@@ -12,9 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+soong_config_module_type_import {
+    from: "device/khadas/common/soong_config/Android.bp",
+    module_types: ["amlogic_vendorconfig_cc_defaults"],
+}
+
+amlogic_vendorconfig_cc_defaults {
+    name: "pqutils_defaults",
+
+    soong_config_variables: {
+        support_pq_compress_db: {
+            cflags: ["-DPRODUCT_SUPPORT_COMPRESS_DB"],
+        },
+    },
+}
+
 cc_library_static {
     name: "pq.utils_static",
     proprietary: true,
+    defaults: ["pqutils_defaults"],
 
     srcs: [
         "miniz.c",
