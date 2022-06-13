@@ -91,7 +91,7 @@ public class CaptionSettingsFragment extends BaseSettingsFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         final ViewGroup v = (ViewGroup) super.onCreateView(inflater, container, savedInstanceState);
         if (v == null) {
             throw new IllegalStateException("Unexpectedly null view from super");
@@ -144,7 +144,7 @@ public class CaptionSettingsFragment extends BaseSettingsFragment {
     @Override
     public void onStart() {
         super.onStart();
-        mCaptioningManager.addCaptioningChangeListener (mCaptionChangeListener);
+        mCaptioningManager.addCaptioningChangeListener(mCaptionChangeListener);
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(mRefreshReceiver,
                 new IntentFilter(ACTION_REFRESH_CAPTIONS_PREVIEW));
         refreshPreviewText();
@@ -153,7 +153,7 @@ public class CaptionSettingsFragment extends BaseSettingsFragment {
     @Override
     public void onStop() {
         super.onStop();
-        mCaptioningManager.removeCaptioningChangeListener (mCaptionChangeListener);
+        mCaptioningManager.removeCaptioningChangeListener(mCaptionChangeListener);
         LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mRefreshReceiver);
     }
 

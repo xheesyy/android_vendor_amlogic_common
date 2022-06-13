@@ -70,11 +70,11 @@ class DrawableLoader extends AsyncTask<BitmapWorkerOptions, Void, Drawable> {
 
     private final RefcountObject.RefcountListener mRefcountListener =
             new RefcountObject.RefcountListener() {
-        @Override
-        public void onRefcountZero(RefcountObject object) {
-            mRecycledBitmaps.addRecycledBitmap((Bitmap) object.getObject());
-        }
-    };
+                @Override
+                public void onRefcountZero(RefcountObject object) {
+                    mRecycledBitmaps.addRecycledBitmap((Bitmap) object.getObject());
+                }
+            };
 
 
     DrawableLoader(ImageView imageView, RecycleBitmapPool recycledBitmapPool) {
@@ -150,7 +150,7 @@ class DrawableLoader extends AsyncTask<BitmapWorkerOptions, Void, Drawable> {
     }
 
     private Drawable getBitmapFromResource(ShortcutIconResource iconResource,
-            BitmapWorkerOptions outputOptions) throws IOException {
+                                           BitmapWorkerOptions outputOptions) throws IOException {
         if (DEBUG) {
             Log.d(TAG, "Loading " + iconResource.toString());
         }
@@ -158,8 +158,8 @@ class DrawableLoader extends AsyncTask<BitmapWorkerOptions, Void, Drawable> {
             Object drawable = loadDrawable(outputOptions.getContext(), iconResource);
             if (drawable instanceof InputStream) {
                 // Most of these are bitmaps, so resize properly.
-                return decodeBitmap((InputStream)drawable, outputOptions);
-            } else if (drawable instanceof Drawable){
+                return decodeBitmap((InputStream) drawable, outputOptions);
+            } else if (drawable instanceof Drawable) {
                 Drawable d = (Drawable) drawable;
                 mOriginalWidth = d.getIntrinsicWidth();
                 mOriginalHeight = d.getIntrinsicHeight();
@@ -314,8 +314,9 @@ class DrawableLoader extends AsyncTask<BitmapWorkerOptions, Void, Drawable> {
      * load drawable for non-bitmap resource or InputStream for bitmap resource without
      * caching Bitmap in Resources.  So that caller can maintain a different caching
      * storage with less memory used.
-     * @return  either {@link Drawable} for xml and ColorDrawable <br>
-     *          or {@link InputStream} for Bitmap resource
+     *
+     * @return either {@link Drawable} for xml and ColorDrawable <br>
+     * or {@link InputStream} for Bitmap resource
      */
     private static Object loadDrawable(Context context, ShortcutIconResource r)
             throws NameNotFoundException {
@@ -333,7 +334,7 @@ class DrawableLoader extends AsyncTask<BitmapWorkerOptions, Void, Drawable> {
         resources.getValue(id, value, true);
         if ((value.type == TypedValue.TYPE_STRING && value.string.toString().endsWith(".xml")) || (
                 value.type >= TypedValue.TYPE_FIRST_COLOR_INT
-                && value.type <= TypedValue.TYPE_LAST_COLOR_INT)) {
+                        && value.type <= TypedValue.TYPE_LAST_COLOR_INT)) {
             return resources.getDrawable(id);
         }
         return resources.openRawResource(id, value);
@@ -368,7 +369,7 @@ class DrawableLoader extends AsyncTask<BitmapWorkerOptions, Void, Drawable> {
                 if (picUriString != null) {
                     BitmapWorkerOptions.Builder optionBuilder =
                             new BitmapWorkerOptions.Builder(context)
-                            .width(options.getWidth())
+                                    .width(options.getWidth())
                                     .height(options.getHeight())
                                     .cacheFlag(options.getCacheFlag())
                                     .bitmapConfig(options.getBitmapConfig())

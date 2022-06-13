@@ -29,13 +29,13 @@ public class StoragePreference extends Preference {
     private static final long SIZE_CALCULATING = -1;
 
     public StoragePreference(Context context, AttributeSet attrs,
-            int defStyleAttr, int defStyleRes) {
+                             int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setSize(SIZE_CALCULATING);
     }
 
     public StoragePreference(Context context, AttributeSet attrs,
-            int defStyleAttr) {
+                             int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setSize(SIZE_CALCULATING);
     }

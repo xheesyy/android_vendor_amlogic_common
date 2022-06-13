@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,56 +15,56 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/pq_pictrue_advanced_color_customize">
+    android:title="@string/pq_pictrue_advanced_color_customize">
 
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeRedFragment"
         android:key="pq_pictrue_advanced_color_customize_red"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_red"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_red" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeGreenFragment"
         android:key="pq_pictrue_advanced_color_customize_green"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_green"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_green" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeBlueFragment"
         android:key="pq_pictrue_advanced_color_customize_blue"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_blue"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_blue" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeCyanFragment"
         android:key="pq_pictrue_advanced_color_customize_cyan"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_cyan"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_cyan" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeMagentaFragment"
         android:key="pq_pictrue_advanced_color_customize_magenta"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_magenta"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_magenta" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeYellowFragment"
         android:key="pq_pictrue_advanced_color_customize_yellow"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_yellow"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_yellow" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeSkinFragment"
         android:key="pq_pictrue_advanced_color_customize_skin"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_skin"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_skin" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeYellowGreenFragment"
         android:key="pq_pictrue_advanced_color_customize_yellow_green"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_yellow_green"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_yellow_green" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeBlueGreenFragment"
         android:key="pq_pictrue_advanced_color_customize_blue_green"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_blue_green"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_blue_green" />
     <Preference
         android:key="pq_pictrue_advanced_color_customize_reset"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize_reset"/>
+        android:title="@string/pq_pictrue_advanced_color_customize_reset" />
 
 </PreferenceScreen>

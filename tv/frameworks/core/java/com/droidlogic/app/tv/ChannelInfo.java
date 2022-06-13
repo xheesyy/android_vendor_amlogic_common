@@ -18,7 +18,9 @@ import android.text.TextUtils;
 
 import java.util.Map;
 import java.util.Arrays;
+
 import android.database.sqlite.SQLiteException;
+
 import java.net.URLEncoder;
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -37,30 +39,30 @@ public class ChannelInfo {
     public static final String COLUMN_LCN2 = Channels.COLUMN_INTERNAL_PROVIDER_FLAG4;
 
     public static final String[] COMMON_PROJECTION = {
-        Channels._ID,
-        Channels.COLUMN_INPUT_ID,
-        Channels.COLUMN_TYPE,
-        Channels.COLUMN_SERVICE_TYPE,
-        Channels.COLUMN_SERVICE_ID,
-        Channels.COLUMN_DISPLAY_NUMBER,
-        Channels.COLUMN_DISPLAY_NAME,
-        Channels.COLUMN_ORIGINAL_NETWORK_ID,
-        Channels.COLUMN_TRANSPORT_STREAM_ID,
-        Channels.COLUMN_VIDEO_FORMAT,
-        Channels.COLUMN_INTERNAL_PROVIDER_DATA,
-        Channels.COLUMN_BROWSABLE,
-        TvContract.Channels.COLUMN_LOCKED,
-        COLUMN_LCN,
-        COLUMN_LCN1,
-        COLUMN_LCN2
+            Channels._ID,
+            Channels.COLUMN_INPUT_ID,
+            Channels.COLUMN_TYPE,
+            Channels.COLUMN_SERVICE_TYPE,
+            Channels.COLUMN_SERVICE_ID,
+            Channels.COLUMN_DISPLAY_NUMBER,
+            Channels.COLUMN_DISPLAY_NAME,
+            Channels.COLUMN_ORIGINAL_NETWORK_ID,
+            Channels.COLUMN_TRANSPORT_STREAM_ID,
+            Channels.COLUMN_VIDEO_FORMAT,
+            Channels.COLUMN_INTERNAL_PROVIDER_DATA,
+            Channels.COLUMN_BROWSABLE,
+            TvContract.Channels.COLUMN_LOCKED,
+            COLUMN_LCN,
+            COLUMN_LCN1,
+            COLUMN_LCN2
     };
 
     public static final String[] SIMPLE_PROJECTION = {
-        TvContract.Channels._ID,
-        TvContract.Channels.COLUMN_DISPLAY_NUMBER,
-        TvContract.Channels.COLUMN_ORIGINAL_NETWORK_ID,
-        TvContract.Channels.COLUMN_TRANSPORT_STREAM_ID,
-        TvContract.Channels.COLUMN_SERVICE_ID
+            TvContract.Channels._ID,
+            TvContract.Channels.COLUMN_DISPLAY_NUMBER,
+            TvContract.Channels.COLUMN_ORIGINAL_NETWORK_ID,
+            TvContract.Channels.COLUMN_TRANSPORT_STREAM_ID,
+            TvContract.Channels.COLUMN_SERVICE_ID
     };
 
     public static final String KEY_DISPLAY_NUMBER = "display_number";
@@ -230,18 +232,19 @@ public class ChannelInfo {
     private int mHideGuide;
     private String mVct;
     private int[] mEitVersions;
-    private int   mProgramsInPat;
-    private int   mPatTsId;
+    private int mProgramsInPat;
+    private int mPatTsId;
 
     private String mContentRatings;
     private String mSignalType;
 
-    private ChannelInfo() {}
+    private ChannelInfo() {
+    }
 
     public static ChannelInfo createPassthroughChannel(Uri paramUri) {
         if (!TvContract.isChannelUriForPassthroughInput(paramUri))
             throw new IllegalArgumentException("URI is not a passthrough channel URI");
-        return createPassthroughChannel((String)paramUri.getPathSegments().get(1));
+        return createPassthroughChannel((String) paramUri.getPathSegments().get(1));
     }
 
     public static ChannelInfo createPassthroughChannel(String input_id) {
@@ -285,20 +288,20 @@ public class ChannelInfo {
         if (index >= 0) {
             String value = null;
             int type = 0;
-            try{
+            try {
                 type = cursor.getType(index);
                 if (type == Cursor.FIELD_TYPE_BLOB) {
                     //youtube iptv database in this column is blob. Add it for the future.
                     byte[] data = cursor.getBlob(index);
                     //Log.d(TAG,"cursor is blob, return null");
                     value = DroidLogicTvUtils.deserializeInternalProviderData(data);
-                    if (DEBUG) Log.i(TAG,"cursor is blob, set value = " + value);
+                    if (DEBUG) Log.i(TAG, "cursor is blob, set value = " + value);
                 } else if (type == Cursor.FIELD_TYPE_STRING)
                     value = cursor.getString(index);
                 else
                     value = null;//return null;
             } catch (SQLiteException e) {
-                if (DEBUG) Log.d(TAG,"SQLiteException:"+e);
+                if (DEBUG) Log.d(TAG, "SQLiteException:" + e);
                 return null;
             }
             Map<String, String> parsedMap = null;
@@ -311,7 +314,7 @@ public class ChannelInfo {
                 String[] str_audioPids = parsedMap.get(KEY_AUDIO_PIDS).replace("[", "").replace("]", "").split(",");
                 String[] str_audioFormats = parsedMap.get(KEY_AUDIO_FORMATS).replace("[", "").replace("]", "").split(",");
                 String[] str_audioExts = parsedMap.get(KEY_AUDIO_EXTS).replace("[", "").replace("]", "").split(",");
-                int number = (str_audioPids[0].compareTo("null") == 0)? 0 : str_audioPids.length;
+                int number = (str_audioPids[0].compareTo("null") == 0) ? 0 : str_audioPids.length;
                 int[] audioPids = null;
                 int[] audioFormats = null;
                 int[] audioExts = null;
@@ -321,7 +324,7 @@ public class ChannelInfo {
                     audioFormats = new int[number];
                     audioExts = new int[number];
                     audioLangs = new String[number];
-                    for (int i=0; i < str_audioPids.length; i++) {
+                    for (int i = 0; i < str_audioPids.length; i++) {
                         audioPids[i] = Integer.parseInt(str_audioPids[i]);
                         audioFormats[i] = Integer.parseInt(str_audioFormats[i]);
                         audioExts[i] = Integer.parseInt(str_audioExts[i]);
@@ -332,7 +335,7 @@ public class ChannelInfo {
                     builder.setAudioExts(audioExts);
                     builder.setAudioLangs(audioLangs);
                 }
-            }else {
+            } else {
                 builder.setAudioPids(null);
                 builder.setAudioFormats(null);
                 builder.setAudioExts(null);
@@ -389,7 +392,7 @@ public class ChannelInfo {
 
             if (parsedMap != null && parsedMap.get(KEY_SUBT_PIDS) != null) {
                 String[] str_subtPids = parsedMap.get(KEY_SUBT_PIDS).replace("[", "").replace("]", "").split(",");
-                int subtNumber = (str_subtPids[0].compareTo("null") == 0)? 0 : str_subtPids.length;
+                int subtNumber = (str_subtPids[0].compareTo("null") == 0) ? 0 : str_subtPids.length;
                 if (subtNumber > 0) {
                     String[] str_subtTypes = parsedMap.get(KEY_SUBT_TYPES).replace("[", "").replace("]", "").split(",");
                     String[] str_subtStypes = parsedMap.get(KEY_SUBT_STYPES).replace("[", "").replace("]", "").split(",");
@@ -402,7 +405,7 @@ public class ChannelInfo {
                     int[] subtId2s = new int[subtNumber];
 
 
-                    for (int i=0; i < subtNumber; i++) {
+                    for (int i = 0; i < subtNumber; i++) {
                         subtTypes[i] = Integer.parseInt(str_subtTypes[i]);
                         subtStypes[i] = Integer.parseInt(str_subtStypes[i]);
                         subtPids[i] = Integer.parseInt(str_subtPids[i]);
@@ -449,7 +452,7 @@ public class ChannelInfo {
                 builder.setVct(parsedMap.get(KEY_VCT));
             if (parsedMap != null && parsedMap.get(KEY_EITV) != null) {
                 String[] svs = parsedMap.get(KEY_EITV).replace("[", "").replace("]", "").split(",");
-                int vn = (svs[0].compareTo("null") == 0)? 0 : svs.length;
+                int vn = (svs[0].compareTo("null") == 0) ? 0 : svs.length;
                 if (vn > 0) {
                     int[] vs = new int[vn];
                     for (int i = 0; i < vn; i++)
@@ -465,11 +468,11 @@ public class ChannelInfo {
 
         index = cursor.getColumnIndex(Channels.COLUMN_BROWSABLE);
         if (index >= 0)
-            builder.setBrowsable(cursor.getInt(index)==1 ? true : false);
+            builder.setBrowsable(cursor.getInt(index) == 1 ? true : false);
 
         index = cursor.getColumnIndex(Channels.COLUMN_LOCKED);
         if (index >= 0)
-            builder.setLocked(cursor.getInt(index)==1 ? true : false);
+            builder.setLocked(cursor.getInt(index) == 1 ? true : false);
 
         index = cursor.getColumnIndex(COLUMN_LCN);
         if (index >= 0)
@@ -1041,7 +1044,7 @@ public class ChannelInfo {
             mChannel.mId = -1L;
             mChannel.mInputId = "";
             mChannel.mType = "";
-            mChannel.mServiceType= "";
+            mChannel.mServiceType = "";
             mChannel.mServiceId = -1;
             mChannel.mDisplayNumber = "-1";
             mChannel.mNumber = -1;
@@ -1084,7 +1087,8 @@ public class ChannelInfo {
             mChannel.mIsPassthrough = false;
             mChannel.mFavInfo = null;
             mChannel.mSatelliteInfo = null;
-            mChannel.mTransponderInfo = null;;
+            mChannel.mTransponderInfo = null;
+            ;
             mChannel.mChannelSignalType = null;
             mChannel.mIsData = false;
 
@@ -1503,7 +1507,7 @@ public class ChannelInfo {
             String[] nameValue = nameValuePair.split("=");
             try {
                 map.put(URLDecoder.decode(nameValue[0], "UTF-8"), nameValue.length > 1 ? URLDecoder.decode(
-                            nameValue[1], "UTF-8") : "");
+                        nameValue[1], "UTF-8") : "");
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException("This method requires UTF-8 encoding support", e);
             }
@@ -1512,8 +1516,8 @@ public class ChannelInfo {
         return map;
     }
 
-    public static boolean isSameChannel (ChannelInfo a, ChannelInfo b) {
-        if (a == null || b== null )
+    public static boolean isSameChannel(ChannelInfo a, ChannelInfo b) {
+        if (a == null || b == null)
             return false;
 
         if (a.getInputId().equals(b.getInputId()) && a.getId() == b.getId()) {
@@ -1539,24 +1543,24 @@ public class ChannelInfo {
 
     public boolean isAnalogChannel() {
         return (mType.equals(TvContract.Channels.TYPE_PAL)
-            || mType.equals(TvContract.Channels.TYPE_NTSC)
-            || mType.equals(TvContract.Channels.TYPE_SECAM));
+                || mType.equals(TvContract.Channels.TYPE_NTSC)
+                || mType.equals(TvContract.Channels.TYPE_SECAM));
     }
 
     public boolean isDigitalChannel() {
         return (mType.equals(TvContract.Channels.TYPE_DTMB)
-            || mType.equals(TvContract.Channels.TYPE_DVB_T)
-            || mType.equals(TvContract.Channels.TYPE_DVB_C)
-            || mType.equals(TvContract.Channels.TYPE_DVB_S)
-            || mType.equals(TvContract.Channels.TYPE_ATSC_T)
-            || mType.equals(TvContract.Channels.TYPE_ATSC_C)
-            || mType.equals(TvContract.Channels.TYPE_ISDB_T));
+                || mType.equals(TvContract.Channels.TYPE_DVB_T)
+                || mType.equals(TvContract.Channels.TYPE_DVB_C)
+                || mType.equals(TvContract.Channels.TYPE_DVB_S)
+                || mType.equals(TvContract.Channels.TYPE_ATSC_T)
+                || mType.equals(TvContract.Channels.TYPE_ATSC_C)
+                || mType.equals(TvContract.Channels.TYPE_ISDB_T));
     }
 
     public boolean isAtscChannel() {
         return (mType.equals(TvContract.Channels.TYPE_ATSC_C)
-            || mType.equals(TvContract.Channels.TYPE_ATSC_T)
-            || mType.equals(TvContract.Channels.TYPE_ATSC_M_H));
+                || mType.equals(TvContract.Channels.TYPE_ATSC_T)
+                || mType.equals(TvContract.Channels.TYPE_ATSC_M_H));
     }
 
     public boolean isNtscChannel() {
@@ -1582,16 +1586,17 @@ public class ChannelInfo {
                 && TextUtils.equals(a.getDisplayName(), mDisplayName);
     }
 
-    public void print () {
+    public void print() {
         Log.d(TAG, toString());
     }
+
     public String toString() {
         return "Id = " + mId +
                 "\n InputId = " + mInputId +
                 "\n Type = " + mType +
                 "\n ServiceType = " + mServiceType +
                 "\n ServiceId = " + mServiceId +
-                "\n DisplayNumber = " + mDisplayNumber+
+                "\n DisplayNumber = " + mDisplayNumber +
                 "\n DisplayName = " + mDisplayName +
                 "\n LogoUrl = " + mLogoUrl +
                 "\n OriginalNetworkId = " + mOriginalNetworkId +
@@ -1666,7 +1671,7 @@ public class ChannelInfo {
         public static final int CC_CAPTION_CC2 = 2;
         public static final int CC_CAPTION_CC3 = 3;
         public static final int CC_CAPTION_CC4 = 4;
-        public static final int CC_CAPTION_TEXT1 =5;
+        public static final int CC_CAPTION_TEXT1 = 5;
         public static final int CC_CAPTION_TEXT2 = 6;
         public static final int CC_CAPTION_TEXT3 = 7;
         public static final int CC_CAPTION_TEXT4 = 8;
@@ -1697,7 +1702,7 @@ public class ChannelInfo {
             mId1 = -1;
             mId2 = -1;
             mLang = "";
-       }
+        }
 
         public Subtitle(int type, int pid, int stype, int id1, int id2, String language) {
             mType = type;
@@ -1798,7 +1803,7 @@ public class ChannelInfo {
             mFormat = -1;
             mExt = -1;
             mLang = "";
-       }
+        }
 
         public Audio(int pid, int format, int ext, String language) {
             mPid = pid;

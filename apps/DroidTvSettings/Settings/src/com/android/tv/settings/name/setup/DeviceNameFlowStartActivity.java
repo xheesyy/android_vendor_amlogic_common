@@ -61,10 +61,12 @@ public class DeviceNameFlowStartActivity extends FragmentActivity {
         animator.addListener(new Animator.AnimatorListener() {
 
             @Override
-            public void onAnimationStart(Animator animation) {}
+            public void onAnimationStart(Animator animation) {
+            }
 
             @Override
-            public void onAnimationRepeat(Animator animation) {}
+            public void onAnimationRepeat(Animator animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -72,7 +74,8 @@ public class DeviceNameFlowStartActivity extends FragmentActivity {
             }
 
             @Override
-            public void onAnimationCancel(Animator animation) {}
+            public void onAnimationCancel(Animator animation) {
+            }
         });
         animator.start();
     }

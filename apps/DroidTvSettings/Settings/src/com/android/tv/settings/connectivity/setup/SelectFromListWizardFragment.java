@@ -212,7 +212,7 @@ public class SelectFromListWizardFragment extends Fragment {
                 return (mScanResult != null && li.mScanResult != null
                         && TextUtils.equals(mName, li.mName)
                         && WifiSecurityUtil.getSecurity(mScanResult)
-                                == WifiSecurityUtil.getSecurity(li.mScanResult));
+                        == WifiSecurityUtil.getSecurity(li.mScanResult));
             }
             return false;
         }
@@ -269,7 +269,7 @@ public class SelectFromListWizardFragment extends Fragment {
         }
 
         public void init(ListItem item, View.OnClickListener onClick,
-                View.OnFocusChangeListener onFocusChange) {
+                         View.OnFocusChangeListener onFocusChange) {
             TextView title = (TextView) itemView.findViewById(R.id.list_item_text);
             title.setText(item.getName());
             itemView.setOnClickListener(onClick);
@@ -304,7 +304,7 @@ public class SelectFromListWizardFragment extends Fragment {
                 // 50 refers to 50 percent, which refers to mid position of textView.
                 alignedDef.setItemAlignmentOffsetPercent(50);
                 ItemAlignmentFacet f = new ItemAlignmentFacet();
-                f.setAlignmentDefs(new ItemAlignmentDef[] {alignedDef});
+                f.setAlignmentDefs(new ItemAlignmentDef[]{alignedDef});
                 return f;
             }
             return null;
@@ -321,21 +321,21 @@ public class SelectFromListWizardFragment extends Fragment {
             ListItemComparator comparator = new ListItemComparator();
             mItems = new SortedList<ListItem>(
                     ListItem.class, new SortedListAdapterCallback<ListItem>(this) {
-                        @Override
-                        public int compare(ListItem t0, ListItem t1) {
-                            return comparator.compare(t0, t1);
-                        }
+                @Override
+                public int compare(ListItem t0, ListItem t1) {
+                    return comparator.compare(t0, t1);
+                }
 
-                        @Override
-                        public boolean areContentsTheSame(ListItem oldItem, ListItem newItem) {
-                            return comparator.compare(oldItem, newItem) == 0;
-                        }
+                @Override
+                public boolean areContentsTheSame(ListItem oldItem, ListItem newItem) {
+                    return comparator.compare(oldItem, newItem) == 0;
+                }
 
-                        @Override
-                        public boolean areItemsTheSame(ListItem item1, ListItem item2) {
-                            return item1.equals(item2);
-                        }
-                    });
+                @Override
+                public boolean areItemsTheSame(ListItem item1, ListItem item2) {
+                    return item1.equals(item2);
+                }
+            });
             mItems.addAll(choices.toArray(new ListItem[0]), false);
         }
 
@@ -418,7 +418,7 @@ public class SelectFromListWizardFragment extends Fragment {
     private static final int SELECT_ITEM_DELAY = 100;
 
     public static SelectFromListWizardFragment newInstance(String title, String description,
-            ArrayList<ListItem> listElements, ListItem lastSelection) {
+                                                           ArrayList<ListItem> listElements, ListItem lastSelection) {
         SelectFromListWizardFragment fragment = new SelectFromListWizardFragment();
         Bundle args = new Bundle();
         args.putString(EXTRA_TITLE, title);

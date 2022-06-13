@@ -22,13 +22,13 @@ import java.util.ArrayList;
 
 /**
  * *************************
- *   DO NOT ADD LOGIC HERE!
+ * DO NOT ADD LOGIC HERE!
  * *************************
  * This is a wrapper for {@link BaseActionFragment}. Place your logic in
  * there and call the function from here
  */
 public class ActionFragment extends ScrollAdapterFragment implements ActionAdapter.Listener,
-    ActionAdapter.OnFocusListener, ActionAdapter.OnKeyListener, LiteFragment {
+        ActionAdapter.OnFocusListener, ActionAdapter.OnKeyListener, LiteFragment {
 
     private final BaseActionFragment mBase = new BaseActionFragment(this);
 

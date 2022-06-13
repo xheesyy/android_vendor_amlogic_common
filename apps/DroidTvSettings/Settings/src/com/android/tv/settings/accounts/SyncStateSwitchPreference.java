@@ -88,6 +88,7 @@ public class SyncStateSwitchPreference extends SwitchPreference {
 
     /**
      * Set whether the sync is active.
+     *
      * @param isActive whether or not the sync is active
      */
     public void setActive(boolean isActive) {
@@ -97,6 +98,7 @@ public class SyncStateSwitchPreference extends SwitchPreference {
 
     /**
      * Set whether a sync is pending.
+     *
      * @param isPending whether or not the sync is pending
      */
     public void setPending(boolean isPending) {
@@ -106,6 +108,7 @@ public class SyncStateSwitchPreference extends SwitchPreference {
 
     /**
      * Set whether the corresponding sync failed.
+     *
      * @param failed whether or not the sync failed
      */
     public void setFailed(boolean failed) {
@@ -115,6 +118,7 @@ public class SyncStateSwitchPreference extends SwitchPreference {
 
     /**
      * Sets whether the preference is in one-time sync mode.
+     *
      * @param oneTimeSyncMode true for one-time sync mode
      */
     public void setOneTimeSyncMode(boolean oneTimeSyncMode) {

@@ -122,7 +122,7 @@ public abstract class SettingsPreferenceFragment extends SettingsPreferenceFragm
             @Override
             @NonNull
             public PreferenceViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                    int viewType) {
+                                                           int viewType) {
                 PreferenceViewHolder vh = super.onCreateViewHolder(parent, viewType);
                 vh.itemView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(
                         getContext(), R.animator.preference));
@@ -211,7 +211,9 @@ public abstract class SettingsPreferenceFragment extends SettingsPreferenceFragm
         return lifecycleHandled;
     }
 
-    /** Subclasses should override this to use their own PageId for statsd logging. */
+    /**
+     * Subclasses should override this to use their own PageId for statsd logging.
+     */
     protected int getPageId() {
         return TvSettingsEnums.PAGE_CLASSIC_DEFAULT;
     }

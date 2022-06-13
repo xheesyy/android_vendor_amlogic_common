@@ -34,14 +34,14 @@ import java.util.List;
  * Class used by an activity to perform animation of multiple TransitionImageViews
  * Usage:
  * - on activity create:
- *   TransitionImageAnimation animation = new TransitionImageAnimation(rootView);
- *   for_each TransitionImage of source
- *       animation.addTransitionSource(source);
- *   animation.startCancelTimer();
+ * TransitionImageAnimation animation = new TransitionImageAnimation(rootView);
+ * for_each TransitionImage of source
+ * animation.addTransitionSource(source);
+ * animation.startCancelTimer();
  * - When the activity loads all target images
- *   for_each TransitionImage of target
- *       animation.addTransitionTarget(target);
- *   animation.startTransition();
+ * for_each TransitionImage of target
+ * animation.addTransitionTarget(target);
+ * animation.startTransition();
  */
 public class TransitionImageAnimation {
 
@@ -236,7 +236,7 @@ public class TransitionImageAnimation {
     private final View.OnLayoutChangeListener mInitializeClip = new View.OnLayoutChangeListener() {
         @Override
         public void onLayoutChange(View v, int left, int top, int right, int bottom,
-                int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                                   int oldLeft, int oldTop, int oldRight, int oldBottom) {
             v.removeOnLayoutChangeListener(this);
             mListeningLayout = false;
             // set initial clipping for all views
@@ -300,12 +300,12 @@ public class TransitionImageAnimation {
 
     private void cancelTransition(final View iv) {
         iv.animate().alpha(0f).setDuration(mCancelTransitionMs).
-            setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator arg0) {
-                mRoot.removeView(iv);
-            }
-        }).start();
+                setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator arg0) {
+                        mRoot.removeView(iv);
+                    }
+                }).start();
     }
 
     /**

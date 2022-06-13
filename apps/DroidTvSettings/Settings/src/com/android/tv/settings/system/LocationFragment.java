@@ -103,15 +103,15 @@ public class LocationFragment extends SettingsPreferenceFragment implements
         mLocationMode.setTitle(R.string.location_status);
         mLocationMode.setDialogTitle(R.string.location_status);
         mLocationMode.setSummary("%s");
-        mLocationMode.setEntries(new CharSequence[] {
+        mLocationMode.setEntries(new CharSequence[]{
                 getString(R.string.location_mode_wifi_description),
                 getString(R.string.off)
         });
-        mLocationMode.setEntryValues(new CharSequence[] {
+        mLocationMode.setEntryValues(new CharSequence[]{
                 LOCATION_MODE_WIFI,
                 LOCATION_MODE_OFF
         });
-        mLocationMode.setSummaries(new CharSequence[] {
+        mLocationMode.setSummaries(new CharSequence[]{
                 getString(R.string.system_location_summary),
                 null
         });

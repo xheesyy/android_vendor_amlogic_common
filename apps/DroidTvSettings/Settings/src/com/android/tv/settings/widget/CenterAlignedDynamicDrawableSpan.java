@@ -28,7 +28,7 @@ import androidx.annotation.DrawableRes;
  * A customized dynamic drawable span which aligns to the center of the text. This assumes that
  * the text is smaller than the image, which will be the case most of the time.
  * This class is mirrored from Setup.
- *
+ * <p>
  * NOTE: For icon that is considerably larger than the text around it (taller than the distance
  * between the font's top and bottom), the icon could be cut off if it is in the first or last line
  * of a TextView. Please consider using smaller icon or adding blank lines before and after the

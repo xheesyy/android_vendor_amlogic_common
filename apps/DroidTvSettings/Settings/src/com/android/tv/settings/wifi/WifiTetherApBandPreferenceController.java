@@ -26,6 +26,7 @@ import android.util.Log;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
+
 import android.util.Log;
 
 import com.android.tv.settings.R;
@@ -40,7 +41,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
     private int mBandIndex;
 
     public WifiTetherApBandPreferenceController(Context context,
-            OnTetherConfigUpdateListener listener) {
+                                                OnTetherConfigUpdateListener listener) {
         super(context, listener);
         updatePreferenceEntries();
     }
@@ -57,7 +58,7 @@ public class WifiTetherApBandPreferenceController extends WifiTetherBasePreferen
         } else {
             mWifiManager.setSoftApConfiguration(
                     new SoftApConfiguration.Builder(config).setBand(SoftApConfiguration.BAND_2GHZ)
-                        .build());
+                            .build());
             mBandIndex = SoftApConfiguration.BAND_2GHZ;
             Log.d(TAG, "5Ghz not supported, updating band index to 2GHz");
         }

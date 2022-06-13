@@ -43,6 +43,7 @@ import android.util.AttributeSet;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
+
 import android.content.Intent;
 
 public class RepeatPreference extends ListPreference {
@@ -59,17 +60,18 @@ public class RepeatPreference extends ListPreference {
 
     /**
      * RepeatPreference
+     *
      * @param context Context
-     * @param attrs AttributeSet
+     * @param attrs   AttributeSet
      */
     public RepeatPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
 
         String[] weekdays = new DateFormatSymbols().getWeekdays();
-        String[] values = new String[] { weekdays[Calendar.MONDAY], weekdays[Calendar.TUESDAY],
+        String[] values = new String[]{weekdays[Calendar.MONDAY], weekdays[Calendar.TUESDAY],
                 weekdays[Calendar.WEDNESDAY], weekdays[Calendar.THURSDAY], weekdays[Calendar.FRIDAY],
-                weekdays[Calendar.SATURDAY], weekdays[Calendar.SUNDAY], };
+                weekdays[Calendar.SATURDAY], weekdays[Calendar.SUNDAY],};
         setEntries(values);
         setEntryValues(values);
     }
@@ -102,6 +104,7 @@ public class RepeatPreference extends ListPreference {
 
     /**
      * set Days Of Week
+     *
      * @param dow Alarm.DaysOfWeek
      */
     public void setDaysOfWeek(Alarm.DaysOfWeek dow) {
@@ -110,10 +113,11 @@ public class RepeatPreference extends ListPreference {
         setSummary(dow.toString(getContext(), true));
     }
 
-    
+
     /**
      * get Days O fWeek
-     * @return  Alarm.DaysOfWeek
+     *
+     * @return Alarm.DaysOfWeek
      */
     public Alarm.DaysOfWeek getDaysOfWeek() {
         return mDaysOfWeek;

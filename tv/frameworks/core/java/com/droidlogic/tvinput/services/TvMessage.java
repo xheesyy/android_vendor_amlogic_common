@@ -16,12 +16,13 @@ import android.os.Parcelable;
  * Created by yu.fang on 2018/7/3.
  */
 
-public class TvMessage implements Parcelable{
+public class TvMessage implements Parcelable {
     private int type;
     private int message;
     private String information;
 
-    public TvMessage() {}
+    public TvMessage() {
+    }
 
     public TvMessage(int type, int message, String information) {
         this.type = type;

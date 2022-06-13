@@ -21,12 +21,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
+
 import android.text.TextUtils;
 import android.util.Log;
 

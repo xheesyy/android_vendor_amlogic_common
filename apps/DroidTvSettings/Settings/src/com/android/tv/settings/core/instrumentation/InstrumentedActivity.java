@@ -38,7 +38,7 @@ public abstract class InstrumentedActivity extends FragmentActivity implements I
         // Mixin that logs visibility change for activity.
         mMetricsFeatureProvider = new MetricsFeatureProvider();
         mVisibilityLoggerMixin = new VisibilityLoggerMixin(getMetricsCategory(),
-            mMetricsFeatureProvider);
+                mMetricsFeatureProvider);
         getLifecycle().addObserver(mVisibilityLoggerMixin);
     }
 }

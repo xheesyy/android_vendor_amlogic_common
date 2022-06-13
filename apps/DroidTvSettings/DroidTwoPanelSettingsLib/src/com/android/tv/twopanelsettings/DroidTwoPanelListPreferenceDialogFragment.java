@@ -30,7 +30,8 @@ import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
 import androidx.recyclerview.widget.RecyclerView;
 
-/** A workaround for pi-tv-dev to fix the issue that ListPreference is not correctly handled by two
+/**
+ * A workaround for pi-tv-dev to fix the issue that ListPreference is not correctly handled by two
  * panel lib. When moving to Q, we should fix this problem in androidx(b/139085296).
  */
 public class DroidTwoPanelListPreferenceDialogFragment extends LeanbackListPreferenceDialogFragment {
@@ -49,7 +50,9 @@ public class DroidTwoPanelListPreferenceDialogFragment extends LeanbackListPrefe
     private CharSequence[] mSummariesCopy;
     private String mInitialSelectionCopy;
 
-    /** Provide a ListPreferenceDialogFragment which satisfy the use of two panel lib **/
+    /**
+     * Provide a ListPreferenceDialogFragment which satisfy the use of two panel lib
+     **/
     public static DroidTwoPanelListPreferenceDialogFragment newInstanceSingle(String key) {
         final Bundle args = new Bundle(1);
         args.putString(ARG_KEY, key);
@@ -78,7 +81,7 @@ public class DroidTwoPanelListPreferenceDialogFragment extends LeanbackListPrefe
                 mMultiCopy = true;
             } else {
                 throw new IllegalArgumentException("Preference must be a ListPreference or "
-                    + "MultiSelectListPreference");
+                        + "MultiSelectListPreference");
             }
         } else {
             mMultiCopy = savedInstanceState.getBoolean(SAVE_STATE_IS_MULTI);
@@ -124,14 +127,14 @@ public class DroidTwoPanelListPreferenceDialogFragment extends LeanbackListPrefe
     }
 
     private class TwoPanelAdapterSingle extends RecyclerView.Adapter<ViewHolder>
-            implements ViewHolder.OnItemClickListener  {
+            implements ViewHolder.OnItemClickListener {
         private final CharSequence[] mEntries;
         private final CharSequence[] mEntryValues;
         private final CharSequence[] mSummaries;
         private CharSequence mSelectedValue;
 
         TwoPanelAdapterSingle(CharSequence[] entries, CharSequence[] entryValues,
-                CharSequence[] summaries, CharSequence selectedValue) {
+                              CharSequence[] summaries, CharSequence selectedValue) {
             mEntries = entries;
             mEntryValues = entryValues;
             mSummaries = summaries;

@@ -38,7 +38,7 @@ public class CommonViewHolder {
     public CommonViewHolder setText(int viewId, String text) {
         View view = getView(viewId);
         if (view instanceof TextView) {
-            TextView textView = (TextView)view;
+            TextView textView = (TextView) view;
             if (textView != null) {
                 textView.setText(text);
             }
@@ -50,7 +50,7 @@ public class CommonViewHolder {
         //Log.d(TAG, "setIcon viewId = " + viewId + ", draw = " + draw);
         View view = getView(viewId);
         if (view instanceof TextView) {
-            TextView textView = (TextView)view;
+            TextView textView = (TextView) view;
             if (textView != null) {
                 if (draw != null) {
                     //textView.setText("icon");

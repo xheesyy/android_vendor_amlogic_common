@@ -36,7 +36,9 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
-/** Provide utilities for Remote & Accessories. */
+/**
+ * Provide utilities for Remote & Accessories.
+ */
 final class AccessoryUtils {
 
     public static final String TAG = "AccessoryUtils";
@@ -46,7 +48,9 @@ final class AccessoryUtils {
     private static final int MINOR_REMOTE_MASK = 0b11001100;
     private static List<String> sKnownDeviceLabels = null;
 
-    /** This allows OEM to easily override the main Service if desired. */
+    /**
+     * This allows OEM to easily override the main Service if desired.
+     */
     public static Class getBluetoothDeviceServiceClass() {
         return BluetoothDevicesService.class;
     }

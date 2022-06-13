@@ -36,6 +36,6 @@ public class StorageResetActivity extends TvSettingsActivity {
             fragmentName = getString(R.string.storage_summary_fragment_name);
         }
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(fragmentName, null);
+                .newSettingsFragment(fragmentName, null);
     }
 }

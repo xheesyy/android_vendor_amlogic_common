@@ -101,7 +101,7 @@ public class MoveAppStepFragment extends GuidedStepSupportFragment {
         final String packageName = getArguments().getString(ARG_PACKAGE_NAME);
         final ApplicationInfo info;
         try {
-             info = mPackageManager.getApplicationInfo(packageName, 0);
+            info = mPackageManager.getApplicationInfo(packageName, 0);
         } catch (PackageManager.NameNotFoundException e) {
             Log.d(TAG, "Package missing while resolving storage", e);
             return;

@@ -109,10 +109,10 @@ public class NetworkPrefixLengthState implements State {
         public void onCreateActions(List<GuidedAction> actions, Bundle savedInstanceState) {
             String title = getString(R.string.wifi_network_prefix_length_hint);
             if (mAdvancedOptionsFlowInfo
-                        .containsPage(AdvancedOptionsFlowInfo.NETWORK_PREFIX_LENGTH)) {
+                    .containsPage(AdvancedOptionsFlowInfo.NETWORK_PREFIX_LENGTH)) {
                 title = mAdvancedOptionsFlowInfo.get(AdvancedOptionsFlowInfo.NETWORK_PREFIX_LENGTH);
             } else if (mAdvancedOptionsFlowInfo.getInitialLinkAddress() != null) {
-                title =  Integer.toString(
+                title = Integer.toString(
                         mAdvancedOptionsFlowInfo.getInitialLinkAddress().getPrefixLength());
             }
 

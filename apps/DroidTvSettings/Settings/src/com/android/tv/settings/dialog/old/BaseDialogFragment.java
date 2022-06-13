@@ -86,7 +86,7 @@ public class BaseDialogFragment {
      * custom view.
      *
      * @param contentAreaId id of the content area
-     * @param actionAreaId id of the action area
+     * @param actionAreaId  id of the action area
      */
     public void setLayoutProperties(int contentAreaId, int actionAreaId) {
         mContentAreaId = contentAreaId;
@@ -94,8 +94,8 @@ public class BaseDialogFragment {
     }
 
     public void performEntryTransition(final Activity activity, final ViewGroup contentView,
-            final ImageView icon, final TextView title,
-            final TextView description, final TextView breadcrumb) {
+                                       final ImageView icon, final TextView title,
+                                       final TextView description, final TextView breadcrumb) {
         // Pull out the root layout of the dialog and set the background drawable, to be
         // faded in during the transition.
         final ViewGroup twoPane = (ViewGroup) contentView.getChildAt(0);
@@ -123,87 +123,87 @@ public class BaseDialogFragment {
         // layout has occurred, as we don't yet know the final location of the icon.
         twoPane.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                twoPane.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                // if we buildLayer() at this time,  the texture is actually not created
-                // delay a little so we can make sure all hardware layer is created before
-                // animation, in that way we can avoid the jittering of start animation
-                twoPane.postOnAnimationDelayed(mEntryAnimationRunnable, ANIMATE_DELAY);
-            }
-
-            final Runnable mEntryAnimationRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    if (!mFragment.isAdded()) {
-                        // We have been detached before this could run, so just bail
-                        return;
+                    @Override
+                    public void onGlobalLayout() {
+                        twoPane.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                        // if we buildLayer() at this time,  the texture is actually not created
+                        // delay a little so we can make sure all hardware layer is created before
+                        // animation, in that way we can avoid the jittering of start animation
+                        twoPane.postOnAnimationDelayed(mEntryAnimationRunnable, ANIMATE_DELAY);
                     }
 
-                    twoPane.setVisibility(View.VISIBLE);
-                    final int secondaryDelay = SLIDE_IN_DISTANCE;
+                    final Runnable mEntryAnimationRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!mFragment.isAdded()) {
+                                // We have been detached before this could run, so just bail
+                                return;
+                            }
 
-                    // Fade in the activity background protection
-                    ObjectAnimator oa = ObjectAnimator.ofInt(mBgDrawable, "alpha", 255);
-                    oa.setDuration(ANIMATE_IN_DURATION);
-                    oa.setStartDelay(secondaryDelay);
-                    oa.setInterpolator(new DecelerateInterpolator(1.0f));
-                    oa.start();
+                            twoPane.setVisibility(View.VISIBLE);
+                            final int secondaryDelay = SLIDE_IN_DISTANCE;
 
-                    View actionFragmentView = activity.findViewById(mActionAreaId);
-                    boolean isRtl = ViewCompat.getLayoutDirection(contentView) ==
-                            ViewCompat.LAYOUT_DIRECTION_RTL;
-                    int startDist = isRtl ? SLIDE_IN_DISTANCE : -SLIDE_IN_DISTANCE;
-                    int endDist = isRtl ? -actionFragmentView.getMeasuredWidth() :
-                            actionFragmentView.getMeasuredWidth();
+                            // Fade in the activity background protection
+                            ObjectAnimator oa = ObjectAnimator.ofInt(mBgDrawable, "alpha", 255);
+                            oa.setDuration(ANIMATE_IN_DURATION);
+                            oa.setStartDelay(secondaryDelay);
+                            oa.setInterpolator(new DecelerateInterpolator(1.0f));
+                            oa.start();
 
-                    // Fade in and slide in the ContentFragment TextViews from the start.
-                    prepareAndAnimateView(title, 0, startDist,
-                            secondaryDelay, ANIMATE_IN_DURATION,
-                            new DecelerateInterpolator(1.0f),
-                            false);
-                    prepareAndAnimateView(breadcrumb, 0, startDist,
-                            secondaryDelay, ANIMATE_IN_DURATION,
-                            new DecelerateInterpolator(1.0f),
-                            false);
-                    prepareAndAnimateView(description, 0,
-                            startDist,
-                            secondaryDelay, ANIMATE_IN_DURATION,
-                            new DecelerateInterpolator(1.0f),
-                            false);
+                            View actionFragmentView = activity.findViewById(mActionAreaId);
+                            boolean isRtl = ViewCompat.getLayoutDirection(contentView) ==
+                                    ViewCompat.LAYOUT_DIRECTION_RTL;
+                            int startDist = isRtl ? SLIDE_IN_DISTANCE : -SLIDE_IN_DISTANCE;
+                            int endDist = isRtl ? -actionFragmentView.getMeasuredWidth() :
+                                    actionFragmentView.getMeasuredWidth();
 
-                    // Fade in and slide in the ActionFragment from the end.
-                    prepareAndAnimateView(actionFragmentView, 0,
-                            endDist, secondaryDelay,
-                            ANIMATE_IN_DURATION, new DecelerateInterpolator(1.0f),
-                            false);
+                            // Fade in and slide in the ContentFragment TextViews from the start.
+                            prepareAndAnimateView(title, 0, startDist,
+                                    secondaryDelay, ANIMATE_IN_DURATION,
+                                    new DecelerateInterpolator(1.0f),
+                                    false);
+                            prepareAndAnimateView(breadcrumb, 0, startDist,
+                                    secondaryDelay, ANIMATE_IN_DURATION,
+                                    new DecelerateInterpolator(1.0f),
+                                    false);
+                            prepareAndAnimateView(description, 0,
+                                    startDist,
+                                    secondaryDelay, ANIMATE_IN_DURATION,
+                                    new DecelerateInterpolator(1.0f),
+                                    false);
 
-                    if (icon != null) {
-                        prepareAndAnimateView(icon, 0, startDist,
-                                secondaryDelay, ANIMATE_IN_DURATION,
-                                new DecelerateInterpolator(1.0f), true /* is the icon */);
-                        if (mShadowLayer != null) {
-                            mShadowLayer.setShadowsAlpha(0f);
+                            // Fade in and slide in the ActionFragment from the end.
+                            prepareAndAnimateView(actionFragmentView, 0,
+                                    endDist, secondaryDelay,
+                                    ANIMATE_IN_DURATION, new DecelerateInterpolator(1.0f),
+                                    false);
+
+                            if (icon != null) {
+                                prepareAndAnimateView(icon, 0, startDist,
+                                        secondaryDelay, ANIMATE_IN_DURATION,
+                                        new DecelerateInterpolator(1.0f), true /* is the icon */);
+                                if (mShadowLayer != null) {
+                                    mShadowLayer.setShadowsAlpha(0f);
+                                }
+                            }
                         }
-                    }
-                }
-            };
-        });
+                    };
+                });
     }
 
     /**
      * Animates a view.
      *
-     * @param v              view to animate
-     * @param initAlpha      initial alpha
-     * @param initTransX     initial translation in the X
-     * @param delay          delay in ms
-     * @param duration       duration in ms
-     * @param interpolator   interpolator to be used, can be null
-     * @param isIcon         if {@code true}, this is the main icon being moved
+     * @param v            view to animate
+     * @param initAlpha    initial alpha
+     * @param initTransX   initial translation in the X
+     * @param delay        delay in ms
+     * @param duration     duration in ms
+     * @param interpolator interpolator to be used, can be null
+     * @param isIcon       if {@code true}, this is the main icon being moved
      */
     public void prepareAndAnimateView(final View v, float initAlpha, float initTransX, int delay,
-            int duration, Interpolator interpolator, final boolean isIcon) {
+                                      int duration, Interpolator interpolator, final boolean isIcon) {
         if (v != null && v.getWindowToken() != null) {
             v.setLayerType(View.LAYER_TYPE_HARDWARE, null);
             v.buildLayer();

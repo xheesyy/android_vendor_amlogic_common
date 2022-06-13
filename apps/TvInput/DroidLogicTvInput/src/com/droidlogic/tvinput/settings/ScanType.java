@@ -17,6 +17,6 @@ public class ScanType {
     public static final int SCAN_FAULT = -1;
     public static final int CABLE_MODE_STANDARD = 1;
     public static final int CABLE_MODE_LRC = 2;
-    public static final int CABLE_MODE_HRC =3;
+    public static final int CABLE_MODE_HRC = 3;
     public static final int CABLE_MODE_AUTO = 4;
 }

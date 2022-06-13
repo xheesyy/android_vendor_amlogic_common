@@ -34,12 +34,12 @@ public class NetworkSwitchService extends Service {
                 NetworkInfo networkInfo = cm.getActiveNetworkInfo();
 
                 if (networkInfo != null && networkInfo.isAvailable()) {
-                    if (UNNETCONDITION_LED != null && NETCONDITION_LED !=null) {
+                    if (UNNETCONDITION_LED != null && NETCONDITION_LED != null) {
                         mControlManager.writeSysFs(UNNETCONDITION_LED, "0");
                         mControlManager.writeSysFs(NETCONDITION_LED, "0");
                     }
                 } else {
-                    if (UNNETCONDITION_LED != null && NETCONDITION_LED !=null) {
+                    if (UNNETCONDITION_LED != null && NETCONDITION_LED != null) {
                         mControlManager.writeSysFs(UNNETCONDITION_LED, "1");
                         mControlManager.writeSysFs(NETCONDITION_LED, "1");
                     }

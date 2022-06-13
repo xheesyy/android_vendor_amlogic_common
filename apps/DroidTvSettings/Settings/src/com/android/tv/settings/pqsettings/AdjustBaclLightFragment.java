@@ -18,9 +18,12 @@ package com.android.tv.settings.pqsettings;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -55,13 +58,13 @@ public class AdjustBaclLightFragment extends SettingsPreferenceFragment implemen
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.xml.backlight_seekbar, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated (View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         initSeekBar(view);
     }
 
@@ -101,7 +104,7 @@ public class AdjustBaclLightFragment extends SettingsPreferenceFragment implemen
             return;
         }
         switch (seekBar.getId()) {
-            case R.id.seekbar_backlight:{
+            case R.id.seekbar_backlight: {
                 setShow(R.id.seekbar_backlight, progress);
                 mPQSettingsManager.setBacklightValue(progress - mPQSettingsManager.getBacklightStatus());
                 break;
@@ -128,7 +131,7 @@ public class AdjustBaclLightFragment extends SettingsPreferenceFragment implemen
 
     private void setShow(int id, int value) {
         switch (id) {
-            case R.id.seekbar_backlight:{
+            case R.id.seekbar_backlight: {
                 text_blacklight.setText(getShowString(R.string.pq_backlight, value));
                 break;
             }

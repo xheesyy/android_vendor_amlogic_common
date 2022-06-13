@@ -178,18 +178,18 @@ public class WriteMacActivity extends Activity {
             }
         }
         if (!format_err) {
-			char[] charArr = strUsid.toCharArray();
+            char[] charArr = strUsid.toCharArray();
             for (int j = 0; j < 10; j++) {
                 int value = (int) charArr[j];
                 if ((value > 0x2f) && (value < 0x3a)) {
-					charArr[j] = (char)(value - 48);
-                } else if((value > 0x40) && (value < 0x47)){
-					charArr[j] = (char)(value - 55);
-				} else if((value > 0x60) && (value < 0x67)){
-					charArr[j] = (char)(value - 87);
+                    charArr[j] = (char) (value - 48);
+                } else if ((value > 0x40) && (value < 0x47)) {
+                    charArr[j] = (char) (value - 55);
+                } else if ((value > 0x60) && (value < 0x67)) {
+                    charArr[j] = (char) (value - 87);
                 }
             }
-			strUsid = new String(charArr);
+            strUsid = new String(charArr);
             Tools.writeFile(Tools.Key_OTP_Usid, strUsid);
         }
 

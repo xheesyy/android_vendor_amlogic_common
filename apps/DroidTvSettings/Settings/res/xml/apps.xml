@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2017 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,7 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:title="@string/applications_category_title">
+    android:title="@string/applications_category_title">
 
     <PreferenceCategory
         android:key="recently_used_apps_category"
@@ -37,16 +36,16 @@
         <Preference
             android:key="Permissions"
             android:title="@string/device_apps_permissions">
-            <intent android:action="android.intent.action.MANAGE_PERMISSIONS"/>
+            <intent android:action="android.intent.action.MANAGE_PERMISSIONS" />
         </Preference>
         <Preference
             android:key="special_access"
             android:title="@string/special_access"
-            android:fragment="com.android.tv.settings.device.apps.specialaccess.SpecialAppAccess"/>
+            android:fragment="com.android.tv.settings.device.apps.specialaccess.SpecialAppAccess" />
     </PreferenceCategory>
 
     <Preference
         android:fragment="com.android.tv.settings.system.SecurityFragment"
         android:key="security"
-        android:title="@string/system_security"/>
+        android:title="@string/system_security" />
 </PreferenceScreen>

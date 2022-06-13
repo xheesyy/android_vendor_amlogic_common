@@ -85,7 +85,7 @@ public class InputMethodHelper {
      * Find InputMethod from a List by id.
      */
     public static InputMethodInfo findInputMethod(String imid,
-            List<InputMethodInfo> enabledInputMethodInfos) {
+                                                  List<InputMethodInfo> enabledInputMethodInfos) {
         for (int i = 0, size = enabledInputMethodInfos.size(); i < size; i++) {
             final InputMethodInfo info = enabledInputMethodInfos.get(i);
             final String id = info.getId();

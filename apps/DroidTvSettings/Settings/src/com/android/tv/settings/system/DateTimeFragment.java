@@ -124,7 +124,7 @@ public class DateTimeFragment extends SettingsPreferenceFragment implements
     public void onResume() {
         super.onResume();
 
-        ((SwitchPreference)mTime24Pref).setChecked(is24Hour());
+        ((SwitchPreference) mTime24Pref).setChecked(is24Hour());
 
         // Register for time ticks and other reasons for time change
         IntentFilter filter = new IntentFilter();
@@ -236,7 +236,7 @@ public class DateTimeFragment extends SettingsPreferenceFragment implements
 
         int value = Settings.Global.getInt(getContext().getContentResolver(),
                 Settings.Global.AUTO_TIME, 0);
-        if(value > 0) {
+        if (value > 0) {
             return AUTO_DATE_TIME_NTP;
         }
 

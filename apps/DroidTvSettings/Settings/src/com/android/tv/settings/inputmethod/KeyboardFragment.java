@@ -235,7 +235,7 @@ public class KeyboardFragment extends SettingsPreferenceFragment {
     }
 
     private void updateCurrentAutofillPreference(Preference currentAutofillPref,
-            List<DefaultAppInfo> candidates) {
+                                                 List<DefaultAppInfo> candidates) {
 
         DefaultAppInfo app = AutofillHelper.getCurrentAutofill(getContext(), candidates);
 
@@ -270,7 +270,7 @@ public class KeyboardFragment extends SettingsPreferenceFragment {
             autofillServicesKeys.add(key);
         }
 
-        for (int i = 0; i < autofillCategory.getPreferenceCount();) {
+        for (int i = 0; i < autofillCategory.getPreferenceCount(); ) {
             final Preference preference = autofillCategory.getPreference(i);
             final String key = preference.getKey();
             if (!TextUtils.isEmpty(key)

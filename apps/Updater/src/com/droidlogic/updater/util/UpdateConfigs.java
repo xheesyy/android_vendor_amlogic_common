@@ -74,7 +74,8 @@ public final class UpdateConfigs {
                             StandardCharsets.UTF_8);
                     configs.add(UpdateConfig.fromJson(json));
                 } catch (Exception e) {
-                    if (PermissionUtils.CanDebug()) Log.e("UpdateConfigs", "Can't read/parse config file " + f.getName(), e);
+                    if (PermissionUtils.CanDebug())
+                        Log.e("UpdateConfigs", "Can't read/parse config file " + f.getName(), e);
                     throw new RuntimeException(
                             "Can't read/parse config file " + f.getName(), e);
                 }
@@ -85,9 +86,9 @@ public final class UpdateConfigs {
 
     /**
      * @param filename searches by given filename
-     * @param config searches in {@link UpdateConfig#getAbConfig()}
+     * @param config   searches in {@link UpdateConfig#getAbConfig()}
      * @return offset and size of {@code filename} in the package zip file
-     *         stored as {@link UpdateConfig.PackageFile}.
+     * stored as {@link UpdateConfig.PackageFile}.
      */
     public static Optional<UpdateConfig.PackageFile> getPropertyFile(
             final String filename,
@@ -98,5 +99,6 @@ public final class UpdateConfigs {
                 .findFirst();
     }
 
-    private UpdateConfigs() {}
+    private UpdateConfigs() {
+    }
 }

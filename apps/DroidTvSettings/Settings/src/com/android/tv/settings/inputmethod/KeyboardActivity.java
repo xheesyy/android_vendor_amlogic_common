@@ -29,6 +29,6 @@ public class KeyboardActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(KeyboardFragment.class.getName(), null);
+                .newSettingsFragment(KeyboardFragment.class.getName(), null);
     }
 }

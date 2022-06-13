@@ -16,6 +16,7 @@ import android.graphics.Typeface;
 import android.text.TextUtils;
 import android.util.JsonReader;
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,8 +48,7 @@ public class IsdbImplement {
     Paint text_paint;
     Paint background_paint;
 
-    IsdbImplement(Context context)
-    {
+    IsdbImplement(Context context) {
         this.mContext = context;
         cc_paint_height = 1080;
         background_paint = new Paint();
@@ -63,8 +63,7 @@ public class IsdbImplement {
         }
     }
 
-    void updateVideoPosition(String ratio, String screen_mode, String video_status)
-    {
+    void updateVideoPosition(String ratio, String screen_mode, String video_status) {
         try {
             String hs_str = video_status.split("VPP_hsc_startp 0x")[1].split("\\.")[0];
             String he_str = video_status.split("VPP_hsc_endp 0x")[1].split("\\.")[0];
@@ -78,12 +77,12 @@ public class IsdbImplement {
             video_height = video_bottom - video_top;
             video_width = video_right - video_left;
             //TODO:
-            video_h_v_rate_on_screen = (double)video_width / (double)video_height;
+            video_h_v_rate_on_screen = (double) video_width / (double) video_height;
             if (video_h_v_rate_on_screen < 1.7) {
                 x_dimension = 720;
                 y_dimension = 540;
                 cc_paint_width = 1440;
-                safe_area_left = (1920 - 1440)/2;
+                safe_area_left = (1920 - 1440) / 2;
             } else {
                 x_dimension = 960;
                 y_dimension = 540;
@@ -91,7 +90,7 @@ public class IsdbImplement {
                 safe_area_left = video_width * 0.1;
             }
             safe_area_top = video_height * 0.1;
-            Log.i(TAG, "position: "+ video_left + " " + video_right + " " + video_top +
+            Log.i(TAG, "position: " + video_left + " " + video_right + " " + video_top +
                     " " + video_bottom + " " + video_h_v_rate_on_screen +
                     " " + x_dimension + " " + y_dimension + ratio + " " + screen_mode);
         } catch (Exception e) {
@@ -116,8 +115,7 @@ public class IsdbImplement {
     JSONArray row_array;
     int horizon_layout = 0;
 
-    void draw(Canvas canvas, String jsonStr)
-    {
+    void draw(Canvas canvas, String jsonStr) {
         JSONObject ccObj;
         text_paint.setAntiAlias(true);
         text_paint.setSubpixelText(true);
@@ -144,7 +142,7 @@ public class IsdbImplement {
             text_paint.setColor(Color.WHITE);
             text_paint.setSubpixelText(true);
             font_actual_size = (cc_paint_height * fsize / y_dimension) / 2;
-            text_paint.setTextSize((int)(font_actual_size*1.25));
+            text_paint.setTextSize((int) (font_actual_size * 1.25));
             text_paint.setTypeface(mono_serif_tf);
         } catch (Exception e) {
             Log.e(TAG, "get params failed: " + e.toString());
@@ -153,7 +151,7 @@ public class IsdbImplement {
         try {
             if (rows > 0) {
                 for (int i = 0; i < rows; i++) {
-                    int x,y;
+                    int x, y;
                     JSONObject target_row = row_array.getJSONObject(i);
                     if (horizon_layout == 1) {
                         y = target_row.getInt("x");
@@ -163,7 +161,7 @@ public class IsdbImplement {
                         y = target_row.getInt("y");
                     }
                     String str = target_row.getString("text");
-                    Log.e(TAG, "x:"+x+" y:"+y +" str:"+str + " horizon? " + horizon_layout);
+                    Log.e(TAG, "x:" + x + " y:" + y + " str:" + str + " horizon? " + horizon_layout);
 
                     double str_left = x * cc_paint_width / x_dimension / 4 + safe_area_left;
                     double str_bottom = y * cc_paint_height / y_dimension + safe_area_top;
@@ -172,7 +170,7 @@ public class IsdbImplement {
                             (float) (str_left + text_paint.measureText(str)),
                             (float) str_bottom + text_paint.getFontMetrics().descent,
                             background_paint);
-                    canvas.drawText(str, (float) str_left, (float)str_bottom, text_paint);
+                    canvas.drawText(str, (float) str_left, (float) str_bottom, text_paint);
                     Log.e(TAG, "sleft " + str_left + " sright " + str_bottom);
 //                    background_paint.setColor(Color.RED);
 //                    canvas.drawLine(x-1000, x+1000, y, y, background_paint);
@@ -180,7 +178,7 @@ public class IsdbImplement {
                 }
             }
         } catch (Exception e) {
-            Log.e(TAG, "Parse rows detail failed "+e.toString());
+            Log.e(TAG, "Parse rows detail failed " + e.toString());
             return;
         }
         Log.e(TAG, "Draw done");

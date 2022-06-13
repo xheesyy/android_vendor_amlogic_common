@@ -28,7 +28,9 @@ import androidx.annotation.Keep;
 import com.android.tv.twopanelsettings.R;
 import com.android.tv.twopanelsettings.slices.InfoFragment;
 
-/** An {@InfoFragment} that hosts preview pane of accounts and sign-in in basic mode. */
+/**
+ * An {@InfoFragment} that hosts preview pane of accounts and sign-in in basic mode.
+ */
 @Keep
 public class BasicModeAccountsAndSignInInfoFragment extends InfoFragment {
 

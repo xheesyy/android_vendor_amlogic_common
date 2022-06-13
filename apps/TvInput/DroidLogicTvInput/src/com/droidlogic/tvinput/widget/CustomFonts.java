@@ -12,7 +12,9 @@ package com.droidlogic.tvinput.widget;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
+
 import java.io.File;
+
 /**
  * Created by daniel on 06/11/2017.
  */
@@ -30,8 +32,7 @@ public class CustomFonts {
     Typeface cursive_tf;
     Typeface cursive_it_tf;
 
-    CustomFonts(Context context)
-    {
+    CustomFonts(Context context) {
         try {
             mono_serif_tf = Typeface.createFromFile(new File(context.getDataDir(), "font/cinecavD_mono.ttf"));
             mono_serif_it_tf = Typeface.createFromFile(new File(context.getDataDir(), "font/cinecavD_mono_it.ttf"));

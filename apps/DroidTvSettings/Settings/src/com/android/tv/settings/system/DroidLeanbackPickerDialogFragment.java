@@ -111,7 +111,7 @@ public class DroidLeanbackPickerDialogFragment extends LeanbackPreferenceDialogF
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         final String pickerType = getArguments().getString(EXTRA_PICKER_TYPE);
 
         final TypedValue tv = new TypedValue();

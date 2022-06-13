@@ -26,6 +26,6 @@ public class StatusActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(StatusFragment.class.getName(), null);
+                .newSettingsFragment(StatusFragment.class.getName(), null);
     }
 }

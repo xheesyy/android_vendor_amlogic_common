@@ -128,30 +128,30 @@ public class BluetoothA2dpConnector implements BluetoothDevicePairer.BluetoothCo
     private BluetoothProfile.ServiceListener mServiceConnection =
             new BluetoothProfile.ServiceListener() {
 
-        @Override
-        public void onServiceDisconnected(int profile) {
-            Log.w(TAG, "Service disconnected, perhaps unexpectedly");
-            unregisterConnectionStateReceiver();
-            closeA2dpProfileProxy();
-            failed();
-        }
+                @Override
+                public void onServiceDisconnected(int profile) {
+                    Log.w(TAG, "Service disconnected, perhaps unexpectedly");
+                    unregisterConnectionStateReceiver();
+                    closeA2dpProfileProxy();
+                    failed();
+                }
 
-        @Override
-        public void onServiceConnected(int profile, BluetoothProfile proxy) {
-            if (DEBUG) {
-                Log.d(TAG, "Connection made to bluetooth proxy." );
-            }
-            mA2dpProfile = (BluetoothA2dp) proxy;
-            if (DEBUG) {
-                Log.d(TAG, "Connecting to target: " + mTarget.getAddress());
-            }
+                @Override
+                public void onServiceConnected(int profile, BluetoothProfile proxy) {
+                    if (DEBUG) {
+                        Log.d(TAG, "Connection made to bluetooth proxy.");
+                    }
+                    mA2dpProfile = (BluetoothA2dp) proxy;
+                    if (DEBUG) {
+                        Log.d(TAG, "Connecting to target: " + mTarget.getAddress());
+                    }
 
-            registerConnectionStateReceiver();
-            // We initiate SDP because connecting to A2DP before services are discovered leads to
-            // error.
-            mTarget.fetchUuidsWithSdp();
-        }
-    };
+                    registerConnectionStateReceiver();
+                    // We initiate SDP because connecting to A2DP before services are discovered leads to
+                    // error.
+                    mTarget.fetchUuidsWithSdp();
+                }
+            };
 
     private BluetoothA2dpConnector() {
     }

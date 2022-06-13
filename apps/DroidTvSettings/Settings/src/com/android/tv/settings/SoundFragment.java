@@ -23,6 +23,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -31,6 +32,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.TwoStatePreference;
+
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -49,23 +51,23 @@ import com.android.tv.settings.tvoption.SoundParameterSettingManager;
 public class SoundFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
     public static final String TAG = "SoundFragment";
 
-    private static final String KEY_DOLBY_DRCMODE_PASSTHROUGH               = "key_dolby_drc_mode";          /* Dolby Sounds */
-    private static final String KEY_DIGITALSOUND_CATEGORY                   = "surround_sound_category";
-    private static final String KEY_DIGITALSOUND_PREFIX                     = "digital_subformat_";
-    public static final String KEY_DIGITALSOUND_FORMAT                      = "key_digital_audio_format";
-    private static final String KEY_DTSDRCMODE_PASSTHROUGH                  = "dtsdrc_mode";
-    private static final String KEY_DTSDRCCUSTOMMODE_PASSTHROUGH            = "dtsdrc_custom_mode";
-    private static final String KEY_SOUND_AD_MIXING                         = "key_sound_ad_mixing";
-    private static final String KEY_DAP                                     = "dolby_audio_processing";
-    private static final String KEY_ARC_LATENCY                             = "arc_latency";                /* HDMI/ARC latency */
-    public static final String KEY_AUDIO_OUTPUT_LATENCY                     = "key_audio_output_latency";   /* Audio Output Latency */
-    public static final String KEY_FORCE_DDP                                = "key_force_ddp";   /* Audio Output DDP for ms12 v2 ,default is mat*/
-    public static final String KEY_SOUND_TV_OUTPUT_DEVICE_HDMI_OUT          = "key_sound_tv_output_device_hdmi_out";   /* for soundbar product HDMI TX output*/
-    public static final String KEY_TV_DTS_VIRTUALX_EFFECT                   = "key_dts_virtualx_settings_truvolumehd";   /* for soundbar product HDMI TX output*/
-    public static final String KEY_DTS_VIRTUALX_SETTINGS                    = "key_dts_virtualx_settings";
+    private static final String KEY_DOLBY_DRCMODE_PASSTHROUGH = "key_dolby_drc_mode";          /* Dolby Sounds */
+    private static final String KEY_DIGITALSOUND_CATEGORY = "surround_sound_category";
+    private static final String KEY_DIGITALSOUND_PREFIX = "digital_subformat_";
+    public static final String KEY_DIGITALSOUND_FORMAT = "key_digital_audio_format";
+    private static final String KEY_DTSDRCMODE_PASSTHROUGH = "dtsdrc_mode";
+    private static final String KEY_DTSDRCCUSTOMMODE_PASSTHROUGH = "dtsdrc_custom_mode";
+    private static final String KEY_SOUND_AD_MIXING = "key_sound_ad_mixing";
+    private static final String KEY_DAP = "dolby_audio_processing";
+    private static final String KEY_ARC_LATENCY = "arc_latency";                /* HDMI/ARC latency */
+    public static final String KEY_AUDIO_OUTPUT_LATENCY = "key_audio_output_latency";   /* Audio Output Latency */
+    public static final String KEY_FORCE_DDP = "key_force_ddp";   /* Audio Output DDP for ms12 v2 ,default is mat*/
+    public static final String KEY_SOUND_TV_OUTPUT_DEVICE_HDMI_OUT = "key_sound_tv_output_device_hdmi_out";   /* for soundbar product HDMI TX output*/
+    public static final String KEY_TV_DTS_VIRTUALX_EFFECT = "key_dts_virtualx_settings_truvolumehd";   /* for soundbar product HDMI TX output*/
+    public static final String KEY_DTS_VIRTUALX_SETTINGS = "key_dts_virtualx_settings";
 
 
-    public static final int KEY_AUDIO_OUTPUT_LATENCY_STEP                   = 10; // 10ms
+    public static final int KEY_AUDIO_OUTPUT_LATENCY_STEP = 10; // 10ms
 
     private OutputModeManager mOutputModeManager;
     private AudioConfigManager mAudioConfigManager;
@@ -74,6 +76,7 @@ public class SoundFragment extends SettingsPreferenceFragment implements Prefere
     private SoundParameterSettingManager mSoundParameterSettingManager;
     private PreferenceCategory mCategoryPref;
     private Map<Integer, Boolean> mFormats;
+
     public static SoundFragment newInstance() {
         return new SoundFragment();
     }
@@ -91,8 +94,8 @@ public class SoundFragment extends SettingsPreferenceFragment implements Prefere
         AudioManager am = context.getSystemService(AudioManager.class);
         try {
             Method getSurroundFormats = AudioManager.class.getMethod("getSurroundFormats");
-            mFormats = (Map<Integer, Boolean>)getSurroundFormats.invoke(am);
-        }catch(Exception ex){
+            mFormats = (Map<Integer, Boolean>) getSurroundFormats.invoke(am);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -218,7 +221,9 @@ public class SoundFragment extends SettingsPreferenceFragment implements Prefere
         updateFormatPreferencesStates();
     }
 
-    /** Creates and adds switches for each surround sound format. */
+    /**
+     * Creates and adds switches for each surround sound format.
+     */
     private void createFormatPreferences() {
         for (Map.Entry<Integer, Boolean> format : mFormats.entrySet()) {
             int formatId = format.getKey();
@@ -284,7 +289,7 @@ public class SoundFragment extends SettingsPreferenceFragment implements Prefere
             if (!enable.isEmpty()) {
                 try {
                     Arrays.stream(enable.split(",")).mapToInt(Integer::parseInt)
-                        .forEach(fmts::add);
+                            .forEach(fmts::add);
                 } catch (NumberFormatException e) {
                     Log.w(TAG, "DIGITAL_AUDIO_SUBFORMAT misformatted.", e);
                 }
@@ -293,9 +298,9 @@ public class SoundFragment extends SettingsPreferenceFragment implements Prefere
 
         for (Map.Entry<Integer, Boolean> format : mFormats.entrySet()) {
             int formatId = format.getKey();
-            String key = KEY_DIGITALSOUND_PREFIX+formatId;
+            String key = KEY_DIGITALSOUND_PREFIX + formatId;
             SwitchPreference preference =
-                    (SwitchPreference)mCategoryPref.findPreference(key);
+                    (SwitchPreference) mCategoryPref.findPreference(key);
             preference.setVisible(show);
             if (show) {
                 if (fmts.contains(formatId))
@@ -316,8 +321,8 @@ public class SoundFragment extends SettingsPreferenceFragment implements Prefere
         } else if (KEY_SOUND_AD_MIXING.equals(key)) {
             final TwoStatePreference adsurport = (TwoStatePreference) findPreference(KEY_SOUND_AD_MIXING);
             mOutputModeManager.setAdSurportEnable(adsurport.isChecked());
-        } else if(KEY_FORCE_DDP.equals(key)) {
-            TwoStatePreference pref = (TwoStatePreference)preference;
+        } else if (KEY_FORCE_DDP.equals(key)) {
+            TwoStatePreference pref = (TwoStatePreference) preference;
             mOutputModeManager.setForceDDPEnable(pref.isChecked());
         } else if (KEY_SOUND_TV_OUTPUT_DEVICE_HDMI_OUT.equals(key)) {
             final TwoStatePreference hdmiOut = (TwoStatePreference) findPreference(KEY_SOUND_TV_OUTPUT_DEVICE_HDMI_OUT);
@@ -339,37 +344,37 @@ public class SoundFragment extends SettingsPreferenceFragment implements Prefere
         if (TextUtils.equals(preference.getKey(), KEY_DOLBY_DRCMODE_PASSTHROUGH)) {
             final String selection = (String) newValue;
             switch (selection) {
-            case SoundParameterSettingManager.DRC_OFF:
-                mOutputModeManager.enableDobly_DRC(false);
-                mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
-                mSoundParameterSettingManager.setDrcModePassthroughSetting(OutputModeManager.IS_DRC_OFF);
-                break;
-            case SoundParameterSettingManager.DRC_LINE:
-                mOutputModeManager.enableDobly_DRC(true);
-                mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
-                mSoundParameterSettingManager.setDrcModePassthroughSetting(OutputModeManager.IS_DRC_LINE);
-                break;
-            case SoundParameterSettingManager.DRC_RF:
-                mOutputModeManager.enableDobly_DRC(false);
-                mOutputModeManager.setDoblyMode(OutputModeManager.RF_DRCMODE);
-                mSoundParameterSettingManager.setDrcModePassthroughSetting(OutputModeManager.IS_DRC_RF);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown drc mode pref value");
+                case SoundParameterSettingManager.DRC_OFF:
+                    mOutputModeManager.enableDobly_DRC(false);
+                    mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
+                    mSoundParameterSettingManager.setDrcModePassthroughSetting(OutputModeManager.IS_DRC_OFF);
+                    break;
+                case SoundParameterSettingManager.DRC_LINE:
+                    mOutputModeManager.enableDobly_DRC(true);
+                    mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
+                    mSoundParameterSettingManager.setDrcModePassthroughSetting(OutputModeManager.IS_DRC_LINE);
+                    break;
+                case SoundParameterSettingManager.DRC_RF:
+                    mOutputModeManager.enableDobly_DRC(false);
+                    mOutputModeManager.setDoblyMode(OutputModeManager.RF_DRCMODE);
+                    mSoundParameterSettingManager.setDrcModePassthroughSetting(OutputModeManager.IS_DRC_RF);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unknown drc mode pref value");
             }
         } else if (TextUtils.equals(preference.getKey(), KEY_DIGITALSOUND_FORMAT)) {
-            final String selection = (String)newValue;
+            final String selection = (String) newValue;
             mSoundParameterSettingManager.setDigitalAudioFormat(selection);
             updateFormatPreferencesStates();
         } else if (TextUtils.equals(preference.getKey(), KEY_DTSDRCMODE_PASSTHROUGH)) {
             final String selection = (String) newValue;
             mOutputModeManager.setDtsDrcScale(selection);
         } else if (TextUtils.equals(preference.getKey(), KEY_ARC_LATENCY)) {
-            mSoundParameterSettingManager.setARCLatency((int)newValue);
+            mSoundParameterSettingManager.setARCLatency((int) newValue);
         } else if (TextUtils.equals(preference.getKey(), KEY_AUDIO_OUTPUT_LATENCY)) {
-            mAudioConfigManager.setAudioOutputAllDelay((int)newValue);
+            mAudioConfigManager.setAudioOutputAllDelay((int) newValue);
         } else if (TextUtils.equals(preference.getKey(), KEY_TV_DTS_VIRTUALX_EFFECT)) {
-            mAudioEffectManager.setDtsVirtualXMode((int)newValue);
+            mAudioEffectManager.setDtsVirtualXMode((int) newValue);
         }
         return true;
     }

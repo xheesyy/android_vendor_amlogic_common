@@ -29,7 +29,7 @@ public class SoundActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(SoundFragment.class.getName(), null);
+                .newSettingsFragment(SoundFragment.class.getName(), null);
     }
 
 }

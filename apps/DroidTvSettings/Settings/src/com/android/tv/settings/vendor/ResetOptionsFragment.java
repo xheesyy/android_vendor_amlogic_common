@@ -27,7 +27,9 @@ import androidx.preference.Preference;
 import com.android.tv.settings.R;
 import com.android.tv.settings.SettingsPreferenceFragment;
 
-/** A vendor version reset options settings. */
+/**
+ * A vendor version reset options settings.
+ */
 @Keep
 public class ResetOptionsFragment extends SettingsPreferenceFragment {
 

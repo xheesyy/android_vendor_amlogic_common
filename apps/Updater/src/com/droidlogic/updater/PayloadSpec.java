@@ -67,11 +67,11 @@ public class PayloadSpec implements Serializable {
      * payload spec builder.
      *
      * <p>Usage:</p>
-     *
+     * <p>
      * {@code
-     *   PayloadSpec spec = PayloadSpec.newBuilder()
-     *     .url("url")
-     *     .build();
+     * PayloadSpec spec = PayloadSpec.newBuilder()
+     * .url("url")
+     * .build();
      * }
      */
     public static class Builder {

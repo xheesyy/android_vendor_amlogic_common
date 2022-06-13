@@ -125,15 +125,15 @@ public class FactoryReceiver extends BroadcastReceiver {
                     return;
                 } else {
                     //test_board
-                    if(rec.contains("test_board=VIM1")){
+                    if (rec.contains("test_board=VIM1")) {
                         MainActivity.test_board = "VIM1";
-                    }else if(rec.contains("test_board=VIM2")){
+                    } else if (rec.contains("test_board=VIM2")) {
                         MainActivity.test_board = "VIM2";
-                    }else if(rec.contains("test_board=VIM3")){
+                    } else if (rec.contains("test_board=VIM3")) {
                         MainActivity.test_board = "VIM3";
-                    }else if(rec.contains("test_board=VIM4")){
+                    } else if (rec.contains("test_board=VIM4")) {
                         MainActivity.test_board = "VIM4";
-                    }else{
+                    } else {
                         MainActivity.test_board = "VIM4";
                     }
                     //tfcard_test

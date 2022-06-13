@@ -36,7 +36,9 @@ public class NetworkRequestErrorDialogFragment extends ObservableDialogFragment 
 
     public enum ERROR_DIALOG_TYPE {TIME_OUT, ABORT}
 
-    /** Creates Network Error dialog. */
+    /**
+     * Creates Network Error dialog.
+     */
     public static NetworkRequestErrorDialogFragment newInstance() {
         return new NetworkRequestErrorDialogFragment();
     }

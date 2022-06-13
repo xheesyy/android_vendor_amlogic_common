@@ -182,7 +182,7 @@ public class WifiDetailsFragment extends SettingsPreferenceFragment
 
             IpAssignment ipAssignment = wifiConfiguration.getIpConfiguration().getIpAssignment();
             mIpSettingsPref.setSummary(ipAssignment == IpAssignment.STATIC
-                            ? R.string.wifi_action_static : R.string.wifi_action_dhcp);
+                    ? R.string.wifi_action_static : R.string.wifi_action_dhcp);
             mIpSettingsPref.setIntent(EditIpSettingsActivity.createIntent(getContext(), networkId));
 
             mForgetNetworkPref.setFragment(ForgetNetworkConfirmFragment.class.getName());
@@ -297,7 +297,7 @@ public class WifiDetailsFragment extends SettingsPreferenceFragment
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             final Context context = getContext();
             actions.add(new GuidedAction.Builder(context)
                     .clickAction(GuidedAction.ACTION_ID_OK)

@@ -92,21 +92,23 @@ public class DigitalClock extends LinearLayout {
 
     /**
      * Digital Clock
+     *
      * @param context Context
      */
     public DigitalClock(Context context) {
         this(context, null);
-        this.mContext=context;
+        this.mContext = context;
     }
 
     /**
      * Digital Clock
+     *
      * @param context Context
-     * @param attrs AttributeSet
+     * @param attrs   AttributeSet
      */
     public DigitalClock(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.mContext=context;
+        this.mContext = context;
     }
 
     @Override

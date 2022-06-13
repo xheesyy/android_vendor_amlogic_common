@@ -35,18 +35,21 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
 import android.media.AudioManager;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
 import android.content.ComponentName;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothClass;
 //import android.bluetooth.BluetoothHidHost;
 import android.text.TextUtils;
+
 /**
  * Service for managing connection and data communication with a GATT server hosted on a
  * given Bluetooth LE device.
@@ -55,16 +58,16 @@ public class DialogBluetoothService extends Service {
     private final static String TAG = "BLE_Service"; // BluetoothLeService.class.getSimpleName();
 
     // Supported devices GAP names
-    private static final String SUPPORTED_DEVICES [] = {
-        "DA14582 M&VRemote",
-        "DA14582 IR&M&VRemote",
-        "DA1458x RCU",
-        "RemoteB008",
-        "Amlogic_RC"
+    private static final String SUPPORTED_DEVICES[] = {
+            "DA14582 M&VRemote",
+            "DA14582 IR&M&VRemote",
+            "DA1458x RCU",
+            "RemoteB008",
+            "Amlogic_RC"
     };
 
-    private static final String BLE_VOICE_DEVICES [] = {
-        "B12"
+    private static final String BLE_VOICE_DEVICES[] = {
+            "B12"
     };
 
     public static final int DEVICE_BIT_IN = 0x80000000;
@@ -93,29 +96,29 @@ public class DialogBluetoothService extends Service {
     //private static final String CONNECTION_FAILED_MSG = "Connection to Audio Remote failed";
 
     // Intent Actions and Intent Extra keys to send messages to MainDiaBleActivity
-    public final static String ACTION_GATT_CONNECTED        = "com.diasemi.bleconnector.action.GATT_CONNECTED";
-    public final static String ACTION_GATT_DISCONNECTED     = "com.diasemi.bleconnector.action.GATT_DISCONNECTED";
-    public final static String ACTION_AUDIO_TRANSFER        = "com.diasemi.bleconnector.action.AUDIO_TRANSFER";
-    public final static String EXTRA_DATA                   = "com.diasemi.bleconnector.extra.DATA";
+    public final static String ACTION_GATT_CONNECTED = "com.diasemi.bleconnector.action.GATT_CONNECTED";
+    public final static String ACTION_GATT_DISCONNECTED = "com.diasemi.bleconnector.action.GATT_DISCONNECTED";
+    public final static String ACTION_AUDIO_TRANSFER = "com.diasemi.bleconnector.action.AUDIO_TRANSFER";
+    public final static String EXTRA_DATA = "com.diasemi.bleconnector.extra.DATA";
 
     // HID UUIDs
-    private static final UUID HID_SERVICE           = UUID.fromString("00001812-0000-1000-8000-00805f9b34fb");   // HID (Human Interface Device) Service
-    private static final UUID HID_INFORMATION_CHAR  = UUID.fromString("00002a4a-0000-1000-8000-00805f9b34fb");   // HID Information Characteristic
-    private static final UUID HID_REPORT_MAP        = UUID.fromString("00002a4b-0000-1000-8000-00805f9b34fb");   // HID Report Map Characteristic
-    private static final UUID HID_CONTROL_POINT     = UUID.fromString("00002a4c-0000-1000-8000-00805f9b34fb");   // HID Control Point Characteristic
-    private static final UUID HID_REPORT_CHAR       = UUID.fromString("00002a4d-0000-1000-8000-00805f9b34fb");   // HID Report Characteristic
+    private static final UUID HID_SERVICE = UUID.fromString("00001812-0000-1000-8000-00805f9b34fb");   // HID (Human Interface Device) Service
+    private static final UUID HID_INFORMATION_CHAR = UUID.fromString("00002a4a-0000-1000-8000-00805f9b34fb");   // HID Information Characteristic
+    private static final UUID HID_REPORT_MAP = UUID.fromString("00002a4b-0000-1000-8000-00805f9b34fb");   // HID Report Map Characteristic
+    private static final UUID HID_CONTROL_POINT = UUID.fromString("00002a4c-0000-1000-8000-00805f9b34fb");   // HID Control Point Characteristic
+    private static final UUID HID_REPORT_CHAR = UUID.fromString("00002a4d-0000-1000-8000-00805f9b34fb");   // HID Report Characteristic
     // Client Characteristic Configuration Descriptor
     private static final UUID CLIENT_CONFIG_DESCRIPTOR = UUID.fromString("00002902-0000-1000-8000-00805f9b34fb");
 
     // Ble Remote HID Report Characteristic instance IDs (Audio)
     //hugo modify for huitong rc;
-    private static final int  HID_STREAM_ENABLE_WRITE_INSTANCE = 65;//59;
-    private static final int  HID_STREAM_ENABLE_READ_INSTANCE  = 61;//62;
-    private static final int  HID_STREAM_DATA_MIN_INSTANCE     = 41;//66;
-    private static final int  HID_STREAM_DATA_MAX_INSTANCE     = 45;//74;
-    private static final int  HID_STREAM_DATA_REP5_INSTANCE    = 53;//66;
-    private static final int  HID_STREAM_DATA_REP6_INSTANCE    = 57;//70;
-    private static final int  HID_STREAM_DATA_REP7_INSTANCE    = 49;//74;
+    private static final int HID_STREAM_ENABLE_WRITE_INSTANCE = 65;//59;
+    private static final int HID_STREAM_ENABLE_READ_INSTANCE = 61;//62;
+    private static final int HID_STREAM_DATA_MIN_INSTANCE = 41;//66;
+    private static final int HID_STREAM_DATA_MAX_INSTANCE = 45;//74;
+    private static final int HID_STREAM_DATA_REP5_INSTANCE = 53;//66;
+    private static final int HID_STREAM_DATA_REP6_INSTANCE = 57;//70;
+    private static final int HID_STREAM_DATA_REP7_INSTANCE = 49;//74;
 
     // Data
     private BluetoothManager mBluetoothManager = null;
@@ -154,13 +157,14 @@ public class DialogBluetoothService extends Service {
             String deviceName = device.getName();
             /*if (BluetoothHidHost.ACTION_CONNECTION_STATE_CHANGED.equals(action)) {
             }
-            else */if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
-                Log.i(TAG, ">ACL LINK CONNECTED ["+device.getName()+"] - checking for supported devices after delay");
+            else */
+            if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
+                Log.i(TAG, ">ACL LINK CONNECTED [" + device.getName() + "] - checking for supported devices after delay");
                 if (isBleVoiceDevice(device)) {
                     setWiredDeviceConnectionState(/*AudioManager.*/DEVICE_IN_BLE_IN, 1, macAddress, deviceName);
                 }
                 if (isRemoteAudioCapable(device)) {
-                    Log.i(TAG, "pending.isEmpty()="+pending.isEmpty());
+                    Log.i(TAG, "pending.isEmpty()=" + pending.isEmpty());
                     if (!pending.isEmpty()) {
                         mBluetoothGatt = null;
                         mConnectionState = STATE_DISCONNECTED;
@@ -170,12 +174,10 @@ public class DialogBluetoothService extends Service {
                     mHandler.postDelayed(mConnRunnable, CONNECTION_DELAY_MS);
                     // waiting some time to not overload BLE device with requests
                 }
-            }
-            else if (BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals(action)) {
-                Log.i(TAG, ">ACL LINK DISCONNECT REQUEST ["+device.getName()+"]");
-            }
-            else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
-                Log.i(TAG, ">ACL LINK DISCONNECTED ["+device.getName()+"]");
+            } else if (BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED.equals(action)) {
+                Log.i(TAG, ">ACL LINK DISCONNECT REQUEST [" + device.getName() + "]");
+            } else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {
+                Log.i(TAG, ">ACL LINK DISCONNECTED [" + device.getName() + "]");
                 if (isBleVoiceDevice(device)) {
                     setWiredDeviceConnectionState(/*AudioManager.*/DEVICE_IN_BLE_IN, 0, macAddress, deviceName);
                 }
@@ -184,14 +186,13 @@ public class DialogBluetoothService extends Service {
                     if (pending.isEmpty())
                         mHandler.removeCallbacks(mConnRunnable);
                 }
-            }
-            else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
+            } else if (BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
                 int bondStateNow = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, BluetoothDevice.BOND_NONE);
                 int bondStatePrev = intent.getIntExtra(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE, BluetoothDevice.BOND_NONE);
 
-                Log.i(TAG, "BOND STATE CHANGED ["+device.getName()+"] - was " + bondStatePrev + ", now is " + bondStateNow);
+                Log.i(TAG, "BOND STATE CHANGED [" + device.getName() + "] - was " + bondStatePrev + ", now is " + bondStateNow);
                 if (isRemoteAudioCapable(device) && bondStatePrev == BluetoothDevice.BOND_BONDING && bondStateNow == BluetoothDevice.BOND_BONDED) {
-                    Log.i(TAG, "Bonding complete ["+device.getName()+"] - checking for supported devices after delay");
+                    Log.i(TAG, "Bonding complete [" + device.getName() + "] - checking for supported devices after delay");
                     pending.add(device);
                     mHandler.removeCallbacks(mConnRunnable);
                     mHandler.postDelayed(mConnRunnable, CONNECTION_DELAY_MS);
@@ -212,7 +213,7 @@ public class DialogBluetoothService extends Service {
         @Override
         public void run() {
             if (mConnectionState == STATE_DISCONNECTED && mBluetoothGatt == null) {
-                Log. i(TAG, "mConnRunnable, looking on bonded devices in order to find connection target...");
+                Log.i(TAG, "mConnRunnable, looking on bonded devices in order to find connection target...");
                 //pending.clear();
                 connectToBondedDevices();
             } else {
@@ -225,7 +226,7 @@ public class DialogBluetoothService extends Service {
         @Override
         public void run() {
             if (mConnectionState == STATE_CONNECTING && mBluetoothGatt != null) {
-                Log.d (TAG, "Connection attempt timeout!");
+                Log.d(TAG, "Connection attempt timeout!");
                 mConnectionState = STATE_DISCONNECTED;
                 mBluetoothGatt.disconnect();
                 close();
@@ -237,8 +238,7 @@ public class DialogBluetoothService extends Service {
     /**
      * Connect to the first found bonded audio remote device
      */
-    public void connectToBondedDevices()
-    {
+    public void connectToBondedDevices() {
         Log.i(TAG, "connectToBondedDevices><");
 
         if (mBluetoothGatt != null && mConnectionState != STATE_DISCONNECTED) {
@@ -252,8 +252,8 @@ public class DialogBluetoothService extends Service {
         }
 
         Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
-        Log.i(TAG, "bondedDevices size:"+bondedDevices.size());
-        for (Iterator<BluetoothDevice> it = bondedDevices.iterator(); it.hasNext();) {
+        Log.i(TAG, "bondedDevices size:" + bondedDevices.size());
+        for (Iterator<BluetoothDevice> it = bondedDevices.iterator(); it.hasNext(); ) {
             BluetoothDevice dev = (BluetoothDevice) it.next();
             if (isBleVoiceDevice(dev)) {
                 setWiredDeviceConnectionState(/*AudioManager.*/DEVICE_IN_BLE_IN, 1, dev.getAddress(), dev.getName());
@@ -261,8 +261,7 @@ public class DialogBluetoothService extends Service {
         }
     }
 
-    public boolean isRemoteAudioCapable(BluetoothDevice device)
-    {
+    public boolean isRemoteAudioCapable(BluetoothDevice device) {
         String name = (device == null ? null : device.getName());
         if (name == null)
             return false;
@@ -276,8 +275,7 @@ public class DialogBluetoothService extends Service {
         return false;
     }
 
-    public boolean isBleVoiceDevice(BluetoothDevice device)
-    {
+    public boolean isBleVoiceDevice(BluetoothDevice device) {
         String name = (device == null ? null : device.getName());
         if (name == null)
             return false;
@@ -298,7 +296,7 @@ public class DialogBluetoothService extends Service {
 
         mHandler = new Handler();
         initializeBTManager();
-        mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
@@ -363,12 +361,11 @@ public class DialogBluetoothService extends Service {
      * Connects to the GATT server hosted on the Bluetooth LE device.
      *
      * @param btDevice The device to connect to.
-     *
      * @return Return true if the connection is initiated successfully. The connection result
-     *         is reported asynchronously through the
-     *
-     *         {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
-     *         callback.
+     * is reported asynchronously through the
+     * <p>
+     * {@code BluetoothGattCallback#onConnectionStateChange(android.bluetooth.BluetoothGatt, int, int)}
+     * callback.
      */
     public boolean connect(BluetoothDevice btDevice) {
         if (btDevice == null) {
@@ -434,7 +431,7 @@ public class DialogBluetoothService extends Service {
     private void sendEnable(int flag) {
         if (enableCharacteristic == null)
             return;
-        Log.i(TAG,"Write Enable: " + flag);
+        Log.i(TAG, "Write Enable: " + flag);
 
         /* masked by hugo
         if (flag != 0) {
@@ -466,8 +463,7 @@ public class DialogBluetoothService extends Service {
             if (newState == BluetoothProfile.STATE_CONNECTED) {
                 // A ttempt to discover services after successful connection.
                 onConnectionSuccess(gatt);
-            }
-            else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+            } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 if (gatt != mBluetoothGatt) {
                     Log.e(TAG, "Disconnected different instance of gatt. No change for main gatt session");
                     return;
@@ -476,7 +472,7 @@ public class DialogBluetoothService extends Service {
                 Log.i(TAG, "Disconnected from GATT server.");
                 mConnectionState = STATE_DISCONNECTED;
                 isHidServiceInitialized = false;
-                flagjni=false;
+                flagjni = false;
                 close();
                 showToast(DISCONNECTED_FROM_AUDIO_REMOTE);
                 broadcastUpdate(ACTION_GATT_DISCONNECTED);
@@ -502,12 +498,12 @@ public class DialogBluetoothService extends Service {
 
         @Override
         public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            Log.i(TAG,"OnRead "+characteristic.getUuid().toString() + ", id=" + characteristic.getInstanceId() + ", status=" + status);
+            Log.i(TAG, "OnRead " + characteristic.getUuid().toString() + ", id=" + characteristic.getInstanceId() + ", status=" + status);
         }
 
         @Override
         public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
-            Log.i(TAG,"OnWrite "+characteristic.getUuid().toString() + ", id=" + characteristic.getInstanceId() + ", status=" + status);
+            Log.i(TAG, "OnWrite " + characteristic.getUuid().toString() + ", id=" + characteristic.getInstanceId() + ", status=" + status);
         }
 
         @Override
@@ -526,18 +522,17 @@ public class DialogBluetoothService extends Service {
                 if (prevInstance > HID_STREAM_DATA_MAX_INSTANCE)
                     prevInstance = HID_STREAM_DATA_MIN_INSTANCE;
                 if (prevInstance != instance) {
-                    Log.w(TAG,String.format("Error, packet sequence interruption, expected %d, received %d", prevInstance, instance));
+                    Log.w(TAG, String.format("Error, packet sequence interruption, expected %d, received %d", prevInstance, instance));
                     prevInstance = instance;
                 }
             }
             // Possible audio button report
             else if ((HID_REPORT_CHAR.compareTo(characteristic.getUuid()) == 0) && (instance == HID_STREAM_ENABLE_READ_INSTANCE)) {
                 byte[] value = characteristic.getValue();
-                Log.i(TAG,"rx key: "+ String.format("%x %x", value[0], value[1]));
+                Log.i(TAG, "rx key: " + String.format("%x %x", value[0], value[1]));
                 if (value[0] == 0x21 && value[1] == 0x02) {
                     //sendEnable(0x01);
-                }
-                else if (value[0] == 0x42 && value[1] == 0x00) {
+                } else if (value[0] == 0x42 && value[1] == 0x00) {
                     //sendEnable(0x00);
                 }
             }
@@ -547,14 +542,14 @@ public class DialogBluetoothService extends Service {
         public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             Log.i(TAG, "onDescriptorRead " + descriptor.getUuid()
                     + ", char " + descriptor.getCharacteristic().getUuid().toString() + ", id=" + descriptor.getCharacteristic().getInstanceId()
-                    + ", status=" +  status);
+                    + ", status=" + status);
         }
 
         @Override
         public void onDescriptorWrite(BluetoothGatt gatt, BluetoothGattDescriptor descriptor, int status) {
             Log.i(TAG, "onDescriptorWrite " + descriptor.getUuid()
                     + ", char " + descriptor.getCharacteristic().getUuid().toString() + ", id=" + descriptor.getCharacteristic().getInstanceId()
-                    + ", status=" +  status);
+                    + ", status=" + status);
             if (!mDescWriteQueue.isEmpty()) {
                 gatt.writeDescriptor(mDescWriteQueue.poll());
             }
@@ -574,9 +569,9 @@ public class DialogBluetoothService extends Service {
             BluetoothGattService gattService;
 
             // Loop through available GATT Services.
-            List<BluetoothGattService> serviceList =  gatt.getServices();
+            List<BluetoothGattService> serviceList = gatt.getServices();
             for (BluetoothGattService s : serviceList) {
-                Log.i(TAG,"Service "+s.getInstanceId()+" "+s.getUuid().toString());
+                Log.i(TAG, "Service " + s.getInstanceId() + " " + s.getUuid().toString());
             }
 
             // Find HID Service
@@ -598,29 +593,29 @@ public class DialogBluetoothService extends Service {
                 // Find the enable, rep5, rep6, rep7 characteristics.
                 if (uuidc.compareTo(HID_REPORT_CHAR) == 0) {
                     switch (instance) {
-                    case HID_STREAM_ENABLE_WRITE_INSTANCE:
-                        enableCharacteristic = gattCharacteristic;
-                        Log.i(TAG, "Found Enable Write Characteristic");
-                        break;
-                    case HID_STREAM_ENABLE_READ_INSTANCE:
-                        Log.i(TAG, "Found Enable Read Characteristic");
-                        setNotify = true;
-                        break;
-                    case HID_STREAM_DATA_REP5_INSTANCE:
-                        rep5Characteristic = gattCharacteristic;
-                        Log.i(TAG, "Found REP5 Characteristic");
-                        setNotify = true;
-                        break;
-                    case HID_STREAM_DATA_REP6_INSTANCE:
-                        rep6Characteristic = gattCharacteristic;
-                        Log.i(TAG, "Found REP6 Characteristic");
-                        setNotify = true;
-                        break;
-                    case HID_STREAM_DATA_REP7_INSTANCE:
-                        rep7Characteristic = gattCharacteristic;
-                        Log.i(TAG, "Found REP7 Characteristic");
-                        setNotify = true;
-                        break;
+                        case HID_STREAM_ENABLE_WRITE_INSTANCE:
+                            enableCharacteristic = gattCharacteristic;
+                            Log.i(TAG, "Found Enable Write Characteristic");
+                            break;
+                        case HID_STREAM_ENABLE_READ_INSTANCE:
+                            Log.i(TAG, "Found Enable Read Characteristic");
+                            setNotify = true;
+                            break;
+                        case HID_STREAM_DATA_REP5_INSTANCE:
+                            rep5Characteristic = gattCharacteristic;
+                            Log.i(TAG, "Found REP5 Characteristic");
+                            setNotify = true;
+                            break;
+                        case HID_STREAM_DATA_REP6_INSTANCE:
+                            rep6Characteristic = gattCharacteristic;
+                            Log.i(TAG, "Found REP6 Characteristic");
+                            setNotify = true;
+                            break;
+                        case HID_STREAM_DATA_REP7_INSTANCE:
+                            rep7Characteristic = gattCharacteristic;
+                            Log.i(TAG, "Found REP7 Characteristic");
+                            setNotify = true;
+                            break;
                     }
                 }
                 Log.i(TAG, "Characteristic " + uuidc.toString() + ", id=" + instance + ", prop=" + gattCharacteristic.getProperties());
@@ -664,31 +659,31 @@ public class DialogBluetoothService extends Service {
 
         //find the audio device
         Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
-        for (Iterator<BluetoothDevice> it = bondedDevices.iterator(); it.hasNext();) {
+        for (Iterator<BluetoothDevice> it = bondedDevices.iterator(); it.hasNext(); ) {
             BluetoothDevice dev = (BluetoothDevice) it.next();
             if (isRemoteAudioCapable(dev)) {
 
-            /* @hidden-api-issue-start*/
+                /* @hidden-api-issue-start*/
                 Log.i(TAG, "amlogic rc " + (status == 1 ? "input" : "remove"));
                 connectedState = status;
                 //mAudioManager.setWiredDeviceConnectionState(AudioManager.DEVICE_IN_WIRED_HEADSET, connectedState, dev.getAddress(), dev.getName());
                 setWiredDeviceConnectionState(/*AudioManager.*/DEVICE_IN_WIRED_HEADSET, connectedState, dev.getAddress(), dev.getName());
-           /* @hidden-api-issue-end */
+                /* @hidden-api-issue-end */
                 break;
             }
         }
     }
 
     private void setWiredDeviceConnectionState(int type, int state, String address, String name) {
-        Log.i(TAG, "type = "+ type +"; state = "+ state +"; address ="+ address +"; name="+name);
+        Log.i(TAG, "type = " + type + "; state = " + state + "; address =" + address + "; name=" + name);
         try {
             Class<?> audioManager = Class.forName("android.media.AudioManager");
             Method setwireState = audioManager.getMethod("setWiredDeviceConnectionState",
-                                    int.class, int.class, String.class, String.class);
+                    int.class, int.class, String.class, String.class);
 
             setwireState.invoke(mAudioManager, type, state, address, name);
 
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             // TODO Auto-generated catch block
@@ -735,15 +730,17 @@ public class DialogBluetoothService extends Service {
         });
     }
 
-     //native jni
-     private native static void classInitNative();
-     private native boolean initNative();
-     private native boolean cleanupNative();
+    //native jni
+    private native static void classInitNative();
 
-     private boolean hasBondedDevices() {
-         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+    private native boolean initNative();
 
-         if (btAdapter == null) {
+    private native boolean cleanupNative();
+
+    private boolean hasBondedDevices() {
+        BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        if (btAdapter == null) {
             Log.w(TAG, "Can't get BT adapter, return");
             return false;
         }
@@ -755,7 +752,7 @@ public class DialogBluetoothService extends Service {
 
         for (final BluetoothDevice device : bondedDevices) {
             final String deviceAddress = device.getAddress();
-            Log.i(TAG, "device: "+ device.getName());
+            Log.i(TAG, "device: " + device.getName());
             if (TextUtils.isEmpty(deviceAddress)) {
                 Log.w(TAG, "Skipping mysteriously empty bluetooth device");
                 continue;
@@ -766,7 +763,7 @@ public class DialogBluetoothService extends Service {
             return true;
         }
         return false;
-     }
+    }
 
 }
 

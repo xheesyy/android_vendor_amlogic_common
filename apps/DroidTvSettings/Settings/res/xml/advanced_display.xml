@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,12 +20,12 @@
     <SwitchPreference
         android:key="game_mode"
         android:persistent="true"
-        android:title="@string/game_mode_title"/>
+        android:title="@string/game_mode_title" />
     <com.android.tv.twopanelsettings.slices.EmbeddedSlicePreference
         android:key="hdr_format_selection"
         android:fragment="com.android.tv.twopanelsettings.slices.SliceFragment"
         custom:uri="@string/format_selection_slice_uri"
-        custom:isPreferenceVisible="false"/>
+        custom:isPreferenceVisible="false" />
     <com.android.tv.twopanelsettings.slices.EmbeddedSlicePreference
         android:key="hdr_resolution"
         android:fragment="com.android.tv.twopanelsettings.slices.SliceFragment"

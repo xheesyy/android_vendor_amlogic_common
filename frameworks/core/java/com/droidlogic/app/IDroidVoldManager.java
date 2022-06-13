@@ -11,11 +11,15 @@
 package com.droidlogic.app;
 
 public interface IDroidVoldManager extends android.os.IInterface {
-    /** Local-side IPC implementation stub class. */
+    /**
+     * Local-side IPC implementation stub class.
+     */
     public static abstract class Stub extends android.os.Binder implements com.droidlogic.app.IDroidVoldManager {
         private static final java.lang.String DESCRIPTOR = "com.droidlogic.app.IDroidVoldManager";
 
-        /** Construct the stub at attach it to the interface. */
+        /**
+         * Construct the stub at attach it to the interface.
+         */
         public Stub() {
             this.attachInterface(this, DESCRIPTOR);
         }
@@ -32,7 +36,7 @@ public interface IDroidVoldManager extends android.os.IInterface {
 
             android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
             if (((iin != null) && (iin instanceof com.droidlogic.app.IDroidVoldManager))) {
-                return ((com.droidlogic.app.IDroidVoldManager)iin);
+                return ((com.droidlogic.app.IDroidVoldManager) iin);
             }
             return new com.droidlogic.app.IDroidVoldManager.Stub.Proxy(obj);
         }
@@ -224,24 +228,24 @@ public interface IDroidVoldManager extends android.os.IInterface {
             @Override
             public android.os.storage.StorageVolume[] getVolumeList(int uid, java.lang.String packageName, int flags)
                     throws android.os.RemoteException {
-                    android.os.Parcel _data = android.os.Parcel.obtain();
-                    android.os.Parcel _reply = android.os.Parcel.obtain();
-                    android.os.storage.StorageVolume[] _result;
+                android.os.Parcel _data = android.os.Parcel.obtain();
+                android.os.Parcel _reply = android.os.Parcel.obtain();
+                android.os.storage.StorageVolume[] _result;
 
-                    try {
-                        _data.writeInterfaceToken(DESCRIPTOR);
-                        _data.writeInt(uid);
-                        _data.writeString(packageName);
-                        _data.writeInt(flags);
-                        mRemote.transact(Stub.TRANSACTION_getVolumeList, _data, _reply, 0);
-                        _reply.readException();
-                        _result = _reply.createTypedArray(android.os.storage.StorageVolume.CREATOR);
-                    } finally {
-                        _reply.recycle();
-                        _data.recycle();
-                    }
+                try {
+                    _data.writeInterfaceToken(DESCRIPTOR);
+                    _data.writeInt(uid);
+                    _data.writeString(packageName);
+                    _data.writeInt(flags);
+                    mRemote.transact(Stub.TRANSACTION_getVolumeList, _data, _reply, 0);
+                    _reply.readException();
+                    _result = _reply.createTypedArray(android.os.storage.StorageVolume.CREATOR);
+                } finally {
+                    _reply.recycle();
+                    _data.recycle();
+                }
 
-                    return _result;
+                return _result;
             }
 
             @Override
@@ -264,64 +268,65 @@ public interface IDroidVoldManager extends android.os.IInterface {
 
                 return _result;
             }
-/*
-            @Override
-            public android.os.storage.DiskInfo[] getDisks() throws android.os.RemoteException {
-                android.os.Parcel _data = android.os.Parcel.obtain();
-                android.os.Parcel _reply = android.os.Parcel.obtain();
-                android.os.storage.DiskInfo[] _result;
-                try {
-                    _data.writeInterfaceToken(DESCRIPTOR);
-                    mRemote.transact(Stub.TRANSACTION_getDisks, _data, _reply, 0);
-                    _reply.readException();
-                    _result = _reply.createTypedArray(android.os.storage.DiskInfo.CREATOR);
-                } finally {
-                    _reply.recycle();
-                    _data.recycle();
-                }
 
-                return _result;
-            }
+            /*
+                        @Override
+                        public android.os.storage.DiskInfo[] getDisks() throws android.os.RemoteException {
+                            android.os.Parcel _data = android.os.Parcel.obtain();
+                            android.os.Parcel _reply = android.os.Parcel.obtain();
+                            android.os.storage.DiskInfo[] _result;
+                            try {
+                                _data.writeInterfaceToken(DESCRIPTOR);
+                                mRemote.transact(Stub.TRANSACTION_getDisks, _data, _reply, 0);
+                                _reply.readException();
+                                _result = _reply.createTypedArray(android.os.storage.DiskInfo.CREATOR);
+                            } finally {
+                                _reply.recycle();
+                                _data.recycle();
+                            }
 
-            @Override
-            public android.os.storage.VolumeInfo[] getVolumes(int flags) throws android.os.RemoteException {
-                android.os.Parcel _data = android.os.Parcel.obtain();
-                android.os.Parcel _reply = android.os.Parcel.obtain();
-                android.os.storage.VolumeInfo[] _result;
-                try {
-                    _data.writeInterfaceToken(DESCRIPTOR);
-                    _data.writeInt(flags);
-                    mRemote.transact(Stub.TRANSACTION_getVolumes, _data, _reply, 0);
-                    _reply.readException();
-                    _result = _reply.createTypedArray(android.os.storage.VolumeInfo.CREATOR);
-                } finally {
-                    _reply.recycle();
-                    _data.recycle();
-                }
+                            return _result;
+                        }
 
-                return _result;
-            }
+                        @Override
+                        public android.os.storage.VolumeInfo[] getVolumes(int flags) throws android.os.RemoteException {
+                            android.os.Parcel _data = android.os.Parcel.obtain();
+                            android.os.Parcel _reply = android.os.Parcel.obtain();
+                            android.os.storage.VolumeInfo[] _result;
+                            try {
+                                _data.writeInterfaceToken(DESCRIPTOR);
+                                _data.writeInt(flags);
+                                mRemote.transact(Stub.TRANSACTION_getVolumes, _data, _reply, 0);
+                                _reply.readException();
+                                _result = _reply.createTypedArray(android.os.storage.VolumeInfo.CREATOR);
+                            } finally {
+                                _reply.recycle();
+                                _data.recycle();
+                            }
 
-            @Override
-            public android.os.storage.VolumeRecord[] getVolumeRecords(int flags) throws android.os.RemoteException {
-                android.os.Parcel _data = android.os.Parcel.obtain();
-                android.os.Parcel _reply = android.os.Parcel.obtain();
-                android.os.storage.VolumeRecord[] _result;
+                            return _result;
+                        }
 
-                try {
-                    _data.writeInterfaceToken(DESCRIPTOR);
-                    _data.writeInt(flags);
-                    mRemote.transact(Stub.TRANSACTION_getVolumeRecords, _data, _reply, 0);
-                    _reply.readException();
-                    _result = _reply.createTypedArray(android.os.storage.VolumeRecord.CREATOR);
-                } finally {
-                    _reply.recycle();
-                    _data.recycle();
-                }
+                        @Override
+                        public android.os.storage.VolumeRecord[] getVolumeRecords(int flags) throws android.os.RemoteException {
+                            android.os.Parcel _data = android.os.Parcel.obtain();
+                            android.os.Parcel _reply = android.os.Parcel.obtain();
+                            android.os.storage.VolumeRecord[] _result;
 
-                return _result;
-            }
-*/
+                            try {
+                                _data.writeInterfaceToken(DESCRIPTOR);
+                                _data.writeInt(flags);
+                                mRemote.transact(Stub.TRANSACTION_getVolumeRecords, _data, _reply, 0);
+                                _reply.readException();
+                                _result = _reply.createTypedArray(android.os.storage.VolumeRecord.CREATOR);
+                            } finally {
+                                _reply.recycle();
+                                _data.recycle();
+                            }
+
+                            return _result;
+                        }
+            */
             @Override
             public void mount(java.lang.String volId) throws android.os.RemoteException {
                 android.os.Parcel _data = android.os.Parcel.obtain();
@@ -366,7 +371,9 @@ public interface IDroidVoldManager extends android.os.IInterface {
                     _data.recycle();
                 }
             }
-            @Override public int getVolumeInfoDiskFlags(java.lang.String mountPoint) throws android.os.RemoteException {
+
+            @Override
+            public int getVolumeInfoDiskFlags(java.lang.String mountPoint) throws android.os.RemoteException {
                 android.os.Parcel _data = android.os.Parcel.obtain();
                 android.os.Parcel _reply = android.os.Parcel.obtain();
                 int _result;
@@ -376,8 +383,7 @@ public interface IDroidVoldManager extends android.os.IInterface {
                     mRemote.transact(Stub.TRANSACTION_getVolumeInfoDiskFlags, _data, _reply, 0);
                     _reply.readException();
                     _result = _reply.readInt();
-                }
-                finally {
+                } finally {
                     _reply.recycle();
                     _data.recycle();
                 }
@@ -399,14 +405,20 @@ public interface IDroidVoldManager extends android.os.IInterface {
     }
 
     public int formatVolume(java.lang.String mountPoint) throws android.os.RemoteException;
+
     //public void shutdown(android.os.storage.IStorageShutdownObserver observer) throws android.os.RemoteException;
     public android.os.storage.StorageVolume[] getVolumeList(int uid, java.lang.String packageName, int flags) throws android.os.RemoteException;
+
     public int mkdirs(java.lang.String callingPkg, java.lang.String path) throws android.os.RemoteException;
+
     //public android.os.storage.DiskInfo[] getDisks() throws android.os.RemoteException;
     //public android.os.storage.VolumeInfo[] getVolumes(int flags) throws android.os.RemoteException;
     //public android.os.storage.VolumeRecord[] getVolumeRecords(int flags) throws android.os.RemoteException;
     public void mount(java.lang.String volId) throws android.os.RemoteException;
+
     public void unmount(java.lang.String volId) throws android.os.RemoteException;
+
     public void format(java.lang.String volId) throws android.os.RemoteException;
+
     public int getVolumeInfoDiskFlags(java.lang.String mountPoint) throws android.os.RemoteException;
 }

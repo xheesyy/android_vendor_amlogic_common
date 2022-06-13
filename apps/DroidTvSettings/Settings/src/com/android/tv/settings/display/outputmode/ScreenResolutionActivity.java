@@ -29,7 +29,7 @@ public class ScreenResolutionActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(ScreenResolutionFragment.class.getName(), null);
+                .newSettingsFragment(ScreenResolutionFragment.class.getName(), null);
     }
 
 }

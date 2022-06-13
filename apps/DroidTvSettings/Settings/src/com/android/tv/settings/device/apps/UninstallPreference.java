@@ -30,7 +30,7 @@ import com.android.tv.settings.R;
 public class UninstallPreference extends AppActionPreference {
 
     public UninstallPreference(Context context,
-            ApplicationsState.AppEntry entry) {
+                               ApplicationsState.AppEntry entry) {
         super(context, entry);
         refresh();
     }
@@ -63,7 +63,7 @@ public class UninstallPreference extends AppActionPreference {
 
     public static boolean canUninstall(ApplicationsState.AppEntry entry) {
         return (entry.info.flags &
-                (ApplicationInfo.FLAG_UPDATED_SYSTEM_APP|ApplicationInfo.FLAG_SYSTEM)) == 0;
+                (ApplicationInfo.FLAG_UPDATED_SYSTEM_APP | ApplicationInfo.FLAG_SYSTEM)) == 0;
     }
 
     public boolean canUninstallUpdates() {

@@ -20,7 +20,9 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-/** Default implementation of {@link StartupVerificationFeatureProvider} */
+/**
+ * Default implementation of {@link StartupVerificationFeatureProvider}
+ */
 public class StartupVerificationFeatureProviderImpl implements StartupVerificationFeatureProvider {
 
     @Override

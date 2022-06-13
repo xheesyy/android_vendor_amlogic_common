@@ -104,12 +104,15 @@ import java.util.List;
  */
 public final class ScrollAdapterView extends AdapterView<Adapter> {
 
-    /** Callback interface for changing state of selected item */
+    /**
+     * Callback interface for changing state of selected item
+     */
     public static interface OnItemChangeListener {
         /**
          * In contrast to standard onFocusChange, the event is fired only when scrolling stops
-         * @param view the view focusing to
-         * @param position index in ScrollAdapter
+         *
+         * @param view         the view focusing to
+         * @param position     index in ScrollAdapter
          * @param targetCenter final center position of view to the left edge of ScrollAdapterView
          */
         public void onItemSelected(View view, int position, int targetCenter);
@@ -124,9 +127,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
      */
     public static interface OnScrollListener {
         /**
-         * @param view the view focusing to
-         * @param position index in ScrollAdapter
-         * @param mainPosition position in the main axis 0(inclusive) ~ 1(exclusive)
+         * @param view           the view focusing to
+         * @param position       index in ScrollAdapter
+         * @param mainPosition   position in the main axis 0(inclusive) ~ 1(exclusive)
          * @param secondPosition position in the second axis 0(inclusive) ~ 1(exclusive)
          */
         public void onScrolled(View view, int position, float mainPosition, float secondPosition);
@@ -153,17 +156,25 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
      */
     public static final int VERTICAL = 1;
 
-    /** calculate number of items on second axis by "parentSize / childSize" */
+    /**
+     * calculate number of items on second axis by "parentSize / childSize"
+     */
     public static final int GRID_SETTING_AUTO = 0;
-    /** single item on second axis (i.e. not a grid view) */
+    /**
+     * single item on second axis (i.e. not a grid view)
+     */
     public static final int GRID_SETTING_SINGLE = 1;
 
     private int mOrientation = HORIZONTAL;
 
-    /** saved measuredSpec to pass to child views */
+    /**
+     * saved measuredSpec to pass to child views
+     */
     private int mMeasuredSpec = -1;
 
-    /** the Adapter used to create views */
+    /**
+     * the Adapter used to create views
+     */
     private ScrollAdapter mAdapter;
     private ScrollAdapterCustomSize mAdapterCustomSize;
     private ScrollAdapterCustomAlign mAdapterCustomAlign;
@@ -172,7 +183,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
     // flag that we have made initial selection during refreshing ScrollAdapterView
     private boolean mMadeInitialSelection = false;
 
-    /** allow animate expanded size change when Scroller is stopped */
+    /**
+     * allow animate expanded size change when Scroller is stopped
+     */
     private boolean mAnimateLayoutChange = true;
 
     private static class RecycledViews {
@@ -201,7 +214,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
             if (mAdapter != null) {
                 mAdapter.viewRemoved(child);
             }
-            if (mViews != null && type >=0 && type < mViews.length
+            if (mViews != null && type >= 0 && type < mViews.length
                     && mViews[type].size() < mMaxRecycledViews) {
                 mViews[type].add(child);
             }
@@ -221,21 +234,31 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
     private final RecycledViews mRecycleExpandedViews =
             new RecycledViews(MAX_RECYCLED_EXPANDED_VIEWS);
 
-    /** exclusive index of view on the left */
+    /**
+     * exclusive index of view on the left
+     */
     private int mLeftIndex;
-    /** exclusive index of view on the right */
+    /**
+     * exclusive index of view on the right
+     */
     private int mRightIndex;
 
-    /** space between two items */
+    /**
+     * space between two items
+     */
     private int mSpace;
     private int mSpaceLow;
     private int mSpaceHigh;
 
     private int mGridSetting = GRID_SETTING_SINGLE;
-    /** effective number of items on 2nd axis, calculated in {@link #onMeasure} */
+    /**
+     * effective number of items on 2nd axis, calculated in {@link #onMeasure}
+     */
     private int mItemsOnOffAxis;
 
-    /** maintains the scroller information */
+    /**
+     * maintains the scroller information
+     */
     private final ScrollController mScroll;
 
     private final ArrayList<OnItemChangeListener> mOnItemChangeListeners = new ArrayList<>();
@@ -250,6 +273,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         ExpandableChildStates() {
             super(SAVE_NO_CHILD, 0);
         }
+
         @Override
         protected void saveVisibleViewsUnchecked() {
             for (int i = firstExpandableIndex(), last = lastExpandableIndex(); i < last; i++) {
@@ -257,10 +281,12 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
             }
         }
     }
+
     final class ExpandedChildStates extends ViewsStateBundle {
         ExpandedChildStates() {
             super(SAVE_LIMITED_CHILD, SAVE_LIMITED_CHILD_DEFAULT_VALUE);
         }
+
         @Override
         protected void saveVisibleViewsUnchecked() {
             for (int i = 0, size = mExpandedViews.size(); i < size; i++) {
@@ -289,15 +315,21 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
      */
     private AdapterViewState mLoadingState;
 
-    /** saves all expandable child states */
+    /**
+     * saves all expandable child states
+     */
     final private ExpandableChildStates mExpandableChildStates = new ExpandableChildStates();
 
-    /** saves all expanded child states */
+    /**
+     * saves all expanded child states
+     */
     final private ExpandedChildStates mExpandedChildStates = new ExpandedChildStates();
 
     private ScrollAdapterTransform mItemTransform;
 
-    /** flag for data changed, {@link #onLayout} will cleaning the whole view */
+    /**
+     * flag for data changed, {@link #onLayout} will cleaning the whole view
+     */
     private boolean mDataSetChangedFlag;
 
     // current selected view adapter index, this is the final position to scroll to
@@ -309,16 +341,20 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         float mainPos;
         float secondPos;
         int viewLocation;
+
         ScrollInfo() {
             clear();
         }
+
         boolean isValid() {
             return index >= 0;
         }
+
         void clear() {
             index = -1;
             id = INVALID_ROW_ID;
         }
+
         void copyFrom(ScrollInfo other) {
             index = other.index;
             id = other.id;
@@ -341,14 +377,20 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
 
     private ScrollAdapterBase mExpandAdapter;
 
-    /** used for measuring the size of {@link ScrollAdapterView} */
+    /**
+     * used for measuring the size of {@link ScrollAdapterView}
+     */
     private int mScrapWidth;
     private int mScrapHeight;
 
-    /** Animator for showing expanded item */
+    /**
+     * Animator for showing expanded item
+     */
     private Animator mExpandedItemInAnim = null;
 
-    /** Animator for hiding expanded item */
+    /**
+     * Animator for hiding expanded item
+     */
     private Animator mExpandedItemOutAnim = null;
 
     private boolean mNavigateOutOfOffAxisAllowed = DEFAULT_NAVIGATE_OUT_OF_OFF_AXIS_ALLOWED;
@@ -361,6 +403,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
      */
     final class ExpandedView {
         private static final int ANIM_DURATION = 450;
+
         ExpandedView(View v, int i, int t) {
             expandedView = v;
             index = i;
@@ -441,12 +484,18 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         }
     }
 
-    /** list of ExpandedView structure */
+    /**
+     * list of ExpandedView structure
+     */
     private final ArrayList<ExpandedView> mExpandedViews = new ArrayList<>(4);
 
-    /** no scrolling */
+    /**
+     * no scrolling
+     */
     private static final int NO_SCROLL = 0;
-    /** scrolling and centering a known focused view */
+    /**
+     * scrolling and centering a known focused view
+     */
     private static final int SCROLL_AND_CENTER_FOCUS = 3;
 
     /**
@@ -567,11 +616,13 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         mMadeInitialSelection = false;
     }
 
-    /** find the view that containing scrollCenter or the next view */
+    /**
+     * find the view that containing scrollCenter or the next view
+     */
     private int findViewIndexContainingScrollCenter(int scrollCenter, int scrollCenterOffAxis,
-            boolean findNext) {
+                                                    boolean findNext) {
         final int lastExpandable = lastExpandableIndex();
-        for (int i = firstExpandableIndex(); i < lastExpandable; i ++) {
+        for (int i = firstExpandableIndex(); i < lastExpandable; i++) {
             View view = getChildAt(i);
             int centerOffAxis = getCenterInOffAxis(view);
             int viewSizeOffAxis;
@@ -582,8 +633,8 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
             }
             int centerMain = getScrollCenter(view);
             if (hasScrollPosition(centerMain, getSize(view), scrollCenter)
-                    && (mItemsOnOffAxis == 1 ||  hasScrollPositionSecondAxis(
-                            scrollCenterOffAxis, viewSizeOffAxis, centerOffAxis))) {
+                    && (mItemsOnOffAxis == 1 || hasScrollPositionSecondAxis(
+                    scrollCenterOffAxis, viewSizeOffAxis, centerOffAxis))) {
                 if (findNext) {
                     if (mScroll.isMainAxisMovingForward() && centerMain < scrollCenter) {
                         if (i + mItemsOnOffAxis < lastExpandableIndex()) {
@@ -648,7 +699,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         setSelectionSmooth(index, 0);
     }
 
-    /** set selection using animation with a given duration, use 0 duration for auto  */
+    /**
+     * set selection using animation with a given duration, use 0 duration for auto
+     */
     public void setSelectionSmooth(int index, int duration) {
         int currentExpandableIndex = indexOfChild(getSelectedView());
         if (currentExpandableIndex < 0) {
@@ -907,7 +960,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
     }
 
     private void recycleExpandableView(View child) {
-        ChildViewHolder holder = ((ChildViewHolder)child.getTag(R.id.ScrollAdapterViewChild));
+        ChildViewHolder holder = ((ChildViewHolder) child.getTag(R.id.ScrollAdapterViewChild));
         if (holder != null) {
             mRecycleViews.recycleView(child, holder.mItemViewType);
         }
@@ -938,7 +991,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
                     }
                 }
                 boolean foundFocus = false;
-                for (int i = 0; i < mItemsOnOffAxis; i++){
+                for (int i = 0; i < mItemsOnOffAxis; i++) {
                     int childIndex = firstIndex + i;
                     if (childHasFocus(childIndex)) {
                         foundFocus = true;
@@ -948,7 +1001,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
                 if (foundFocus) {
                     break;
                 }
-                for (int i = 0; i < mItemsOnOffAxis; i++){
+                for (int i = 0; i < mItemsOnOffAxis; i++) {
                     child = getChildAt(firstExpandableIndex());
                     mExpandableChildStates.saveInvisibleView(child, mLeftIndex + 1);
                     removeViewInLayout(child);
@@ -983,7 +1036,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
                     }
                 }
                 boolean foundFocus = false;
-                for (int i = 0; i < count; i++){
+                for (int i = 0; i < count; i++) {
                     int childIndex = lastIndex - 1 - i;
                     if (childHasFocus(childIndex)) {
                         foundFocus = true;
@@ -993,7 +1046,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
                 if (foundFocus) {
                     break;
                 }
-                for (int i = 0; i < count; i++){
+                for (int i = 0; i < count; i++) {
                     child = getChildAt(lastExpandableIndex() - 1);
                     mExpandableChildStates.saveInvisibleView(child, mRightIndex - 1);
                     removeViewInLayout(child);
@@ -1004,7 +1057,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         }
     }
 
-    /** check if expandable view or related expanded view has focus */
+    /**
+     * check if expandable view or related expanded view has focus
+     */
     private boolean childHasFocus(int expandableViewIndex) {
         View child = getChildAt(expandableViewIndex);
         if (child.hasFocus()) {
@@ -1019,9 +1074,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
 
     /**
      * @param gridSetting <br>
-     * {@link #GRID_SETTING_SINGLE}: single item on second axis, i.e. not a grid view <br>
-     * {@link #GRID_SETTING_AUTO}: auto calculate number of items on second axis <br>
-     * >1: shown as a grid view, with given fixed number of items on second axis <br>
+     *                    {@link #GRID_SETTING_SINGLE}: single item on second axis, i.e. not a grid view <br>
+     *                    {@link #GRID_SETTING_AUTO}: auto calculate number of items on second axis <br>
+     *                    >1: shown as a grid view, with given fixed number of items on second axis <br>
      */
     public void setGridSetting(int gridSetting) {
         mGridSetting = gridSetting;
@@ -1166,7 +1221,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         }
 
         mItemsOnOffAxis = mGridSetting > 0 ? mGridSetting
-            : mOrientation == HORIZONTAL ?
+                : mOrientation == HORIZONTAL ?
                 (heightMode == MeasureSpec.UNSPECIFIED ? 1 : clientHeightSize / mScrapHeight)
                 : (widthMode == MeasureSpec.UNSPECIFIED ? 1 : clientWidthSize / mScrapWidth);
         if (mItemsOnOffAxis == 0) {
@@ -1254,7 +1309,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         int maxSelectedSize = 0;
         for (int i = 0; i < itemsToAdd; i++) {
             View child = leftToRight ? addAndMeasureExpandableView(mRightIndex + i, -1) :
-                addAndMeasureExpandableView(mLeftIndex - i, firstExpandableIndex());
+                    addAndMeasureExpandableView(mLeftIndex - i, firstExpandableIndex());
             if (child == null) {
                 return false;
             }
@@ -1277,37 +1332,37 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
             h.mMaxSize = maxSize;
             if (mOrientation == HORIZONTAL) {
                 switch (mScroll.getScrollItemAlign()) {
-                case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
-                    child.layout(left + maxSize / 2 - child.getMeasuredWidth() / 2, top,
-                            left + maxSize / 2 + child.getMeasuredWidth() / 2,
-                            top + child.getMeasuredHeight());
-                    break;
-                case ScrollController.SCROLL_ITEM_ALIGN_LOW:
-                    child.layout(left, top, left + child.getMeasuredWidth(),
-                            top + child.getMeasuredHeight());
-                    break;
-                case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
-                    child.layout(left + maxSize - child.getMeasuredWidth(), top, left + maxSize,
-                            top + child.getMeasuredHeight());
-                    break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
+                        child.layout(left + maxSize / 2 - child.getMeasuredWidth() / 2, top,
+                                left + maxSize / 2 + child.getMeasuredWidth() / 2,
+                                top + child.getMeasuredHeight());
+                        break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_LOW:
+                        child.layout(left, top, left + child.getMeasuredWidth(),
+                                top + child.getMeasuredHeight());
+                        break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
+                        child.layout(left + maxSize - child.getMeasuredWidth(), top, left + maxSize,
+                                top + child.getMeasuredHeight());
+                        break;
                 }
                 top += child.getMeasuredHeight();
                 top += mSpace;
             } else {
                 switch (mScroll.getScrollItemAlign()) {
-                case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
-                    child.layout(left, top + maxSize / 2 - child.getMeasuredHeight() / 2,
-                            left + child.getMeasuredWidth(),
-                            top + maxSize / 2 + child.getMeasuredHeight() / 2);
-                    break;
-                case ScrollController.SCROLL_ITEM_ALIGN_LOW:
-                    child.layout(left, top, left + child.getMeasuredWidth(),
-                            top + child.getMeasuredHeight());
-                    break;
-                case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
-                    child.layout(left, top + maxSize - child.getMeasuredHeight(),
-                            left + getMeasuredWidth(), top + maxSize);
-                    break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
+                        child.layout(left, top + maxSize / 2 - child.getMeasuredHeight() / 2,
+                                left + child.getMeasuredWidth(),
+                                top + maxSize / 2 + child.getMeasuredHeight() / 2);
+                        break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_LOW:
+                        child.layout(left, top, left + child.getMeasuredWidth(),
+                                top + child.getMeasuredHeight());
+                        break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
+                        child.layout(left, top + maxSize - child.getMeasuredHeight(),
+                                left + getMeasuredWidth(), top + maxSize);
+                        break;
                 }
                 left += child.getMeasuredWidth();
                 left += mSpace;
@@ -1336,6 +1391,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         }
         return true;
     }
+
     /**
      * try to add one right/bottom child views, returning false tells caller can stop loop
      */
@@ -1412,7 +1468,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
                     return index;
                 }
                 index = mScrollBeforeReset.index - i;
-                if (index >=0 && index < c && mAdapter.getItemId(index) == mScrollBeforeReset.id) {
+                if (index >= 0 && index < c && mAdapter.getItemId(index) == mScrollBeforeReset.id) {
                     return index;
                 }
             }
@@ -1442,7 +1498,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         mScrollBeforeReset.clear();
         mLoadingState = null;
         if (selection < 0 || selection >= mAdapter.getCount()) {
-            Log.w(TAG, "invalid selection "+selection);
+            Log.w(TAG, "invalid selection " + selection);
             return;
         }
 
@@ -1452,13 +1508,13 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         int left, top;
         if (mOrientation == HORIZONTAL) {
             // estimation of left
-            left = viewLoc != Integer.MIN_VALUE ? viewLoc: mScroll.horizontal.getPaddingLow()
+            left = viewLoc != Integer.MIN_VALUE ? viewLoc : mScroll.horizontal.getPaddingLow()
                     + mScrapWidth * (selection / mItemsOnOffAxis);
             top = mScroll.vertical.getPaddingLow();
         } else {
             left = mScroll.horizontal.getPaddingLow();
             // estimation of top
-            top = viewLoc != Integer.MIN_VALUE ? viewLoc: mScroll.vertical.getPaddingLow()
+            top = viewLoc != Integer.MIN_VALUE ? viewLoc : mScroll.vertical.getPaddingLow()
                     + mScrapHeight * (selection / mItemsOnOffAxis);
         }
         mRightIndex = startIndex;
@@ -1618,8 +1674,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
 
     /**
      * Scroll to next/last expandable view.
+     *
      * @param direction The direction corresponding to the arrow key that was pressed
-     * @param repeats repeated count (0 means no repeat)
+     * @param repeats   repeated count (0 means no repeat)
      * @return True if we consumed the event, false otherwise
      */
     public boolean arrowScroll(int direction, int repeats) {
@@ -1627,7 +1684,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         return handleArrowKey(direction, repeats, true, false);
     }
 
-    /** equivalent to arrowScroll(direction, 0) */
+    /**
+     * equivalent to arrowScroll(direction, 0)
+     */
     public boolean arrowScroll(int direction) {
         return arrowScroll(direction, 0);
     }
@@ -1670,7 +1729,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
     }
 
     protected boolean handleArrowKey(int direction, int repeats, boolean forceFindNextExpandable,
-            boolean page) {
+                                     boolean page) {
         View currentTop = getFocusedChild();
         View currentExpandable = getExpandableChild(currentTop);
         View focused = findFocus();
@@ -1711,7 +1770,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         View nextTop = null;
         if (isOnOffAxis) {
             if (isGrowing && currentExpandableIndex + 1 < lastExpandableIndex() &&
-                            getAdapterIndex(currentExpandableIndex) % mItemsOnOffAxis
+                    getAdapterIndex(currentExpandableIndex) % mItemsOnOffAxis
                             != mItemsOnOffAxis - 1) {
                 nextTop = getChildAt(currentExpandableIndex + 1);
             } else if (!isGrowing && currentExpandableIndex - 1 >= firstExpandableIndex()
@@ -1723,9 +1782,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         } else {
             int adapterIndex = getAdapterIndex(currentExpandableIndex);
             int focusAdapterIndex = adapterIndex;
-            for (int totalCount = repeats + 1; totalCount > 0;) {
-                int nextFocusAdapterIndex = isGrowing ? focusAdapterIndex + mItemsOnOffAxis:
-                    focusAdapterIndex - mItemsOnOffAxis;
+            for (int totalCount = repeats + 1; totalCount > 0; ) {
+                int nextFocusAdapterIndex = isGrowing ? focusAdapterIndex + mItemsOnOffAxis :
+                        focusAdapterIndex - mItemsOnOffAxis;
                 if ((isGrowing && nextFocusAdapterIndex >= mAdapter.getCount())
                         || (!isGrowing && nextFocusAdapterIndex < 0)) {
                     if (focusAdapterIndex == adapterIndex
@@ -1823,12 +1882,12 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         if (scrollCenter > center) {
             if (index + mItemsOnOffAxis < lastExpandableIndex()) {
                 int nextCenter = getScrollCenter(getChildAt(index + mItemsOnOffAxis));
-                info.mainPos = (float)(scrollCenter - center) / (nextCenter - center);
+                info.mainPos = (float) (scrollCenter - center) / (nextCenter - center);
             } else {
                 // overscroll to right
-                info.mainPos = (float)(scrollCenter - center) / getSize(view);
+                info.mainPos = (float) (scrollCenter - center) / getSize(view);
             }
-        } else if (scrollCenter == center){
+        } else if (scrollCenter == center) {
             info.mainPos = 0;
         } else {
             if (index - mItemsOnOffAxis >= firstExpandableIndex()) {
@@ -1881,12 +1940,12 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         float savedSecondPos = mCurScroll.secondPos;
         updateScrollInfo(mCurScroll);
         if (mOnScrollListeners != null && !mOnScrollListeners.isEmpty()
-                &&(savedIndex != mCurScroll.index
+                && (savedIndex != mCurScroll.index
                 || savedMainPos != mCurScroll.mainPos || savedSecondPos != mCurScroll.secondPos)) {
             if (mCurScroll.index >= 0) {
                 for (OnScrollListener l : mOnScrollListeners) {
                     l.onScrolled(getChildAt(expandableIndexFromAdapterIndex(
-                            mCurScroll.index)), mCurScroll.index,
+                                    mCurScroll.index)), mCurScroll.index,
                             mCurScroll.mainPos, mCurScroll.secondPos);
                 }
             }
@@ -1902,7 +1961,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED);
     }
 
-    /** manually set scroll position */
+    /**
+     * manually set scroll position
+     */
     private void setSelectionInternal(int adapterIndex, float scrollPosition, boolean fireEvent) {
         if (adapterIndex < 0 || mAdapter == null || adapterIndex >= mAdapter.getCount()
                 || !mAdapter.isEnabled(adapterIndex)) {
@@ -1961,9 +2022,11 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         fireItemSelected();
     }
 
-    /** scroll And Focus To expandable item in the main direction */
+    /**
+     * scroll And Focus To expandable item in the main direction
+     */
     public void scrollAndFocusTo(View topItem, int direction, boolean easeFling, int duration,
-            boolean page) {
+                                 boolean page) {
         if (topItem == null) {
             mScrollerState = NO_SCROLL;
             return;
@@ -2015,19 +2078,19 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
     }
 
     private void ensureSimpleItemTransform() {
-        if (! (mItemTransform instanceof SimpleScrollAdapterTransform)) {
+        if (!(mItemTransform instanceof SimpleScrollAdapterTransform)) {
             mItemTransform = new SimpleScrollAdapterTransform(getContext());
         }
     }
 
     public void setLowItemTransform(Animator anim) {
         ensureSimpleItemTransform();
-        ((SimpleScrollAdapterTransform)mItemTransform).setLowItemTransform(anim);
+        ((SimpleScrollAdapterTransform) mItemTransform).setLowItemTransform(anim);
     }
 
     public void setHighItemTransform(Animator anim) {
         ensureSimpleItemTransform();
-        ((SimpleScrollAdapterTransform)mItemTransform).setHighItemTransform(anim);
+        ((SimpleScrollAdapterTransform) mItemTransform).setHighItemTransform(anim);
     }
 
     @Override
@@ -2267,7 +2330,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         float progress = 1;
         if (expandIdx < lastExpandable - 1) {
             progress = (float) (nextCenter - mScroll.mainAxis().getScrollCenter()) /
-                       (float) (nextCenter - center);
+                    (float) (nextCenter - center);
             if (thisExpanded != null) {
                 expandedSize =
                         (mOrientation == HORIZONTAL ? thisExpanded.expandedView.getMeasuredWidth()
@@ -2323,7 +2386,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
                     }
                 }
                 maxSize = Math.max(maxSize, mOrientation == HORIZONTAL ? view.getMeasuredWidth() :
-                    view.getMeasuredHeight());
+                        view.getMeasuredHeight());
                 if (j == 0) {
                     int viewLow = mOrientation == HORIZONTAL ? view.getLeft() : view.getTop();
                     // because we start over again,  we should remove the extra space
@@ -2344,14 +2407,14 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
                 int viewMeasuredSize = mOrientation == HORIZONTAL ? view.getMeasuredWidth()
                         : view.getMeasuredHeight();
                 switch (mScroll.getScrollItemAlign()) {
-                case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
-                    viewStart += maxSize / 2 - viewMeasuredSize / 2;
-                    break;
-                case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
-                    viewStart += maxSize - viewMeasuredSize;
-                    break;
-                case ScrollController.SCROLL_ITEM_ALIGN_LOW:
-                    break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
+                        viewStart += maxSize / 2 - viewMeasuredSize / 2;
+                        break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
+                        viewStart += maxSize - viewMeasuredSize;
+                        break;
+                    case ScrollController.SCROLL_ITEM_ALIGN_LOW:
+                        break;
                 }
                 if (mOrientation == HORIZONTAL) {
                     if (view.isLayoutRequested()) {
@@ -2468,13 +2531,13 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         mScroll.mainAxis().setExtraSpaceHigh(extraSpaceHigh);
 
         // 5. update expanded views
-        for (int j = 0; j < expandedCount;) {
+        for (int j = 0; j < expandedCount; ) {
             // remove views in mExpandedViews and are not newly created
             ExpandedView v = mExpandedViews.get(j);
-            if (v!= thisExpanded && v!= nextExpanded && v != previousExpanded) {
+            if (v != thisExpanded && v != nextExpanded && v != previousExpanded) {
                 if (v.expandedView.hasFocus()) {
                     View expandableView = getChildAt(expandableIndexFromAdapterIndex(v.index));
-                     expandableView.requestFocus();
+                    expandableView.requestFocus();
                 }
                 v.close();
                 mExpandedChildStates.saveInvisibleView(v.expandedView, v.index);
@@ -2553,21 +2616,21 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
 
     private boolean hasScrollPosition(int scrollCenter, int maxSize, int scrollPosInMain) {
         switch (mScroll.getScrollItemAlign()) {
-        case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
-            return scrollCenter - maxSize / 2 - mSpaceLow < scrollPosInMain &&
-                    scrollPosInMain < scrollCenter + maxSize / 2 + mSpaceHigh;
-        case ScrollController.SCROLL_ITEM_ALIGN_LOW:
-            return scrollCenter - mSpaceLow <= scrollPosInMain &&
-                    scrollPosInMain < scrollCenter + maxSize + mSpaceHigh;
-        case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
-            return scrollCenter - maxSize - mSpaceLow < scrollPosInMain &&
-                    scrollPosInMain <= scrollCenter + mSpaceHigh;
+            case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
+                return scrollCenter - maxSize / 2 - mSpaceLow < scrollPosInMain &&
+                        scrollPosInMain < scrollCenter + maxSize / 2 + mSpaceHigh;
+            case ScrollController.SCROLL_ITEM_ALIGN_LOW:
+                return scrollCenter - mSpaceLow <= scrollPosInMain &&
+                        scrollPosInMain < scrollCenter + maxSize + mSpaceHigh;
+            case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
+                return scrollCenter - maxSize - mSpaceLow < scrollPosInMain &&
+                        scrollPosInMain <= scrollCenter + mSpaceHigh;
         }
         return false;
     }
 
     private boolean hasScrollPositionSecondAxis(int scrollCenterOffAxis, int viewSizeOffAxis,
-            int centerOffAxis) {
+                                                int centerOffAxis) {
         return centerOffAxis - viewSizeOffAxis / 2 - mSpaceLow <= scrollCenterOffAxis
                 && scrollCenterOffAxis <= centerOffAxis + viewSizeOffAxis / 2 + mSpaceHigh;
     }
@@ -2582,15 +2645,15 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         View firstView = getChildAt(firstIndex);
         int center = 0;
         switch (mScroll.getScrollItemAlign()) {
-        case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
-            center = getCenter(firstView);
-            break;
-        case ScrollController.SCROLL_ITEM_ALIGN_LOW:
-            center = mOrientation == HORIZONTAL ? firstView.getLeft() : firstView.getTop();
-            break;
-        case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
-            center = mOrientation == HORIZONTAL ? firstView.getRight() : firstView.getBottom();
-            break;
+            case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
+                center = getCenter(firstView);
+                break;
+            case ScrollController.SCROLL_ITEM_ALIGN_LOW:
+                center = mOrientation == HORIZONTAL ? firstView.getLeft() : firstView.getTop();
+                break;
+            case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
+                center = mOrientation == HORIZONTAL ? firstView.getRight() : firstView.getBottom();
+                break;
         }
         if (mScroll.mainAxis().getSelectedTakesMoreSpace()) {
             center -= ((ChildViewHolder) firstView.getTag(
@@ -2627,27 +2690,27 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
     }
 
     private int getScrollLow(int scrollCenter, View view) {
-        ChildViewHolder holder = (ChildViewHolder)view.getTag(R.id.ScrollAdapterViewChild);
+        ChildViewHolder holder = (ChildViewHolder) view.getTag(R.id.ScrollAdapterViewChild);
         switch (mScroll.getScrollItemAlign()) {
-        case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
-            return scrollCenter - holder.mMaxSize / 2;
-        case ScrollController.SCROLL_ITEM_ALIGN_LOW:
-            return scrollCenter;
-        case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
-            return scrollCenter - holder.mMaxSize;
+            case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
+                return scrollCenter - holder.mMaxSize / 2;
+            case ScrollController.SCROLL_ITEM_ALIGN_LOW:
+                return scrollCenter;
+            case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
+                return scrollCenter - holder.mMaxSize;
         }
         return 0;
     }
 
     private int getScrollHigh(int scrollCenter, View view) {
-        ChildViewHolder holder = (ChildViewHolder)view.getTag(R.id.ScrollAdapterViewChild);
+        ChildViewHolder holder = (ChildViewHolder) view.getTag(R.id.ScrollAdapterViewChild);
         switch (mScroll.getScrollItemAlign()) {
-        case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
-            return scrollCenter + holder.mMaxSize / 2;
-        case ScrollController.SCROLL_ITEM_ALIGN_LOW:
-            return scrollCenter + holder.mMaxSize;
-        case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
-            return scrollCenter;
+            case ScrollController.SCROLL_ITEM_ALIGN_CENTER:
+                return scrollCenter + holder.mMaxSize / 2;
+            case ScrollController.SCROLL_ITEM_ALIGN_LOW:
+                return scrollCenter + holder.mMaxSize;
+            case ScrollController.SCROLL_ITEM_ALIGN_HIGH:
+                return scrollCenter;
         }
         return 0;
     }
@@ -2726,7 +2789,7 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
             super.onRestoreInstanceState(state);
             return;
         }
-        SavedState ss = (SavedState)state;
+        SavedState ss = (SavedState) state;
         super.onRestoreInstanceState(ss.getSuperState());
         mLoadingState = ss.theState;
         fireDataSetChanged();
@@ -2741,7 +2804,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         return mExpandableChildStates.getSavePolicy();
     }
 
-    /** See explanation in {@link #getSaveExpandableViewsPolicy()} */
+    /**
+     * See explanation in {@link #getSaveExpandableViewsPolicy()}
+     */
     public void setSaveExpandableViewsPolicy(int saveExpandablePolicy) {
         mExpandableChildStates.setSavePolicy(saveExpandablePolicy);
     }
@@ -2754,7 +2819,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         return mExpandableChildStates.getLimitNumber();
     }
 
-    /** See explanation in {@link #getSaveExpandableViewsLimit()} */
+    /**
+     * See explanation in {@link #getSaveExpandableViewsLimit()}
+     */
     public void setSaveExpandableViewsLimit(int saveExpandableChildNumber) {
         mExpandableChildStates.setLimitNumber(saveExpandableChildNumber);
     }
@@ -2768,7 +2835,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         return mExpandedChildStates.getSavePolicy();
     }
 
-    /** See explanation in {@link #getSaveExpandedViewsPolicy} */
+    /**
+     * See explanation in {@link #getSaveExpandedViewsPolicy}
+     */
     public void setSaveExpandedViewsPolicy(int saveExpandedChildPolicy) {
         mExpandedChildStates.setSavePolicy(saveExpandedChildPolicy);
     }
@@ -2781,7 +2850,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         return mExpandedChildStates.getLimitNumber();
     }
 
-    /** See explanation in {@link #getSaveExpandedViewsLimit()} */
+    /**
+     * See explanation in {@link #getSaveExpandedViewsLimit()}
+     */
     public void setSaveExpandedViewsLimit(int mSaveExpandedNumber) {
         mExpandedChildStates.setLimitNumber(mSaveExpandedNumber);
     }
@@ -2866,7 +2937,9 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         mNavigateInAnimationAllowed = navigateInAnimation;
     }
 
-    /** set space in pixels between two items */
+    /**
+     * set space in pixels between two items
+     */
     public void setSpace(int space) {
         mSpace = space;
         // mSpace may not be evenly divided by 2
@@ -2874,17 +2947,23 @@ public final class ScrollAdapterView extends AdapterView<Adapter> {
         mSpaceHigh = mSpace - mSpaceLow;
     }
 
-    /** get space in pixels between two items */
+    /**
+     * get space in pixels between two items
+     */
     public int getSpace() {
         return mSpace;
     }
 
-    /** set pixels of selected item, use {@link ScrollAdapterCustomSize} for more complicated case */
+    /**
+     * set pixels of selected item, use {@link ScrollAdapterCustomSize} for more complicated case
+     */
     public void setSelectedSize(int selectedScale) {
         mSelectedSize = selectedScale;
     }
 
-    /** get pixels of selected item */
+    /**
+     * get pixels of selected item
+     */
     public int getSelectedSize() {
         return mSelectedSize;
     }

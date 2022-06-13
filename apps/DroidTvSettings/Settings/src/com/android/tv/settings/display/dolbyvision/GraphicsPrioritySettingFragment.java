@@ -12,12 +12,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
+
 import android.util.ArrayMap;
 import android.util.Log;
 import android.text.TextUtils;
@@ -36,12 +40,12 @@ public class GraphicsPrioritySettingFragment extends SettingsPreferenceFragment 
 
     //public static final String KEY_DOLBY_VISION     = "dolby_vision_set";
 
-    private static final String GRAPHICS_PRIORITY      = "1";
-    private static final String VIDEO_PRIORITY         = "0";
+    private static final String GRAPHICS_PRIORITY = "1";
+    private static final String VIDEO_PRIORITY = "0";
 
     private static final String DV_RADIO_GROUP = "graphics_priority";
     private static final String ACTION_GRAPHICS_PRIORITY = "graphics_priority";
-    private static final String ACTION_VIDEO_PRIORITY    = "video_priority";
+    private static final String ACTION_VIDEO_PRIORITY = "video_priority";
 
     private DolbyVisionSettingManager mDolbyVisionSettingManager;
 
@@ -100,13 +104,13 @@ public class GraphicsPrioritySettingFragment extends SettingsPreferenceFragment 
         String curPriority = mDolbyVisionSettingManager.getGraphicsPriority();
         ArrayList<Action> actions = new ArrayList<Action>();
         actions.add(new Action.Builder()
-               .key(ACTION_GRAPHICS_PRIORITY)
-               .title(getString(R.string.graphics_priority))
-               .checked(curPriority.equals("1")).build());
+                .key(ACTION_GRAPHICS_PRIORITY)
+                .title(getString(R.string.graphics_priority))
+                .checked(curPriority.equals("1")).build());
         actions.add(new Action.Builder()
-               .key(ACTION_VIDEO_PRIORITY)
-               .title(getString(R.string.video_priority))
-               .checked(curPriority.equals("0")).build());
+                .key(ACTION_VIDEO_PRIORITY)
+                .title(getString(R.string.video_priority))
+                .checked(curPriority.equals("0")).build());
         return actions;
     }
 

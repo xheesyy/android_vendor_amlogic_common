@@ -20,15 +20,17 @@ import android.os.Parcel;
  * Callback to find out when we have finished stopping a user.
  * {@hide}
  */
-public interface ISystemControlNotify extends IInterface
-{
-    /** Local-side IPC implementation stub class. */
+public interface ISystemControlNotify extends IInterface {
+    /**
+     * Local-side IPC implementation stub class.
+     */
     public static abstract class Stub extends Binder implements ISystemControlNotify {
         private static final java.lang.String DESCRIPTOR = "com.droidlogic.app.ISystemControlNotify";
 
-        /** Construct the stub at attach it to the interface. */
-        public Stub()
-        {
+        /**
+         * Construct the stub at attach it to the interface.
+         */
+        public Stub() {
             this.attachInterface(this, DESCRIPTOR);
         }
 
@@ -36,15 +38,14 @@ public interface ISystemControlNotify extends IInterface
          * Cast an IBinder object into an com.droidlogic.app.ISystemControlNotify interface,
          * generating a proxy if needed.
          */
-        public static ISystemControlNotify asInterface(IBinder obj)
-        {
+        public static ISystemControlNotify asInterface(IBinder obj) {
             if ((obj == null)) {
                 return null;
             }
 
             IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
             if (((iin != null) && (iin instanceof ISystemControlNotify))) {
-                return ((ISystemControlNotify)iin);
+                return ((ISystemControlNotify) iin);
             }
             return new ISystemControlNotify.Stub.Proxy(obj);
         }
@@ -57,13 +58,11 @@ public interface ISystemControlNotify extends IInterface
         @Override
         public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
             switch (code) {
-                case INTERFACE_TRANSACTION:
-                {
+                case INTERFACE_TRANSACTION: {
                     reply.writeString(DESCRIPTOR);
                     return true;
                 }
-                case TRANSACT_ONEVENT:
-                {
+                case TRANSACT_ONEVENT: {
                     data.enforceInterface(DESCRIPTOR);
                     int _arg0 = data.readInt();
                     this.onEvent(_arg0);
@@ -74,8 +73,7 @@ public interface ISystemControlNotify extends IInterface
             return super.onTransact(code, data, reply, flags);
         }
 
-        private static class Proxy implements ISystemControlNotify
-        {
+        private static class Proxy implements ISystemControlNotify {
             private IBinder mRemote;
 
             Proxy(IBinder remote) {

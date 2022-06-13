@@ -11,10 +11,12 @@ import android.os.ResultReceiver;
 import android.os.RecoverySystem;
 import android.util.Log;
 import android.util.Pair;
+
 import static com.droidlogic.updater.util.PackageFiles.COMPATIBILITY_ZIP_FILE_NAME;
 import static com.droidlogic.updater.util.PackageFiles.OTA_PACKAGE_DIR;
 import static com.droidlogic.updater.util.PackageFiles.PAYLOAD_BINARY_FILE_NAME;
 import static com.droidlogic.updater.util.PackageFiles.PAYLOAD_PROPERTIES_FILE_NAME;
+
 import com.droidlogic.updater.PayloadSpec;
 import com.droidlogic.updater.UpdateConfig;
 import com.droidlogic.updater.util.UpdateEngineProperties;
@@ -22,8 +24,11 @@ import com.droidlogic.updater.util.FileDownloader;
 import com.droidlogic.updater.util.PackageFiles;
 import com.droidlogic.updater.util.PayloadSpecs;
 import com.droidlogic.updater.util.UpdateConfigs;
+
 import org.json.JSONException;
+
 import com.google.common.collect.ImmutableSet;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -58,38 +63,45 @@ public class PrepareUpdateService extends IntentService {
     private static int CHECK_STATUS = 3000;
     public static boolean mStopService = false;
     private static ArrayList<FileDownloader> mDownloaders = new ArrayList<FileDownloader>(10);
+
     //check update task status
-    public enum CHECKUP_STATUS{
-        IDLE,CHECKING,NEWEST,UPDATE
-    };
-    private Runnable checkTime = new Runnable(){
+    public enum CHECKUP_STATUS {
+        IDLE, CHECKING, NEWEST, UPDATE
+    }
+
+    ;
+    private Runnable checkTime = new Runnable() {
         public void run() {
             if (mStopService) {
                 PrepareUpdateService.this.stopSelf();
-            }else {
-                 mLocalHandler.postDelayed(checkTime,CHECK_STATUS);
+            } else {
+                mLocalHandler.postDelayed(checkTime, CHECK_STATUS);
             }
         }
     };
+
     public PrepareUpdateService() {
         super("PrepareUpdateService");
     }
-    public interface CheckupResultCallback{
+
+    public interface CheckupResultCallback {
         public void onReceiveResult(int status, UpdateConfig config);
     }
+
     /*
-    * start Service to checkup new version
-    * */
-    public static void startCheckup(Context context,Handler handler,CheckupResultCallback resultReceiver) {
-        if (PermissionUtils.CanDebug()) Log.d(TAG,"startCheckup");
+     * start Service to checkup new version
+     * */
+    public static void startCheckup(Context context, Handler handler, CheckupResultCallback resultReceiver) {
+        if (PermissionUtils.CanDebug()) Log.d(TAG, "startCheckup");
         mCurrentStatus = CHECKUP_STATUS.IDLE;
-        CallbackCheckupReceiverWrapper wrapper = new CallbackCheckupReceiverWrapper(handler,resultReceiver);
+        CallbackCheckupReceiverWrapper wrapper = new CallbackCheckupReceiverWrapper(handler, resultReceiver);
         Intent intent = new Intent(context, PrepareUpdateService.class);
         intent.setAction(ACTION_CHECK_UPDATE);
-        intent.putExtra(EXTRA_PARAM_RESULT_RECEIVER,wrapper);
+        intent.putExtra(EXTRA_PARAM_RESULT_RECEIVER, wrapper);
         context.startService(intent);
     }
-    public static void stopCheck(){
+
+    public static void stopCheck() {
         mStopService = true;
         for (int i = 0; i < mDownloaders.size(); i++) {
             mDownloaders.get(i).stopDown();
@@ -97,6 +109,7 @@ public class PrepareUpdateService extends IntentService {
         mDownloaders.clear();
         mCurrentStatus = CHECKUP_STATUS.IDLE;
     }
+
     /**
      * This interface is used to send results from {@link PrepareUpdateService} to
      * {@code MainActivity}.
@@ -119,18 +132,20 @@ public class PrepareUpdateService extends IntentService {
      * @param resultCallback callback that will be called when the update is ready to be installed
      */
     public static void startService(Context context,
-            UpdateConfig config,
-            Handler handler,
-            UpdateResultCallback resultCallback) {
+                                    UpdateConfig config,
+                                    Handler handler,
+                                    UpdateResultCallback resultCallback) {
         ResultReceiver receiver = new CallbackResultReceiver(handler, resultCallback);
         Intent intent = new Intent(context, PrepareUpdateService.class);
         intent.putExtra(EXTRA_PARAM_CONFIG, config);
         intent.putExtra(EXTRA_PARAM_RESULT_RECEIVER, receiver);
         context.startService(intent);
     }
-    public  static class CallbackCheckupReceiverWrapper extends ResultReceiver {
+
+    public static class CallbackCheckupReceiverWrapper extends ResultReceiver {
         private CheckupResultCallback mCheckupcallback;
-        public CallbackCheckupReceiverWrapper(Handler handler,CheckupResultCallback checkupcallback) {
+
+        public CallbackCheckupReceiverWrapper(Handler handler, CheckupResultCallback checkupcallback) {
             super(handler);
             mCheckupcallback = checkupcallback;
         }
@@ -140,35 +155,37 @@ public class PrepareUpdateService extends IntentService {
             if (bundle != null) {
                 UpdateConfig config = bundle.getParcelable(BUNDLE_PARAM_CONFIG);
                 mCheckupcallback.onReceiveResult(status, config);
-            }else {
+            } else {
                 mCheckupcallback.onReceiveResult(status, null);
             }
         }
     }
+
     @Override
     protected void onHandleIntent(Intent intent) {
-        if (PermissionUtils.CanDebug()) Log.d(TAG,"onHandleIntent");
+        if (PermissionUtils.CanDebug()) Log.d(TAG, "onHandleIntent");
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_CHECK_UPDATE.equals(action)) {
                 ResultReceiver resultReceiver = intent.getParcelableExtra(EXTRA_PARAM_RESULT_RECEIVER);
                 Bundle extrabunder = intent.getExtras();
-                Log.d(TAG,"onHandleIntent"+intent+"intent:"+extrabunder.getParcelable(EXTRA_PARAM_RESULT_RECEIVER)+"intent.getextra"+extrabunder.getShort("key"));
+                Log.d(TAG, "onHandleIntent" + intent + "intent:" + extrabunder.getParcelable(EXTRA_PARAM_RESULT_RECEIVER) + "intent.getextra" + extrabunder.getShort("key"));
                 Bundle bundle = new Bundle();
                 try {
                     mStopService = false;
-                    Pair<CHECKUP_STATUS,UpdateConfig>  config = checkCfg();
-                    bundle.putParcelable(BUNDLE_PARAM_CONFIG,config.second);
-                    resultReceiver.send(config.first.ordinal(),bundle);
+                    Pair<CHECKUP_STATUS, UpdateConfig> config = checkCfg();
+                    bundle.putParcelable(BUNDLE_PARAM_CONFIG, config.second);
+                    resultReceiver.send(config.first.ordinal(), bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    if (PermissionUtils.CanDebug()) Log.e(TAG, "Failed to prepare streaming update", e);
-                    bundle.putParcelable(BUNDLE_PARAM_CONFIG,null);
+                    if (PermissionUtils.CanDebug())
+                        Log.e(TAG, "Failed to prepare streaming update", e);
+                    bundle.putParcelable(BUNDLE_PARAM_CONFIG, null);
                     resultReceiver.send(CHECKUP_STATUS.NEWEST.ordinal(), null);
                 }
-            }else{
+            } else {
                 if (PermissionUtils.CanDebug()) Log.d(TAG, "On handle intent is called");
-                mLocalHandler.postDelayed(checkTime,CHECK_STATUS);
+                mLocalHandler.postDelayed(checkTime, CHECK_STATUS);
                 UpdateConfig config = intent.getParcelableExtra(EXTRA_PARAM_CONFIG);
                 ResultReceiver resultReceiver = intent.getParcelableExtra(EXTRA_PARAM_RESULT_RECEIVER);
 
@@ -176,51 +193,57 @@ public class PrepareUpdateService extends IntentService {
                     PayloadSpec spec = execute(config);
                     resultReceiver.send(RESULT_CODE_SUCCESS, CallbackResultReceiver.createBundle(spec));
                 } catch (Exception e) {
-                    if (PermissionUtils.CanDebug()) Log.d(TAG,"mCurrentStatus:"+mCurrentStatus);
-                    if (PermissionUtils.CanDebug()) Log.e(TAG, "Failed to prepare streaming update", e);
+                    if (PermissionUtils.CanDebug()) Log.d(TAG, "mCurrentStatus:" + mCurrentStatus);
+                    if (PermissionUtils.CanDebug())
+                        Log.e(TAG, "Failed to prepare streaming update", e);
                     resultReceiver.send(RESULT_CODE_ERROR, null);
                 }
             }
         }
     }
-    public String createParams(){
+
+    public String createParams() {
         StringBuilder params = new StringBuilder();
-        params.append("sn="+Build.getSerial());
-        params.append("&bdate="+Build.TIME/1000);
-        params.append("&os=android-"+Build.VERSION.RELEASE);
-        params.append("&device="+Build.DEVICE);
+        params.append("sn=" + Build.getSerial());
+        params.append("&bdate=" + Build.TIME / 1000);
+        params.append("&os=android-" + Build.VERSION.RELEASE);
+        params.append("&device=" + Build.DEVICE);
         return params.toString();
     }
-    private Pair<CHECKUP_STATUS,UpdateConfig> checkCfg()throws MalformedURLException, Exception {
+
+    private Pair<CHECKUP_STATUS, UpdateConfig> checkCfg() throws MalformedURLException, Exception {
         CHECKUP_STATUS status = CHECKUP_STATUS.IDLE;
         mCurrentStatus = CHECKUP_STATUS.CHECKING;
-        String param ="/chk?"+createParams();
-        if (PermissionUtils.CanDebug()) Log.d(TAG,"url: "+UpdateEngineProperties.SERVER_URI+param);
-        URL url = new URL(UpdateEngineProperties.SERVER_URI+param);
+        String param = "/chk?" + createParams();
+        if (PermissionUtils.CanDebug())
+            Log.d(TAG, "url: " + UpdateEngineProperties.SERVER_URI + param);
+        URL url = new URL(UpdateEngineProperties.SERVER_URI + param);
         URLConnection connection = url.openConnection();
         connection.connect();
 
-        status= CHECKUP_STATUS.CHECKING;
+        status = CHECKUP_STATUS.CHECKING;
         BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         StringBuilder result = new StringBuilder();
         String line;
-        while ( (line = reader.readLine() ) != null ) {
+        while ((line = reader.readLine()) != null) {
             result.append(line);
-            if (PermissionUtils.CanDebug()) Log.d(TAG,line);
+            if (PermissionUtils.CanDebug()) Log.d(TAG, line);
         }
-        UpdateConfig config  = UpdateConfig.fromJson(result.toString());
+        UpdateConfig config = UpdateConfig.fromJson(result.toString());
         if (config.getName() != null) {
             status = CHECKUP_STATUS.UPDATE;
         } else {
             status = CHECKUP_STATUS.NEWEST;
         }
         mCurrentStatus = status;
-        Pair<CHECKUP_STATUS,UpdateConfig> ret = new Pair<CHECKUP_STATUS,UpdateConfig>(status,config);
+        Pair<CHECKUP_STATUS, UpdateConfig> ret = new Pair<CHECKUP_STATUS, UpdateConfig>(status, config);
         return ret;
     }
-    public static int getStatus(){
+
+    public static int getStatus() {
         return mCurrentStatus.ordinal();
     }
+
     /**
      * 1. Downloads files for streaming updates.
      * 2. Makes sure required files are present.
@@ -231,7 +254,8 @@ public class PrepareUpdateService extends IntentService {
             throws IOException, PreparationFailedException {
 
         if (config.getAbConfig().getVerifyPayloadMetadata()) {
-            if (PermissionUtils.CanDebug()) Log.i(TAG, "Verifying payload metadata with UpdateEngine.");
+            if (PermissionUtils.CanDebug())
+                Log.i(TAG, "Verifying payload metadata with UpdateEngine.");
             if (!verifyPayloadMetadata(config)) {
                 throw new PreparationFailedException("Payload metadata is not compatible");
             }
@@ -256,7 +280,8 @@ public class PrepareUpdateService extends IntentService {
 
         File compatibilityFile = Paths.get(PackageFiles.OTA_PACKAGE_DIR, PackageFiles.COMPATIBILITY_ZIP_FILE_NAME).toFile();
         if (compatibilityFile.isFile()) {
-            if (PermissionUtils.CanDebug()) Log.i(TAG, "Verifying OTA package for compatibility with the device");
+            if (PermissionUtils.CanDebug())
+                Log.i(TAG, "Verifying OTA package for compatibility with the device");
             if (!verifyPackageCompatibility(compatibilityFile)) {
                 throw new PreparationFailedException(
                         "OTA package is not compatible with this device");
@@ -284,8 +309,9 @@ public class PrepareUpdateService extends IntentService {
                                 PackageFiles.PAYLOAD_METADATA_FILE_NAME))
                         .findFirst();
         if (!metadataPackageFile.isPresent()) {
-            if (PermissionUtils.CanDebug()) Log.w(TAG, String.format("ab_config.property_files doesn't contain %s",
-                    PackageFiles.PAYLOAD_METADATA_FILE_NAME));
+            if (PermissionUtils.CanDebug())
+                Log.w(TAG, String.format("ab_config.property_files doesn't contain %s",
+                        PackageFiles.PAYLOAD_METADATA_FILE_NAME));
             return true;
         }
         Path metadataPath = Paths.get(OTA_PACKAGE_DIR, PackageFiles.PAYLOAD_METADATA_FILE_NAME);
@@ -299,15 +325,17 @@ public class PrepareUpdateService extends IntentService {
             mDownloaders.add(d);
             d.download();
         } catch (IOException e) {
-            if (PermissionUtils.CanDebug()) Log.w(TAG, String.format("Downloading %s from %s failed",
-                    PackageFiles.PAYLOAD_METADATA_FILE_NAME,
-                    config.getUrl()), e);
+            if (PermissionUtils.CanDebug())
+                Log.w(TAG, String.format("Downloading %s from %s failed",
+                        PackageFiles.PAYLOAD_METADATA_FILE_NAME,
+                        config.getUrl()), e);
             return true;
         }
         try {
             return mUpdateEngine.verifyPayloadMetadata(metadataPath.toAbsolutePath().toString());
         } catch (Exception e) {
-            if (PermissionUtils.CanDebug()) Log.w(TAG, "UpdateEngine#verifyPayloadMetadata failed", e);
+            if (PermissionUtils.CanDebug())
+                Log.w(TAG, "UpdateEngine#verifyPayloadMetadata failed", e);
             return true;
         }
     }
@@ -325,14 +353,15 @@ public class PrepareUpdateService extends IntentService {
         for (String file : PRE_STREAMING_FILES_SET) {
             try {
                 Files.deleteIfExists(Paths.get(OTA_PACKAGE_DIR, file));
-            }catch(Exception e) {
+            } catch (Exception e) {
                 if (PermissionUtils.CanDebug()) Log.w(TAG, "UpdateEngine#deleteIfExists failed", e);
             }
         }
         if (PermissionUtils.CanDebug()) Log.d(TAG, "Downloading files to " + dir);
         for (UpdateConfig.PackageFile file : config.getAbConfig().getPropertyFiles()) {
             if (PRE_STREAMING_FILES_SET.contains(file.getFilename()) && mCurrentStatus.ordinal() > 2) {
-                if (PermissionUtils.CanDebug()) Log.d(TAG, "Downloading file " + file.getFilename());
+                if (PermissionUtils.CanDebug())
+                    Log.d(TAG, "Downloading file " + file.getFilename());
                 FileDownloader downloader = new FileDownloader(
                         config.getUrl(),
                         file.getOffset(),
@@ -387,6 +416,7 @@ public class PrepareUpdateService extends IntentService {
             mUpdateResultCallback.onReceiveResult(resultCode, payloadSpec);
         }
     }
+
     /**
      * The files that should be downloaded before streaming.
      */

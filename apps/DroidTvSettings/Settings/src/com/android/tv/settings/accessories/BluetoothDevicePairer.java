@@ -47,7 +47,7 @@ public class BluetoothDevicePairer {
 
     /**
      * This class operates in two modes, automatic and manual.
-     *
+     * <p>
      * AUTO MODE
      * In auto mode we listen for an input device that looks like it can
      * generate DPAD events. When one is found we wait
@@ -55,18 +55,18 @@ public class BluetoothDevicePairer {
      * connecting to the device. The idea is that a UI making use of this class
      * would give the user a chance to cancel pairing during this window. Once
      * the connection process starts, it is considered uninterruptible.
-     *
+     * <p>
      * Connection is accomplished in two phases, bonding and socket connection.
      * First we try to create a bond to the device and listen for bond status
      * change broadcasts. Once the bond is made, we connect to the device.
      * Connecting to the device actually opens a socket and hooks the device up
      * to the input system.
-     *
+     * <p>
      * In auto mode if we see more than one compatible input device before
      * bonding with a candidate device, we stop the process. We don't want to
      * connect to the wrong device and it is up to the user of this class to
      * tell us what to connect to.
-     *
+     * <p>
      * MANUAL MODE
      * Manual mode is where a user of this class explicitly tells us which
      * device to connect to. To switch to manual mode you can call
@@ -76,7 +76,7 @@ public class BluetoothDevicePairer {
      * that you want to connect to, call {@link #startPairing(BluetoothDevice)}
      * to start the connection process. At this point the same process is
      * followed as when we start connection in auto mode.
-     *
+     * <p>
      * Even in manual mode there is a timeout before we actually start
      * connecting, but it is {@link #DELAY_MANUAL_PAIRING}.
      */
@@ -116,6 +116,7 @@ public class BluetoothDevicePairer {
          * Call back when BT device connection is completed.
          */
         void succeeded();
+
         void failed();
     }
 
@@ -143,7 +144,7 @@ public class BluetoothDevicePairer {
     private static final boolean DEBUG = true;
 
     private static final String[] INVALID_INPUT_KEYBOARD_DEVICE_NAMES = {
-        "gpio-keypad", "cec_keyboard", "Virtual", "athome_remote"
+            "gpio-keypad", "cec_keyboard", "Virtual", "athome_remote"
     };
 
     private static final int SCAN_MODE_NOT_SET = 0;
@@ -228,7 +229,7 @@ public class BluetoothDevicePairer {
 
                 if (DEBUG) {
                     Log.d(TAG, "Bond states: old = " + previousBondState + ", new = " +
-                        bondState);
+                            bondState);
                 }
 
                 if (bondState == BluetoothDevice.BOND_NONE &&
@@ -251,6 +252,7 @@ public class BluetoothDevicePairer {
         public void succeeded() {
             setStatus(STATUS_NONE);
         }
+
         public void failed() {
             setStatus(STATUS_ERROR);
         }
@@ -415,6 +417,7 @@ public class BluetoothDevicePairer {
 
     /**
      * Start pairing and connection to the specified device.
+     *
      * @param device device
      */
     public void startPairing(BluetoothDevice device) {
@@ -423,6 +426,7 @@ public class BluetoothDevicePairer {
 
     /**
      * Return our state
+     *
      * @return One of the STATE_ constants.
      */
     public int getStatus() {
@@ -670,7 +674,7 @@ public class BluetoothDevicePairer {
         switch (majorDeviceClass) {
             case BluetoothClass.Device.Major.PERIPHERAL:
                 return new BluetoothInputDeviceConnector(
-                    mContext, mTarget, mHandler, mOpenConnectionCallback);
+                        mContext, mTarget, mHandler, mOpenConnectionCallback);
             case BluetoothClass.Device.Major.AUDIO_VIDEO:
                 return new BluetoothA2dpConnector(mContext, mTarget, mOpenConnectionCallback);
             default:

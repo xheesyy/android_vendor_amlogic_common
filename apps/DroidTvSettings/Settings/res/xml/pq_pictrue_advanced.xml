@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,7 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/pq_pictrue_advanced">
+    android:title="@string/pq_pictrue_advanced">
 
     <ListPreference
         android:key="pq_pictrue_advanced_dynamic_tone_mapping"
@@ -29,17 +28,17 @@
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedGammaFragment"
         android:key="pq_pictrue_advanced_gamma"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_gamma"/>
+        android:title="@string/pq_pictrue_advanced_gamma" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedManualGammaFragment"
         android:key="pq_pictrue_advanced_manual_gamma"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_manual_gamma"/>
+        android:title="@string/pq_pictrue_advanced_manual_gamma" />
     <Preference
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorTemperatureFragment"
         android:key="pq_pictrue_advanced_color_temperature"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_temperature"/>
+        android:title="@string/pq_pictrue_advanced_color_temperature" />
     <ListPreference
         android:key="pq_pictrue_advanced_color_management"
         android:persistent="false"
@@ -51,7 +50,7 @@
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedColorCustomizeFragment"
         android:key="pq_pictrue_advanced_color_customize"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_color_customize"/>
+        android:title="@string/pq_pictrue_advanced_color_customize" />
     <ListPreference
         android:key="pq_hdmi_color_range"
         android:persistent="false"
@@ -140,6 +139,6 @@
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedMEMCFragment"
         android:key="pq_pictrue_advanced_memc"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced_memc"/>
+        android:title="@string/pq_pictrue_advanced_memc" />
 
 </PreferenceScreen>

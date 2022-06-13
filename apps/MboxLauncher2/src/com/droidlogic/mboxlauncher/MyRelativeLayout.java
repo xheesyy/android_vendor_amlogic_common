@@ -34,8 +34,8 @@ import android.util.Log;
 import java.lang.Character;
 
 
-public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutListener{
-    private final static String TAG="MyRelativeLayout";
+public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutListener {
+    private final static String TAG = "MyRelativeLayout";
 
     private final static float ELEVATION_HOVER_MIN = 30;
     private final static float ELEVATION_HOVER_MID = 36;
@@ -65,11 +65,11 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
     private boolean mIsAddButton = false;
     private boolean isSwitchAnimRunning = false;
 
-    public MyRelativeLayout(Context context){
+    public MyRelativeLayout(Context context) {
         super(context);
     }
 
-    public MyRelativeLayout(Context context, AttributeSet attrs){
+    public MyRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         setFocusable(true);
@@ -78,7 +78,7 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
         getViewTreeObserver().addOnGlobalLayoutListener(this);
     }
 
-    public MyRelativeLayout(Context context, AttributeSet attrs, int defStyle){
+    public MyRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
@@ -88,16 +88,16 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
     }
 
     @Override
-    protected void onLayout (boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout (changed, left, top, right, bottom);
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
     }
 
     @Override
-    protected void onDetachedFromWindow () {
+    protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
     }
 
-    public  void onGlobalLayout () {
+    public void onGlobalLayout() {
         layoutCompleted = true;
         if (isFocused()) {
             setHoverViewDelayed();
@@ -105,7 +105,7 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
         getViewTreeObserver().removeGlobalOnLayoutListener(this);
     }
 
-    public boolean dispatchKeyEvent (KeyEvent event) {
+    public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (event.getKeyCode()) {
                 case KeyEvent.KEYCODE_DPAD_UP:
@@ -115,25 +115,25 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
                 case KeyEvent.KEYCODE_DPAD_LEFT:
                     if (mNumber != -1 && mNumber % COLUMN_NUMBER == 0) {
                         isSwitchAnimRunning = true;
-                        ((Launcher)mContext).switchSecondScren(AppLayout.ANIM_LEFT);
+                        ((Launcher) mContext).switchSecondScren(AppLayout.ANIM_LEFT);
                     }
                     break;
                 case KeyEvent.KEYCODE_DPAD_RIGHT:
                     if (mNumber != -1 && (mNumber % COLUMN_NUMBER == 5
-                            || mNumber == ((ViewGroup)getParent()).getChildCount() - 1)) {
+                            || mNumber == ((ViewGroup) getParent()).getChildCount() - 1)) {
                         isSwitchAnimRunning = true;
-                        ((Launcher)mContext).switchSecondScren(AppLayout.ANIM_RIGHT);
+                        ((Launcher) mContext).switchSecondScren(AppLayout.ANIM_RIGHT);
                     }
                     break;
                 case KeyEvent.KEYCODE_DPAD_CENTER:
                 case KeyEvent.KEYCODE_ENTER:
                     if (mType != Launcher.TYPE_APP_SHORTCUT) {
-                        ((Launcher)mContext).saveHomeFocus(this);
+                        ((Launcher) mContext).saveHomeFocus(this);
                     }
                     switch (mType) {
                         case Launcher.TYPE_VIDEO:
-                            if (((Launcher)mContext).isTvFeture()) {
-                                ((Launcher)mContext).startTvApp();
+                            if (((Launcher) mContext).isTvFeture()) {
+                                ((Launcher) mContext).startTvApp();
                             } else {
                                 showSecondScreen(Launcher.MODE_VIDEO);
                                 return true;
@@ -163,10 +163,10 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
                             ComponentName cameraCom = new ComponentName("com.android.camera2", "com.android.camera.CameraLauncher");
                             if (mIntent != null) {
                                 if (mIntent.getComponent().flattenToString().equals(Launcher.COMPONENT_TV_APP))
-                                    ((Launcher)mContext).startTvApp();
+                                    ((Launcher) mContext).startTvApp();
                                 else if (mIntent.getComponent().equals(cameraCom)) {
                                     if (mContext.getPackageManager().getComponentEnabledSetting(cameraCom)
-                                        != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                                            != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
                                         try {
                                             mContext.startActivity(mIntent);
                                         } catch (Exception e) {
@@ -179,8 +179,8 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
                                     if (temp.length > 0 && temp[0].equals(Launcher.COMPONENT_THOMASROOM))
                                         Launcher.isLaunchingThomasroom = true;
                                 }
-                            } else if (mIsAddButton){
-                                ((Launcher)mContext).startCustomScreen(this);
+                            } else if (mIsAddButton) {
+                                ((Launcher) mContext).startCustomScreen(this);
                             }
                             break;
                     }
@@ -192,57 +192,56 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
     }
 
     @Override
-    public boolean onTouchEvent (MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             switch (mType) {
                 case Launcher.TYPE_VIDEO:
-                            if (((Launcher)mContext).isTvFeture()) {
-                                ((Launcher)mContext).startTvApp();
-                            } else {
-                                showSecondScreen(Launcher.MODE_VIDEO);
-                                return true;
-                            }
-                            break;
-                        case Launcher.TYPE_RECOMMEND:
-                            showSecondScreen(Launcher.MODE_RECOMMEND);
-                            break;
-                        case Launcher.TYPE_MUSIC:
-                            showSecondScreen(Launcher.MODE_MUSIC);
-                            break;
-                        case Launcher.TYPE_APP:
-                            showSecondScreen(Launcher.MODE_APP);
-                            break;
-                        case Launcher.TYPE_LOCAL:
-                            showSecondScreen(Launcher.MODE_LOCAL);
-                            break;
-                        case Launcher.TYPE_SETTINGS:
-                            if (mIntent != null) {
-                                mContext.startActivity(mIntent);
-                            }
-                            break;
-                        case Launcher.TYPE_APP_SHORTCUT:
-                        case Launcher.TYPE_HOME_SHORTCUT:
-                            ComponentName cameraCom = new ComponentName("com.android.camera2", "com.android.camera.CameraLauncher");
-                            if (mIntent != null) {
-                                if (mIntent.getComponent().flattenToString().equals(Launcher.COMPONENT_TV_APP))
-                                    ((Launcher)mContext).startTvApp();
-                                else if (mIntent.getComponent().equals(cameraCom)) {
-                                    if (mContext.getPackageManager().getComponentEnabledSetting(cameraCom)
-                                        != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
-                                        try {
-                                            mContext.startActivity(mIntent);
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-                                }
-                                else
+                    if (((Launcher) mContext).isTvFeture()) {
+                        ((Launcher) mContext).startTvApp();
+                    } else {
+                        showSecondScreen(Launcher.MODE_VIDEO);
+                        return true;
+                    }
+                    break;
+                case Launcher.TYPE_RECOMMEND:
+                    showSecondScreen(Launcher.MODE_RECOMMEND);
+                    break;
+                case Launcher.TYPE_MUSIC:
+                    showSecondScreen(Launcher.MODE_MUSIC);
+                    break;
+                case Launcher.TYPE_APP:
+                    showSecondScreen(Launcher.MODE_APP);
+                    break;
+                case Launcher.TYPE_LOCAL:
+                    showSecondScreen(Launcher.MODE_LOCAL);
+                    break;
+                case Launcher.TYPE_SETTINGS:
+                    if (mIntent != null) {
+                        mContext.startActivity(mIntent);
+                    }
+                    break;
+                case Launcher.TYPE_APP_SHORTCUT:
+                case Launcher.TYPE_HOME_SHORTCUT:
+                    ComponentName cameraCom = new ComponentName("com.android.camera2", "com.android.camera.CameraLauncher");
+                    if (mIntent != null) {
+                        if (mIntent.getComponent().flattenToString().equals(Launcher.COMPONENT_TV_APP))
+                            ((Launcher) mContext).startTvApp();
+                        else if (mIntent.getComponent().equals(cameraCom)) {
+                            if (mContext.getPackageManager().getComponentEnabledSetting(cameraCom)
+                                    != PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+                                try {
                                     mContext.startActivity(mIntent);
-                            } else if (mIsAddButton){
-                                ((Launcher)mContext).startCustomScreen(this);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
-                            break;
+                        } else
+                            mContext.startActivity(mIntent);
+                    } else if (mIsAddButton) {
+                        ((Launcher) mContext).startCustomScreen(this);
+                    }
+                    break;
 
             }
             return false;
@@ -251,18 +250,18 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
     }
 
     @Override
-    protected void onFocusChanged (boolean gainFocus, int direction, Rect previouslyFocusedRect){
+    protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect) {
         if (gainFocus == true) {
             if (layoutCompleted) {
                 setHoverView();
             }
         } else {
-            ScaleAnimation anim = new ScaleAnimation(1.07f, 1f, 1.07f, 1f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            ScaleAnimation anim = new ScaleAnimation(1.07f, 1f, 1.07f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
             anim.setZAdjustment(Animation.ZORDER_TOP);
             anim.setDuration(animDuration);
             anim.setStartTime(animDelay);
             this.startAnimation(anim);
-            }
+        }
     }
 
     public void setType(int type) {
@@ -295,17 +294,17 @@ public class MyRelativeLayout extends RelativeLayout implements OnGlobalLayoutLi
         mIntent = intent;
     }
 
-    private void showSecondScreen(int mode){
-        ((Launcher)mContext).setHomeViewVisible(false);
-        ((Launcher)mContext).setShortcutScreen(mode);
+    private void showSecondScreen(int mode) {
+        ((Launcher) mContext).setHomeViewVisible(false);
+        ((Launcher) mContext).setShortcutScreen(mode);
     }
 
-    private void setHoverView(){
-        ((Launcher)mContext).setHoverView(this);
+    private void setHoverView() {
+        ((Launcher) mContext).setHoverView(this);
     }
 
-    private void setHoverViewDelayed(){
-        ((Launcher)mContext).setHoverViewDelayed(this, DELAYED_TIME_HOVER_VIEW);
+    private void setHoverViewDelayed() {
+        ((Launcher) mContext).setHoverViewDelayed(this, DELAYED_TIME_HOVER_VIEW);
     }
 
     public void setNumber(int number) {

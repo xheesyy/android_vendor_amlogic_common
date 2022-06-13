@@ -26,6 +26,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.ProgressBar;
+
 import com.droidlogic.updater.R;
 
 public class RemoteView {
@@ -53,19 +54,19 @@ public class RemoteView {
         mParams = new WindowManager.LayoutParams();
         mParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
         mParams.format = PixelFormat.TRANSLUCENT;
-        mParams.gravity = Gravity.BOTTOM|Gravity.RIGHT;
+        mParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
         mParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         mParams.width = 120;
         // mParams.height = 30;
         mParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
         mParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-     //   mParams.x = 100;
-       // mParams.y = 100;
+        //   mParams.x = 100;
+        // mParams.y = 100;
         isShowing = false;
     }
 
     public void adjustParam() {
-       wm.updateViewLayout(mFloatView, mParams);
+        wm.updateViewLayout(mFloatView, mParams);
     }
 
     public void show() {
@@ -84,13 +85,13 @@ public class RemoteView {
 
 
     public void updateUI(String value, boolean visible, int progress) {
-        Log.d("V","updateUI"+value+" visible:"+(mFloatView == null)+" "+progress);
+        Log.d("V", "updateUI" + value + " visible:" + (mFloatView == null) + " " + progress);
         if (mFloatView == null) return;
         TextView status =
                 (TextView) mFloatView.findViewById(R.id.progress_status);
         status.setText(value);
         if (visible) {
-            ProgressBar mProgressbar =(ProgressBar) mFloatView.findViewById(R.id.progress);
+            ProgressBar mProgressbar = (ProgressBar) mFloatView.findViewById(R.id.progress);
             mProgressbar.setIndeterminate(false);
             mProgressbar.setProgress(progress);
         }

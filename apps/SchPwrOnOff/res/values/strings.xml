@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2007 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2007 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,7 +12,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">    
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Schedule power on/off settings -->
     <!-- Main Settings screen setting option name to go into the power on/off settings-->
     <string name="schedule_power_on_off_settings_title">Schedule power on &amp; off</string>
@@ -89,6 +88,6 @@
     <string name="schpwr_shutdown_message">"Your device will shut down in <xliff:g id="seconds">%s</xliff:g> seconds"</string>
     <string name="schpwr_shutdown_message_second">"Your device will shut down in <xliff:g id="second">%s</xliff:g> second"</string>
 
-	<string name="settime_button_ok">OK</string>
-	<string name="settime_button_canel">Cancel</string>
+    <string name="settime_button_ok">OK</string>
+    <string name="settime_button_canel">Cancel</string>
 </resources>

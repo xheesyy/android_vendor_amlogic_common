@@ -53,7 +53,7 @@ public class AlarmProvider extends ContentProvider {
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int currentVersion) {
             Log.d(TAG, "Upgrading schpwrs database from version " + oldVersion + " to " + currentVersion
-               + ", which will destroy all old data");
+                    + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS schpwrs");
             onCreate(db);
         }
@@ -79,23 +79,23 @@ public class AlarmProvider extends ContentProvider {
         // Generate the body of the query
         int match = URLMATCHER.match(url);
         switch (match) {
-        case SCHPWRS:
-            qb.setTables("schpwrs");
-            break;
-        case SCHPWRS_ID:
-            qb.setTables("schpwrs");
-            qb.appendWhere("_id=");
-            qb.appendWhere(url.getPathSegments().get(1));
-            break;
-        default:
-            throw new IllegalArgumentException("Unknown URL " + url);
+            case SCHPWRS:
+                qb.setTables("schpwrs");
+                break;
+            case SCHPWRS_ID:
+                qb.setTables("schpwrs");
+                qb.appendWhere("_id=");
+                qb.appendWhere(url.getPathSegments().get(1));
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown URL " + url);
         }
 
         SQLiteDatabase db = mOpenHelper.getReadableDatabase();
         Cursor ret = qb.query(db, projectionIn, selection, selectionArgs, null, null, sort);
 
         if (ret == null) {
-           Log.e(TAG, "Alarms.query: failed");
+            Log.e(TAG, "Alarms.query: failed");
         } else {
             ret.setNotificationUri(getContext().getContentResolver(), url);
         }
@@ -107,12 +107,12 @@ public class AlarmProvider extends ContentProvider {
     public String getType(Uri url) {
         int match = URLMATCHER.match(url);
         switch (match) {
-        case SCHPWRS:
-            return "vnd.android.cursor.dir/schpwrs";
-        case SCHPWRS_ID:
-            return "vnd.android.cursor.item/schpwrs";
-        default:
-            throw new IllegalArgumentException("Unknown URL");
+            case SCHPWRS:
+                return "vnd.android.cursor.dir/schpwrs";
+            case SCHPWRS_ID:
+                return "vnd.android.cursor.item/schpwrs";
+            default:
+                throw new IllegalArgumentException("Unknown URL");
         }
     }
 
@@ -124,13 +124,13 @@ public class AlarmProvider extends ContentProvider {
         try {
             SQLiteDatabase db = mOpenHelper.getWritableDatabase();
             switch (match) {
-            case SCHPWRS_ID:
-                String segment = url.getPathSegments().get(1);
-                rowId = Long.parseLong(segment);
-                count = db.update("schpwrs", values, "_id=" + rowId, null);
-                break;
-            default:
-                throw new UnsupportedOperationException("Cannot update URL: " + url);
+                case SCHPWRS_ID:
+                    String segment = url.getPathSegments().get(1);
+                    rowId = Long.parseLong(segment);
+                    count = db.update("schpwrs", values, "_id=" + rowId, null);
+                    break;
+                default:
+                    throw new UnsupportedOperationException("Cannot update URL: " + url);
             }
 
             Log.d(TAG, "*** notifyChange() rowId: " + rowId + " url " + url);
@@ -144,7 +144,7 @@ public class AlarmProvider extends ContentProvider {
 
     @Override
     public Uri insert(Uri url, ContentValues initialValues) {
-            Log.d(TAG, "---------->>> alarm provider");
+        Log.d(TAG, "---------->>> alarm provider");
         if (URLMATCHER.match(url) != SCHPWRS) {
             throw new IllegalArgumentException("Cannot insert into URL: " + url);
         }
@@ -193,7 +193,7 @@ public class AlarmProvider extends ContentProvider {
         if (rowId < 0) {
             throw new SQLException("Failed to insert row into " + url);
         }
-       Log.d(TAG, "Added alarm rowId = " + rowId);
+        Log.d(TAG, "Added alarm rowId = " + rowId);
 
         Uri newUrl = ContentUris.withAppendedId(Alarm.Columns.CONTENT_URI, rowId);
         getContext().getContentResolver().notifyChange(newUrl, null);
@@ -207,20 +207,20 @@ public class AlarmProvider extends ContentProvider {
         int count;
         String whr;
         switch (URLMATCHER.match(url)) {
-        case SCHPWRS:
-            count = db.delete("schpwrs", where, whereArgs);
-            break;
-        case SCHPWRS_ID:
-            String segment = url.getPathSegments().get(1);
-            if (TextUtils.isEmpty(where)) {
-                whr = "_id=" + segment;
-            } else {
-                whr = "_id=" + segment + " AND (" + where + ")";
-            }
-            count = db.delete("schpwrs", whr, whereArgs);
-            break;
-        default:
-            throw new IllegalArgumentException("Cannot delete from URL: " + url);
+            case SCHPWRS:
+                count = db.delete("schpwrs", where, whereArgs);
+                break;
+            case SCHPWRS_ID:
+                String segment = url.getPathSegments().get(1);
+                if (TextUtils.isEmpty(where)) {
+                    whr = "_id=" + segment;
+                } else {
+                    whr = "_id=" + segment + " AND (" + where + ")";
+                }
+                count = db.delete("schpwrs", whr, whereArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Cannot delete from URL: " + url);
         }
 
         getContext().getContentResolver().notifyChange(url, null);

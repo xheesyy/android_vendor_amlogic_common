@@ -30,7 +30,7 @@ final class InstrumentationUtils {
     /**
      * Log the PAGE_FOCUSED event to statsd.
      *
-     * @param pageId the id of the focused page
+     * @param pageId  the id of the focused page
      * @param forward whether the page is focused in the forward navigation (deeper into the
      *                setting tree)
      */
@@ -41,8 +41,8 @@ final class InstrumentationUtils {
                     TvSettingsStatsLog.TVSETTINGS_UI_INTERACTED,
                     forward != null
                             ? (forward
-                                    ? TvSettingsEnums.PAGE_FOCUSED_FORWARD
-                                    : TvSettingsEnums.PAGE_FOCUSED_BACKWARD)
+                            ? TvSettingsEnums.PAGE_FOCUSED_FORWARD
+                            : TvSettingsEnums.PAGE_FOCUSED_BACKWARD)
                             : TvSettingsEnums.PAGE_FOCUSED,
                     pageId);
         } catch (Exception e) {
@@ -70,7 +70,7 @@ final class InstrumentationUtils {
     /**
      * Log the TOGGLE_INTERACTED event to statsd.
      *
-     * @param toggleId the id of the interacted toggle
+     * @param toggleId  the id of the interacted toggle
      * @param toggledOn whether the toggle is being flipped on
      */
     static void logToggleInteracted(int toggleId, Boolean toggledOn) {
@@ -80,8 +80,8 @@ final class InstrumentationUtils {
                     TvSettingsStatsLog.TVSETTINGS_UI_INTERACTED,
                     toggledOn != null
                             ? (toggledOn
-                                    ? TvSettingsEnums.TOGGLED_ON
-                                    : TvSettingsEnums.TOGGLED_OFF)
+                            ? TvSettingsEnums.TOGGLED_ON
+                            : TvSettingsEnums.TOGGLED_OFF)
                             : TvSettingsEnums.TOGGLE_INTERACTED,
                     toggleId);
         } catch (Exception e) {
@@ -89,7 +89,9 @@ final class InstrumentationUtils {
         }
     }
 
-    /** Prevent this class from being accidentally instantiated. */
+    /**
+     * Prevent this class from being accidentally instantiated.
+     */
     private InstrumentationUtils() {
     }
 }

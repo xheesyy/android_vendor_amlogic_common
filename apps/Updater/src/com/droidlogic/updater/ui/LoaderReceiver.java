@@ -15,10 +15,12 @@
  *limitations under the License.
  ******************************************************************/
 package com.droidlogic.updater.ui;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
+
 import com.droidlogic.updater.util.PrefUtils;
 import com.droidlogic.updater.service.PrepareUpdateService;
 import com.droidlogic.updater.service.AutoCheckService;
@@ -26,14 +28,14 @@ import com.droidlogic.updater.service.AutoCheckService;
 public class LoaderReceiver extends BroadcastReceiver {
 
     @Override
-    public void onReceive ( Context context, Intent ii ) {
+    public void onReceive(Context context, Intent ii) {
         PrefUtils mPref = new PrefUtils(context);
         if (mPref.getBooleanVal(PrefUtils.key, false)) {
             Intent intent = new Intent(context, EmptyActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         } else {
-            Intent servintent = new Intent(context,AutoCheckService.class);
+            Intent servintent = new Intent(context, AutoCheckService.class);
             context.startService(servintent);
         }
     }

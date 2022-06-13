@@ -3,7 +3,7 @@
     package="com.droidlogic.mictoggle"
     android:sharedUserId="android.uid.system">
 
-    <uses-permission android:name="droidlogic.permission.SYSTEM_CONTROL"/>
+    <uses-permission android:name="droidlogic.permission.SYSTEM_CONTROL" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +14,7 @@
         <provider
             android:name="com.droidlogic.mictoggle.AssistantMicMuteProvider"
             android:authorities="atv.hotwordmic"
-            android:exported="true">
-        </provider>
+            android:exported="true"></provider>
     </application>
 
 </manifest>

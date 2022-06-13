@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 Amlogic, Inc.
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2012 Amlogic, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,4 +16,4 @@
     android:id="@+id/text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textSize="@dimen/text_titile_size"/>
+    android:textSize="@dimen/text_titile_size" />

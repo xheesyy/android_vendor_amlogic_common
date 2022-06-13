@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +15,13 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/tv_name">
-        <Preference
-            android:key="key_tv_sound"
-            android:title="@string/tv_sound"
-            android:fragment="com.android.tv.settings.soundeffect.SoundModeFragment"/>
-        <Preference
-            android:key="settings_mode"
-            android:title="@string/settings_mode"
-            android:fragment="com.android.tv.settings.tvoption.SettingsModeFragment"/>
+    android:title="@string/tv_name">
+    <Preference
+        android:key="key_tv_sound"
+        android:title="@string/tv_sound"
+        android:fragment="com.android.tv.settings.soundeffect.SoundModeFragment" />
+    <Preference
+        android:key="settings_mode"
+        android:title="@string/settings_mode"
+        android:fragment="com.android.tv.settings.tvoption.SettingsModeFragment" />
 </PreferenceScreen>

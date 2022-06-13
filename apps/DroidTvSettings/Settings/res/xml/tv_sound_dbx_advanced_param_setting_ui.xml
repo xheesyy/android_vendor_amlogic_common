@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/settings_background"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:layout_height="wrap_content"
@@ -13,8 +13,7 @@
         android:textSize="@dimen/pq_seekbar_title"
         android:layout_marginTop="@dimen/pq_seekbar_title_marginTop"
         android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
     <TextView
         android:id="@+id/id_text_view_tv_dbx_param_sonics"
         android:layout_height="wrap_content"
@@ -24,16 +23,14 @@
         android:textSize="@dimen/pq_seekbar_item"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
         android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
     <SeekBar
         android:id="@+id/id_seek_bar_tv_dbx_param_sonics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="4"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
-        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        />
+        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom" />
     <TextView
         android:id="@+id/id_text_view_tv_dbx_param_volume"
         android:layout_height="wrap_content"
@@ -43,16 +40,14 @@
         android:textSize="@dimen/pq_seekbar_item"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
         android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
     <SeekBar
         android:id="@+id/id_seek_bar_tv_dbx_param_volume"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="2"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
-        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        />
+        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom" />
     <TextView
         android:id="@+id/id_text_view_tv_dbx_param_surround"
         android:layout_height="wrap_content"
@@ -62,14 +57,12 @@
         android:textSize="@dimen/pq_seekbar_item"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
         android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
     <SeekBar
         android:id="@+id/id_seek_bar_tv_dbx_param_surround"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="2"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
-        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        />
+        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom" />
 </LinearLayout>

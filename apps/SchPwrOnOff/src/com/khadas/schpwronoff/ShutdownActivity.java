@@ -99,7 +99,7 @@ public class ShutdownActivity extends Activity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
-         Log.d(TAG, "onCreateDialog");
+        Log.d(TAG, "onCreateDialog");
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setCancelable(false).setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle(com.android.internal.R.string.power_off).setMessage(mMessage)
@@ -120,7 +120,7 @@ public class ShutdownActivity extends Activity {
         if (!getResources().getBoolean(com.android.internal.R.bool.config_sf_slowBlur)) {
             dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
         }
-        
+
 
         return dialog;
     }

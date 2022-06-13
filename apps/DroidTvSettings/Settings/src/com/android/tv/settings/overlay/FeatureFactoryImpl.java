@@ -59,14 +59,19 @@ public class FeatureFactoryImpl implements FeatureFactory {
         return new StartupVerificationFeatureProviderImpl();
     }
 
-    /** A settings fragment suitable for displaying in the default (one panel) layout. */
+    /**
+     * A settings fragment suitable for displaying in the default (one panel) layout.
+     */
     public static class SettingsFragment extends BaseSettingsFragment {
 
         private static final String EXTRA_FRAGMENT_CLASS_NAME = "fragmentClassName";
 
-        public SettingsFragment() {}
+        public SettingsFragment() {
+        }
 
-        /** Constructs a new instance of a settings fragment. */
+        /**
+         * Constructs a new instance of a settings fragment.
+         */
         public static SettingsFragment newInstance(String className, Bundle arguments) {
             SettingsFragment fragment = new SettingsFragment();
             Bundle args = arguments == null ? new Bundle() : new Bundle(arguments);
@@ -83,7 +88,7 @@ public class FeatureFactoryImpl implements FeatureFactory {
                 fragment.setArguments(getArguments());
                 startPreferenceFragment(fragment);
             } catch (IllegalAccessException | ClassNotFoundException
-                    | java.lang.InstantiationException e) {
+                     | java.lang.InstantiationException e) {
                 Log.e(TAG, "Unable to start initial preference screen.", e);
             }
         }

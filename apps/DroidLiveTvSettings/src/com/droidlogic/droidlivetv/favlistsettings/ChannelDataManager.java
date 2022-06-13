@@ -84,7 +84,7 @@ public class ChannelDataManager {
         byte[] A = new byte[1];
         try {
             for (int i = 0; i < 26; i++) {
-                A[0] = (byte)('A' + (byte)i);//(byte)'A' + (byte)i;
+                A[0] = (byte) ('A' + (byte) i);//(byte)'A' + (byte)i;
                 childObj = new JSONObject();
                 childObj.put(KEY_SETTINGS_CHANNEL_NAME, (new String(A)) + DEFAULTNAME + String.valueOf(2 * i));
                 childObj.put(KEY_SETTINGS_CHANNEL_FREQUENCY, (2 * i + 1) * 10);
@@ -95,7 +95,7 @@ public class ChannelDataManager {
                 childObj.put(KEY_SETTINGS_CHANNEL_FAV_INDEX, new JSONArray().toString());
                 childObj.put(KEY_SETTINGS_CHANNEL_ITEM_TYPE, Item.ACTION_CHANNEL_SORT_ALL);
                 childObj.put(KEY_SETTINGS_CHANNEL_CONTAINER_TYPE, Item.CONTAINER_ITEM_ALL_CHANNEL);
-                childObj.put(KEY_SETTINGS_CHANNEL_ID, (long)(2 * i));
+                childObj.put(KEY_SETTINGS_CHANNEL_ID, (long) (2 * i));
                 result.add(childObj.toString());
                 array.put(childObj);
                 childObj = new JSONObject();
@@ -108,7 +108,7 @@ public class ChannelDataManager {
                 childObj.put(KEY_SETTINGS_CHANNEL_FAV_INDEX, new JSONArray().toString());
                 childObj.put(KEY_SETTINGS_CHANNEL_ITEM_TYPE, Item.ACTION_CHANNEL_SORT_ALL);
                 childObj.put(KEY_SETTINGS_CHANNEL_CONTAINER_TYPE, Item.CONTAINER_ITEM_ALL_CHANNEL);
-                childObj.put(KEY_SETTINGS_CHANNEL_ID, (long)(2 * i + 1));
+                childObj.put(KEY_SETTINGS_CHANNEL_ID, (long) (2 * i + 1));
                 result.add(childObj.toString());
                 array.put(childObj);
             }
@@ -135,7 +135,7 @@ public class ChannelDataManager {
             String satelliteInfo = null;
             Iterator it = allList.iterator();
             while (it.hasNext()) {
-                singleChannel = (ChannelInfo)it.next();
+                singleChannel = (ChannelInfo) it.next();
                 if ((!singleChannel.isOtherChannel() && !singleChannel.isBrowsable()) || (singleChannel.isOtherChannel() && singleChannel.getHidden() == 1)) {
                     //hide not browsable channel
                     continue;
@@ -190,7 +190,7 @@ public class ChannelDataManager {
             JSONObject jsonObj = null;
             Item item = null;
             while (iterator.hasNext()) {
-                String objStr = (String)iterator.next();
+                String objStr = (String) iterator.next();
                 if (!TextUtils.isEmpty(objStr)) {
                     try {
                         jsonObj = new JSONObject(objStr);
@@ -224,7 +224,7 @@ public class ChannelDataManager {
             Item item = null;
             int count = 1;
             while (iterator.hasNext()) {
-                String objStr = (String)iterator.next();
+                String objStr = (String) iterator.next();
                 if (!TextUtils.isEmpty(objStr)) {
                     try {
                         jsonObj = new JSONObject(objStr);
@@ -280,8 +280,8 @@ public class ChannelDataManager {
     }
 
     /*
-    *serviceType can be SERVICE_TYPE_AUDIO_VIDEO or SERVICE_TYPE_AUDIO or SERVICE_TYPE_OTHER
-    */
+     *serviceType can be SERVICE_TYPE_AUDIO_VIDEO or SERVICE_TYPE_AUDIO or SERVICE_TYPE_OTHER
+     */
     public LinkedList<Item> getChannelListItemByType(String inputId, String serviceType) {
         LinkedList<Item> result = new LinkedList<Item>();
         List<String> list = getChannelList(inputId);
@@ -291,7 +291,7 @@ public class ChannelDataManager {
             Item item = null;
             int count = 1;
             while (iterator.hasNext()) {
-                String objStr = (String)iterator.next();
+                String objStr = (String) iterator.next();
                 if (!TextUtils.isEmpty(objStr)) {
                     try {
                         jsonObj = new JSONObject(objStr);
@@ -341,7 +341,7 @@ public class ChannelDataManager {
         result.add(item);
 
         for (int i = 0; i < 26; i++) {
-            A[0] = (byte)('A' + (byte)i);
+            A[0] = (byte) ('A' + (byte) i);
             obj = new JSONObject();
             try {
                 obj.put(KEY_SETTINGS_CHANNEL_ITEM_KEY, new String(A));
@@ -375,7 +375,7 @@ public class ChannelDataManager {
             singleItem = null;
             singleName = null;
             singleStartAlphabet = null;
-            singleItem = (ChannelListItem)itemList.next();
+            singleItem = (ChannelListItem) itemList.next();
             singleName = singleItem.getTitle();
             if (!TextUtils.isEmpty(singleName)) {
                 if (singleName.length() == 1) {
@@ -411,7 +411,7 @@ public class ChannelDataManager {
         JSONObject obj = null;
         Iterator<Item> channelList = listItem.iterator();
         while (channelList.hasNext()) {
-            item = (ChannelListItem)channelList.next();
+            item = (ChannelListItem) channelList.next();
             tpName = item.getTranponder();
             if (!TextUtils.isEmpty(tpName)) {
                 map.put(tpName, tpName);
@@ -453,7 +453,7 @@ public class ChannelDataManager {
         int count = 1;
         JSONObject obj = null;
         while (itemList.hasNext()) {
-            singleItem = (ChannelListItem)itemList.next();
+            singleItem = (ChannelListItem) itemList.next();
             singleName = singleItem.getTranponder();
             frequencyName = singleItem.getFrequency() + "Hz";//in case that channel does has satellite infomation
             if (!TextUtils.isEmpty(name) && (TextUtils.equals(singleName, name) || (TextUtils.isEmpty(singleName) && TextUtils.equals(frequencyName, name)))) {
@@ -483,7 +483,7 @@ public class ChannelDataManager {
         JSONObject obj = null;
         Iterator<Item> channelList = listItem.iterator();
         while (channelList.hasNext()) {
-            item = (ChannelListItem)channelList.next();
+            item = (ChannelListItem) channelList.next();
             satelliteName = item.getSatellite();
             //Log.d(TAG, "getSatelliteSortKeyChannelListItem tpName = " + tpName);
             if (!TextUtils.isEmpty(satelliteName)) {
@@ -526,7 +526,7 @@ public class ChannelDataManager {
         int count = 1;
         JSONObject obj = null;
         while (itemList.hasNext()) {
-            singleItem = (ChannelListItem)itemList.next();
+            singleItem = (ChannelListItem) itemList.next();
             singleName = singleItem.getSatellite();
             channelTypeName = singleItem.getChannelType();//in case that channel does has satellite infomation
             if (!TextUtils.isEmpty(name) && (TextUtils.equals(singleName, name) || (TextUtils.isEmpty(singleName) && TextUtils.equals(channelTypeName, name)))) {
@@ -556,7 +556,7 @@ public class ChannelDataManager {
 
         Iterator<Item> channelList = listItem.iterator();
         while (channelList.hasNext()) {
-            item = (ChannelListItem)channelList.next();
+            item = (ChannelListItem) channelList.next();
             frequency = item.getFrequency();
             if (frequency > 0) {
                 map.put(String.valueOf(frequency), frequency);
@@ -593,7 +593,7 @@ public class ChannelDataManager {
         int count = 1;
         JSONObject obj = null;
         while (itemList.hasNext()) {
-            singleItem = (ChannelListItem)itemList.next();
+            singleItem = (ChannelListItem) itemList.next();
             singleFreq = singleItem.getFrequency();
             if (freq == singleFreq) {
                 obj = singleItem.getJSONObject();
@@ -622,7 +622,7 @@ public class ChannelDataManager {
         JSONObject obj = null;
         Iterator<Item> channelList = listItem.iterator();
         while (channelList.hasNext()) {
-            item = (ChannelListItem)channelList.next();
+            item = (ChannelListItem) channelList.next();
             networkId = item.getNetworkId();
             map.put(String.valueOf(networkId), networkId);
         }
@@ -657,7 +657,7 @@ public class ChannelDataManager {
         int count = 1;
         JSONObject obj = null;
         while (itemList.hasNext()) {
-            singleItem = (ChannelListItem)itemList.next();
+            singleItem = (ChannelListItem) itemList.next();
             singlenetworkId = singleItem.getNetworkId();
             if (networkId == singlenetworkId) {
                 obj = singleItem.getJSONObject();
@@ -689,7 +689,7 @@ public class ChannelDataManager {
         int count = 1;
         JSONObject obj = null;
         while (itemList.hasNext()) {
-            singleItem = (ChannelListItem)itemList.next();
+            singleItem = (ChannelListItem) itemList.next();
             singleName = singleItem.getTitle();
             if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(singleName)) {
                 singleName = singleName.toUpperCase();
@@ -720,7 +720,7 @@ public class ChannelDataManager {
             int count = 0;
             Iterator<String> iterator = all.iterator();
             while (iterator.hasNext()) {
-                String value = (String)iterator.next();
+                String value = (String) iterator.next();
                 try {
                     JSONObject obj = new JSONObject(value);
                     if (channelId == obj.getLong(KEY_SETTINGS_CHANNEL_ID)) {
@@ -767,7 +767,6 @@ public class ChannelDataManager {
 
     /**
      * Returns defalut 64 group of fav list, obj key is "fav_list".
-     *
      */
     private JSONArray init64FavList() {
         //JSONObject obj = new JSONObject();
@@ -855,7 +854,7 @@ public class ChannelDataManager {
                     if (DEBUG) {
                         //Log.d(TAG, "getFavListItem i = " + i + ", favitem = " + initArray.get(i));
                     }
-                    JSONObject obj = (JSONObject)initArray.get(i);
+                    JSONObject obj = (JSONObject) initArray.get(i);
                     //Log.d(TAG, "getFavListItem jsonObj = " + obj.toString());
                     item = new FavListItem(mContext, obj.getString(KEY_SETTINGS_FAV_NAME), obj.getBoolean(KEY_SETTINGS_FAV_IS_ADDED), obj.toString());
                     result.add(item);
@@ -892,7 +891,7 @@ public class ChannelDataManager {
                     if (DEBUG) {
                         //Log.d(TAG, "getEditFavListItem i = " + i + ", favitem = " + initArray.get(i));
                     }
-                    JSONObject obj = (JSONObject)initArray.get(i);
+                    JSONObject obj = (JSONObject) initArray.get(i);
                     obj.put(KEY_SETTINGS_FAV_IS_ADDED, true);
                     obj.put(KEY_SETTINGS_FAV_LIST_TYPE, Item.LIST_EDIT_ALL_FAV_LIST);
                     //Log.d(TAG, "getFavListItem jsonObj = " + obj.toString());
@@ -914,7 +913,7 @@ public class ChannelDataManager {
         JSONObject singleObj = null;
         String name = null;
         while (iterator.hasNext()) {
-            single = (String)iterator.next();
+            single = (String) iterator.next();
             try {
                 singleObj = new JSONObject(single);
                 name = singleObj.getString(KEY_SETTINGS_FAV_NAME);
@@ -948,14 +947,14 @@ public class ChannelDataManager {
             JSONArray singleFavInfoArray = null;
             String singleFavName = null;
             while (iterator.hasNext()) {
-                singleChannel = (ChannelInfo)iterator.next();
+                singleChannel = (ChannelInfo) iterator.next();
                 singleFavInfoStr = TextUtils.isEmpty(singleChannel.getFavouriteInfo()) ? new JSONArray().toString() : singleChannel.getFavouriteInfo();
                 try {
                     singleFavInfoArray = new JSONArray(singleFavInfoStr);
                     if (singleFavInfoArray != null && singleFavInfoArray.length() > 0) {
                         for (int i = 0; i < singleFavInfoArray.length(); i++) {
                             try {
-                                singleFavName = (String)singleFavInfoArray.get(i);
+                                singleFavName = (String) singleFavInfoArray.get(i);
                                 if (TextUtils.equals(singleFavName, favName)) {
                                     singleFavInfoArray.remove(i);
                                     needUpdateList.put(singleChannel.getId(), singleFavInfoArray.toString());
@@ -1021,7 +1020,7 @@ public class ChannelDataManager {
         JSONObject singleObj = null;
         String name = null;
         while (iterator.hasNext()) {
-            single = (String)iterator.next();
+            single = (String) iterator.next();
             try {
                 singleObj = new JSONObject(single);
                 name = singleObj.getString(KEY_SETTINGS_FAV_NAME);
@@ -1060,13 +1059,13 @@ public class ChannelDataManager {
             JSONArray singleFavInfoArray = null;
             String singleFavName = null;
             while (iterator.hasNext()) {
-                singleChannel = (ChannelInfo)iterator.next();
+                singleChannel = (ChannelInfo) iterator.next();
                 singleFavInfoStr = TextUtils.isEmpty(singleChannel.getFavouriteInfo()) ? new JSONArray().toString() : singleChannel.getFavouriteInfo();
                 try {
                     singleFavInfoArray = new JSONArray(singleFavInfoStr);
                     if (singleFavInfoArray != null && singleFavInfoArray.length() > 0) {
                         for (int i = 0; i < singleFavInfoArray.length(); i++) {
-                            singleFavName = (String)singleFavInfoArray.get(i);
+                            singleFavName = (String) singleFavInfoArray.get(i);
                             if (TextUtils.equals(singleFavName, oldName)) {
                                 singleFavName = newName;
                                 singleFavInfoArray.remove(i);
@@ -1102,7 +1101,7 @@ public class ChannelDataManager {
         String single = null;
         JSONObject singleObj = null;
         while (iterator.hasNext()) {
-            single = (String)iterator.next();
+            single = (String) iterator.next();
             try {
                 singleObj = new JSONObject(single);
                 if (TextUtils.equals(favName, singleObj.getString(KEY_SETTINGS_FAV_NAME))) {
@@ -1137,7 +1136,7 @@ public class ChannelDataManager {
             JSONObject singleObj = null;
             int index = 0;
             while (iterator.hasNext()) {
-                single = (String)iterator.next();
+                single = (String) iterator.next();
                 try {
                     singleObj = new JSONObject(single);
                     if (DEBUG) {
@@ -1195,7 +1194,7 @@ public class ChannelDataManager {
             List<String> channelFav = chanelItem.getFavAllIndex();
             for (int i = 0; i < initArray.length(); i++) {
                 try {
-                    JSONObject obj = (JSONObject)initArray.get(i);
+                    JSONObject obj = (JSONObject) initArray.get(i);
                     //obj.put(KEY_SETTINGS_IS_ALL_FAV_LIST, false);
                     obj.put(KEY_SETTINGS_FAV_LIST_TYPE, Item.LIST_CHANNEL_FAV_LIST);
                     //Log.d(TAG, "getChannelFavListItem jsonObj = " + obj.toString());
@@ -1231,7 +1230,7 @@ public class ChannelDataManager {
             int count = 1;
             while (iterator.hasNext()) {
                 hasFav = false;
-                oneItem = (ChannelListItem)iterator.next();
+                oneItem = (ChannelListItem) iterator.next();
                 favInfoList = oneItem.getFavAllIndex();
                 if (favInfoList != null && favInfoList.size() > 0) {
                     for (int i = 0; i < favInfoList.size(); i++) {
@@ -1277,7 +1276,7 @@ public class ChannelDataManager {
         JSONArray array = new JSONArray();
         String item = null;
         while (iterator.hasNext()) {
-            item = (String)iterator.next();
+            item = (String) iterator.next();
             //Log.d(TAG, "convertListToJsonStr item = " + item);
             array.put(item);
         }
@@ -1296,7 +1295,7 @@ public class ChannelDataManager {
         String item = null;
         JSONObject obj = null;
         while (iterator.hasNext()) {
-            item = (String)iterator.next();
+            item = (String) iterator.next();
             try {
                 obj = new JSONObject(item);
             } catch (JSONException e) {

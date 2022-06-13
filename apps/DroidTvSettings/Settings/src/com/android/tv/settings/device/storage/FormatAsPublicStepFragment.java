@@ -41,6 +41,7 @@ public class FormatAsPublicStepFragment extends GuidedStepSupportFragment {
 
     public interface Callback {
         void onRequestFormatAsPublic(String diskId, String volumeId);
+
         void onCancelFormatDialog();
     }
 

@@ -40,7 +40,9 @@ public class RestrictedProfileModel {
     private final ActivityManager mActivityManager;
     private final UserManager mUserManager;
 
-    /** Cache the UserInfo we're running as because, unlike other profiles, it won't change. */
+    /**
+     * Cache the UserInfo we're running as because, unlike other profiles, it won't change.
+     */
     private final UserInfo mCurrentUserInfo;
 
     public RestrictedProfileModel(final Context context) {
@@ -56,7 +58,9 @@ public class RestrictedProfileModel {
         mCurrentUserInfo = mUserManager.getUserInfo(mContext.getUserId());
     }
 
-    /** Switch into the restricted profile. */
+    /**
+     * Switch into the restricted profile.
+     */
     public boolean enterUser() {
         if (isCurrentUser()) {
             Log.w(TAG, "Tried to switch into current user");
@@ -72,7 +76,9 @@ public class RestrictedProfileModel {
         return true;
     }
 
-    /** Switch out of the restricted profile, back into the primary user. */
+    /**
+     * Switch out of the restricted profile, back into the primary user.
+     */
     public void exitUser() {
         if (isCurrentUser()) {
             switchUserNow(getOwnerUserId());
@@ -81,7 +87,7 @@ public class RestrictedProfileModel {
 
     /**
      * Remove the restricted profile.
-     *
+     * <p>
      * Called from another user. Requires permission to MANAGE_USERS.
      */
     public void removeUser() {
@@ -94,14 +100,16 @@ public class RestrictedProfileModel {
         mUserManager.removeUser(restrictedUserHandle);
     }
 
-    /** @return {@code true} if the current user is the restricted profile. */
+    /**
+     * @return {@code true} if the current user is the restricted profile.
+     */
     public boolean isCurrentUser() {
         return mCurrentUserInfo.isRestricted();
     }
 
     /**
      * @return a @{link UserInfo} for the restricted profile, or {@code null} if there is no
-     *         restricted profile on the device.
+     * restricted profile on the device.
      */
     public UserInfo getUser() {
         if (mCurrentUserInfo.isRestricted()) {
@@ -128,7 +136,9 @@ public class RestrictedProfileModel {
         }
     }
 
-    /** Switch to {@param userId} or log an exception if this fails. */
+    /**
+     * Switch to {@param userId} or log an exception if this fails.
+     */
     private void switchUserNow(int userId) {
         try {
             mActivityManager.switchUser(userId);

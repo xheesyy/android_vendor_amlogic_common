@@ -87,7 +87,7 @@ public class DroidLogicHdmiCecManager {
                     mInSelectProtection = false;
                     break;
                 case MSG_SEND_KEY_EVENT:
-                    mClient.sendKeyEvent((int)msg.arg1, (boolean)msg.obj);
+                    mClient.sendKeyEvent((int) msg.arg1, (boolean) msg.obj);
                     break;
                 default:
                     break;
@@ -140,20 +140,20 @@ public class DroidLogicHdmiCecManager {
      * a. hdmi device id
      * b. onSetMain true
      * c. HdmiDeviceInfo in TvInputInfo is null? deviceSelect : portSelect.
-
+     * <p>
      * 2. When to call internal address 0
      * This is when there is no hdmi device's Session onSetMain true. We could do it like this:
      * a. hdmi device id
      * b. onSetMain false
      * c. exclude the special case in which there is no need.
-
+     * <p>
      * 3. There are 4 cases in which hdmi device's Session onSetMain false is called.
      * a. Tune from hdmi device A to hdmi B.--> onSetMain hdmi true remove old messages.
      * b. Tune from hdmi device to none hdmi device. -->onSetMain false message is not removed.
      * c. Quit LiveTv to MboxLauncher which has no TvView of TV source.-->onSetMain false message is not removed.
      * d. Tune from LiveTV's hdmi device A to MboxLauncher's same one.---> If the device id is the same but
-     *    session id is not, and in this scenario the old Session's onSetMain false might happens after the
-     *    new one has been callded onSetMain true, we should abort calling internal address.
+     * session id is not, and in this scenario the old Session's onSetMain false might happens after the
+     * new one has been callded onSetMain true, we should abort calling internal address.
      */
     public void onSetMain(boolean isMain, String inputId, int deviceId, int sessionId) {
         if (!mHasCecFeature) {
@@ -216,8 +216,8 @@ public class DroidLogicHdmiCecManager {
 
     private void registerSettingsObserver() {
         DroidLogicSettingsObserver observer = new DroidLogicSettingsObserver(mHandler);
-        String[] settings = new String[] {
-            HDMI_CONTROL_ENABLED
+        String[] settings = new String[]{
+                HDMI_CONTROL_ENABLED
         };
         for (String s : settings) {
             mContext.getContentResolver().registerContentObserver(Global.getUriFor(s), false, observer);
@@ -225,8 +225,8 @@ public class DroidLogicHdmiCecManager {
     }
 
     /**
-    * generally used to switch source.
-    */
+     * generally used to switch source.
+     */
     private void deviceSelect() {
         mCurrentSelect = mSelectingDevice;
 
@@ -293,7 +293,7 @@ public class DroidLogicHdmiCecManager {
         return null;
     }
 
-    public void setDeviceIdForCec(int deviceId){
+    public void setDeviceIdForCec(int deviceId) {
         // Give cec hal a chance to filter strange <Active Source>
         Log.d(TAG, "setDeviceIdForCec " + deviceId);
         TvControlManager.getInstance().setDeviceIdForCec(deviceId);
@@ -314,7 +314,7 @@ public class DroidLogicHdmiCecManager {
     }
 
     public int getInputSourceDeviceId() {
-        return  mTvControlDataManager.getInt(mContext.getContentResolver(), DroidLogicTvUtils.TV_CURRENT_DEVICE_ID, 0);
+        return mTvControlDataManager.getInt(mContext.getContentResolver(), DroidLogicTvUtils.TV_CURRENT_DEVICE_ID, 0);
     }
 
     public boolean isHdmiDeviceId(int deviceId) {
@@ -401,10 +401,10 @@ public class DroidLogicHdmiCecManager {
             StringBuffer sb = new StringBuffer();
             sb.append("current selected device info ");
             sb.append("inputId: ").append(inputId).append(" ")
-              .append("deviceId: ").append(deviceId).append(" ")
-              .append("sessionId: ").append(sessionId).append(" ")
-              .append("logicalAddress: ").append(logicalAddress).append(" ")
-              .append("portId: ").append(portId);
+                    .append("deviceId: ").append(deviceId).append(" ")
+                    .append("sessionId: ").append(sessionId).append(" ")
+                    .append("logicalAddress: ").append(logicalAddress).append(" ")
+                    .append("portId: ").append(portId);
             return sb.toString();
         }
     }
@@ -418,7 +418,7 @@ public class DroidLogicHdmiCecManager {
         public void onChange(boolean selfChange, Uri uri) {
             String option = uri.getLastPathSegment();
             boolean enabled = Global.getInt(mContext.getContentResolver(),
-                                option, ENABLED) == ENABLED;
+                    option, ENABLED) == ENABLED;
             switch (option) {
                 case HDMI_CONTROL_ENABLED:
                     if (!enabled) {
@@ -431,7 +431,7 @@ public class DroidLogicHdmiCecManager {
                         return;
                     }
                     if (isHdmiDeviceId(mCurrentSelect.getDeviceId())
-                        && (getInputSourceDeviceId() == mCurrentSelect.getDeviceId())) {
+                            && (getInputSourceDeviceId() == mCurrentSelect.getDeviceId())) {
                         // In accord with the device channel LiveTv tuned.
                         Log.d(TAG, "cec settings is enabled! " + mCurrentSelect);
                         deviceSelect();

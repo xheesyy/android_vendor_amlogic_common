@@ -1,11 +1,11 @@
 /*
-* Copyright (c) 2014 Amlogic, Inc. All rights reserved.
-*
-* This source code is subject to the terms and conditions defined in the
-* file 'LICENSE' which is part of this source code package.
-*
-* Description: java file
-*/
+ * Copyright (c) 2014 Amlogic, Inc. All rights reserved.
+ *
+ * This source code is subject to the terms and conditions defined in the
+ * file 'LICENSE' which is part of this source code package.
+ *
+ * Description: java file
+ */
 package com.droidlogic.app;
 
 import android.content.Context;
@@ -30,6 +30,7 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+
 import java.lang.Exception;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +49,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import com.droidlogic.app.CcImplement;
 
 
@@ -68,7 +70,7 @@ public class CCSubtitleView extends View {
     public static final int CC_CAPTION_CC2 = 2;
     public static final int CC_CAPTION_CC3 = 3;
     public static final int CC_CAPTION_CC4 = 4;
-    public static final int CC_CAPTION_TEXT1 =5;
+    public static final int CC_CAPTION_TEXT1 = 5;
     public static final int CC_CAPTION_TEXT2 = 6;
     public static final int CC_CAPTION_TEXT3 = 7;
     public static final int CC_CAPTION_TEXT4 = 8;
@@ -96,7 +98,7 @@ public class CCSubtitleView extends View {
 
     public static final int CC_OPACITY_DEFAULT = 0;
     public static final int CC_OPACITY_TRANSPARET = 1;
-    public static final int CC_OPACITY_TRANSLUCENT= 2;
+    public static final int CC_OPACITY_TRANSLUCENT = 2;
     public static final int CC_OPACITY_SOLID = 3;
     public static final int CC_OPACITY_FLASH = 4;
 
@@ -135,7 +137,7 @@ public class CCSubtitleView extends View {
         protected float mFontSize;
 
         public DTVCCParams(int vfmt, int caption, int fgColor, int fgOpacity,
-                int bgColor, int bgOpacity, int fontStyle, float fontSize) {
+                           int bgColor, int bgOpacity, int fontStyle, float fontSize) {
             this.vfmt = vfmt;
             this.mCaptionMode = caption;
             this.mFgColor = fgColor;
@@ -152,18 +154,18 @@ public class CCSubtitleView extends View {
     private int mDisplayTop = 0;
     private int mDisplayBottom = 0;
     private boolean mActive = true;
-    private boolean   mVisible;
+    private boolean mVisible;
 
     private void update() {
         Log.e(TAG, "update");
-         postInvalidate();
+        postInvalidate();
     }
 
     private void init() {
-        synchronized(lock) {
+        synchronized (lock) {
             if (mInitCount == 0) {
-                mVisible    = true;
-               // checkDebug();
+                mVisible = true;
+                // checkDebug();
                 setActive(true);
                 setLayerType(View.LAYER_TYPE_SOFTWARE, null);
                 mCustomFont = new CustomFonts(mContext);
@@ -252,25 +254,27 @@ public class CCSubtitleView extends View {
     }
 
     /**
-     *set show margin blank
-     *@param left  left margin width
-     *@param top   top margin height
-     *@param right right margin width
-     *@param bottom bottom margin height
+     * set show margin blank
+     *
+     * @param left   left margin width
+     * @param top    top margin height
+     * @param right  right margin width
+     * @param bottom bottom margin height
      */
     public void setMargin(int left, int top, int right, int bottom) {
-        mDisplayLeft   = left;
-        mDisplayTop    = top;
-        mDisplayRight  = right;
+        mDisplayLeft = left;
+        mDisplayTop = top;
+        mDisplayRight = right;
         mDisplayBottom = bottom;
     }
 
     /**
      * set active
+     *
      * @param active y/n
      */
     public void setActive(boolean active) {
-        Log.d(TAG, "[setActive]active:"+active);
+        Log.d(TAG, "[setActive]active:" + active);
         synchronized (lock) {
             this.mActive = active;
         }
@@ -305,7 +309,7 @@ public class CCSubtitleView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        Log.d(TAG, "[onDraw] 0 active =  "+mActive+";mVisible="+mVisible);
+        Log.d(TAG, "[onDraw] 0 active =  " + mActive + ";mVisible=" + mVisible);
        /* if (!mActive || !mVisible ) {
             if (mCcImplement == null)
                 return;
@@ -314,7 +318,7 @@ public class CCSubtitleView extends View {
             return;
         }*/
 
-        CcImplement.CaptionWindow  captionWin = mQueueCaption.poll();
+        CcImplement.CaptionWindow captionWin = mQueueCaption.poll();
         if (captionWin != null) {
             captionWin.draw(canvas);
         }
@@ -323,6 +327,7 @@ public class CCSubtitleView extends View {
     private boolean IsCloseCaptionShowEnable() {
         return SystemProperties.getBoolean("vendor.sys.subtitleService.closecaption.enable", false);
     }
+
     protected void finalize() throws Throwable {
         // Resource may not be available during gc process
         super.finalize();
@@ -334,13 +339,12 @@ public class CCSubtitleView extends View {
         postInvalidate();
     }
 
-    Handler handler = new Handler()
-    {
+    Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             Log.d(TAG, "msg.what =" + msg.what);
             switch (msg.what) {
                 case JSON_MSG_NORMAL:
-                    CcImplement.CaptionWindow  captionWindow = (CcImplement.CaptionWindow)msg.obj;
+                    CcImplement.CaptionWindow captionWindow = (CcImplement.CaptionWindow) msg.obj;
                     mQueueCaption.offer(captionWindow);
                     postInvalidate();
                     break;
@@ -348,12 +352,13 @@ public class CCSubtitleView extends View {
         }
     };
 
-   private boolean filterVoidSubtitle(String str) {
+    private boolean filterVoidSubtitle(String str) {
         if (str.contains(CC_ONTENT)) {
             return false;
         }
         return true;
-   }
+    }
+
     public void showJsonStr(String str) {
         Log.d(TAG, "[showJsonStr]str:" + str);
         if (filterVoidSubtitle(str))

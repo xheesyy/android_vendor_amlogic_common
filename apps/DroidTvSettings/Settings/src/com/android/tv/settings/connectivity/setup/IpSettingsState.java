@@ -108,7 +108,7 @@ public class IpSettingsState implements State {
             if (mAdvancedOptionsFlowInfo.containsPage(AdvancedOptionsFlowInfo.IP_SETTINGS)) {
                 title = mAdvancedOptionsFlowInfo.get(AdvancedOptionsFlowInfo.IP_SETTINGS);
             } else if (mAdvancedOptionsFlowInfo.getIpConfiguration().getIpAssignment()
-                        == IpConfiguration.IpAssignment.STATIC) {
+                    == IpConfiguration.IpAssignment.STATIC) {
                 title = getString(R.string.wifi_action_static);
             } else {
                 title = getString(R.string.wifi_action_dhcp);
@@ -128,7 +128,7 @@ public class IpSettingsState implements State {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             Context context = getActivity();
             actions.add(new GuidedAction.Builder(context)
                     .title(getString(R.string.wifi_action_dhcp))

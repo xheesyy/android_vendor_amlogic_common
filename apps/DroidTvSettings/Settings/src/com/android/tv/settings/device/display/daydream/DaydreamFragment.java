@@ -155,7 +155,7 @@ public class DaydreamFragment extends SettingsPreferenceFragment
     }
 
     private void refreshDreamInfoMap(List<DreamBackend.DreamInfo> infos,
-            CharSequence[] listEntries, CharSequence[] listEntryValues) {
+                                     CharSequence[] listEntries, CharSequence[] listEntryValues) {
         mDreamInfos.clear();
         listEntries[0] = getString(R.string.device_daydreams_none);
         listEntryValues[0] = DREAM_COMPONENT_NONE;
@@ -264,7 +264,7 @@ public class DaydreamFragment extends SettingsPreferenceFragment
 
     // Map @array/sleep_timeout_entries to defined log enum
     private int getSleepTimeoutEntryId(int sleepTimeout) {
-        switch(sleepTimeout) {
+        switch (sleepTimeout) {
             case 300000:
                 return TvSettingsEnums.PREFERENCES_SCREENSAVER_START_DELAY_5M;
             case 900000:

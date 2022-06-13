@@ -91,7 +91,9 @@ public class SecurityFragment extends SettingsPreferenceFragment
             PIN_MODE_RESTRICTED_PROFILE_SWITCH_OUT,
             PIN_MODE_RESTRICTED_PROFILE_CHANGE_PASSWORD,
             PIN_MODE_RESTRICTED_PROFILE_DELETE})
-    private @interface PinMode {}
+    private @interface PinMode {
+    }
+
     private static final int PIN_MODE_CHOOSE_LOCKSCREEN = 1;
     private static final int PIN_MODE_RESTRICTED_PROFILE_SWITCH_OUT = 2;
     private static final int PIN_MODE_RESTRICTED_PROFILE_CHANGE_PASSWORD = 3;
@@ -388,8 +390,8 @@ public class SecurityFragment extends SettingsPreferenceFragment
     }
 
     /**
-      * Called by other Fragments to decide whether to show or hide profile-related views.
-      */
+     * Called by other Fragments to decide whether to show or hide profile-related views.
+     */
     public static boolean isRestrictedProfileInEffect(Context context) {
         return new RestrictedProfileModel(context).isCurrentUser();
     }

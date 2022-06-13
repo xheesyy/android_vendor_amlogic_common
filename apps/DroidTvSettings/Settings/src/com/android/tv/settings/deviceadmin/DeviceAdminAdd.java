@@ -56,17 +56,17 @@ public class DeviceAdminAdd extends FragmentActivity {
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
+        mDPM = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         PackageManager packageManager = getPackageManager();
 
-        if ((getIntent().getFlags()&Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
+        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_NEW_TASK) != 0) {
             Log.w(TAG, "Cannot start ADD_DEVICE_ADMIN as a new task");
             finish();
             return;
         }
 
         String action = getIntent().getAction();
-        ComponentName who = (ComponentName)getIntent().getParcelableExtra(
+        ComponentName who = (ComponentName) getIntent().getParcelableExtra(
                 DevicePolicyManager.EXTRA_DEVICE_ADMIN);
         if (who == null) {
             Log.w(TAG, "No component specified in " + action);
@@ -118,7 +118,7 @@ public class DeviceAdminAdd extends FragmentActivity {
                     PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS);
             int count = avail == null ? 0 : avail.size();
             boolean found = false;
-            for (int i=0; i<count; i++) {
+            for (int i = 0; i < count; i++) {
                 ResolveInfo ri = avail.get(i);
                 if (ai.packageName.equals(ri.activityInfo.packageName)
                         && ai.name.equals(ri.activityInfo.name)) {
@@ -206,7 +206,7 @@ public class DeviceAdminAdd extends FragmentActivity {
             logSpecialPermissionChange(true, mDeviceAdmin.getComponent().getPackageName());
             mDPM.setActiveAdmin(mDeviceAdmin.getComponent(), mRefreshing);
             EventLog.writeEvent(1234,
-                mDeviceAdmin.getActivityInfo().applicationInfo.uid);
+                    mDeviceAdmin.getActivityInfo().applicationInfo.uid);
 
             setResult(Activity.RESULT_OK);
         } catch (RuntimeException e) {

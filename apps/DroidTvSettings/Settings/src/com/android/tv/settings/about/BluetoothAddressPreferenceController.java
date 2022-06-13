@@ -27,7 +27,7 @@ import com.android.settingslib.deviceinfo.AbstractBluetoothAddressPreferenceCont
 public class BluetoothAddressPreferenceController
         extends AbstractBluetoothAddressPreferenceController {
     public BluetoothAddressPreferenceController(Context context,
-            Lifecycle lifecycle) {
+                                                Lifecycle lifecycle) {
         super(context, lifecycle);
     }
 

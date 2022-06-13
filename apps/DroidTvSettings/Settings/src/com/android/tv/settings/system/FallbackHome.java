@@ -96,7 +96,7 @@ public class FallbackHome extends FragmentActivity implements PinDialogFragment.
 
     /**
      * If we have file-based encryption and a restricted profile we must request PIN entry on boot.
-     *
+     * <p>
      * Unlike a normal password, the restricted profile PIN is set on USER_OWNER in order to
      * prevent switching out. Under FBE this means that the underlying USER_SYSTEM will remain
      * encrypted and in RUNNING_LOCKED state. In order for various system functions to work

@@ -19,7 +19,9 @@ package com.android.tv.settings.accessories;
 import android.content.ComponentName;
 import android.content.ServiceConnection;
 
-/** A thin layer of ServiceConnection that makes cleaning up slightly cleaner. */
+/**
+ * A thin layer of ServiceConnection that makes cleaning up slightly cleaner.
+ */
 public abstract class SimplifiedConnection implements ServiceConnection {
 
     protected abstract void cleanUp();

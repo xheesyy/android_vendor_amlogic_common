@@ -17,12 +17,14 @@
 package com.android.tv.settings.soundeffect;
 
 import android.os.Bundle;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.SwitchPreference;
 import androidx.preference.TwoStatePreference;
+
 import android.util.Log;
 
 import com.android.tv.settings.R;
@@ -213,7 +215,7 @@ public class DolbyAudioEffectFragment extends SettingsPreferenceFragment impleme
         mVlPref.setChecked(enable);
         mVlAmountPref.setValue(val);
         mVlAmountPref.setAdjustable(isUserMode);
-        mVlAmountPref.setTitle(isUserMode?"":getShowString(R.string.dap_volume_leveler));
+        mVlAmountPref.setTitle(isUserMode ? "" : getShowString(R.string.dap_volume_leveler));
         mVlInfoPref.setVisible((!isUserMode) && (!enable));
         mVlPref.setVisible(isUserMode);
         mVlAmountPref.setVisible(enable);
@@ -223,7 +225,7 @@ public class DolbyAudioEffectFragment extends SettingsPreferenceFragment impleme
         mDePref.setChecked(enable);
         mDeAmountPref.setValue(val);
         mDeAmountPref.setAdjustable(isUserMode);
-        mDeAmountPref.setTitle(isUserMode?"":getShowString(R.string.dap_dialog_enhancer));
+        mDeAmountPref.setTitle(isUserMode ? "" : getShowString(R.string.dap_dialog_enhancer));
         mDeInfoPref.setVisible((!isUserMode) && (!enable));
         mDePref.setVisible(isUserMode);
         mDeAmountPref.setVisible(enable);
@@ -249,12 +251,12 @@ public class DolbyAudioEffectFragment extends SettingsPreferenceFragment impleme
         switch (preference.getKey()) {
             case KEY_VOLUME_LEVELER:
                 isChecked = mVlPref.isChecked();
-                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_VL_ENABLE, isChecked?1:0);
+                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_VL_ENABLE, isChecked ? 1 : 0);
                 mVlAmountPref.setVisible(isChecked);
                 break;
             case KEY_DIALOG_ENHANCER:
                 isChecked = mDePref.isChecked();
-                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_DE_ENABLE, isChecked?1:0);
+                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_DE_ENABLE, isChecked ? 1 : 0);
                 mDeAmountPref.setVisible(isChecked);
                 break;
         }
@@ -265,37 +267,37 @@ public class DolbyAudioEffectFragment extends SettingsPreferenceFragment impleme
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
             case KEY_DAP_MODE:
-                final int selection = Integer.parseInt((String)newValue);
+                final int selection = Integer.parseInt((String) newValue);
                 mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_EFFECT_MODE, selection);
                 break;
             case KEY_VOLUME_LEVELER_AMOUNT:
-                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_VL_AMOUNT, (int)newValue);
+                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_VL_AMOUNT, (int) newValue);
                 break;
             case KEY_DIALOG_ENHANCER_AMOUNT:
-                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_DE_AMOUNT, (int)newValue);
+                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_DE_AMOUNT, (int) newValue);
                 break;
             case KEY_SURROUND_BOOST:
-                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_SURROUND_BOOST, (int)newValue);
+                mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_SURROUND_BOOST, (int) newValue);
                 break;
             case KEY_GEQ_MODE:
-                final int progress = Integer.parseInt((String)newValue);
+                final int progress = Integer.parseInt((String) newValue);
                 mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_GEQ_ENABLE, progress);
                 updateGeq(progress);
                 break;
             case KEY_GEQ_BAND1:
-                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND1, (int)newValue);
+                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND1, (int) newValue);
                 break;
             case KEY_GEQ_BAND2:
-                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND2, (int)newValue);
+                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND2, (int) newValue);
                 break;
             case KEY_GEQ_BAND3:
-                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND3, (int)newValue);
+                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND3, (int) newValue);
                 break;
             case KEY_GEQ_BAND4:
-                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND4, (int)newValue);
+                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND4, (int) newValue);
                 break;
             case KEY_GEQ_BAND5:
-                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND5, (int)newValue);
+                mAudioEffectManager.setDapParam(AudioEffectManager.SUBCMD_DAP_GEQ_BAND5, (int) newValue);
                 break;
         }
         return true;

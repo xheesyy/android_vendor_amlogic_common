@@ -29,7 +29,7 @@ public class AdjustValueActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(AdjustValueFragment.class.getName(), null);
+                .newSettingsFragment(AdjustValueFragment.class.getName(), null);
     }
 
 }

@@ -31,7 +31,7 @@ import com.droidlogic.updater.util.PermissionUtils;
 /**
  * Downloads chunk of a file from given url using {@code offset} and {@code size},
  * and saves to a given location.
- *
+ * <p>
  * In a real-life application this helper class should download from HTTP Server,
  * but in this sample app it will only download from a local file.
  */
@@ -54,6 +54,7 @@ public final class FileDownloader {
 
     /**
      * Downloads the file with given offset and size.
+     *
      * @throws IOException when can't download the file
      */
     public void download() throws IOException {
@@ -63,7 +64,7 @@ public final class FileDownloader {
 
         URL url = new URL(mUrl);
         URLConnection connection = url.openConnection();
-        connection.addRequestProperty("Range", "bytes=" + mOffset + "-"+(mOffset+mSize));
+        connection.addRequestProperty("Range", "bytes=" + mOffset + "-" + (mOffset + mSize));
         connection.connect();
 
         stopFlag = false;
@@ -88,7 +89,7 @@ public final class FileDownloader {
                     output.write(data, 0, count);
                     total += count;
                 }
-                if (PermissionUtils.CanDebug()) Log.d(TAG,"download"+total+"/"+mSize);
+                if (PermissionUtils.CanDebug()) Log.d(TAG, "download" + total + "/" + mSize);
                 if (total != mSize) {
                     throw new IOException("Can't download file "
                             + mUrl
@@ -98,7 +99,8 @@ public final class FileDownloader {
             }
         }
     }
+
     public void stopDown() {
-        stopFlag  = true;
+        stopFlag = true;
     }
 }

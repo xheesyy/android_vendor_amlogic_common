@@ -34,10 +34,12 @@ import com.droidlogic.tvinput.R;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import com.droidlogic.app.tv.TvControlManager;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import android.view.Surface;
 
 public class ATVInputService extends DroidLogicTvInputService {
@@ -92,7 +94,7 @@ public class ATVInputService extends DroidLogicTvInputService {
 
     @Override
     public void setCurrentSessionById(int sessionId) {
-        Utils.logd(TAG, "setCurrentSessionById:"+sessionId);
+        Utils.logd(TAG, "setCurrentSessionById:" + sessionId);
         ATVSessionImpl session = sessionMap.get(sessionId);
         if (session != null) {
             mCurrentSession = session;
@@ -101,7 +103,7 @@ public class ATVInputService extends DroidLogicTvInputService {
 
     @Override
     public void doTuneFinish(int result, Uri uri, int sessionId) {
-        Utils.logd(TAG, "doTuneFinish,result:"+result+"sessionId:"+sessionId);
+        Utils.logd(TAG, "doTuneFinish,result:" + result + "sessionId:" + sessionId);
         if (result == ACTION_SUCCESS) {
             ATVSessionImpl session = sessionMap.get(sessionId);
             if (session != null)
@@ -132,10 +134,11 @@ public class ATVInputService extends DroidLogicTvInputService {
                 mOverlayView.setImage(R.drawable.bg_no_signal);
             }
         }
+
         @Override
         public boolean onSetSurface(Surface surface) {
             super.onSetSurface(surface);
-            return setSurfaceInService(surface,this);
+            return setSurfaceInService(surface, this);
         }
 
 
@@ -179,10 +182,10 @@ public class ATVInputService extends DroidLogicTvInputService {
 
         @Override
         public void notifyVideoAvailable() {
-            Log.d(TAG, "notifyVideoAvailable "+getSessionId());
+            Log.d(TAG, "notifyVideoAvailable " + getSessionId());
             super.notifyVideoAvailable();
 
-            if (mCurrentChannel !=null && mCurrentChannel.isAnalogChannel()) {
+            if (mCurrentChannel != null && mCurrentChannel.isAnalogChannel()) {
                 openTvAudio(DroidLogicTvUtils.SOURCE_TYPE_ATV);
             }
         }
@@ -197,13 +200,13 @@ public class ATVInputService extends DroidLogicTvInputService {
 
         private void switchToSourceInput(Uri uri) {
             mUnblockedRatingSet.clear();
-            Log.d(TAG, "switchToSourceInput  uri="+ uri);
+            Log.d(TAG, "switchToSourceInput  uri=" + uri);
             if (Utils.getChannelId(uri) < 0) {
                 Log.d(TAG, "ChannelId < 0, stop Play");
                 mTvControlManager.SetFrontendParms(TvControlManager.tv_fe_type_e.TV_FE_ANALOG,
-                                     45250000,// try to get the tune into unlock status
-                                     TvControlManager.tvin_color_system_e.COLOR_SYSTEM_PAL.toInt(),
-                                     TvControlManager.ATV_AUDIO_STD_DK, 0, 0, 0, 0);
+                        45250000,// try to get the tune into unlock status
+                        TvControlManager.tvin_color_system_e.COLOR_SYSTEM_PAL.toInt(),
+                        TvControlManager.ATV_AUDIO_STD_DK, 0, 0, 0, 0);
                 releasePlayer();
                 notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN);
                 mCurrentChannel = null;
@@ -222,20 +225,20 @@ public class ATVInputService extends DroidLogicTvInputService {
             /* open atv audio and mute when notify Video Available */
             openTvAudio(DroidLogicTvUtils.SOURCE_TYPE_ATV);
             mTvControlManager.PlayATVProgram(info.getFrequency() + info.getFineTune(),
-                info.getVideoStd(),
-                info.getAudioStd(),
-                info.getVfmt(),
-                info.getAudioOutPutMode(),
-                0,
-                info.getAudioCompensation());
+                    info.getVideoStd(),
+                    info.getAudioStd(),
+                    info.getVfmt(),
+                    info.getAudioOutPutMode(),
+                    0,
+                    info.getAudioCompensation());
             checkContentBlockNeeded();
             return true;
         }
 
         private void checkContentBlockNeeded() {
             if (mCurrentContentRating == null || !mTvInputManager.isParentalControlsEnabled()
-                || !mTvInputManager.isRatingBlocked(mCurrentContentRating)
-                || mUnblockedRatingSet.contains(mCurrentContentRating)) {
+                    || !mTvInputManager.isRatingBlocked(mCurrentContentRating)
+                    || mUnblockedRatingSet.contains(mCurrentContentRating)) {
                 // Content rating is changed so we don't need to block anymore.
                 // Unblock content here explicitly to resume playback.
                 unblockContent(null);
@@ -273,7 +276,7 @@ public class ATVInputService extends DroidLogicTvInputService {
         public final String logoBackgroundUrl;
 
         public TvInput(String displayName, String name, String description, String logoThumbUrl,
-                String logoBackgroundUrl) {
+                       String logoBackgroundUrl) {
             this.displayName = displayName;
             this.name = name;
             this.description = description;

@@ -44,8 +44,7 @@ import com.android.tv.settings.R;
 
 import android.widget.Toast;
 
-public class DolbyVisionService extends Service
-{
+public class DolbyVisionService extends Service {
     private static String TAG = "DvService";
     public static final String OPERATION = "operation";
     public static final int OPERATION_SHOW = 100;
@@ -101,7 +100,7 @@ public class DolbyVisionService extends Service
 
     @Override
     public void onStart(Intent intent, int startId) {
-        Log.i(TAG,"[onStart]");
+        Log.i(TAG, "[onStart]");
         super.onStart(intent, startId);
     }
 
@@ -109,7 +108,7 @@ public class DolbyVisionService extends Service
         public void run() {
             Message message = Message.obtain();
             message.what = MSG_DV_VIEW_OUT;
-            mHandler.sendMessage (message);
+            mHandler.sendMessage(message);
         }
     };
 
@@ -118,33 +117,33 @@ public class DolbyVisionService extends Service
             public void run() {
                 Message message = Message.obtain();
                 message.what = MSG_DV_VIEW_OUT;
-                mHandler.sendMessage (message);
+                mHandler.sendMessage(message);
             }
         };
         cancelTimer.cancel();
         cancelTimer = new Timer();
-        cancelTimer.schedule (task1, 5000);
+        cancelTimer.schedule(task1, 5000);
     }
 
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-            case MSG_DV_VIEW_OUT:
-                removeView();
-                break;
-            case MSG_SCAN_FILE:
+                case MSG_DV_VIEW_OUT:
+                    removeView();
+                    break;
+                case MSG_SCAN_FILE:
 //                Log.i(TAG, "[mHandler]isSwitchVideo:"+isSwitchVideo()+",isDv:"+isDv());
-                if (isSwitchVideo()) {
+                    if (isSwitchVideo()) {
 //                    Log.i(TAG, "[mHandler]txtContext:"+txtContext+",updateTxtContext:"+updateTxtContext);
-                    txtContext = updateTxtContext;
-                    if (isDv() && !isViewAdded) {
+                        txtContext = updateTxtContext;
+                        if (isDv() && !isViewAdded) {
 //                        Log.i(TAG, "[mHandler]txtContext:"+txtContext);
-                        addView();
-                        cancelFloatView();
+                            addView();
+                            cancelFloatView();
+                        }
                     }
-                }
-                break;
+                    break;
             }
         }
     };
@@ -171,22 +170,22 @@ public class DolbyVisionService extends Service
 
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    lastX = (int) event.getRawX();
-                    lastY = (int) event.getRawY();
-                    paramX = params.x;
-                    paramY = params.y;
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    int dx = (int) event.getRawX() - lastX;
-                    int dy = (int) event.getRawY() - lastY;
-                    params.x = paramX + dx;
-                    params.y = paramY + dy;
-                    wm.updateViewLayout(btn_floatView, params);
-                    break;
+                    case MotionEvent.ACTION_DOWN:
+                        lastX = (int) event.getRawX();
+                        lastY = (int) event.getRawY();
+                        paramX = params.x;
+                        paramY = params.y;
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        int dx = (int) event.getRawX() - lastX;
+                        int dy = (int) event.getRawY() - lastY;
+                        params.x = paramX + dx;
+                        params.y = paramY + dy;
+                        wm.updateViewLayout(btn_floatView, params);
+                        break;
                 }
                 return true;
-             }
+            }
         });
     }
 
@@ -210,12 +209,11 @@ public class DolbyVisionService extends Service
         updateTxtContext = readVfmMap();
         if (updateTxtContext != null && updateTxtContext.equals(txtContext)) {
             return false;
-        }
-        else
+        } else
             return true;
     }
 
-    public  String readVfmMap() {
+    public String readVfmMap() {
         File file = null;
         file = new File(VFM_MAP_PATH);
         if (!file.exists()) {
@@ -232,7 +230,7 @@ public class DolbyVisionService extends Service
             inputStreamReader = new InputStreamReader(fileInputStream);
             reader = new BufferedReader(inputStreamReader);
             while ((line = reader.readLine()) != null) {
-                sb.append(line+" ");
+                sb.append(line + " ");
             }
         } catch (IOException e) {
             e.printStackTrace();

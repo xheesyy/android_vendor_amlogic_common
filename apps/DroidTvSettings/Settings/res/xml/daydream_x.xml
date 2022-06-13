@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,16 +15,16 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:custom="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/device_daydream">
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:title="@string/device_daydream">
     <Preference
         android:key="dreamNow"
         android:persistent="true"
-        android:title="@string/device_daydreams_test"/>
+        android:title="@string/device_daydreams_test" />
 
     <com.android.tv.twopanelsettings.slices.SlicePreference
         android:fragment="com.android.tv.twopanelsettings.slices.SliceFragment"
         android:key="ambient_settings"
         android:title="@string/ambient_settings_title"
-        custom:uri="@string/ambient_slice_uri"/>
+        custom:uri="@string/ambient_slice_uri" />
 </PreferenceScreen>

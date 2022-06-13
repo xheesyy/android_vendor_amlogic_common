@@ -1,19 +1,19 @@
 /******************************************************************
-*
-*Copyright (C) 2012 Amlogic, Inc.
-*
-*Licensed under the Apache License, Version 2.0 (the "License");
-*you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing, software
-*distributed under the License is distributed on an "AS IS" BASIS,
-*WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*See the License for the specific language governing permissions and
-*limitations under the License.
-******************************************************************/
+ *
+ *Copyright (C) 2012 Amlogic, Inc.
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ ******************************************************************/
 package com.droidlogic.otaupgrade;
 
 import android.app.Activity;
@@ -54,6 +54,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+
 import android.os.Build;
 
 /**
@@ -160,16 +161,16 @@ public class MainActivity extends Activity implements OnClickListener {
 
             builder.setTitle(R.string.version_info);
             builder.setPositiveButton(R.string.sure,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
             builder.create().show();
         } else if (item.getItemId() == R.id.settings) {
             if (MainActivity.this.getResources().getString(R.string.auto_check)
-                                     .equals(item.getTitle().toString())) {
+                    .equals(item.getTitle().toString())) {
                 mPreference.setBoolean(PrefUtils.PREF_AUTO_CHECK, true);
                 item.setTitle(R.string.auto_check_close);
             } else {
@@ -191,11 +192,11 @@ public class MainActivity extends Activity implements OnClickListener {
         dlg.setContentView(dlgView);
         dlg.setCancelable(false);
         dlg.findViewById(R.id.confirm_cancel).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dlg.dismiss();
-                }
-            });
+            @Override
+            public void onClick(View v) {
+                dlg.dismiss();
+            }
+        });
         dlg.show();
     }
 
@@ -205,12 +206,12 @@ public class MainActivity extends Activity implements OnClickListener {
 
         if (filepath != null) {
             savedInstanceState.putString("filepath",
-                filepath.getText().toString());
+                    filepath.getText().toString());
         }
 
         if (filename != null) {
             savedInstanceState.putString("filename",
-                filename.getText().toString());
+                    filename.getText().toString());
         }
     }
 
@@ -262,12 +263,12 @@ public class MainActivity extends Activity implements OnClickListener {
             }
         }
         String act = getIntent().getAction();
-        if ( RESULT_BACKUP.equals ( act ) ) {
-            Toast.makeText ( this, getString ( R.string.backup_result ), 5000 )
-            .show();
-        } else if ( RESULT_RESTORE.equals ( act ) ) {
-            Toast.makeText ( this, getString ( R.string.restore_result ), 2000 )
-            .show();
+        if (RESULT_BACKUP.equals(act)) {
+            Toast.makeText(this, getString(R.string.backup_result), 5000)
+                    .show();
+        } else if (RESULT_RESTORE.equals(act)) {
+            Toast.makeText(this, getString(R.string.restore_result), 2000)
+                    .show();
         }
     }
 
@@ -279,70 +280,70 @@ public class MainActivity extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-        case R.id.backup:
+            case R.id.backup:
 
-            Intent intent = new Intent(LoaderReceiver.BACKUPDATA);
-            intent.setClass(this, BackupActivity.class);
-            startActivity(intent);
-            this.finish();
+                Intent intent = new Intent(LoaderReceiver.BACKUPDATA);
+                intent.setClass(this, BackupActivity.class);
+                startActivity(intent);
+                this.finish();
 
-            break;
+                break;
 
-        case R.id.restore:
+            case R.id.restore:
 
-            Intent intent2 = new Intent(LoaderReceiver.RESTOREDATA);
-            intent2.setClass(this, BackupActivity.class);
-            startActivity(intent2);
-            this.finish();
+                Intent intent2 = new Intent(LoaderReceiver.RESTOREDATA);
+                intent2.setClass(this, BackupActivity.class);
+                startActivity(intent2);
+                this.finish();
 
-            break;
+                break;
 
-        case R.id.btn_update_locale:
+            case R.id.btn_update_locale:
 
-            Intent intent0 = new Intent(this, FileSelector.class);
-            Activity activity = (Activity) this;
-            startActivityForResult(intent0, queryUpdateFile);
+                Intent intent0 = new Intent(this, FileSelector.class);
+                Activity activity = (Activity) this;
+                startActivityForResult(intent0, queryUpdateFile);
 
-            break;
+                break;
 
-        case R.id.btn_locale_certern:
-            String fullname = filepath.getText().toString();
-            if ( fullname.lastIndexOf("/") > 0 && (filename != null) && (filename.length() > 0) && Build.VERSION.SDK_INT < 28 ) {
-                if (mWipeDate == null)
-                    UpdateMode = mPreference.createAmlScript(fullname, false, false);
-                else
-                    UpdateMode = mPreference.createAmlScript(fullname,mWipeDate.isChecked(),mWipeMedia.isChecked());
+            case R.id.btn_locale_certern:
+                String fullname = filepath.getText().toString();
+                if (fullname.lastIndexOf("/") > 0 && (filename != null) && (filename.length() > 0) && Build.VERSION.SDK_INT < 28) {
+                    if (mWipeDate == null)
+                        UpdateMode = mPreference.createAmlScript(fullname, false, false);
+                    else
+                        UpdateMode = mPreference.createAmlScript(fullname, mWipeDate.isChecked(), mWipeMedia.isChecked());
 
-                if (UpdateMode == OtaUpgradeUtils.UPDATE_OTA && mPreference.inLocal(fullname)
-                        &&(mWipeDate.isChecked() || mWipeMedia.isChecked())) {
+                    if (UpdateMode == OtaUpgradeUtils.UPDATE_OTA && mPreference.inLocal(fullname)
+                            && (mWipeDate.isChecked() || mWipeMedia.isChecked())) {
                         mWipeDate.setChecked(false);
                         mWipeMedia.setChecked(false);
                         Toast.makeText(this, getString(R.string.reset_wipe), Toast.LENGTH_LONG).show();
+                    }
+
+                    UpdateDialog(fullname);
+                } else if (fullname == null || filename.length() == 0) {
+                    Toast.makeText(this, getString(R.string.file_not_exist), 2000).show();
+                } else {
+                    UpdateDialog(fullname);
+                }
+                break;
+
+            case R.id.updatebtn:
+
+                if (!checkInternet()) {
+                    Toast.makeText(this, getString(R.string.net_error), 2000).show();
+
+                    return;
                 }
 
-                UpdateDialog(fullname);
-            } else if( fullname == null || filename.length() == 0 ) {
-                Toast.makeText(this, getString(R.string.file_not_exist), 2000).show();
-            } else {
-                UpdateDialog(fullname);
-            }
-            break;
+                Intent intent1 = new Intent();
+                intent1.setAction(UpdateService.ACTION_CHECK);
+                intent1.setClass(this, UpdateActivity.class);
+                startActivity(intent1);
+                this.finish();
 
-        case R.id.updatebtn:
-
-            if (!checkInternet()) {
-                Toast.makeText(this, getString(R.string.net_error), 2000).show();
-
-                return;
-            }
-
-            Intent intent1 = new Intent();
-            intent1.setAction(UpdateService.ACTION_CHECK);
-            intent1.setClass(this, UpdateActivity.class);
-            startActivity(intent1);
-            this.finish();
-
-            break;
+                break;
         }
     }
 
@@ -369,6 +370,7 @@ public class MainActivity extends Activity implements OnClickListener {
             return new String(data, 0, data.length);
         }
     }
+
     public String getFromAssets(String fileName) {
         String result = "";
 
@@ -377,7 +379,7 @@ public class MainActivity extends Activity implements OnClickListener {
             int lenght = in.available();
             byte[] buffer = new byte[lenght];
             in.read(buffer);
-            result = getString(buffer,"UTF-8");
+            result = getString(buffer, "UTF-8");
         } catch (Exception e) {
             e.printStackTrace();
         }

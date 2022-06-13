@@ -15,8 +15,8 @@ import android.provider.Settings;
 import android.util.Log;
 
 public class PlayBackManager {
-    private static final String TAG             = "PlayBackManager";
-    private static final boolean DEBUG          = false;
+    private static final String TAG = "PlayBackManager";
+    private static final boolean DEBUG = false;
 
     private static final String KEY_HDMI_SELFADAPTION = "key_hdmi_selfadaption";
     private static final String SYSF_HDMI_SELFADAPTION = "/sys/class/tv/policy_fr_auto";
@@ -28,12 +28,12 @@ public class PlayBackManager {
     private Context mContext;
     private SystemControlManager mSystemControl;
 
-    public PlayBackManager(Context context){
+    public PlayBackManager(Context context) {
         mContext = context;
         mSystemControl = SystemControlManager.getInstance();
     }
 
-    public void initHdmiSelfadaption () {
+    public void initHdmiSelfadaption() {
         mSystemControl.writeSysFs(SYSF_HDMI_SELFADAPTION, Integer.toString(getHdmiSelfAdaptionMode()));
     }
 

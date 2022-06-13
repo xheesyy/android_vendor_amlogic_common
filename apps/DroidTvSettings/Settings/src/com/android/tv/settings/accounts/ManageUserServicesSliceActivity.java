@@ -23,7 +23,9 @@ import android.text.TextUtils;
 import com.android.tv.settings.R;
 import com.android.tv.settings.slice.SliceActivity;
 
-/** Activity for showing users services settings. */
+/**
+ * Activity for showing users services settings.
+ */
 public class ManageUserServicesSliceActivity extends SliceActivity {
     private static final String KEY_USER_ID = "userId";
 

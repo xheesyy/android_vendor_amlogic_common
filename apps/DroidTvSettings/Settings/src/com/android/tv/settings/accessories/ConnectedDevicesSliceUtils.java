@@ -22,7 +22,9 @@ import android.net.Uri;
 
 import com.android.tv.twopanelsettings.slices.SlicesConstants;
 
-/** Util class for {@ConnectedDevicesSliceProvider} */
+/**
+ * Util class for {@ConnectedDevicesSliceProvider}
+ */
 public final class ConnectedDevicesSliceUtils {
 
     static final String AUTHORITY = "com.android.tv.settings.accessories.sliceprovider";
@@ -51,7 +53,9 @@ public final class ConnectedDevicesSliceUtils {
         return BLUETOOTH_DEVICE_PATH.equals(getFirstSegment(uri));
     }
 
-    /** Check if slice provider exists. */
+    /**
+     * Check if slice provider exists.
+     */
     static boolean isSliceProviderValid(Context context, String uri) {
         if (uri == null) {
             return false;

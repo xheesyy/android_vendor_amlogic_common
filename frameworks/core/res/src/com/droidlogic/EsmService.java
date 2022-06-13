@@ -44,7 +44,7 @@ public class EsmService extends Service {
                 //writeSysfsStr(KILL_ESM_PATH, "0");
                 //Log.d(TAG, "when resume set N to Kill_ESM_PATH");
             }
-            if ( Intent.ACTION_SCREEN_OFF.equals(action) && ( mHandler != null ) ) {
+            if (Intent.ACTION_SCREEN_OFF.equals(action) && (mHandler != null)) {
                 //mHandler.removeCallbacks(mKillRunnable);
                 //mHandler.post(mKillRunnable);
             }
@@ -57,7 +57,7 @@ public class EsmService extends Service {
 
         Log.i(TAG, "onCreate");
 
-        PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
         if (!register) {
             IntentFilter intentFilter = new IntentFilter();
@@ -70,7 +70,7 @@ public class EsmService extends Service {
 
     @Override
     public void onDestroy() {
-        if ( register ) {
+        if (register) {
             this.unregisterReceiver(mScreenReceiver);
             register = false;
         }
@@ -86,7 +86,7 @@ public class EsmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if ( mKillThread == null ) {
+        if (mKillThread == null) {
             mKillThread = new HandlerThread("kill_esm");
             mKillThread.start();
             mHandler = new Handler(mKillThread.getLooper());
@@ -96,6 +96,7 @@ public class EsmService extends Service {
 
 
     private static final String KILL_ESM_PATH = "/sys/module/tvin_hdmirx/parameters/hdcp22_kill_esm";
+
     private int writeSysfsStr(String path, String val) {
         if (!new java.io.File(path).exists()) {
             Log.e(TAG, "File not found: " + path);
@@ -155,7 +156,7 @@ public class EsmService extends Service {
 
         Log.d(TAG, "forceExitEsm /sys/power/state:" + powerState);
         writeSysfsStr(KILL_ESM_PATH, "1");
-        int count =0;
+        int count = 0;
         while (true) {
             try {
                 Thread.sleep(500);//500ms
@@ -165,7 +166,7 @@ public class EsmService extends Service {
 
             String esmValue = readSysfsStr(KILL_ESM_PATH);
             String state = PlatformAPI.getStringProperty("init.svc.hdcp_rx22", "");
-            Log.w(TAG, "hdcp22_kill_esm value:" + esmValue +"rx22 is:"+state);
+            Log.w(TAG, "hdcp22_kill_esm value:" + esmValue + "rx22 is:" + state);
             if (("Y".equals(esmValue)) && ("running".equals(state)) && (count < 10))
                 Log.w(TAG, "esm still is running, we need it be killed");
             else break;
@@ -173,7 +174,7 @@ public class EsmService extends Service {
         Log.d(TAG, "forceExitEsm esm killed done");
     }
 
-    private Runnable mKillRunnable = new Runnable(){
+    private Runnable mKillRunnable = new Runnable() {
         @Override
         public void run() {
             mWakeLock.acquire();

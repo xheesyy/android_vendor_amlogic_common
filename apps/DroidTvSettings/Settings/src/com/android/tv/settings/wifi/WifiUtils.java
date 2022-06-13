@@ -61,8 +61,9 @@ public class WifiUtils {
 
     /**
      * This method is a stripped and negated version of WifiConfigStore.canModifyNetwork.
+     *
      * @param context Context of caller
-     * @param config The WiFi config.
+     * @param config  The WiFi config.
      * @return true if Settings cannot modify the config due to lockDown.
      */
     public static boolean isNetworkLockedDown(Context context, WifiConfiguration config) {
@@ -104,7 +105,9 @@ public class WifiUtils {
         return isLockdownFeatureEnabled;
     }
 
-    /** Returns true if the provided NetworkCapabilities indicate a captive portal network. */
+    /**
+     * Returns true if the provided NetworkCapabilities indicate a captive portal network.
+     */
     public static boolean canSignIntoNetwork(NetworkCapabilities capabilities) {
         return (capabilities != null
                 && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL));

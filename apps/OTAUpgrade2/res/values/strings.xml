@@ -107,10 +107,10 @@
     <string name="download_summary">Download Update Files Success</string>
     <string name="auto_check">Auto Check Update</string>
     <string name="auto_check_close">Close Auto Check Update</string>
-     <string name="prepare_copy">Prepare to Copy Files</string>
+    <string name="prepare_copy">Prepare to Copy Files</string>
     <string name="start_copy">Copying...</string>
     <string name="copy_failed_restart">Copy Files to Exteranl Storage:%s Failed,Restart Copying</string>
-	<string name="scan_title">Scanning</string>
+    <string name="scan_title">Scanning</string>
     <string name="scan_tip">Scanning,Please wait...</string>
     <string name="backup_result">backup finish</string>
     <string name="restore_result">restore will run background about few mininus</string>

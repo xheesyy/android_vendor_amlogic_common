@@ -92,7 +92,7 @@ public class AppPicker extends FragmentActivity {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             final List<ApplicationInfo> pkgs =
                     getActivity().getPackageManager().getInstalledApplications(0);
             final PackageManager pm = getActivity().getPackageManager();
@@ -107,7 +107,7 @@ public class AppPicker extends FragmentActivity {
                     // On a user build, we only allow debugging of apps that
                     // are marked as debuggable.  Otherwise (for platform development)
                     // we allow all apps.
-                    if ((ai.flags&ApplicationInfo.FLAG_DEBUGGABLE) == 0
+                    if ((ai.flags & ApplicationInfo.FLAG_DEBUGGABLE) == 0
                             && "user".equals(Build.TYPE)) {
                         continue;
                     }

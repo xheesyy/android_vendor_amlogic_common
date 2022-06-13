@@ -94,28 +94,28 @@ public abstract class DroidLogicOverlayView extends FrameLayout {
         mTextView.setText(resId);
     }
 
-    public void setTextForEas(String text){
+    public void setTextForEas(String text) {
         mEasTextView.setText(text);
         mEasTextView.post(new Runnable() {
-                @Override
-                public void run() {
-                    mEasScrollView.setBackgroundColor(Color.BLACK);
-                    if (mEasScrollView.getWidth() < mEasTextView.getWidth()) {
-                        Log.i(TAG,"scroll");
-                        startEasAnimation(true);
-                    }else {
-                        Log.i(TAG,"not scroll");
-                        startEasAnimation(false);
-                    }
+            @Override
+            public void run() {
+                mEasScrollView.setBackgroundColor(Color.BLACK);
+                if (mEasScrollView.getWidth() < mEasTextView.getWidth()) {
+                    Log.i(TAG, "scroll");
+                    startEasAnimation(true);
+                } else {
+                    Log.i(TAG, "not scroll");
+                    startEasAnimation(false);
                 }
-            });
+            }
+        });
     }
 
     private void startEasAnimation(boolean isScroll) {
         if (isScroll)
             mRigthToLeftAnim = new TranslateAnimation(mEasScrollView.getWidth(), -mEasTextView.getWidth(), 0, 0);
         else
-            mRigthToLeftAnim = new TranslateAnimation((mEasScrollView.getWidth()-mEasTextView.getWidth())/2, (mEasScrollView.getWidth()-mEasTextView.getWidth())/2, 0, 0);
+            mRigthToLeftAnim = new TranslateAnimation((mEasScrollView.getWidth() - mEasTextView.getWidth()) / 2, (mEasScrollView.getWidth() - mEasTextView.getWidth()) / 2, 0, 0);
 
         mRigthToLeftAnim.setRepeatCount(Animation.INFINITE);
         mRigthToLeftAnim.setInterpolator(new LinearInterpolator());
@@ -131,14 +131,14 @@ public abstract class DroidLogicOverlayView extends FrameLayout {
         if (visible) {
             mEasTextView.setVisibility(VISIBLE);
             mEasScrollView.setVisibility(VISIBLE);
-        }else {
+        } else {
             mEasScrollView.setBackgroundColor(Color.TRANSPARENT);
             mEasTextView.setVisibility(GONE);
             mEasScrollView.setVisibility(GONE);
         }
     }
 
-    public void setTextForTeletextNumber(CharSequence text){
+    public void setTextForTeletextNumber(CharSequence text) {
         if (mTeletextNumber != null) {
             mTeletextNumber.setText(text);
         }

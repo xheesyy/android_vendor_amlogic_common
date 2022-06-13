@@ -34,7 +34,7 @@ public class SettingsPreferenceUtil {
      * @return compound key of the preference
      */
     public static String getCompoundKey(@NonNull LeanbackPreferenceFragmentCompat fragment,
-            @NonNull Preference preference) {
+                                        @NonNull Preference preference) {
         String title = "";
         View fragmentView = fragment.getView();
         if (fragmentView != null && fragmentView.findViewById(R.id.decor_title) != null) {

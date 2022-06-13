@@ -40,6 +40,7 @@ import android.app.AlarmManager;
 
 import android.media.tv.TvContract;
 import android.media.tv.TvContract.Channels;
+
 import com.droidlogic.app.tv.DroidLogicTvUtils;
 import com.droidlogic.app.tv.ChannelInfo;
 import com.droidlogic.app.tv.Program;
@@ -75,14 +76,14 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
     private TvDataBaseManager mTvDataBaseManager;
 
     private void wakeUp(long time) {
-         try {
-             Class<?> cls = Class.forName("android.os.PowerManager");
-             Method method = cls.getMethod("wakeUp", long.class);
-             method.invoke(mPowerManager, time);
-         } catch(Exception e) {
-             e.printStackTrace();
-         }
-     }
+        try {
+            Class<?> cls = Class.forName("android.os.PowerManager");
+            Method method = cls.getMethod("wakeUp", long.class);
+            method.invoke(mPowerManager, time);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -92,7 +93,7 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
         Log.d(TAG, "isScreenOpen = " + isScreenOpen);
         //Resume if the system is suspending
         if (!isScreenOpen) {
-            Log.d(TAG, "wakeUp the android." );
+            Log.d(TAG, "wakeUp the android.");
             long time = SystemClock.uptimeMillis();
             wakeUp(time);
         }
@@ -128,12 +129,12 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
             if (channel.isAnalogChannel()) {
                 tvtype = 0;
             } else if (channel.isDigitalChannel()) {
-                 tvtype = 1;
+                tvtype = 1;
             }
             inputid = channel.getInputId();
             Log.d(TAG, "receive appointed channel:" + channel.getDisplayName() + " program: " + program.getTitle());
 
-            LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = inflater.inflate(R.layout.layout_dialog, null);
 
             if (mAlertDialog == null) {
@@ -144,15 +145,15 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
             mAlertDialog.show();
             mAlertDialog.getWindow().setContentView(view);
 
-            tx_title = (TextView)view.findViewById(R.id.dialog_title);
-            TextView tx_content = (TextView)view.findViewById(R.id.dialog_content);
+            tx_title = (TextView) view.findViewById(R.id.dialog_title);
+            TextView tx_content = (TextView) view.findViewById(R.id.dialog_content);
             tx_content.setText(mContext.getResources().getString(R.string.watch_program) + " " + program.getTitle());
 
-            TextView button_cancel = (TextView)view.findViewById(R.id.dialog_cancel);
+            TextView button_cancel = (TextView) view.findViewById(R.id.dialog_cancel);
             //button_cancel.setOnClickListener(this);
             button_cancel.setOnFocusChangeListener(this);
 
-            TextView button_ok = (TextView)view.findViewById(R.id.dialog_ok);
+            TextView button_ok = (TextView) view.findViewById(R.id.dialog_ok);
             //button_ok.setOnClickListener(this);
             button_ok.setOnFocusChangeListener(this);
 
@@ -201,7 +202,7 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
     public void startLiveTv() {
         if (channelid < 0) {
             Log.d(TAG, "startLiveTv channel is invalid");
-             return;
+            return;
         }
         ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         if (am.getRunningTasks(1).get(0).topActivity.getPackageName().equals(PACKAGE_LAUNCHER)) {
@@ -209,7 +210,7 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
             am.forceStopPackage(PACKAGE_LAUNCHER);
         }
         Intent intent = new Intent(TvInputManager.ACTION_SETUP_INPUTS);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("from_tv_source", true);
         intent.putExtra(TvInputInfo.EXTRA_INPUT_ID, inputid);
         intent.putExtra(DroidLogicTvUtils.EXTRA_CHANNEL_ID, channelid);
@@ -219,13 +220,13 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
         mContext.startActivity(intent);
     }
 
-    private void cancelAppointedProgramAlarm (long programid) {
+    private void cancelAppointedProgramAlarm(long programid) {
         Program logicprogram = mTvDataBaseManager.getProgram(programid);
         if (logicprogram != null) {
             Log.d(TAG, "cancelAppointedProgramAlarm id = " + programid);
             logicprogram.setIsAppointed(false);
             mTvDataBaseManager.updateProgram(logicprogram);
-            AlarmManager alarm = (AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
+            AlarmManager alarm = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(DroidLogicTvUtils.ACTION_DROID_PROGRAM_WATCH_APPOINTED);
             intent.addFlags(0x01000000/*Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND*/);
             intent.setData(TvContract.buildProgramUri(logicprogram.getId()));
@@ -273,7 +274,7 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
             Log.d(TAG, "setAppointedProgramAlarm null data");
             return;
         }
-        AlarmManager alarm = (AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarm = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         long pendingTime = data.getLongExtra(DroidLogicTvUtils.EXTRA_APPOINTED_DELAY, -1l);
         if (pendingTime >= 0) {
             Log.d(TAG, "" + pendingTime / 60000 + " min " + pendingTime % 60000 / 1000 + " sec later show program prompt");
@@ -294,7 +295,7 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
             Log.d(TAG, "cancelAppointedProgramAlarm null data");
             return;
         }
-        AlarmManager alarm = (AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarm = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         PendingIntent pendingIntent = buildPendingIntent(data, false);
         if (pendingIntent != null) {
             alarm.cancel(pendingIntent);
@@ -302,7 +303,7 @@ public class AppointedProgramReceiver extends BroadcastReceiver implements OnFoc
         Log.d(TAG, "cancelAppointedProgramAlarm pendingIntent = " + pendingIntent);
     }
 
-    private PendingIntent buildPendingIntent (Intent data, boolean creatNew) {
+    private PendingIntent buildPendingIntent(Intent data, boolean creatNew) {
         if (data == null) {
             Log.d(TAG, "buildPendingIntent null data");
             return null;

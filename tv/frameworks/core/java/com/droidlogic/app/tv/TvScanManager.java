@@ -74,34 +74,36 @@ public class TvScanManager {
                     if (mIsBind || retry <= 0) {
                         break;
                     }
-                    retry --;
+                    retry--;
                     Thread.sleep(500);
                 }
             }
-        } catch (InterruptedException e){}
+        } catch (InterruptedException e) {
+        }
     }
 
     private ServiceConnection serConn = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
             LOGI("[onServiceDisconnected]mService: " + mService);
-            try{
+            try {
                 //unregister callback
                 mService.unregisterListener(mListener);
                 isConnected = false;
-            } catch (RemoteException e){
+            } catch (RemoteException e) {
                 e.printStackTrace();
             }
             mService = null;
         }
+
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mService = ITvScanService.Stub.asInterface(service);
-            try{
+            try {
                 //register callback
                 mService.registerListener(mListener);
                 isConnected = true;
-            } catch (RemoteException e){
+            } catch (RemoteException e) {
                 e.printStackTrace();
             }
             LOGI("SubTitleClient.onServiceConnected()..mService: " + mService);
@@ -116,7 +118,7 @@ public class TvScanManager {
         return isConnected;
     }
 
-    public void init(){
+    public void init() {
         try {
             if (intent != null) {
                 mService.init(intent);
@@ -126,7 +128,7 @@ public class TvScanManager {
         }
     }
 
-    public void setAtsccSearchSys(int value){
+    public void setAtsccSearchSys(int value) {
         try {
             mService.setAtsccSearchSys(value);
         } catch (RemoteException e) {
@@ -134,7 +136,7 @@ public class TvScanManager {
         }
     }
 
-    public void startAutoScan(){
+    public void startAutoScan() {
         try {
             mService.startAutoScan();
         } catch (RemoteException e) {
@@ -142,7 +144,7 @@ public class TvScanManager {
         }
     }
 
-    public void startManualScan(){
+    public void startManualScan() {
         try {
             mService.startManualScan();
         } catch (RemoteException e) {
@@ -162,7 +164,7 @@ public class TvScanManager {
      * @param dtv TRUE will search dtv channel, FALSE not.
      * @param atv TRUE will search atv channel, FALSE not.
      */
-    public void setSearchSys(boolean dtv, boolean atv){
+    public void setSearchSys(boolean dtv, boolean atv) {
         try {
             mService.setSearchSys(dtv, atv);
         } catch (RemoteException e) {
@@ -187,7 +189,7 @@ public class TvScanManager {
         }
     }
 
-    public void setFrequency (String value1, String value2) {
+    public void setFrequency(String value1, String value2) {
         try {
             mService.setFrequency(value1, value2);
         } catch (RemoteException e) {

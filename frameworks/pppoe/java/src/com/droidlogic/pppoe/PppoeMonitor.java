@@ -1,9 +1,9 @@
 /*
-*Copyright (c) 2014 Amlogic, Inc. All rights reserved.
-*
-*This source code is subject to the terms and conditions defined in the
-*file 'LICENSE' which is part of this source code package.
-*/
+ *Copyright (c) 2014 Amlogic, Inc. All rights reserved.
+ *
+ *This source code is subject to the terms and conditions defined in the
+ *file 'LICENSE' which is part of this source code package.
+ */
 
 package com.droidlogic.pppoe;
 
@@ -13,7 +13,9 @@ import android.os.SystemProperties;
 import android.net.NetworkInfo;
 import android.util.Config;
 import android.util.Slog;
+
 import java.util.StringTokenizer;
+
 import com.droidlogic.app.SystemControlManager;
 
 /**
@@ -24,7 +26,7 @@ import com.droidlogic.app.SystemControlManager;
  */
 public class PppoeMonitor {
     private static final String TAG = "PppoeMonitor";
-    private static final int CONNECTED  = 1;
+    private static final int CONNECTED = 1;
     private static final int INTERFACE_DOWN = 2;
     private static final int INTERFACE_UP = 3;
     private static final int DEV_ADDED = 4;
@@ -61,51 +63,50 @@ public class PppoeMonitor {
             mSystemControlManager = SystemControlManager.getInstance();
 
             if (DEBUG) Slog.i(TAG, "Start run");
-            for (;;) {
+            for (; ; ) {
                 String eventName = PppoeNative.waitForEvent();
 
                 String propVal = mSystemControlManager.getProperty(pppoe_running_flag);
-                if (DEBUG) Slog.i(TAG, "Start run for "+"eventName"+eventName+"propVal"+propVal);
+                if (DEBUG)
+                    Slog.i(TAG, "Start run for " + "eventName" + eventName + "propVal" + propVal);
                 int n = 0;
                 if (propVal.length() != 0) {
                     try {
                         n = Integer.parseInt(propVal);
-                    } catch (NumberFormatException e) {}
+                    } catch (NumberFormatException e) {
+                    }
                 }
 
-                if ( 0 == n) {
+                if (0 == n) {
                     continue;
                 }
 
                 if (eventName == null) {
                     continue;
                 }
-                if (DEBUG) Slog.i(TAG, "EVENT[" + eventName+"]");
+                if (DEBUG) Slog.i(TAG, "EVENT[" + eventName + "]");
                 /*
                  * Map event name into event enum
                  */
-                String [] events = eventName.split(":");
+                String[] events = eventName.split(":");
                 index = events.length;
                 if (index < 2)
                     continue;
                 i = 0;
-                while (index != 0 && i < index-1) {
+                while (index != 0 && i < index - 1) {
                     int event = 0;
-                    if ("added".equals(events[i+1]) ) {
+                    if ("added".equals(events[i + 1])) {
                         event = DEV_ADDED;
-                    }
-                    else if ("removed".equals(events[i+1])) {
+                    } else if ("removed".equals(events[i + 1])) {
                         event = DEV_REMOVED;
-                    }
-                    else {
-                        int cmd =Integer.parseInt(events[i+1]);
-                        if ( cmd == DEL_LINK) {
+                    } else {
+                        int cmd = Integer.parseInt(events[i + 1]);
+                        if (cmd == DEL_LINK) {
                             event = INTERFACE_DOWN;
-                            handleEvent(events[i],event);
-                        }
-                        else if (cmd == NEW_LINK) {
+                            handleEvent(events[i], event);
+                        } else if (cmd == NEW_LINK) {
                             event = INTERFACE_UP;
-                            handleEvent(events[i],event);
+                            handleEvent(events[i], event);
                         }
                     }
                     i = i + 2;
@@ -113,16 +114,16 @@ public class PppoeMonitor {
             }
         }
 
-        void handleEvent(String ifname,int event) {
+        void handleEvent(String ifname, int event) {
             switch (event) {
                 case INTERFACE_DOWN:
-                    mTracker.notifyStateChange(ifname,NetworkInfo.DetailedState.DISCONNECTED);
+                    mTracker.notifyStateChange(ifname, NetworkInfo.DetailedState.DISCONNECTED);
                     break;
                 case INTERFACE_UP:
-                    mTracker.notifyStateChange(ifname,NetworkInfo.DetailedState.CONNECTED);
+                    mTracker.notifyStateChange(ifname, NetworkInfo.DetailedState.CONNECTED);
                     break;
                 default:
-                    mTracker.notifyStateChange(ifname,NetworkInfo.DetailedState.FAILED);
+                    mTracker.notifyStateChange(ifname, NetworkInfo.DetailedState.FAILED);
             }
         }
 

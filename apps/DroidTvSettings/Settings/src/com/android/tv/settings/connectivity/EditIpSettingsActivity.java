@@ -75,7 +75,7 @@ public class EditIpSettingsActivity extends InstrumentedActivity implements
             ((WifiConfig) netConfig).load(networkId);
         }
         EditSettingsInfo editSettingsInfo =
-                    ViewModelProviders.of(this).get(EditSettingsInfo.class);
+                ViewModelProviders.of(this).get(EditSettingsInfo.class);
         editSettingsInfo.setNetworkConfiguration(netConfig);
         AdvancedWifiOptionsFlow.createFlow(this, false, true, netConfig,
                 null, mSaveState, AdvancedWifiOptionsFlow.START_IP_SETTINGS_PAGE);
@@ -94,7 +94,6 @@ public class EditIpSettingsActivity extends InstrumentedActivity implements
 
         mStateMachine.start(true);
     }
-
 
 
     @Override

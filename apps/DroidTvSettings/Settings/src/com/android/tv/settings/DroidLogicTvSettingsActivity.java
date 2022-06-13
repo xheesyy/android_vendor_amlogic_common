@@ -19,7 +19,9 @@ package com.android.tv.settings;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.transition.Scene;
 import android.transition.Slide;
 import android.transition.Transition;
@@ -39,13 +41,14 @@ import android.provider.Settings;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.content.ComponentName;
+
 import java.lang.reflect.Method;
+
 import com.droidlogic.app.DataProviderManager;
 import com.android.tv.settings.tvoption.TvOptionSettingManager;
 import com.droidlogic.app.tv.AudioEffectManager;
 import com.android.tv.settings.tvoption.SoundParameterSettingManager;
 import com.android.tv.settings.soundeffect.OptionParameterManager;
-
 
 
 public abstract class DroidLogicTvSettingsActivity extends Activity implements ViewTreeObserver.OnPreDrawListener {
@@ -138,7 +141,7 @@ public abstract class DroidLogicTvSettingsActivity extends Activity implements V
         unregisterReceiver(mReceiver);
     }
 
-    public void startShowActivityTimer () {
+    public void startShowActivityTimer() {
         handler.removeMessages(0);
 
         int seconds = DataProviderManager.getIntValue(this, TvOptionSettingManager.KEY_MENU_TIME,
@@ -181,7 +184,7 @@ public abstract class DroidLogicTvSettingsActivity extends Activity implements V
     }
 
     @Override
-    public boolean dispatchKeyEvent (KeyEvent event) {
+    public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (event.getKeyCode()) {
                 case KeyEvent.KEYCODE_DPAD_UP:
@@ -219,8 +222,8 @@ public abstract class DroidLogicTvSettingsActivity extends Activity implements V
         Method isResumedMethod = null;
         try {
             isResumedMethod = Activity.class.getMethod("isResumed()");
-            isresumed = (boolean)isResumedMethod.invoke(DroidLogicTvSettingsActivity.this);
-        }catch (Exception ex){
+            isresumed = (boolean) isResumedMethod.invoke(DroidLogicTvSettingsActivity.this);
+        } catch (Exception ex) {
         }
         if (isresumed && fragment != null) {
             final ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
@@ -285,5 +288,6 @@ public abstract class DroidLogicTvSettingsActivity extends Activity implements V
     public OptionParameterManager getOptionParameterManager() {
         return mOptionParameterManager;
     }
+
     protected abstract Fragment createSettingsFragment();
 }

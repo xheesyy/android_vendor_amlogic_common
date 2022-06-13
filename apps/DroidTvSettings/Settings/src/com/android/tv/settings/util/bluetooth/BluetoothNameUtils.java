@@ -39,6 +39,7 @@ public class BluetoothNameUtils {
 
     /**
      * Decode the setup type integer from the Bluetooth device name.
+     *
      * @param bluetoothName
      * @return The integer value of the setup code, or -1 if no code is present.
      */
@@ -63,6 +64,7 @@ public class BluetoothNameUtils {
 
     /**
      * Decode the LED configuration contained in the input string.
+     *
      * @param bluetoothName
      * @return The LedConfiguration or none if one can not be parsed from the string.
      */
@@ -91,6 +93,7 @@ public class BluetoothNameUtils {
 
     /**
      * Check if the name matches the expected format for a hub Bluetooth name.
+     *
      * @param name
      * @return true if the pattern matches, false if it doesn't.
      */

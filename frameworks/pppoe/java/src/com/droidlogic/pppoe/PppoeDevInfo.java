@@ -1,9 +1,9 @@
 /*
-*Copyright (c) 2014 Amlogic, Inc. All rights reserved.
-*
-*This source code is subject to the terms and conditions defined in the
-*file 'LICENSE' which is part of this source code package.
-*/
+ *Copyright (c) 2014 Amlogic, Inc. All rights reserved.
+ *
+ *This source code is subject to the terms and conditions defined in the
+ *file 'LICENSE' which is part of this source code package.
+ */
 
 package com.droidlogic.pppoe;
 
@@ -22,7 +22,7 @@ public class PppoeDevInfo implements Parcelable {
     public static final String PPPOE_CONN_MODE_DHCP = "dhcp";
     public static final String PPPOE_CONN_MODE_MANUAL = "manual";
 
-    public PppoeDevInfo () {
+    public PppoeDevInfo() {
         dev_name = null;
         ipaddr = null;
         dns = null;
@@ -43,14 +43,15 @@ public class PppoeDevInfo implements Parcelable {
         this.ipaddr = ip;
     }
 
-    public String getIpAddress( ) {
+    public String getIpAddress() {
         return this.ipaddr;
     }
+
     public void setNetMask(String ip) {
         this.netmask = ip;
     }
 
-    public String getNetMask( ) {
+    public String getNetMask() {
         return this.netmask;
     }
 
@@ -66,7 +67,7 @@ public class PppoeDevInfo implements Parcelable {
         this.dns = dns;
     }
 
-    public String getDnsAddr( ) {
+    public String getDnsAddr() {
         return this.dns;
     }
 
@@ -95,22 +96,25 @@ public class PppoeDevInfo implements Parcelable {
         dest.writeString(this.dns);
         dest.writeString(this.mode);
     }
-      /** Implement the Parcelable interface {@hide} */
-    public static final Creator<PppoeDevInfo> CREATOR =
-    new Creator<PppoeDevInfo>() {
-        public PppoeDevInfo createFromParcel(Parcel in) {
-            PppoeDevInfo info = new PppoeDevInfo();
-            info.setIfName(in.readString());
-            info.setIpAddress(in.readString());
-            info.setNetMask(in.readString());
-            info.setRouteAddr(in.readString());
-            info.setDnsAddr(in.readString());
-            info.setConnectMode(in.readString());
-            return info;
-        }
 
-        public PppoeDevInfo[] newArray(int size) {
-            return new PppoeDevInfo[size];
-        }
-    };
+    /**
+     * Implement the Parcelable interface {@hide}
+     */
+    public static final Creator<PppoeDevInfo> CREATOR =
+            new Creator<PppoeDevInfo>() {
+                public PppoeDevInfo createFromParcel(Parcel in) {
+                    PppoeDevInfo info = new PppoeDevInfo();
+                    info.setIfName(in.readString());
+                    info.setIpAddress(in.readString());
+                    info.setNetMask(in.readString());
+                    info.setRouteAddr(in.readString());
+                    info.setDnsAddr(in.readString());
+                    info.setConnectMode(in.readString());
+                    return info;
+                }
+
+                public PppoeDevInfo[] newArray(int size) {
+                    return new PppoeDevInfo[size];
+                }
+            };
 }

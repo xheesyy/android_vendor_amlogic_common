@@ -17,7 +17,9 @@
 package com.android.tv.settings.util;
 
 import android.os.SystemProperties;
+
 import androidx.preference.Preference;
+
 import android.text.TextUtils;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -33,9 +35,10 @@ public final class DroidUtils {
     public static final String KEY_HIDE_STARTUP = "hide_startup";
     public static final String VALUE_HIDE_STARTUP = "1";
     public static final String VALUE_SHOW_STARTUP = "0";
+
     /**
-    * Non instantiable.
-    */
+     * Non instantiable.
+     */
     private DroidUtils() {
     }
 

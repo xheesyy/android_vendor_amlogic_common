@@ -29,6 +29,7 @@ import com.android.tv.settings.connectivity.util.StateMachine;
 public class FinishState implements State {
     private final FragmentActivity mActivity;
     private Fragment mFragment;
+
     public FinishState(FragmentActivity activity) {
         mActivity = activity;
     }

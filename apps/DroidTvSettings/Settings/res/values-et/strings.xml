@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="settings_app_name" msgid="7931201304065140909">"Seaded"</string>
     <string name="launcher_settings_app_name" msgid="1459269619779675736">"Seaded"</string>
     <string name="launcher_network_app_name" msgid="8311763462169735002">"Võrk"</string>
@@ -46,8 +44,8 @@
     <string name="accounts_category_title" msgid="7286858931427579845">"Kontod ja sisselogimine"</string>
     <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"Kontod puuduvad"</string>
     <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
-      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> kontot</item>
-      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> konto</item>
+        <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> kontot</item>
+        <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> konto</item>
     </plurals>
     <string name="accounts_slice_summary" msgid="1571012157154521119">"Meediateenused, assistent, maksed"</string>
     <string name="connectivity_network_category_title" msgid="8226264889892008114">"Võrk ja internet"</string>
@@ -57,8 +55,8 @@
     <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"Kaugjuhtimisseadmed ja tarvikud"</string>
     <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"Ühendatud Bluetoothi seadmed puuduvad"</string>
     <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
-      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> lisaseadet</item>
-      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> lisaseade</item>
+        <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> lisaseadet</item>
+        <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> lisaseade</item>
     </plurals>
     <string name="display_and_sound_category_title" msgid="9203309625380755860">"Ekraan ja heli"</string>
     <string name="help_and_feedback_category_title" msgid="7036505833991003031">"Abi ja tagasiside"</string>
@@ -230,8 +228,8 @@
     <string name="about_serial" msgid="3432319328808745459">"Seerianumber"</string>
     <string name="about_build" msgid="8467840394761634575">"Android TV OS-i järk"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
-      <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> toimingut veel ja olete arendaja</item>
-      <item quantity="one"><xliff:g id="STEP_COUNT_0">%1$d</xliff:g> toiming veel ja olete arendaja</item>
+        <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> toimingut veel ja olete arendaja</item>
+        <item quantity="one"><xliff:g id="STEP_COUNT_0">%1$d</xliff:g> toiming veel ja olete arendaja</item>
     </plurals>
     <string name="about_ads" msgid="7662896442040086522">"Reklaamid"</string>
     <string name="ads_description" msgid="8081069475265061074">"Hallake oma reklaamiseadeid, lähtestades näiteks oma reklaami-ID."</string>
@@ -265,20 +263,20 @@
     <string name="license_title" msgid="4032466200355435641">"Litsents"</string>
     <string name="terms_title" msgid="192888187310800678">"Nõuded ja tingimused"</string>
     <string name="webview_license_title" msgid="5370270485188947540">"Süsteemi WebView\' litsents"</string>
-  <string-array name="wifi_signal_strength">
-    <item msgid="4475363344103354364">"Kehv"</item>
-    <item msgid="2098818614362343532">"Rahuldav"</item>
-    <item msgid="2713050260700175954">"Hea"</item>
-    <item msgid="6005053494500517261">"Suurepärane"</item>
-  </string-array>
+    <string-array name="wifi_signal_strength">
+        <item msgid="4475363344103354364">"Kehv"</item>
+        <item msgid="2098818614362343532">"Rahuldav"</item>
+        <item msgid="2713050260700175954">"Hea"</item>
+        <item msgid="6005053494500517261">"Suurepärane"</item>
+    </string-array>
     <string name="title_mac_address" msgid="7511588678922209883">"Seadme MAC-aadress"</string>
     <string name="title_randomized_mac_address" msgid="3359532498635833471">"Juhuslik MAC-aadress"</string>
     <string name="title_signal_strength" msgid="5047116893338315998">"Signaali tugevus"</string>
     <string name="title_random_mac_settings" msgid="6685812569356353378">"Privaatsus"</string>
-  <string-array name="random_mac_settings_entries">
-    <item msgid="3457228452595715533">"Kasuta juhuslikku MAC-aadressi (vaikeseade)"</item>
-    <item msgid="2490415280467390067">"Kasuta seadme MAC-aadressi"</item>
-  </string-array>
+    <string-array name="random_mac_settings_entries">
+        <item msgid="3457228452595715533">"Kasuta juhuslikku MAC-aadressi (vaikeseade)"</item>
+        <item msgid="2490415280467390067">"Kasuta seadme MAC-aadressi"</item>
+    </string-array>
     <string name="mac_address_not_available" msgid="2992935344891853369">"Pole saadaval"</string>
     <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"Juhuslik MAC-aadress"</string>
     <string name="title_ip_address" msgid="705842159484772807">"IP-aadress"</string>
@@ -452,15 +450,15 @@
     <string name="system_set_time_format" msgid="902518158066450918">"24-tunnise vormingu kasutamine"</string>
     <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="SAMPLE">%2$s</xliff:g>)"</string>
     <string name="system_auto_date_time" msgid="8458199433555868708">"Automaatne kuupäev ja kellaaeg"</string>
-  <string-array name="auto_date_time_entries">
-    <item msgid="8119837829162871025">"Kasuta võrgu pakutud kellaaega"</item>
-    <item msgid="369146066143710034">"Väljas"</item>
-  </string-array>
-  <string-array name="auto_date_time_ts_entries">
-    <item msgid="1010003447137304123">"Kasuta võrgu pakutud kellaaega"</item>
-    <item msgid="5645263357181875427">"Kasuta ülekandevoo pakutud kellaaega"</item>
-    <item msgid="5501503537181350884">"Väljas"</item>
-  </string-array>
+    <string-array name="auto_date_time_entries">
+        <item msgid="8119837829162871025">"Kasuta võrgu pakutud kellaaega"</item>
+        <item msgid="369146066143710034">"Väljas"</item>
+    </string-array>
+    <string-array name="auto_date_time_ts_entries">
+        <item msgid="1010003447137304123">"Kasuta võrgu pakutud kellaaega"</item>
+        <item msgid="5645263357181875427">"Kasuta ülekandevoo pakutud kellaaega"</item>
+        <item msgid="5501503537181350884">"Väljas"</item>
+    </string-array>
     <string name="system_location" msgid="4057295363709016511">"Asukoht"</string>
     <string name="system_desc_location" msgid="1680134126100535031">"Laske rakendustel, mis on palunud teie luba, kasutada teie asukohateavet"</string>
     <string name="system_network_location_confirm" msgid="7128162421781085332">"Asukohaga nõustumine"</string>
@@ -606,15 +604,15 @@
     <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"Ülejoonistuse loenduri kuvamine"</string>
     <string name="no_application" msgid="1904437693440706534">"Mitte ükski"</string>
     <string name="enable_opengl_traces_none" msgid="4718084947494592040">"Puudub"</string>
-  <string-array name="animation_scale_entries">
-    <item msgid="5408992662476056082">"Animatsioon on väljas"</item>
-    <item msgid="6818290063799857019">"0,5-kordne animatsiooni skaala"</item>
-    <item msgid="8257959452691080724">"1-kordne animatsiooni skaala"</item>
-    <item msgid="4781052272686018414">"1,5-kordne animatsiooni skaala"</item>
-    <item msgid="2272016945160227610">"2-kordne animatsiooni skaala"</item>
-    <item msgid="5015441793276576312">"5-kordne animatsiooni skaala"</item>
-    <item msgid="1290233583371556415">"10-kordne animatsiooni skaala"</item>
-  </string-array>
+    <string-array name="animation_scale_entries">
+        <item msgid="5408992662476056082">"Animatsioon on väljas"</item>
+        <item msgid="6818290063799857019">"0,5-kordne animatsiooni skaala"</item>
+        <item msgid="8257959452691080724">"1-kordne animatsiooni skaala"</item>
+        <item msgid="4781052272686018414">"1,5-kordne animatsiooni skaala"</item>
+        <item msgid="2272016945160227610">"2-kordne animatsiooni skaala"</item>
+        <item msgid="5015441793276576312">"5-kordne animatsiooni skaala"</item>
+        <item msgid="1290233583371556415">"10-kordne animatsiooni skaala"</item>
+    </string-array>
     <string name="track_frame_time_off" msgid="8845064783618702239">"Väljas"</string>
     <string name="track_frame_time_bars" msgid="5841531515222229632">"Ekraanil ribadena"</string>
     <string name="app_process_limit_standard" msgid="6069948528843313888">"Standardpiir"</string>
@@ -667,16 +665,16 @@
     <string name="inputs_tv_auto_on" msgid="544848340484583318">"Teleri automaatne sisselülitus"</string>
     <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"Teleri sisselülitamine HDMI-seadmega"</string>
     <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
-      <item quantity="other">Ühendatud sisendid</item>
-      <item quantity="one">Ühendatud sisend</item>
+        <item quantity="other">Ühendatud sisendid</item>
+        <item quantity="one">Ühendatud sisend</item>
     </plurals>
     <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
-      <item quantity="other">Ooterežiimis sisendid</item>
-      <item quantity="one">Ooterežiimis sisend</item>
+        <item quantity="other">Ooterežiimis sisendid</item>
+        <item quantity="one">Ooterežiimis sisend</item>
     </plurals>
     <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
-      <item quantity="other">Ühendamata sisendid</item>
-      <item quantity="one">Ühendamata sisend</item>
+        <item quantity="other">Ühendamata sisendid</item>
+        <item quantity="one">Ühendamata sisend</item>
     </plurals>
     <string name="user_add_profile_item_summary" msgid="3211866291940617804">"Juurdepääsu piiramine rakendustele ja muule konto sisule"</string>
     <string name="user_new_profile_name" msgid="6637593067318708353">"Piiratud profiil"</string>
@@ -692,8 +690,8 @@
     <string name="restricted_profile_configure_title" msgid="3327502517511010296">"Seaded"</string>
     <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"Lubatud rakendused"</string>
     <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
-      <item quantity="other">%d rakendust on lubatud</item>
-      <item quantity="one">1 rakendus on lubatud</item>
+        <item quantity="other">%d rakendust on lubatud</item>
+        <item quantity="one">1 rakendus on lubatud</item>
     </plurals>
     <string name="restricted_profile_allowed" msgid="970921490464867884">"Lubatud"</string>
     <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"Ei ole lubatud"</string>
@@ -771,12 +769,12 @@
     <string name="confirm_factory_reset_device" msgid="4308646529880718465">"Kustuta kõik"</string>
     <string name="select_device_name_title" msgid="3045019448327493634">"Valige seadme <xliff:g id="DEVICEMODEL">%1$s</xliff:g> nimi"</string>
     <string name="select_device_name_description" msgid="8528185095614986580">"Andke seadmele nimi, et seda oleks lihtsam tuvastada, kui sellesse üle kannate või teiste seadmete kaudu sellega ühenduse loote."</string>
-  <string-array name="rooms">
-    <item msgid="6590829789532602097">"Android TV"</item>
-    <item msgid="1140506340411482365">"Elutoa teler"</item>
-    <item msgid="6448060889026244632">"Peretoa teler"</item>
-    <item msgid="3336274213215419228">"Magamistoa teler"</item>
-  </string-array>
+    <string-array name="rooms">
+        <item msgid="6590829789532602097">"Android TV"</item>
+        <item msgid="1140506340411482365">"Elutoa teler"</item>
+        <item msgid="6448060889026244632">"Peretoa teler"</item>
+        <item msgid="3336274213215419228">"Magamistoa teler"</item>
+    </string-array>
     <string name="custom_room" msgid="6798144004583173563">"Sisestage kohandatud nimi …"</string>
     <string name="device_rename_title" msgid="9070021379000499270">"Seadme <xliff:g id="DEVICEMODEL">%1$s</xliff:g> ümbernimetamine"</string>
     <string name="device_rename_description" msgid="1973894029492915135">"Selle seadme <xliff:g id="DEVICEMODEL">%1$s</xliff:g> nimi on praegu „<xliff:g id="DEVICENAME">%2$s</xliff:g>”"</string>

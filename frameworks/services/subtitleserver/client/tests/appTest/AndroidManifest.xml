@@ -23,8 +23,7 @@
             android:name="com.example.SubtitleSimpleDemo.PlayerActivity"
             android:label="@string/title_activity_player"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
         <activity
             android:name="com.example.SubtitleSimpleDemo.FileBrowserActivity"
             android:label="@string/app_name">

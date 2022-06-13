@@ -18,7 +18,9 @@ package com.android.tv.settings.accessories;
 
 import android.bluetooth.BluetoothDevice;
 
-/**  Local provider proxy to customize events. */
+/**
+ * Local provider proxy to customize events.
+ */
 abstract class LocalBluetoothDeviceProvider implements BluetoothDeviceProvider {
 
     abstract BluetoothDeviceProvider getHostBluetoothDeviceProvider();

@@ -44,7 +44,9 @@ public class InfoFragment extends Fragment {
         return view;
     }
 
-    /** Update the infos in InfoFragment **/
+    /**
+     * Update the infos in InfoFragment
+     **/
     public void updateInfoFragment() {
         updateInfo(getView());
     }

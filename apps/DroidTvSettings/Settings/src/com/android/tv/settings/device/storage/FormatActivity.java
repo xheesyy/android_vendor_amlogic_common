@@ -203,7 +203,7 @@ public class FormatActivity extends FragmentActivity
                         }
 
                         Toast.makeText(context, mActivity.getString(
-                                R.string.storage_format_success, mActivity.mFormatDiskDesc),
+                                        R.string.storage_format_success, mActivity.mFormatDiskDesc),
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(context,

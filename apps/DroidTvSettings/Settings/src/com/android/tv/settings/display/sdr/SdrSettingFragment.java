@@ -12,9 +12,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.provider.Settings;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import android.util.ArrayMap;
 import android.util.Log;
 

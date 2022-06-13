@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 20020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +15,8 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:custom="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/settings_app_name">
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:title="@string/settings_app_name">
 
     <!--
       The basic mode suggestion and the real suggested settings are mutually exclusive so it is safe
@@ -26,7 +25,7 @@
     <PreferenceCategory
         android:key="basic_mode_suggestion"
         android:title="@string/basic_mode_suggestion_category_title"
-        android:order="0" >
+        android:order="0">
         <Preference
             android:key="basic_mode_exit"
             android:icon="@drawable/ic_tv_x"
@@ -54,7 +53,7 @@
             android:key="accounts_and_sign_in_slice"
             android:title="@string/accounts_category_title"
             android:fragment="com.android.tv.settings.accounts.AccountsSliceFragment"
-            custom:uri="@string/account_slice_uri"/>
+            custom:uri="@string/account_slice_uri" />
         <Preference
             android:key="accounts_and_sign_in_basic_mode"
             android:icon="@drawable/ic_add_an_account"
@@ -94,18 +93,17 @@
             android:icon="@drawable/ic_remotes_and_accessories"
             android:key="remotes_and_accessories"
             android:title="@string/remotes_and_accessories_category_title"
-            android:fragment="com.android.tv.settings.accessories.AccessoriesFragment" >
+            android:fragment="com.android.tv.settings.accessories.AccessoriesFragment">
             <intent
                 android:targetClass="com.android.tv.settings.accessories.AddAccessoryActivity"
-                android:targetPackage="com.android.tv.settings"/>
+                android:targetPackage="com.android.tv.settings" />
         </Preference>
         <Preference
             android:icon="@drawable/ic_remotes_and_accessories"
             android:key="connected_devices"
             android:title="@string/remotes_and_accessories_category_title"
             android:visible="false">
-            <intent
-                android:action="com.android.tv.settings.CONNECTED_DEVICES" />
+            <intent android:action="com.android.tv.settings.CONNECTED_DEVICES" />
         </Preference>
         <com.android.tv.twopanelsettings.slices.SlicePreference
             android:icon="@drawable/ic_remotes_and_accessories"
@@ -113,12 +111,11 @@
             android:title="@string/remotes_and_accessories_category_title"
             android:fragment="com.android.tv.twopanelsettings.slices.SliceFragment"
             custom:isPreferenceVisible="false"
-            custom:uri="@string/connected_devices_slice_uri"/>
+            custom:uri="@string/connected_devices_slice_uri" />
         <Preference
             android:icon="@drawable/ic_help_outline"
             android:key="help_and_feedback"
             android:title="@string/help_and_feedback_category_title"
-            android:fragment="com.android.tv.settings.help.HelpFragment">
-        </Preference>
+            android:fragment="com.android.tv.settings.help.HelpFragment"></Preference>
     </PreferenceCategory>
 </PreferenceScreen>

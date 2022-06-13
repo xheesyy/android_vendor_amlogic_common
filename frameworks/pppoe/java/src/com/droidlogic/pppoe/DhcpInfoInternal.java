@@ -17,7 +17,6 @@
 package com.droidlogic.pppoe;
 
 
-
 import android.text.TextUtils;
 import android.util.Log;
 import android.net.RouteInfo;
@@ -35,6 +34,7 @@ import java.util.Collections;
 /**
  * A simple object for retrieving the results of a DHCP request.
  * Replaces (internally) the IPv4-only DhcpInfo class.
+ *
  * @hide
  */
 public class DhcpInfoInternal {
@@ -72,9 +72,10 @@ public class DhcpInfoInternal {
             try {
                 InetAddress inetAddress = NetworkUtils.numericToInetAddress(addr);
                 if (inetAddress instanceof Inet4Address) {
-                    return NetworkUtils.inetAddressToInt((Inet4Address)inetAddress);
+                    return NetworkUtils.inetAddressToInt((Inet4Address) inetAddress);
                 }
-            } catch (IllegalArgumentException e) {}
+            } catch (IllegalArgumentException e) {
+            }
         }
         return 0;
     }
@@ -91,7 +92,8 @@ public class DhcpInfoInternal {
         try {
             InetAddress inetAddress = NetworkUtils.numericToInetAddress(ipAddress);
             info.netmask = NetworkUtils.prefixLengthToNetmaskInt(prefixLength);
-        } catch (IllegalArgumentException e) {}
+        } catch (IllegalArgumentException e) {
+        }
         info.dns1 = convertToInt(dns1);
         info.dns2 = convertToInt(dns2);
         info.serverAddress = convertToInt(serverAddress);

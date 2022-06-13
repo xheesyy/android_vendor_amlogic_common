@@ -18,27 +18,33 @@ package com.android.tv.settings.develop;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.ListPreference;
+
 import android.os.SystemProperties;
 import android.text.TextUtils;
+
 import com.android.tv.settings.util.DroidUtils;
 import com.android.tv.settings.SettingsConstant;
 import com.android.tv.settings.R;
 import com.droidlogic.app.SystemControlManager;
+
 import android.util.Log;
 
 public class DevelopFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "DevelopFragment";
 
-    private static final String KEY_KERNEL_LOG_CONFIG    = "kernel_loglevel_config";
-    private static final String KEY_DTVKIT               = "dtvkit_features";
+    private static final String KEY_KERNEL_LOG_CONFIG = "kernel_loglevel_config";
+    private static final String KEY_DTVKIT = "dtvkit_features";
 
-    public static final String ENV_KERNEL_LOG_LEVEL      = "ubootenv.var.loglevel";
+    public static final String ENV_KERNEL_LOG_LEVEL = "ubootenv.var.loglevel";
 
     private SystemControlManager mSystemControlManager;
     private Preference mKernelLogPref;
@@ -59,8 +65,8 @@ public class DevelopFragment extends SettingsPreferenceFragment implements Prefe
         setPreferencesFromResource(R.xml.develop, null);
         mSystemControlManager = SystemControlManager.getInstance();
 
-        mKernelLogPref=findPreference(KEY_KERNEL_LOG_CONFIG);
-        mDtvkitPref=findPreference(KEY_DTVKIT);
+        mKernelLogPref = findPreference(KEY_KERNEL_LOG_CONFIG);
+        mDtvkitPref = findPreference(KEY_DTVKIT);
         mKernelLogPref.setOnPreferenceChangeListener(this);
         if (!SystemProperties.get("ro.product.brand").contains("Amlogic")) {
             mKernelLogPref.setVisible(false);
@@ -68,10 +74,10 @@ public class DevelopFragment extends SettingsPreferenceFragment implements Prefe
         }
         String level = mSystemControlManager.getBootenv(ENV_KERNEL_LOG_LEVEL, "1");
         if (level.contains("1")) {
-            ((SwitchPreference)mKernelLogPref).setChecked(false);
+            ((SwitchPreference) mKernelLogPref).setChecked(false);
             mKernelLogPref.setSummary(R.string.captions_display_off);
         } else {
-            ((SwitchPreference)mKernelLogPref).setChecked(true);
+            ((SwitchPreference) mKernelLogPref).setChecked(true);
             mKernelLogPref.setSummary(R.string.captions_display_on);
         }
 
@@ -91,6 +97,7 @@ public class DevelopFragment extends SettingsPreferenceFragment implements Prefe
         }
         return true;
     }
+
     @Override
     public int getMetricsCategory() {
         return 0;

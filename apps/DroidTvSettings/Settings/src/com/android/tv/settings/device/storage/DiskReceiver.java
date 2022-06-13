@@ -91,7 +91,7 @@ public class DiskReceiver extends BroadcastReceiver {
             if (info.getType() == VolumeInfo.TYPE_PRIVATE
                     && !TextUtils.equals(volumeId, VolumeInfo.ID_PRIVATE_INTERNAL)) {
                 Toast.makeText(context, R.string.storage_mount_adopted, Toast.LENGTH_SHORT)
-                    .show();
+                        .show();
                 return;
             }
         }

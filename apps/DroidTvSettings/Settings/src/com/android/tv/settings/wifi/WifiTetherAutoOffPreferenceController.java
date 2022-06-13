@@ -23,6 +23,7 @@ import android.net.wifi.WifiManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
+
 import android.util.Log;
 
 public class WifiTetherAutoOffPreferenceController extends BasePreferenceController implements
@@ -32,6 +33,7 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
     private String mPrefKey;
 
     private final WifiManager mWifiManager;
+
     public WifiTetherAutoOffPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mWifiManager = context.getSystemService(WifiManager.class);
@@ -46,21 +48,21 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        Log.d(TAG,"displayPreference");
-        mSwitchPref = (SwitchPreference)screen.findPreference(mPrefKey);
+        Log.d(TAG, "displayPreference");
+        mSwitchPref = (SwitchPreference) screen.findPreference(mPrefKey);
     }
 
     @Override
     public void updateState(Preference preference) {
         SoftApConfiguration softApConfiguration = mWifiManager.getSoftApConfiguration();
         final boolean settingsOn = softApConfiguration.isAutoShutdownEnabled();
-        mSwitchPref = (SwitchPreference)preference;
+        mSwitchPref = (SwitchPreference) preference;
         ((SwitchPreference) preference).setChecked(settingsOn);
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        mSwitchPref = (SwitchPreference)preference;
+        mSwitchPref = (SwitchPreference) preference;
         final boolean settingsOn = (Boolean) newValue;
         SoftApConfiguration softApConfiguration = mWifiManager.getSoftApConfiguration();
         SoftApConfiguration newSoftApConfiguration =
@@ -71,7 +73,7 @@ public class WifiTetherAutoOffPreferenceController extends BasePreferenceControl
     }
 
     public void setEnabled(boolean enable) {
-        Log.d(TAG,"setEnabled"+enable);
+        Log.d(TAG, "setEnabled" + enable);
         if (mSwitchPref != null) {
             mSwitchPref.setEnabled(enable);
         }

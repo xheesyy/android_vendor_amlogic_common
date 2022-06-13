@@ -29,7 +29,7 @@ public class DbxSettingActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DbxSettingFragment.class.getName(), null);
+                .newSettingsFragment(DbxSettingFragment.class.getName(), null);
     }
 
 }

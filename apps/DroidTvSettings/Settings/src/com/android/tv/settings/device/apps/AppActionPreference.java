@@ -38,6 +38,7 @@ public abstract class AppActionPreference extends Preference {
 
     /**
      * Set entry and refresh pref.
+     *
      * @param entry entry
      */
     public void setEntry(@NonNull ApplicationsState.AppEntry entry) {
@@ -56,7 +57,7 @@ public abstract class AppActionPreference extends Preference {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             actions.add(new GuidedAction.Builder()
                     .title(getString(android.R.string.ok))
                     .id(ID_OK)

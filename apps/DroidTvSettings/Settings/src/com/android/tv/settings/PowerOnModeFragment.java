@@ -25,8 +25,10 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.PowerManager;
 import android.provider.Settings;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import android.util.ArrayMap;
 import android.util.Log;
 

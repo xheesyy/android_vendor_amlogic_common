@@ -32,12 +32,11 @@ public class EthernetWifiSwitch extends BroadcastReceiver {
             if (ethInfo.getState() == NetworkInfo.State.CONNECTED) {
                 int wifiState = wm.getWifiState();
                 if ((wifiState == WifiManager.WIFI_STATE_ENABLING) ||
-                    (wifiState == WifiManager.WIFI_STATE_ENABLED)) {
+                        (wifiState == WifiManager.WIFI_STATE_ENABLED)) {
                     wm.setWifiEnabled(false);
                     SettingsPref.setWiFiSaveState(context, 1);
                 }
-            }
-            else {
+            } else {
                 if (1 == SettingsPref.getWiFiSaveState(context)) {
                     wm.setWifiEnabled(true);
                     SettingsPref.setWiFiSaveState(context, 0);

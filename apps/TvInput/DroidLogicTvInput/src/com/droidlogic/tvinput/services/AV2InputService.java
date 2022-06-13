@@ -46,20 +46,26 @@ import android.content.IntentFilter;
 import android.util.Log;
 import android.media.tv.TvInputManager;
 import android.media.tv.TvContentRating;
+
 import com.droidlogic.app.tv.ChannelInfo;
 import com.droidlogic.app.tv.TvDataBaseManager;
 import com.droidlogic.tvinput.widget.DTVSubtitleView;
+
 import android.os.Handler;
 import android.os.HandlerThread;
+
 import com.droidlogic.app.tv.Program;
+
 import android.media.tv.TvContract;
 import android.os.Message;
 import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 import android.view.accessibility.CaptioningManager.CaptioningChangeListener;
 import android.graphics.Color;
+
 import com.droidlogic.app.DataProviderManager;
 import com.droidlogic.app.SystemControlManager;
+
 import android.media.tv.TvTrackInfo;
 import android.widget.Toast;
 
@@ -168,7 +174,7 @@ public class AV2InputService extends DroidLogicTvInputService {
 
     @Override
     public void setCurrentSessionById(int sessionId) {
-        Utils.logd(TAG, "setCurrentSessionById:"+sessionId);
+        Utils.logd(TAG, "setCurrentSessionById:" + sessionId);
         AV2InputSession session = sessionMap.get(sessionId);
         if (session != null) {
             mCurrentSession = session;
@@ -177,32 +183,28 @@ public class AV2InputService extends DroidLogicTvInputService {
 
     @Override
     public void doTuneFinish(int result, Uri uri, int sessionId) {
-        Log.d(TAG, "doTuneFinish,result:"+result+"sessionId:"+sessionId);
+        Log.d(TAG, "doTuneFinish,result:" + result + "sessionId:" + sessionId);
         if (result == ACTION_SUCCESS) {
             AV2InputSession session = sessionMap.get(sessionId);
             if (session != null) {
                 mCurrentChannel = mTvDataBaseManager.getChannelInfo(uri);
-                Log.d(TAG, "mCurrentChannel:"+mCurrentChannel);
+                Log.d(TAG, "mCurrentChannel:" + mCurrentChannel);
                 session.checkContentBlockNeeded(mCurrentChannel);
             }
         }
     }
 
 
-
-    private int signal_is_pal(TvInSignalInfo signal_info)
-    {
+    private int signal_is_pal(TvInSignalInfo signal_info) {
         if (signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_PAL_60 ||
-            signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_PAL_CN ||
-            signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_PAL_I ||
-            signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_PAL_M) {
+                signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_PAL_CN ||
+                signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_PAL_I ||
+                signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_PAL_M) {
             return SIGNAL_PAL_FMT;
-        }
-        else if (signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_NTSC_443 ||
-            signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_NTSC_M) {
+        } else if (signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_NTSC_443 ||
+                signal_info.sigFmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_CVBS_NTSC_M) {
             return SIGNAL_NTSC_FMT;
-        }
-        else {
+        } else {
             return SIGNAL_NOT_KNOWN;
         }
     }
@@ -214,14 +216,13 @@ public class AV2InputService extends DroidLogicTvInputService {
         if (status == TvInSignalInfo.SignalStatus.TVIN_SIG_STATUS_STABLE) {
             Log.d(TAG, "currSession " + mCurrentSession + " tmpInfo.fmt.toString() for av=" + signal_info.sigFmt.toString());
             signalFmt = signal_is_pal(signal_info);
-        }
-        else
+        } else
             signalFmt = SIGNAL_NOT_KNOWN;
 
         super.onSigChange(signal_info);
     }
 
-    public class AV2InputSession extends TvInputBaseSession  implements DTVSubtitleView.SubtitleDataListener{
+    public class AV2InputSession extends TvInputBaseSession implements DTVSubtitleView.SubtitleDataListener {
         private TvInputManager mTvInputManager;
         private final Context mContext;
         //private TvControlManager mTvControlManager;
@@ -282,31 +283,31 @@ public class AV2InputService extends DroidLogicTvInputService {
 
 
         private class CCStyleParams {
-             protected int fg_color;
-             protected int fg_opacity;
-             protected int bg_color;
-             protected int bg_opacity;
-             protected int font_style;
-             protected float font_size;
+            protected int fg_color;
+            protected int fg_opacity;
+            protected int bg_color;
+            protected int bg_opacity;
+            protected int font_style;
+            protected float font_size;
 
-             public CCStyleParams(int fg_color, int fg_opacity,
-                                int bg_color, int bg_opacity, int font_style, float font_size) {
-                 this.fg_color = fg_color;
-                 this.fg_opacity = fg_opacity;
-                 this.bg_color = bg_color;
-                 this.bg_opacity = bg_opacity;
-                 this.font_style = font_style;
-                 this.font_size = font_size;
-             }
-         }
+            public CCStyleParams(int fg_color, int fg_opacity,
+                                 int bg_color, int bg_opacity, int font_style, float font_size) {
+                this.fg_color = fg_color;
+                this.fg_opacity = fg_opacity;
+                this.bg_color = bg_color;
+                this.bg_opacity = bg_opacity;
+                this.font_style = font_style;
+                this.font_size = font_size;
+            }
+        }
 
         protected int getTeletextRegionID(String ttxRegionName) {
             final String[] supportedRegions = {"English", "Deutsch", "Svenska/Suomi/Magyar",
                     "Italiano", "Fran?ais", "Português/Espa?ol",
-                    "Cesky/Slovencina", "Türk?e", "Ellinika", "Alarabia / English" ,
+                    "Cesky/Slovencina", "Türk?e", "Ellinika", "Alarabia / English",
                     "Russian", "Cyrillic"
             };
-            final int[] regionIDMaps = {16, 17, 18, 19, 20, 21, 14, 22, 55 , 64, 36, 32};
+            final int[] regionIDMaps = {16, 17, 18, 19, 20, 21, 14, 22, 55, 64, 36, 32};
 
             int i;
             for (i = 0; i < supportedRegions.length; i++) {
@@ -329,18 +330,18 @@ public class AV2InputService extends DroidLogicTvInputService {
                 //CCStyleParams ccParam = getCaptionStyle();
                 CCStyleParams ccParam = getCaptionStyle();//new CCStyleParams(1,3,2,3,0,2);
                 DTVSubtitleView.AVCCParams params =
-                    new DTVSubtitleView.AVCCParams(pid, id1, lang,
-                        ccParam.fg_color,
-                        ccParam.fg_opacity,
-                        ccParam.bg_color,
-                        ccParam.bg_opacity,
-                        ccParam.font_style,
-                        ccParam.font_size);
+                        new DTVSubtitleView.AVCCParams(pid, id1, lang,
+                                ccParam.fg_color,
+                                ccParam.fg_opacity,
+                                ccParam.bg_color,
+                                ccParam.bg_opacity,
+                                ccParam.font_style,
+                                ccParam.font_size);
 
                 mSubtitleView.setSubParams(params);
                 mSubtitleView.setMargin(225, 128, 225, 128);
-                Log.d(TAG, "ATV CC pid="+pid+",fg_color="+ccParam.fg_color+", fg_op="+ccParam.fg_opacity+", bg_color="+ccParam.bg_color+", bg_op="+ccParam.bg_opacity);
-                Log.d(TAG,"font_style:"+ccParam.font_style+"font_size"+ccParam.font_size);
+                Log.d(TAG, "ATV CC pid=" + pid + ",fg_color=" + ccParam.fg_color + ", fg_op=" + ccParam.fg_opacity + ", bg_color=" + ccParam.bg_color + ", bg_op=" + ccParam.bg_opacity);
+                Log.d(TAG, "font_style:" + ccParam.font_style + "font_size" + ccParam.font_size);
             } else if (type == ChannelInfo.Subtitle.TYPE_ATV_TELETEXT) {
                 int pgno;
                 pgno = (id1 == 0) ? 800 : id1 * 100;
@@ -350,12 +351,13 @@ public class AV2InputService extends DroidLogicTvInputService {
                 mSubtitleView.setSubParams(params);
             }
         }
+
         public AV2InputSession(Context context, String inputId, int deviceId) {
             super(context, inputId, deviceId);
             mContext = context;
             Utils.logd(TAG, "=====new AVInputSession=====");
             if (mTvInputManager == null)
-                mTvInputManager = (TvInputManager)getSystemService(Context.TV_INPUT_SERVICE);
+                mTvInputManager = (TvInputManager) getSystemService(Context.TV_INPUT_SERVICE);
             mCurrentChannel = null;
             needRestartCC = true;
             mTvDataBaseManager = new TvDataBaseManager(mContext);
@@ -368,25 +370,25 @@ public class AV2InputService extends DroidLogicTvInputService {
             initOverlayView(R.layout.layout_overlay);
             if (mOverlayView != null) {
                 mOverlayView.setImage(R.drawable.bg_no_signal);
-                mSubtitleView = (DTVSubtitleView)mOverlayView.getSubtitleView();
+                mSubtitleView = (DTVSubtitleView) mOverlayView.getSubtitleView();
                 mSubtitleView.setSubtitleDataListener(this);
             }
 
-           if (getBlockNoRatingEnable()) {
+            if (getBlockNoRatingEnable()) {
                 isBlockNoRatingEnable = true;
             } else {
                 isBlockNoRatingEnable = false;
                 isUnlockCurrent_NR = false;
             }
-            Log.d(TAG,"isBlockNoRatingEnable:"+isBlockNoRatingEnable+",isUnlockCurrent_NR:"+isUnlockCurrent_NR);
+            Log.d(TAG, "isBlockNoRatingEnable:" + isBlockNoRatingEnable + ",isUnlockCurrent_NR:" + isUnlockCurrent_NR);
             mCaptioningManager = (CaptioningManager) mContext.getSystemService(Context.CAPTIONING_SERVICE);
             mSystemControlManager = SystemControlManager.getInstance();
 
         }
 
         private boolean getBlockNoRatingEnable() {
-            int status = DataProviderManager.getIntValue(mContext, DroidLogicTvUtils.BLOCK_NORATING, 0) ;
-            Log.d(TAG,"getBlockNoRatingEnable:"+status);
+            int status = DataProviderManager.getIntValue(mContext, DroidLogicTvUtils.BLOCK_NORATING, 0);
+            Log.d(TAG, "getBlockNoRatingEnable:" + status);
             return (status == 1) ? true : false;
         }
 
@@ -419,7 +421,7 @@ public class AV2InputService extends DroidLogicTvInputService {
         @Override
         public boolean onSetSurface(Surface surface) {
             super.onSetSurface(surface);
-            return setSurfaceInService(surface,this);
+            return setSurfaceInService(surface, this);
         }
 
 
@@ -430,20 +432,17 @@ public class AV2InputService extends DroidLogicTvInputService {
             return doTuneInService(channelUri, getSessionId());
         }
 
-        protected void checkIsNeedClearUnblockRating()
-        {
+        protected void checkIsNeedClearUnblockRating() {
             boolean isParentControlEnabled = mTvInputManager.isParentalControlsEnabled();
             Log.d(TAG, "checkIsNeedClearUnblockRating  into");
-            if (isParentControlEnabled)
-            {
-              Iterator<TvContentRating> rateIter = mUnblockedRatingSet.iterator();
-              while (rateIter.hasNext()) {
-                TvContentRating rating = rateIter.next();
-                if (mTvInputManager.isRatingBlocked(rating))
-                {
-                    mUnblockedRatingSet.remove(rating);
+            if (isParentControlEnabled) {
+                Iterator<TvContentRating> rateIter = mUnblockedRatingSet.iterator();
+                while (rateIter.hasNext()) {
+                    TvContentRating rating = rateIter.next();
+                    if (mTvInputManager.isRatingBlocked(rating)) {
+                        mUnblockedRatingSet.remove(rating);
+                    }
                 }
-              }
             }
         }
 
@@ -451,7 +450,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             mUnblockedRatingSet.clear();
             stopSubtitle();
             releaseWorkThread();
-            synchronized(mLock) {
+            synchronized (mLock) {
                 mCurrentChannel = null;
             }
             if (mHandler != null) {
@@ -479,6 +478,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                 mHandler = null;
             }
         }
+
         @Override
         public void doUnblockContent(TvContentRating rating) {
             super.doUnblockContent(rating);
@@ -499,6 +499,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             }
 
         }
+
         @Override
         public void doAppPrivateCmd(String action, Bundle bundle) {
             //super.doAppPrivateCmd(action, bundle);
@@ -507,7 +508,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                     mHardware.setSurface(null, null);
                 }
             } else if (DroidLogicTvUtils.ACTION_BLOCK_NORATING.equals(action)) {
-                Log.d(TAG, "do private cmd: ACTION_BLOCK_NORATING:"+ bundle.getInt(DroidLogicTvUtils.PARAM_NORATING_ENABLE));
+                Log.d(TAG, "do private cmd: ACTION_BLOCK_NORATING:" + bundle.getInt(DroidLogicTvUtils.PARAM_NORATING_ENABLE));
                 if (DroidLogicTvUtils.NORATING_OFF == bundle.getInt(DroidLogicTvUtils.PARAM_NORATING_ENABLE)) {
                     isBlockNoRatingEnable = false;
                     isUnlockCurrent_NR = false;
@@ -518,16 +519,18 @@ public class AV2InputService extends DroidLogicTvInputService {
                 checkCurrentContentBlockNeeded();
             }
         }
+
         public int mParentControlDelay = 3000;
+
         protected void doParentalControls(ChannelInfo channelInfo) {
             if (mHandler != null)
                 mHandler.removeMessages(MSG_PARENTAL_CONTROL_AV);
 
             if (mTvInputManager == null)
-                mTvInputManager = (TvInputManager)getSystemService(Context.TV_INPUT_SERVICE);
+                mTvInputManager = (TvInputManager) getSystemService(Context.TV_INPUT_SERVICE);
 
             //Log.d(TAG, "doPC:"+this);
-            Log.d(TAG, "doParentalControls:"+channelInfo);
+            Log.d(TAG, "doParentalControls:" + channelInfo);
             boolean isParentalControlsEnabled = mTvInputManager.isParentalControlsEnabled();
             if (isParentalControlsEnabled) {
                 TvContentRating blockContentRating = getContentRatingOfCurrentProgramBlocked(channelInfo);
@@ -543,7 +546,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                 updateChannelBlockStatus(false, null, channelInfo);
             }
 
-           if (mHandler != null) {
+            if (mHandler != null) {
                 if (false) {
                    /* TvTime TvTime = new TvTime(mContext);
                     Program mCurrentProgram = mTvDataBaseManager.getProgram(TvContract.buildChannelUri(channelInfo.getId()), TvTime.getTime());
@@ -556,13 +559,13 @@ public class AV2InputService extends DroidLogicTvInputService {
                     Log.d(TAG, "doPC next");
                 } else {
                     mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_PARENTAL_CONTROL_AV, this), mParentControlDelay);
-                    Log.d(TAG, "---doPC next:"+mParentControlDelay);
+                    Log.d(TAG, "---doPC next:" + mParentControlDelay);
                 }
             }
         }
 
         protected TvContentRating[] getContentRatingsOfCurrentProgram(ChannelInfo channelInfo) {
-            Log.d(TAG, "getContentRatingsOfCurrentProgram:"+channelInfo);
+            Log.d(TAG, "getContentRatingsOfCurrentProgram:" + channelInfo);
             return mATVContentRatings;
         }
 
@@ -602,8 +605,8 @@ public class AV2InputService extends DroidLogicTvInputService {
 
         @Override
         public void onSubtitleData(String json) {
-            Log.d(TAG, "onSubtitleData curchannel:"+(mCurrentChannel!=null?mCurrentChannel.toString():"null"));
-            Log.d(TAG, "onSubtitleData json:"+json);
+            Log.d(TAG, "onSubtitleData curchannel:" + (mCurrentChannel != null ? mCurrentChannel.toString() : "null"));
+            Log.d(TAG, "onSubtitleData json:" + json);
 
             int mask = DroidLogicTvUtils.getObjectValueInt(json, "cc", "data", -1);
             if (mask != -1) {
@@ -652,6 +655,7 @@ public class AV2InputService extends DroidLogicTvInputService {
         private int mCurrentCCExist = 0;
         private int mCurrentCCStyle = -1;
         private boolean mCurrentCCEnabled = false;
+
         public void doCCData(int mask) {
             Log.d(TAG, "cc data: " + mask);
 
@@ -667,19 +671,20 @@ public class AV2InputService extends DroidLogicTvInputService {
         protected void tryPreferredSubtitleContinue(int exist) {
             synchronized (mSubtitleLock) {
                 if (tryPreferredSubtitle(exist) == -1) {
-                    Log.d(TAG,"tryPreferredSubtitleContinue,mCurrentCCStyle:"+mCurrentCCStyle);
+                    Log.d(TAG, "tryPreferredSubtitleContinue,mCurrentCCStyle:" + mCurrentCCStyle);
                     startSubtitleCCBackground();
                     notifyTrackSelected(TvTrackInfo.TYPE_SUBTITLE, null);
                 }
                 mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_CC_TRY_PREFERRED, mCurrentCCExist, 0, this),
-                                DELAY_TRY_PREFER_CC);
+                        DELAY_TRY_PREFER_CC);
             }
         }
+
         protected int tryPreferredSubtitle(int exist) {
             if (mSystemControlManager != null) {
-                int to =  mSystemControlManager.getPropertyInt(DTV_SUBTITLE_CC_PREFER, -1);
+                int to = mSystemControlManager.getPropertyInt(DTV_SUBTITLE_CC_PREFER, -1);
 
-                Log.d(TAG, "ccc tryPrefer, exist["+exist+"] to["+to+"] Enable["+mCurrentCCEnabled+"]");
+                Log.d(TAG, "ccc tryPrefer, exist[" + exist + "] to[" + to + "] Enable[" + mCurrentCCEnabled + "]");
 
                 if (mCurrentCCStyle == to)//already show
                     return 0;
@@ -689,7 +694,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                     startSubtitle();//startSubtitle(s);
                     notifyTrackSelected(TvTrackInfo.TYPE_SUBTITLE, null);
                 }
-                Log.d(TAG,"tryPreferredSubtitle,return:"+to);
+                Log.d(TAG, "tryPreferredSubtitle,return:" + to);
                 return to;
             }
             return 0;
@@ -710,23 +715,23 @@ public class AV2InputService extends DroidLogicTvInputService {
 
         protected void checkContentBlockNeeded(ChannelInfo channelInfo) {
             //doParentalControls(channelInfo);
-            Log.d(TAG, "checkContentBlockNeeded:"+channelInfo);
+            Log.d(TAG, "checkContentBlockNeeded:" + channelInfo);
             doParentalControls(channelInfo);
         }
 
         private void updateChannelBlockStatus(boolean channelBlocked,
-                TvContentRating contentRating, ChannelInfo channelInfo) {
+                                              TvContentRating contentRating, ChannelInfo channelInfo) {
             if (channelInfo == null) {
-                Log.d(TAG,"channelInfo is null ,exit updateChannelBlockStatus");
-               // return;
+                Log.d(TAG, "channelInfo is null ,exit updateChannelBlockStatus");
+                // return;
             }
-            Log.d(TAG, "updateBlock:"+channelBlocked + " curBlock:"+mChannelBlocked + " channel:"+channelInfo);
+            Log.d(TAG, "updateBlock:" + channelBlocked + " curBlock:" + mChannelBlocked + " channel:" + channelInfo);
 
             //only for block norationg function
             TvContentRating tcr = TvContentRating.createRating("com.android.tv", "block_norating", "block_norating", "");
 
             boolean needChannelBlock = channelBlocked;
-            Log.d(TAG, "isBlockNoRatingEnable:"+isBlockNoRatingEnable+",isUnlockCurrent_NR:"+isUnlockCurrent_NR);
+            Log.d(TAG, "isBlockNoRatingEnable:" + isBlockNoRatingEnable + ",isUnlockCurrent_NR:" + isUnlockCurrent_NR);
             //add for no-rating block
             boolean isParentControlEnabled = mTvInputManager.isParentalControlsEnabled();
             TvContentRating currentBlockRatting = getCurrentRating();
@@ -735,9 +740,9 @@ public class AV2InputService extends DroidLogicTvInputService {
                 needChannelBlock = true;
             }
 
-            Log.d(TAG, "needChannelBlock:"+needChannelBlock);
+            Log.d(TAG, "needChannelBlock:" + needChannelBlock);
             needChannelBlock = isParentControlEnabled & needChannelBlock;
-            Log.d(TAG, "updated needChannelBlock:"+needChannelBlock);
+            Log.d(TAG, "updated needChannelBlock:" + needChannelBlock);
 
             if ((mChannelBlocked != -1) && (mChannelBlocked == 1) == needChannelBlock
                     && (!needChannelBlock || (needChannelBlock && contentRating != null && contentRating.equals(mLastBlockedRating))))
@@ -746,20 +751,20 @@ public class AV2InputService extends DroidLogicTvInputService {
             mChannelBlocked = (needChannelBlock ? 1 : 0);
             if (needChannelBlock) {
                 if (contentRating != null) {
-                    Log.d(TAG, "notifyBlock:"+contentRating.flattenToString());
+                    Log.d(TAG, "notifyBlock:" + contentRating.flattenToString());
                     notifyContentBlocked(contentRating);
                 } else if (isBlockNoRatingEnable) {
-                    Log.d(TAG, "notifyBlock because of block_norating:"+tcr.flattenToString());
+                    Log.d(TAG, "notifyBlock because of block_norating:" + tcr.flattenToString());
                     notifyContentBlocked(tcr);
                 }
                 mLastBlockedRating = contentRating;
             } else {
-                synchronized(mLock) {
-                   // if (mCurrentChannel != null) {
-                        playProgram(mCurrentChannel);
-                        Log.d(TAG, "notifyAllowed");
-                        notifyContentAllowed();
-                   // }
+                synchronized (mLock) {
+                    // if (mCurrentChannel != null) {
+                    playProgram(mCurrentChannel);
+                    Log.d(TAG, "notifyAllowed");
+                    notifyContentAllowed();
+                    // }
                 }
             }
         }
@@ -858,7 +863,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             public void run() {
                 mTeletextSubPageNumber_count = 0;
                 mTeletextSubPageNumber = 0;
-                for (int i=0;i<mTeletextSubPageByteArr.length;i++)
+                for (int i = 0; i < mTeletextSubPageByteArr.length; i++)
                     mTeletextSubPageByteArr[i] = '-';
                 mSubtitleView.tt_set_subpn_text(Integer.toString(mSubtitleView.get_teletext_subpg()));
                 Log.d(TAG, "mTeletextNumberHideViewRunnable");
@@ -922,10 +927,10 @@ public class AV2InputService extends DroidLogicTvInputService {
                 mMainHandler.removeCallbacks(mTeletextSubpgNumberHideViewRunnable);
             }
             if (mTeletextSubPageNumber_count == 0) {
-                for (int i=0; i<4; i++)
+                for (int i = 0; i < 4; i++)
                     mTeletextSubPageByteArr[i] = '-';
             }
-            mTeletextSubPageByteArr[mTeletextSubPageNumber_count++] = (char)('0' + value);
+            mTeletextSubPageByteArr[mTeletextSubPageNumber_count++] = (char) ('0' + value);
             if (mTeletextSubPageNumber == 0 && value != 0)
                 mTeletextSubPageNumber = value;
             else
@@ -946,7 +951,7 @@ public class AV2InputService extends DroidLogicTvInputService {
 
 
         private boolean playProgram(ChannelInfo info) {
-            Log.d(TAG,"playProgram");
+            Log.d(TAG, "playProgram");
 
             notifyTracks(info);
             startSubtitle();
@@ -954,8 +959,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             return true;
         }
 
-        private void start_teletext()
-        {
+        private void start_teletext() {
             if (pal_teletext_subtitle != null) {
                 setSubtitleParam(ChannelInfo.Subtitle.TYPE_ATV_TELETEXT,
                         0,
@@ -978,8 +982,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             startSubtitleAutoAnalog();
         }
 
-        public void reset_atv_status()
-        {
+        public void reset_atv_status() {
             tt_subpg_walk_mode = false;
             if (tt_display_mode == DTVSubtitleView.TT_DISP_MIX_RIGHT) {
                 Rect rect = new Rect();
@@ -1035,6 +1038,7 @@ public class AV2InputService extends DroidLogicTvInputService {
         }
 
         private int reg_id = 0;
+
         @Override
         public boolean onKeyDown(int keyCode, KeyEvent event) {
             Log.e(TAG, "keycode down: " + keyCode + " tt_switch " + teletext_switch);
@@ -1087,8 +1091,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                     mSubtitleView.colorLink(3);
                     break;
                 case KEY_MIX: //Play/Pause
-                    switch (tt_display_mode)
-                    {
+                    switch (tt_display_mode) {
                         case DTVSubtitleView.TT_DISP_NORMAL:
                             tt_display_mode = DTVSubtitleView.TT_DISP_MIX_RIGHT;
                             break;
@@ -1101,14 +1104,15 @@ public class AV2InputService extends DroidLogicTvInputService {
                         default:
                             tt_display_mode = DTVSubtitleView.TT_DISP_NORMAL;
                             break;
-                    };
+                    }
+                    ;
                     mSubtitleView.setTTMixMode(tt_display_mode);
                     Rect rect = new Rect();
                     mSubtitleView.getGlobalVisibleRect(rect);
                     if (tt_display_mode == DTVSubtitleView.TT_DISP_MIX_RIGHT) {
-                        layoutSurface(rect.left, rect.top, (rect.left + rect.right) / 2,  rect.top + rect.bottom);
+                        layoutSurface(rect.left, rect.top, (rect.left + rect.right) / 2, rect.top + rect.bottom);
                     } else {
-                        layoutSurface(rect.left, rect.top, rect.right,  rect.bottom);
+                        layoutSurface(rect.left, rect.top, rect.right, rect.bottom);
                     }
                     break;
                 case KEY_NEXT_PAGE: //Next program
@@ -1185,8 +1189,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                     mSubtitleView.tt_goto_subtitle();
                     break;
                 case 87:
-                    switch (reg_id)
-                    {
+                    switch (reg_id) {
                         case 0:
                             reg_id = 8;
                             break;
@@ -1211,7 +1214,8 @@ public class AV2InputService extends DroidLogicTvInputService {
                         default:
                             reg_id = 0;
                             break;
-                    };
+                    }
+                    ;
                     Log.e(TAG, "regid " + reg_id);
                     mSubtitleView.setTTRegion(reg_id);
                     break;
@@ -1221,8 +1225,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             return true;
         }
 
-        private void stop_teletext()
-        {
+        private void stop_teletext() {
             enableSubtitleShow(false);
             teletext_switch = false;
             reset_atv_status();
@@ -1230,8 +1233,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             notifyTrackSelected(TvTrackInfo.TYPE_SUBTITLE, null);
         }
 
-        protected void prepareTeletext(List<ChannelInfo.Subtitle> subtitles)
-        {
+        protected void prepareTeletext(List<ChannelInfo.Subtitle> subtitles) {
             pal_teletext_subtitle
                     = new ChannelInfo.Subtitle(ChannelInfo.Subtitle.TYPE_ATV_TELETEXT,
                     1,
@@ -1311,7 +1313,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             }
 
             for (TvContentRating rating : ratings) {
-               if (!mUnblockedRatingSet.contains(rating) && mTvInputManager
+                if (!mUnblockedRatingSet.contains(rating) && mTvInputManager
                         .isRatingBlocked(rating)) {
                     return rating;
                 }
@@ -1334,7 +1336,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                         if (mCurrentSession == msg.obj) {
                             switch (msg.what) {
                                 case MSG_PARENTAL_CONTROL_AV:
-                                    Log.d(TAG,"MSG_PARENTAL_CONTROL_AV,checkContentBlockNeeded:"+mCurrentChannel);
+                                    Log.d(TAG, "MSG_PARENTAL_CONTROL_AV,checkContentBlockNeeded:" + mCurrentChannel);
                                     checkContentBlockNeeded(mCurrentChannel);
                                     break;
                                 case MSG_CC_DATA:
@@ -1363,10 +1365,8 @@ public class AV2InputService extends DroidLogicTvInputService {
             }
         }
 
-        protected int getColor(int color)
-        {
-        switch (color)
-            {
+        protected int getColor(int color) {
+            switch (color) {
                 case 0xFFFFFF:
                     return DTV_COLOR_WHITE;
                 case 0x0:
@@ -1386,11 +1386,10 @@ public class AV2InputService extends DroidLogicTvInputService {
             }
             return DTV_COLOR_WHITE;
         }
-        protected int getOpacity(int opacity)
-        {
-            Log.d(TAG, ">> opacity:"+Integer.toHexString(opacity));
-            switch (opacity)
-            {
+
+        protected int getOpacity(int opacity) {
+            Log.d(TAG, ">> opacity:" + Integer.toHexString(opacity));
+            switch (opacity) {
                 case 0:
                     return DTV_OPACITY_TRANSPARENT;
                 case 0x80000000:
@@ -1400,6 +1399,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             }
             return DTV_OPACITY_TRANSPARENT;
         }
+
         protected float getFontSize(float textSize) {
             if (0 <= textSize && textSize < .375) {
                 return 1.0f;//AM_CC_FONTSIZE_SMALL
@@ -1411,7 +1411,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                 return 3.0f;//AM_CC_FONTSIZE_BIG
             } else if (textSize < 2.5) {
                 return 4.0f;//AM_CC_FONTSIZE_MAX
-            }else {
+            } else {
                 return 2.0f;//AM_CC_FONTSIZE_DEFAULT
             }
         }
@@ -1431,13 +1431,13 @@ public class AV2InputService extends DroidLogicTvInputService {
             return DroidLogicTvUtils.mapToString(map);
         }
 
-        protected String addSubtitleTracks(List <TvTrackInfo> tracks, ChannelInfo ch) {
+        protected String addSubtitleTracks(List<TvTrackInfo> tracks, ChannelInfo ch) {
             if (mCurrentSubtitles == null || mCurrentSubtitles.size() == 0)
                 return null;
 
-            Log.d(TAG, "add subtitle tracks["+mCurrentSubtitles.size()+"]");
+            Log.d(TAG, "add subtitle tracks[" + mCurrentSubtitles.size() + "]");
 
-            int auto = (mCurrentSubtitle == null)?-1:mCurrentSubtitle.id;
+            int auto = (mCurrentSubtitle == null) ? -1 : mCurrentSubtitle.id;
             Iterator<ChannelInfo.Subtitle> iter = mCurrentSubtitles.iterator();
             while (iter.hasNext()) {
                 ChannelInfo.Subtitle s = iter.next();
@@ -1448,7 +1448,7 @@ public class AV2InputService extends DroidLogicTvInputService {
                                 .build();
                 tracks.add(SubtitleTrack);
 
-                Log.d(TAG, "\t" + (((auto==s.id))? ("*"+s.id+":[") : (""+s.id+": [")) + s.mLang + "]"
+                Log.d(TAG, "\t" + (((auto == s.id)) ? ("*" + s.id + ":[") : ("" + s.id + ": [")) + s.mLang + "]"
                         + " [pid:" + s.mPid + "] [type:" + s.mType + "]");
                 Log.d(TAG, "\t" + "   [id1:" + s.mId1 + "] [id2:" + s.mId2 + "] [stype:" + s.mStype + "]");
             }
@@ -1460,37 +1460,37 @@ public class AV2InputService extends DroidLogicTvInputService {
         }
 
         protected void notifyTracks(ChannelInfo ch) {
-            List < TvTrackInfo > tracks = new ArrayList<>();;
+            List<TvTrackInfo> tracks = new ArrayList<>();
+            ;
             String AudioSelectedId = null;
             String SubSelectedId = null;
             mCurrentSubtitles = new ArrayList<ChannelInfo.Subtitle>();
             if (signalFmt == SIGNAL_NTSC_FMT) {
                 Log.e(TAG, "SIGNAL_NTSC_FMT prepare cc");
                 int count = 0;
-                for (int i=0; i<4; i++)
-                {
+                for (int i = 0; i < 4; i++) {
                     ChannelInfo.Subtitle sub = new ChannelInfo.Subtitle(
                             ChannelInfo.Subtitle.TYPE_ATV_CC,
                             ChannelInfo.Subtitle.CC_CAPTION_CC1 + i,
                             ChannelInfo.Subtitle.TYPE_ATV_CC,
                             0,
                             0,
-                            "CC"+(i+1),
+                            "CC" + (i + 1),
                             count++);
                     mCurrentSubtitles.add(sub);
                 }
-                for (int i=0; i<4; i++) {
+                for (int i = 0; i < 4; i++) {
                     ChannelInfo.Subtitle s = new ChannelInfo.Subtitle(
                             ChannelInfo.Subtitle.TYPE_ATV_CC,
                             ChannelInfo.Subtitle.CC_CAPTION_TEXT1 + i,
                             ChannelInfo.Subtitle.TYPE_ATV_CC,
                             0,
                             0,
-                            "TX"+(i+1),
+                            "TX" + (i + 1),
                             count++);
                     mCurrentSubtitles.add(s);
                 }
-            } else if (signalFmt == SIGNAL_PAL_FMT){
+            } else if (signalFmt == SIGNAL_PAL_FMT) {
                 Log.e(TAG, "SIGNAL_PAL_FMT prepare teletext");
                 prepareTeletext(mCurrentSubtitles);
             } else if (signalFmt == SIGNAL_NOT_KNOWN)
@@ -1499,7 +1499,7 @@ public class AV2InputService extends DroidLogicTvInputService {
             SubSelectedId = addSubtitleTracks(tracks, ch);
 
             if (tracks != null) {
-                Log.d(TAG, "notify Tracks["+tracks.size()+"]");
+                Log.d(TAG, "notify Tracks[" + tracks.size() + "]");
                 notifyTracksChanged(tracks);
             }
 
@@ -1510,8 +1510,8 @@ public class AV2InputService extends DroidLogicTvInputService {
             notifyTrackSelected(TvTrackInfo.TYPE_SUBTITLE, SubSelectedId);
         }
 
-        private int getRawUserStyle(){
-           //TODO
+        private int getRawUserStyle() {
+            //TODO
            /* try {
                 Class clazz = ClassLoader.getSystemClassLoader().loadClass("android.view.accessibility.CaptioningManager");
                 Method method = clazz.getMethod("getUserStyle");
@@ -1569,62 +1569,61 @@ public class AV2InputService extends DroidLogicTvInputService {
             int fg = userStyle.foregroundColor;
             int bg = userStyle.backgroundColor;
 
-            int convert_fg_color = USE_NEW_CCVIEW? fg_color : getColor(fg_color);
-            int convert_fg_opacity = USE_NEW_CCVIEW? fg_opacity : getOpacity(fg_opacity);
-            int convert_bg_color = USE_NEW_CCVIEW? bg_color : getColor(bg_color);
-            int convert_bg_opacity = USE_NEW_CCVIEW? bg_opacity : getOpacity(bg_opacity);
-            float convert_font_size = USE_NEW_CCVIEW? textSize: getFontSize(textSize);
-            Log.d(TAG, "Caption font size:"+convert_font_size+" ,fg_color:"+Integer.toHexString(fg)+
-                ", fg_opacity:"+Integer.toHexString(fg_opacity)+
-                " ,bg_color:"+Integer.toHexString(bg)+", @fg_color:"+convert_fg_color+", @bg_color:"+
-                convert_bg_color+", @fg_opacity:"+convert_fg_opacity+", @bg_opacity:"+convert_bg_opacity);
+            int convert_fg_color = USE_NEW_CCVIEW ? fg_color : getColor(fg_color);
+            int convert_fg_opacity = USE_NEW_CCVIEW ? fg_opacity : getOpacity(fg_opacity);
+            int convert_bg_color = USE_NEW_CCVIEW ? bg_color : getColor(bg_color);
+            int convert_bg_opacity = USE_NEW_CCVIEW ? bg_opacity : getOpacity(bg_opacity);
+            float convert_font_size = USE_NEW_CCVIEW ? textSize : getFontSize(textSize);
+            Log.d(TAG, "Caption font size:" + convert_font_size + " ,fg_color:" + Integer.toHexString(fg) +
+                    ", fg_opacity:" + Integer.toHexString(fg_opacity) +
+                    " ,bg_color:" + Integer.toHexString(bg) + ", @fg_color:" + convert_fg_color + ", @bg_color:" +
+                    convert_bg_color + ", @fg_opacity:" + convert_fg_opacity + ", @bg_opacity:" + convert_bg_opacity);
 
-            switch (style)
-            {
+            switch (style) {
                 case DTV_CC_STYLE_WHITE_ON_BLACK:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.WHITE : DTV_COLOR_WHITE;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.BLACK : DTV_COLOR_BLACK;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.WHITE : DTV_COLOR_WHITE;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.BLACK : DTV_COLOR_BLACK;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
                     break;
 
                 case DTV_CC_STYLE_BLACK_ON_WHITE:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.BLACK : DTV_COLOR_BLACK;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.WHITE : DTV_COLOR_WHITE;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.BLACK : DTV_COLOR_BLACK;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.WHITE : DTV_COLOR_WHITE;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
                     break;
 
                 case DTV_CC_STYLE_YELLOW_ON_BLACK:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.YELLOW : DTV_COLOR_YELLOW;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.BLACK : DTV_COLOR_BLACK;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.YELLOW : DTV_COLOR_YELLOW;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.BLACK : DTV_COLOR_BLACK;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
                     break;
 
                 case DTV_CC_STYLE_YELLOW_ON_BLUE:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.YELLOW : DTV_COLOR_YELLOW;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.BLUE : DTV_COLOR_BLUE;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLUE : DTV_OPACITY_SOLID;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.YELLOW : DTV_COLOR_YELLOW;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.BLUE : DTV_COLOR_BLUE;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLUE : DTV_OPACITY_SOLID;
                     break;
 
                 case DTV_CC_STYLE_USE_DEFAULT:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.WHITE : DTVSubtitleView.CC_COLOR_DEFAULT;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTVSubtitleView.CC_OPACITY_DEFAULT;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.BLACK : DTVSubtitleView.CC_COLOR_DEFAULT;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTVSubtitleView.CC_OPACITY_DEFAULT;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.WHITE : DTVSubtitleView.CC_COLOR_DEFAULT;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTVSubtitleView.CC_OPACITY_DEFAULT;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.BLACK : DTVSubtitleView.CC_COLOR_DEFAULT;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTVSubtitleView.CC_OPACITY_DEFAULT;
                     break;
 
                 case DTV_CC_STYLE_USE_CUSTOM:
                     break;
             }
             params = new CCStyleParams(convert_fg_color,
-                convert_fg_opacity,
-                convert_bg_color,
-                convert_bg_opacity,
-                fontStyle,
-                convert_font_size);
+                    convert_fg_opacity,
+                    convert_bg_color,
+                    convert_bg_opacity,
+                    fontStyle,
+                    convert_font_size);
 
             return params;
         }

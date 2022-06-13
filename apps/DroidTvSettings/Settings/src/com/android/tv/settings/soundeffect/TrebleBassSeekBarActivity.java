@@ -29,7 +29,7 @@ public class TrebleBassSeekBarActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(TrebleBassSeekBarFragment.class.getName(), null);
+                .newSettingsFragment(TrebleBassSeekBarFragment.class.getName(), null);
     }
 
 }

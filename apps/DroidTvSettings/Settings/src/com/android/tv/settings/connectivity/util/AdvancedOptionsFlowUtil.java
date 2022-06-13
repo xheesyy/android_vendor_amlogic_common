@@ -51,10 +51,10 @@ public class AdvancedOptionsFlowUtil {
         boolean hasProxySettings =
                 (!flowInfo.containsPage(AdvancedOptionsFlowInfo.ADVANCED_OPTIONS)
                         || !flowInfo.choiceChosen(
-                                activity.getString(R.string.wifi_action_advanced_no),
-                                AdvancedOptionsFlowInfo.ADVANCED_OPTIONS))
-                && !flowInfo.choiceChosen(activity.getString(R.string.wifi_action_proxy_none),
-                                            AdvancedOptionsFlowInfo.PROXY_SETTINGS);
+                        activity.getString(R.string.wifi_action_advanced_no),
+                        AdvancedOptionsFlowInfo.ADVANCED_OPTIONS))
+                        && !flowInfo.choiceChosen(activity.getString(R.string.wifi_action_proxy_none),
+                        AdvancedOptionsFlowInfo.PROXY_SETTINGS);
         mIpConfiguration.setProxySettings(hasProxySettings
                 ? IpConfiguration.ProxySettings.STATIC : IpConfiguration.ProxySettings.NONE);
         if (hasProxySettings) {
@@ -94,13 +94,13 @@ public class AdvancedOptionsFlowUtil {
         boolean hasIpSettings =
                 (!flowInfo.containsPage(AdvancedOptionsFlowInfo.ADVANCED_OPTIONS)
                         || !flowInfo.choiceChosen(
-                                activity.getString(R.string.wifi_action_advanced_no),
-                                AdvancedOptionsFlowInfo.ADVANCED_OPTIONS))
-                && !flowInfo.choiceChosen(activity.getString(R.string.wifi_action_dhcp),
-                                            AdvancedOptionsFlowInfo.IP_SETTINGS);
+                        activity.getString(R.string.wifi_action_advanced_no),
+                        AdvancedOptionsFlowInfo.ADVANCED_OPTIONS))
+                        && !flowInfo.choiceChosen(activity.getString(R.string.wifi_action_dhcp),
+                        AdvancedOptionsFlowInfo.IP_SETTINGS);
         mIpConfiguration.setIpAssignment(hasIpSettings
-                        ? IpConfiguration.IpAssignment.STATIC
-                        : IpConfiguration.IpAssignment.DHCP);
+                ? IpConfiguration.IpAssignment.STATIC
+                : IpConfiguration.IpAssignment.DHCP);
         if (hasIpSettings) {
             StaticIpConfiguration staticConfig = new StaticIpConfiguration();
             mIpConfiguration.setStaticIpConfiguration(staticConfig);

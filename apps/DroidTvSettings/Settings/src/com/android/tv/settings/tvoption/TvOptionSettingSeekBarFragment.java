@@ -18,9 +18,12 @@ package com.android.tv.settings.tvoption;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -57,13 +60,13 @@ public class TvOptionSettingSeekBarFragment extends SettingsPreferenceFragment i
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.xml.tv_settings_seekbar, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated (View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         if (mTvOptionSettingManager == null) {
             mTvOptionSettingManager = new TvOptionSettingManager(getActivity(), false);
         }
@@ -101,7 +104,7 @@ public class TvOptionSettingSeekBarFragment extends SettingsPreferenceFragment i
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         switch (seekBar.getId()) {
-            case R.id.seekbar_tv_audio_ad_mix_level:{
+            case R.id.seekbar_tv_audio_ad_mix_level: {
                 setShow(R.id.seekbar_tv_audio_ad_mix_level, progress);
                 mTvOptionSettingManager.setADMix(progress - mTvOptionSettingManager.getADMixStatus());
                 break;
@@ -123,7 +126,7 @@ public class TvOptionSettingSeekBarFragment extends SettingsPreferenceFragment i
 
     private void setShow(int id, int value) {
         switch (id) {
-            case R.id.seekbar_tv_audio_ad_mix_level:{
+            case R.id.seekbar_tv_audio_ad_mix_level: {
                 text_audio_ad_mix_level.setText(getShowString(R.string.tv_audio_ad_mix_level, value));
                 break;
             }

@@ -15,6 +15,7 @@
  */
 
 package com.android.tv.settings.wifi;
+
 import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
@@ -26,9 +27,12 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
+
 import androidx.annotation.VisibleForTesting;
+
 import android.util.Log;
 import android.util.ArrayMap;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -36,9 +40,11 @@ import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.TwoStatePreference;
+
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.tv.settings.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -46,14 +52,15 @@ import java.util.Collection;
 
 import com.android.tv.settings.SettingsPreferenceFragment;
 
-public abstract class HotSpotBaseFragment extends SettingsPreferenceFragment{
+public abstract class HotSpotBaseFragment extends SettingsPreferenceFragment {
     private static final String TAG = "HotSpotBaseFragment";
     private final Map<Class, List<AbstractPreferenceController>> mPreferenceControllers =
             new ArrayMap<>();
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.d(TAG,"HotSpotBaseFragment onAttach");
+        Log.d(TAG, "HotSpotBaseFragment onAttach");
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         // Load preference controllers from code
         final List<AbstractPreferenceController> controllersFromCode =
@@ -73,14 +80,16 @@ public abstract class HotSpotBaseFragment extends SettingsPreferenceFragment{
         controllers.addAll(uniqueControllerFromXml);
         for (AbstractPreferenceController controller : controllers) {
             addPreferenceController(controller);
-            Log.d(TAG,"addPreferenceController here"+controller.getClass().getName());
+            Log.d(TAG, "addPreferenceController here" + controller.getClass().getName());
         }
     }
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         refreshAllPreferences();
     }
-        /**
+
+    /**
      * Displays resource based tiles.
      */
     private void displayResourceTiles() {
@@ -93,6 +102,7 @@ public abstract class HotSpotBaseFragment extends SettingsPreferenceFragment{
         mPreferenceControllers.values().stream().flatMap(Collection::stream).forEach(
                 controller -> controller.displayPreference(screen));
     }
+
     private void refreshAllPreferences() {
         // First remove old preferences.
         if (getPreferenceScreen() != null) {
@@ -117,22 +127,25 @@ public abstract class HotSpotBaseFragment extends SettingsPreferenceFragment{
 
         return null;
     }
-        /**
+
+    /**
      * Get a list of {@link AbstractPreferenceController} for this fragment.
      */
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         return null;
     }
+
     protected void addPreferenceController(AbstractPreferenceController controller) {
         if (mPreferenceControllers.get(controller.getClass()) == null) {
             mPreferenceControllers.put(controller.getClass(), new ArrayList<>());
         }
-        Log.d(TAG,"addPreferenceController"+controller.getClass());
+        Log.d(TAG, "addPreferenceController" + controller.getClass());
         mPreferenceControllers.get(controller.getClass()).add(controller);
     }
-      @Override
+
+    @Override
     public void onCreate(Bundle icicle) {
-        Log.d(TAG,"HotSpotBaseFragment called");
+        Log.d(TAG, "HotSpotBaseFragment called");
         super.onCreate(icicle);
         // Set ComparisonCallback so we get better animation when list changes.
         getPreferenceManager().setPreferenceComparisonCallback(
@@ -140,12 +153,14 @@ public abstract class HotSpotBaseFragment extends SettingsPreferenceFragment{
     }
 
     protected abstract int getPreferenceScreenResId();
+
     @Override
     public void onResume() {
         super.onResume();
         updatePreferenceStates();
     }
-        /**
+
+    /**
      * Update state of each preference managed by PreferenceController.
      */
     protected void updatePreferenceStates() {

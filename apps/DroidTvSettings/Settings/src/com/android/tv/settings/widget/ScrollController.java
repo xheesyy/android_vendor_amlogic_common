@@ -84,7 +84,9 @@ public class ScrollController {
      */
     public final static int SCROLL_ITEM_ALIGN_HIGH = 2;
 
-    /** operation not allowed */
+    /**
+     * operation not allowed
+     */
     public final static int OPERATION_DISABLE = 0;
 
     /**
@@ -151,11 +153,17 @@ public class ScrollController {
          * scroll to two edges.
          */
         private int mTouchScrollMax;
-        /** right/bottom edge of last child */
+        /**
+         * right/bottom edge of last child
+         */
         private int mMaxEdge;
-        /** left/top edge of first child, typically should be zero*/
+        /**
+         * left/top edge of first child, typically should be zero
+         */
         private int mMinEdge;
-        /** Minimum scroll value, point to center of first child, typically half of child size */
+        /**
+         * Minimum scroll value, point to center of first child, typically half of child size
+         */
         private int mScrollMin;
         /**
          * scroll min for standard touch friendly operation, i.e. focus will not move to side when
@@ -167,22 +175,26 @@ public class ScrollController {
 
         private boolean mSelectedTakesMoreSpace = false;
 
-        /** the offset set by a mouse dragging event */
+        /**
+         * the offset set by a mouse dragging event
+         */
         private float mDragOffset;
 
         /**
          * Total extra spaces.  Divided into four parts:<p>
          * 1.  extraSpace before scrollPosition, given by {@link #mExtraSpaceLow}
-         *     This value is animating from the extra space of "transition from" to the value
-         *     of "transition to"<p>
+         * This value is animating from the extra space of "transition from" to the value
+         * of "transition to"<p>
          * 2.  extraSpace after scrollPosition<p>
          * 3.  size of expanded view of "transition from"<p>
          * 4.  size of expanded view of "transition to"<p>
          * Among the four parts: 2,3,4 are after scroll position.<p>
          * 3,4 are included in mExpandedSize when {@link #mSelectedTakesMoreSpace} is true<p>
-         * */
+         */
         private int mExpandedSize;
-        /** extra space used before the scroll position */
+        /**
+         * extra space used before the scroll position
+         */
         private int mExtraSpaceLow;
         private int mExtraSpaceHigh;
 
@@ -209,7 +221,9 @@ public class ScrollController {
          */
         private float mScrollCenterOffsetPercent = -1;
 
-        /** represents position information of child views, see {@link ItemWindow} */
+        /**
+         * represents position information of child views, see {@link ItemWindow}
+         */
         public static class Item {
 
             private int mIndex;
@@ -237,7 +251,9 @@ public class ScrollController {
                 return mIndex;
             }
 
-            /** set low bound, high bound and index for the item */
+            /**
+             * set low bound, high bound and index for the item
+             */
             final public void setValue(int index, int low, int high) {
                 mIndex = index;
                 mLow = low;
@@ -294,7 +310,7 @@ public class ScrollController {
             } else if (scrollCenterOffsetPercent > 100) {
                 scrollCenterOffsetPercent = 100;
             }
-            mScrollCenterOffsetPercent =  ( scrollCenterOffsetPercent / 100.0f);
+            mScrollCenterOffsetPercent = (scrollCenterOffsetPercent / 100.0f);
         }
 
         final public void setSelectedTakesMoreSpace(boolean selectedTakesMoreSpace) {
@@ -329,7 +345,9 @@ public class ScrollController {
             return mOperationMode == OPERATION_TOUCH ? mTouchScrollMax : mScrollMax;
         }
 
-        /** update scroll min and minEdge,  Integer.MIN_VALUE means unknown*/
+        /**
+         * update scroll min and minEdge,  Integer.MIN_VALUE means unknown
+         */
         final public void updateScrollMin(int scrollMin, int minEdge) {
             mScrollMin = scrollMin;
             if (mScrollCenter < mScrollMin) {
@@ -350,7 +368,9 @@ public class ScrollController {
             mTouchScrollMin = Integer.MIN_VALUE;
         }
 
-        /** update scroll max and maxEdge,  Integer.MAX_VALUE means unknown*/
+        /**
+         * update scroll max and maxEdge,  Integer.MAX_VALUE means unknown
+         */
         final public void updateScrollMax(int scrollMax, int maxEdge) {
             mScrollMax = scrollMax;
             if (mScrollCenter > mScrollMax) {
@@ -539,7 +559,7 @@ public class ScrollController {
                     if (mMaxEdge - scrollCenter + spaceAfterScrollCenter <= afterMiddlePosition) {
                         // scroll center is very close to the right edge of view port : align the
                         // right edge of last children (plus expanded size) to view port's right
-                        return mMaxEdge -mPaddingLow - (clientSize - mExpandedSize );
+                        return mMaxEdge - mPaddingLow - (clientSize - mExpandedSize);
                     }
                 }
                 // else put scroll center in middle of view port
@@ -548,10 +568,10 @@ public class ScrollController {
                 int shift;
                 switch (getScrollItemAlign()) {
                     case SCROLL_ITEM_ALIGN_LOW:
-                        shift = - mExtraSpaceLow;
+                        shift = -mExtraSpaceLow;
                         break;
                     case SCROLL_ITEM_ALIGN_HIGH:
-                        shift = + mExtraSpaceHigh;
+                        shift = +mExtraSpaceHigh;
                         break;
                     case SCROLL_ITEM_ALIGN_CENTER:
                     default:
@@ -576,7 +596,7 @@ public class ScrollController {
                     if (mMaxEdge - scrollCenter - shift + mExpandedSize <= afterMiddlePosition) {
                         // scroll center is very close to the right edge of view port : align the
                         // right edge of last children (plus expanded size) to view port's right
-                        return mMaxEdge -mPaddingLow - (clientSize - mExpandedSize );
+                        return mMaxEdge - mPaddingLow - (clientSize - mExpandedSize);
                     }
                 }
                 // else put scroll center in middle of view port
@@ -603,13 +623,19 @@ public class ScrollController {
 
     private final static int STATE_NONE = 0;
 
-    /** using fling scroller */
+    /**
+     * using fling scroller
+     */
     private final static int STATE_FLING = 1;
 
-    /** using scroll scroller */
+    /**
+     * using scroll scroller
+     */
     private final static int STATE_SCROLL = 2;
 
-    /** using drag */
+    /**
+     * using drag
+     */
     private final static int STATE_DRAG = 3;
 
     private int mState = STATE_NONE;
@@ -626,16 +652,24 @@ public class ScrollController {
 
     private Axis mSecondAxis = vertical;
 
-    /** fling operation mode */
+    /**
+     * fling operation mode
+     */
     private int mFlingMode = OPERATION_AUTO;
 
-    /** drag operation mode */
+    /**
+     * drag operation mode
+     */
     private int mDragMode = OPERATION_AUTO;
 
-    /** scroll operation mode (for DPAD) */
+    /**
+     * scroll operation mode (for DPAD)
+     */
     private int mScrollMode = OPERATION_NOTOUCH;
 
-    /** the major movement is in horizontal or vertical */
+    /**
+     * the major movement is in horizontal or vertical
+     */
     private boolean mMainHorizontal;
     private boolean mHorizontalForward = true;
     private boolean mVerticalForward = true;
@@ -759,7 +793,7 @@ public class ScrollController {
         }
     }
 
-    final public boolean fling(int velocity_x, int velocity_y){
+    final public boolean fling(int velocity_x, int velocity_y) {
         if (mFlingMode == OPERATION_DISABLE) {
             return false;
         }
@@ -767,8 +801,8 @@ public class ScrollController {
         horizontal.setOperationMode(operationMode);
         vertical.setOperationMode(operationMode);
         mState = STATE_FLING;
-        mFlingScroller.fling((int)(horizontal.mScrollCenter),
-                (int)(vertical.mScrollCenter),
+        mFlingScroller.fling((int) (horizontal.mScrollCenter),
+                (int) (vertical.mScrollCenter),
                 velocity_x,
                 velocity_y,
                 Integer.MIN_VALUE,
@@ -812,8 +846,8 @@ public class ScrollController {
             float velocity = mFlingScroller.getCurrVelocity();
             float velocityX = velocity * curDx / hyp;
             float velocityY = velocity * curDy / hyp;
-            int durationX = velocityX ==0 ? 0 : (int)((Math.abs(dx) * 1000) / velocityX);
-            int durationY = velocityY ==0 ? 0 : (int)((Math.abs(dy) * 1000) / velocityY);
+            int durationX = velocityX == 0 ? 0 : (int) ((Math.abs(dx) * 1000) / velocityX);
+            int durationY = velocityY == 0 ? 0 : (int) ((Math.abs(dy) * 1000) / velocityY);
             if (duration == 0) duration = Math.max(durationX, durationY);
         } else {
             if (duration == 0) {
@@ -836,7 +870,7 @@ public class ScrollController {
     }
 
     final public void startScrollByMain(int deltaMain, int deltaSecond, boolean easeFling,
-            int duration, boolean page) {
+                                        int duration, boolean page) {
         int dx, dy;
         if (mOrientation == ScrollAdapterView.HORIZONTAL) {
             dx = deltaMain;
@@ -923,14 +957,16 @@ public class ScrollController {
         }
     }
 
-    /** return true if scroll/fling animation or lerper is not stopped */
+    /**
+     * return true if scroll/fling animation or lerper is not stopped
+     */
     final public boolean isFinished() {
         Scroller scroller;
         if (mState == STATE_FLING) {
             scroller = mFlingScroller;
         } else if (mState == STATE_SCROLL) {
             scroller = mScrollScroller;
-        } else if (mState == STATE_DRAG){
+        } else if (mState == STATE_DRAG) {
             return false;
         } else {
             return true;
@@ -971,7 +1007,7 @@ public class ScrollController {
         } else if (mState == STATE_SCROLL) {
             scroller = mScrollScroller;
         } else if (mState == STATE_DRAG) {
-            if (horizontal.mDragOffset != 0 || vertical.mDragOffset !=0 ) {
+            if (horizontal.mDragOffset != 0 || vertical.mDragOffset != 0) {
                 horizontal.updateFromDrag();
                 vertical.updateFromDrag();
             }
@@ -986,9 +1022,11 @@ public class ScrollController {
         }
     }
 
-    /** get Scroll animation duration in ms for given pixels */
+    /**
+     * get Scroll animation duration in ms for given pixels
+     */
     final public int getScrollDuration(int distance, boolean isPage) {
-        int ms = (int)(distance * SCROLL_DURATION_MS_PER_PIX);
+        int ms = (int) (distance * SCROLL_DURATION_MS_PER_PIX);
         int minValue = isPage ? SCROLL_DURATION_PAGE_MIN : SCROLL_DURATION_MIN;
         if (ms < minValue) {
             ms = minValue;

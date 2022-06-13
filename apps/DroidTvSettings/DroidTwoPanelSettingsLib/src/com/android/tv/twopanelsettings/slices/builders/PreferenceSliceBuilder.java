@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Remove unused code and add test.
+
 /**
  * Builder for constructing slices composed of rows of TvSettings style preferences.
  */
@@ -62,8 +63,8 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
      */
     @RestrictTo(RestrictTo.Scope.LIBRARY)
     @IntDef({
-        View.LAYOUT_DIRECTION_RTL, View.LAYOUT_DIRECTION_LTR, View.LAYOUT_DIRECTION_INHERIT,
-        View.LAYOUT_DIRECTION_LOCALE
+            View.LAYOUT_DIRECTION_RTL, View.LAYOUT_DIRECTION_LTR, View.LAYOUT_DIRECTION_INHERIT,
+            View.LAYOUT_DIRECTION_LOCALE
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface LayoutDirection {
@@ -106,7 +107,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
      * @param ttl the {@link Duration} that the content in this slice can live for.
      */
     public PreferenceSliceBuilder(@NonNull Context context, @NonNull Uri uri,
-            @Nullable Duration ttl) {
+                                  @Nullable Duration ttl) {
         super(context, uri);
         mImpl.setTtl(ttl);
     }
@@ -158,6 +159,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
     /**
      * Set the focused preference for slice.
+     *
      * @param key key of the focused preference.
      */
     public PreferenceSliceBuilder setFocusedPreference(CharSequence key) {
@@ -165,13 +167,17 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
         return this;
     }
 
-    /** Add a preference which can be embedded in other settings items. **/
+    /**
+     * Add a preference which can be embedded in other settings items.
+     **/
     public PreferenceSliceBuilder setEmbeddedPreference(RowBuilder builder) {
         mImpl.setEmbeddedPreference(builder);
         return this;
     }
 
-    /** Indicates that the slice is not ready yet **/
+    /**
+     * Indicates that the slice is not ready yet
+     **/
     public PreferenceSliceBuilder setNotReady() {
         mImpl.setNotReady();
         return this;
@@ -180,6 +186,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
     /**
      * Set the redirected slice uri. Settings would render the slice from the redirected slice uri.
+     *
      * @param redirectedSliceUri the redirected slice uri.
      */
     @NonNull
@@ -294,7 +301,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
          * load this content in the background, in this case the template displays a placeholder
          * until updated.
          *
-         * @param icon the image to display.
+         * @param icon      the image to display.
          * @param isLoading whether this content is being loaded in the background.
          */
         @NonNull
@@ -323,7 +330,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
          * </p>
          *
          * @param isLoading indicates whether the app is doing work to load the added content in the
-         * background or not.
+         *                  background or not.
          */
         @NonNull
         private RowBuilder setTitleItem(@NonNull SliceAction action, boolean isLoading) {
@@ -373,7 +380,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set the information text title for the preference builder.
-         *
+         * <p>
          * It is strongly recommended to also invoke setContentDescription() for a11y
          * purposes. Please see setContentDescription() for more details.
          */
@@ -385,7 +392,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set the information text summary for the preference builder.
-         *
+         * <p>
          * It is strongly recommended to also invoke setContentDescription() for a11y
          * purposes. Please see setContentDescription() for more details.
          */
@@ -419,6 +426,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set a pendingIntent for the preference builder.
+         *
          * @param pendingIntent pendingIntent
          * @return builder
          */
@@ -431,6 +439,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
          * Set a followup pendingIntent for the preference builder. After the initial pendingIntent
          * is launched and result is retrieved by TvSettings, TvSettings will pack the result into
          * the followup PendingIntent and launch it.
+         *
          * @param pendingIntent followup pendingIntent
          * @return builder
          */
@@ -482,7 +491,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
          * </p>
          *
          * @param isLoading indicates whether the app is doing work to load the added content in the
-         * background or not.
+         *                  background or not.
          */
         @NonNull
         public RowBuilder setTitle(@Nullable CharSequence title, boolean isLoading) {
@@ -509,7 +518,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
          * </p>
          *
          * @param isLoading indicates whether the app is doing work to load the added content in the
-         * background or not.
+         *                  background or not.
          */
         @NonNull
         public RowBuilder setSubtitle(@Nullable CharSequence subtitle, boolean isLoading) {
@@ -535,15 +544,15 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
          * load this content in the background, in this case the template displays a placeholder
          * until updated.
          *
-         * @param icon the image to display.
+         * @param icon      the image to display.
          * @param isLoading whether this content is being loaded in the background.
          */
         @NonNull
         private RowBuilder addEndItem(@Nullable IconCompat icon, boolean isLoading) {
             if (mHasEndActionOrToggle) {
                 throw new IllegalArgumentException("Trying to add an icon to end items when an"
-                    + "action has already been added. End items cannot have a mixture of "
-                    + "actions and icons.");
+                        + "action has already been added. End items cannot have a mixture of "
+                        + "actions and icons.");
             }
             mEndItems.add(new Pair<>(icon, 0));
             mEndTypes.add(TYPE_ICON);
@@ -573,8 +582,9 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Add a radio button to the RowBuilder.
+         *
          * @param pendingIntent pendingIntent to launch when radio is clicked.
-         * @param isChecked Initial state of the radio button
+         * @param isChecked     Initial state of the radio button
          */
         public RowBuilder addRadioButton(
                 PendingIntent pendingIntent, boolean isChecked) {
@@ -583,9 +593,10 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Add a radio button to the RowBuilder.
+         *
          * @param pendingIntent pendingIntent to launch when radio is clicked.
-         * @param isChecked Initial state of the radio button
-         * @param radioGroup group of the radio
+         * @param isChecked     Initial state of the radio button
+         * @param radioGroup    group of the radio
          */
         public RowBuilder addRadioButton(
                 PendingIntent pendingIntent, boolean isChecked, CharSequence radioGroup) {
@@ -594,8 +605,9 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Add a checkmark to the RowBuilder.
+         *
          * @param pendingIntent pendingIntent to launch when checkmark is clicked.
-         * @param isChecked Initial state of the check mark.
+         * @param isChecked     Initial state of the check mark.
          */
         public RowBuilder addCheckMark(
                 PendingIntent pendingIntent, boolean isChecked) {
@@ -604,8 +616,9 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Add a switch to the RowBuilder.
+         *
          * @param pendingIntent pendingIntent to launch when switch is clicked.
-         * @param isChecked Initial state of the switch.
+         * @param isChecked     Initial state of the switch.
          */
         public RowBuilder addSwitch(
                 PendingIntent pendingIntent, boolean isChecked) {
@@ -621,9 +634,10 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Add a switch for the preference.
+         *
          * @param pendingIntent pendingIntent
-         * @param actionTitle title for the switch, also used for contentDescription.
-         * @param isChecked the state of the switch
+         * @param actionTitle   title for the switch, also used for contentDescription.
+         * @param isChecked     the state of the switch
          * @return
          */
         @NonNull
@@ -644,19 +658,19 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
          * </p>
          *
          * @param isLoading indicates whether the app is doing work to load the added content in the
-         * background or not.
+         *                  background or not.
          */
         @NonNull
         private RowBuilder addEndItem(@NonNull SliceAction action, boolean isLoading) {
             if (mHasEndImage) {
                 throw new IllegalArgumentException("Trying to add an action to end items when an"
-                    + "icon has already been added. End items cannot have a mixture of "
-                    + "actions and icons.");
+                        + "icon has already been added. End items cannot have a mixture of "
+                        + "actions and icons.");
             }
             if (mHasDefaultToggle) {
                 throw new IllegalStateException("Only one non-custom toggle can be added "
-                    + "in a single row. If you would like to include multiple toggles "
-                    + "in a row, set a custom icon for each toggle.");
+                        + "in a single row. If you would like to include multiple toggles "
+                        + "in a row, set a custom icon for each toggle.");
             }
             mEndItems.add(action);
             mEndTypes.add(TYPE_ACTION);
@@ -668,12 +682,12 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Sets the content description for the row.
-         *
+         * <p>
          * Although TvSettings will try to construct the content description to its best extent
          * if it's not set, it is strongly recommended to invoke this method with info items
          * folded in the content description for the Roy for a11y purposes, as the info items
          * may be unfocusable when talkback is on.
-         *
+         * <p>
          * By default, this method will assign the full info item title and summary to the
          * content description if one is not specified.
          */
@@ -685,6 +699,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set the target slice uri for the builder.
+         *
          * @param targetSliceUri indicates the target slice uri when the preference is focused.
          * @return builder
          */
@@ -695,6 +710,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set the key for the builder.
+         *
          * @param key indicates the key for the preference.
          * @return builder
          */
@@ -716,6 +732,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set whether the toggle use a checkmark style. Otherwise, a switch style is used.
+         *
          * @param isCheckMark use checkmark.
          * @deprecated use {@link PreferenceSliceBuilder.RowBuilder#setButtonStyle(int)}
          */
@@ -732,6 +749,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set the button style.
+         *
          * @param buttonStyle
          */
         public RowBuilder setButtonStyle(@BUTTONSTYLE int buttonStyle) {
@@ -741,6 +759,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set whether the icon needs to be processed by TvSettings.
+         *
          * @param needed if true, TvSettings will add a round border around the given icon
          */
         @NonNull
@@ -769,6 +788,7 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
 
         /**
          * Set whether this item is selectable.
+         *
          * @param selectable
          */
         @NonNull
@@ -798,7 +818,9 @@ public class PreferenceSliceBuilder extends TemplateSliceBuilder {
             return mTargetSliceUri;
         }
 
-        /** Get the key for the builder */
+        /**
+         * Get the key for the builder
+         */
         public CharSequence getKey() {
             return mKey;
         }

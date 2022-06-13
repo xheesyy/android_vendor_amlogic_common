@@ -25,7 +25,7 @@ public class MorePrefFragmentActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(MorePrefFragment.class.getName(), null);
+                .newSettingsFragment(MorePrefFragment.class.getName(), null);
     }
 
 }

@@ -32,7 +32,7 @@ import java.util.function.Consumer;
 public class RestrictedProfilePinDialogFragment extends PinDialogFragment {
     private static final String TAG = RestrictedProfilePinDialogFragment.class.getSimpleName();
 
-    private static final  String SHARED_PREFERENCE_NAME = "RestrictedProfilePinDialogFragment";
+    private static final String SHARED_PREFERENCE_NAME = "RestrictedProfilePinDialogFragment";
     private static final String PREF_DISABLE_PIN_UNTIL = "disable_pin_until";
 
     private RestrictedProfilePinStorage mRestrictedProfilePinStorage;
@@ -81,7 +81,7 @@ public class RestrictedProfilePinDialogFragment extends PinDialogFragment {
      */
     public static long getDisablePinUntil(Context context) {
         return context.getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE)
-                      .getLong(PREF_DISABLE_PIN_UNTIL, 0);
+                .getLong(PREF_DISABLE_PIN_UNTIL, 0);
     }
 
     /**

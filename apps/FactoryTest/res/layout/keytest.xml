@@ -3,7 +3,7 @@
     android:id="@id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ffffffff" >
+    android:background="#ffffffff">
 
     <Button
         android:id="@id/n1"
@@ -202,27 +202,27 @@
         android:layout_alignRight="@+id/textView1"
         android:text="@string/mute" />
 
-	<LinearLayout
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:layout_gravity="bottom"
-		android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
 
-		<Button
-			android:id="@+id/btn_success"
-			android:layout_width="0dip"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="success" />
+        <Button
+            android:id="@+id/btn_success"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="success" />
 
-		<Button
-			android:id="@+id/btn_fail"
-			android:layout_width="0dip"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="fail" />
+        <Button
+            android:id="@+id/btn_fail"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="fail" />
 
-	</LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

@@ -33,12 +33,16 @@ public class SliceActivity extends TvSettingsActivity {
     private static final String EXTRA_STARTUP_VERIFICATION_REQUIRED =
             "startup_verification_required";
 
-    /** Provide slice uri */
+    /**
+     * Provide slice uri
+     */
     public String getSliceUri() {
         return getIntent().getStringExtra(EXTRA_SLICE_URI);
     }
 
-    /** Provide slice screen title */
+    /**
+     * Provide slice screen title
+     */
     public String getScreenTitle() {
         return null;
     }

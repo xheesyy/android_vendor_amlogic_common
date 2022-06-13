@@ -288,7 +288,7 @@ public class CaptionCustomFragment extends LeanbackPreferenceFragmentCompat impl
     }
 
     private String getCaptionsBackgroundOpacity() {
-        return opacityToString (Settings.Secure.getInt(getContext().getContentResolver(),
+        return opacityToString(Settings.Secure.getInt(getContext().getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR, 0) & 0xff000000);
     }
 

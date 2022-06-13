@@ -28,7 +28,7 @@ public interface ScrollAdapter extends ScrollAdapterBase {
     /**
      * Optional method to be implemented by {@link ScrollAdapter}. Returns the
      * {@link ScrollAdapterBase} that {@link ScrollAdapterView} will invoke
-     * {@link Adapter#getView(int,View,ViewGroup)} to create an expanded view. Returns null if the
+     * {@link Adapter#getView(int, View, ViewGroup)} to create an expanded view. Returns null if the
      * adapter does not want to support expanding.
      */
     public ScrollAdapterBase getExpandAdapter();

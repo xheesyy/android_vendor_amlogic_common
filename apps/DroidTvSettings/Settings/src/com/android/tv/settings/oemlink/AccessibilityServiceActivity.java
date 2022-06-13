@@ -31,14 +31,16 @@ import com.android.tv.settings.overlay.FlavorUtils;
 
 import java.util.List;
 
-/** An OEM hook for starting a specific accessibility service settings directly. */
+/**
+ * An OEM hook for starting a specific accessibility service settings directly.
+ */
 public class AccessibilityServiceActivity extends TvSettingsActivity {
 
     private static final String TAG = "A11yServiceOemLink";
     private static final String A11Y_SERVICE_INFO_EXTRA = "accessibilityServiceInfo";
 
     @Override
-    protected Fragment createSettingsFragment()  {
+    protected Fragment createSettingsFragment() {
         if (getIntent() == null || getIntent().getExtras() == null
                 || getIntent().getExtras().getParcelable(A11Y_SERVICE_INFO_EXTRA) == null) {
             Log.e(TAG, "No accessibility info extras, returning null");

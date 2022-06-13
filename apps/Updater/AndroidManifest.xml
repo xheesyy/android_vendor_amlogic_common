@@ -3,16 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:sharedUserId="android.uid.system"
     package="com.droidlogic.updater">
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_CACHE_FILESYSTEM" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.REBOOT"/>
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REBOOT" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL" />
     <uses-permission android:name="android.permission.CHANGE_COMPONENT_ENABLED_STATE" />
+
     <application
         android:name=".UpdateApplication"
         android:allowBackup="true"
@@ -28,28 +30,34 @@
             <!--<intent-filter>
                 <action android:name="com.droidlogic.checkup.update" />
             </intent-filter>-->
-       </service>
+        </service>
         <service
             android:name="com.droidlogic.updater.service.AutoCheckService"
-            android:exported="true">
-       </service>
-        <receiver android:name=".ui.LoaderReceiver" >
+            android:exported="true"></service>
+
+        <receiver android:name=".ui.LoaderReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                 <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-       <activity android:name=".ui.UpdateActivity"/>
-       <activity android:name=".ui.FragmentAlertDialog" android:theme="@style/activity_styles" />
-       <activity android:name=".ui.MainActivity">
+
+        <activity android:name=".ui.UpdateActivity" />
+        <activity
+            android:name=".ui.FragmentAlertDialog"
+            android:theme="@style/activity_styles" />
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-       </activity>
-       <activity android:name=".ui.FileSelector"/>
-       <activity android:name=".ui.EmptyActivity"  android:theme="@style/Theme.empty"/>
+        </activity>
+        <activity android:name=".ui.FileSelector" />
+        <activity
+            android:name=".ui.EmptyActivity"
+            android:theme="@style/Theme.empty" />
     </application>
 
 </manifest>

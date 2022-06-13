@@ -42,9 +42,9 @@ public class SettingsToast extends Toast {
     /**
      * Constructs a SettingsToast message with a text message.
      *
-     * @param context  The context to use.  Usually your {@link android.app.Application}
-     *                 or {@link android.app.Activity} object.
-     * @param text     The text to show.  Can be formatted text.
+     * @param context The context to use.  Usually your {@link android.app.Application}
+     *                or {@link android.app.Activity} object.
+     * @param text    The text to show.  Can be formatted text.
      */
     public SettingsToast(Context context, CharSequence text) {
         super(context);
@@ -70,11 +70,11 @@ public class SettingsToast extends Toast {
      * Constructs a SettingsToast message with a text message and an icon.
      *
      * @param context The context to use. Usually your
-     *            {@link android.app.Application} or
-     *            {@link android.app.Activity} object.
-     * @param text The text to show. Can be formatted text.
+     *                {@link android.app.Application} or
+     *                {@link android.app.Activity} object.
+     * @param text    The text to show. Can be formatted text.
      * @param iconUri URI String identifying the Icon to be used in this
-     *            notification.
+     *                notification.
      */
     public SettingsToast(Context context, CharSequence text, String iconUri) {
         this(context, text);
@@ -84,7 +84,7 @@ public class SettingsToast extends Toast {
 
             BitmapDownloader bitmapDownloader = BitmapDownloader.getInstance(mContext);
             mBitmapCallBack = new BitmapCallback() {
-                    @Override
+                @Override
                 public void onBitmapRetrieved(Bitmap bitmap) {
                     mIconView.setImageBitmap(bitmap);
                     mIconView.setVisibility(View.VISIBLE);
@@ -92,7 +92,7 @@ public class SettingsToast extends Toast {
             };
 
             bitmapDownloader.getBitmap(new BitmapWorkerOptions.Builder(mContext).resource(
-                    Uri.parse(iconUri)).width(mIconView.getLayoutParams().width)
+                            Uri.parse(iconUri)).width(mIconView.getLayoutParams().width)
                     .height(mIconView.getLayoutParams().height).build(), mBitmapCallBack);
         }
     }
@@ -100,10 +100,10 @@ public class SettingsToast extends Toast {
     /**
      * Constructs a SettingsToast message with a text message and a Bitmap icon.
      *
-     * @param context The context to use. Usually your
-     *            {@link android.app.Application} or
-     *            {@link android.app.Activity} object.
-     * @param text The text to show. Can be formatted text.
+     * @param context    The context to use. Usually your
+     *                   {@link android.app.Application} or
+     *                   {@link android.app.Activity} object.
+     * @param text       The text to show. Can be formatted text.
      * @param iconBitmap Bitmap Icon to be used in this toast notification.
      */
     public SettingsToast(Context context, CharSequence text, Bitmap iconBitmap) {

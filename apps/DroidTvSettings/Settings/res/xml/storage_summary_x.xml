@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,21 +15,20 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:custom="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/device_storage">
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:title="@string/device_storage">
     <PreferenceCategory
         android:key="suggestions"
         android:title="@string/storage_suggestions"
-        custom:isPreferenceVisible="false" >
+        custom:isPreferenceVisible="false">
         <com.android.tv.twopanelsettings.slices.EmbeddedSlicePreference
             android:key="ambient_storage"
-            custom:uri="@string/ambient_slice_storage_uri" >
-        </com.android.tv.twopanelsettings.slices.EmbeddedSlicePreference>
+            custom:uri="@string/ambient_slice_storage_uri"></com.android.tv.twopanelsettings.slices.EmbeddedSlicePreference>
     </PreferenceCategory>
     <PreferenceCategory
         android:key="device_storage"
-        android:title="@string/storage_device_storage_section"/>
+        android:title="@string/storage_device_storage_section" />
     <PreferenceCategory
         android:key="removable_storage"
-        android:title="@string/storage_removable_storage_section"/>
+        android:title="@string/storage_removable_storage_section" />
 </PreferenceScreen>

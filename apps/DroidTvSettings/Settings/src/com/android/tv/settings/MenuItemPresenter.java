@@ -26,7 +26,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.net.Uri;
+
 import androidx.leanback.widget.Presenter;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -72,7 +74,7 @@ public class MenuItemPresenter extends Presenter {
             prepareTextView(menuItemViewHolder.mTitleView, menuItem.getTitle());
             boolean hasDescription = prepareTextView(menuItemViewHolder.mDescriptionView,
                     menuItem.getDescriptionGetter() == null ? null
-                    : menuItem.getDescriptionGetter().getText());
+                            : menuItem.getDescriptionGetter().getText());
 
             Resources res = menuItemViewHolder.mTitleView.getContext().getResources();
             ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams)

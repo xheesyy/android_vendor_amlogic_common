@@ -95,8 +95,8 @@ public final class WifiConfigHelper {
                 config.allowedKeyManagement.set(KeyMgmt.IEEE8021X);
                 break;
             case AccessPoint.SECURITY_SAE:
-               config.allowedKeyManagement.set(KeyMgmt.SAE);// DroidLogic modify SWPL-45229
-               break;
+                config.allowedKeyManagement.set(KeyMgmt.SAE);// DroidLogic modify SWPL-45229
+                break;
         }
     }
 
@@ -139,8 +139,9 @@ public final class WifiConfigHelper {
 
     /**
      * Get {@link WifiConfiguration} based upon the {@link WifiManager} and networkId.
+     *
      * @param wifiManager
-     * @param networkId the id of the network.
+     * @param networkId   the id of the network.
      * @return the {@link WifiConfiguration} of the specified network.
      */
     public static WifiConfiguration getWifiConfiguration(WifiManager wifiManager, int networkId) {
@@ -211,8 +212,8 @@ public final class WifiConfigHelper {
      * networks, or null if no matching network is found.
      */
     private static WifiConfiguration getFromConfiguredNetworks(Context context,
-            String ssid,
-            int security) {
+                                                               String ssid,
+                                                               int security) {
         WifiManager wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         List<WifiConfiguration> configuredNetworks = wifiMan.getConfiguredNetworks();
         if (configuredNetworks != null) {

@@ -34,7 +34,7 @@ public class AppUsageAccessActivity extends TvSettingsActivity {
             return null;
         } else {
             return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-                .newSettingsFragment(AppUsageAccess.class.getName(), null);
+                    .newSettingsFragment(AppUsageAccess.class.getName(), null);
         }
     }
 }

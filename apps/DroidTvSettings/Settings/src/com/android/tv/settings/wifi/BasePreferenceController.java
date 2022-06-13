@@ -106,15 +106,15 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * This is done through reflection. Do not use this method unless you know what you are doing.
      */
     public static BasePreferenceController createInstance(Context context,
-            String controllerName, String key) {
+                                                          String controllerName, String key) {
         try {
             final Class<?> clazz = Class.forName(controllerName);
             final Constructor<?> preferenceConstructor =
                     clazz.getConstructor(Context.class, String.class);
-            final Object[] params = new Object[] {context, key};
+            final Object[] params = new Object[]{context, key};
             return (BasePreferenceController) preferenceConstructor.newInstance(params);
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException |
-                IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+                 IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             throw new IllegalStateException(
                     "Invalid preference controller: " + controllerName, e);
         }
@@ -129,10 +129,10 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
         try {
             final Class<?> clazz = Class.forName(controllerName);
             final Constructor<?> preferenceConstructor = clazz.getConstructor(Context.class);
-            final Object[] params = new Object[] {context};
+            final Object[] params = new Object[]{context};
             return (BasePreferenceController) preferenceConstructor.newInstance(params);
         } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException |
-                IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
+                 IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
             throw new IllegalStateException(
                     "Invalid preference controller: " + controllerName, e);
         }
@@ -172,7 +172,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
      * {@link #DISABLED_DEPENDENT_SETTING}, then the setting will be disabled by default in the
      * DashboardFragment, and it is up to the {@link BasePreferenceController} to enable the
      * preference at the right time.
-     *
+     * <p>
      * TODO (mfritze) Build a dependency mechanism to allow a controller to easily define the
      * dependent setting.
      */
@@ -220,13 +220,13 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
     /**
      * Determines if the controller should be used as a Slice.
      * <p>
-     *     Important criteria for a Slice are:
-     *     - Must be secure
-     *     - Must not be a privacy leak
-     *     - Must be understandable as a stand-alone Setting.
+     * Important criteria for a Slice are:
+     * - Must be secure
+     * - Must not be a privacy leak
+     * - Must be understandable as a stand-alone Setting.
      * <p>
-     *     This does not guarantee the setting is available. {@link #isAvailable()} should sill be
-     *     called.
+     * This does not guarantee the setting is available. {@link #isAvailable()} should sill be
+     * called.
      *
      * @return {@code true} if the controller should be used externally as a Slice.
      */
@@ -246,7 +246,7 @@ public abstract class BasePreferenceController extends AbstractPreferenceControl
 
     /**
      * Updates non-indexable keys for search provider.
-     *
+     * <p>
      * Called by SearchIndexProvider#getNonIndexableKeys
      */
     public void updateNonIndexableKeys(List<String> keys) {

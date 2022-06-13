@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,7 +16,7 @@
     android:id="@+id/picker_frame"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center" >
+    android:gravity="center">
 
     <FrameLayout
         android:id="@+id/picker_background"
@@ -26,7 +25,8 @@
         android:layout_centerVertical="true"
         android:background="@color/selector_color" />
 
-    <view class="com.android.tv.settings.widget.picker.Picker$PickerLayout"
+    <view
+        class="com.android.tv.settings.widget.picker.Picker$PickerLayout"
         android:id="@+id/picker"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

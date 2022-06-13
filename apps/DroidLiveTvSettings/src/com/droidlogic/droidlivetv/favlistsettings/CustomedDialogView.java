@@ -64,7 +64,8 @@ public class CustomedDialogView {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         final AlertDialog alertDialog = builder.create();
         WindowManager.LayoutParams params = alertDialog.getWindow().getAttributes();
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        ;
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         alertDialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
 
@@ -75,7 +76,7 @@ public class CustomedDialogView {
             itemList.add(item);
         }
         View dialogView = View.inflate(mContext, R.layout.dialog_list, null);
-        MyAdapter myAdapter = new MyAdapter(mContext,itemList);
+        MyAdapter myAdapter = new MyAdapter(mContext, itemList);
         ListView list = dialogView.findViewById(R.id.dialog_listview);
         list.setAdapter(myAdapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -110,7 +111,8 @@ public class CustomedDialogView {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         final AlertDialog alertDialog = builder.create();
         WindowManager.LayoutParams params = alertDialog.getWindow().getAttributes();
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        ;
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         alertDialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
 
@@ -173,7 +175,8 @@ public class CustomedDialogView {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         final AlertDialog alertDialog = builder.create();
         WindowManager.LayoutParams params = alertDialog.getWindow().getAttributes();
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        ;
         params.width = WindowManager.LayoutParams.WRAP_CONTENT;
         alertDialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
 
@@ -190,7 +193,7 @@ public class CustomedDialogView {
         final Button rename = dialogView.findViewById(R.id.button_rename);
         final ListView list = dialogView.findViewById(R.id.dialog_listview);
         final LinearLayout container = dialogView.findViewById(R.id.dialog_list_editname_container);
-        final MyAdapter myAdapter = new MyAdapter(mContext,itemList);
+        final MyAdapter myAdapter = new MyAdapter(mContext, itemList);
         final int[] FLAG = {FLAG_EDIT_FAV_ADD};
 
         title.setVisibility(View.VISIBLE);
@@ -237,7 +240,7 @@ public class CustomedDialogView {
                         edit.setText("");
                         edit.setHint(R.string.edit_fav_list_add_type_in_description);
                         break;
-                    case FLAG_EDIT_FAV_DEL:{
+                    case FLAG_EDIT_FAV_DEL: {
                         FLAG[0] = FLAG_EDIT_FAV_DEL;
                         if (container.getVisibility() != View.VISIBLE) {
                             container.setVisibility(View.VISIBLE);
@@ -258,7 +261,7 @@ public class CustomedDialogView {
                         edit.setHint("");
                         break;
                     }
-                    case FLAG_EDIT_FAV_EDIT:{
+                    case FLAG_EDIT_FAV_EDIT: {
                         FLAG[0] = FLAG_EDIT_FAV_EDIT;
                         if (container.getVisibility() != View.VISIBLE) {
                             container.setVisibility(View.VISIBLE);
@@ -307,16 +310,16 @@ public class CustomedDialogView {
                     if (FLAG[0] == FLAG_EDIT_FAV_ADD) {
                         if (channelDataManager.getFavGroupPageCount() >= 64) {
                             Log.d(TAG, "rename onClick add limit is 64");
-                            Toast.makeText(mContext,R.string.edit_fav_list_name_limit, Toast.LENGTH_SHORT);
+                            Toast.makeText(mContext, R.string.edit_fav_list_name_limit, Toast.LENGTH_SHORT);
                             edit.setHint(R.string.edit_fav_list_name_limit);
                             return;
                         } else if (editable == null || (editable != null && TextUtils.isEmpty(editable.toString()))) {
-                            Toast.makeText(mContext,R.string.edit_fav_list_name_invalid, Toast.LENGTH_SHORT);
+                            Toast.makeText(mContext, R.string.edit_fav_list_name_invalid, Toast.LENGTH_SHORT);
                             edit.setHint(R.string.edit_fav_list_name_invalid);
                             Log.d(TAG, "rename onClick add invalid fav page");
                             return;
                         } else if (channelDataManager.isFavGroupExist(editable != null ? editable.toString() : null)) {
-                            Toast.makeText(mContext,R.string.edit_fav_list_name_exist, Toast.LENGTH_SHORT);
+                            Toast.makeText(mContext, R.string.edit_fav_list_name_exist, Toast.LENGTH_SHORT);
                             edit.setHint(R.string.edit_fav_list_name_exist);
                             Log.d(TAG, "rename onClick add fav page exist");
                             return;
@@ -325,12 +328,12 @@ public class CustomedDialogView {
                         Log.d(TAG, "rename onClick del fav page");
                     } else if (FLAG[0] == FLAG_EDIT_FAV_EDIT) {
                         if (editable == null || (editable != null && TextUtils.isEmpty(editable.toString()))) {
-                            Toast.makeText(mContext,R.string.edit_fav_list_name_invalid, Toast.LENGTH_SHORT);
+                            Toast.makeText(mContext, R.string.edit_fav_list_name_invalid, Toast.LENGTH_SHORT);
                             edit.setHint(R.string.edit_fav_list_name_invalid);
                             Log.d(TAG, "rename onClick edit invalid fav page");
                             return;
                         } else if (channelDataManager.isFavGroupExist(editable != null ? editable.toString() : null)) {
-                            Toast.makeText(mContext,R.string.edit_fav_list_name_exist, Toast.LENGTH_SHORT);
+                            Toast.makeText(mContext, R.string.edit_fav_list_name_exist, Toast.LENGTH_SHORT);
                             edit.setHint(R.string.edit_fav_list_name_exist);
                             Log.d(TAG, "rename onClick edit fav page exist");
                             return;
@@ -390,7 +393,7 @@ public class CustomedDialogView {
         public View getView(int position, View convertView, ViewGroup parent) {
             ListViewHolder holder = null;
             if (convertView == null) {
-                convertView = LayoutInflater.from(mAdapterContext).inflate(R.layout.dialog_list_item,parent,false);
+                convertView = LayoutInflater.from(mAdapterContext).inflate(R.layout.dialog_list_item, parent, false);
                 holder = new ListViewHolder();
                 holder.mListTextView = (TextView) convertView.findViewById(R.id.list_item_text);
                 convertView.setTag(holder);
@@ -406,7 +409,7 @@ public class CustomedDialogView {
 
         private String mTitle = null;
 
-        public ListItem(String title){
+        public ListItem(String title) {
             this.mTitle = title;
         }
 
@@ -418,7 +421,7 @@ public class CustomedDialogView {
     public class ListViewHolder {
         private TextView mListTextView;
 
-        public ListViewHolder(){
+        public ListViewHolder() {
 
         }
 

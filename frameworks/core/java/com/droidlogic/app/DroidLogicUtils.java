@@ -38,7 +38,7 @@ public class DroidLogicUtils {
     }
 
     public static String audioFormatOutputToString(int value) {
-        String temp = "["+value+"]";
+        String temp = "[" + value + "]";
         switch (value) {
             case OutputModeManager.DIGITAL_AUDIO_FORMAT_PCM:
                 return temp + "FORMAT_PCM";
@@ -55,7 +55,7 @@ public class DroidLogicUtils {
 
     public static boolean getMicToggleState() {
         String ret = getSystemControlManager().readSysFs("/sys/class/gpio_keypad/table").replaceAll("\n", "");
-        Log.d(TAG, "getMicToggleState:"+ret);
+        Log.d(TAG, "getMicToggleState:" + ret);
         int a = ret.indexOf("name = mute");
         String item_mute = ret.substring(a);
         int pos_on = item_mute.indexOf("1");

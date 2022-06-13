@@ -15,7 +15,9 @@ import android.util.Log;
 
 import com.droidlogic.app.MediaPlayerExt;
 
-/** @hide */
+/**
+ * @hide
+ */
 public class MediaPlayerClient extends IMediaPlayerClient.Stub {
     private static final String TAG = "MediaPlayerClient";
     private static final boolean DEBUG = false;
@@ -30,7 +32,8 @@ public class MediaPlayerClient extends IMediaPlayerClient.Stub {
     }
 
     public void notify(int msg, int ext1, int ext2, Parcel parcel) {
-        if (DEBUG) Log.i(TAG, "[notify] msg:" + msg + ", ext1:" + ext1 + ", ext2:" + ext2 + ", parcel:" + parcel);
+        if (DEBUG)
+            Log.i(TAG, "[notify] msg:" + msg + ", ext1:" + ext1 + ", ext2:" + ext2 + ", parcel:" + parcel);
         mMp.postEvent(msg, ext1, ext2, parcel);
     }
 }

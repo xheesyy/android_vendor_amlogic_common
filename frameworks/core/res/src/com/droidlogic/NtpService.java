@@ -41,7 +41,7 @@ public class NtpService extends Service {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if ( ConnectivityManager.CONNECTIVITY_ACTION.equals(action) && ( mHandler != null ) ) {
+            if (ConnectivityManager.CONNECTIVITY_ACTION.equals(action) && (mHandler != null)) {
                 mHandler.removeCallbacks(mSyncRunnable);
                 mHandler.post(mSyncRunnable);
             }
@@ -61,12 +61,13 @@ public class NtpService extends Service {
         super.onDestroy();
     }
 
-    private void cancelReceiver(){
-        if ( register ) {
+    private void cancelReceiver() {
+        if (register) {
             this.unregisterReceiver(mConnectivityReceiver);
             register = false;
         }
     }
+
     private void registerForConnectivityIntents() {
         if (!register) {
             IntentFilter intentFilter = new IntentFilter();
@@ -90,13 +91,13 @@ public class NtpService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if ( requestTimeThread == null ) {
+        if (requestTimeThread == null) {
             init();
         }
         return super.onStartCommand(intent, flags, startId);
     }
 
-    private Runnable mSyncRunnable = new Runnable(){
+    private Runnable mSyncRunnable = new Runnable() {
         @Override
         public void run() {
             SyncTimeLock();
@@ -110,20 +111,20 @@ public class NtpService extends Service {
             Method getnptMethod = sntpClass.getMethod("getNtpTime", null);
             Method reqtimeMethod = sntpClass.getMethod("requestTime", String.class, int.class);
             Method getreference = sntpClass.getMethod("getNtpTimeReference", null);
-            for ( int i=0; (NtpServers != null) && i<NtpServers.length; i++ ) {
+            for (int i = 0; (NtpServers != null) && i < NtpServers.length; i++) {
                 boolean ret = (boolean) reqtimeMethod.invoke(sntpObject, NtpServers[i], NTP_TIMEOUT);
                 if (ret) {
                     long now = (long) getnptMethod.invoke(sntpObject, null) + SystemClock.elapsedRealtime() - (long) getreference.invoke(sntpObject, null);
-                    Log.d(TAG,"TIME Set to"+now);
+                    Log.d(TAG, "TIME Set to" + now);
                     SystemClock.setCurrentTimeMillis(now);
                     cancelReceiver();
                     break;
                 }
             }
 
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }catch (InstantiationException e) {
+        } catch (InstantiationException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IllegalAccessException e) {

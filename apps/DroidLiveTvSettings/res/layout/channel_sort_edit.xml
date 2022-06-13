@@ -94,6 +94,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_gravity="center">
+
                 <TextView
                     android:id="@+id/sat_text"
                     android:layout_width="wrap_content"
@@ -121,6 +122,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:layout_gravity="center">
+
                 <TextView
                     android:id="@+id/tp_text"
                     android:layout_width="wrap_content"
@@ -207,7 +209,7 @@
                 android:nextFocusUp="@id/favourite"
                 android:nextFocusDown="@id/favourite"
                 android:scrollbarFadeDuration="0"
-                android:fadeScrollbars="true"/>
+                android:fadeScrollbars="true" />
         </LinearLayout>
 
     </LinearLayout>

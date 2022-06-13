@@ -18,9 +18,12 @@ package com.android.tv.settings.pqsettings;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -63,13 +66,13 @@ public class AdjustValueFragment extends SettingsPreferenceFragment implements S
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.xml.seekbar, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated (View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         initSeekBar(view);
     }
 
@@ -147,8 +150,8 @@ public class AdjustValueFragment extends SettingsPreferenceFragment implements S
             seekbar_sharpness.setVisibility(View.GONE);
             text_sharpness.setVisibility(View.GONE);
         }
-        seekbar_hue= (SeekBar) view.findViewById(R.id.seekbar_hue);
-        text_hue= (TextView) view.findViewById(R.id.text_hue);
+        seekbar_hue = (SeekBar) view.findViewById(R.id.seekbar_hue);
+        text_hue = (TextView) view.findViewById(R.id.text_hue);
         if (((isTv && getActivity().getResources().getBoolean(R.bool.tv_pq_need_hue)) ||
                 (!isTv && getActivity().getResources().getBoolean(R.bool.box_pq_need_hue))) && mPQSettingsManager.isNtscSignalOrNot()) {
             status = mPQSettingsManager.getToneStatus();
@@ -172,27 +175,27 @@ public class AdjustValueFragment extends SettingsPreferenceFragment implements S
             return;
         }
         switch (seekBar.getId()) {
-            case R.id.seekbar_brightness:{
+            case R.id.seekbar_brightness: {
                 setShow(R.id.seekbar_brightness, progress);
                 mPQSettingsManager.setBrightness(progress - mPQSettingsManager.getBrightnessStatus());
                 break;
             }
-            case R.id.seekbar_contrast:{
+            case R.id.seekbar_contrast: {
                 setShow(R.id.seekbar_contrast, progress);
                 mPQSettingsManager.setContrast(progress - mPQSettingsManager.getContrastStatus());
                 break;
             }
-            case R.id.seekbar_saturation:{
+            case R.id.seekbar_saturation: {
                 setShow(R.id.seekbar_saturation, progress);
                 mPQSettingsManager.setColor(progress - mPQSettingsManager.getColorStatus());
                 break;
             }
-            case R.id.seekbar_sharpness:{
+            case R.id.seekbar_sharpness: {
                 setShow(R.id.seekbar_sharpness, progress);
                 mPQSettingsManager.setSharpness(progress - mPQSettingsManager.getSharpnessStatus());
                 break;
             }
-            case R.id.seekbar_hue:{
+            case R.id.seekbar_hue: {
                 setShow(R.id.seekbar_hue, progress);
                 mPQSettingsManager.setTone(progress - mPQSettingsManager.getToneStatus());
                 break;
@@ -219,23 +222,23 @@ public class AdjustValueFragment extends SettingsPreferenceFragment implements S
 
     private void setShow(int id, int value) {
         switch (id) {
-            case R.id.seekbar_brightness:{
+            case R.id.seekbar_brightness: {
                 text_brightness.setText(getShowString(R.string.pq_brightness, value));
                 break;
             }
-            case R.id.seekbar_contrast:{
+            case R.id.seekbar_contrast: {
                 text_contrast.setText(getShowString(R.string.pq_contrast, value));
                 break;
             }
-            case R.id.seekbar_saturation:{
+            case R.id.seekbar_saturation: {
                 text_saturation.setText(getShowString(R.string.pq_saturation, value));
                 break;
             }
-            case R.id.seekbar_sharpness:{
+            case R.id.seekbar_sharpness: {
                 text_sharpness.setText(getShowString(R.string.pq_sharpness, value));
                 break;
             }
-            case R.id.seekbar_hue:{
+            case R.id.seekbar_hue: {
                 text_hue.setText(getShowString(R.string.pq_hue, value));
                 break;
             }

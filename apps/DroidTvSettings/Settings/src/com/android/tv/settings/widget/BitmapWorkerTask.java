@@ -92,7 +92,7 @@ public class BitmapWorkerTask extends AsyncTask<BitmapWorkerOptions, Void, Bitma
                             UriUtils.getIconResource(workerOptions.getResourceUri()),
                             workerOptions);
                 } else if (UriUtils.isWebUri(workerOptions.getResourceUri())) {
-                        return getBitmapFromHttp(workerOptions);
+                    return getBitmapFromHttp(workerOptions);
                 } else if (UriUtils.isContentUri(workerOptions.getResourceUri())) {
                     return getBitmapFromContent(workerOptions);
                 } else if (UriUtils.isAccountImageUri(workerOptions.getResourceUri())) {
@@ -124,7 +124,7 @@ public class BitmapWorkerTask extends AsyncTask<BitmapWorkerOptions, Void, Bitma
     }
 
     private Bitmap getBitmapFromResource(Context context, ShortcutIconResource iconResource,
-            BitmapWorkerOptions outputOptions) throws IOException {
+                                         BitmapWorkerOptions outputOptions) throws IOException {
         if (DEBUG) {
             Log.d(TAG, "Loading " + iconResource.toString());
         }
@@ -132,8 +132,8 @@ public class BitmapWorkerTask extends AsyncTask<BitmapWorkerOptions, Void, Bitma
             Object drawable = loadDrawable(context, iconResource);
             if (drawable instanceof InputStream) {
                 // Most of these are bitmaps, so resize properly.
-                return decodeBitmap((InputStream)drawable, outputOptions);
-            } else if (drawable instanceof Drawable){
+                return decodeBitmap((InputStream) drawable, outputOptions);
+            } else if (drawable instanceof Drawable) {
                 return createIconBitmap((Drawable) drawable, outputOptions);
             } else {
                 Log.w(TAG, "getBitmapFromResource failed, unrecognized resource: " + drawable);
@@ -181,10 +181,10 @@ public class BitmapWorkerTask extends AsyncTask<BitmapWorkerOptions, Void, Bitma
             int height = (int) (bitmap.getHeight() * scale);
             if (DEBUG) {
                 Log.d(TAG, "Scaling bitmap " + ((outputOptions.getResourceUri() != null)
-                                        ? outputOptions.getResourceUri().toString()
-                                        : outputOptions.getIconResource().toString()) + " from "
-                                + bitmap.getWidth() + "x" + bitmap.getHeight() + " to " + width
-                                + "x" + height + " scale " + scale);
+                        ? outputOptions.getResourceUri().toString()
+                        : outputOptions.getIconResource().toString()) + " from "
+                        + bitmap.getWidth() + "x" + bitmap.getHeight() + " to " + width
+                        + "x" + height + " scale " + scale);
             }
             Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, width, height, true);
             mScaled = true;
@@ -269,7 +269,7 @@ public class BitmapWorkerTask extends AsyncTask<BitmapWorkerOptions, Void, Bitma
             return decodeBitmap(in, options);
         } finally {
             if (DEBUG) {
-                Log.d(TAG, "loading done "+url);
+                Log.d(TAG, "loading done " + url);
             }
         }
     }
@@ -290,8 +290,9 @@ public class BitmapWorkerTask extends AsyncTask<BitmapWorkerOptions, Void, Bitma
      * load drawable for non-bitmap resource or InputStream for bitmap resource without
      * caching Bitmap in Resources.  So that caller can maintain a different caching
      * storage with less memory used.
-     * @return  either {@link Drawable} for xml and ColorDrawable <br>
-     *          or {@link InputStream} for Bitmap resource
+     *
+     * @return either {@link Drawable} for xml and ColorDrawable <br>
+     * or {@link InputStream} for Bitmap resource
      */
     private static Object loadDrawable(Context context, ShortcutIconResource r)
             throws NameNotFoundException {
@@ -310,7 +311,7 @@ public class BitmapWorkerTask extends AsyncTask<BitmapWorkerOptions, Void, Bitma
         resources.getValue(id, value, true);
         if ((value.type == TypedValue.TYPE_STRING && value.string.toString().endsWith(".xml")) || (
                 value.type >= TypedValue.TYPE_FIRST_COLOR_INT
-                && value.type <= TypedValue.TYPE_LAST_COLOR_INT)) {
+                        && value.type <= TypedValue.TYPE_LAST_COLOR_INT)) {
             return resources.getDrawable(id);
         }
         return resources.openRawResource(id, value);
@@ -363,7 +364,7 @@ public class BitmapWorkerTask extends AsyncTask<BitmapWorkerOptions, Void, Bitma
                 if (picUriString != null) {
                     BitmapWorkerOptions.Builder optionBuilder =
                             new BitmapWorkerOptions.Builder(context)
-                            .width(options.getWidth())
+                                    .width(options.getWidth())
                                     .height(options.getHeight())
                                     .cacheFlag(options.getCacheFlag())
                                     .bitmapConfig(options.getBitmapConfig())

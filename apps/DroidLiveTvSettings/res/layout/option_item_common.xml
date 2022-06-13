@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +22,7 @@
     android:paddingTop="@dimen/option_item_common_padding_top"
     android:paddingBottom="@dimen/option_item_common_padding_bottom"
     android:gravity="center_vertical"
-    android:focusable="false" >
+    android:focusable="false">
 
     <TextView
         android:id="@+id/title"
@@ -34,6 +33,7 @@
         android:textColor="@color/option_item_text_color"
         android:singleLine="true"
         android:focusable="false" />
+
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"

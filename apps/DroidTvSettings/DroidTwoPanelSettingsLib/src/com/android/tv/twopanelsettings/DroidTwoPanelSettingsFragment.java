@@ -98,7 +98,7 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
             new OnChildViewHolderSelectedListener() {
                 @Override
                 public void onChildViewHolderSelected(RecyclerView parent,
-                        RecyclerView.ViewHolder child, int position, int subposition) {
+                                                      RecyclerView.ViewHolder child, int position, int subposition) {
                     if (child == null) {
                         return;
                     }
@@ -111,7 +111,7 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
 
                 @Override
                 public void onChildViewHolderSelectedAndPositioned(RecyclerView parent,
-                        RecyclerView.ViewHolder child, int position, int subposition) {
+                                                                   RecyclerView.ViewHolder child, int position, int subposition) {
                 }
             };
 
@@ -125,7 +125,7 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.two_panel_settings_fragment, container, false);
         mScrollView = v.findViewById(R.id.scrollview);
         mHandler = new Handler();
@@ -152,7 +152,9 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         }
     }
 
-    /** Extend this method to provide the initial screen **/
+    /**
+     * Extend this method to provide the initial screen
+     **/
     public abstract void onPreferenceStartInitialScreen();
 
     private boolean shouldDisplay(String fragment) {
@@ -190,12 +192,16 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         return true;
     }
 
-    /** Navigate back to the previous fragment **/
+    /**
+     * Navigate back to the previous fragment
+     **/
     public void navigateBack() {
         back(false);
     }
 
-    /** Navigate into current preview fragment */
+    /**
+     * Navigate into current preview fragment
+     */
     public void navigateToPreviewFragment() {
         Fragment previewFragment = getChildFragmentManager().findFragmentById(
                 frameResIds[mPrefPanelIdx + 1]);
@@ -325,9 +331,13 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         return true;
     }
 
-    /** Callback from SliceFragment **/
+    /**
+     * Callback from SliceFragment
+     **/
     public interface SliceFragmentCallback {
-        /** Triggered when preference is focused **/
+        /**
+         * Triggered when preference is focused
+         **/
         void onPreferenceFocused(Preference preference);
     }
 
@@ -443,7 +453,7 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         @Override
         public @Nullable
         View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                          Bundle savedInstanceState) {
             return inflater.inflate(R.layout.dummy_fragment, container, false);
         }
     }
@@ -633,7 +643,9 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         }
     }
 
-    /** For RTL layout, we need to know the right edge from where the panels start scrolling. */
+    /**
+     * For RTL layout, we need to know the right edge from where the panels start scrolling.
+     */
     private int computeMaxRightScroll() {
         int scrollViewWidth = getResources().getDimensionPixelSize(R.dimen.tp_settings_panes_width);
         int panelWidth = getResources().getDimensionPixelSize(
@@ -644,7 +656,9 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         return result < 0 ? 0 : result;
     }
 
-    /** Scrolls such that the panel with given index is the main panel shown on the left. */
+    /**
+     * Scrolls such that the panel with given index is the main panel shown on the left.
+     */
     private void moveToPanel(final int index, boolean smoothScroll) {
         mHandler.post(() -> {
             if (DEBUG) {
@@ -848,7 +862,9 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         }
     }
 
-    /** Show error message in preview panel **/
+    /**
+     * Show error message in preview panel
+     **/
     public void showErrorMessage(String errorMessage) {
         Fragment prefFragment =
                 getChildFragmentManager().findFragmentById(frameResIds[mPrefPanelIdx]);
@@ -892,7 +908,9 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         return chosenPreference;
     }
 
-    /** Creates preview preference fragment. */
+    /**
+     * Creates preview preference fragment.
+     */
     public Fragment onCreatePreviewFragment(Fragment caller, Preference preference) {
         if (preference.getFragment() != null) {
             if (!shouldDisplay(preference.getFragment())) {
@@ -937,19 +955,25 @@ public abstract class DroidTwoPanelSettingsFragment extends Fragment implements
         }
     }
 
-    /** Add focus listener to the child fragment **/
+    /**
+     * Add focus listener to the child fragment
+     **/
     public void addListenerForFragment(Fragment fragment) {
         if (isFragmentInTheMainPanel(fragment)) {
             addOrRemovePreferenceFocusedListener(fragment, true);
         }
     }
 
-    /** Remove focus listener from the child fragment **/
+    /**
+     * Remove focus listener from the child fragment
+     **/
     public void removeListenerForFragment(Fragment fragment) {
         addOrRemovePreferenceFocusedListener(fragment, false);
     }
 
-    /** Check if fragment is in the main panel **/
+    /**
+     * Check if fragment is in the main panel
+     **/
     public boolean isFragmentInTheMainPanel(Fragment fragment) {
         return fragment == getChildFragmentManager().findFragmentById(frameResIds[mPrefPanelIdx]);
     }

@@ -20,10 +20,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemProperties;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
 import android.util.Log;
 import android.text.TextUtils;
 import android.view.View;
@@ -54,14 +57,14 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
 
     private static final String TAG = "SoundModeFragment";
 
-    private static final String TV_EQ_MODE                                  = "key_tv_sound_mode";
-    private static final String TV_TREBLE_BASS_SETTINGS                     = "treble_bass_effect_settings";
-    private static final String TV_BALANCE_SETTINGS                         = "balance_effect_settings";
-    private static final String TV_VIRTUAL_SURROUND_SETTINGS                = "tv_sound_virtual_surround";
-    private static final String TV_SOUND_OUT                                = "tv_sound_output_device";
-    private static final String KEY_DOLBY_DAP_EFFECT                        = "key_dolby_dap_effect";
-    private static final String AUDIO_ONLY                                  = "tv_sound_audio_only";
-    private static final String KEY_TV_SOUND_AUDIO_SOURCE_SELECT            = "key_tv_sound_audio_source_select";
+    private static final String TV_EQ_MODE = "key_tv_sound_mode";
+    private static final String TV_TREBLE_BASS_SETTINGS = "treble_bass_effect_settings";
+    private static final String TV_BALANCE_SETTINGS = "balance_effect_settings";
+    private static final String TV_VIRTUAL_SURROUND_SETTINGS = "tv_sound_virtual_surround";
+    private static final String TV_SOUND_OUT = "tv_sound_output_device";
+    private static final String KEY_DOLBY_DAP_EFFECT = "key_dolby_dap_effect";
+    private static final String AUDIO_ONLY = "tv_sound_audio_only";
+    private static final String KEY_TV_SOUND_AUDIO_SOURCE_SELECT = "key_tv_sound_audio_source_select";
 
     private AudioConfigManager mAudioConfigManager;
     private AudioEffectManager mAudioEffectManager;
@@ -69,7 +72,7 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
     private SoundParameterSettingManager mSoundParameterSettingManager;
     private OutputModeManager mOutputModeManager;
 
-    private static final int AUDIO_OUTPUT_DELAY_SOURCE_DEFAULT               = 0;
+    private static final int AUDIO_OUTPUT_DELAY_SOURCE_DEFAULT = 0;
 
     private static int mCurrentSettingSourceId = AudioConfigManager.AUDIO_OUTPUT_DELAY_SOURCE_ATV;
     private ListPreference mTvSourceSelectPref;
@@ -137,15 +140,15 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
 
     private void init() {
         mAudioConfigManager = AudioConfigManager.getInstance(getActivity());
-        mAudioEffectManager = ((TvSettingsActivity)getActivity()).getAudioEffectManager();
+        mAudioEffectManager = ((TvSettingsActivity) getActivity()).getAudioEffectManager();
         mTvControlManager = TvControlManager.getInstance();
-        mSoundParameterSettingManager = ((TvSettingsActivity)getActivity()).getSoundParameterSettingManager();
+        mSoundParameterSettingManager = ((TvSettingsActivity) getActivity()).getSoundParameterSettingManager();
         mOutputModeManager = OutputModeManager.getInstance(getActivity());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView");
         final View innerView = super.onCreateView(inflater, container, savedInstanceState);
         if (getActivity().getIntent().getIntExtra("from_live_tv", 0) == 1) {
@@ -197,7 +200,8 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
         if (TextUtils.equals(preference.getKey(), AUDIO_ONLY)) {
             createUiDialog(AUDIOONLY);
         }
@@ -207,8 +211,9 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
-        final int selection = Integer.parseInt((String)newValue);
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
+        final int selection = Integer.parseInt((String) newValue);
         if (TextUtils.equals(preference.getKey(), TV_EQ_MODE)) {
             mAudioEffectManager.setSoundMode(selection);
             // non-user sound mode, set default treble and bass value
@@ -224,7 +229,7 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
             mAudioEffectManager.setTreble(trebleValue);
         } else if (TextUtils.equals(preference.getKey(), TV_VIRTUAL_SURROUND_SETTINGS)) {
             mAudioEffectManager.setVirtualSurround(selection);
-        }else if (TextUtils.equals(preference.getKey(), TV_SOUND_OUT)) {
+        } else if (TextUtils.equals(preference.getKey(), TV_SOUND_OUT)) {
             mSoundParameterSettingManager.setSoundOutputStatus(selection);
         } else if (TextUtils.equals(preference.getKey(), KEY_TV_SOUND_AUDIO_SOURCE_SELECT)) {
             mCurrentSettingSourceId = selection;
@@ -255,7 +260,7 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
         initOutputDelayAndPrescaleSeekBar(view);
     }
 
-    private void createUiDialog () {
+    private void createUiDialog() {
         Context context = (Context) (getActivity());
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.xml.tv_sound_effect_ui, null);//tv_sound_effect_ui
@@ -273,7 +278,7 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
         initSoundModeEqBandSeekBar(view);
     }
 
-    private void createUiDialog (int type) {
+    private void createUiDialog(int type) {
         Context context = (Context) (getActivity());
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.xml.layout_dialog, null);
@@ -282,9 +287,9 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
         final AlertDialog mAlertDialog = builder.create();
         mAlertDialog.show();
         mAlertDialog.getWindow().setContentView(view);
-        TextView button_cancel = (TextView)view.findViewById(R.id.dialog_cancel);
-        TextView dialogtitle = (TextView)view.findViewById(R.id.dialog_title);
-        TextView dialogdetails = (TextView)view.findViewById(R.id.dialog_details);
+        TextView button_cancel = (TextView) view.findViewById(R.id.dialog_cancel);
+        TextView dialogtitle = (TextView) view.findViewById(R.id.dialog_title);
+        TextView dialogdetails = (TextView) view.findViewById(R.id.dialog_details);
         if (AUDIOONLY == type) {
             dialogtitle.setText(getActivity().getResources().getString(R.string.title_tv_sound_audio_only));
             dialogdetails.setText(getActivity().getResources().getString(R.string.msg_tv_sound_audio_only));
@@ -297,7 +302,7 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
             }
         });
         button_cancel.requestFocus();
-        TextView button_ok = (TextView)view.findViewById(R.id.dialog_ok);
+        TextView button_ok = (TextView) view.findViewById(R.id.dialog_ok);
         button_ok.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -324,7 +329,7 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
 
     private void initSoundModeEqBandSeekBar(View view) {
         if (mAudioEffectManager == null) {
-            mAudioEffectManager = ((TvSettingsActivity)getActivity()).getAudioEffectManager();
+            mAudioEffectManager = ((TvSettingsActivity) getActivity()).getAudioEffectManager();
         }
         int status = -1;
         mBand1Seekbar = (SeekBar) view.findViewById(R.id.seekbar_tv_audio_effect_band1);
@@ -390,7 +395,7 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
         mTextAudioPrescale = (TextView) view.findViewById(R.id.id_text_view_audio_prescale);
         int value = mAudioConfigManager.getAudioPrescale(mCurrentSettingSourceId);
         mSeekBarAudioPrescale.setOnSeekBarChangeListener(this);
-        mSeekBarAudioPrescale.setProgress(value+150);
+        mSeekBarAudioPrescale.setProgress(value + 150);
         setShow(R.id.id_seek_bar_audio_prescale, value);
 
         mIsDelayAndPrescaleSeekBarInited = true;
@@ -401,55 +406,55 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
         if (!mIsAudioEqSeekBarInited && !mIsDelayAndPrescaleSeekBarInited) {
             return;
         }
-        ((TvSettingsActivity)getActivity()).startShowActivityTimer();
+        ((TvSettingsActivity) getActivity()).startShowActivityTimer();
         switch (seekBar.getId()) {
-            case R.id.seekbar_tv_audio_effect_band1:{
+            case R.id.seekbar_tv_audio_effect_band1: {
                 setShow(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND1, progress);
                 mAudioEffectManager.setUserSoundModeParam(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND1, progress);
                 break;
             }
-            case R.id.seekbar_tv_audio_effect_band2:{
+            case R.id.seekbar_tv_audio_effect_band2: {
                 setShow(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND2, progress);
                 mAudioEffectManager.setUserSoundModeParam(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND2, progress);
                 break;
             }
-            case R.id.seekbar_tv_audio_effect_band3:{
+            case R.id.seekbar_tv_audio_effect_band3: {
                 setShow(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND3, progress);
                 mAudioEffectManager.setUserSoundModeParam(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND3, progress);
                 break;
             }
-            case R.id.seekbar_tv_audio_effect_band4:{
+            case R.id.seekbar_tv_audio_effect_band4: {
                 setShow(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND4, progress);
                 mAudioEffectManager.setUserSoundModeParam(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND4, progress);
                 break;
             }
-            case R.id.seekbar_tv_audio_effect_band5:{
+            case R.id.seekbar_tv_audio_effect_band5: {
                 setShow(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND5, progress);
                 mAudioEffectManager.setUserSoundModeParam(AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND5, progress);
                 break;
             }
-            case R.id.id_seek_bar_audio_delay_speaker:{
+            case R.id.id_seek_bar_audio_delay_speaker: {
                 setShow(R.id.id_seek_bar_audio_delay_speaker, progress);
                 mAudioConfigManager.setAudioOutputSpeakerDelay(mCurrentSettingSourceId, progress);
                 setDelayEnabled();
                 break;
             }
-            case R.id.id_seek_bar_audio_delay_spdif:{
+            case R.id.id_seek_bar_audio_delay_spdif: {
                 setShow(R.id.id_seek_bar_audio_delay_spdif, progress);
                 mAudioConfigManager.setAudioOutputSpdifDelay(mCurrentSettingSourceId, progress);
                 setDelayEnabled();
                 break;
             }
-            case R.id.id_seek_bar_audio_delay_headphone:{
+            case R.id.id_seek_bar_audio_delay_headphone: {
                 setShow(R.id.id_seek_bar_audio_delay_headphone, progress);
                 mAudioConfigManager.setAudioOutputHeadphoneDelay(mCurrentSettingSourceId, progress);
                 setDelayEnabled();
                 break;
             }
-            case R.id.id_seek_bar_audio_prescale:{
+            case R.id.id_seek_bar_audio_prescale: {
                 // UI display -150 - 150
-                setShow(R.id.id_seek_bar_audio_prescale, progress-150);
-                mAudioConfigManager.setAudioPrescale(mCurrentSettingSourceId, progress-150);
+                setShow(R.id.id_seek_bar_audio_prescale, progress - 150);
+                mAudioConfigManager.setAudioPrescale(mCurrentSettingSourceId, progress - 150);
                 setDelayEnabled();
                 break;
             }
@@ -471,40 +476,40 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
 
     private void setShow(int id, int value) {
         switch (id) {
-            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND1:{
+            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND1: {
                 mBand1Text.setText(getShowString(R.string.tv_audio_effect_band1, value));
                 break;
             }
-            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND2:{
+            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND2: {
                 mBand2Text.setText(getShowString(R.string.tv_audio_effect_band2, value));
                 break;
             }
-            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND3:{
+            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND3: {
                 mBand3Text.setText(getShowString(R.string.tv_audio_effect_band3, value));
                 break;
             }
-            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND4:{
+            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND4: {
                 mBand4Text.setText(getShowString(R.string.tv_audio_effect_band4, value));
                 break;
             }
-            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND5:{
+            case AudioEffectManager.EQ_SOUND_MODE_EFFECT_BAND5: {
                 mBand5Text.setText(getShowString(R.string.tv_audio_effect_band5, value));
                 break;
             }
-            case R.id.id_seek_bar_audio_delay_speaker:{
+            case R.id.id_seek_bar_audio_delay_speaker: {
                 mTextAudioOutputDelaySpeaker.setText(getAudioDelayShowString(R.string.title_tv_audio_delay_speaker, value));
                 break;
             }
-            case R.id.id_seek_bar_audio_delay_spdif:{
+            case R.id.id_seek_bar_audio_delay_spdif: {
                 mTextAudioOutputDelaySpdif.setText(getAudioDelayShowString(R.string.title_tv_audio_delay_spdif, value));
                 break;
             }
-            case R.id.id_seek_bar_audio_delay_headphone:{
+            case R.id.id_seek_bar_audio_delay_headphone: {
                 mTextAudioOutputDelayHeadphone.setText(getAudioDelayShowString(R.string.title_tv_audio_delay_headphone, value));
                 break;
             }
-            case R.id.id_seek_bar_audio_prescale:{
-                mTextAudioPrescale.setText(getActivity().getResources().getString(R.string.title_tv_audio_prescale) + ": " + value/10.0 + " dB");
+            case R.id.id_seek_bar_audio_prescale: {
+                mTextAudioPrescale.setText(getActivity().getResources().getString(R.string.title_tv_audio_prescale) + ": " + value / 10.0 + " dB");
                 break;
             }
             default:
@@ -516,7 +521,7 @@ public class SoundModeFragment extends SettingsPreferenceFragment implements Pre
         return getActivity().getResources().getString(resid) + ": " + value + " ms";
     }
 
-    private void setDelayEnabled () {
+    private void setDelayEnabled() {
         SystemControlManager.getInstance().setProperty(AudioConfigManager.PROP_AUDIO_DELAY_ENABLED, "true");
     }
 

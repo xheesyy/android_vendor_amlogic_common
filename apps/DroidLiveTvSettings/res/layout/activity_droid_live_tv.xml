@@ -3,5 +3,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="@dimen/side_panel_width"
-    android:layout_height="match_parent" >
-</RelativeLayout>
+    android:layout_height="match_parent"></RelativeLayout>

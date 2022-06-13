@@ -39,6 +39,7 @@ public class Utils {
         PreferenceManager.getDefaultSharedPreferences(context).edit()
                 .putString(PREF_KEY_LAST_WATCHED_CHANNEL_URI, uri.toString()).apply();
     }
+
     public static String getLastWatchedChannelUri(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(PREF_KEY_LAST_WATCHED_CHANNEL_URI, null);

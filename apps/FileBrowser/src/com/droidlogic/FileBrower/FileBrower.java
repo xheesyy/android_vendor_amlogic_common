@@ -1,22 +1,23 @@
 /******************************************************************
-*
-*Copyright (C) 2012  Amlogic, Inc.
-*
-*Licensed under the Apache License, Version 2.0 (the "License");
-*you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing, software
-*distributed under the License is distributed on an "AS IS" BASIS,
-*WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*See the License for the specific language governing permissions and
-*limitations under the License.
-******************************************************************/
+ *
+ *Copyright (C) 2012  Amlogic, Inc.
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ ******************************************************************/
 package com.droidlogic.FileBrower;
 
 import android.os.storage.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -85,7 +86,6 @@ import android.content.BroadcastReceiver;
 import android.media.MediaScannerConnection;
 
 
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 
@@ -98,7 +98,9 @@ import com.droidlogic.FileBrower.FileOp.FileOpTodo;
 import com.droidlogic.app.FileListManager;
 
 import android.bluetooth.BluetoothAdapter;
+
 import java.lang.System;
+
 import androidx.core.content.FileProvider;
 
 public class FileBrower extends Activity {
@@ -150,17 +152,17 @@ public class FileBrower extends Activity {
 
     private int item_position_selected, item_position_first, item_position_last;
     private int fromtop_piexl;
-    private boolean isInFileBrowserView=false;
+    private boolean isInFileBrowserView = false;
 
     private static final int REQUEST_CODE_ASK_PERMISSIONS = 2;
 
-    String open_mode[] = {"movie","music","photo","packageInstall"};
+    String open_mode[] = {"movie", "music", "photo", "packageInstall"};
 
     private static FileListManager mFileListManager;
 
     private static final int RET_OK = 0;
 
-    Comparator  mFileComparator = new Comparator<File>() {
+    Comparator mFileComparator = new Comparator<File>() {
         @Override
         public int compare(File o1, File o2) {
             if (o1.isDirectory() && o2.isFile())
@@ -195,13 +197,12 @@ public class FileBrower extends Activity {
                 }
                 if (FileOp.IsBusy) {
                     if (isOperateInDirectory(path, FileOp.source_path) ||
-                        isOperateInDirectory(path, FileOp.target_path)) {
+                            isOperateInDirectory(path, FileOp.target_path)) {
                         FileOp.copy_cancel = true;
                     }
                 }
-            }
-            else if ((action.equals ("com.droidvold.action.MEDIA_UNMOUNTED")
-                || action.equals ("com.droidvold.action.MEDIA_EJECT")) && !path.equals("/dev/null")) {
+            } else if ((action.equals("com.droidvold.action.MEDIA_UNMOUNTED")
+                    || action.equals("com.droidvold.action.MEDIA_EJECT")) && !path.equals("/dev/null")) {
                 if (cur_path.startsWith(path)) {
                     cur_path = FileListManager.STORAGE;
                     DeviceScan();
@@ -209,8 +210,7 @@ public class FileBrower extends Activity {
                 if (cur_path.equals(FileListManager.STORAGE)) {
                     DeviceScan();
                 }
-            }
-            else if (action.equals(Intent.ACTION_MEDIA_MOUNTED) || action.equals ("com.droidvold.action.MEDIA_MOUNTED")) {
+            } else if (action.equals(Intent.ACTION_MEDIA_MOUNTED) || action.equals("com.droidvold.action.MEDIA_MOUNTED")) {
                 if (cur_path.equals(FileListManager.STORAGE)) {
                     DeviceScan();
                 }
@@ -222,8 +222,7 @@ public class FileBrower extends Activity {
                 if (cur_path.equals(FileListManager.STORAGE)) {
                     DeviceScan();
                 }
-            }
-            else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
+            } else if (action.equals(Intent.ACTION_SCREEN_OFF)) {
                 if (sort_dialog != null)
                     sort_dialog.dismiss();
                 if (click_dialog != null)
@@ -240,7 +239,9 @@ public class FileBrower extends Activity {
         //ignore orientation change
     }
 
-    /** Called when the activity is first created or resumed. */
+    /**
+     * Called when the activity is first created or resumed.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -248,8 +249,8 @@ public class FileBrower extends Activity {
         //m_storagemgr.registerListener(mListener);
 
         /** edit process bar handler
-        *  mProgressHandler.sendMessage(Message.obtain(mProgressHandler, msg.what, msg.arg1, msg.arg2));
-        */
+         *  mProgressHandler.sendMessage(Message.obtain(mProgressHandler, msg.what, msg.arg1, msg.arg2));
+         */
         mProgressHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -261,45 +262,45 @@ public class FileBrower extends Activity {
                 TextView tvForPaste = null;
                 if (edit_dialog != null) {
                     pb = (ProgressBar) edit_dialog.findViewById(R.id.edit_progress_bar);
-                    tvForPaste=(TextView)edit_dialog.findViewById(R.id.text_view_paste);
+                    tvForPaste = (TextView) edit_dialog.findViewById(R.id.text_view_paste);
                 }
 
                 switch (msg.what) {
-                    case 0: 	//set invisible
+                    case 0:    //set invisible
                         if ((edit_dialog != null) && (pb != null) && (tvForPaste != null)) {
                             pb.setVisibility(View.INVISIBLE);
                             tvForPaste.setVisibility(View.GONE);
                         }
-                    break;
-                    case 1:		//set progress_bar1
+                        break;
+                    case 1:        //set progress_bar1
                         if ((edit_dialog != null) && (pb != null)) {
                             pb.setProgress(msg.arg1);
                         }
-                    break;
-                    case 2:		//set progress_bar2
+                        break;
+                    case 2:        //set progress_bar2
                         if ((edit_dialog != null) && (pb != null)) {
                             pb.setSecondaryProgress(msg.arg1);
                         }
-                    break;
-                    case 3:		//set visible
+                        break;
+                    case 3:        //set visible
                         if ((edit_dialog != null) && (pb != null) && (tvForPaste != null)) {
                             pb.setProgress(0);
                             pb.setSecondaryProgress(0);
                             pb.setVisibility(View.VISIBLE);
 
                             tvForPaste.setVisibility(View.VISIBLE);
-                            tvForPaste.setText(getText(R.string.edit_dialog_paste_file)+"\n"+FileOp.getMarkFileName("list"));
+                            tvForPaste.setText(getText(R.string.edit_dialog_paste_file) + "\n" + FileOp.getMarkFileName("list"));
                         }
-                    break;
-                    case 4:		//file paste ok
+                        break;
+                    case 4:        //file paste ok
                         scanAll();
 
                         db.deleteAllFileMark();
                         lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
                         ThumbnailOpUtils.updateThumbnailsForDir(getBaseContext(), cur_path);
                         Toast.makeText(FileBrower.this,
-                            getText(R.string.Toast_msg_paste_ok),
-                            Toast.LENGTH_SHORT).show();
+                                getText(R.string.Toast_msg_paste_ok),
+                                Toast.LENGTH_SHORT).show();
                         FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
                         if (edit_dialog != null)
                             edit_dialog.dismiss();
@@ -310,11 +311,11 @@ public class FileBrower extends Activity {
                             tvForPaste.setText("");
                             tvForPaste.setVisibility(View.GONE);
                         }
-                    break;
-                    case 5:		//file paste err
+                        break;
+                    case 5:        //file paste err
                         Toast.makeText(FileBrower.this,
-                            getText(R.string.Toast_msg_paste_nofile),
-                            Toast.LENGTH_SHORT).show();
+                                getText(R.string.Toast_msg_paste_nofile),
+                                Toast.LENGTH_SHORT).show();
                         FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
                         if (edit_dialog != null)
                             edit_dialog.dismiss();
@@ -325,11 +326,11 @@ public class FileBrower extends Activity {
                             tvForPaste.setText("");
                             tvForPaste.setVisibility(View.GONE);
                         }
-                    break;
-                    case 7:		//dir cannot write
+                        break;
+                    case 7:        //dir cannot write
                         Toast.makeText(FileBrower.this,
-                            getText(R.string.Toast_msg_paste_writeable),
-                            Toast.LENGTH_SHORT).show();
+                                getText(R.string.Toast_msg_paste_writeable),
+                                Toast.LENGTH_SHORT).show();
                         //FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
                         if (edit_dialog != null)
                             edit_dialog.dismiss();
@@ -340,14 +341,14 @@ public class FileBrower extends Activity {
                             tvForPaste.setText("");
                             tvForPaste.setVisibility(View.GONE);
                         }
-                    break;
-                    case 8:		//no free space
+                        break;
+                    case 8:        //no free space
                         db.deleteAllFileMark();
                         lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
                         ThumbnailOpUtils.updateThumbnailsForDir(getBaseContext(), cur_path);
                         Toast.makeText(FileBrower.this,
-                            getText(R.string.Toast_msg_paste_nospace),
-                            Toast.LENGTH_SHORT).show();
+                                getText(R.string.Toast_msg_paste_nospace),
+                                Toast.LENGTH_SHORT).show();
                         FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
                         if (edit_dialog != null)
                             edit_dialog.dismiss();
@@ -358,23 +359,22 @@ public class FileBrower extends Activity {
                             tvForPaste.setText("");
                             tvForPaste.setVisibility(View.GONE);
                         }
-                    break;
-                    case 9:		//file copy cancel
+                        break;
+                    case 9:        //file copy cancel
                         if ((FileOp.copying_file != null) && (FileOp.copying_file.exists())) {
                             try {
                                 if (FileOp.copying_file.isDirectory())
                                     FileUtils.deleteDirectory(FileOp.copying_file);
                                 else
                                     FileOp.copying_file.delete();
-                            }
-                            catch (Exception e) {
-                                Log.e("Exception when delete",e.toString());
+                            } catch (Exception e) {
+                                Log.e("Exception when delete", e.toString());
                             }
                         }
 
                         Toast.makeText(FileBrower.this,
-                            getText(R.string.Toast_copy_fail),
-                            Toast.LENGTH_SHORT).show();
+                                getText(R.string.Toast_copy_fail),
+                                Toast.LENGTH_SHORT).show();
                         FileOp.copy_cancel = false;
                         FileOp.copying_file = null;
                         db.deleteAllFileMark();
@@ -389,7 +389,7 @@ public class FileBrower extends Activity {
                             tvForPaste.setText("");
                             tvForPaste.setVisibility(View.GONE);
                         }
-                    break;
+                        break;
                     case 10:    //update list
                         //((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();
                         if (!mListLoaded) {
@@ -399,22 +399,22 @@ public class FileBrower extends Activity {
                         mListLoaded = false;
                         if (load_dialog != null)
                             load_dialog.dismiss();
-                    break;
-                    case 11:	//destination dir is sub folder of src dir
-                    Toast.makeText(FileBrower.this,
-                        getText(R.string.Toast_msg_paste_sub_folder),
-                        Toast.LENGTH_SHORT).show();
-                    //FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
-                    if (edit_dialog != null)
-                        edit_dialog.dismiss();
-                    if (mWakeLock.isHeld())
-                        mWakeLock.release();
+                        break;
+                    case 11:    //destination dir is sub folder of src dir
+                        Toast.makeText(FileBrower.this,
+                                getText(R.string.Toast_msg_paste_sub_folder),
+                                Toast.LENGTH_SHORT).show();
+                        //FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
+                        if (edit_dialog != null)
+                            edit_dialog.dismiss();
+                        if (mWakeLock.isHeld())
+                            mWakeLock.release();
 
-                    if (tvForPaste != null) {
-                        tvForPaste.setText("");
-                        tvForPaste.setVisibility(View.GONE);
-                    }
-                    break;
+                        if (tvForPaste != null) {
+                            tvForPaste.setText("");
+                            tvForPaste.setVisibility(View.GONE);
+                        }
+                        break;
                 }
             }
         };
@@ -424,9 +424,9 @@ public class FileBrower extends Activity {
         intentFilter.addAction(Intent.ACTION_MEDIA_EJECT);
         intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        intentFilter.addAction ("com.droidvold.action.MEDIA_UNMOUNTED");
-        intentFilter.addAction ("com.droidvold.action.MEDIA_MOUNTED");
-        intentFilter.addAction ("com.droidvold.action.MEDIA_EJECT");
+        intentFilter.addAction("com.droidvold.action.MEDIA_UNMOUNTED");
+        intentFilter.addAction("com.droidvold.action.MEDIA_MOUNTED");
+        intentFilter.addAction("com.droidvold.action.MEDIA_EJECT");
         intentFilter.addDataScheme("file");
         registerReceiver(mMountReceiver, intentFilter);
 
@@ -441,12 +441,11 @@ public class FileBrower extends Activity {
 
         if (cur_path.equals(FileListManager.STORAGE)) {
             DeviceScan();
-        }
-        else {
+        } else {
             lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
         }
         lv.setSelectionFromTop(item_position_selected, fromtop_piexl);
-        isInFileBrowserView=true;
+        isInFileBrowserView = true;
     }
 
     @Override
@@ -479,7 +478,9 @@ public class FileBrower extends Activity {
         db.close();
     }
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -490,12 +491,11 @@ public class FileBrower extends Activity {
             if (!bundle.getString("sort_flag").equals("")) {
                 lv_sort_flag = bundle.getString("sort_flag");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "Do not set sort flag");
         }
 
-        PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         //mWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, TAG);
 
@@ -514,10 +514,9 @@ public class FileBrower extends Activity {
         try {
             Bundle bundle = this.getIntent().getExtras();
             if (!bundle.getString("cur_path").equals("")) {
-                cur_path=bundle.getString("cur_path");
+                cur_path = bundle.getString("cur_path");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "Do not set cur_path");
         }
 
@@ -535,7 +534,7 @@ public class FileBrower extends Activity {
         /* lv OnItemClickListener */
         lv.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
-                Map<String, Object> item = (Map<String, Object>)parent.getItemAtPosition(pos);
+                Map<String, Object> item = (Map<String, Object>) parent.getItemAtPosition(pos);
                 String file_path = (String) item.get(KEY_PATH);
                 File file = new File(file_path);
                 if (!file.exists()) {
@@ -547,38 +546,32 @@ public class FileBrower extends Activity {
                     if (file.isDirectory()) {
                         cur_path = file_path;
                         lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
-                    }
-                    else {
-                        FileBrower.this.setResult(Activity.RESULT_OK,new Intent(null, Uri.fromFile(file)));
+                    } else {
+                        FileBrower.this.setResult(Activity.RESULT_OK, new Intent(null, Uri.fromFile(file)));
                         FileBrower.this.finish();
                     }
-                }
-                else {
+                } else {
                     ToggleButton btn_mode = (ToggleButton) findViewById(R.id.btn_mode);
                     if (!btn_mode.isChecked()) {
                         if (file.isDirectory()) {
                             cur_path = file_path;
                             lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
-                        }
-                        else {
+                        } else {
                             openFile(file);
                             //showDialog(CLICK_DIALOG_ID);
                         }
 
-                    }
-                    else {
+                    } else {
                         if (!cur_path.equals(FileListManager.STORAGE)) {
                             if (item.get(KEY_SELE).equals(R.drawable.item_img_unsel)) {
-                                FileOp.updateFileStatus(file_path, 1,"list");
+                                FileOp.updateFileStatus(file_path, 1, "list");
                                 item.put(KEY_SELE, R.drawable.item_img_sel);
-                            }
-                            else if (item.get(KEY_SELE).equals(R.drawable.item_img_sel)) {
-                                FileOp.updateFileStatus(file_path, 0,"list");
+                            } else if (item.get(KEY_SELE).equals(R.drawable.item_img_sel)) {
+                                FileOp.updateFileStatus(file_path, 0, "list");
                                 item.put(KEY_SELE, R.drawable.item_img_unsel);
                             }
                             ((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             cur_path = file_path;
                             lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
                         }
@@ -605,8 +598,7 @@ public class FileBrower extends Activity {
                     if (cur_path.equals(FileListManager.NAND) || parent_path.equals(FileListManager.MEDIA_RW)) {
                         cur_path = FileListManager.STORAGE;
                         DeviceScan();
-                    }
-                    else {
+                    } else {
                         cur_path = parent_path;
                         lv.setAdapter(getFileListAdapterSorted(parent_path, lv_sort_flag));
                     }
@@ -631,8 +623,8 @@ public class FileBrower extends Activity {
                     showDialog(EDIT_DIALOG_ID);
                 else {
                     Toast.makeText(FileBrower.this,
-                    getText(R.string.Toast_msg_edit_noopen),
-                    Toast.LENGTH_SHORT).show();
+                            getText(R.string.Toast_msg_edit_noopen),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -645,8 +637,8 @@ public class FileBrower extends Activity {
                     showDialog(SORT_DIALOG_ID);
                 else {
                     Toast.makeText(FileBrower.this,
-                    getText(R.string.Toast_msg_sort_noopen),
-                    Toast.LENGTH_SHORT).show();
+                            getText(R.string.Toast_msg_sort_noopen),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -665,10 +657,9 @@ public class FileBrower extends Activity {
             public void onClick(View v) {
                 if (Intent.ACTION_GET_CONTENT.equalsIgnoreCase(FileBrower.this.getIntent().getAction())) {
                     Toast.makeText(FileBrower.this,
-                    getText(R.string. Thumbnail_unsupport),
-                    Toast.LENGTH_SHORT).show();
-                }
-                else {
+                            getText(R.string.Thumbnail_unsupport),
+                            Toast.LENGTH_SHORT).show();
+                } else {
                     FileOp.SetMode(true);
                     Intent intent = new Intent();
                     intent.setClass(FileBrower.this, ThumbnailView1.class);
@@ -683,7 +674,9 @@ public class FileBrower extends Activity {
         });
     }
 
-    /** onDestory() */
+    /**
+     * onDestory()
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -693,6 +686,7 @@ public class FileBrower extends Activity {
         }
         db.close();
     }
+
     private final class ScannPathTask extends AsyncTask<String, Void, Void> {
 
         @Override
@@ -701,11 +695,11 @@ public class FileBrower extends Activity {
             // annoying; instead, only start showing the spinner if loading the image has taken
             // longer than 1 sec (ie 1000 ms)
             if (mLoadingProgress == null) {
-                FrameLayout rootFrameLayout=(FrameLayout)findViewById(android.R.id.content);
-                FrameLayout.LayoutParams layoutParams=
-                    new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                layoutParams.gravity=Gravity.CENTER;
-                mLoadingProgress=new ProgressBar(FileBrower.this);
+                FrameLayout rootFrameLayout = (FrameLayout) findViewById(android.R.id.content);
+                FrameLayout.LayoutParams layoutParams =
+                        new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                layoutParams.gravity = Gravity.CENTER;
+                mLoadingProgress = new ProgressBar(FileBrower.this);
                 mLoadingProgress.setLayoutParams(layoutParams);
                 rootFrameLayout.addView(mLoadingProgress);
                 mLoadingProgress.setVisibility(View.GONE);
@@ -722,7 +716,7 @@ public class FileBrower extends Activity {
         protected Void doInBackground(String... params) {
             Log.d(TAG, "doInBackground show image by image player service");
             String filePath = params[0];
-            Log.i(TAG,"filePath = " + filePath);
+            Log.i(TAG, "filePath = " + filePath);
             MediaScanner mediaScanner = new MediaScanner(getBaseContext());
             //String fileMimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("jpg");
             String[] filePaths = new String[]{filePath};
@@ -750,7 +744,7 @@ public class FileBrower extends Activity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                String permissions[], int[] grantResults) {
+                                           String permissions[], int[] grantResults) {
         switch (requestCode) {
             case REQUEST_CODE_ASK_PERMISSIONS: {
                 if (grantResults.length > 0
@@ -792,17 +786,16 @@ public class FileBrower extends Activity {
         @Override
         public void onMediaScannerConnected() {
             for (int i = 0; i < filePaths.length; i++) {
-                Log.i(TAG,"onMediaScannerConnected " + filePaths[i]);
+                Log.i(TAG, "onMediaScannerConnected " + filePaths[i]);
                 mediaScanConn.scanFile(filePaths[i], null);
             }
         }
 
 
-
         @Override
         public void onScanCompleted(String path, Uri uri) {
-            scanTimes ++;
-            if(scanTimes == filePaths.length) {
+            scanTimes++;
+            if (scanTimes == filePaths.length) {
                 mediaScanConn.disconnect();
                 scanTimes = 0;
             }
@@ -813,16 +806,15 @@ public class FileBrower extends Activity {
             String type = "*/*";
             File f = new File(path);
             type = mFileListManager.CheckMediaType(f);
-            Log.i(TAG,"onScanCompleted file path = " + path);
-            Log.i(TAG,"onScanCompleted file path = " + uri.toString());
-            intent.setDataAndType(uri,type);
+            Log.i(TAG, "onScanCompleted file path = " + path);
+            Log.i(TAG, "onScanCompleted file path = " + uri.toString());
+            intent.setDataAndType(uri, type);
             try {
                 startActivity(intent);
-            }
-            catch (ActivityNotFoundException e) {
+            } catch (ActivityNotFoundException e) {
                 Toast.makeText(FileBrower.this,
-                getText(R.string.Toast_msg_no_applicaton),
-                Toast.LENGTH_SHORT).show();
+                        getText(R.string.Toast_msg_no_applicaton),
+                        Toast.LENGTH_SHORT).show();
             }
 
             filePaths = null;
@@ -832,16 +824,16 @@ public class FileBrower extends Activity {
     }
 
 
-    public void install_apk (String apk_filepath) {
+    public void install_apk(String apk_filepath) {
         Intent installintent = new Intent();
         File apkFile = new File(apk_filepath);
-        installintent.setAction (Intent.ACTION_VIEW);
+        installintent.setAction(Intent.ACTION_VIEW);
         Uri uri = FileProvider.getUriForFile(this,
-            "com.droidlogic.filebrowser.fileprovider",
-            apkFile);
+                "com.droidlogic.filebrowser.fileprovider",
+                apkFile);
         installintent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         installintent.setDataAndType(uri, "application/vnd.android.package-archive");
-        startActivityForResult(installintent,RET_OK);
+        startActivityForResult(installintent, RET_OK);
     }
 
     protected void openFile(File f) {
@@ -850,11 +842,10 @@ public class FileBrower extends Activity {
             try {
                 install_apk(filePath);
                 return;
-            }
-            catch (ActivityNotFoundException e) {
+            } catch (ActivityNotFoundException e) {
                 Toast.makeText(FileBrower.this,
-                getText(R.string.Toast_msg_no_applicaton),
-                Toast.LENGTH_SHORT).show();
+                        getText(R.string.Toast_msg_no_applicaton),
+                        Toast.LENGTH_SHORT).show();
             }
         }
         ScannPathTask task = new ScannPathTask();
@@ -869,9 +860,9 @@ public class FileBrower extends Activity {
                 //Intent intent = this.getIntent();
                 Bundle bundle = data.getExtras();
                 cur_path = bundle.getString("cur_path");
-            break;
+                break;
             default:
-            break;
+                break;
         }
     }
 
@@ -883,7 +874,7 @@ public class FileBrower extends Activity {
         String usb = getString(R.string.usb_device_str);
         String cdrom = getString(R.string.cdrom_device_str);
         String sdcardExt = getString(R.string.ext_sdcard_device_str);
-        String DeviceArray[] = {internal,sdcard,usb,cdrom,sdcardExt};
+        String DeviceArray[] = {internal, sdcard, usb, cdrom, sdcardExt};
 
         int length = 0;
         length = DeviceArray.length;
@@ -899,18 +890,18 @@ public class FileBrower extends Activity {
     private ListAdapter getDeviceListAdapter() {
         // TODO Auto-generated method stub
         return new SimpleAdapter(FileBrower.this,
-            getDeviceListData(),
-            R.layout.device_item,
-            new String[]{
-                KEY_TYPE,
-                KEY_NAME,
-                KEY_RDWR
-            },
-            new int[]{
-                R.id.device_type,
-                R.id.device_name,
-                R.id.device_rw}
-            );
+                getDeviceListData(),
+                R.layout.device_item,
+                new String[]{
+                        KEY_TYPE,
+                        KEY_NAME,
+                        KEY_RDWR
+                },
+                new int[]{
+                        R.id.device_type,
+                        R.id.device_name,
+                        R.id.device_rw}
+        );
     }
 
     private List<Map<String, Object>> getDeviceListData() {
@@ -927,7 +918,7 @@ public class FileBrower extends Activity {
         int fileCnt = list.size();
         for (int i = 0; i < fileCnt; i++) {
             Map<String, Object> fMap = list.get(i);
-            String sType = (String)fMap.get(KEY_TYPE);
+            String sType = (String) fMap.get(KEY_TYPE);
             if (sType.equals("type_nand")) {
                 fMap.put(KEY_TYPE, R.drawable.sd_card_icon);
             } else if (sType.equals("type_udisk")) {
@@ -947,7 +938,9 @@ public class FileBrower extends Activity {
         return list;
     }
 
-    /** Dialog */
+    /**
+     * Dialog
+     */
     @Override
     protected Dialog onCreateDialog(int id) {
         LayoutInflater inflater = (LayoutInflater) FileBrower.this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -956,33 +949,33 @@ public class FileBrower extends Activity {
             case SORT_DIALOG_ID:
                 View layout_sort = inflater.inflate(R.layout.sort_dialog_layout, (ViewGroup) findViewById(R.id.layout_root_sort));
                 sort_dialog = new AlertDialog.Builder(FileBrower.this)
-                    .setView(layout_sort)
-                    .setTitle(R.string.btn_sort_str)
-                    .create();
-            return sort_dialog;
+                        .setView(layout_sort)
+                        .setTitle(R.string.btn_sort_str)
+                        .create();
+                return sort_dialog;
 
             case EDIT_DIALOG_ID:
                 View layout_edit = inflater.inflate(R.layout.edit_dialog_layout, (ViewGroup) findViewById(R.id.layout_root_edit));
                 edit_dialog = new AlertDialog.Builder(FileBrower.this)
-                    .setView(layout_edit)
-                    .setTitle(R.string.btn_edit_str)
-                    .create();
-            return edit_dialog;
+                        .setView(layout_edit)
+                        .setTitle(R.string.btn_edit_str)
+                        .create();
+                return edit_dialog;
 
             case CLICK_DIALOG_ID:
                 View layout_click = inflater.inflate(R.layout.click_dialog_layout, (ViewGroup) findViewById(R.id.layout_root_click));
                 click_dialog = new AlertDialog.Builder(FileBrower.this)
-                    .setView(layout_click)
-                    .create();
-            return click_dialog;
+                        .setView(layout_click)
+                        .create();
+                return click_dialog;
 
             case HELP_DIALOG_ID:
                 View layout_help = inflater.inflate(R.layout.help_dialog_layout, (ViewGroup) findViewById(R.id.layout_root_help));
                 help_dialog = new AlertDialog.Builder(FileBrower.this)
-                    .setView(layout_help)
-                    .setTitle(R.string.btn_help_str)
-                    .create();
-            return help_dialog;
+                        .setView(layout_help)
+                        .setTitle(R.string.btn_help_str)
+                        .create();
+                return help_dialog;
 
             case LOAD_DIALOG_ID:
                 if (load_dialog == null) {
@@ -991,7 +984,7 @@ public class FileBrower extends Activity {
                     load_dialog.setIndeterminate(true);
                     load_dialog.setCancelable(true);
                 }
-            return load_dialog;
+                return load_dialog;
         }
 
         return null;
@@ -1020,12 +1013,10 @@ public class FileBrower extends Activity {
                             if (pos == 0) {
                                 lv_sort_flag = "by_name";
                                 lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
-                            }
-                            else if (pos == 1) {
+                            } else if (pos == 1) {
                                 lv_sort_flag = "by_date";
                                 lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
-                            }
-                            else if (pos == 2) {
+                            } else if (pos == 2) {
                                 lv_sort_flag = "by_size";
                                 lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
                             }
@@ -1042,7 +1033,7 @@ public class FileBrower extends Activity {
                         */
                     }
                 });
-            break;
+                break;
 
             case EDIT_DIALOG_ID:
                 if (display.getHeight() > display.getWidth()) {
@@ -1073,86 +1064,81 @@ public class FileBrower extends Activity {
                             File wFile = new File(cur_path);
                             if (!wFile.canWrite()) {
                                 Toast.makeText(FileBrower.this,
-                                    getText(R.string.Toast_msg_no_write),
-                                    Toast.LENGTH_SHORT).show();
+                                        getText(R.string.Toast_msg_no_write),
+                                        Toast.LENGTH_SHORT).show();
                             } else {
                                 if (pos == 0) {
                                     try {
                                         myCursor = db.getFileMark();
                                         if (myCursor.getCount() > 0) {
                                             Toast.makeText(FileBrower.this,
-                                                getText(R.string.Toast_msg_cut_todo),
-                                                Toast.LENGTH_SHORT).show();
+                                                    getText(R.string.Toast_msg_cut_todo),
+                                                    Toast.LENGTH_SHORT).show();
                                             FileOp.file_op_todo = FileOpTodo.TODO_CUT;
                                         } else {
                                             Toast.makeText(FileBrower.this,
-                                                getText(R.string.Toast_msg_cut_nofile),
-                                                Toast.LENGTH_SHORT).show();
+                                                    getText(R.string.Toast_msg_cut_nofile),
+                                                    Toast.LENGTH_SHORT).show();
                                             FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
                                         }
                                     } finally {
                                         myCursor.close();
                                     }
 
-                                edit_dialog.dismiss();
-                            }
-                            else if (pos == 1) {
-                                try {
-                                    myCursor = db.getFileMark();
-                                    if (myCursor.getCount() > 0) {
-                                        Toast.makeText(FileBrower.this,
-                                            getText(R.string.Toast_msg_cpy_todo),
-                                            Toast.LENGTH_SHORT).show();
-                                        FileOp.file_op_todo = FileOpTodo.TODO_CPY;
-                                    } else {
-                                        Toast.makeText(FileBrower.this,
-                                            getText(R.string.Toast_msg_cpy_nofile),
-                                            Toast.LENGTH_SHORT).show();
-                                        FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
+                                    edit_dialog.dismiss();
+                                } else if (pos == 1) {
+                                    try {
+                                        myCursor = db.getFileMark();
+                                        if (myCursor.getCount() > 0) {
+                                            Toast.makeText(FileBrower.this,
+                                                    getText(R.string.Toast_msg_cpy_todo),
+                                                    Toast.LENGTH_SHORT).show();
+                                            FileOp.file_op_todo = FileOpTodo.TODO_CPY;
+                                        } else {
+                                            Toast.makeText(FileBrower.this,
+                                                    getText(R.string.Toast_msg_cpy_nofile),
+                                                    Toast.LENGTH_SHORT).show();
+                                            FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
+                                        }
+                                    } finally {
+                                        myCursor.close();
                                     }
-                                } finally {
-                                    myCursor.close();
-                                }
-                                edit_dialog.dismiss();
-                            }
-                            else if (pos == 2) {
-                                if (!mWakeLock.isHeld())
-                                    mWakeLock.acquire();
+                                    edit_dialog.dismiss();
+                                } else if (pos == 2) {
+                                    if (!mWakeLock.isHeld())
+                                        mWakeLock.acquire();
 
                                     if (cur_path.startsWith(FileListManager.NAND)) {
-                                        Log.d(TAG,"==== Environment.MEDIA_MOUNTED:"+Environment.MEDIA_MOUNTED);
+                                        Log.d(TAG, "==== Environment.MEDIA_MOUNTED:" + Environment.MEDIA_MOUNTED);
                                         //if(Environment.getExternalStorage2State().equals(Environment.MEDIA_MOUNTED))
                                         //if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))  //from thumbnailView1
                                         if (Environment.getStorageState(new File(FileListManager.NAND)).equals(Environment.MEDIA_MOUNTED)) {
-                                            new Thread () {
-                                                public void run () {
+                                            new Thread() {
+                                                public void run() {
                                                     try {
                                                         FileOp.pasteSelectedFile("list");
-                                                    } catch(Exception e) {
+                                                    } catch (Exception e) {
                                                         Log.e("Exception when paste file", e.toString());
                                                     }
                                                 }
                                             }.start();
-                                        }
-                                        else {
+                                        } else {
                                             Toast.makeText(FileBrower.this,
-                                                getText(R.string.Toast_no_sdcard),
-                                                Toast.LENGTH_SHORT).show();
+                                                    getText(R.string.Toast_no_sdcard),
+                                                    Toast.LENGTH_SHORT).show();
                                         }
-                                    }
-                                    else {
-                                        new Thread () {
-                                            public void run () {
+                                    } else {
+                                        new Thread() {
+                                            public void run() {
                                                 try {
                                                     FileOp.pasteSelectedFile("list");
-                                                } catch(Exception e) {
+                                                } catch (Exception e) {
                                                     Log.e("Exception when paste file", e.toString());
                                                 }
                                             }
                                         }.start();
                                     }
-                                }
-                                else if (pos == 3) {
+                                } else if (pos == 3) {
                                     FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
                                     FileOpReturn delStatus = FileOp.deleteSelectedFile("list");
                                     if (FileOpReturn.SUCCESS == delStatus) {
@@ -1160,90 +1146,81 @@ public class FileBrower extends Activity {
                                         lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
                                         scanAll();
                                         Toast.makeText(FileBrower.this,
-                                            getText(R.string.Toast_msg_del_ok),
-                                            Toast.LENGTH_SHORT).show();
-                                    }
-                                    else if (FileOpReturn.ERR_DEL_FAIL == delStatus) {
+                                                getText(R.string.Toast_msg_del_ok),
+                                                Toast.LENGTH_SHORT).show();
+                                    } else if (FileOpReturn.ERR_DEL_FAIL == delStatus) {
                                         Toast.makeText(FileBrower.this,
-                                            getText(R.string.Toast_msg_del_fail),
-                                            Toast.LENGTH_SHORT).show();
-                                    }
-                                    else {
+                                                getText(R.string.Toast_msg_del_fail),
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
                                         Toast.makeText(FileBrower.this,
-                                            getText(R.string.Toast_msg_del_nofile),
-                                            Toast.LENGTH_SHORT).show();
+                                                getText(R.string.Toast_msg_del_nofile),
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                     edit_dialog.dismiss();
-                                }
-                                else if (pos == 4) {
+                                } else if (pos == 4) {
                                     FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
                                     myCursor = db.getFileMark();
                                     if (myCursor.getCount() > 0) {
                                         if (myCursor.getCount() > 1) {
                                             String fullPath = FileOp.getMarkFilePath("list");
                                             Toast.makeText(FileBrower.this,
-                                                getText(R.string.Toast_msg_rename_morefile)+"\n"+fullPath,
-                                                Toast.LENGTH_LONG).show();
-                                        }
-                                        else {
-                                            String fullPath=FileOp.getSingleMarkFilePath("list");
+                                                    getText(R.string.Toast_msg_rename_morefile) + "\n" + fullPath,
+                                                    Toast.LENGTH_LONG).show();
+                                        } else {
+                                            String fullPath = FileOp.getSingleMarkFilePath("list");
                                             if (null != fullPath) {
                                                 String dirPath = fullPath.substring(0, fullPath.lastIndexOf('/'));
                                                 if (cur_path.equals(dirPath)) {
                                                     if (!fileRename()) {
                                                         Toast.makeText(FileBrower.this,
-                                                            getText(R.string.Toast_msg_rename_error),
-                                                            Toast.LENGTH_SHORT).show();
+                                                                getText(R.string.Toast_msg_rename_error),
+                                                                Toast.LENGTH_SHORT).show();
                                                     }
-                                                }
-                                                else {
+                                                } else {
                                                     Toast.makeText(FileBrower.this,
-                                                        getText(R.string.Toast_msg_rename_diffpath)+"\n"+dirPath,
-                                                        Toast.LENGTH_LONG).show();
+                                                            getText(R.string.Toast_msg_rename_diffpath) + "\n" + dirPath,
+                                                            Toast.LENGTH_LONG).show();
                                                 }
-                                            }
-                                            else if (!fileRename()) {
+                                            } else if (!fileRename()) {
                                                 Toast.makeText(FileBrower.this,
-                                                    getText(R.string.Toast_msg_rename_error),
-                                                    Toast.LENGTH_SHORT).show();
+                                                        getText(R.string.Toast_msg_rename_error),
+                                                        Toast.LENGTH_SHORT).show();
                                             }
                                         }
-                                    }
-                                    else {
+                                    } else {
                                         Toast.makeText(FileBrower.this,
-                                            getText(R.string.Toast_msg_rename_nofile),
-                                            Toast.LENGTH_SHORT).show();
+                                                getText(R.string.Toast_msg_rename_nofile),
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                     edit_dialog.dismiss();
-                                }
-                                else if (pos == 5) {
+                                } else if (pos == 5) {
                                     FileOp.file_op_todo = FileOpTodo.TODO_NOTHING;
                                     myCursor = db.getFileMark();
                                     if (myCursor.getCount() > 0) {
                                         int ret = shareFile();
                                         if (ret <= 0) {
                                             Toast.makeText(FileBrower.this,
+                                                    getText(R.string.Toast_msg_share_nofile),
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(FileBrower.this,
                                                 getText(R.string.Toast_msg_share_nofile),
                                                 Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                    else {
-                                        Toast.makeText(FileBrower.this,
-                                            getText(R.string.Toast_msg_share_nofile),
-                                            Toast.LENGTH_SHORT).show();
                                     }
                                     edit_dialog.dismiss();
                                 }
                             }
                         } else {
                             Toast.makeText(FileBrower.this,
-                                getText(R.string.Toast_msg_paste_wrongpath),
-                                Toast.LENGTH_SHORT).show();
+                                    getText(R.string.Toast_msg_paste_wrongpath),
+                                    Toast.LENGTH_SHORT).show();
                             edit_dialog.dismiss();
                         }
                     }
                 });
-            break;
+                break;
 
             case CLICK_DIALOG_ID:
                 if (display.getHeight() > display.getWidth()) {
@@ -1255,13 +1232,12 @@ public class FileBrower extends Activity {
 
                 click_lv = (ListView) click_dialog.getWindow().findViewById(R.id.click_listview);
                 click_lv.setAdapter(getDialogListAdapter(CLICK_DIALOG_ID));
-            break;
+                break;
 
             case HELP_DIALOG_ID:
                 if (display.getHeight() > display.getWidth()) {
                     lp.width = (int) (display.getWidth() * 1.0);
-                }
-                else {
+                } else {
                     lp.width = (int) (display.getWidth() * 0.5);
                 }
                 dialog.getWindow().setAttributes(lp);
@@ -1273,13 +1249,12 @@ public class FileBrower extends Activity {
                         help_dialog.dismiss();
                     }
                 });
-            break;
+                break;
 
             case LOAD_DIALOG_ID:
                 if (display.getHeight() > display.getWidth()) {
                     lp.width = (int) (display.getWidth() * 1.0);
-                }
-                else {
+                } else {
                     lp.width = (int) (display.getWidth() * 0.5);
                 }
                 dialog.getWindow().setAttributes(lp);
@@ -1290,13 +1265,14 @@ public class FileBrower extends Activity {
                 });
 
                 mLoadCancel = false;
-            break;
+                break;
         }
     }
 
     private Dialog mRenameDialog;
     private String name = null;
     private String path = null;
+
     private boolean fileRename() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.file_rename, null);
@@ -1306,16 +1282,14 @@ public class FileBrower extends Activity {
             int index = -1;
             index = path.lastIndexOf("/");
             if (index >= 0) {
-                name=path.substring(index + 1);
+                name = path.substring(index + 1);
                 if (null == name) {
                     return false;
                 }
-            }
-            else {
+            } else {
                 return false;
             }
-        }
-        else {
+        } else {
             return false;
         }
 
@@ -1331,7 +1305,7 @@ public class FileBrower extends Activity {
                 if (!name.equals(newFileName)) {
                     String fileType = name.substring(name.lastIndexOf('.') + 1);
                     String newFileType = newFileName.substring(newFileName.lastIndexOf('.') + 1);
-                    if (!mRenameFile.isDirectory() &&!fileType.equals(newFileType)) {
+                    if (!mRenameFile.isDirectory() && !fileType.equals(newFileType)) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(FileBrower.this);
                         AlertDialog alertDialog = builder.setMessage(R.string.dialog_rename_confirm_str)
                                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -1366,7 +1340,7 @@ public class FileBrower extends Activity {
                         params.height = 200;
                         window.setAttributes(params);
                         alertDialog.show();
-                    }else {
+                    } else {
                         if (null != mRenameDialog) {
                             mRenameDialog.dismiss();
                             mRenameDialog = null;
@@ -1382,11 +1356,11 @@ public class FileBrower extends Activity {
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
-                }else{
+                } else {
                     if (null != mRenameDialog) {
                         mRenameDialog.dismiss();
                         mRenameDialog = null;
-		        db.deleteAllFileMark();
+                        db.deleteAllFileMark();
                         lv.setAdapter(getFileListAdapterSorted(cur_path, lv_sort_flag));
                         scanAll();
                     }
@@ -1396,7 +1370,7 @@ public class FileBrower extends Activity {
 
         buttonCancel.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                if (null != mRenameDialog ) {
+                if (null != mRenameDialog) {
                     mRenameDialog.dismiss();
                     mRenameDialog = null;
                 }
@@ -1404,8 +1378,8 @@ public class FileBrower extends Activity {
         });
 
         mRenameDialog = new AlertDialog.Builder(FileBrower.this)
-            .setView(v)
-            .show();
+                .setView(v)
+                .show();
         return true;
     }
 
@@ -1420,8 +1394,8 @@ public class FileBrower extends Activity {
         BluetoothAdapter ba = BluetoothAdapter.getDefaultAdapter();
         if (ba == null) {
             Toast.makeText(FileBrower.this,
-                getText(R.string.Toast_msg_share_nodev),
-                Toast.LENGTH_SHORT).show();
+                    getText(R.string.Toast_msg_share_nodev),
+                    Toast.LENGTH_SHORT).show();
             return 0xff;
         }
 
@@ -1429,8 +1403,7 @@ public class FileBrower extends Activity {
             if (size > 1) {
                 intent.setAction(Intent.ACTION_SEND_MULTIPLE).setType(type);
                 intent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
-            }
-            else {
+            } else {
                 intent.setAction(Intent.ACTION_SEND).setType(type);
                 intent.putExtra(Intent.EXTRA_STREAM, uris.get(0));
             }
@@ -1440,44 +1413,48 @@ public class FileBrower extends Activity {
         return size;
     }
 
-    /** getFileListAdapter */
+    /**
+     * getFileListAdapter
+     */
     private SimpleAdapter getFileListAdapter(String path) {
         return new SimpleAdapter(FileBrower.this,
-            getFileListData(path),
-            R.layout.filelist_item,
-            new String[]{
-                KEY_TYPE,
-                KEY_NAME,
-                KEY_SELE,
-                KEY_SIZE,
-                KEY_DATE,
-                KEY_RDWR},
-            new int[]{
-                R.id.item_type,
-                R.id.item_name,
-                R.id.item_sel,
-                R.id.item_size,
-                R.id.item_date,
-                R.id.item_rw}
+                getFileListData(path),
+                R.layout.filelist_item,
+                new String[]{
+                        KEY_TYPE,
+                        KEY_NAME,
+                        KEY_SELE,
+                        KEY_SIZE,
+                        KEY_DATE,
+                        KEY_RDWR},
+                new int[]{
+                        R.id.item_type,
+                        R.id.item_name,
+                        R.id.item_sel,
+                        R.id.item_size,
+                        R.id.item_date,
+                        R.id.item_rw}
         );
     }
 
-    /** getFileListData */
+    /**
+     * getFileListData
+     */
     private List<Map<String, Object>> getFileListData(String path) {
         List<Map<String, Object>> list = mFileListManager.getFiles(path);
         int fileCnt = list.size();
         String tmpPath = null;
         for (int i = 0; i < fileCnt; i++) {
             Map<String, Object> fMap = list.get(i);
-            tmpPath = (String)fMap.get(KEY_PATH);
-            if (tmpPath !=null) {
+            tmpPath = (String) fMap.get(KEY_PATH);
+            if (tmpPath != null) {
                 File file = new File(tmpPath);
                 long file_date = file.lastModified();
                 String date = new SimpleDateFormat("yyyy/MM/dd HH:mm")
                         .format(new Date(file_date));
                 fMap.put(KEY_DATE, date + " | ");
                 long file_size = file.length();
-                if (FileOp.isFileSelected(tmpPath,"list")) {
+                if (FileOp.isFileSelected(tmpPath, "list")) {
                     fMap.put(KEY_SELE, R.drawable.item_img_sel);
                 } else {
                     fMap.put(KEY_SELE, R.drawable.item_img_unsel);
@@ -1506,40 +1483,41 @@ public class FileBrower extends Activity {
         return list;
     }
 
-    /** getFileListAdapterSorted */
+    /**
+     * getFileListAdapterSorted
+     */
     private SimpleAdapter getFileListAdapterSorted(String path, String sort_type) {
         if (path.equals(FileListManager.STORAGE)) {
             return new SimpleAdapter(FileBrower.this,
-                getDeviceListData(),
-                R.layout.device_item,
-                new String[]{
-                    KEY_TYPE,
-                    KEY_NAME,
-                    KEY_RDWR},
-                new int[]{
-                    R.id.device_type,
-                    R.id.device_name,
-                    R.id.device_rw}
+                    getDeviceListData(),
+                    R.layout.device_item,
+                    new String[]{
+                            KEY_TYPE,
+                            KEY_NAME,
+                            KEY_RDWR},
+                    new int[]{
+                            R.id.device_type,
+                            R.id.device_name,
+                            R.id.device_rw}
             );
-        }
-        else {
+        } else {
             return new SimpleAdapter(FileBrower.this,
-                getFileListDataSorted(path, sort_type),
-                R.layout.filelist_item,
-                new String[]{
-                    KEY_TYPE,
-                    KEY_NAME,
-                    KEY_SELE,
-                    KEY_SIZE,
-                    KEY_DATE,
-                    KEY_RDWR},
-                new int[]{
-                    R.id.item_type,
-                    R.id.item_name,
-                    R.id.item_sel,
-                    R.id.item_size,
-                    R.id.item_date,
-                    R.id.item_rw}
+                    getFileListDataSorted(path, sort_type),
+                    R.layout.filelist_item,
+                    new String[]{
+                            KEY_TYPE,
+                            KEY_NAME,
+                            KEY_SELE,
+                            KEY_SIZE,
+                            KEY_DATE,
+                            KEY_RDWR},
+                    new int[]{
+                            R.id.item_type,
+                            R.id.item_name,
+                            R.id.item_sel,
+                            R.id.item_size,
+                            R.id.item_date,
+                            R.id.item_rw}
             );
         }
     }
@@ -1561,28 +1539,29 @@ public class FileBrower extends Activity {
                 }
             }.start();
             return new ArrayList<Map<String, Object>>();
-        }
-        else {
+        } else {
             return mList;
         }
     }
 
-    /** getFileListDataSorted */
+    /**
+     * getFileListDataSorted
+     */
     private List<Map<String, Object>> getFileListDataSortedAsync(String path, String sort_type) {
         List<Map<String, Object>> list = mFileListManager.getFiles(path);
         int fileCnt = list.size();
         String tmpPath = null;
         for (int i = 0; i < fileCnt; i++) {
             Map<String, Object> fMap = list.get(i);
-            tmpPath = (String)fMap.get(KEY_PATH);
-            if (tmpPath !=null) {
+            tmpPath = (String) fMap.get(KEY_PATH);
+            if (tmpPath != null) {
                 File file = new File(tmpPath);
                 long file_date = file.lastModified();
                 String date = new SimpleDateFormat("yyyy/MM/dd HH:mm")
                         .format(new Date(file_date));
                 fMap.put(KEY_DATE, date + " | ");
                 long file_size = file.length();
-                if (FileOp.isFileSelected(tmpPath,"list")) {
+                if (FileOp.isFileSelected(tmpPath, "list")) {
                     fMap.put(KEY_SELE, R.drawable.item_img_sel);
                 } else {
                     fMap.put(KEY_SELE, R.drawable.item_img_unsel);
@@ -1618,27 +1597,25 @@ public class FileBrower extends Activity {
 
                         if ((file1.isFile() && file2.isFile()) || (file1.isDirectory() && file2.isDirectory())) {
                             return ((String) object1.get(KEY_NAME)).toLowerCase()
-                                .compareTo(((String) object2.get(KEY_NAME)).toLowerCase());
+                                    .compareTo(((String) object2.get(KEY_NAME)).toLowerCase());
                         } else {
                             return file2.isFile() ? -1 : 1;
                         }
                     }
                 });
-            }
-            else if (sort_type.equals("by_date")) {
+            } else if (sort_type.equals("by_date")) {
                 Collections.sort(list, new Comparator<Map<String, Object>>() {
                     public int compare(Map<String, Object> object1,
-                    Map<String, Object> object2) {
+                                       Map<String, Object> object2) {
                         String fileDate1 = ((String) object1.get(KEY_DATE)).toLowerCase().split("|")[0];
                         String fileDate2 = ((String) object2.get(KEY_DATE)).toLowerCase().split("|")[0];
                         return (fileDate1).compareTo(fileDate2);
                     }
                 });
-            }
-            else if (sort_type.equals("by_size")) {
+            } else if (sort_type.equals("by_size")) {
                 Collections.sort(list, new Comparator<Map<String, Object>>() {
                     public int compare(Map<String, Object> object1,
-                    Map<String, Object> object2) {
+                                       Map<String, Object> object2) {
                         String fileSize1 = ((String) object1.get(KEY_SIZE)).toLowerCase().split("|")[0];
                         String fileSize2 = ((String) object2.get(KEY_SIZE)).toLowerCase().split("|")[0];
                         return (fileSize1).compareTo(fileSize2);
@@ -1649,23 +1626,27 @@ public class FileBrower extends Activity {
         return list;
     }
 
-    /** getDialogListAdapter */
+    /**
+     * getDialogListAdapter
+     */
     private SimpleAdapter getDialogListAdapter(int id) {
         return new SimpleAdapter(FileBrower.this,
-            getDialogListData(id),
-            R.layout.dialog_item,
-            new String[]{
-                "item_type",
-                "item_name",
-                "item_sel",},
-            new int[]{
-                R.id.dialog_item_type,
-                R.id.dialog_item_name,
-                R.id.dialog_item_sel,}
+                getDialogListData(id),
+                R.layout.dialog_item,
+                new String[]{
+                        "item_type",
+                        "item_name",
+                        "item_sel",},
+                new int[]{
+                        R.id.dialog_item_type,
+                        R.id.dialog_item_name,
+                        R.id.dialog_item_sel,}
         );
     }
 
-    /** getFileListData */
+    /**
+     * getFileListData
+     */
     private List<Map<String, Object>> getDialogListData(int id) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map;
@@ -1687,7 +1668,7 @@ public class FileBrower extends Activity {
                 map.put("item_name", getText(R.string.sort_dialog_size_str));
                 map.put("item_sel", R.drawable.dialog_item_img_unsel);
                 list.add(map);
-            break;
+                break;
 
             case EDIT_DIALOG_ID:
                 map = new HashMap<String, Object>();
@@ -1720,7 +1701,7 @@ public class FileBrower extends Activity {
                 map.put("item_name", getText(R.string.edit_dialog_share_str));
                 map.put("item_sel", R.drawable.dialog_item_img_unsel);
                 list.add(map);
-            break;
+                break;
 
             case CLICK_DIALOG_ID:
                 for (int i = 0; i < open_mode.length; i++) {
@@ -1730,7 +1711,7 @@ public class FileBrower extends Activity {
                     map.put("item_sel", R.drawable.dialog_item_img_unsel);
                     list.add(map);
                 }
-            break;
+                break;
 
             case HELP_DIALOG_ID:
                 map = new HashMap<String, Object>();
@@ -1763,7 +1744,7 @@ public class FileBrower extends Activity {
                 map.put("item_name", getText(R.string.dialog_help_item_thumb_str));
                 map.put("item_sel", R.drawable.dialog_item_img_unsel);
                 list.add(map);
-            break;
+                break;
         }
         return list;
     }
@@ -1788,10 +1769,10 @@ public class FileBrower extends Activity {
 
     private void scanAll() {
         Intent intent = new Intent();
-        intent.setClassName("com.android.providers.media","com.android.providers.media.MediaScannerService");
+        intent.setClassName("com.android.providers.media", "com.android.providers.media.MediaScannerService");
         Bundle argsa = new Bundle();
         argsa.putString("path", FileListManager.NAND);
-        argsa.putString("volume","external");
+        argsa.putString("volume", "external");
         startService(intent.putExtras(argsa));
     }
 
@@ -1804,8 +1785,7 @@ public class FileBrower extends Activity {
                 if (cur_path.equals(FileListManager.NAND) || parent_path.equals(FileListManager.MEDIA_RW)) {
                     cur_path = FileListManager.STORAGE;
                     DeviceScan();
-                }
-                else {
+                } else {
                     cur_path = parent_path;
                     lv.setAdapter(getFileListAdapterSorted(parent_path, lv_sort_flag));
                 }

@@ -25,7 +25,9 @@ import android.util.Log;
 
 import java.nio.ShortBuffer;
 
-/** Manages audio recording, audio metrics, and audio playback for debugging purposes. */
+/**
+ * Manages audio recording, audio metrics, and audio playback for debugging purposes.
+ */
 public class AudioDebug {
 
     private static final String TAG = "AudioDebug";
@@ -50,9 +52,13 @@ public class AudioDebug {
     @Nullable
     private AudioTrack mAudioTrack;
 
-    /** Interface for receiving a notification when audio recording finishes. */
+    /**
+     * Interface for receiving a notification when audio recording finishes.
+     */
     public interface AudioRecordedCallback {
-        /** Callback for receiving a notification when audio recording finishes. */
+        /**
+         * Callback for receiving a notification when audio recording finishes.
+         */
         void onAudioRecorded(boolean successful);
     }
 
@@ -62,14 +68,16 @@ public class AudioDebug {
      * @param metricsCallback       Callback for metrics updates
      */
     public AudioDebug(Context context, AudioRecordedCallback audioRecordedCallback,
-            AudioMetrics.UpdateMetricsCallback metricsCallback) {
+                      AudioMetrics.UpdateMetricsCallback metricsCallback) {
         this.mContext = context;
         this.mAudioRecordedCallback = audioRecordedCallback;
 
         mMetrics = new AudioMetrics(metricsCallback);
     }
 
-    /** Starts recording audio. */
+    /**
+     * Starts recording audio.
+     */
     public void startRecording() throws AudioReaderException {
         if (mAudioReader != null) {
             mAudioReader.stop();
@@ -139,7 +147,9 @@ public class AudioDebug {
     }
 
 
-    /** Stops recording audio. */
+    /**
+     * Stops recording audio.
+     */
     public void stopRecording() {
         if (mAudioReader != null) {
             mAudioReader.stop();
@@ -147,7 +157,9 @@ public class AudioDebug {
         }
     }
 
-    /** Stops recording audio, and discards the recorded audio. */
+    /**
+     * Stops recording audio, and discards the recorded audio.
+     */
     public void cancelRecording() {
         if (mAudioReader != null) {
             mAudioReader.cancel();
@@ -156,7 +168,9 @@ public class AudioDebug {
     }
 
 
-    /** Plays the recorded audio. */
+    /**
+     * Plays the recorded audio.
+     */
     public void playAudio() {
         if (mAudioTrack == null) {
             Log.e(TAG, "No audio track recorded");
@@ -169,7 +183,9 @@ public class AudioDebug {
         }
     }
 
-    /** Writes the recorded audio to a WAV file. */
+    /**
+     * Writes the recorded audio to a WAV file.
+     */
     public void writeAudioToFile() {
         WavWriter.writeToFile(mContext.getExternalFilesDir(null), mAudioBuffer);
     }

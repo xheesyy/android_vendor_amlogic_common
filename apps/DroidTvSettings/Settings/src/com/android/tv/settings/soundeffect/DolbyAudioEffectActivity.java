@@ -29,7 +29,7 @@ public class DolbyAudioEffectActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DolbyAudioEffectFragment.class.getName(), null);
+                .newSettingsFragment(DolbyAudioEffectFragment.class.getName(), null);
     }
 
 }

@@ -29,7 +29,7 @@ public class AdjustBaclLightActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(AdjustBaclLightFragment.class.getName(), null);
+                .newSettingsFragment(AdjustBaclLightFragment.class.getName(), null);
     }
 
 }

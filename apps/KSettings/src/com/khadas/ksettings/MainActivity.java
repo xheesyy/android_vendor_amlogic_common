@@ -69,10 +69,10 @@ public class MainActivity extends PreferenceActivity {
                 // Set the summary to reflect the new value.
                 preference.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
 
-                if(FAN_KEY.equals(key)){
+                if (FAN_KEY.equals(key)) {
                     //Log.d("wjh","f===" + index);
                     //set Fan Level
-                    switch (index){
+                    switch (index) {
                         case 0:
                             try {
                                 ComApi.execCommand(new String[]{"sh", "-c", "echo 0 > /sys/class/fan/enable"});
@@ -118,16 +118,16 @@ public class MainActivity extends PreferenceActivity {
                     }
                     SystemProperties.set("persist.sys.fan_control", "" + index);
 
-                }else if(POWER_KEY.equals(key)){
-                    Log.d("wjh","p===" + index);
-                    SystemProperties.set("persist.sys.power.key.action",""+index);
+                } else if (POWER_KEY.equals(key)) {
+                    Log.d("wjh", "p===" + index);
+                    SystemProperties.set("persist.sys.power.key.action", "" + index);
                 }
 
-            }  else {
+            } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
-                if (FUNCTION_KEY.equals(key)){
-                    if("".equals(stringValue)) {
+                if (FUNCTION_KEY.equals(key)) {
+                    if ("".equals(stringValue)) {
                         stringValue = SystemProperties.get("persist.sys.func.key.action", "3");
                     }
                     SystemProperties.set("persist.sys.func.key.action", stringValue);
@@ -137,6 +137,7 @@ public class MainActivity extends PreferenceActivity {
             return true;
         }
     };
+
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);

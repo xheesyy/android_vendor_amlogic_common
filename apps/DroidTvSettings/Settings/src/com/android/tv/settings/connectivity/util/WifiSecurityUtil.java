@@ -34,7 +34,7 @@ public class WifiSecurityUtil {
      * @return the category of wifi security.
      */
     public static int getSecurity(ScanResult result) {
-       if (result.capabilities.contains("SAE")) { // DroidLogic modify SWPL-45229
+        if (result.capabilities.contains("SAE")) { // DroidLogic modify SWPL-45229
             return AccessPoint.SECURITY_SAE;
         } else if (result.capabilities.contains("WEP")) {
             return AccessPoint.SECURITY_WEP;

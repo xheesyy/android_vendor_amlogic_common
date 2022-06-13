@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -43,8 +42,7 @@
     <!-- Allow overlay to specify known/official device names using the return value of
         BluetoothDevice # getName() so that it is hidden from the generic bluetooth accessories
         section and is only visible in OEM-implemented Slice. -->
-    <string-array name="known_bluetooth_device_labels" translatable="false">
-    </string-array>
+    <string-array name="known_bluetooth_device_labels" translatable="false"></string-array>
 
     <!-- Whether to show the bluetooth toggle. Please be very careful with this config as setting it
         to true would surface a toggle in Remotes & Accessories settings that allows the user to

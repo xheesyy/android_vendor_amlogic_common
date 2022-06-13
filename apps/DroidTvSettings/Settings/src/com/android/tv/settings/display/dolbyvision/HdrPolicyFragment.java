@@ -14,12 +14,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
+
 import android.util.ArrayMap;
 import android.util.Log;
 import android.text.TextUtils;
@@ -38,11 +42,11 @@ import java.util.ArrayList;
 public class HdrPolicyFragment extends SettingsPreferenceFragment {
     private static final String LOG_TAG = "HdrPolicyFragment";
 
-    private static final String HDR_POLICY_SINK   = "hdr_policy_sink";
+    private static final String HDR_POLICY_SINK = "hdr_policy_sink";
     private static final String HDR_POLICY_SOURCE = "hdr_policy_source";
 
-    private static final String DV_HDR_SOURCE     = "1";
-    private static final String DV_HDR_SINK       = "0";
+    private static final String DV_HDR_SOURCE = "1";
+    private static final String DV_HDR_SINK = "0";
     private OutputUiManager mOutputUiManager;
     // Adjust this value to keep things relatively responsive without janking
     // animations
@@ -83,32 +87,33 @@ public class HdrPolicyFragment extends SettingsPreferenceFragment {
     private ArrayList<Action> getActions() {
         ArrayList<Action> actions = new ArrayList<Action>();
         actions.add(new Action.Builder()
-            .key(HDR_POLICY_SINK)
-            .title(getString(R.string.hdr_policy_sink))
-            .checked(mOutputUiManager.getHdrStrategy().equals(DV_HDR_SINK))
-            .build());
+                .key(HDR_POLICY_SINK)
+                .title(getString(R.string.hdr_policy_sink))
+                .checked(mOutputUiManager.getHdrStrategy().equals(DV_HDR_SINK))
+                .build());
 
         actions.add(new Action.Builder()
-            .key(HDR_POLICY_SOURCE)
-            .title(getString(R.string.hdr_policy_source))
-            .checked(mOutputUiManager.getHdrStrategy().equals(DV_HDR_SOURCE))
-            .build());
+                .key(HDR_POLICY_SOURCE)
+                .title(getString(R.string.hdr_policy_source))
+                .checked(mOutputUiManager.getHdrStrategy().equals(DV_HDR_SOURCE))
+                .build());
 
         return actions;
     }
+
     public boolean onClickHandle(String key) {
         switch (key) {
             case HDR_POLICY_SINK:
-                Log.i(LOG_TAG,"checked SINK");
+                Log.i(LOG_TAG, "checked SINK");
                 mOutputUiManager.setHdrStrategy(DV_HDR_SINK);
                 break;
             case HDR_POLICY_SOURCE:
-                Log.i(LOG_TAG,"checked SOURCE");
+                Log.i(LOG_TAG, "checked SOURCE");
                 mOutputUiManager.setHdrStrategy(DV_HDR_SOURCE);
                 break;
             default:
-                Log.i(LOG_TAG,"checked default");
-                    return false;
+                Log.i(LOG_TAG, "checked default");
+                return false;
         }
         return true;
     }
@@ -124,7 +129,7 @@ public class HdrPolicyFragment extends SettingsPreferenceFragment {
                 }
             } else {
                 radioPreference.setChecked(true);
-                Log.i(LOG_TAG,"not checked");
+                Log.i(LOG_TAG, "not checked");
             }
         }
         return super.onPreferenceTreeClick(preference);

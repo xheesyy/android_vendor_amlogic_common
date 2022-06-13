@@ -18,9 +18,12 @@ package com.android.tv.settings.soundeffect;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
 import android.util.Log;
 import android.text.TextUtils;
 import android.widget.SeekBar;
@@ -62,19 +65,19 @@ public class AgcSeekBarFragment extends SettingsPreferenceFragment implements Se
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (mAudioEffectManager == null) {
-            mAudioEffectManager = ((TvSettingsActivity)getActivity()).getAudioEffectManager();
+            mAudioEffectManager = ((TvSettingsActivity) getActivity()).getAudioEffectManager();
         }
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.xml.tv_sound_agc, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated (View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         initSeekBar(view);
     }
 
@@ -133,17 +136,17 @@ public class AgcSeekBarFragment extends SettingsPreferenceFragment implements Se
             return;
         }
         switch (seekBar.getId()) {
-            case R.id.seekbar_max_level:{
+            case R.id.seekbar_max_level: {
                 setShow(R.id.seekbar_max_level, progress - 30);
                 mAudioEffectManager.setAgcMaxLevel(progress - 30); //0 ~ 30 -->-30 ~ 0
                 break;
             }
-            case R.id.seekbar_attack_time:{
+            case R.id.seekbar_attack_time: {
                 setShow(R.id.seekbar_attack_time, (progress + 1) * 10);
                 mAudioEffectManager.setAgcAttackTime((progress + 1) * 10);//0 ~ 19 --> 10ms~200ms
                 break;
             }
-            case R.id.seekbar_release_time:{
+            case R.id.seekbar_release_time: {
                 setShow(R.id.seekbar_release_time, progress + 2);
                 mAudioEffectManager.setAgcReleaseTime(progress + 2);//  0 ~6 -->2s~8s
                 break;
@@ -170,15 +173,15 @@ public class AgcSeekBarFragment extends SettingsPreferenceFragment implements Se
 
     private void setShow(int id, int value) {
         switch (id) {
-            case R.id.seekbar_max_level:{
+            case R.id.seekbar_max_level: {
                 text_max_level.setText(getShowString(R.id.seekbar_max_level, value));
                 break;
             }
-            case R.id.seekbar_attack_time:{
+            case R.id.seekbar_attack_time: {
                 text_attack_time.setText(getShowString(R.id.seekbar_attack_time, value));
                 break;
             }
-            case R.id.seekbar_release_time:{
+            case R.id.seekbar_release_time: {
                 text_release_time.setText(getShowString(R.id.seekbar_release_time, value));
                 break;
             }
@@ -190,15 +193,15 @@ public class AgcSeekBarFragment extends SettingsPreferenceFragment implements Se
     private String getShowString(int resid, int value) {
         String result = "";
         switch (resid) {
-            case R.id.seekbar_max_level:{
-                result =  getActivity().getResources().getString(R.string.tv_sound_agc_max_level) + ": " + value + "dB";
+            case R.id.seekbar_max_level: {
+                result = getActivity().getResources().getString(R.string.tv_sound_agc_max_level) + ": " + value + "dB";
                 break;
             }
-            case R.id.seekbar_attack_time:{
+            case R.id.seekbar_attack_time: {
                 result = getActivity().getResources().getString(R.string.tv_sound_agc_attack_time) + ": " + value + "ms";
                 break;
             }
-            case R.id.seekbar_release_time:{
+            case R.id.seekbar_release_time: {
                 result = getActivity().getResources().getString(R.string.tv_sound_agc_release_time) + ": " + value + "s";
                 break;
             }

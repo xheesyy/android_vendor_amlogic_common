@@ -32,6 +32,7 @@ import android.util.Log;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -103,6 +104,7 @@ public class DroidContentRatingsParser {
     private final Object mLock = new Object();
 
     private AtomicFile mAtomicFile_t;
+
     public DroidContentRatingsParser() {
         //mContext = context;
         File userDir = new File("/mnt/vendor/param");//Environment.getDataSystemDirectory();
@@ -110,11 +112,11 @@ public class DroidContentRatingsParser {
             if (!userDir.mkdirs()) {
                 throw new IllegalStateException("User dir cannot be created: " + userDir);
             }
-         }
-         mAtomicFile_t = new AtomicFile(new File(userDir, "tv_rrt_define.xml"));
+        }
+        mAtomicFile_t = new AtomicFile(new File(userDir, "tv_rrt_define.xml"));
     }
 
-    private void doUtilscloseQuietly (InputStream string) {
+    private void doUtilscloseQuietly(InputStream string) {
         /*try {
             Class clazz = ClassLoader.getSystemClassLoader().loadClass("libcore.io.IoUtils");
             Method method = clazz.getMethod("closeQuietly", InputStream.class);
@@ -134,7 +136,7 @@ public class DroidContentRatingsParser {
         }
     }
 
-    private void doXmlUtilsbeginDocument (XmlPullParser parser, String string) {
+    private void doXmlUtilsbeginDocument(XmlPullParser parser, String string) {
         try {
             Class clazz = ClassLoader.getSystemClassLoader().loadClass("com.android.internal.util.XmlUtils");
             Method method = clazz.getMethod("beginDocument", XmlPullParser.class, String.class);
@@ -145,7 +147,7 @@ public class DroidContentRatingsParser {
         }
     }
 
-    private boolean doXmlUtilsnextElementWithin (XmlPullParser parser, int outerDepth) {
+    private boolean doXmlUtilsnextElementWithin(XmlPullParser parser, int outerDepth) {
         try {
             Class clazz = ClassLoader.getSystemClassLoader().loadClass("com.android.internal.util.XmlUtils");
             Method method = clazz.getMethod("nextElementWithin", XmlPullParser.class, int.class);
@@ -184,6 +186,7 @@ public class DroidContentRatingsParser {
             return null;
         }
     }
+
     private List<ContentRatingSystemT> loadFromXml_t(XmlPullParser parser)
             throws IOException, XmlPullParserException {
         List<ContentRatingSystemT> ratingSystems_t = new ArrayList<>();
@@ -192,13 +195,14 @@ public class DroidContentRatingsParser {
         final int outerDepth = parser.getDepth();
         //Log.w(TAG, "loadFromXml_t,outerDepth:"+outerDepth);
         while (doXmlUtilsnextElementWithin(parser, outerDepth)) {
-           // Log.w(TAG, "-----name:"+parser.getName());
+            // Log.w(TAG, "-----name:"+parser.getName());
             if (parser.getName().equals(TAG_RATING_SYSTEM_DEFINITION)) {
                 ratingSystems_t.add(parseRatingSystemDefinition_t(parser));
             }
         }
         return ratingSystems_t;
     }
+
     private ContentRatingSystemT parseRatingSystemDefinition_t(XmlPullParser parser)
             throws IOException, XmlPullParserException {
         ContentRatingSystemT builder = new ContentRatingSystemT();
@@ -207,9 +211,9 @@ public class DroidContentRatingsParser {
         int i = 0;
         //Log.w(TAG, "     parseRatingSystemDefinition_t:"+outerDepth);
         int attr_num = parser.getAttributeCount();
-       // Log.w(TAG, "     attr_num:"+attr_num);
+        // Log.w(TAG, "     attr_num:"+attr_num);
 
-        for (i = 0; i< attr_num; i++) {
+        for (i = 0; i < attr_num; i++) {
             String attr = parser.getAttributeName(i);
             switch (attr) {
                 case ATTR_NAME:
@@ -221,11 +225,11 @@ public class DroidContentRatingsParser {
                     builder.setRegion(StringToInt(parser.getAttributeValue(i)));
                     break;
                 case ATTR_COUNTRY:
-                   // Log.w(TAG, "         attr:"+attr+", value:"+parser.getAttributeValue(i));
+                    // Log.w(TAG, "         attr:"+attr+", value:"+parser.getAttributeValue(i));
                     builder.setCountry(parser.getAttributeValue(i));
                     break;
                 case ATTR_DIMENSION_ID:
-                   // Log.w(TAG, "         attr:"+attr+", value:"+parser.getAttributeValue(i));
+                    // Log.w(TAG, "         attr:"+attr+", value:"+parser.getAttributeValue(i));
                     break;
             }
         }
@@ -233,7 +237,7 @@ public class DroidContentRatingsParser {
 
         while (doXmlUtilsnextElementWithin(parser, outerDepth)) {
             i = 0;
-           // Log.w(TAG, "         ---tag:"+parser.getName()+"i:"+i);
+            // Log.w(TAG, "         ---tag:"+parser.getName()+"i:"+i);
             if (parser.getName().equals(TAG_RATING_DEFINITION)) {
                 builder.addRatingBuilder(parseRatingDefinition_t(parser));
             }
@@ -245,7 +249,7 @@ public class DroidContentRatingsParser {
         int getvalue = -1;
         try {
             getvalue = Integer.valueOf(value);
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             throw new NumberFormatException("string is not integer: " + value);
         }
         return getvalue;
@@ -267,7 +271,7 @@ public class DroidContentRatingsParser {
                     builder.setTitle(parser.getAttributeValue(i));
                     break;
                 case ATTR_DESCRIPTION:
-                   // Log.w(TAG, "                 attr:"+attr+", value:"+parser.getAttributeValue(i));
+                    // Log.w(TAG, "                 attr:"+attr+", value:"+parser.getAttributeValue(i));
                     builder.setDescription(parser.getAttributeValue(i));
                     break;
                 case ATTR_RADING_ID:
@@ -287,23 +291,23 @@ public class DroidContentRatingsParser {
         private String mName;
         private String mCountry;
         private int mRegion;
-        private final List<RatingDefinition> mRatings =  new ArrayList<>();
+        private final List<RatingDefinition> mRatings = new ArrayList<>();
 
-        public void ContentRatingSystemT(){
+        public void ContentRatingSystemT() {
         }
 
         public void setName(String name) {
-        if (name == null || name.equals(""))
-             mName = "NULL";
-             else
-             mName = name;
+            if (name == null || name.equals(""))
+                mName = "NULL";
+            else
+                mName = name;
         }
 
         public void setCountry(String country) {
-        if (country == null || country.equals(""))
-            mCountry = "NULL";
-        else
-            mCountry = country;
+            if (country == null || country.equals(""))
+                mCountry = "NULL";
+            else
+                mCountry = country;
         }
 
         public void setRegion(int region) {
@@ -317,35 +321,40 @@ public class DroidContentRatingsParser {
         public String getName() {
             return mName;
         }
+
         public String getCountry() {
             return mCountry;
         }
+
         public void addRatingBuilder(RatingDefinition rating) {
             if (mRatings == null) {
-                Log.d(TAG,"addRatingBuilder,mRating is NULL");
+                Log.d(TAG, "addRatingBuilder,mRating is NULL");
                 return;
             }
             mRatings.add(rating);
         }
+
         public List<RatingDefinition> getRatingDefinitions() {
             return mRatings;
         }
-        public String toString(){
-        String s = "Name:"+mName+",Country:" + mCountry + "\n RatingDefinition : \n";
-        for (RatingDefinition rating : mRatings)
-            s = s + rating.toString();
+
+        public String toString() {
+            String s = "Name:" + mName + ",Country:" + mCountry + "\n RatingDefinition : \n";
+            for (RatingDefinition rating : mRatings)
+                s = s + rating.toString();
             return s;
         }
 
         public void clear() {
-        mRatings.clear();
+            mRatings.clear();
         }
     }
 
     public class RatingDefinition {
         private String mTitle;
         private String mDescription;
-        public void RatingDefinition(){
+
+        public void RatingDefinition() {
         }
 
         public void setTitle(String name) {
@@ -354,21 +363,24 @@ public class DroidContentRatingsParser {
             else
                 mTitle = name;
         }
+
         public void setDescription(String description) {
             if (description == null || description.equals(""))
                 mDescription = "NULL";
             else
                 mDescription = description;
         }
-            public String getTitle() {
-                return mTitle;
-            }
+
+        public String getTitle() {
+            return mTitle;
+        }
+
         public String getDescription() {
             return mDescription;
         }
 
-        public String toString(){
-            String s = "    Title:" + mTitle + ",Description:" + mDescription+"\n";
+        public String toString() {
+            String s = "    Title:" + mTitle + ",Description:" + mDescription + "\n";
             return s;
         }
     }

@@ -20,12 +20,14 @@ import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-/** Feature provider for TvSettings startup verification. */
+/**
+ * Feature provider for TvSettings startup verification.
+ */
 public interface StartupVerificationFeatureProvider {
 
     /**
      * Start the Activity for TvSettings startup verification.
-     *
+     * <p>
      * The Activity is expected to :
      * - invoke setResult(RESULT_OK) and finish() immediately without showing any UI if TvSettings
      * should be launched directly (e.g., device in adult profile or has gone through successful
@@ -33,7 +35,8 @@ public interface StartupVerificationFeatureProvider {
      * - show challenge/informative UI (e.g., adult re-auth) based on device's status and invoke
      * setResult(RESULT_OK) before finishing ONLY IF it has determined that TvSettings should be
      * launched normally.
-     * @param activity the activity to invoke startActivityForResult() from
+     *
+     * @param activity    the activity to invoke startActivityForResult() from
      * @param requestCode the requestCode expected by onActivityResult() to receive result of
      *                    startup verification activity
      * @return whether the Activity is found and started. The false result, aka the absence of the

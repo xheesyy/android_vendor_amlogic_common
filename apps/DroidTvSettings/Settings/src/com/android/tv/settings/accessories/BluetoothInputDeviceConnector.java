@@ -35,42 +35,42 @@ public class BluetoothInputDeviceConnector implements BluetoothDevicePairer.Blue
     private static final boolean DEBUG = false;
 
     private static final String[] INVALID_INPUT_KEYBOARD_DEVICE_NAMES = {
-        "gpio-keypad", "cec_keyboard", "Virtual", "athome_remote"
+            "gpio-keypad", "cec_keyboard", "Virtual", "athome_remote"
     };
 
     private BluetoothProfile.ServiceListener mServiceConnection =
             new BluetoothProfile.ServiceListener() {
 
-        @Override
-        public void onServiceDisconnected(int profile) {
-            Log.w(TAG, "Service disconnected, perhaps unexpectedly");
-            unregisterInputMethodMonitor();
-            closeInputProfileProxy();
-            mOpenConnectionCallback.failed();
-        }
-
-        @Override
-        public void onServiceConnected(int profile, BluetoothProfile proxy) {
-            if (DEBUG) {
-                Log.d(TAG, "Connection made to bluetooth proxy.");
-            }
-            mInputProxy = (BluetoothHidHost) proxy;
-            if (mTarget != null) {
-                registerInputMethodMonitor();
-                if (DEBUG) {
-                    Log.d(TAG, "Connecting to target: " + mTarget.getAddress());
+                @Override
+                public void onServiceDisconnected(int profile) {
+                    Log.w(TAG, "Service disconnected, perhaps unexpectedly");
+                    unregisterInputMethodMonitor();
+                    closeInputProfileProxy();
+                    mOpenConnectionCallback.failed();
                 }
-                // TODO need to start a timer, otherwise if the connection fails we might be
-                // stuck here forever
-                mInputProxy.connect(mTarget);
 
-                // must set PRIORITY_AUTO_CONNECT or auto-connection will not
-                // occur, however this setting does not appear to be sticky
-                // across a reboot
-                mInputProxy.setPriority(mTarget, BluetoothProfile.PRIORITY_AUTO_CONNECT);
-            }
-        }
-    };
+                @Override
+                public void onServiceConnected(int profile, BluetoothProfile proxy) {
+                    if (DEBUG) {
+                        Log.d(TAG, "Connection made to bluetooth proxy.");
+                    }
+                    mInputProxy = (BluetoothHidHost) proxy;
+                    if (mTarget != null) {
+                        registerInputMethodMonitor();
+                        if (DEBUG) {
+                            Log.d(TAG, "Connecting to target: " + mTarget.getAddress());
+                        }
+                        // TODO need to start a timer, otherwise if the connection fails we might be
+                        // stuck here forever
+                        mInputProxy.connect(mTarget);
+
+                        // must set PRIORITY_AUTO_CONNECT or auto-connection will not
+                        // occur, however this setting does not appear to be sticky
+                        // across a reboot
+                        mInputProxy.setPriority(mTarget, BluetoothProfile.PRIORITY_AUTO_CONNECT);
+                    }
+                }
+            };
 
     private BluetoothHidHost mInputProxy;
     private boolean mInputMethodMonitorRegistered = false;
@@ -96,23 +96,23 @@ public class BluetoothInputDeviceConnector implements BluetoothDevicePairer.Blue
 
     private InputManager.InputDeviceListener mInputListener =
             new InputManager.InputDeviceListener() {
-        @Override
-        public void onInputDeviceRemoved(int deviceId) {
-            // ignored
-        }
+                @Override
+                public void onInputDeviceRemoved(int deviceId) {
+                    // ignored
+                }
 
-        @Override
-        public void onInputDeviceChanged(int deviceId) {
-            // ignored
-        }
+                @Override
+                public void onInputDeviceChanged(int deviceId) {
+                    // ignored
+                }
 
-        @Override
-        public void onInputDeviceAdded(int deviceId) {
-           if (BluetoothDevicePairer.hasValidInputDevice(mContext, new int[] {deviceId})) {
-               onInputAdded();
-           }
-        }
-    };
+                @Override
+                public void onInputDeviceAdded(int deviceId) {
+                    if (BluetoothDevicePairer.hasValidInputDevice(mContext, new int[]{deviceId})) {
+                        onInputAdded();
+                    }
+                }
+            };
 
     private void onInputAdded() {
         unregisterInputMethodMonitor();

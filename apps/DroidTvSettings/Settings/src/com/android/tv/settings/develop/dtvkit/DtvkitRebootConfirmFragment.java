@@ -40,10 +40,12 @@ import java.util.List;
 
 import android.os.SystemProperties;
 import android.text.TextUtils;
+
 import com.android.tv.settings.util.DroidUtils;
 import com.android.tv.settings.SettingsConstant;
 import com.android.tv.settings.R;
 import com.droidlogic.app.SystemControlManager;
+
 import android.provider.Settings;
 import android.util.Log;
 
@@ -52,9 +54,9 @@ public class DtvkitRebootConfirmFragment extends GuidedStepSupportFragment {
 
     private static final String TAG = "DtvkitRebootConfirmFragment";
     private static final String ARG_SAFE_MODE = "DtvkitRebootConfirmFragment.safe_mode";
-    private static final String PROP_DVBC_DVBS_SWITCH     = "persist.vendor.tvconfig.path";
-    private static final String PROP_DVBC_PATH     = "/mnt/vendor/odm_ext/etc/tvconfig/dtvkit/config.xml";
-    private static final String PROP_DVBS_PATH     = "/mnt/vendor/odm_ext/etc/tvconfig/dtvkit/config_dvbs.xml";
+    private static final String PROP_DVBC_DVBS_SWITCH = "persist.vendor.tvconfig.path";
+    private static final String PROP_DVBC_PATH = "/mnt/vendor/odm_ext/etc/tvconfig/dtvkit/config.xml";
+    private static final String PROP_DVBS_PATH = "/mnt/vendor/odm_ext/etc/tvconfig/dtvkit/config_dvbs.xml";
 
     public static DtvkitRebootConfirmFragment newInstance(boolean safeMode) {
 
@@ -94,7 +96,7 @@ public class DtvkitRebootConfirmFragment extends GuidedStepSupportFragment {
 
     @Override
     public void onCreateActions(@NonNull List<GuidedAction> actions,
-            Bundle savedInstanceState) {
+                                Bundle savedInstanceState) {
         final Context context = getActivity();
         if (getArguments().getBoolean(ARG_SAFE_MODE, false)) {
             actions.add(new GuidedAction.Builder(context)
@@ -135,7 +137,7 @@ public class DtvkitRebootConfirmFragment extends GuidedStepSupportFragment {
         String strDvbcDvbsSwitchPropEnabled;
         SystemControlManager mSystemControlManager = SystemControlManager.getInstance();
         strDvbcDvbsSwitchPropEnabled = mSystemControlManager.getProperty(PROP_DVBC_DVBS_SWITCH);
-        if (strDvbcDvbsSwitchPropEnabled == null )
+        if (strDvbcDvbsSwitchPropEnabled == null)
             return false;
         else {
             if (strDvbcDvbsSwitchPropEnabled.equals(PROP_DVBC_PATH))

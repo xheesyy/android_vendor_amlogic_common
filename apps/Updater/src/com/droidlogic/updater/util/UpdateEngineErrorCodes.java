@@ -66,10 +66,11 @@ public final class UpdateEngineErrorCodes {
      * converts error code to error name
      */
     public static String getCodeName(int errorCode) {
-        String reason =  CODE_TO_NAME_MAP.get(errorCode);
+        String reason = CODE_TO_NAME_MAP.get(errorCode);
         if (reason == null) reason = "Update File Corruption";
         return reason;
     }
 
-    private UpdateEngineErrorCodes() {}
+    private UpdateEngineErrorCodes() {
+    }
 }

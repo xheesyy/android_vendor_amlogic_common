@@ -21,7 +21,9 @@ import static com.android.tv.settings.overlay.FlavorUtils.X_EXPERIENCE_FLAVORS_M
 import com.android.tv.settings.R;
 import com.android.tv.settings.slice.SliceActivity;
 
-/** A SliceActivity for showing account settings. */
+/**
+ * A SliceActivity for showing account settings.
+ */
 public class AccountSliceActivity extends SliceActivity {
     @Override
     public String getSliceUri() {

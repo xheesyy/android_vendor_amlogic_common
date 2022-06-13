@@ -23,7 +23,9 @@ import androidx.annotation.Keep;
 import com.android.tv.settings.R;
 import com.android.tv.settings.SettingsPreferenceFragment;
 
-/** A vendor version power and energy settings. */
+/**
+ * A vendor version power and energy settings.
+ */
 @Keep
 public class PowerAndEnergyFragment extends SettingsPreferenceFragment {
     @Override

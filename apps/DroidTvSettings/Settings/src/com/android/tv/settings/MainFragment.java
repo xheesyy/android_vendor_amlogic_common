@@ -127,7 +127,9 @@ public class MainFragment extends PreferenceControllerFragment implements
     @VisibleForTesting
     boolean mHasAccounts;
 
-    /** Controllers for the Quick Settings section. */
+    /**
+     * Controllers for the Quick Settings section.
+     */
     private List<AbstractPreferenceController> mPreferenceControllers;
     private HotwordSwitchController mHotwordSwitchController;
     private TakeBugReportController mTakeBugReportController;
@@ -195,7 +197,9 @@ public class MainFragment extends PreferenceControllerFragment implements
         return getContext().getResources().getBoolean(R.bool.config_quick_settings_enabled);
     }
 
-    /** @return true if there is at least one available item in quick settings. */
+    /**
+     * @return true if there is at least one available item in quick settings.
+     */
     private boolean shouldShowQuickSettings() {
         for (AbstractPreferenceController controller : mPreferenceControllers) {
             if (controller.isAvailable()) {
@@ -215,7 +219,7 @@ public class MainFragment extends PreferenceControllerFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         showOrHideQuickSettings();
         updateAccessoryPref();
         updateConnectivity();
@@ -229,7 +233,9 @@ public class MainFragment extends PreferenceControllerFragment implements
         updateAccountPref();
     }
 
-    /** Creates the quick settings category and its children. */
+    /**
+     * Creates the quick settings category and its children.
+     */
     private void showQuickSettings() {
         if (mQuickSettingsList != null) {
             return;
@@ -265,7 +271,9 @@ public class MainFragment extends PreferenceControllerFragment implements
         }
     }
 
-    /** Removes the quick settings category and all its children. */
+    /**
+     * Removes the quick settings category and all its children.
+     */
     private void hideQuickSettings() {
         Preference quickSettingsPref = findPreference(KEY_QUICK_SETTINGS);
         if (quickSettingsPref == null) {
@@ -455,7 +463,7 @@ public class MainFragment extends PreferenceControllerFragment implements
                 return targetContext.getResources().getString(resId);
             }
         } catch (Resources.NotFoundException | PackageManager.NameNotFoundException
-                | SecurityException e) {
+                 | SecurityException e) {
             Log.w(TAG, "Unable to get string resource " + resourceName, e);
         }
         return null;
@@ -476,7 +484,7 @@ public class MainFragment extends PreferenceControllerFragment implements
                 return targetContext.getResources().getDrawable(resId);
             }
         } catch (Resources.NotFoundException | PackageManager.NameNotFoundException
-                | SecurityException e) {
+                 | SecurityException e) {
             Log.w(TAG, "Unable to get drawable resource " + resourceName, e);
         }
         return null;

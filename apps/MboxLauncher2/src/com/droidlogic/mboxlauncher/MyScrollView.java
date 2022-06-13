@@ -21,22 +21,22 @@ import android.util.Log;
 import android.util.AttributeSet;
 
 
-public class MyScrollView extends ScrollView{
-    private final static String TAG="MyScrollView";
+public class MyScrollView extends ScrollView {
+    private final static String TAG = "MyScrollView";
     private Context mContext;
 
-    public MyScrollView (Context context){
-        super(context); 
+    public MyScrollView(Context context) {
+        super(context);
     }
-    
-    public MyScrollView (Context context, AttributeSet attrs){
-        super(context, attrs); 
+
+    public MyScrollView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         mContext = context;
     }
-   
+
     @Override
-    public boolean onTouchEvent (MotionEvent event){
-        return false;       
+    public boolean onTouchEvent(MotionEvent event) {
+        return false;
     }
 
 /*    @Override

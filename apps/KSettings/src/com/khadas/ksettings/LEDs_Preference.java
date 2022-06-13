@@ -56,9 +56,9 @@ public class LEDs_Preference extends PreferenceActivity implements Preference.On
                 // Set the summary to reflect the new value.
                 preference.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
 
-                if (White_LED_KEY.equals(key)){
+                if (White_LED_KEY.equals(key)) {
                     //Log.d("wjh","1===" + index);
-                    switch(index){
+                    switch (index) {
                         case 0:
                             try {
                                 ComApi.execCommand(new String[]{"sh", "-c", "echo 0 0 > /sys/class/leds/state_led/breath"});
@@ -83,7 +83,7 @@ public class LEDs_Preference extends PreferenceActivity implements Preference.On
                     }
                     SystemProperties.set("persist.sys.white_led_control", "" + index);
 
-                }else if(Red_LED_KEY.equals(key)){
+                } else if (Red_LED_KEY.equals(key)) {
                     //Log.d("wjh","2===" + index);
                     try {
                         ComApi.execCommand(new String[]{"sh", "-c", "echo " + index + " >/sys/class/mcu/redled"});
@@ -93,7 +93,7 @@ public class LEDs_Preference extends PreferenceActivity implements Preference.On
                     SystemProperties.set("persist.sys.red_led_control", "" + index);
                 }
 
-            }  else {
+            } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
@@ -101,6 +101,7 @@ public class LEDs_Preference extends PreferenceActivity implements Preference.On
             return true;
         }
     };
+
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);

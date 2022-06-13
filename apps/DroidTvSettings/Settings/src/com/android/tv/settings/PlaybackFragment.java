@@ -17,6 +17,7 @@ package com.android.tv.settings;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 

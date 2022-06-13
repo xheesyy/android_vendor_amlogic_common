@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="settings_app_name" msgid="7931201304065140909">"Einstellungen"</string>
     <string name="launcher_settings_app_name" msgid="1459269619779675736">"Einstellungen"</string>
     <string name="launcher_network_app_name" msgid="8311763462169735002">"Netzwerk"</string>
@@ -46,8 +44,8 @@
     <string name="accounts_category_title" msgid="7286858931427579845">"Konten &amp; Anmeldung"</string>
     <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"Keine Konten"</string>
     <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
-      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> Konten</item>
-      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> Konto</item>
+        <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> Konten</item>
+        <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> Konto</item>
     </plurals>
     <string name="accounts_slice_summary" msgid="1571012157154521119">"Mediendienste, Assistant, Zahlungen"</string>
     <string name="connectivity_network_category_title" msgid="8226264889892008114">"Netzwerk &amp; Internet"</string>
@@ -57,8 +55,8 @@
     <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"Fernbedienungen &amp; Zubehör"</string>
     <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"Keine verbundenen Bluetooth-Geräte"</string>
     <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
-      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> Zubehörteile</item>
-      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> Zubehörteil</item>
+        <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> Zubehörteile</item>
+        <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> Zubehörteil</item>
     </plurals>
     <string name="display_and_sound_category_title" msgid="9203309625380755860">"Display &amp; Ton"</string>
     <string name="help_and_feedback_category_title" msgid="7036505833991003031">"Hilfe und Feedback"</string>
@@ -230,8 +228,8 @@
     <string name="about_serial" msgid="3432319328808745459">"Seriennummer"</string>
     <string name="about_build" msgid="8467840394761634575">"Android TV-Betriebssystem-Build"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
-      <item quantity="other">In <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> Schritten bist du ein Entwickler.</item>
-      <item quantity="one">In <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> Schritt bist du ein Entwickler.</item>
+        <item quantity="other">In <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> Schritten bist du ein Entwickler.</item>
+        <item quantity="one">In <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> Schritt bist du ein Entwickler.</item>
     </plurals>
     <string name="about_ads" msgid="7662896442040086522">"Anzeigen"</string>
     <string name="ads_description" msgid="8081069475265061074">"Hier kannst du deine Einstellungen für Werbung verwalten, z. B. deine Werbe-ID zurücksetzen."</string>
@@ -265,20 +263,20 @@
     <string name="license_title" msgid="4032466200355435641">"Lizenz"</string>
     <string name="terms_title" msgid="192888187310800678">"Nutzungsbedingungen"</string>
     <string name="webview_license_title" msgid="5370270485188947540">"System-WebView-Lizenz"</string>
-  <string-array name="wifi_signal_strength">
-    <item msgid="4475363344103354364">"Schwach"</item>
-    <item msgid="2098818614362343532">"Ausreichend"</item>
-    <item msgid="2713050260700175954">"Gut"</item>
-    <item msgid="6005053494500517261">"Ausgezeichnet"</item>
-  </string-array>
+    <string-array name="wifi_signal_strength">
+        <item msgid="4475363344103354364">"Schwach"</item>
+        <item msgid="2098818614362343532">"Ausreichend"</item>
+        <item msgid="2713050260700175954">"Gut"</item>
+        <item msgid="6005053494500517261">"Ausgezeichnet"</item>
+    </string-array>
     <string name="title_mac_address" msgid="7511588678922209883">"MAC-Adresse des Geräts"</string>
     <string name="title_randomized_mac_address" msgid="3359532498635833471">"Zufällige MAC-Adresse"</string>
     <string name="title_signal_strength" msgid="5047116893338315998">"Signalstärke"</string>
     <string name="title_random_mac_settings" msgid="6685812569356353378">"Datenschutz"</string>
-  <string-array name="random_mac_settings_entries">
-    <item msgid="3457228452595715533">"Zufällig festgelegte MAC-Adresse verwenden (Standard)"</item>
-    <item msgid="2490415280467390067">"MAC-Adresse des Geräts verwenden"</item>
-  </string-array>
+    <string-array name="random_mac_settings_entries">
+        <item msgid="3457228452595715533">"Zufällig festgelegte MAC-Adresse verwenden (Standard)"</item>
+        <item msgid="2490415280467390067">"MAC-Adresse des Geräts verwenden"</item>
+    </string-array>
     <string name="mac_address_not_available" msgid="2992935344891853369">"Nicht verfügbar"</string>
     <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"Zufällig festgelegte MAC"</string>
     <string name="title_ip_address" msgid="705842159484772807">"IP-Adresse"</string>
@@ -452,15 +450,15 @@
     <string name="system_set_time_format" msgid="902518158066450918">"24-Stunden-Format"</string>
     <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="SAMPLE">%2$s</xliff:g>)"</string>
     <string name="system_auto_date_time" msgid="8458199433555868708">"Autom. Datum/Uhrzeit"</string>
-  <string-array name="auto_date_time_entries">
-    <item msgid="8119837829162871025">"Zeit aus Netzwerk beziehen"</item>
-    <item msgid="369146066143710034">"Aus"</item>
-  </string-array>
-  <string-array name="auto_date_time_ts_entries">
-    <item msgid="1010003447137304123">"Zeit aus Netzwerk beziehen"</item>
-    <item msgid="5645263357181875427">"Zeit aus Transport Stream beziehen"</item>
-    <item msgid="5501503537181350884">"Aus"</item>
-  </string-array>
+    <string-array name="auto_date_time_entries">
+        <item msgid="8119837829162871025">"Zeit aus Netzwerk beziehen"</item>
+        <item msgid="369146066143710034">"Aus"</item>
+    </string-array>
+    <string-array name="auto_date_time_ts_entries">
+        <item msgid="1010003447137304123">"Zeit aus Netzwerk beziehen"</item>
+        <item msgid="5645263357181875427">"Zeit aus Transport Stream beziehen"</item>
+        <item msgid="5501503537181350884">"Aus"</item>
+    </string-array>
     <string name="system_location" msgid="4057295363709016511">"Standort"</string>
     <string name="system_desc_location" msgid="1680134126100535031">"Meine Standortdaten dürfen von Apps verwendet werden, die ich dazu berechtigt habe."</string>
     <string name="system_network_location_confirm" msgid="7128162421781085332">"Standortfreigabe"</string>
@@ -606,15 +604,15 @@
     <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"Überschneidungszähler anzeigen"</string>
     <string name="no_application" msgid="1904437693440706534">"Keine"</string>
     <string name="enable_opengl_traces_none" msgid="4718084947494592040">"Keine"</string>
-  <string-array name="animation_scale_entries">
-    <item msgid="5408992662476056082">"Animation aus"</item>
-    <item msgid="6818290063799857019">"Animationsfaktor: 0,5x"</item>
-    <item msgid="8257959452691080724">"Animationsfaktor: 1x"</item>
-    <item msgid="4781052272686018414">"Animationsfaktor: 1,5x"</item>
-    <item msgid="2272016945160227610">"Animationsfaktor: 2x"</item>
-    <item msgid="5015441793276576312">"Animationsfaktor: 5x"</item>
-    <item msgid="1290233583371556415">"Animationsfaktor: 10x"</item>
-  </string-array>
+    <string-array name="animation_scale_entries">
+        <item msgid="5408992662476056082">"Animation aus"</item>
+        <item msgid="6818290063799857019">"Animationsfaktor: 0,5x"</item>
+        <item msgid="8257959452691080724">"Animationsfaktor: 1x"</item>
+        <item msgid="4781052272686018414">"Animationsfaktor: 1,5x"</item>
+        <item msgid="2272016945160227610">"Animationsfaktor: 2x"</item>
+        <item msgid="5015441793276576312">"Animationsfaktor: 5x"</item>
+        <item msgid="1290233583371556415">"Animationsfaktor: 10x"</item>
+    </string-array>
     <string name="track_frame_time_off" msgid="8845064783618702239">"Aus"</string>
     <string name="track_frame_time_bars" msgid="5841531515222229632">"Auf Bildschirm als Balken"</string>
     <string name="app_process_limit_standard" msgid="6069948528843313888">"Standardlimit"</string>
@@ -667,16 +665,16 @@
     <string name="inputs_tv_auto_on" msgid="544848340484583318">"TV automatisch einschalten"</string>
     <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"Fernseher zusammen mit HDMI-Gerät einschalten"</string>
     <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
-      <item quantity="other">Verbundene Eingänge</item>
-      <item quantity="one">Verbundener Eingang</item>
+        <item quantity="other">Verbundene Eingänge</item>
+        <item quantity="one">Verbundener Eingang</item>
     </plurals>
     <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
-      <item quantity="other">Eingänge auf Stand-by</item>
-      <item quantity="one">Eingang auf Stand-by</item>
+        <item quantity="other">Eingänge auf Stand-by</item>
+        <item quantity="one">Eingang auf Stand-by</item>
     </plurals>
     <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
-      <item quantity="other">Nicht verbundene Eingänge</item>
-      <item quantity="one">Nicht verbundener Eingang</item>
+        <item quantity="other">Nicht verbundene Eingänge</item>
+        <item quantity="one">Nicht verbundener Eingang</item>
     </plurals>
     <string name="user_add_profile_item_summary" msgid="3211866291940617804">"Zugriff auf Apps und sonstige Inhalte in deinem Konto einschränken"</string>
     <string name="user_new_profile_name" msgid="6637593067318708353">"Eingeschränktes Profil"</string>
@@ -692,8 +690,8 @@
     <string name="restricted_profile_configure_title" msgid="3327502517511010296">"Einstellungen"</string>
     <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"Zugelassene Apps"</string>
     <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
-      <item quantity="other">%d Apps zugelassen</item>
-      <item quantity="one">1 App zugelassen</item>
+        <item quantity="other">%d Apps zugelassen</item>
+        <item quantity="one">1 App zugelassen</item>
     </plurals>
     <string name="restricted_profile_allowed" msgid="970921490464867884">"Zugelassen"</string>
     <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"Nicht zugelassen"</string>
@@ -771,12 +769,12 @@
     <string name="confirm_factory_reset_device" msgid="4308646529880718465">"Alles löschen"</string>
     <string name="select_device_name_title" msgid="3045019448327493634">"Name für <xliff:g id="DEVICEMODEL">%1$s</xliff:g> auswählen"</string>
     <string name="select_device_name_description" msgid="8528185095614986580">"Gib deinem Gerät einen Namen, damit du es identifizieren kannst, wenn du von anderen Geräten darauf streamen oder eine Verbindung damit herstellen möchtest."</string>
-  <string-array name="rooms">
-    <item msgid="6590829789532602097">"Android TV"</item>
-    <item msgid="1140506340411482365">"Fernseher im Wohnzimmer"</item>
-    <item msgid="6448060889026244632">"Fernseher im Gemeinschaftsraum"</item>
-    <item msgid="3336274213215419228">"Fernseher im Schlafzimmer"</item>
-  </string-array>
+    <string-array name="rooms">
+        <item msgid="6590829789532602097">"Android TV"</item>
+        <item msgid="1140506340411482365">"Fernseher im Wohnzimmer"</item>
+        <item msgid="6448060889026244632">"Fernseher im Gemeinschaftsraum"</item>
+        <item msgid="3336274213215419228">"Fernseher im Schlafzimmer"</item>
+    </string-array>
     <string name="custom_room" msgid="6798144004583173563">"Namen eingeben…"</string>
     <string name="device_rename_title" msgid="9070021379000499270">"<xliff:g id="DEVICEMODEL">%1$s</xliff:g> umbenennen"</string>
     <string name="device_rename_description" msgid="1973894029492915135">"<xliff:g id="DEVICEMODEL">%1$s</xliff:g> heißt momentan „<xliff:g id="DEVICENAME">%2$s</xliff:g>“."</string>

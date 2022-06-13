@@ -10,8 +10,10 @@
 package com.droidlogic.app.tv;
 
 import java.util.HashMap;
+
 import android.util.Log;
 import android.text.TextUtils;
+
 import java.util.ArrayList;
 
 /**
@@ -22,61 +24,99 @@ public class TvScanConfig {
     private static String TAG = "TvScanConfig";
     private boolean mDebug = true;
 
-    public static final int TV_SEARCH_MANUAL_INDEX      = 0;
-    public static final int TV_SEARCH_AUTO_INDEX        = 1;
-    public static final int TV_SEARCH_NUMBER_INDEX      = 2;
-    public static final int TV_SEARCH_NIT_INDEX         = 3;
-    public static final ArrayList<String> TV_SEARCH_MODE = new ArrayList<String>(){{add("manual"); add("auto"); add("number"); add("nit");}};
+    public static final int TV_SEARCH_MANUAL_INDEX = 0;
+    public static final int TV_SEARCH_AUTO_INDEX = 1;
+    public static final int TV_SEARCH_NUMBER_INDEX = 2;
+    public static final int TV_SEARCH_NIT_INDEX = 3;
+    public static final ArrayList<String> TV_SEARCH_MODE = new ArrayList<String>() {{
+        add("manual");
+        add("auto");
+        add("number");
+        add("nit");
+    }};
 
-    public static final int TV_SEARCH_TYPE_ATSC_C_AUTO_INDEX    = 0;
-    public static final int TV_SEARCH_TYPE_ATSC_C_HRC_INDEX     = 1;
-    public static final int TV_SEARCH_TYPE_ATSC_C_LRC_INDEX     = 2;
-    public static final int TV_SEARCH_TYPE_ATSC_C_STD_INDEX     = 3;
-    public static final int TV_SEARCH_TYPE_ATSC_T_INDEX         = 4;
-    public static final int TV_SEARCH_TYPE_ATV_INDEX            = 5;
-    public static final int TV_SEARCH_TYPE_DTMB_INDEX           = 6;
-    public static final int TV_SEARCH_TYPE_DVBC_INDEX           = 7;
-    public static final int TV_SEARCH_TYPE_DVBS_INDEX           = 8;
-    public static final int TV_SEARCH_TYPE_DVBT_INDEX           = 9;
-    public static final int TV_SEARCH_TYPE_ISDBT_INDEX          = 10;
+    public static final int TV_SEARCH_TYPE_ATSC_C_AUTO_INDEX = 0;
+    public static final int TV_SEARCH_TYPE_ATSC_C_HRC_INDEX = 1;
+    public static final int TV_SEARCH_TYPE_ATSC_C_LRC_INDEX = 2;
+    public static final int TV_SEARCH_TYPE_ATSC_C_STD_INDEX = 3;
+    public static final int TV_SEARCH_TYPE_ATSC_T_INDEX = 4;
+    public static final int TV_SEARCH_TYPE_ATV_INDEX = 5;
+    public static final int TV_SEARCH_TYPE_DTMB_INDEX = 6;
+    public static final int TV_SEARCH_TYPE_DVBC_INDEX = 7;
+    public static final int TV_SEARCH_TYPE_DVBS_INDEX = 8;
+    public static final int TV_SEARCH_TYPE_DVBT_INDEX = 9;
+    public static final int TV_SEARCH_TYPE_ISDBT_INDEX = 10;
     public static final ArrayList<String> TV_SEARCH_TYPE = new ArrayList<String>() {
         {
-            add("ATSC-C-AUTO"); add("ATSC-C-HRC"); add("ATSC-C-LRC"); add("ATSC-C-STD"); add("ATSC-T"); add("ATV");
-            add("DTMB"); add("DVB-C"); add("DVB-S"); add("DVB-T"); add("ISDB-T");
+            add("ATSC-C-AUTO");
+            add("ATSC-C-HRC");
+            add("ATSC-C-LRC");
+            add("ATSC-C-STD");
+            add("ATSC-T");
+            add("ATV");
+            add("DTMB");
+            add("DVB-C");
+            add("DVB-S");
+            add("DVB-T");
+            add("ISDB-T");
         }
     };
 
     //definition about country
-    public static final int TV_COUNTRY_AMERICA_INDEX    = 0;
-    public static final int TV_COUNTRY_INDIA_INDEX      = 1;
-    public static final int TV_COUNTRY_INDONESIA_INDEX  = 2;
-    public static final int TV_COUNTRY_MEXICO_INDEX     = 3;
-    public static final int TV_COUNTRY_GERMANY_INDEX    = 4;
-    public static final int TV_COUNTRY_CHINA_INDEX      = 5;
-    public static final int TV_COUNTRY_BRAZIL_INDEX     = 6;
-    public static final int TV_COUNTRY_FRANCE_INDEX     = 7;
-    public static final ArrayList<String> TV_COUNTRY = new ArrayList<String>(){{add("US"); add("IN"); add("ID"); add("MX"); add("DE"); add("CN"); add("BR"); add("FR");}};
+    public static final int TV_COUNTRY_AMERICA_INDEX = 0;
+    public static final int TV_COUNTRY_INDIA_INDEX = 1;
+    public static final int TV_COUNTRY_INDONESIA_INDEX = 2;
+    public static final int TV_COUNTRY_MEXICO_INDEX = 3;
+    public static final int TV_COUNTRY_GERMANY_INDEX = 4;
+    public static final int TV_COUNTRY_CHINA_INDEX = 5;
+    public static final int TV_COUNTRY_BRAZIL_INDEX = 6;
+    public static final int TV_COUNTRY_FRANCE_INDEX = 7;
+    public static final ArrayList<String> TV_COUNTRY = new ArrayList<String>() {{
+        add("US");
+        add("IN");
+        add("ID");
+        add("MX");
+        add("DE");
+        add("CN");
+        add("BR");
+        add("FR");
+    }};
 
-    public static final int TV_COLOR_SYS_AUTO_INDEX     = 0;
-    public static final int TV_COLOR_SYS_PAL_INDEX      = 1;
-    public static final int TV_COLOR_SYS_NTSC_INDEX     = 2;
-    public static final int TV_COLOR_SYS_SECAM_INDEX    = 3;
-    public static final ArrayList<String> TV_COLOR_SYS = new ArrayList<String>(){{add("AUTO"); add("PAL"); add("NTSC"); add("SECAM");}};
+    public static final int TV_COLOR_SYS_AUTO_INDEX = 0;
+    public static final int TV_COLOR_SYS_PAL_INDEX = 1;
+    public static final int TV_COLOR_SYS_NTSC_INDEX = 2;
+    public static final int TV_COLOR_SYS_SECAM_INDEX = 3;
+    public static final ArrayList<String> TV_COLOR_SYS = new ArrayList<String>() {{
+        add("AUTO");
+        add("PAL");
+        add("NTSC");
+        add("SECAM");
+    }};
 
-    public static final int TV_SOUND_SYS_AUTO_INDEX     = 0;
-    public static final int TV_SOUND_SYS_DK_INDEX       = 1;
-    public static final int TV_SOUND_SYS_I_INDEX        = 2;
-    public static final int TV_SOUND_SYS_BG_INDEX       = 3;
-    public static final int TV_SOUND_SYS_M_INDEX        = 4;
-    public static final int TV_SOUND_SYS_L_INDEX        = 5;
-    public static final ArrayList<String> TV_SOUND_SYS = new ArrayList<String>(){{add("AUTO"); add("DK"); add("I"); add("BG"); add("M"); add("L");}};
+    public static final int TV_SOUND_SYS_AUTO_INDEX = 0;
+    public static final int TV_SOUND_SYS_DK_INDEX = 1;
+    public static final int TV_SOUND_SYS_I_INDEX = 2;
+    public static final int TV_SOUND_SYS_BG_INDEX = 3;
+    public static final int TV_SOUND_SYS_M_INDEX = 4;
+    public static final int TV_SOUND_SYS_L_INDEX = 5;
+    public static final ArrayList<String> TV_SOUND_SYS = new ArrayList<String>() {{
+        add("AUTO");
+        add("DK");
+        add("I");
+        add("BG");
+        add("M");
+        add("L");
+    }};
 
-    public static final ArrayList<String> TV_MIN_MAX_FREQ = new ArrayList<String>(){{add("44250000"); add("868250000");}};
+    public static final ArrayList<String> TV_MIN_MAX_FREQ = new ArrayList<String>() {{
+        add("44250000");
+        add("868250000");
+    }};
 
-    public static final int TV_ATV_AUTO_FREQ_LIST        = 0; /* 0: freq table list sacn mode */
-    public static final int TV_ATV_AUTO_ALL_BAND         = 1;  /* 1: all band sacn mode */
+    public static final int TV_ATV_AUTO_FREQ_LIST = 0; /* 0: freq table list sacn mode */
+    public static final int TV_ATV_AUTO_ALL_BAND = 1;  /* 1: all band sacn mode */
 
-    public static ArrayList<String> stringToWordsList(String strings, ArrayList<String> defaultStrings){
+    public static ArrayList<String> stringToWordsList(String strings, ArrayList<String> defaultStrings) {
         if (!TextUtils.isEmpty(strings)) {
             ArrayList<String> getSupportList = new ArrayList<String>();
             String[] supportList = strings.split(",");

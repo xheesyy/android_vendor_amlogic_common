@@ -29,15 +29,15 @@ import android.view.animation.Interpolator;
 import com.android.tv.settings.R;
 
 /**
-* A DialogFragment has 2 fragments, a content fragment and a list fragment.
-* <p>
-* Subclasses should override to supply the content fragment and list items.
-* <p>
-* The DialogFragment will handle animating in and out.
-* <p>
-* This class will use a default layout, but a custom layout can be provided by
-* calling {@link #setLayoutProperties}
-*/
+ * A DialogFragment has 2 fragments, a content fragment and a list fragment.
+ * <p>
+ * Subclasses should override to supply the content fragment and list items.
+ * <p>
+ * The DialogFragment will handle animating in and out.
+ * <p>
+ * This class will use a default layout, but a custom layout can be provided by
+ * calling {@link #setLayoutProperties}
+ */
 public class DialogFragment extends Fragment implements ActionAdapter.Listener, LiteFragment {
 
     private Activity mActivity;
@@ -74,7 +74,7 @@ public class DialogFragment extends Fragment implements ActionAdapter.Listener, 
      * custom view.
      *
      * @param contentAreaId id of the content area
-     * @param actionAreaId id of the action area
+     * @param actionAreaId  id of the action area
      */
     protected void setLayoutProperties(int contentAreaId, int actionAreaId) {
         mBase.setLayoutProperties(contentAreaId, actionAreaId);
@@ -83,16 +83,16 @@ public class DialogFragment extends Fragment implements ActionAdapter.Listener, 
     /**
      * Animates a view.
      *
-     * @param v              view to animate
-     * @param initAlpha      initial alpha
-     * @param initTransX     initial translation in the X
-     * @param delay          delay in ms
-     * @param duration       duration in ms
-     * @param interpolator   interpolator to be used, can be null
-     * @param isIcon         if {@code true}, this is the main icon being moved
+     * @param v            view to animate
+     * @param initAlpha    initial alpha
+     * @param initTransX   initial translation in the X
+     * @param delay        delay in ms
+     * @param duration     duration in ms
+     * @param interpolator interpolator to be used, can be null
+     * @param isIcon       if {@code true}, this is the main icon being moved
      */
     protected void prepareAndAnimateView(final View v, float initAlpha, float initTransX, int delay,
-            int duration, Interpolator interpolator, final boolean isIcon) {
+                                         int duration, Interpolator interpolator, final boolean isIcon) {
         mBase.prepareAndAnimateView(
                 v, initAlpha, initTransX, delay, duration, interpolator, isIcon);
     }
@@ -130,6 +130,7 @@ public class DialogFragment extends Fragment implements ActionAdapter.Listener, 
      * Capable of returning {@link Activity} prior to this Fragment being
      * attached to it's parent Activity.  Useful for getting the parent
      * Activity prior to {@link #onAttach(Activity)} being called.
+     *
      * @return parent {@link Activity}
      */
     private Activity getRealActivity() {
@@ -191,7 +192,7 @@ public class DialogFragment extends Fragment implements ActionAdapter.Listener, 
      * this will be added to the back stack.
      */
     protected void setContentAndActionFragments(Fragment contentFragment, Fragment actionFragment,
-            boolean addToBackStack) {
+                                                boolean addToBackStack) {
         FragmentTransaction ft = getContentFragmentTransaction(contentFragment);
         ft = addActionFragmentToTransaction(actionFragment, ft, addToBackStack,
                 getRealActivity().getFragmentManager());
@@ -220,7 +221,7 @@ public class DialogFragment extends Fragment implements ActionAdapter.Listener, 
      * If an action fragment currently exists, this will be added to the back stack.
      */
     private FragmentTransaction addActionFragmentToTransaction(Fragment fragment,
-            FragmentTransaction ft, boolean addToBackStack, FragmentManager fm) {
+                                                               FragmentTransaction ft, boolean addToBackStack, FragmentManager fm) {
         if (ft == null) {
             ft = fm.beginTransaction();
         }

@@ -29,7 +29,7 @@ public class DtsVirualXSettingActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DtsVirualXSettingFragment.class.getName(), null);
+                .newSettingsFragment(DtsVirualXSettingFragment.class.getName(), null);
     }
 
 }

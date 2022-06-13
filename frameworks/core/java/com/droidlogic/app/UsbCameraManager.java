@@ -33,27 +33,28 @@ import android.os.UserHandle;
 import android.util.Log;
 
 public class UsbCameraManager {
-    private static final String TAG             = "UsbCameraManager";
+    private static final String TAG = "UsbCameraManager";
 
-    private static final boolean DEBUG          = false;
+    private static final boolean DEBUG = false;
 
-    private static final String PACKAGES[]      = {
-        "com.android.camera2",
-        "com.android.camera2",
+    private static final String PACKAGES[] = {
+            "com.android.camera2",
+            "com.android.camera2",
     };
 
-    private static final String ACTIVITIES[]    = {
-        "com.android.camera.CameraLauncher",
-        "com.android.camera.CameraActivity",
+    private static final String ACTIVITIES[] = {
+            "com.android.camera.CameraLauncher",
+            "com.android.camera.CameraActivity",
     };
 
     private Context mContext;
+
     //private ICameraService mCameraService = null;
-    public UsbCameraManager(Context context){
+    public UsbCameraManager(Context context) {
         mContext = context;
     }
 
-    private void usbCameraAttach(boolean isAttach){
+    private void usbCameraAttach(boolean isAttach) {
         /*
         try {
             if (null == mCameraService) {
@@ -81,7 +82,7 @@ public class UsbCameraManager {
         */
     }
 
-    public void bootReady(){
+    public void bootReady() {
         if (!hasCamera()) {
             Log.i(TAG, "bootReady disable all camera activities");
             for (int i = 0; i < ACTIVITIES.length; i++) {
@@ -90,7 +91,7 @@ public class UsbCameraManager {
         }
     }
 
-    public void UsbDeviceAttach(UsbDevice device, boolean isAttach){
+    public void UsbDeviceAttach(UsbDevice device, boolean isAttach) {
         if (isUsbCamera(device)) {
             Log.i(TAG, "usb camera attach: " + isAttach);
             new VideoDevThread(mContext, isAttach).start();
@@ -125,8 +126,8 @@ public class UsbCameraManager {
             // We need the DONT_KILL_APP flag, otherwise we will be killed
             // immediately because we are in the same app.
             pm.setComponentEnabledSetting(name,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP);
+                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                    PackageManager.DONT_KILL_APP);
         } catch (Exception e) {
             Log.w(TAG, "Unable disable component: " + name, e);
         }
@@ -138,8 +139,8 @@ public class UsbCameraManager {
 
         try {
             pm.setComponentEnabledSetting(name,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
+                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                    PackageManager.DONT_KILL_APP);
         } catch (Exception e) {
             Log.w(TAG, "Unable enable component: " + name, e);
         }
@@ -165,7 +166,7 @@ public class UsbCameraManager {
             }*/
 
             if (intf == null) {
-                Log.e(TAG,"intf is null , return");
+                Log.e(TAG, "intf is null , return");
                 continue;
             }
             if (intf.getInterfaceClass() == UsbConstants.USB_CLASS_VIDEO) {
@@ -194,20 +195,19 @@ public class UsbCameraManager {
         public void run() {
             boolean end = false;
             int loopCount = 0;
-            while ( !end ) {
+            while (!end) {
                 try {
                     if (mIsAttach) {
                         Thread.sleep(500);//first delay 500ms, in order to wait kernel set up video device path
                     } else {
                         Thread.sleep(50);
                     }
-                }
-                catch (InterruptedException e){
+                } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
 
                 int devNum = 0;
-                for ( int i = 0; i < DEV_NUM; i++ ) {
+                for (int i = 0; i < DEV_NUM; i++) {
                     String path = DEV_VIDEO_prefix + i;
                     if (new File(path).exists()) {
                         devNum++;
@@ -215,10 +215,10 @@ public class UsbCameraManager {
                     }
                 }
                 if (mIsAttach &&
-                    //device path has been set up by kernel
-                    ((devNum > mCamNum) ||
-                    //video device was plugged in when boot
-                    ((devNum > 0) && (mCamNum == devNum)))) {
+                        //device path has been set up by kernel
+                        ((devNum > mCamNum) ||
+                                //video device was plugged in when boot
+                                ((devNum > 0) && (mCamNum == devNum)))) {
                     usbCameraAttach(mIsAttach);
                     for (int i = 0; i < ACTIVITIES.length; i++) {
                         enableComponent(PACKAGES[i], ACTIVITIES[i]);
@@ -226,8 +226,7 @@ public class UsbCameraManager {
                     ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
                     am.forceStopPackage("com.skype.rover");
                     end = true;
-                }
-                else if (!mIsAttach) {//device path has been deleted by kernel
+                } else if (!mIsAttach) {//device path has been deleted by kernel
                     usbCameraAttach(mIsAttach);
                     if (devNum < 1) {
                         for (int i = 0; i < ACTIVITIES.length; i++) {
@@ -238,21 +237,21 @@ public class UsbCameraManager {
 
                     //if plug out the usb camera, need exit camera app
                     ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
-                    ComponentName cn = am.getRunningTasks (1).get (0).topActivity;
+                    ComponentName cn = am.getRunningTasks(1).get(0).topActivity;
                     String name = cn.getClassName();
 
                     Log.i(TAG, "usb camera plug out top activity:" + name + " pkg:" + cn.getPackageName());
                     for (int i = 0; i < ACTIVITIES.length; i++) {
-                        if (name.equals (ACTIVITIES[i])) {
+                        if (name.equals(ACTIVITIES[i])) {
                             Intent homeIntent = new Intent(Intent.ACTION_MAIN, null);
                             homeIntent.addCategory(Intent.CATEGORY_HOME);
                             homeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                     | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
                             mContext.startActivity(homeIntent);
 
-                            try{
+                            try {
                                 Thread.sleep(500);
-                            }catch (InterruptedException e){
+                            } catch (InterruptedException e) {
                             }
                             Log.i(TAG, "usb camera plug out kill:" + cn.getPackageName());
                             am.forceStopPackage(cn.getPackageName());
@@ -260,8 +259,7 @@ public class UsbCameraManager {
                             break;
                         }
                     }
-                }
-                else if ((mCamNum > 0) && (mCamNum == devNum)) {//video device was plugged in when boot
+                } else if ((mCamNum > 0) && (mCamNum == devNum)) {//video device was plugged in when boot
                     loopCount++;
                     if (loopCount > 2) {//1s kernel has set up or delete the device path
                         end = true;

@@ -16,7 +16,7 @@ import android.os.Parcelable;
  * Created by yu.fang on 2018/7/3.
  */
 
-public class EventParams implements Parcelable{
+public class EventParams implements Parcelable {
     private int frequency;
     private int quality;
     private int strength;

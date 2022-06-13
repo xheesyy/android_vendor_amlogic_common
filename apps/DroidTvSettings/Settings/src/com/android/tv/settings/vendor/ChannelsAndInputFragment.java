@@ -23,9 +23,11 @@ import androidx.annotation.Keep;
 import com.android.tv.settings.R;
 import com.android.tv.settings.SettingsPreferenceFragment;
 
-/** A vendor sample of Channels And Inputs settings. */
+/**
+ * A vendor sample of Channels And Inputs settings.
+ */
 @Keep
-public class ChannelsAndInputFragment  extends SettingsPreferenceFragment {
+public class ChannelsAndInputFragment extends SettingsPreferenceFragment {
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         setPreferencesFromResource(R.xml.channels_and_inputs_vendor, null);

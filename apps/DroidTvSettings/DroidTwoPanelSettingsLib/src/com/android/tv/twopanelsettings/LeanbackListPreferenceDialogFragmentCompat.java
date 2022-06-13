@@ -45,7 +45,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-/** A copy-paste from androidx leanback library. Make particular methods to be public so that
+/**
+ * A copy-paste from androidx leanback library. Make particular methods to be public so that
  * they can be overrode.
  */
 public class LeanbackListPreferenceDialogFragmentCompat extends
@@ -161,7 +162,7 @@ public class LeanbackListPreferenceDialogFragmentCompat extends
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         TypedValue tv = new TypedValue();
         this.getActivity().getTheme().resolveAttribute(attr.preferenceTheme, tv, true);
         int theme = tv.resourceId;
@@ -197,7 +198,7 @@ public class LeanbackListPreferenceDialogFragmentCompat extends
         return (Adapter) (this.mMulti ? new LeanbackListPreferenceDialogFragmentCompat.AdapterMulti(
                 this.mEntries, this.mEntryValues, this.mInitialSelections)
                 : new LeanbackListPreferenceDialogFragmentCompat.AdapterSingle(this.mEntries,
-                        this.mEntryValues, this.mInitialSelection));
+                this.mEntryValues, this.mInitialSelection));
     }
 
     public static final class ViewHolder extends
@@ -208,7 +209,7 @@ public class LeanbackListPreferenceDialogFragmentCompat extends
         private final LeanbackListPreferenceDialogFragmentCompat.OnItemClickListener mListener;
 
         public ViewHolder(@NonNull View view,
-                @NonNull LeanbackListPreferenceDialogFragmentCompat.OnItemClickListener listener) {
+                          @NonNull LeanbackListPreferenceDialogFragmentCompat.OnItemClickListener listener) {
             super(view);
             this.mWidgetView = (Checkable) view.findViewById(id.button);
             this.mContainer = (ViewGroup) view.findViewById(id.container);
@@ -246,7 +247,7 @@ public class LeanbackListPreferenceDialogFragmentCompat extends
         private final Set<String> mSelections;
 
         AdapterMulti(CharSequence[] entries, CharSequence[] entryValues,
-                Set<String> initialSelections) {
+                     Set<String> initialSelections) {
             this.mEntries = entries;
             this.mEntryValues = entryValues;
             this.mSelections = new HashSet(initialSelections);
@@ -260,7 +261,7 @@ public class LeanbackListPreferenceDialogFragmentCompat extends
         }
 
         public void onBindViewHolder(LeanbackListPreferenceDialogFragmentCompat.ViewHolder holder,
-                int position) {
+                                     int position) {
             holder.getWidgetView().setChecked(
                     this.mSelections.contains(this.mEntryValues[position].toString()));
             holder.getTitleView().setText(this.mEntries[position]);
@@ -305,7 +306,7 @@ public class LeanbackListPreferenceDialogFragmentCompat extends
         private CharSequence mSelectedValue;
 
         AdapterSingle(CharSequence[] entries, CharSequence[] entryValues,
-                CharSequence selectedValue) {
+                      CharSequence selectedValue) {
             this.mEntries = entries;
             this.mEntryValues = entryValues;
             this.mSelectedValue = selectedValue;
@@ -320,7 +321,7 @@ public class LeanbackListPreferenceDialogFragmentCompat extends
         }
 
         public void onBindViewHolder(LeanbackListPreferenceDialogFragmentCompat.ViewHolder holder,
-                int position) {
+                                     int position) {
             holder.getWidgetView().setChecked(
                     this.mEntryValues[position].equals(this.mSelectedValue));
             holder.getTitleView().setText(this.mEntries[position]);

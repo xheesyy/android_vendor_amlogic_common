@@ -34,7 +34,7 @@ public class ExternalSourcesActivity extends TvSettingsActivity {
             return null;
         } else {
             return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-                .newSettingsFragment(ExternalSources.class.getName(), null);
+                    .newSettingsFragment(ExternalSources.class.getName(), null);
         }
     }
 }

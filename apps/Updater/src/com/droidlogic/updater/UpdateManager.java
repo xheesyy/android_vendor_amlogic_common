@@ -216,7 +216,8 @@ public class UpdateManager {
      */
     private void setUpdaterState(int newUpdaterState)
             throws UpdaterState.InvalidTransitionException {
-        if (PermissionUtils.CanDebug()) Log.d(TAG, "setUpdaterState invoked newState=" + newUpdaterState);
+        if (PermissionUtils.CanDebug())
+            Log.d(TAG, "setUpdaterState invoked newState=" + newUpdaterState);
         int previousState = mUpdaterState.get();
         mUpdaterState.set(newUpdaterState);
         if (previousState != newUpdaterState) {
@@ -274,7 +275,7 @@ public class UpdateManager {
      */
     public synchronized void applyUpdate(Context context, UpdateConfig config)
             throws UpdaterState.InvalidTransitionException {
-        if (PermissionUtils.CanDebug()) Log.d(TAG,"applyUpdate");
+        if (PermissionUtils.CanDebug()) Log.d(TAG, "applyUpdate");
         mEngineErrorCode.set(UpdateEngineErrorCodes.UNKNOWN);
         setUpdaterState(UpdaterState.RUNNING);
 
@@ -285,13 +286,14 @@ public class UpdateManager {
         if (!config.getAbConfig().getForceSwitchSlot()) {
             mManualSwitchSlotRequired.set(true);
         } else {*/
-            mManualSwitchSlotRequired.set(true);
+        mManualSwitchSlotRequired.set(true);
         //}
 
         if (PermissionUtils.CanDebug()) Log.d(TAG, "Starting PrepareUpdateService");
         PrepareUpdateService.startService(context, config, mHandler, (code, payloadSpec) -> {
             if (code != PrepareUpdateService.RESULT_CODE_SUCCESS) {
-                if (PermissionUtils.CanDebug()) Log.e(TAG, "PrepareUpdateService failed, result code is " + code);
+                if (PermissionUtils.CanDebug())
+                    Log.e(TAG, "PrepareUpdateService failed, result code is " + code);
                 setUpdaterStateSilent(UpdaterState.ERROR);
                 return;
             }
@@ -330,7 +332,8 @@ public class UpdateManager {
      * with the given id.</p>
      */
     private void updateEngineApplyPayload(UpdateData update) {
-        if (PermissionUtils.CanDebug()) Log.d(TAG, "updateEngineApplyPayload invoked with url " + update.mPayload.getUrl());
+        if (PermissionUtils.CanDebug())
+            Log.d(TAG, "updateEngineApplyPayload invoked with url " + update.mPayload.getUrl());
 
         synchronized (mLock) {
             mLastUpdateData = update;
@@ -338,10 +341,10 @@ public class UpdateManager {
 
         ArrayList<String> properties = new ArrayList<>(update.getPayload().getProperties());
         properties.addAll(update.getExtraProperties());
-        String[] params=properties.toArray(new String[0]);
+        String[] params = properties.toArray(new String[0]);
         if (PermissionUtils.CanDebug()) {
-            for (String p:params) {
-                Log.d(TAG,"--------------"+p);
+            for (String p : params) {
+                Log.d(TAG, "--------------" + p);
             }
         }
         try {
@@ -354,9 +357,9 @@ public class UpdateManager {
             if ((e.getMessage() != null) && (e.getMessage().contains("waiting for reboot"))) {
                 getOnProgressUpdateCallback().ifPresent(callback -> callback.accept(1));
             }
-            Log.d(TAG,"e.msg"+e.getMessage());
+            Log.d(TAG, "e.msg" + e.getMessage());
             if (PermissionUtils.CanDebug()) Log.d(TAG, "UpdateEngine failed to apply the update");
-           // setUpdaterStateSilent(UpdaterState.ERROR);
+            // setUpdaterStateSilent(UpdaterState.ERROR);
         }
     }
 
@@ -431,7 +434,7 @@ public class UpdateManager {
             initializeUpdateState(UpdaterState.REBOOT_REQUIRED);
             return;
         }
-        if (state == UpdaterState.IDLE && (engineStatus >= UpdateEngine.UpdateStatusConstants.DOWNLOADING) && (engineStatus < UpdateEngine.UpdateStatusConstants.UPDATED_NEED_REBOOT) ) {
+        if (state == UpdaterState.IDLE && (engineStatus >= UpdateEngine.UpdateStatusConstants.DOWNLOADING) && (engineStatus < UpdateEngine.UpdateStatusConstants.UPDATED_NEED_REBOOT)) {
             initializeUpdateState(UpdaterState.RUNNING);
             return;
         }
@@ -452,7 +455,8 @@ public class UpdateManager {
             case UpdaterState.RUNNING:
                 if (engineStatus == UpdateEngine.UpdateStatusConstants.UPDATED_NEED_REBOOT
                         || engineStatus == UpdateEngine.UpdateStatusConstants.IDLE) {
-                    if (PermissionUtils.CanDebug()) Log.i(TAG, "ensureUpdateEngineStatusIsRunning - re-applying last payload");
+                    if (PermissionUtils.CanDebug())
+                        Log.i(TAG, "ensureUpdateEngineStatusIsRunning - re-applying last payload");
                     // Re-apply latest update. It makes update_engine to invoke
                     // onPayloadApplicationComplete callback. The callback notifies
                     // if update was successful or not.
@@ -509,9 +513,10 @@ public class UpdateManager {
     }
 
     private void onPayloadApplicationComplete(int errorCode) {
-        if (PermissionUtils.CanDebug()) Log.d(TAG, "onPayloadApplicationComplete invoked,"+mUpdateEngineStatus.get()+" errorCode=" + errorCode);
-        if (mUpdateEngineStatus.get() == UpdaterState.IDLE && ((errorCode !=  UpdateEngine.ErrorCodeConstants.SUCCESS)
-                &&(UpdateEngineErrorCodes.UPDATED_BUT_NOT_ACTIVE != errorCode))) {
+        if (PermissionUtils.CanDebug())
+            Log.d(TAG, "onPayloadApplicationComplete invoked," + mUpdateEngineStatus.get() + " errorCode=" + errorCode);
+        if (mUpdateEngineStatus.get() == UpdaterState.IDLE && ((errorCode != UpdateEngine.ErrorCodeConstants.SUCCESS)
+                && (UpdateEngineErrorCodes.UPDATED_BUT_NOT_ACTIVE != errorCode))) {
             return;
         }
         mEngineErrorCode.set(errorCode);
@@ -525,7 +530,7 @@ public class UpdateManager {
         }
         if (!isManualSwitchSlotRequired()) {
             getOnEngineCompleteCallback()
-                .ifPresent(callback -> callback.accept(errorCode));
+                    .ifPresent(callback -> callback.accept(errorCode));
         }
     }
 
@@ -605,8 +610,9 @@ public class UpdateManager {
             }
         }
     }
+
     //cost time call
-    public int cleanupAppliedPayload(){
+    public int cleanupAppliedPayload() {
         return mUpdateEngine.cleanupAppliedPayload();
     }
 }

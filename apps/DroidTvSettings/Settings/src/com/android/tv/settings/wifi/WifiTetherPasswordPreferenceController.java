@@ -18,8 +18,10 @@ package com.android.tv.settings.wifi;
 
 import android.content.Context;
 import android.net.wifi.SoftApConfiguration;
+
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
+
 import android.text.TextUtils;
 
 import com.android.tv.settings.R;
@@ -35,7 +37,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     EditTextPreference preference = null;
 
     public WifiTetherPasswordPreferenceController(Context context,
-            OnTetherConfigUpdateListener listener) {
+                                                  OnTetherConfigUpdateListener listener) {
         super(context, listener);
     }
 
@@ -48,7 +50,7 @@ public class WifiTetherPasswordPreferenceController extends WifiTetherBasePrefer
     public void updateDisplay() {
         if (null != preference) {
 
-        String password = preference.getText();
+            String password = preference.getText();
             if (password != null && !password.equals(mPassword)) {
                 mPassword = password;
                 mListener.onTetherConfigUpdated();

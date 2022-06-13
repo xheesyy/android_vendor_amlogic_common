@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +21,7 @@
     android:paddingStart="@dimen/side_panel_padding_start"
     android:paddingEnd="@dimen/side_panel_padding_end"
     android:focusable="true"
-    android:background="?android:attr/selectableItemBackground" >
+    android:background="?android:attr/selectableItemBackground">
 
     <RadioButton
         android:id="@+id/radio_button"
@@ -32,7 +31,8 @@
         android:background="@null"
         android:clickable="false" />
 
-    <include layout="@layout/option_item_common"
+    <include
+        layout="@layout/option_item_common"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />

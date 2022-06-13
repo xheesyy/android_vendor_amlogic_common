@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="@style/Theme.Leanback" >
+    <style name="AppTheme" parent="@style/Theme.Leanback">
         <item name="android:windowShowWallpaper">false</item>
         <item name="android:windowBackground">#FF101010</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
@@ -13,6 +13,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
+
     <style name="activity_styles1" parent="@android:style/Theme.Dialog">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -24,7 +25,8 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
-    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button"/>
+
+    <style name="ActionPrimaryButton" parent="android:Widget.DeviceDefault.Button" />
 
     <style name="Theme.empty" parent="@android:style/Theme.Translucent.NoTitleBar">
         <item name="android:animation">@null</item>

@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.tv.settings.TvSettingsActivity;
 import com.android.tv.settings.overlay.FlavorUtils;
+
 /**
  * Activity to adjust multi picture option.
  */
@@ -28,7 +29,7 @@ public class PQAdvancedColorTemperatureActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PQAdvancedColorTemperatureFragment.class.getName(), null);
+                .newSettingsFragment(PQAdvancedColorTemperatureFragment.class.getName(), null);
     }
 
 }

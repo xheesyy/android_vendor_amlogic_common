@@ -89,12 +89,12 @@ public class SuggestionItemView extends LinearLayout {
                 getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
         if (focused.getId() == R.id.dismiss_button
                 && ((isRTL && direction == ViewGroup.FOCUS_RIGHT)
-                || (!isRTL && direction == ViewGroup.FOCUS_LEFT)))  {
+                || (!isRTL && direction == ViewGroup.FOCUS_LEFT))) {
             return mItemContainer;
         } else if (focused.getId() == R.id.main_container
                 && ((isRTL && direction == ViewGroup.FOCUS_LEFT)
                 || (!isRTL && direction == ViewGroup.FOCUS_RIGHT))) {
-            return  mDissmissButton;
+            return mDissmissButton;
         }
         return super.focusSearch(focused, direction);
     }

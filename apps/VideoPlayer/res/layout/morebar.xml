@@ -19,8 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_weight="1"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/ResumeBtn"
         android:src="@drawable/resume"
@@ -28,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_weight="1"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/PlaymodeBtn"
         android:src="@drawable/mode"
@@ -37,8 +37,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/ChangetrackBtn"
         android:src="@drawable/change_track"
@@ -46,8 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/SubtitleBtn"
         android:src="@drawable/fondsetup"
@@ -55,8 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/ttPageBtn"
         android:src="@drawable/tt_page"
@@ -64,8 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/ChapterBtn"
         android:src="@drawable/doc"
@@ -74,17 +74,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:visibility="gone">
-    </ImageButton>
-	<ImageButton
+        android:visibility="gone"></ImageButton>
+
+    <ImageButton
         android:id="@+id/DisplayBtn"
         android:src="@drawable/diplay"
         android:background="@drawable/btn_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/BrightnessBtn"
         android:src="@drawable/brightness"
@@ -92,8 +92,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/InfoBtn"
         android:layout_width="wrap_content"
@@ -102,8 +102,8 @@
         android:layout_weight="1"
         android:src="@drawable/info"
         android:background="@drawable/btn_button"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
+
     <ImageButton
         android:id="@+id/Play3DBtn"
         android:layout_width="wrap_content"
@@ -112,8 +112,8 @@
         android:src="@drawable/play_3d"
         android:background="@drawable/btn_button"
         android:gravity="center"
-        android:visibility="gone">
-    </ImageButton>
+        android:visibility="gone"></ImageButton>
+
     <ImageButton
         android:id="@+id/MoreSetBtn"
         android:layout_width="wrap_content"
@@ -121,6 +121,5 @@
         android:layout_weight="1"
         android:src="@drawable/more_set"
         android:background="@drawable/btn_button"
-        android:gravity="center">
-    </ImageButton>
+        android:gravity="center"></ImageButton>
 </LinearLayout>

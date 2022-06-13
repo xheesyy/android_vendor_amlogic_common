@@ -160,7 +160,7 @@ public class VideoFragment extends Fragment implements MediaPlayer.OnCompletionL
 
         if (1 == MainActivity.ageing_flag) {
             if ((hour_ageing >= MainActivity.ageing_time) && 1 == ageing_test_step) {
-			  	Log.i(TAG, "jason lao hua jie shu !!! ");
+                Log.i(TAG, "jason lao hua jie shu !!! ");
                 Tools.writeFile(Tools.ageing_status, "1");
                 ageing_test_step = 2;
             } else if (0 == ageing_test_step) {

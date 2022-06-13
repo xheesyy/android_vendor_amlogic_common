@@ -25,7 +25,7 @@ public class DisplayPositionActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DisplayPositionFragment.class.getName(), null);
+                .newSettingsFragment(DisplayPositionFragment.class.getName(), null);
     }
 
 }

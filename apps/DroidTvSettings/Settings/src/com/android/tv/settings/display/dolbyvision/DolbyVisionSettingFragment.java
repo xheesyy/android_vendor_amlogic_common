@@ -14,12 +14,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
+
 import android.util.ArrayMap;
 import android.util.Log;
 import android.text.TextUtils;
@@ -37,17 +41,17 @@ import java.util.ArrayList;
 public class DolbyVisionSettingFragment extends SettingsPreferenceFragment {
     private static final String TAG = "DolbyVisionSettingFragment";
 
-    public static final String KEY_DOLBY_VISION     = "dolby_vision_set";
+    public static final String KEY_DOLBY_VISION = "dolby_vision_set";
 
-    private static final int DV_LL_RGB            = 3;
-    private static final int DV_LL_YUV            = 2;
-    private static final int DV_ENABLE            = 1;
-    private static final int DV_DISABLE           = 0;
+    private static final int DV_LL_RGB = 3;
+    private static final int DV_LL_YUV = 2;
+    private static final int DV_ENABLE = 1;
+    private static final int DV_DISABLE = 0;
 
     private static final String DV_RADIO_GROUP = "dv";
     private static final String DOLBY_VISION_DEFAULT = "dolby_vision_default";
-    private static final String DOLBY_VISION_LL_YUV  = "dolby_vision_ll_yuv";
-    private static final String DOLBY_VISION_LL_RGB  = "dolby_vision_ll_rgb";
+    private static final String DOLBY_VISION_LL_YUV = "dolby_vision_ll_yuv";
+    private static final String DOLBY_VISION_LL_RGB = "dolby_vision_ll_rgb";
     private static final String DOLBY_VISION_DISABLE = "dolby_vision_disable";
 
     private DolbyVisionSettingManager mDolbyVisionSettingManager;
@@ -131,40 +135,40 @@ public class DolbyVisionSettingFragment extends SettingsPreferenceFragment {
         ArrayList<Action> actions = new ArrayList<Action>();
         if (mode.equals("")) {
             actions.add(new Action.Builder()
-                .key(DOLBY_VISION_DEFAULT)
-                .title(getString(R.string.dolby_vision_default_enable))
-                .checked((enable == true) && (type == DV_ENABLE))
-                .build());
+                    .key(DOLBY_VISION_DEFAULT)
+                    .title(getString(R.string.dolby_vision_default_enable))
+                    .checked((enable == true) && (type == DV_ENABLE))
+                    .build());
         }
         if (!mode.equals("") && mode.contains("DV_RGB_444_8BIT")) {
             actions.add(new Action.Builder()
-                .key(DOLBY_VISION_DEFAULT)
-                .title(getString(R.string.dolby_vision_sink_led))
-                .checked((enable == true) && (type == DV_ENABLE))
-                .build());
+                    .key(DOLBY_VISION_DEFAULT)
+                    .title(getString(R.string.dolby_vision_sink_led))
+                    .checked((enable == true) && (type == DV_ENABLE))
+                    .build());
         }
         if (!mode.equals("")) {
             if (mode.contains("LL_YCbCr_422_12BIT")) {
                 actions.add(new Action.Builder()
-                    .key(DOLBY_VISION_LL_YUV)
-                    .title(getString(R.string.dolby_vision_low_latency_yuv))
-                    .checked((enable == true) && (type == DV_LL_YUV))
-                    .build());
+                        .key(DOLBY_VISION_LL_YUV)
+                        .title(getString(R.string.dolby_vision_low_latency_yuv))
+                        .checked((enable == true) && (type == DV_LL_YUV))
+                        .build());
             }
             if ((mode.contains("LL_RGB_444_12BIT") || mode.contains("LL_RGB_444_10BIT"))
                     && !curMode.contains("2160") && !curMode.contains("smpte")) {
                 actions.add(new Action.Builder()
-                    .key(DOLBY_VISION_LL_RGB)
-                    .title(getString(R.string.dolby_vision_low_latency_rgb))
-                    .checked((enable == true) && (type == DV_LL_RGB))
-                    .build());
+                        .key(DOLBY_VISION_LL_RGB)
+                        .title(getString(R.string.dolby_vision_low_latency_rgb))
+                        .checked((enable == true) && (type == DV_LL_RGB))
+                        .build());
             }
         }
         actions.add(new Action.Builder()
-            .key(DOLBY_VISION_DISABLE)
-            .title(getString(R.string.dolby_vision_off))
-            .checked(enable == false)
-            .build());
+                .key(DOLBY_VISION_DISABLE)
+                .title(getString(R.string.dolby_vision_off))
+                .checked(enable == false)
+                .build());
         return actions;
     }
 

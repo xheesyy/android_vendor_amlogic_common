@@ -20,10 +20,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.content.Intent;
 import android.content.DialogInterface;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceCategory;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -56,9 +59,9 @@ public class DroidSettingsModeFragment extends SettingsPreferenceFragment implem
 
     private static final String STARTUP_SETTING = "tv_startup_setting";
     private static final String DYNAMIC_BACKLIGHT = "tv_dynamic_backlight";
-    private static final String RESTORE_FACTORY= "tv_restore_factory";
+    private static final String RESTORE_FACTORY = "tv_restore_factory";
     private static final String FBC_UPGRADE = "tv_fbc_upgrade";
-    private static final String PIP= "tv_pip";
+    private static final String PIP = "tv_pip";
     private static final String CLOSED_CAPTIONS = "tv_closed_captions";
     private static final String AV_PARENTAL_CONTROLS = "parental_controls";
     private static final String MENU_TIME = "tv_menu_time";
@@ -66,8 +69,8 @@ public class DroidSettingsModeFragment extends SettingsPreferenceFragment implem
     private static final String NOSIGNAL_SLEEP_TIMER = "tv_nosignal_timeout";
     private static final String NOSIGNAL_SCREEN_STATUS = "tv_nosignal_screen_status";
     private static final String DAYLIGHT_SAVING_TIME = "tv_daylight_saving_time";
-    private static final String FACTORY_MENU =  "tv_factory_menu";
-    private static final String HDMI_SWITCH =  "tv_hdmi_switch";
+    private static final String FACTORY_MENU = "tv_factory_menu";
+    private static final String HDMI_SWITCH = "tv_hdmi_switch";
     private static final String KEY_HDMI_CEC_CONTROL = "hdmicec";
     private static final String KEY_HDMI_AUDIO_LATENCY = "box_hdmi_audio_latency";
 
@@ -116,7 +119,7 @@ public class DroidSettingsModeFragment extends SettingsPreferenceFragment implem
             mTvControlManager = TvControlManager.getInstance();
         }
         if (mTvInputManager == null) {
-            mTvInputManager = (TvInputManager)getActivity().getSystemService(Context.TV_INPUT_SERVICE);
+            mTvInputManager = (TvInputManager) getActivity().getSystemService(Context.TV_INPUT_SERVICE);
         }
         boolean is_from_new_live_tv = getActivity().getIntent().getIntExtra("from_new_live_tv", 0) == 1;
         boolean isTv = SettingsConstant.needDroidlogicTvFeature(getActivity());
@@ -136,15 +139,15 @@ public class DroidSettingsModeFragment extends SettingsPreferenceFragment implem
         Log.d(TAG, "mSourceInput: " + deviceId);
         boolean isParentControlEnabled = mTvInputManager.isParentalControlsEnabled();
         if (deviceId == DroidLogicTvUtils.DEVICE_ID_AV1
-            || deviceId == DroidLogicTvUtils.DEVICE_ID_AV2) {
+                || deviceId == DroidLogicTvUtils.DEVICE_ID_AV2) {
             avParentalControls.setVisible(true);
         } else {
             avParentalControls.setVisible(false);
         }
         if (deviceId != DroidLogicTvUtils.DEVICE_ID_HDMI1
-            && deviceId != DroidLogicTvUtils.DEVICE_ID_HDMI2
-            && deviceId != DroidLogicTvUtils.DEVICE_ID_HDMI3
-            && deviceId != DroidLogicTvUtils.DEVICE_ID_HDMI4) {
+                && deviceId != DroidLogicTvUtils.DEVICE_ID_HDMI2
+                && deviceId != DroidLogicTvUtils.DEVICE_ID_HDMI3
+                && deviceId != DroidLogicTvUtils.DEVICE_ID_HDMI4) {
             hdmiSwitch.setVisible(false);
         }
         if (isParentControlEnabled) {
@@ -200,7 +203,8 @@ public class DroidSettingsModeFragment extends SettingsPreferenceFragment implem
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey());
         if (TextUtils.equals(preference.getKey(), RESTORE_FACTORY)) {
             createUiDialog(RESTORE);
         } else if (TextUtils.equals(preference.getKey(), FBC_UPGRADE)) {
@@ -236,8 +240,9 @@ public class DroidSettingsModeFragment extends SettingsPreferenceFragment implem
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
-        final int selection = Integer.parseInt((String)newValue);
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
+        final int selection = Integer.parseInt((String) newValue);
         if (TextUtils.equals(preference.getKey(), STARTUP_SETTING)) {
             mTvOptionSettingManager.setStartupSetting(selection);
         } else if (TextUtils.equals(preference.getKey(), DYNAMIC_BACKLIGHT)) {
@@ -273,7 +278,7 @@ public class DroidSettingsModeFragment extends SettingsPreferenceFragment implem
         return temp;
     }
 
-    private void createUiDialog (int type) {
+    private void createUiDialog(int type) {
         Context context = (Context) (getActivity());
         AlertDialog.Builder uiDialog = new AlertDialog.Builder(getActivity());
         String dialogtitle = "";
@@ -288,25 +293,25 @@ public class DroidSettingsModeFragment extends SettingsPreferenceFragment implem
         uiDialog.setTitle(dialogtitle);
         uiDialog.setMessage(dialogdetails);
         uiDialog.setPositiveButton(getString(R.string.tv_ok)
-            , new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (RESTORE == type) {
-                        mTvOptionSettingManager.doFactoryReset();
-                    } else if (FBC == type) {
-                        mTvOptionSettingManager.doFbcUpgrade();
+                , new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (RESTORE == type) {
+                            mTvOptionSettingManager.doFactoryReset();
+                        } else if (FBC == type) {
+                            mTvOptionSettingManager.doFbcUpgrade();
+                        }
+                        dialog.dismiss();
+                        ((PowerManager) context.getSystemService(Context.POWER_SERVICE)).reboot(null);
                     }
-                    dialog.dismiss();
-                    ((PowerManager) context.getSystemService(Context.POWER_SERVICE)).reboot(null);
-                }
-            });
+                });
         uiDialog.setNegativeButton(getString(R.string.tv_cancel)
-            , new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
+                , new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
         uiDialog.create().show();
     }
 

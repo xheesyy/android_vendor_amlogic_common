@@ -40,7 +40,7 @@ import java.io.File;
  * Displays open source NOTICE files.
  */
 public class LicenseActivity extends FragmentActivity implements
-            LoaderManager.LoaderCallbacks<File> {
+        LoaderManager.LoaderCallbacks<File> {
     private static final String TAG = "LicenseActivity";
     private static final String FILE_PROVIDER_AUTHORITY = "com.android.settings.files";
 

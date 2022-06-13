@@ -25,7 +25,7 @@ public class HdrSettingActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(HdrSettingFragment.class.getName(), null);
+                .newSettingsFragment(HdrSettingFragment.class.getName(), null);
     }
 
 }

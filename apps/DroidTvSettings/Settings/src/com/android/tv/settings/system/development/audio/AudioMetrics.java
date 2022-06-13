@@ -22,7 +22,9 @@ import android.util.Log;
 
 import java.util.Optional;
 
-/** Stores audio recording metrics. Sends metrics updates through a callback. */
+/**
+ * Stores audio recording metrics. Sends metrics updates through a callback.
+ */
 public class AudioMetrics {
 
     private static final String TAG = "AudioMetrics";
@@ -33,7 +35,9 @@ public class AudioMetrics {
 
     private final UpdateMetricsCallback mCallback;
 
-    /** Contains data to be exposed via the callback. */
+    /**
+     * Contains data to be exposed via the callback.
+     */
     public static class Data {
 
         public Optional<Long> timeToStartReadMs = Optional.empty();
@@ -50,9 +54,13 @@ public class AudioMetrics {
         }
     }
 
-    /** Interface for receiving metrics updates. */
+    /**
+     * Interface for receiving metrics updates.
+     */
     public interface UpdateMetricsCallback {
-        /** Callback for receiving metrics updates. */
+        /**
+         * Callback for receiving metrics updates.
+         */
         void onUpdateMetrics(AudioMetrics.Data data);
     }
 
@@ -63,14 +71,18 @@ public class AudioMetrics {
         this.mCallback = callback;
     }
 
-    /** Records the beginning of the audio recording process. */
+    /**
+     * Records the beginning of the audio recording process.
+     */
     public void start() {
         mData = new Data();
         mStartTs = Optional.of(System.currentTimeMillis());
         updateMetrics();
     }
 
-    /** Records that we have started monitoring a buffer for incoming audio data. */
+    /**
+     * Records that we have started monitoring a buffer for incoming audio data.
+     */
     public void startedReading() throws IllegalStateException {
         long startTs = this.mStartTs
                 .orElseThrow(() -> new IllegalStateException(
@@ -81,7 +93,9 @@ public class AudioMetrics {
         updateMetrics();
     }
 
-    /** Records that we have started receiving non-zero audio data */
+    /**
+     * Records that we have started receiving non-zero audio data
+     */
     public void receivedValidAudio() throws IllegalStateException {
         long startTs = this.mStartTs
                 .orElseThrow(() -> new IllegalStateException(
@@ -92,14 +106,18 @@ public class AudioMetrics {
         updateMetrics();
     }
 
-    /** Records the duration of empty audio received before valid audio */
+    /**
+     * Records the duration of empty audio received before valid audio
+     */
     public void setEmptyAudioDurationMs(long emptyAudioMs) {
         mData = new Data(mData);
         mData.emptyAudioDurationMs = Optional.of(emptyAudioMs);
         updateMetrics();
     }
 
-    /** Sends updated data through the callback */
+    /**
+     * Sends updated data through the callback
+     */
     private void updateMetrics() {
         Handler mainHandler = new Handler(Looper.getMainLooper());
         mainHandler.post(() -> mCallback.onUpdateMetrics(mData));
@@ -111,7 +129,9 @@ public class AudioMetrics {
                 msTimestampToString(mData.emptyAudioDurationMs)));
     }
 
-    /** Converts a possible timestamp in milliseconds to its string representation. */
+    /**
+     * Converts a possible timestamp in milliseconds to its string representation.
+     */
     public static String msTimestampToString(Optional<Long> optL) {
         return optL.map((Long l) -> String.format("%s ms", l)).orElse("");
     }

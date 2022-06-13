@@ -44,25 +44,26 @@ import android.widget.Toast;
 import android.os.SystemProperties;
 import android.widget.ImageView;
 import android.content.pm.PackageManager;
+
 import com.droidlogic.R;
 
-public class BtSetupActivity extends Activity implements BluetoothDevicePairer.EventListener{
+public class BtSetupActivity extends Activity implements BluetoothDevicePairer.EventListener {
     private static final String TAG = "MainActivity";
-    private TextView mTextStatus,eTextStatus;
+    private TextView mTextStatus, eTextStatus;
     private ImageView mTV, mStatus, mRemote;
     private Button mBottonSkip;
     private BluetoothDevicePairer mBluetoothPairer;
     private int mPreviousStatus = BluetoothDevicePairer.STATUS_NONE;
     private Context mContext;
-    private  Handler mMsgHandler;
-    private static final String NAME_NONE =  "NONE";
-    private static final String STR_TIP_RC20 =  "Press the <BACK> button and the <HOME>/<OK> button for 6 seconds,Go in pairing mode";
-    private static final String STR_TIP_B12 =  "Press the <BACK> button and the <HOME> button for 6 seconds,Go in pairing mode";
-    private static final String STR_TIP_B10 =  "Press the <BACK> button and the <ENTER> button for 6 seconds,Go in pairing mode";
-    private static final String STR_TIP_QW =  "Press the <OK> button and the <Volume -> button for 6 seconds,Go in pairing mode";
+    private Handler mMsgHandler;
+    private static final String NAME_NONE = "NONE";
+    private static final String STR_TIP_RC20 = "Press the <BACK> button and the <HOME>/<OK> button for 6 seconds,Go in pairing mode";
+    private static final String STR_TIP_B12 = "Press the <BACK> button and the <HOME> button for 6 seconds,Go in pairing mode";
+    private static final String STR_TIP_B10 = "Press the <BACK> button and the <ENTER> button for 6 seconds,Go in pairing mode";
+    private static final String STR_TIP_QW = "Press the <OK> button and the <Volume -> button for 6 seconds,Go in pairing mode";
     private static final String STR_TIP_EXIT = "Press the <BACK> button or the <EXIT> button exit";
     private static final String STR_BONDFAIL = "   bond fail";
-    private static final String STR_CONFAIL  = "   connect fail";
+    private static final String STR_CONFAIL = "   connect fail";
     private static final String STR_SUCESS = "  paired successfully.";
     private static final String STR_ERROR = "  NO BLUETOOTH INSIDE";
     private static final String STR_PAIR = " pairing";
@@ -72,8 +73,8 @@ public class BtSetupActivity extends Activity implements BluetoothDevicePairer.E
     private static final int MSG_FINISH = 2;
     private String mDefaultBtRemoteType;
 
-   @Override
-   protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -82,13 +83,13 @@ public class BtSetupActivity extends Activity implements BluetoothDevicePairer.E
 
         mTextStatus = (TextView) findViewById(R.id.TiptextView);
         eTextStatus = (TextView) findViewById(R.id.ExittextView);
-        ImageView  remoteImg = (ImageView) findViewById(R.id.imageView3);
+        ImageView remoteImg = (ImageView) findViewById(R.id.imageView3);
 
         //mDefaultBtRemoteType = SystemProperties.get("ro.default.btremote.type", "Amlogic_RC20");
         mDefaultBtRemoteType = SystemProperties.get("ro.vendor.autoconnectbt.nameprefix", "Amlogic_RC_B12");
         if (mDefaultBtRemoteType.contains("Amlogic_RC20")) {
             remoteImg.setImageDrawable(mContext.getDrawable(R.drawable.remote_press_light_rc20));
-             mTextStatus.setText(STR_TIP_RC20);
+            mTextStatus.setText(STR_TIP_RC20);
         } else if (mDefaultBtRemoteType.contains("Amlogic_RC_B12")) {
             remoteImg.setImageDrawable(mContext.getDrawable(R.drawable.remote_press_light_b12));
             mTextStatus.setText(STR_TIP_B12);
@@ -116,8 +117,8 @@ public class BtSetupActivity extends Activity implements BluetoothDevicePairer.E
                         Log.d(TAG, "No handler case available for message: " + msg.what);
                 }
             }
-          };
-     }
+        };
+    }
 
 
     @Override
@@ -148,42 +149,42 @@ public class BtSetupActivity extends Activity implements BluetoothDevicePairer.E
     }
 
 
-   @Override
-   public void statusChanged(){
+    @Override
+    public void statusChanged() {
         if (mBluetoothPairer == null) return;
         int status = mBluetoothPairer.getStatus();
         int oldStatus = mPreviousStatus;
         mPreviousStatus = status;
-       String RemoteName = mBluetoothPairer.getTargetDevice() == null ? NAME_NONE :
+        String RemoteName = mBluetoothPairer.getTargetDevice() == null ? NAME_NONE :
                 mBluetoothPairer.getTargetDevice().getName();
 
-       switch (status) {
+        switch (status) {
             case BluetoothDevicePairer.STATUS_NONE:
                 break;
             case BluetoothDevicePairer.STATUS_SCANNING:
-               if (mDefaultBtRemoteType.equals("Amlogic_RC20")) {
-                   mTextStatus.setText(STR_TIP_RC20);
-               } else if (mDefaultBtRemoteType.equals("Amlogic_B12")) {
-                   mTextStatus.setText(STR_TIP_B12);
-               } else if (mDefaultBtRemoteType.equals("Amlogic_B10")) {
-                   mTextStatus.setText(STR_TIP_B10);
-               }
+                if (mDefaultBtRemoteType.equals("Amlogic_RC20")) {
+                    mTextStatus.setText(STR_TIP_RC20);
+                } else if (mDefaultBtRemoteType.equals("Amlogic_B12")) {
+                    mTextStatus.setText(STR_TIP_B12);
+                } else if (mDefaultBtRemoteType.equals("Amlogic_B10")) {
+                    mTextStatus.setText(STR_TIP_B10);
+                }
                 break;
             case BluetoothDevicePairer.STATUS_BONDFAIL:
-              mTextStatus.setText( RemoteName + STR_BONDFAIL);
+                mTextStatus.setText(RemoteName + STR_BONDFAIL);
                 break;
             case BluetoothDevicePairer.STATUS_CONNECTFAIL:
-               mTextStatus.setText( RemoteName + STR_CONFAIL);
+                mTextStatus.setText(RemoteName + STR_CONFAIL);
                 break;
             case BluetoothDevicePairer.STATUS_CONNECTED:
                 mTextStatus.setText(RemoteName + STR_SUCESS);
-                mMsgHandler.sendEmptyMessageDelayed(MSG_FINISH,DONE_MESSAGE_TIMEOUT);
-                 break;
+                mMsgHandler.sendEmptyMessageDelayed(MSG_FINISH, DONE_MESSAGE_TIMEOUT);
+                break;
             case BluetoothDevicePairer.STATUS_FINDED:
                 mTextStatus.setText(RemoteName + STR_PAIR);
                 break;
             case BluetoothDevicePairer.STATUS_ERROR:
-                mTextStatus.setText( STR_ERROR);
+                mTextStatus.setText(STR_ERROR);
                 break;
         }
 
@@ -191,8 +192,8 @@ public class BtSetupActivity extends Activity implements BluetoothDevicePairer.E
 
     private void RemoveActivity() {
 
-        Intent data=null;
-        setResult(1,data);
+        Intent data = null;
+        setResult(1, data);
         Log.d(TAG, "RemoveActivity SUCCESS");
     }
 
@@ -203,9 +204,9 @@ public class BtSetupActivity extends Activity implements BluetoothDevicePairer.E
         PackageManager.DONT_KILL_APP);
     }*/
 
-    private void FinishActivity(){
+    private void FinishActivity() {
         RemoveActivity();
         //RemoveReceiver();
         finish();
-   }
+    }
 }

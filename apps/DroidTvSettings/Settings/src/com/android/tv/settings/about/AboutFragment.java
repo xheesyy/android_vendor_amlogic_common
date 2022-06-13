@@ -276,7 +276,7 @@ public class AboutFragment extends SettingsPreferenceFragment {
             netflixesnPref.setVisible(true);
             netflixesnPref.setSummary(mEsnText);
             versionPref.setVisible(true);
-            versionPref.setSummary(mSystemControlManager.getPropertyString(HAILSTORM_VERSION_PROP,"no"));
+            versionPref.setSummary(mSystemControlManager.getPropertyString(HAILSTORM_VERSION_PROP, "no"));
         } else {
             netflixesnPref.setVisible(false);
             versionPref.setVisible(false);
@@ -391,8 +391,8 @@ public class AboutFragment extends SettingsPreferenceFragment {
                         mMetricsFeatureProvider.action(
                                 getContext(), MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
                                 Pair.create(MetricsEvent
-                                        .FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
-                                0));
+                                                .FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
+                                        0));
                     } else if (mDevHitCountdown > 0
                             && mDevHitCountdown < (TAPS_TO_BE_A_DEVELOPER - 2)) {
                         if (mDevHitToast != null) {
@@ -400,8 +400,8 @@ public class AboutFragment extends SettingsPreferenceFragment {
                         }
                         mDevHitToast = Toast
                                 .makeText(getActivity(), getResources().getQuantityString(
-                                        R.plurals.show_dev_countdown, mDevHitCountdown,
-                                        mDevHitCountdown),
+                                                R.plurals.show_dev_countdown, mDevHitCountdown,
+                                                mDevHitCountdown),
                                         Toast.LENGTH_SHORT);
                         mDevHitToast.show();
                     }
@@ -409,7 +409,7 @@ public class AboutFragment extends SettingsPreferenceFragment {
                             getContext(), MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
                             Pair.create(
                                     MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
-                            0));
+                                    0));
                 } else if (mDevHitCountdown < 0) {
                     if (mDevHitToast != null) {
                         mDevHitToast.cancel();
@@ -421,7 +421,7 @@ public class AboutFragment extends SettingsPreferenceFragment {
                             getContext(), MetricsEvent.ACTION_SETTINGS_BUILD_NUMBER_PREF,
                             Pair.create(
                                     MetricsEvent.FIELD_SETTINGS_BUILD_NUMBER_DEVELOPER_MODE_ENABLED,
-                            1));
+                                    1));
                 }
                 break;
             case KEY_DEVICE_FEEDBACK:

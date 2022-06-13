@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="settings_app_name" msgid="7931201304065140909">"Nastavitve"</string>
     <string name="launcher_settings_app_name" msgid="1459269619779675736">"Nastavitve"</string>
     <string name="launcher_network_app_name" msgid="8311763462169735002">"Omrežje"</string>
@@ -46,10 +44,10 @@
     <string name="accounts_category_title" msgid="7286858931427579845">"Računi in prijava"</string>
     <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"Ni računov"</string>
     <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
-      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> račun</item>
-      <item quantity="two"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računa</item>
-      <item quantity="few"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računi</item>
-      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računov</item>
+        <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> račun</item>
+        <item quantity="two"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računa</item>
+        <item quantity="few"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računi</item>
+        <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računov</item>
     </plurals>
     <string name="accounts_slice_summary" msgid="1571012157154521119">"Predstavnostne storitve, Pomočnik, Google Payments"</string>
     <string name="connectivity_network_category_title" msgid="8226264889892008114">"Omrežje in internet"</string>
@@ -59,10 +57,10 @@
     <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"Daljinsko upravljanje in dodatki"</string>
     <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"Ni povezanih naprav Bluetooth"</string>
     <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
-      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> dodatek</item>
-      <item quantity="two"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> dodatka</item>
-      <item quantity="few"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> dodatki</item>
-      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> dodatkov</item>
+        <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> dodatek</item>
+        <item quantity="two"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> dodatka</item>
+        <item quantity="few"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> dodatki</item>
+        <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> dodatkov</item>
     </plurals>
     <string name="display_and_sound_category_title" msgid="9203309625380755860">"Slika in zvok"</string>
     <string name="help_and_feedback_category_title" msgid="7036505833991003031">"Pomoč in povratne informacije"</string>
@@ -234,10 +232,10 @@
     <string name="about_serial" msgid="3432319328808745459">"Serijska številka"</string>
     <string name="about_build" msgid="8467840394761634575">"Delovna različica operacijskega sistema Android TV"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
-      <item quantity="one"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vas loči od tega, da postanete razvijalec</item>
-      <item quantity="two"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vas ločita od tega, da postanete razvijalec</item>
-      <item quantity="few"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraki vas ločijo od tega, da postanete razvijalec</item>
-      <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korakov vas loči od tega, da postanete razvijalec</item>
+        <item quantity="one"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vas loči od tega, da postanete razvijalec</item>
+        <item quantity="two"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vas ločita od tega, da postanete razvijalec</item>
+        <item quantity="few"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraki vas ločijo od tega, da postanete razvijalec</item>
+        <item quantity="other"><xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korakov vas loči od tega, da postanete razvijalec</item>
     </plurals>
     <string name="about_ads" msgid="7662896442040086522">"Oglasi"</string>
     <string name="ads_description" msgid="8081069475265061074">"Upravljanje nastavitev oglasov, kot je ponastavitev oglaševalskega ID-ja."</string>
@@ -271,20 +269,20 @@
     <string name="license_title" msgid="4032466200355435641">"Licenca"</string>
     <string name="terms_title" msgid="192888187310800678">"Določila in pogoji"</string>
     <string name="webview_license_title" msgid="5370270485188947540">"Licenca za WebView v sistemu"</string>
-  <string-array name="wifi_signal_strength">
-    <item msgid="4475363344103354364">"Slab"</item>
-    <item msgid="2098818614362343532">"Kar dober"</item>
-    <item msgid="2713050260700175954">"Dober"</item>
-    <item msgid="6005053494500517261">"Odličen"</item>
-  </string-array>
+    <string-array name="wifi_signal_strength">
+        <item msgid="4475363344103354364">"Slab"</item>
+        <item msgid="2098818614362343532">"Kar dober"</item>
+        <item msgid="2713050260700175954">"Dober"</item>
+        <item msgid="6005053494500517261">"Odličen"</item>
+    </string-array>
     <string name="title_mac_address" msgid="7511588678922209883">"Naslov MAC naprave"</string>
     <string name="title_randomized_mac_address" msgid="3359532498635833471">"Naključno izbran naslov MAC"</string>
     <string name="title_signal_strength" msgid="5047116893338315998">"Moč signala"</string>
     <string name="title_random_mac_settings" msgid="6685812569356353378">"Zasebnost"</string>
-  <string-array name="random_mac_settings_entries">
-    <item msgid="3457228452595715533">"Uporaba naključno izbranega naslova MAC (privzeto)"</item>
-    <item msgid="2490415280467390067">"Uporaba naslova MAC naprave"</item>
-  </string-array>
+    <string-array name="random_mac_settings_entries">
+        <item msgid="3457228452595715533">"Uporaba naključno izbranega naslova MAC (privzeto)"</item>
+        <item msgid="2490415280467390067">"Uporaba naslova MAC naprave"</item>
+    </string-array>
     <string name="mac_address_not_available" msgid="2992935344891853369">"Ni na voljo"</string>
     <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"Naključno izbran naslov MAC"</string>
     <string name="title_ip_address" msgid="705842159484772807">"Naslov IP"</string>
@@ -458,15 +456,15 @@
     <string name="system_set_time_format" msgid="902518158066450918">"Uporabljaj 24-urno obliko"</string>
     <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="SAMPLE">%2$s</xliff:g>)"</string>
     <string name="system_auto_date_time" msgid="8458199433555868708">"Samodejna datum in ura"</string>
-  <string-array name="auto_date_time_entries">
-    <item msgid="8119837829162871025">"Uporabi uro omrežja"</item>
-    <item msgid="369146066143710034">"Izklopljeno"</item>
-  </string-array>
-  <string-array name="auto_date_time_ts_entries">
-    <item msgid="1010003447137304123">"Uporabi uro omrežja"</item>
-    <item msgid="5645263357181875427">"Uporabi uro transportnega toka"</item>
-    <item msgid="5501503537181350884">"Izklopljeno"</item>
-  </string-array>
+    <string-array name="auto_date_time_entries">
+        <item msgid="8119837829162871025">"Uporabi uro omrežja"</item>
+        <item msgid="369146066143710034">"Izklopljeno"</item>
+    </string-array>
+    <string-array name="auto_date_time_ts_entries">
+        <item msgid="1010003447137304123">"Uporabi uro omrežja"</item>
+        <item msgid="5645263357181875427">"Uporabi uro transportnega toka"</item>
+        <item msgid="5501503537181350884">"Izklopljeno"</item>
+    </string-array>
     <string name="system_location" msgid="4057295363709016511">"Lokacija"</string>
     <string name="system_desc_location" msgid="1680134126100535031">"Aplikacije lahko z mojim dovoljenjem uporabijo podatke o lokaciji"</string>
     <string name="system_network_location_confirm" msgid="7128162421781085332">"Soglasje za lokacijo"</string>
@@ -612,15 +610,15 @@
     <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"Števec risanja zunaj vidn. območja"</string>
     <string name="no_application" msgid="1904437693440706534">"Nobene"</string>
     <string name="enable_opengl_traces_none" msgid="4718084947494592040">"Brez"</string>
-  <string-array name="animation_scale_entries">
-    <item msgid="5408992662476056082">"Animacija izklopljena"</item>
-    <item msgid="6818290063799857019">"Merilo animacije: 0,5 x"</item>
-    <item msgid="8257959452691080724">"Merilo animacije: 1 x"</item>
-    <item msgid="4781052272686018414">"Merilo animacije: 1,5 x"</item>
-    <item msgid="2272016945160227610">"Merilo animacije: 2 x"</item>
-    <item msgid="5015441793276576312">"Merilo animacije: 5 x"</item>
-    <item msgid="1290233583371556415">"Merilo animacije: 10 x"</item>
-  </string-array>
+    <string-array name="animation_scale_entries">
+        <item msgid="5408992662476056082">"Animacija izklopljena"</item>
+        <item msgid="6818290063799857019">"Merilo animacije: 0,5 x"</item>
+        <item msgid="8257959452691080724">"Merilo animacije: 1 x"</item>
+        <item msgid="4781052272686018414">"Merilo animacije: 1,5 x"</item>
+        <item msgid="2272016945160227610">"Merilo animacije: 2 x"</item>
+        <item msgid="5015441793276576312">"Merilo animacije: 5 x"</item>
+        <item msgid="1290233583371556415">"Merilo animacije: 10 x"</item>
+    </string-array>
     <string name="track_frame_time_off" msgid="8845064783618702239">"Izklopljeno"</string>
     <string name="track_frame_time_bars" msgid="5841531515222229632">"Na zaslonu kot vrstice"</string>
     <string name="app_process_limit_standard" msgid="6069948528843313888">"Standardna omejitev"</string>
@@ -673,22 +671,22 @@
     <string name="inputs_tv_auto_on" msgid="544848340484583318">"Samodejni vklop televizorja"</string>
     <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"Vklop televizorja z napravo HDMI"</string>
     <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
-      <item quantity="one">Povezani vhodi</item>
-      <item quantity="two">Povezani vhodi</item>
-      <item quantity="few">Povezani vhodi</item>
-      <item quantity="other">Povezani vhodi</item>
+        <item quantity="one">Povezani vhodi</item>
+        <item quantity="two">Povezani vhodi</item>
+        <item quantity="few">Povezani vhodi</item>
+        <item quantity="other">Povezani vhodi</item>
     </plurals>
     <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
-      <item quantity="one">Vhodi v pripravljenosti</item>
-      <item quantity="two">Vhodi v pripravljenosti</item>
-      <item quantity="few">Vhodi v pripravljenosti</item>
-      <item quantity="other">Vhodi v pripravljenosti</item>
+        <item quantity="one">Vhodi v pripravljenosti</item>
+        <item quantity="two">Vhodi v pripravljenosti</item>
+        <item quantity="few">Vhodi v pripravljenosti</item>
+        <item quantity="other">Vhodi v pripravljenosti</item>
     </plurals>
     <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
-      <item quantity="one">Nepovezani vhodi</item>
-      <item quantity="two">Nepovezani vhodi</item>
-      <item quantity="few">Nepovezani vhodi</item>
-      <item quantity="other">Nepovezani vhodi</item>
+        <item quantity="one">Nepovezani vhodi</item>
+        <item quantity="two">Nepovezani vhodi</item>
+        <item quantity="few">Nepovezani vhodi</item>
+        <item quantity="other">Nepovezani vhodi</item>
     </plurals>
     <string name="user_add_profile_item_summary" msgid="3211866291940617804">"Omejitev dostopa do aplikacij in druge vsebine v računu"</string>
     <string name="user_new_profile_name" msgid="6637593067318708353">"Omejeni profil"</string>
@@ -704,10 +702,10 @@
     <string name="restricted_profile_configure_title" msgid="3327502517511010296">"Nastavitve"</string>
     <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"Dovoljene aplikacije"</string>
     <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
-      <item quantity="one">%d dovoljena aplikacija</item>
-      <item quantity="two">%d dovoljeni aplikaciji</item>
-      <item quantity="few">%d dovoljene aplikacije</item>
-      <item quantity="other">%d dovoljenih aplikacij</item>
+        <item quantity="one">%d dovoljena aplikacija</item>
+        <item quantity="two">%d dovoljeni aplikaciji</item>
+        <item quantity="few">%d dovoljene aplikacije</item>
+        <item quantity="other">%d dovoljenih aplikacij</item>
     </plurals>
     <string name="restricted_profile_allowed" msgid="970921490464867884">"Dovoljeno"</string>
     <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"Ni dovoljeno"</string>
@@ -785,12 +783,12 @@
     <string name="confirm_factory_reset_device" msgid="4308646529880718465">"Izbriši vse"</string>
     <string name="select_device_name_title" msgid="3045019448327493634">"Izberite ime za napravo <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="select_device_name_description" msgid="8528185095614986580">"Napravo poimenujte, da jo boste lažje prepoznali, ko boste v njej predvajali vsebino iz drugih naprav ali vzpostavljali povezavo z njo iz drugih naprav."</string>
-  <string-array name="rooms">
-    <item msgid="6590829789532602097">"Android TV"</item>
-    <item msgid="1140506340411482365">"Televizor v dnevni sobi"</item>
-    <item msgid="6448060889026244632">"Televizor v družinski sobi"</item>
-    <item msgid="3336274213215419228">"Televizor v spalnici"</item>
-  </string-array>
+    <string-array name="rooms">
+        <item msgid="6590829789532602097">"Android TV"</item>
+        <item msgid="1140506340411482365">"Televizor v dnevni sobi"</item>
+        <item msgid="6448060889026244632">"Televizor v družinski sobi"</item>
+        <item msgid="3336274213215419228">"Televizor v spalnici"</item>
+    </string-array>
     <string name="custom_room" msgid="6798144004583173563">"Vnesite ime po meri …"</string>
     <string name="device_rename_title" msgid="9070021379000499270">"Preimenovanje te naprave <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="device_rename_description" msgid="1973894029492915135">"Ta naprava <xliff:g id="DEVICEMODEL">%1$s</xliff:g> se trenutno imenuje »<xliff:g id="DEVICENAME">%2$s</xliff:g>«"</string>

@@ -30,7 +30,9 @@ public final class Alarm implements Parcelable {
         }
     };
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int describeContents() {
         return 0;
@@ -65,7 +67,7 @@ public final class Alarm implements Parcelable {
 
         /**
          * Hour in 24-hour localtime 0 - 23.
-         * <P>
+         * <p>
          * Type: INTEGER
          * </P>
          */
@@ -73,7 +75,7 @@ public final class Alarm implements Parcelable {
 
         /**
          * Minutes in localtime 0 - 59
-         * <P>
+         * <p>
          * Type: INTEGER
          * </P>
          */
@@ -81,7 +83,7 @@ public final class Alarm implements Parcelable {
 
         /**
          * Days of week coded as integer
-         * <P>
+         * <p>
          * Type: INTEGER
          * </P>
          */
@@ -89,7 +91,7 @@ public final class Alarm implements Parcelable {
 
         /**
          * Alarm time in UTC milliseconds from the epoch.
-         * <P>
+         * <p>
          * Type: INTEGER
          * </P>
          */
@@ -97,7 +99,7 @@ public final class Alarm implements Parcelable {
 
         /**
          * True if alarm is active
-         * <P>
+         * <p>
          * Type: BOOLEAN
          * </P>
          */
@@ -105,7 +107,7 @@ public final class Alarm implements Parcelable {
 
         /**
          * True if alarm should vibrate
-         * <P>
+         * <p>
          * Type: BOOLEAN
          * </P>
          */
@@ -113,7 +115,7 @@ public final class Alarm implements Parcelable {
 
         /**
          * Message to show when alarm triggers Note: not currently used
-         * <P>
+         * <p>
          * Type: STRING
          * </P>
          */
@@ -121,7 +123,7 @@ public final class Alarm implements Parcelable {
 
         /**
          * Audio alert to play when alarm triggers
-         * <P>
+         * <p>
          * Type: STRING
          * </P>
          */
@@ -135,8 +137,8 @@ public final class Alarm implements Parcelable {
         // Used when filtering enabled alarms.
         public static final String WHERE_ENABLED = ENABLED + "=1";
 
-        static final String[] ALARM_QUERY_COLUMNS = { _ID, HOUR, MINUTES, DAYS_OF_WEEK, ALARM_TIME, ENABLED, VIBRATE,
-                MESSAGE, ALERT };
+        static final String[] ALARM_QUERY_COLUMNS = {_ID, HOUR, MINUTES, DAYS_OF_WEEK, ALARM_TIME, ENABLED, VIBRATE,
+                MESSAGE, ALERT};
 
         /**
          * These save calls to cursor.getColumnIndexOrThrow() THEY MUST BE KEPT IN SYNC WITH ABOVE QUERY COLUMNS
@@ -170,6 +172,7 @@ public final class Alarm implements Parcelable {
 
     /**
      * Alarm object constructor
+     *
      * @param c Cursor
      */
     public Alarm(Cursor c) {
@@ -200,6 +203,7 @@ public final class Alarm implements Parcelable {
 
     /**
      * contruct alarm object from parcel
+     *
      * @param p Parcel
      */
     public Alarm(Parcel p) {
@@ -224,8 +228,8 @@ public final class Alarm implements Parcelable {
         private static final int NO_DAY_BIT = 0x00;
         private static final int EVERY_DAY_BIT = 0x7f;
         private static final int WEEK_DAYS = 7;
-        private static final int[] DAY_MAP = new int[] { Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY,
-                Calendar.THURSDAY, Calendar.FRIDAY, Calendar.SATURDAY, Calendar.SUNDAY, };
+        private static final int[] DAY_MAP = new int[]{Calendar.MONDAY, Calendar.TUESDAY, Calendar.WEDNESDAY,
+                Calendar.THURSDAY, Calendar.FRIDAY, Calendar.SATURDAY, Calendar.SUNDAY,};
 
         // Bitmask of all repeating days
         private int mDays;
@@ -289,10 +293,11 @@ public final class Alarm implements Parcelable {
         public void set(DaysOfWeek dow) {
             mDays = dow.mDays;
         }
-        
+
         public void set(int days) {
             mDays = days;
         }
+
         public int getCoded() {
             return mDays;
         }
@@ -313,8 +318,7 @@ public final class Alarm implements Parcelable {
         /**
          * returns number of days from today until next alarm
          *
-         * @param c
-         *            must be set to today
+         * @param c must be set to today
          */
         public int getNextAlarm(Calendar c) {
             final int days = 5;

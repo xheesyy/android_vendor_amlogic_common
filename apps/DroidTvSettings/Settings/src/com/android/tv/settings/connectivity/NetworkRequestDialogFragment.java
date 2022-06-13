@@ -66,7 +66,9 @@ import java.util.List;
 public class NetworkRequestDialogFragment extends ObservableDialogFragment implements
         DialogInterface.OnClickListener, NetworkRequestMatchCallback {
 
-    /** Message sent to us to stop scanning wifi and pop up timeout dialog. */
+    /**
+     * Message sent to us to stop scanning wifi and pop up timeout dialog.
+     */
     private static final int MESSAGE_STOP_SCAN_WIFI_LIST = 0;
 
     /**
@@ -76,7 +78,9 @@ public class NetworkRequestDialogFragment extends ObservableDialogFragment imple
     private static final int MAX_NUMBER_LIST_ITEM = 5;
     private boolean mShowLimitedItem = true;
 
-    /** Delayed time to stop scanning wifi. */
+    /**
+     * Delayed time to stop scanning wifi.
+     */
     private static final int DELAY_TIME_STOP_SCAN_MS = 30 * 1000;
 
     @VisibleForTesting
@@ -91,7 +95,9 @@ public class NetworkRequestDialogFragment extends ObservableDialogFragment imple
     private boolean mIsSpecifiedSsid;
     private boolean mWaitingConnectCallback;
 
-    /** Creates Network Request dialog. */
+    /**
+     * Creates Network Request dialog.
+     */
     public static NetworkRequestDialogFragment newInstance() {
         NetworkRequestDialogFragment dialogFragment = new NetworkRequestDialogFragment();
         return dialogFragment;
@@ -328,7 +334,7 @@ public class NetworkRequestDialogFragment extends ObservableDialogFragment imple
 
     protected void stopScanningAndPopErrorDialog(ERROR_DIALOG_TYPE type) {
         // Dismisses current dialog.
-        final Dialog dialog =  getDialog();
+        final Dialog dialog = getDialog();
         if (dialog != null && dialog.isShowing()) {
             dismiss();
         }

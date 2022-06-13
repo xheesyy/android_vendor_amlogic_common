@@ -36,7 +36,7 @@ public class ChannelListItem extends Item {
     private void initJSONObject(String json) {
         try {
             if (!TextUtils.isEmpty(json)) {
-                mJSONObject =  new JSONObject(json);
+                mJSONObject = new JSONObject(json);
             }
         } catch (JSONException e) {
             Log.e(TAG, "initJSONObject e = " + e.getMessage());
@@ -165,7 +165,7 @@ public class ChannelListItem extends Item {
         if (list != null && list.size() > 0) {
             Iterator<String> iterator = list.iterator();
             while (iterator.hasNext()) {
-                String title = (String)iterator.next();
+                String title = (String) iterator.next();
                 if (TextUtils.equals(favTitle, title)) {
                     if (!isSelected) {
                         continue;

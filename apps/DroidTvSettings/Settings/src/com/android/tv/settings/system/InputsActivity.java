@@ -29,6 +29,6 @@ public class InputsActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(InputsFragment.class.getName(), null);
+                .newSettingsFragment(InputsFragment.class.getName(), null);
     }
 }

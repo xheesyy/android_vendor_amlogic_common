@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.tv.settings.TvSettingsActivity;
 import com.android.tv.settings.overlay.FlavorUtils;
+
 /**
  * Activity.
  */
@@ -27,7 +28,7 @@ public class DevelopActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DevelopFragment.class.getName(), null);
+                .newSettingsFragment(DevelopFragment.class.getName(), null);
     }
 
 }

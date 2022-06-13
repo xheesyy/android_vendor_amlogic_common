@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2020 The Android Open Source Project
 
     Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,24 +20,24 @@
 
     <androidx.leanback.widget.GuidanceStylingRelativeLayout
         android:id="@+id/guidance_container"
-        style="?attr/guidanceContainerStyle" >
+        style="?attr/guidanceContainerStyle">
 
         <ImageView
             android:id="@+id/guidance_icon"
             style="?attr/guidanceIconStyle"
-            tools:ignore="ContentDescription"/>
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/guidance_breadcrumb"
-            style="?attr/guidanceBreadcrumbStyle"/>
+            style="?attr/guidanceBreadcrumbStyle" />
 
         <TextView
             android:id="@+id/guidance_title"
-            style="?attr/guidanceTitleStyle"/>
+            style="?attr/guidanceTitleStyle" />
 
         <TextView
             android:id="@+id/guidance_description"
-            style="?attr/guidanceDescriptionStyle"/>
+            style="?attr/guidanceDescriptionStyle" />
 
     </androidx.leanback.widget.GuidanceStylingRelativeLayout>
 

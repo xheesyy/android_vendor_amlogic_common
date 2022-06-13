@@ -1,5 +1,4 @@
-<?xml version="1.0"   encoding="utf-8"?>
-<!-- Copyright (C) 2012 Amlogic, Inc.
+<?xml version="1.0"   encoding="utf-8"?><!-- Copyright (C) 2012 Amlogic, Inc.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,27 +19,28 @@
     android:paddingLeft="@dimen/padding_dialog"
     android:paddingRight="@dimen/padding_dialog"
     android:gravity="center_vertical|center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
     <View
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginLeft="6dp"
-        android:layout_marginRight="6dp"/>
+        android:layout_marginRight="6dp" />
 
     <TextView
         android:id="@+id/info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dip"
-		android:layout_marginRight="30dip"
-		android:textSize="@dimen/text_size"
+        android:layout_marginRight="30dip"
+        android:textSize="@dimen/text_size"
         android:layout_marginTop="6dip"
-        android:text="@string/warnning"/>
+        android:text="@string/warnning" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-		android:paddingTop="20dp"
+        android:paddingTop="20dp"
         android:gravity="bottom|center_horizontal">
 
         <Button

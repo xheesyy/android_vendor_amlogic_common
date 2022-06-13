@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +15,12 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/main_frame"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="?android:attr/windowBackground"
-              android:orientation="vertical"
-              android:transitionGroup="false">
+    android:id="@+id/main_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground"
+    android:orientation="vertical"
+    android:transitionGroup="false">
 
     <FrameLayout
         android:id="@+id/decor_title_container"
@@ -31,6 +30,7 @@
         android:background="@color/tp_preference_brand_color"
         android:elevation="0dp"
         android:transitionGroup="false">
+
         <TextView
             android:id="@+id/decor_title"
             android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:layout_marginBottom="@dimen/tp_preference_decor_title_margin_bottom"
             android:singleLine="false"
             android:autoSizeTextType="uniform"
-            android:maxLines="3"/>
+            android:maxLines="3" />
     </FrameLayout>
 
     <TextView
@@ -54,6 +54,6 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:transitionGroup="true"/>
+        android:transitionGroup="true" />
 
 </LinearLayout>

@@ -25,26 +25,26 @@ import android.provider.Settings;
 import android.util.Log;
 
 public class DolbyVisionSettingManager {
-    private static final String TAG                 = "DolbyVisionSettingManager";
+    private static final String TAG = "DolbyVisionSettingManager";
 
-    private static final String PROP_SUPPORT_DOLBY_VISION    = "vendor.system.support.dolbyvision";
-    private static final String PROP_SOC_SUPPORT_DOLBY_VISION    = "ro.vendor.platform.support.dolbyvision";
-    private static final String ENV_IS_BEST_MODE             = "ubootenv.var.is.bestmode";
-    private static final String ENV_IS_DV_ENABLE             = "ubootenv.var.dv_enable";
+    private static final String PROP_SUPPORT_DOLBY_VISION = "vendor.system.support.dolbyvision";
+    private static final String PROP_SOC_SUPPORT_DOLBY_VISION = "ro.vendor.platform.support.dolbyvision";
+    private static final String ENV_IS_BEST_MODE = "ubootenv.var.is.bestmode";
+    private static final String ENV_IS_DV_ENABLE = "ubootenv.var.dv_enable";
 
-    public static final int DOVISION_DISABLE        = 0;
-    public static final int DOVISION_ENABLE         = 1;
+    public static final int DOVISION_DISABLE = 0;
+    public static final int DOVISION_ENABLE = 1;
 
     private Context mContext;
     private SystemControlManager mSystemControl;
 
-    public DolbyVisionSettingManager(Context context){
+    public DolbyVisionSettingManager(Context context) {
         mContext = context;
         mSystemControl = SystemControlManager.getInstance();
     }
 
     public void initSetDolbyVision() {
-       if (isDolbyVisionEnable()) {
+        if (isDolbyVisionEnable()) {
             setDolbyVisionEnable(getDolbyVisionType());
         }
     }
@@ -113,6 +113,7 @@ public class DolbyVisionSettingManager {
     public int getDolbyVisionType() {
         return mSystemControl.getDolbyVisionType();
     }
+
     public long resolveResolutionValue(String mode) {
         return mSystemControl.resolveResolutionValue(mode);
     }

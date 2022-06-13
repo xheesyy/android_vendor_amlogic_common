@@ -28,12 +28,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+
 import java.util.List;
+
 /**
  * This class posts notifications that are used to populate the Partner Row of the Leanback Launcher
  * It also allows the system/launcher to find the correct partner customization
  * package.
- *
+ * <p>
  * Packages using this broadcast receiver must also be a system app to be used for
  * partner customization.
  */
@@ -62,11 +64,11 @@ public class PartnerReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        android.util.Log.d("XX",intent.getAction());
-        if ( mContext == null ) {
+        android.util.Log.d("XX", intent.getAction());
+        if (mContext == null) {
             mContext = context;
             mNotifMan = (NotificationManager)
-                        mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+                    mContext.getSystemService(Context.NOTIFICATION_SERVICE);
             mPkgMan = mContext.getPackageManager();
             mHandler = new Handler();
         }
@@ -76,19 +78,20 @@ public class PartnerReceiver extends BroadcastReceiver {
                 Intent.ACTION_PACKAGE_REMOVED.equals(action)*/) {
             postNotification(getPackageName(intent));
         } else if (Intent.ACTION_BOOT_COMPLETED.equals(action) ||
-            ACTION_PARTNER_CUSTOMIZATION.equals(action) ||
-            Intent.ACTION_PACKAGE_REPLACED.equals(action) && getPackageName(intent).equals(LEANBANK_PKG)) {
+                ACTION_PARTNER_CUSTOMIZATION.equals(action) ||
+                Intent.ACTION_PACKAGE_REPLACED.equals(action) && getPackageName(intent).equals(LEANBANK_PKG)) {
             postNotification(PLAYER_PKG_NAME);
             postNotification(DLNA_PKG_NAME);
             postNotification(UPDATE_PKG_NAME);
         }
     }
+
     private boolean isPkgExist(String pkgName) {
         List<PackageInfo> applist = mPkgMan.getInstalledPackages(0);
-        if ( applist == null )
+        if (applist == null)
             return false;
         boolean isExist = false;
-        for ( PackageInfo pkg : applist ) {
+        for (PackageInfo pkg : applist) {
             if (pkgName.equals(pkg.packageName)) {
                 isExist = true;
             }
@@ -96,13 +99,14 @@ public class PartnerReceiver extends BroadcastReceiver {
         if (isExist) return true;
         return false;
     }
+
     private void postNotification(String pkgName) {
         int sort;
         int resId;
         int backupResId;
         int titleId;
         int backupTitleId;
-        if ( !isPkgExist(pkgName) ) {
+        if (!isPkgExist(pkgName)) {
             return;
         }
         switch (pkgName) {
@@ -130,16 +134,16 @@ public class PartnerReceiver extends BroadcastReceiver {
             default:
                 return;
         }
-        mHandler.postDelayed(new Runnable(){
+        mHandler.postDelayed(new Runnable() {
             public void run() {
                 postNotification(sort, resId, backupResId, titleId, backupTitleId, pkgName);
             }
-        },3000);
+        }, 3000);
         //postNotification(sort, resId, backupResId, titleId, backupTitleId, pkgName);
     }
 
     private void postNotification(int sort, int resId, int backupResId,
-            int titleId, int backupTitleId, String pkgName) {
+                                  int titleId, int backupTitleId, String pkgName) {
         int id = resId;
         Intent intent = mPkgMan.getLeanbackLaunchIntentForPackage(pkgName);
 
@@ -158,7 +162,7 @@ public class PartnerReceiver extends BroadcastReceiver {
                 .setContentIntent(PendingIntent.getActivity(mContext, 0, intent, 0))
                 .setCategory(Notification.CATEGORY_RECOMMENDATION)
                 .setGroup(PARTNER_GROUP)
-                .setSortKey(sort+"")
+                .setSortKey(sort + "")
                 .setColor(mContext.getResources().getColor(R.color.partner_color))
                 .setExtras(extras);
         mNotifMan.notify(id, bob.build());

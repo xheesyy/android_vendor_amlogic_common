@@ -59,7 +59,7 @@ public class DeviceNameSetFragment extends GuidedStepSupportFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         return GuidedActionsAlignUtil.createView(view, this);
     }

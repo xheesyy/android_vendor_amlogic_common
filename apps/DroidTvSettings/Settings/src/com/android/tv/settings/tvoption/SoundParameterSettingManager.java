@@ -45,23 +45,24 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TimeZone;
 import java.util.SimpleTimeZone;
+
 import com.droidlogic.app.SystemControlManager;
 
 public class SoundParameterSettingManager {
 
     public static final String TAG = "SoundParameterSettingManager";
-    public static final String DIGITAL_SOUND_PCM                = "pcm";
-    public static final String DIGITAL_SOUND_AUTO               = "auto";
-    public static final String DIGITAL_SOUND_MANUAL             = "manual";
-    public static final String DIGITAL_SOUND_PASSTHROUGH        = "passthrough";
-    public static final String TV_KEY_AD_SWITCH                 = "ad_switch";
+    public static final String DIGITAL_SOUND_PCM = "pcm";
+    public static final String DIGITAL_SOUND_AUTO = "auto";
+    public static final String DIGITAL_SOUND_MANUAL = "manual";
+    public static final String DIGITAL_SOUND_PASSTHROUGH = "passthrough";
+    public static final String TV_KEY_AD_SWITCH = "ad_switch";
 
     private Resources mResources;
     private Context mContext;
     private AudioManager mAudioManager;
     private OutputModeManager mOutputModeManager;
 
-    public SoundParameterSettingManager (Context context) {
+    public SoundParameterSettingManager(Context context) {
         mContext = context;
         mResources = mContext.getResources();
         mAudioManager = (AudioManager) context.getSystemService(context.AUDIO_SERVICE);
@@ -75,26 +76,26 @@ public class SoundParameterSettingManager {
 
     // 0 1 ~ off on
     public int getVirtualSurroundStatus() {
-        final int itemPosition =  Settings.Global.getInt(mContext.getContentResolver(),
+        final int itemPosition = Settings.Global.getInt(mContext.getContentResolver(),
                 OutputModeManager.VIRTUAL_SURROUND, OutputModeManager.VIRTUAL_SURROUND_OFF);
         if (CanDebug()) Log.d(TAG, "getVirtualSurroundStatus = " + itemPosition);
         return itemPosition;
     }
 
-    public int getSoundOutputStatus () {
-        final int itemPosition =  Settings.Global.getInt(mContext.getContentResolver(),
+    public int getSoundOutputStatus() {
+        final int itemPosition = Settings.Global.getInt(mContext.getContentResolver(),
                 OutputModeManager.SOUND_OUTPUT_DEVICE, OutputModeManager.SOUND_OUTPUT_DEVICE_SPEAKER);
         if (CanDebug()) Log.d(TAG, "getSoundOutputStatus = " + itemPosition);
         return itemPosition;
     }
 
-    public void setVirtualSurround (int mode) {
+    public void setVirtualSurround(int mode) {
         if (CanDebug()) Log.d(TAG, "setVirtualSurround = " + mode);
         mOutputModeManager.setVirtualSurround(mode);
         Settings.Global.putInt(mContext.getContentResolver(), OutputModeManager.VIRTUAL_SURROUND, mode);
     }
 
-    public void setSoundOutputStatus (int mode) {
+    public void setSoundOutputStatus(int mode) {
         if (CanDebug()) Log.d(TAG, "setSoundOutputStatus = " + mode);
         mOutputModeManager.setSoundOutputStatus(mode);
         Settings.Global.putInt(mContext.getContentResolver(), OutputModeManager.SOUND_OUTPUT_DEVICE, mode);
@@ -103,7 +104,7 @@ public class SoundParameterSettingManager {
                 mode == OutputModeManager.SOUND_OUTPUT_DEVICE_ARC ? OutputModeManager.TV_ARC_ON : OutputModeManager.TV_ARC_OFF);
     }
 
-    public void setDigitalAudioFormat (String mode) {
+    public void setDigitalAudioFormat(String mode) {
         if (CanDebug()) Log.d(TAG, "setDigitalAudioFormat = " + mode);
         switch (mode) {
             case DIGITAL_SOUND_PCM:
@@ -129,20 +130,20 @@ public class SoundParameterSettingManager {
                 DroidLogicUtils.audioFormatOutputToString(surround));
         String format = "";
         switch (surround) {
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_PCM:
-            format = DIGITAL_SOUND_PCM;
-            break;
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_MANUAL:
-            format = DIGITAL_SOUND_MANUAL;
-            break;
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_AUTO:
-            format = DIGITAL_SOUND_AUTO;
-            break;
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_PASSTHROUGH:
-            format = DIGITAL_SOUND_PASSTHROUGH;
-            break;
-        default:
-            format = DIGITAL_SOUND_AUTO;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_PCM:
+                format = DIGITAL_SOUND_PCM;
+                break;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_MANUAL:
+                format = DIGITAL_SOUND_MANUAL;
+                break;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_AUTO:
+                format = DIGITAL_SOUND_AUTO;
+                break;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_PASSTHROUGH:
+                format = DIGITAL_SOUND_PASSTHROUGH;
+                break;
+            default:
+                format = DIGITAL_SOUND_AUTO;
         }
         return format;
     }
@@ -157,7 +158,7 @@ public class SoundParameterSettingManager {
         if (!enable.isEmpty()) {
             try {
                 Arrays.stream(enable.split(",")).mapToInt(Integer::parseInt)
-                    .forEach(fmts::add);
+                        .forEach(fmts::add);
             } catch (NumberFormatException e) {
                 Log.w(TAG, "DIGITAL_AUDIO_SUBFORMAT misformatted.", e);
             }
@@ -204,26 +205,26 @@ public class SoundParameterSettingManager {
     public static final String DRC_RF = "rf";
 
     public String getDrcModePassthroughSetting() {
-    String isSupportDTVKIT = SystemControlManager.getInstance().getPropertyString("ro.vendor.platform.is.tv", "");
-    boolean tvflag = isSupportDTVKIT.equals("1");
+        String isSupportDTVKIT = SystemControlManager.getInstance().getPropertyString("ro.vendor.platform.is.tv", "");
+        boolean tvflag = isSupportDTVKIT.equals("1");
 
         int value;
         if (tvflag) {
             value = Settings.Global.getInt(mContext.getContentResolver(),
-                OutputModeManager.DRC_MODE, OutputModeManager.IS_DRC_RF);
+                    OutputModeManager.DRC_MODE, OutputModeManager.IS_DRC_RF);
         } else {
             value = Settings.Global.getInt(mContext.getContentResolver(),
-                OutputModeManager.DRC_MODE, OutputModeManager.IS_DRC_LINE);
+                    OutputModeManager.DRC_MODE, OutputModeManager.IS_DRC_LINE);
         }
 
         switch (value) {
-        case OutputModeManager.IS_DRC_OFF:
-            return DRC_OFF;
-        case OutputModeManager.IS_DRC_LINE:
-        default:
-            return DRC_LINE;
-        case OutputModeManager.IS_DRC_RF:
-            return DRC_RF;
+            case OutputModeManager.IS_DRC_OFF:
+                return DRC_OFF;
+            case OutputModeManager.IS_DRC_LINE:
+            default:
+                return DRC_LINE;
+            case OutputModeManager.IS_DRC_RF:
+                return DRC_RF;
         }
     }
 

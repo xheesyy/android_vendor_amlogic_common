@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2017 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +17,8 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/high_power_apps">
     <Preference
-            android:key="header"
-            android:title="@string/high_power_apps_description"
-            android:singleLineTitle="false"
-            android:selectable="false" />
+        android:key="header"
+        android:title="@string/high_power_apps_description"
+        android:singleLineTitle="false"
+        android:selectable="false" />
 </PreferenceScreen>

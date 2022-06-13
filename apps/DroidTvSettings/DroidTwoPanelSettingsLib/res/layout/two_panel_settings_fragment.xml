@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2018 The Android Open Source Project
 
     Licensed under the Apache License, Version 2.0 (the "License")
@@ -41,8 +40,7 @@
     be exactly X amount of previous pane's blank paddingEnd blending into the real paddingStart of
     current preference pane to consist the larger visual paddingStart.
 -->
-<com.android.tv.twopanelsettings.TwoPanelSettingsRootView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.android.tv.twopanelsettings.TwoPanelSettingsRootView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/two_panel_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -64,9 +62,9 @@
 
             <!-- extra_padding, the extra paddingStart of preference pane -->
             <FrameLayout
-                 android:background="@color/tp_preference_panel_background_color"
-                 android:layout_width="@dimen/preference_pane_extra_padding_start"
-                 android:layout_height="match_parent" />
+                android:background="@color/tp_preference_panel_background_color"
+                android:layout_width="@dimen/preference_pane_extra_padding_start"
+                android:layout_height="match_parent" />
 
             <FrameLayout
                 android:id="@+id/frame1"
@@ -76,8 +74,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame2"
@@ -87,8 +84,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame3"
@@ -98,8 +94,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame4"
@@ -109,8 +104,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame5"
@@ -120,8 +114,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame6"
@@ -131,8 +124,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame7"
@@ -142,8 +134,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame8"
@@ -153,8 +144,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame9"
@@ -164,8 +154,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <FrameLayout
                 android:id="@+id/frame10"
@@ -175,8 +164,7 @@
                 android:paddingStart="@dimen/pane_basic_padding_start"
                 android:paddingEnd="@dimen/preference_pane_padding_end"
                 android:clipChildren="false"
-                android:clipToPadding="false">
-            </FrameLayout>
+                android:clipToPadding="false"></FrameLayout>
 
             <!-- extra_padding_rtl, the extra paddingStart of preference pane in RTL -->
             <FrameLayout

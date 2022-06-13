@@ -26,11 +26,11 @@ public interface ScrollAdapterTransform {
     /**
      * performs transform on a view based on distance pixels from center
      *
-     * @param view view that to perform transform
-     * @param distanceFromCenter distance in pixels from center in the main orientation, negative if
-     *        lower than the center, 0 if at center, positive if higher than center
+     * @param view                      view that to perform transform
+     * @param distanceFromCenter        distance in pixels from center in the main orientation, negative if
+     *                                  lower than the center, 0 if at center, positive if higher than center
      * @param distanceFromCenter2ndAxis distance in pixels from center in the 2nd orientation for a
-     *        grid view; in case of a single row/column,  it will be 0
+     *                                  grid view; in case of a single row/column,  it will be 0
      */
     public void transform(View view, int distanceFromCenter, int distanceFromCenter2ndAxis);
 

@@ -109,9 +109,11 @@
     <dimen name="side_panel_fragment_enter_offset_x">32dp</dimen>
     <dimen name="side_panel_fragment_exit_offset_x">-32dp</dimen>
     <dimen name="side_panel_fragment_pop_enter_offset_x">
-        @dimen/side_panel_fragment_exit_offset_x</dimen>
+        @dimen/side_panel_fragment_exit_offset_x
+    </dimen>
     <dimen name="side_panel_fragment_pop_exit_offset_x">
-        @dimen/side_panel_fragment_enter_offset_x</dimen>
+        @dimen/side_panel_fragment_enter_offset_x
+    </dimen>
 
     <!-- More options -->
     <dimen name="option_item_height">48dp</dimen>
@@ -167,14 +169,18 @@
     <dimen name="program_guide_table_header_column_channel_logo_height">40dp</dimen>
     <dimen name="program_guide_table_header_column_channel_logo_margin_top">12dp</dimen>
     <dimen name="program_guide_table_header_column_channel_block_width">
-        @dimen/program_guide_table_header_column_channel_block_height</dimen>
+        @dimen/program_guide_table_header_column_channel_block_height
+    </dimen>
     <dimen name="program_guide_table_header_column_channel_block_height">
-        @dimen/program_guide_table_header_column_channel_logo_height</dimen>
+        @dimen/program_guide_table_header_column_channel_logo_height
+    </dimen>
     <dimen name="program_guide_table_header_column_channel_block_margin_top">
-        @dimen/program_guide_table_header_column_channel_logo_margin_top</dimen>
+        @dimen/program_guide_table_header_column_channel_logo_margin_top
+    </dimen>
     <dimen name="program_guide_table_header_column_input_logo_width">18dp</dimen>
     <dimen name="program_guide_table_header_column_input_logo_height">
-        @dimen/program_guide_table_header_column_input_logo_width</dimen>
+        @dimen/program_guide_table_header_column_input_logo_width
+    </dimen>
     <dimen name="program_guide_table_header_column_input_logo_margin_top">23dp</dimen>
     <dimen name="program_guide_table_header_row_height">40dp</dimen>
     <dimen name="program_guide_table_header_row_font_size">16sp</dimen>
@@ -264,9 +270,11 @@
 
     <!-- Keypad channel switch -->
     <dimen name="keypad_channel_switch_channel_number_text_size">
-        @dimen/channel_banner_channel_number_large_text_size</dimen>
+        @dimen/channel_banner_channel_number_large_text_size
+    </dimen>
     <dimen name="keypad_channel_switch_channel_number_margin_top">
-        @dimen/channel_banner_channel_number_large_margin_top</dimen>
+        @dimen/channel_banner_channel_number_large_margin_top
+    </dimen>
     <dimen name="keypad_channel_switch_item_height">48dp</dimen>
     <!-- A height of Keypad channel switch view without channel_list -->
     <dimen name="keypad_channel_switch_base_height">84dp</dimen>
@@ -314,7 +322,7 @@
     <dimen name="dvr_card_image_layout_height">140dp</dimen>
 
     <!-- favlist settings -->
-	<dimen name="circle_width">20dp</dimen>
+    <dimen name="circle_width">20dp</dimen>
     <dimen name="circle_heigth">20dp</dimen>
     <dimen name="rectangle_width">20dp</dimen>
     <dimen name="rectangle_heigth">20dp</dimen>

@@ -53,21 +53,21 @@ import com.droidlogic.app.tv.TvControlManager;
 import com.droidlogic.tvinput.widget.DroidLogicOverlayView;
 
 public abstract class TvInputBaseSession extends TvInputService.Session implements Handler.Callback,
-    SystemControlEvent.HdrInfoListener {
+        SystemControlEvent.HdrInfoListener {
     private static final boolean DEBUG = true;
     private static final String TAG = "TvInputBaseSession";
 
     private static final int SESSION_CTEATED = 0;
     private static final int SESSION_RELEASED = 1;
 
-    private static final int    MSG_REGISTER_BROADCAST = 8;
-    private static final int    MSG_DO_PRI_CMD              = 9;
-    protected static final int  MSG_SUBTITLE_SHOW           = 10;
-    protected static final int  MSG_SUBTITLE_HIDE           = 11;
-    protected static final int  MSG_DO_RELEASE              = 12;
-    protected static final int  MSG_AUDIO_MUTE              = 13;
-    protected static final int  MSG_IMAGETEXT_SET           = 14;
-    protected static final int  MSG_IMAGETEXT_RESET         = 15;
+    private static final int MSG_REGISTER_BROADCAST = 8;
+    private static final int MSG_DO_PRI_CMD = 9;
+    protected static final int MSG_SUBTITLE_SHOW = 10;
+    protected static final int MSG_SUBTITLE_HIDE = 11;
+    protected static final int MSG_DO_RELEASE = 12;
+    protected static final int MSG_AUDIO_MUTE = 13;
+    protected static final int MSG_IMAGETEXT_SET = 14;
+    protected static final int MSG_IMAGETEXT_RESET = 15;
 
     ////add for get hdmi info
     protected static final int MSG_UPDATE_HDMI_HDR = 30;
@@ -80,7 +80,7 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
     protected static final int CHECK_DOLBY_VISION_MAX_COUNT = 5;
     protected static final int MSG_DISPLAY_PERIOD = 3000;
 
-    protected static final int TVINPUT_BASE_DELAY_SEND_MSG  = 10; // Filter message within 10ms, only the last message is processed
+    protected static final int TVINPUT_BASE_DELAY_SEND_MSG = 10; // Filter message within 10ms, only the last message is processed
     private Context mContext;
     public int mId;
     private String mInputId;
@@ -119,7 +119,7 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
         mAudioSystemCmdManager = AudioSystemCmdManager.getInstance(mContext);
         mTvControlManager = TvControlManager.getInstance();
         mSessionHandler = new Handler(context.getMainLooper(), this);
-        mTvInputManager = (TvInputManager)mContext.getSystemService(Context.TV_INPUT_SERVICE);
+        mTvInputManager = (TvInputManager) mContext.getSystemService(Context.TV_INPUT_SERVICE);
         mDroidLogicHdmiCecManager = DroidLogicHdmiCecManager.getInstance(mContext);
         isHdmiDevice = (DroidLogicTvUtils.parseTvSourceTypeFromDeviceId(deviceId) == TvControlManager.SourceInput_Type.SOURCE_TYPE_HDMI);
         sendSessionMessage(MSG_REGISTER_BROADCAST);
@@ -147,25 +147,26 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
         mSessionHandler.removeMessages(msg.what);
         msg.sendToTarget();
     }
+
     public void doRelease() {
         Log.d(TAG, "doRelease,input: " + mInputId + " " + this);
 
         mContext.unregisterReceiver(mBroadcastReceiver);
 
         if (setSessionStateMachine(SESSION_RELEASED) == 0) {
-            ((DroidLogicTvInputService)mContext).stopTvPlay(mId, true);
+            ((DroidLogicTvInputService) mContext).stopTvPlay(mId, true);
         }
     }
 
-    private int setSessionStateMachine (int action) {
+    private int setSessionStateMachine(int action) {
         int count = DataProviderManager.getIntValue(mContext, DroidLogicTvUtils.TV_SESSION_COUNT, 0);
         switch (action) {
-                case SESSION_CTEATED:
-                    count++;
-                    break;
-                case SESSION_RELEASED:
-                    count--;
-                    break;
+            case SESSION_CTEATED:
+                count++;
+                break;
+            case SESSION_RELEASED:
+                count--;
+                break;
         }
 
         if (count > 1) {
@@ -188,15 +189,19 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
         return count;
     }
 
-    public void doAppPrivateCmd(String action, Bundle bundle) {}
-    public void doUnblockContent(TvContentRating rating) {}
+    public void doAppPrivateCmd(String action, Bundle bundle) {
+    }
+
+    public void doUnblockContent(TvContentRating rating) {
+    }
+
     public boolean isRadioChannel() {
         return false;
     }
 
     @Override
     public void onSurfaceChanged(int format, int width, int height) {
-        Log.d(TAG, "onSurfaceChanged: format="+format + " width=" + width + " height=" + height);
+        Log.d(TAG, "onSurfaceChanged: format=" + format + " width=" + width + " height=" + height);
         if (width < 720 || height < 480) {
             mTvControlManager.SetPreviewWindowMode(true);
         } else {
@@ -252,11 +257,11 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
     public void initOverlayView(int resId) {
         LayoutInflater inflater = (LayoutInflater)
                 mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mOverlayView = (DroidLogicOverlayView)inflater.inflate(resId, null);
+        mOverlayView = (DroidLogicOverlayView) inflater.inflate(resId, null);
         setOverlayViewEnabled(true);
     }
 
-    private  BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
@@ -276,7 +281,7 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
 
     @Override
     public void onOverlayViewSizeChanged(int width, int height) {
-        Log.d(TAG, "onOverlayViewSizeChanged: "+width+","+height);
+        Log.d(TAG, "onOverlayViewSizeChanged: " + width + "," + height);
     }
 
     @Override
@@ -300,7 +305,7 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
 
     @Override
     public void notifyVideoUnavailable(int reason) {
-        Log.d(TAG, "notifyVideoUnavailable: "+reason);
+        Log.d(TAG, "notifyVideoUnavailable: " + reason);
         super.notifyVideoUnavailable(reason);
         Message msg = mSessionHandler.obtainMessage(MSG_IMAGETEXT_SET);
         mSessionHandler.removeMessages(msg.what);
@@ -311,7 +316,7 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
     }
 
     @Override
-     public boolean onSetSurface(Surface surface) {
+    public boolean onSetSurface(Surface surface) {
         if (surface == null) {
             mSessionHandler.removeCallbacksAndMessages(null);
             isSurfaceAlive = false;
@@ -326,7 +331,7 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
         }
 
         return false;
-     }
+    }
 
     @Override
     public void onRelease() {
@@ -347,7 +352,7 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
     }
 
     private void setAudiodMute(boolean mute) {
-        Log.d(TAG, "setAudiodMute="+mute);
+        Log.d(TAG, "setAudiodMute=" + mute);
         if (mute) {
             handleAdtvAudioEvent(AudioSystemCmdManager.AUDIO_SERVICE_CMD_SET_PRE_MUTE, 1, 0);
         } else {
@@ -355,15 +360,15 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
         }
     }
 
-    public void openTvAudio (int type){
+    public void openTvAudio(int type) {
         mAudioSystemCmdManager.openTvAudio(type);
     }
 
-    public void closeTvAudio (){
+    public void closeTvAudio() {
         mAudioSystemCmdManager.closeTvAudio();
     }
 
-    public void handleAdtvAudioEvent (int cmd, int param1, int param2){
+    public void handleAdtvAudioEvent(int cmd, int param1, int param2) {
         mAudioSystemCmdManager.handleAdtvAudioEvent(cmd, param1, param2);
     }
 
@@ -385,16 +390,16 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
 
         switch (msg.what) {
             case MSG_REGISTER_BROADCAST:
-                    IntentFilter intentFilter = new IntentFilter();
-                    intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-                    intentFilter.addAction(Intent.ACTION_SCREEN_ON);
-                    mContext.registerReceiver(mBroadcastReceiver, intentFilter);
+                IntentFilter intentFilter = new IntentFilter();
+                intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+                intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+                mContext.registerReceiver(mBroadcastReceiver, intentFilter);
                 break;
             case MSG_DO_PRI_CMD:
-                if (isHdmiDevice && DroidLogicTvUtils.ACTION_TIF_SHOW_DOLBY_VISION.equals((String)msg.obj)) {
+                if (isHdmiDevice && DroidLogicTvUtils.ACTION_TIF_SHOW_DOLBY_VISION.equals((String) msg.obj)) {
                     showDolbyVisionInitiativelyFor3s();
                 }
-                doAppPrivateCmd((String)msg.obj, msg.getData());
+                doAppPrivateCmd((String) msg.obj, msg.getData());
                 break;
             case MSG_SUBTITLE_SHOW:
                 if (mOverlayView != null) {
@@ -412,7 +417,8 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
             case MSG_AUDIO_MUTE:
                 long startTime = SystemClock.uptimeMillis();
                 setAudiodMute(msg.arg1 == 0);
-                if (DEBUG) Log.d(TAG, "setAudiodMute used " + (SystemClock.uptimeMillis() - startTime) + " ms");
+                if (DEBUG)
+                    Log.d(TAG, "setAudiodMute used " + (SystemClock.uptimeMillis() - startTime) + " ms");
                 break;
             case MSG_IMAGETEXT_SET:
                 if (mOverlayView != null) {
@@ -484,7 +490,7 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
     @Override
     public void onHdrInfoChange(int newHdrInfo) {
         //if (DEBUG)
-            //Log.d(TAG, "onHdrInfoChange: hdr info is: " + newHdrInfo);
+        //Log.d(TAG, "onHdrInfoChange: hdr info is: " + newHdrInfo);
         String newHdrtype = getHdmiHdrInfo(newHdrInfo);
         if (!TextUtils.equals(newHdrtype, mHdmiHdrInfo)) {
             mHdmiHdrInfo = newHdrtype;
@@ -570,12 +576,12 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
     }
 
     /*
-    *PCM audios require  display PCM
-    *DD  audios require display Dolby Digital
-    *DDP audios require display Dolby Digital Plus
-    *DTS  audios require display DTS
-    *DTS HD audios require display DTS HD
-    */
+     *PCM audios require  display PCM
+     *DD  audios require display Dolby Digital
+     *DDP audios require display Dolby Digital Plus
+     *DTS  audios require display DTS
+     *DTS HD audios require display DTS HD
+     */
     private String getHdmiAudioFormat() {
         String result = null;
         String formatInfo = getParameters("HDMIIN Audio Type");
@@ -639,11 +645,11 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
     private int parseFirstValidIntegerByPattern(String info) {
         int result = -1;
         try {
-            String regEx="[0-9]+";
+            String regEx = "[0-9]+";
             Pattern p = Pattern.compile(regEx);
             Matcher m = p.matcher(info);
             if (m.find()) {
-              result = Integer.valueOf(m.group(0));
+                result = Integer.valueOf(m.group(0));
             } else {
                 Log.d(TAG, "parseFirstValidIntergerByPattern not matched");
             }
@@ -663,15 +669,15 @@ public abstract class TvInputBaseSession extends TvInputService.Session implemen
     }
 
     /*
-    * arg1 = 1 means start to deal
-    * arg2 = 1 means display, arg2 = 2 means hide
-    */
+     * arg1 = 1 means start to deal
+     * arg2 = 1 means display, arg2 = 2 means hide
+     */
     private void dealDolbyVisionDisplay(int arg1, int arg2, Object obj) {
         if (DEBUG) {
             Log.d(TAG, "dealDolbyVisionDisplay arg1 = " + arg1 + ", arg2 = " + arg2 + ", obj = " + obj);
         }
         if (arg1 == 1) {
-            String hdmiHdr = (String)obj;
+            String hdmiHdr = (String) obj;
             if (isDolbyVisionType(hdmiHdr)) {
                 if (mSessionHandler != null) {
                     mSessionHandler.removeMessages(MSG_SHOW_DOLBY_VSION);

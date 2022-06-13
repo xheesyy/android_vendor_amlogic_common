@@ -58,6 +58,7 @@ import android.os.SystemClock;
 import android.hardware.hdmi.HdmiControlManager;
 import android.provider.Settings.Global;
 import android.hardware.hdmi.HdmiDeviceInfo;
+
 import java.util.HashMap;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -70,6 +71,7 @@ import android.content.ContentResolver;
 import android.media.MediaCodec;
 import android.text.TextUtils;
 import android.os.UserHandle;
+
 import java.util.Map;
 
 public abstract class DroidLogicTvInputService extends TvInputService implements
@@ -122,7 +124,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
 
     private Handler mHandler = new Handler();
 
-    private HardwareCallback mHardwareCallback = new HardwareCallback(){
+    private HardwareCallback mHardwareCallback = new HardwareCallback() {
         @Override
         public void onReleased() {
             if (DEBUG)
@@ -137,7 +139,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
                 Log.d(TAG, "onStreamConfigChanged");
             mConfigs = configs;
             if (DEBUG && mConfigs != null)
-                Log.d(TAG, "mConfigs.length:"+mConfigs.length);
+                Log.d(TAG, "mConfigs.length:" + mConfigs.length);
             else
                 Log.d(TAG, "mConfigs = null");
 
@@ -150,7 +152,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
                         Log.d(TAG, " Plug out & Input is not conneted,show overlay infomations");
                         mSession.notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_WEAK_SIGNAL);
                     }*/
-                }  else if (mConfigs.length > 0 && mSurface != null){
+                } else if (mConfigs.length > 0 && mSurface != null) {
                     Log.d(TAG, "open source");
                     createDecoder();
                     decoderRelease();
@@ -164,7 +166,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     };
 
     public void registerChannelScanStartReceiver() {
-        IntentFilter filter= new IntentFilter();
+        IntentFilter filter = new IntentFilter();
         filter.addAction(DroidLogicTvUtils.ACTION_DTV_AUTO_SCAN);
         filter.addAction(DroidLogicTvUtils.ACTION_DTV_MANUAL_SCAN);
         filter.addAction(DroidLogicTvUtils.ACTION_ATV_AUTO_SCAN);
@@ -179,7 +181,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     @Override
     public void onCreate() {
         super.onCreate();
-        mTvInputManager = (TvInputManager)this.getSystemService(Context.TV_INPUT_SERVICE);
+        mTvInputManager = (TvInputManager) this.getSystemService(Context.TV_INPUT_SERVICE);
         mHdmiCecManager = DroidLogicHdmiCecManager.getInstance(getApplicationContext());
         mSystemControlManager = SystemControlManager.getInstance();
         mTvControlManager = TvControlManager.getInstance();
@@ -199,7 +201,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     }
 
     public void registerInput(String inputId) {
-        Log.d(TAG, "register Input:"+inputId);
+        Log.d(TAG, "register Input:" + inputId);
         mContext = getApplicationContext();
         mCurrentInputId = inputId;
         if (mSessionHandler == null)
@@ -215,14 +217,14 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         mChildClassName = className;
     }
 
-    protected void acquireHardware(TvInputInfo info){
+    protected void acquireHardware(TvInputInfo info) {
         mDeviceId = getHardwareDeviceId(info.getId());
         mCurrentInputId = info.getId();
         mHardware = mTvInputManager.acquireTvInputHardware(mDeviceId, info, mHardwareCallback);
-        Log.d(TAG, "acquireHardware mDeviceId="+mDeviceId+",  mCurrentInputId="+mCurrentInputId+", mHardware: " + mHardware);
+        Log.d(TAG, "acquireHardware mDeviceId=" + mDeviceId + ",  mCurrentInputId=" + mCurrentInputId + ", mHardware: " + mHardware);
     }
 
-    protected void releaseHardware(){
+    protected void releaseHardware() {
         Log.d(TAG, "releaseHardware , mHardware: " + mHardware);
         if (mHardware != null && mDeviceId != -1) {
             mConfigs = null;
@@ -232,6 +234,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
 
     /**
      * get session has been created by {@code onCreateSession}, and input id of session.
+     *
      * @param session {@link HdmiInputSession} or {@link AVInputSession}
      */
     protected void registerInputSession(TvInputBaseSession session) {
@@ -240,7 +243,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
             return;
         }
         mCurrentSessionId = session.mId;
-        Log.d(TAG, "registerInputSession:  inputId="+mCurrentInputId+  " sessioniId=" + session.mId);
+        Log.d(TAG, "registerInputSession:  inputId=" + mCurrentInputId + " sessioniId=" + session.mId);
 
         if (mCurrentInputId != null) {
             final TvInputInfo currentinfo = mTvInputManager.getTvInputInfo(mCurrentInputId);
@@ -257,17 +260,18 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
 
     /**
      * update {@code mInfoList} when hardware device is added or removed.
-     * @param hInfo {@linkHardwareInfo} get from HAL.
-     * @param info {@link TvInputInfo} will be added or removed.
+     *
+     * @param hInfo     {@linkHardwareInfo} get from HAL.
+     * @param info      {@link TvInputInfo} will be added or removed.
      * @param isRemoved {@code true} if you want to remove info. {@code false} otherwise.
      */
     protected void updateInfoListIfNeededLocked(TvInputHardwareInfo hInfo,
-            TvInputInfo info, boolean isRemoved) {
+                                                TvInputInfo info, boolean isRemoved) {
         updateInfoListIfNeededLocked(hInfo.getDeviceId(), info, isRemoved);
     }
 
     protected void updateInfoListIfNeededLocked(int Id, TvInputInfo info,
-            boolean isRemoved) {
+                                                boolean isRemoved) {
         if (isRemoved) {
             mInfoList.remove(Id);
         } else {
@@ -322,41 +326,41 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     protected String getTvInputInfoLabel(int device_id) {
         String label = null;
         switch (device_id) {
-        case DroidLogicTvUtils.DEVICE_ID_ATV:
-            label = ChannelInfo.LABEL_ATV;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_DTV:
-            label = ChannelInfo.LABEL_DTV;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_AV1:
-            label = ChannelInfo.LABEL_AV1;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_AV2:
-            label = ChannelInfo.LABEL_AV2;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_HDMI1:
-            label = ChannelInfo.LABEL_HDMI1;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_HDMI2:
-            label = ChannelInfo.LABEL_HDMI2;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_HDMI3:
-            label = ChannelInfo.LABEL_HDMI3;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_HDMI4:
-            label = ChannelInfo.LABEL_HDMI4;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_SPDIF:
-            label = ChannelInfo.LABEL_SPDIF;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_AUX:
-            label = ChannelInfo.LABEL_AUX;
-            break;
-        case DroidLogicTvUtils.DEVICE_ID_ARC:
-            label = ChannelInfo.LABEL_ARC;
-            break;
-        default:
-            break;
+            case DroidLogicTvUtils.DEVICE_ID_ATV:
+                label = ChannelInfo.LABEL_ATV;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_DTV:
+                label = ChannelInfo.LABEL_DTV;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_AV1:
+                label = ChannelInfo.LABEL_AV1;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_AV2:
+                label = ChannelInfo.LABEL_AV2;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_HDMI1:
+                label = ChannelInfo.LABEL_HDMI1;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_HDMI2:
+                label = ChannelInfo.LABEL_HDMI2;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_HDMI3:
+                label = ChannelInfo.LABEL_HDMI3;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_HDMI4:
+                label = ChannelInfo.LABEL_HDMI4;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_SPDIF:
+                label = ChannelInfo.LABEL_SPDIF;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_AUX:
+                label = ChannelInfo.LABEL_AUX;
+                break;
+            case DroidLogicTvUtils.DEVICE_ID_ARC:
+                label = ChannelInfo.LABEL_ARC;
+                break;
+            default:
+                break;
         }
         return label;
     }
@@ -409,7 +413,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         TvInSignalInfo.SignalStatus status = signal_info.sigStatus;
 
         if (DEBUG)
-            Log.d(TAG, "onSigChange: " + status.ordinal() + ", "+ status.toString());
+            Log.d(TAG, "onSigChange: " + status.ordinal() + ", " + status.toString());
         if (mSession == null) {
             Log.w(TAG, "mSession is null ,discard this signal!");
             return;
@@ -423,90 +427,91 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         } else if (status == TvInSignalInfo.SignalStatus.TVIN_SIG_STATUS_STABLE) {
             int device_id = mSession.getDeviceId();
             if ((mTvControlManager.GetCurrentSourceInput() != DroidLogicTvUtils.DEVICE_ID_DTV)
-                || (signal_info.reserved == 1))
+                    || (signal_info.reserved == 1))
                 mSession.notifyVideoAvailable();
 
             String[] strings;
             Bundle bundle = new Bundle();
             switch (device_id) {
-            case DroidLogicTvUtils.DEVICE_ID_HDMI1:
-            case DroidLogicTvUtils.DEVICE_ID_HDMI2:
-            case DroidLogicTvUtils.DEVICE_ID_HDMI3:
-            case DroidLogicTvUtils.DEVICE_ID_HDMI4:
-                if (DEBUG)
-                    Log.d(TAG, "signal_info.fmt.toString() for hdmi=" + signal_info.sigFmt.toString());
+                case DroidLogicTvUtils.DEVICE_ID_HDMI1:
+                case DroidLogicTvUtils.DEVICE_ID_HDMI2:
+                case DroidLogicTvUtils.DEVICE_ID_HDMI3:
+                case DroidLogicTvUtils.DEVICE_ID_HDMI4:
+                    if (DEBUG)
+                        Log.d(TAG, "signal_info.fmt.toString() for hdmi=" + signal_info.sigFmt.toString());
 
-                strings = signal_info.sigFmt.toString().split("_");
-                TvInSignalInfo.SignalFmt fmt = signal_info.sigFmt;
-                if (fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X480I_60HZ
-                        || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X480I_120HZ
-                        || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X480I_240HZ
-                        || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_2880X480I_60HZ
-                        || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_2880X480I_60HZ) {
-                    strings[4] = "480I";
-                } else if (fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X576I_50HZ
-                        || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X576I_100HZ
-                        || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X576I_200HZ) {
-                    strings[4] = "576I";
-                }
+                    strings = signal_info.sigFmt.toString().split("_");
+                    TvInSignalInfo.SignalFmt fmt = signal_info.sigFmt;
+                    if (fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X480I_60HZ
+                            || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X480I_120HZ
+                            || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X480I_240HZ
+                            || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_2880X480I_60HZ
+                            || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_2880X480I_60HZ) {
+                        strings[4] = "480I";
+                    } else if (fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X576I_50HZ
+                            || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X576I_100HZ
+                            || fmt == TvInSignalInfo.SignalFmt.TVIN_SIG_FMT_HDMI_1440X576I_200HZ) {
+                        strings[4] = "576I";
+                    }
 
-                bundle.putInt(DroidLogicTvUtils.SIG_INFO_TYPE, DroidLogicTvUtils.SIG_INFO_TYPE_HDMI);
-                bundle.putString(DroidLogicTvUtils.SIG_INFO_LABEL, getInfoLabel());
-                if (strings != null && strings.length <= 4) {
-                    Log.d(TAG, "invalid signal");
-                    bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, " ");
-                } else if (mTvControlManager.IsDviSignal()) {
-                    Log.d(TAG, "dvi signal");
-                    bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, "DVI "+strings[4]
-                            + "_" + signal_info.reserved + "HZ");
-                    mSession.setParameters("audio=linein");
-                } else {
-                    Log.d(TAG, "hdmi signal");
-                    bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, strings[4]
-                            + "_" + signal_info.reserved + "HZ");
-                    mSession.setParameters("audio=hdmi");
-                }
+                    bundle.putInt(DroidLogicTvUtils.SIG_INFO_TYPE, DroidLogicTvUtils.SIG_INFO_TYPE_HDMI);
+                    bundle.putString(DroidLogicTvUtils.SIG_INFO_LABEL, getInfoLabel());
+                    if (strings != null && strings.length <= 4) {
+                        Log.d(TAG, "invalid signal");
+                        bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, " ");
+                    } else if (mTvControlManager.IsDviSignal()) {
+                        Log.d(TAG, "dvi signal");
+                        bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, "DVI " + strings[4]
+                                + "_" + signal_info.reserved + "HZ");
+                        mSession.setParameters("audio=linein");
+                    } else {
+                        Log.d(TAG, "hdmi signal");
+                        bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, strings[4]
+                                + "_" + signal_info.reserved + "HZ");
+                        mSession.setParameters("audio=hdmi");
+                    }
 
-                mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_EVENT, bundle);
-                break;
-            case DroidLogicTvUtils.DEVICE_ID_AV1:
-            case DroidLogicTvUtils.DEVICE_ID_AV2:
-                if (DEBUG)
-                    Log.d(TAG, "tmpInfo.fmt.toString() for av=" + signal_info.sigFmt.toString());
+                    mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_EVENT, bundle);
+                    break;
+                case DroidLogicTvUtils.DEVICE_ID_AV1:
+                case DroidLogicTvUtils.DEVICE_ID_AV2:
+                    if (DEBUG)
+                        Log.d(TAG, "tmpInfo.fmt.toString() for av=" + signal_info.sigFmt.toString());
 
-                strings = signal_info.sigFmt.toString().split("_");
-                bundle.putInt(DroidLogicTvUtils.SIG_INFO_TYPE, DroidLogicTvUtils.SIG_INFO_TYPE_AV);
-                bundle.putString(DroidLogicTvUtils.SIG_INFO_LABEL, getInfoLabel());
-                if (strings != null && strings.length <= 4)
-                    bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, "");
-                else
-                    bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, strings[4]);
-                mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_EVENT, bundle);
-                break;
-            case DroidLogicTvUtils.DEVICE_ID_ATV:
-                if (DEBUG)
-                    Log.d(TAG, "tmpInfo.fmt.toString() for atv=" + signal_info.sigFmt.toString());
+                    strings = signal_info.sigFmt.toString().split("_");
+                    bundle.putInt(DroidLogicTvUtils.SIG_INFO_TYPE, DroidLogicTvUtils.SIG_INFO_TYPE_AV);
+                    bundle.putString(DroidLogicTvUtils.SIG_INFO_LABEL, getInfoLabel());
+                    if (strings != null && strings.length <= 4)
+                        bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, "");
+                    else
+                        bundle.putString(DroidLogicTvUtils.SIG_INFO_ARGS, strings[4]);
+                    mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_EVENT, bundle);
+                    break;
+                case DroidLogicTvUtils.DEVICE_ID_ATV:
+                    if (DEBUG)
+                        Log.d(TAG, "tmpInfo.fmt.toString() for atv=" + signal_info.sigFmt.toString());
 
-                mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_EVENT, null);
-                break;
-            case DroidLogicTvUtils.DEVICE_ID_DTV:
-                if (DEBUG)
-                    Log.d(TAG, "tmpInfo.fmt.toString() for dtv=" + signal_info.sigFmt.toString());
+                    mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_EVENT, null);
+                    break;
+                case DroidLogicTvUtils.DEVICE_ID_DTV:
+                    if (DEBUG)
+                        Log.d(TAG, "tmpInfo.fmt.toString() for dtv=" + signal_info.sigFmt.toString());
 
-                mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_EVENT, null);
-                break;
-            case DroidLogicTvUtils.DEVICE_ID_SPDIF:
-                if (DEBUG)
-                    Log.d(TAG, "onSigChange: notifyVideoUnavailable(VIDEO_UNAVAILABLE_REASON_AUDIO_ONLY)");
+                    mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_EVENT, null);
+                    break;
+                case DroidLogicTvUtils.DEVICE_ID_SPDIF:
+                    if (DEBUG)
+                        Log.d(TAG, "onSigChange: notifyVideoUnavailable(VIDEO_UNAVAILABLE_REASON_AUDIO_ONLY)");
 
-                mSession.notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_AUDIO_ONLY);
-            default:
-                break;
+                    mSession.notifyVideoUnavailable(TvInputManager.VIDEO_UNAVAILABLE_REASON_AUDIO_ONLY);
+                default:
+                    break;
             }
         }
     }
 
-    public void onSigChanged(TvInSignalInfo signal_info) { }
+    public void onSigChanged(TvInSignalInfo signal_info) {
+    }
 
     @Override
     public void onSourceConnectChange(TvControlManager.SourceInput source, int connectionState) {
@@ -528,13 +533,13 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         if (mTvStoreManager != null) {
             mTvStoreManager.onStoreEvent(event);
         } else {
-            Log.w(TAG, "StorDBonEvent mTvStoreManager null, service-->mCurrentInputId:" + mCurrentInputId + ", mSourceType:"+mSourceType + ", mChildClassName =" + mChildClassName);
+            Log.w(TAG, "StorDBonEvent mTvStoreManager null, service-->mCurrentInputId:" + mCurrentInputId + ", mSourceType:" + mSourceType + ", mChildClassName =" + mChildClassName);
         }
     }
 
     public void resetScanStoreListener() {
         mTvControlManager.setStorDBListener(this);
-        Log.d(TAG, "resetScanStoreListener service-->mCurrentInputId:" + mCurrentInputId + ", mSourceType:"+mSourceType + ", mChildClassName =" + mChildClassName);
+        Log.d(TAG, "resetScanStoreListener service-->mCurrentInputId:" + mCurrentInputId + ", mSourceType:" + mSourceType + ", mChildClassName =" + mChildClassName);
     }
 
     @Override
@@ -546,7 +551,8 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
             mSession.notifySessionEvent(DroidLogicTvUtils.SIG_INFO_C_SCANNING_FRAME_STABLE_EVENT, bundle);
     }
 
-    public void onUpdateCurrentChannel(ChannelInfo channel, boolean store) {}
+    public void onUpdateCurrentChannel(ChannelInfo channel, boolean store) {
+    }
 
     public final class SomeArgs {
         public Object arg1;
@@ -562,12 +568,12 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         }
     }
 
-    protected  boolean setSurfaceInService(Surface surface, TvInputBaseSession session ) {
+    protected boolean setSurfaceInService(Surface surface, TvInputBaseSession session) {
         Log.d(TAG, "setSurfaceInService, surface: " + surface + " session: " + session);
 
         Message message = mSessionHandler.obtainMessage();
         message.what = MSG_DO_SET_SURFACE;
-        synchronized(this) {
+        synchronized (this) {
             SomeArgs args = new SomeArgs();
             args.arg1 = surface;
             args.arg2 = session;
@@ -584,7 +590,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         return false;
     }
 
-    protected  boolean doTuneInService(Uri channelUri, int sessionId) {
+    protected boolean doTuneInService(Uri channelUri, int sessionId) {
         Log.d(TAG, "doTuneInService onTune channelUri=" + channelUri);
 
         Message message = mSessionHandler.obtainMessage(MSG_DO_TUNE, sessionId, 0, channelUri);
@@ -598,17 +604,17 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     private final class SurfaceHandler extends Handler {
         @Override
         public void handleMessage(Message message) {
-        if (DEBUG)
-            Log.d(TAG, "handleMessage, msg.what=" + message.what);
-        switch (message.what) {
-            case MSG_DO_TUNE:
-                mSessionHandler.removeMessages(MSG_DO_TUNE);
-                doTune((Uri)message.obj, message.arg1);
-                break;
-            case MSG_DO_SET_SURFACE:
-                SomeArgs args = (SomeArgs) message.obj;
-                doSetSurface((Surface)args.arg1, (TvInputBaseSession)args.arg2);
-                break;
+            if (DEBUG)
+                Log.d(TAG, "handleMessage, msg.what=" + message.what);
+            switch (message.what) {
+                case MSG_DO_TUNE:
+                    mSessionHandler.removeMessages(MSG_DO_TUNE);
+                    doTune((Uri) message.obj, message.arg1);
+                    break;
+                case MSG_DO_SET_SURFACE:
+                    SomeArgs args = (SomeArgs) message.obj;
+                    doSetSurface((Surface) args.arg1, (TvInputBaseSession) args.arg2);
+                    break;
             }
         }
     }
@@ -617,21 +623,21 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         String str = "OMX.amlogic.avc.decoder.awesome.secure";
         try {
             mMediaCodec1 = MediaCodec.createByCodecName(str);
-            } catch (Exception exception) {
+        } catch (Exception exception) {
             Log.d(TAG, "Exception during decoder1 creation", exception);
             decoderRelease();
             return false;
         }
         try {
             mMediaCodec2 = MediaCodec.createByCodecName(str);
-            } catch (Exception exception) {
+        } catch (Exception exception) {
             Log.d(TAG, "Exception during decoder2 creation", exception);
             decoderRelease();
             return false;
         }
         try {
             mMediaCodec3 = MediaCodec.createByCodecName(str);
-            } catch (Exception exception) {
+        } catch (Exception exception) {
             Log.d(TAG, "Exception during decoder3 creation", exception);
             decoderRelease();
             return false;
@@ -645,51 +651,51 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         if (mMediaCodec1 != null) {
             try {
                 mMediaCodec1.stop();
-                } catch (IllegalStateException exception) {
+            } catch (IllegalStateException exception) {
                 mMediaCodec1.reset();
                 // IllegalStateException happens when decoder fail to start.
                 Log.d(TAG, "IllegalStateException during decoder1 stop", exception);
-                } finally {
-                    try {
-                        mMediaCodec1.release();
-                    } catch (IllegalStateException exception) {
-                        Log.d(TAG, "IllegalStateException during decoder1 release", exception);
-                    }
-                    mMediaCodec1 = null;
+            } finally {
+                try {
+                    mMediaCodec1.release();
+                } catch (IllegalStateException exception) {
+                    Log.d(TAG, "IllegalStateException during decoder1 release", exception);
+                }
+                mMediaCodec1 = null;
             }
         }
 
         if (mMediaCodec2 != null) {
             try {
                 mMediaCodec2.stop();
-                } catch (IllegalStateException exception) {
+            } catch (IllegalStateException exception) {
                 mMediaCodec2.reset();
                 // IllegalStateException happens when decoder fail to start.
                 Log.d(TAG, "IllegalStateException during decoder2 stop", exception);
-                } finally {
-                    try {
-                        mMediaCodec2.release();
-                    } catch (IllegalStateException exception) {
-                        Log.d(TAG, "IllegalStateException during decoder2 release", exception);
-                    }
-                    mMediaCodec2 = null;
+            } finally {
+                try {
+                    mMediaCodec2.release();
+                } catch (IllegalStateException exception) {
+                    Log.d(TAG, "IllegalStateException during decoder2 release", exception);
+                }
+                mMediaCodec2 = null;
             }
         }
 
         if (mMediaCodec3 != null) {
             try {
                 mMediaCodec3.stop();
-                } catch (IllegalStateException exception) {
+            } catch (IllegalStateException exception) {
                 mMediaCodec3.reset();
                 // IllegalStateException happens when decoder fail to start.
                 Log.d(TAG, "IllegalStateException during decoder3 stop", exception);
-                } finally {
-                    try {
-                        mMediaCodec3.release();
-                    } catch (IllegalStateException exception) {
-                        Log.d(TAG, "IllegalStateException during decoder3 release", exception);
-                    }
-                    mMediaCodec3 = null;
+            } finally {
+                try {
+                    mMediaCodec3.release();
+                } catch (IllegalStateException exception) {
+                    Log.d(TAG, "IllegalStateException during decoder3 release", exception);
+                }
+                mMediaCodec3 = null;
             }
         }
 
@@ -778,13 +784,13 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     }
 
     public int stopTvPlay(int sessionId, boolean needStopTv) {
-        Log.d(TAG, "stopTvPlay:"+sessionId+" mHardware:"+mHardware);
+        Log.d(TAG, "stopTvPlay:" + sessionId + " mHardware:" + mHardware);
         if (mHardware != null && mConfigs.length > 0) {
             Log.d(TAG, "needStopTv=" + needStopTv);
             if (!needStopTv) {
                 Log.d(TAG, "enableTvViewFastSwitch");
                 enableTvViewFastSwitch();
-            }else {
+            } else {
                 if (mSession != null) {
                     mSession.closeTvAudio();
                 }
@@ -794,9 +800,19 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         }
         return ACTION_SUCCESS;
     }
-    public void setCurrentSessionById(int sessionId){}
-    public void doTuneFinish(int result, Uri uri, int sessionId){};
-    public void tvPlayStopped(int sessionId){};
+
+    public void setCurrentSessionById(int sessionId) {
+    }
+
+    public void doTuneFinish(int result, Uri uri, int sessionId) {
+    }
+
+    ;
+
+    public void tvPlayStopped(int sessionId) {
+    }
+
+    ;
 
     protected int getCurrentSessionId() {
         return mCurrentSessionId;
@@ -841,11 +857,11 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     }
 
     /**
-    * This callback is called when HdmiControlService update the cec device info,
-    * So most of the times it's not triggered by a hotplug action, which means
-    * New device is added here. As a result, we should not do the useless work
-    * of onHdmiDeviceRemoved and onHdmiDeviceAdded when it's the same device.
-    */
+     * This callback is called when HdmiControlService update the cec device info,
+     * So most of the times it's not triggered by a hotplug action, which means
+     * New device is added here. As a result, we should not do the useless work
+     * of onHdmiDeviceRemoved and onHdmiDeviceAdded when it's the same device.
+     */
     @Override
     public TvInputInfo onHdmiDeviceAdded(HdmiDeviceInfo deviceInfo) {
         if (deviceInfo == null) {
@@ -925,52 +941,56 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     protected final BroadcastReceiver mChannelScanStartReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-                 String action = intent.getAction();
-                 Bundle bundle = intent.getBundleExtra(DroidLogicTvUtils.EXTRA_MORE);
-                 String inputId = bundle.getString(TvInputInfo.EXTRA_INPUT_ID);
-                 Log.d(TAG, "mCurrentInputId:"+mCurrentInputId+", inputId:"+inputId);
-                 if (mCurrentInputId != null && mCurrentInputId.equals(inputId)) {
-                     registerInput(inputId);
-                     resetScanStoreListener();
-                     initTvStoreManager();
-                 }
+            String action = intent.getAction();
+            Bundle bundle = intent.getBundleExtra(DroidLogicTvUtils.EXTRA_MORE);
+            String inputId = bundle.getString(TvInputInfo.EXTRA_INPUT_ID);
+            Log.d(TAG, "mCurrentInputId:" + mCurrentInputId + ", inputId:" + inputId);
+            if (mCurrentInputId != null && mCurrentInputId.equals(inputId)) {
+                registerInput(inputId);
+                resetScanStoreListener();
+                initTvStoreManager();
             }
+        }
     };
 
     private void initTvStoreManager() {
-            if (mTvStoreManager == null) {
-                int channel_number_start = 1;
-                if (mSystemControlManager != null)
-                    channel_number_start = mSystemControlManager.getPropertyInt("tv.channel.number.start", 1);
-                mTvStoreManager = new TvStoreManager(this, mCurrentInputId, channel_number_start) {
+        if (mTvStoreManager == null) {
+            int channel_number_start = 1;
+            if (mSystemControlManager != null)
+                channel_number_start = mSystemControlManager.getPropertyInt("tv.channel.number.start", 1);
+            mTvStoreManager = new TvStoreManager(this, mCurrentInputId, channel_number_start) {
                 @Override
                 public void onEvent(String eventType, Bundle eventArgs) {
-                    Log.d(TAG, "TvStoreManager.onEvent:"+eventType);
+                    Log.d(TAG, "TvStoreManager.onEvent:" + eventType);
                     if (mSession != null)
                         mSession.notifySessionEvent(eventType, eventArgs);
                     else
                         Log.d(TAG, "mSession is null, no need to notify tvview.callback");
                 }
+
                 @Override
                 public void onUpdateCurrent(ChannelInfo channel, boolean store) {
                     onUpdateCurrentChannel(channel, store);
                 }
+
                 @Override
                 public void onDtvNumberMode(String mode) {
                     DataProviderManager.putStringValue(DroidLogicTvInputService.this, DroidLogicTvUtils.TV_KEY_DTV_NUMBER_MODE, "lcn");
                 }
+
                 public void onScanEnd() {
                     mTvControlManager.DtvStopScan();
                 }
             };
-    }}
-
-    private float getUptimeSeconds() {
-       return  (float)SystemClock.uptimeMillis() / 1000;
+        }
     }
 
-    public void notifyAppEasStatus(boolean isStarted){
-        Log.d(TAG, "notifyAppEasStatus:"+isStarted);
+    private float getUptimeSeconds() {
+        return (float) SystemClock.uptimeMillis() / 1000;
+    }
+
+    public void notifyAppEasStatus(boolean isStarted) {
+        Log.d(TAG, "notifyAppEasStatus:" + isStarted);
         Bundle bundle = new Bundle();
         bundle.putInt(DroidLogicTvUtils.SIG_INFO_EAS_STATUS, isStarted ? 1 : 0);
         if (mSession != null) {
@@ -983,10 +1003,12 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
         private Uri mUri;
         private boolean hasPendingTune = false;
 
-        public void PendingTuneEvent() {}
+        public void PendingTuneEvent() {
+        }
+
         public void setPendingEvent(Uri uri, int id) {
             if (DEBUG)
-                Log.d(TAG, "PendingTune, uri=" + uri+ ",id:"+id);
+                Log.d(TAG, "PendingTune, uri=" + uri + ",id:" + id);
             mSessionId = id;
             mUri = uri;
             hasPendingTune = true;
@@ -994,7 +1016,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
 
         public boolean hasPendingEventToProcess(int id) {
             if (DEBUG)
-                Log.d(TAG, "hasPendingEventToProcess, id=" + id+ ",mSessionId:"+mSessionId);
+                Log.d(TAG, "hasPendingEventToProcess, id=" + id + ",mSessionId:" + mSessionId);
             return hasPendingTune && (mSessionId == id);
         }
 
@@ -1002,7 +1024,7 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
             mUri = null;
             mSessionId = -1;
             hasPendingTune = false;
-       }
+        }
     }
 
     public int getCaptionRawUserStyle() {
@@ -1011,11 +1033,12 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
     }
 
     private static final String INPUT_ID_ADTV = "com.droidlogic.tvinput/.services.ADTVInputService/HW16";
+
     private void initTvPlaySetting() {
         //tv_current_device_id
         if (DataProviderManager.getIntValue(this, DroidLogicTvUtils.TV_CURRENT_DEVICE_ID, -1) == -1) {
             DataProviderManager.putIntValue(this, DroidLogicTvUtils.TV_CURRENT_DEVICE_ID,
-                      DroidLogicTvUtils.DEVICE_ID_ADTV);
+                    DroidLogicTvUtils.DEVICE_ID_ADTV);
         }
 
         //tv_current_inputid
@@ -1074,30 +1097,30 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
             }
         }
         Log.d(TAG, "setAudioDelay, audioSource:" + audioSource + ",speaker delay:" + mAudioConfigManager.getAudioOutputSpeakerDelay(audioSource)
-                + ", spdif delay:"+ mAudioConfigManager.getAudioOutputSpdifDelay(audioSource));
+                + ", spdif delay:" + mAudioConfigManager.getAudioOutputSpdifDelay(audioSource));
         DroidLogicTvUtils.setTvSourceType(mContext, audioSource);
         mAudioConfigManager.setAudioOutputSpeakerDelay(audioSource, mAudioConfigManager.getAudioOutputSpeakerDelay(audioSource));
         mAudioConfigManager.setAudioOutputSpdifDelay(audioSource, mAudioConfigManager.getAudioOutputSpdifDelay(audioSource));
     }
 
-    private boolean getAudioDelayEnabled () {
+    private boolean getAudioDelayEnabled() {
         return SystemControlManager.getInstance()
                 .getPropertyBoolean(AudioConfigManager.PROP_AUDIO_DELAY_ENABLED, false);
     }
 
     private boolean isHdmiDeviceId(int deviceId) {
         return deviceId >= DroidLogicTvUtils.DEVICE_ID_HDMI1 &&
-               deviceId <= DroidLogicTvUtils.DEVICE_ID_HDMI4;
+                deviceId <= DroidLogicTvUtils.DEVICE_ID_HDMI4;
 
     }
 
-    private void enableTvViewFastSwitch (){
+    private void enableTvViewFastSwitch() {
         if (mSystemControlManager.getPropertyBoolean(DroidLogicTvUtils.PROP_IGNORE_FAST_SWITCH, false)) {
             Log.d(TAG, "app request ignore fast switch once");
             mSystemControlManager.setProperty(DroidLogicTvUtils.PROP_IGNORE_FAST_SWITCH, "false");
             return;
         }
-        if (mSession !=null) {
+        if (mSession != null) {
             int device_id = mSession.getDeviceId();
             switch (device_id) {
                 case DroidLogicTvUtils.DEVICE_ID_HDMI1:
@@ -1110,13 +1133,13 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
                 case DroidLogicTvUtils.DEVICE_ID_DTV:
                 case DroidLogicTvUtils.DEVICE_ID_ADTV:
                     mSystemControlManager.setProperty(DroidLogicTvUtils.PROP_NEED_FAST_SWITCH, "true");
-                break;
+                    break;
             }
         }
     }
 
     private void completeTvViewFastSwitch() {
-        if (mSession !=null &&
+        if (mSession != null &&
                 mSystemControlManager.getPropertyBoolean(DroidLogicTvUtils.PROP_NEED_FAST_SWITCH, false)) {
             int device_id = mSession.getDeviceId();
             switch (device_id) {
@@ -1131,12 +1154,12 @@ public abstract class DroidLogicTvInputService extends TvInputService implements
                 case DroidLogicTvUtils.DEVICE_ID_AV2:
                     onSigChange(mTvControlManager.GetCurrentSignalInfo());
                     mSystemControlManager.setProperty(DroidLogicTvUtils.PROP_NEED_FAST_SWITCH, "false");
-                break;
+                    break;
                 case DroidLogicTvUtils.DEVICE_ID_ATV:
                 case DroidLogicTvUtils.DEVICE_ID_DTV:
                 case DroidLogicTvUtils.DEVICE_ID_ADTV:
                     //ATV,DTV reset PROP_NEED_FAST_SWITCH in ADTV service
-                break;
+                    break;
             }
         }
     }

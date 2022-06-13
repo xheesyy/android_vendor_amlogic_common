@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,15 +15,15 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/amlogic_developer_options_title">
+    android:title="@string/amlogic_developer_options_title">
     <SwitchPreference
         android:key="dtvkit_fcc"
         android:persistent="false"
-        android:title="@string/dtvkit_fcc"/>
+        android:title="@string/dtvkit_fcc" />
     <SwitchPreference
         android:key="dtvkit_pip"
         android:persistent="false"
-        android:title="@string/dtvkit_pip"/>
+        android:title="@string/dtvkit_pip" />
     <SwitchPreference
         android:key="dvbc_dvbs_switch"
         android:persistent="false"

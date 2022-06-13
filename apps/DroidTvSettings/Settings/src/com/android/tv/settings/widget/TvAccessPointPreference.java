@@ -35,7 +35,7 @@ public class TvAccessPointPreference extends AccessPointPreference {
     private AccessPoint mAccessPoint;
 
     public TvAccessPointPreference(AccessPoint accessPoint, Context context,
-            AccessPointPreference.UserBadgeCache cache, boolean forSavedNetworks) {
+                                   AccessPointPreference.UserBadgeCache cache, boolean forSavedNetworks) {
         super(accessPoint, context, cache, forSavedNetworks);
         mAccessPoint = accessPoint;
     }

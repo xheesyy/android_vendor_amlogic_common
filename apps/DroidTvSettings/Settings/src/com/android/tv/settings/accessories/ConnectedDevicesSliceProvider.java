@@ -57,7 +57,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/** The SliceProvider for "connected devices" settings */
+/**
+ * The SliceProvider for "connected devices" settings
+ */
 public class ConnectedDevicesSliceProvider extends SliceProvider implements
         BluetoothDeviceProvider.Listener {
 
@@ -72,10 +74,10 @@ public class ConnectedDevicesSliceProvider extends SliceProvider implements
 
     private final BluetoothDeviceProvider mLocalBluetoothDeviceProvider =
             new LocalBluetoothDeviceProvider() {
-        BluetoothDeviceProvider getHostBluetoothDeviceProvider() {
-            return getBluetoothDeviceProvider();
-        }
-    };
+                BluetoothDeviceProvider getHostBluetoothDeviceProvider() {
+                    return getBluetoothDeviceProvider();
+                }
+            };
 
     private final ServiceConnection mBtDeviceServiceConnection =
             new SimplifiedConnection() {
@@ -361,9 +363,9 @@ public class ConnectedDevicesSliceProvider extends SliceProvider implements
                             .addSwitch(
                                     AccessoryUtils.isBluetoothEnabled()
                                             ? PendingIntent.getActivity(
-                                                    getContext(), 1, bluetoothToggleIntent, 0)
+                                            getContext(), 1, bluetoothToggleIntent, 0)
                                             : PendingIntent.getBroadcast(
-                                                    getContext(), 2, bluetoothToggleIntent, 0),
+                                            getContext(), 2, bluetoothToggleIntent, 0),
                                     AccessoryUtils.isBluetoothEnabled())
             );
         }

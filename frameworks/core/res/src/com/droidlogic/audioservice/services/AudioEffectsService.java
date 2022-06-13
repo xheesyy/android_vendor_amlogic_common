@@ -84,9 +84,9 @@ public class AudioEffectsService extends Service {
         ContentProviderClient tvProvider = getContentResolver().acquireContentProviderClient(TvContract.AUTHORITY);
 
         return (tvProvider != null) &&
-                (((SystemProperties.getInt("persist.vendor.media.bootvideo", 50)  > 100)
+                (((SystemProperties.getInt("persist.vendor.media.bootvideo", 50) > 100)
                         && TextUtils.equals(SystemProperties.get("service.bootvideo.exit", "1"), "0"))
-                || ((SystemProperties.getInt("persist.vendor.media.bootvideo", 50)  <= 100)));
+                        || ((SystemProperties.getInt("persist.vendor.media.bootvideo", 50) <= 100)));
     }
 
     private static final int MSG_CHECK_BOOTVIDEO_FINISHED = 0;
@@ -131,7 +131,7 @@ public class AudioEffectsService extends Service {
             return mSoundEffectManager.getDtsTruVolumeHdEnable();
         }
 
-        public int getSoundModeStatus () {
+        public int getSoundModeStatus() {
             return mSoundEffectManager.getSoundModeStatus();
         }
 
@@ -140,35 +140,35 @@ public class AudioEffectsService extends Service {
             return mSoundEffectManager.getSoundModule();
         }
 
-        public int getTrebleStatus () {
+        public int getTrebleStatus() {
             return mSoundEffectManager.getTrebleStatus();
         }
 
-        public int getBassStatus () {
+        public int getBassStatus() {
             return mSoundEffectManager.getBassStatus();
         }
 
-        public int getBalanceStatus () {
+        public int getBalanceStatus() {
             return mSoundEffectManager.getBalanceStatus();
         }
 
-        public boolean getAgcEnableStatus () {
+        public boolean getAgcEnableStatus() {
             return mSoundEffectManager.getAgcEnableStatus();
         }
 
-        public int getAgcMaxLevelStatus () {
+        public int getAgcMaxLevelStatus() {
             return mSoundEffectManager.getAgcMaxLevelStatus();
         }
 
-        public int getAgcAttackTimeStatus () {
+        public int getAgcAttackTimeStatus() {
             return mSoundEffectManager.getAgcAttackTimeStatus();
         }
 
-        public int getAgcReleaseTimeStatus () {
+        public int getAgcReleaseTimeStatus() {
             return mSoundEffectManager.getAgcReleaseTimeStatus();
         }
 
-        public int getAgcSourceIdStatus () {
+        public int getAgcSourceIdStatus() {
             return mSoundEffectManager.getAgcSourceIdStatus();
         }
 
@@ -176,11 +176,11 @@ public class AudioEffectsService extends Service {
             return mSoundEffectManager.getVirtualSurroundStatus();
         }
 
-        public void setSoundMode (int mode) {
+        public void setSoundMode(int mode) {
             mSoundEffectManager.setSoundMode(mode);
         }
 
-        public void setSoundModeByObserver (int mode) {
+        public void setSoundModeByObserver(int mode) {
             mSoundEffectManager.setSoundModeByObserver(mode);
         }
 
@@ -192,16 +192,16 @@ public class AudioEffectsService extends Service {
             return mSoundEffectManager.getUserSoundModeParam(bandNumber);
         }
 
-        public void setTreble (int step) {
-            mSoundEffectManager.setTreble (step);
+        public void setTreble(int step) {
+            mSoundEffectManager.setTreble(step);
         }
 
-        public void setBass (int step) {
-            mSoundEffectManager.setBass (step);
+        public void setBass(int step) {
+            mSoundEffectManager.setBass(step);
         }
 
-        public void setBalance (int step) {
-            mSoundEffectManager.setBalance (step);
+        public void setBalance(int step) {
+            mSoundEffectManager.setBalance(step);
         }
 
         public void setSurroundEnable(boolean enable) {
@@ -228,28 +228,28 @@ public class AudioEffectsService extends Service {
             return mSoundEffectManager.getTruBassEnable();
         }
 
-        public void setAgcEnable (boolean enable) {
+        public void setAgcEnable(boolean enable) {
             mSoundEffectManager.setAgcEnable(enable);
         }
 
-        public void setAgcMaxLevel (int step) {
+        public void setAgcMaxLevel(int step) {
             mSoundEffectManager.setAgcMaxLevel(step);
         }
 
-        public void setAgcAttackTime (int step) {
+        public void setAgcAttackTime(int step) {
             mSoundEffectManager.setAgcAttackTime(step);
         }
 
-        public void setAgcReleaseTime (int step) {
+        public void setAgcReleaseTime(int step) {
             mSoundEffectManager.setAgcReleaseTime(step);
         }
 
-        public void setSourceIdForAvl (int step) {
+        public void setSourceIdForAvl(int step) {
             mSoundEffectManager.setSourceIdForAvl(step);
         }
 
-        public void setVirtualSurround (int mode) {
-            mSoundEffectManager.setVirtualSurround (mode);
+        public void setVirtualSurround(int mode) {
+            mSoundEffectManager.setVirtualSurround(mode);
         }
 
         public void setDbxEnable(boolean enable) {

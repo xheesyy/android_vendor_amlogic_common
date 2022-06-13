@@ -26,6 +26,6 @@ public class DateTimeActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DateTimeFragment.class.getName(), null);
+                .newSettingsFragment(DateTimeFragment.class.getName(), null);
     }
 }

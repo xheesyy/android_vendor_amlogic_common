@@ -24,7 +24,9 @@ import androidx.fragment.app.Fragment;
  */
 public interface SettingsFragmentProvider {
 
-    /** Creates a new instance of a settings fragment. */
+    /**
+     * Creates a new instance of a settings fragment.
+     */
     Fragment newSettingsFragment(String className, Bundle arguments)
             throws IllegalArgumentException;
 }

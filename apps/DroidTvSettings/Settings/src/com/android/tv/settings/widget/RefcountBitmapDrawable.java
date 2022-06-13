@@ -25,7 +25,7 @@ public class RefcountBitmapDrawable extends BitmapDrawable {
     private final RefcountObject<Bitmap> mRefcountObject;
 
     /**
-     *  create initial drawable,  this will not increase the refcount
+     * create initial drawable,  this will not increase the refcount
      */
     public RefcountBitmapDrawable(Resources res, RefcountObject<Bitmap> bitmap) {
         super(res, bitmap.getObject());
@@ -33,7 +33,7 @@ public class RefcountBitmapDrawable extends BitmapDrawable {
     }
 
     /**
-     *  create the drawable from existing drawable, will not increase refcount
+     * create the drawable from existing drawable, will not increase refcount
      */
     public RefcountBitmapDrawable(Resources res, RefcountBitmapDrawable drawable) {
         this(res, drawable.getRefcountObject());

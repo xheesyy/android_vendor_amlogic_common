@@ -47,5 +47,6 @@ public final class UpdateEngineStatuses {
         return STATUS_MAP.get(status);
     }
 
-    private UpdateEngineStatuses() {}
+    private UpdateEngineStatuses() {
+    }
 }

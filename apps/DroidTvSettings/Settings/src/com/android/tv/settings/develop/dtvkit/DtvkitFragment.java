@@ -18,17 +18,23 @@ package com.android.tv.settings.develop.dtvkit;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.ListPreference;
+
 import android.os.SystemProperties;
 import android.text.TextUtils;
+
 import com.android.tv.settings.util.DroidUtils;
 import com.android.tv.settings.SettingsConstant;
 import com.android.tv.settings.R;
 import com.droidlogic.app.SystemControlManager;
+
 import android.util.Log;
 
 import android.content.Context;
@@ -43,52 +49,56 @@ import android.widget.TextView;
 import android.view.Display;
 import android.view.WindowManager;
 import android.provider.Settings;
+
 import com.android.tv.settings.develop.dtvkit.DtvkitRebootConfirmFragment;
 import com.android.tv.twopanelsettings.TwoPanelSettingsFragment;
+
 import androidx.leanback.preference.LeanbackSettingsFragmentCompat;
 import androidx.fragment.app.Fragment;
+
 import android.app.tvsettings.TvSettingsEnums;
+
 import static com.android.tv.settings.util.InstrumentationUtils.logEntrySelected;
 
 public class DtvkitFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
-	private static final String TAG = "DtvkitFragment";
-    private static final String KEY_DTVKIT_FCC    = "dtvkit_fcc";
-    private static final String KEY_DTVKIT_PIP    = "dtvkit_pip";
+    private static final String TAG = "DtvkitFragment";
+    private static final String KEY_DTVKIT_FCC = "dtvkit_fcc";
+    private static final String KEY_DTVKIT_PIP = "dtvkit_pip";
     private static final String KEY_DVBC_DVBS_SWITCH = "dvbc_dvbs_switch";
 
-    private static final String PROP_DTV_PIPFCC    = "vendor.tv.dtv.pipfcc.architecture";
-    private static final String PROP_DTV_PIPLINE   = "vendor.amtsplayer.pipeline";
-    private static final String PROP_DTV_PIP       = "vendor.tv.dtv.enable.pip";
-    private static final String PROP_DTV_FCC       = "vendor.tv.dtv.enable.fcc";
-    private static final String PROP_DTV_AUDIO     = "vendor.dtv.audio.skipamadec";
-    private static final String PROP_DVBC_DVBS_SWITCH     = "persist.vendor.tvconfig.path";
-    private static final String PROP_DVBC_PATH     = "/mnt/vendor/odm_ext/etc/tvconfig/dtvkit/config.xml";
-    private static final String PROP_DVBS_PATH     = "/mnt/vendor/odm_ext/etc/tvconfig/dtvkit/config_dvbs.xml";
+    private static final String PROP_DTV_PIPFCC = "vendor.tv.dtv.pipfcc.architecture";
+    private static final String PROP_DTV_PIPLINE = "vendor.amtsplayer.pipeline";
+    private static final String PROP_DTV_PIP = "vendor.tv.dtv.enable.pip";
+    private static final String PROP_DTV_FCC = "vendor.tv.dtv.enable.fcc";
+    private static final String PROP_DTV_AUDIO = "vendor.dtv.audio.skipamadec";
+    private static final String PROP_DVBC_DVBS_SWITCH = "persist.vendor.tvconfig.path";
+    private static final String PROP_DVBC_PATH = "/mnt/vendor/odm_ext/etc/tvconfig/dtvkit/config.xml";
+    private static final String PROP_DVBS_PATH = "/mnt/vendor/odm_ext/etc/tvconfig/dtvkit/config_dvbs.xml";
 
     private Preference mDtvkitFCC;
     private Preference mDtvkitPIP;
     private Preference mDvbcDvbsSwitchPref;
 
-	private SystemControlManager mSystemControlManager;
+    private SystemControlManager mSystemControlManager;
 
 
-	public static DtvkitFragment newInstance() {
-		return new DtvkitFragment();
-	}
+    public static DtvkitFragment newInstance() {
+        return new DtvkitFragment();
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-		setPreferencesFromResource(R.xml.dtvkit, null);
-		mSystemControlManager = SystemControlManager.getInstance();
-        mDtvkitFCC=findPreference(KEY_DTVKIT_FCC);
-        mDtvkitPIP=findPreference(KEY_DTVKIT_PIP);
-        mDvbcDvbsSwitchPref=findPreference(KEY_DVBC_DVBS_SWITCH);
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.dtvkit, null);
+        mSystemControlManager = SystemControlManager.getInstance();
+        mDtvkitFCC = findPreference(KEY_DTVKIT_FCC);
+        mDtvkitPIP = findPreference(KEY_DTVKIT_PIP);
+        mDvbcDvbsSwitchPref = findPreference(KEY_DVBC_DVBS_SWITCH);
         mDtvkitFCC.setOnPreferenceChangeListener(this);
         mDtvkitPIP.setOnPreferenceChangeListener(this);
         mDvbcDvbsSwitchPref.setOnPreferenceChangeListener(this);
@@ -143,7 +153,7 @@ public class DtvkitFragment extends SettingsPreferenceFragment implements Prefer
     private boolean getDvbcDvbsSwitchPropEnabled() {
         String strDvbcDvbsSwitchPropEnabled;
         strDvbcDvbsSwitchPropEnabled = mSystemControlManager.getProperty(PROP_DVBC_DVBS_SWITCH);
-        if (strDvbcDvbsSwitchPropEnabled == null )
+        if (strDvbcDvbsSwitchPropEnabled == null)
             return false;
         else {
             if (strDvbcDvbsSwitchPropEnabled.equals(PROP_DVBC_PATH))
@@ -173,25 +183,26 @@ public class DtvkitFragment extends SettingsPreferenceFragment implements Prefer
     }
 
     private void updateUI() {
-        ((SwitchPreference)mDtvkitFCC).setChecked(isEnableFCC());
-        ((SwitchPreference)mDtvkitPIP).setChecked(isEnablePIP());
+        ((SwitchPreference) mDtvkitFCC).setChecked(isEnableFCC());
+        ((SwitchPreference) mDtvkitPIP).setChecked(isEnablePIP());
 
         boolean isDvbcDvbsSwitchEnabled = getDvbcDvbsSwitchPropEnabled();
-        ((SwitchPreference)mDvbcDvbsSwitchPref).setChecked(isDvbcDvbsSwitchEnabled);
+        ((SwitchPreference) mDvbcDvbsSwitchPref).setChecked(isDvbcDvbsSwitchEnabled);
     }
 
     private boolean isEnablePIP() {
         if (mSystemControlManager.getPropertyBoolean(PROP_DTV_PIPFCC, false)
-            && mSystemControlManager.getProperty(PROP_DTV_PIPLINE).contains("1")
-            && mSystemControlManager.getPropertyBoolean(PROP_DTV_PIP, false)) {
+                && mSystemControlManager.getProperty(PROP_DTV_PIPLINE).contains("1")
+                && mSystemControlManager.getPropertyBoolean(PROP_DTV_PIP, false)) {
             return true;
         }
         return false;
     }
+
     private boolean isEnableFCC() {
         if (mSystemControlManager.getPropertyBoolean(PROP_DTV_PIPFCC, false)
-            && mSystemControlManager.getProperty(PROP_DTV_PIPLINE).contains("1")
-            && mSystemControlManager.getPropertyBoolean(PROP_DTV_FCC, false)) {
+                && mSystemControlManager.getProperty(PROP_DTV_PIPLINE).contains("1")
+                && mSystemControlManager.getPropertyBoolean(PROP_DTV_FCC, false)) {
             return true;
         }
         return false;

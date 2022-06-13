@@ -201,7 +201,7 @@ public class WifiConnectionActivity extends InstrumentedActivity implements
                 this, false, true, null,
                 mOptionsOrConnectState, mConnectState, AdvancedWifiOptionsFlow.START_DEFAULT_PAGE);
         UserChoiceInfo userChoiceInfo =
-                    ViewModelProviders.of(this).get(UserChoiceInfo.class);
+                ViewModelProviders.of(this).get(UserChoiceInfo.class);
         userChoiceInfo.setWifiConfiguration(mConfiguration);
         userChoiceInfo.setWifiSecurity(mWifiSecurity);
 

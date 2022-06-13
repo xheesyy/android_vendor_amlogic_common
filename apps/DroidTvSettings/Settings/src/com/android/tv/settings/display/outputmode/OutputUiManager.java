@@ -43,9 +43,10 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.UserHandle ;
+import android.os.UserHandle;
 
 public class OutputUiManager {
     private static final String TAG = "OutputUiManager";
@@ -55,149 +56,149 @@ public class OutputUiManager {
     public static final String HDMI_MODE = "hdmi";
 
     private static final String[] HDMI_LIST = {
-        "2160p60hz",
-        "2160p50hz",
-        "2160p30hz",
-        "2160p25hz",
-        "2160p24hz",
-        "smpte24hz",
-        "1080p60hz",
-        "1080p50hz",
-        "1080p24hz",
-        "720p60hz",
-        "720p50hz",
-        "1080i60hz",
-        "1080i50hz",
-        "576p50hz",
-        "480p60hz",
-        "576i50hz",
-        "480i60hz",
-        "3440x1440p60hz",
-        "2560x1600p60hz",
-        "2560x1440p60hz",
-        "2560x1080p60hz",
-        "1920x1200p60hz",
-        "1680x1050p60hz",
-        "1600x1200p60hz",
-        "1600x900p60hz",
-        "1440x900p60hz",
-        "1360x768p60hz",
-        "1280x1024p60hz",
-        "1280x800p60hz",
-        "1280x480p60hz",
-        "1024x768p60hz",
-        "1024x600p60hz",
-        "800x600p60hz",
-        "800x480p60hz",
-        "640x480p60hz",
-        "480x320p60hz"
+            "2160p60hz",
+            "2160p50hz",
+            "2160p30hz",
+            "2160p25hz",
+            "2160p24hz",
+            "smpte24hz",
+            "1080p60hz",
+            "1080p50hz",
+            "1080p24hz",
+            "720p60hz",
+            "720p50hz",
+            "1080i60hz",
+            "1080i50hz",
+            "576p50hz",
+            "480p60hz",
+            "576i50hz",
+            "480i60hz",
+            "3440x1440p60hz",
+            "2560x1600p60hz",
+            "2560x1440p60hz",
+            "2560x1080p60hz",
+            "1920x1200p60hz",
+            "1680x1050p60hz",
+            "1600x1200p60hz",
+            "1600x900p60hz",
+            "1440x900p60hz",
+            "1360x768p60hz",
+            "1280x1024p60hz",
+            "1280x800p60hz",
+            "1280x480p60hz",
+            "1024x768p60hz",
+            "1024x600p60hz",
+            "800x600p60hz",
+            "800x480p60hz",
+            "640x480p60hz",
+            "480x320p60hz"
     };
     private static final String[] HDMI_TITLE = {
-        "4k2k-60hz",
-        "4k2k-50hz",
-        "4k2k-30hz",
-        "4k2k-25hz",
-        "4k2k-24hz",
-        "4k2k-smpte",
-        "1080p-60hz",
-        "1080p-50hz",
-        "1080p-24hz",
-        "720p-60hz",
-        "720p-50hz",
-        "1080i-60hz",
-        "1080i-50hz",
-        "576p-50hz",
-        "480p-60hz",
-        "576i-50hz",
-        "480i-60hz",
-        "3440x1440p60hz",
-        "2560x1600p60hz",
-        "2560x1440p60hz",
-        "2560x1080p60hz",
-        "1920x1200p60hz",
-        "1680x1050p60hz",
-        "1600x1200p60hz",
-        "1600x900p60hz",
-        "1440x900p60hz",
-        "1360x768p60hz",
-        "1280x1024p60hz",
-        "1280x800p60hz",
-        "1280x480p60hz",
-        "1024x768p60hz",
-        "1024x600p60hz",
-        "800x600p60hz",
-        "800x480p60hz",
-        "640x480p60hz",
-        "480x320p60hz"
+            "4k2k-60hz",
+            "4k2k-50hz",
+            "4k2k-30hz",
+            "4k2k-25hz",
+            "4k2k-24hz",
+            "4k2k-smpte",
+            "1080p-60hz",
+            "1080p-50hz",
+            "1080p-24hz",
+            "720p-60hz",
+            "720p-50hz",
+            "1080i-60hz",
+            "1080i-50hz",
+            "576p-50hz",
+            "480p-60hz",
+            "576i-50hz",
+            "480i-60hz",
+            "3440x1440p60hz",
+            "2560x1600p60hz",
+            "2560x1440p60hz",
+            "2560x1080p60hz",
+            "1920x1200p60hz",
+            "1680x1050p60hz",
+            "1600x1200p60hz",
+            "1600x900p60hz",
+            "1440x900p60hz",
+            "1360x768p60hz",
+            "1280x1024p60hz",
+            "1280x800p60hz",
+            "1280x480p60hz",
+            "1024x768p60hz",
+            "1024x600p60hz",
+            "800x600p60hz",
+            "800x480p60hz",
+            "640x480p60hz",
+            "480x320p60hz"
     };
 
     public static final String[] HDMI_COLOR_LIST = {
-        "444,12bit",
-        "444,10bit",
-        "444,8bit",
-        "422,12bit",
-        "420,12bit",
-        "420,10bit",
-        "420,8bit",
-        "rgb,12bit",
-        "rgb,10bit",
-        "rgb,8bit"
+            "444,12bit",
+            "444,10bit",
+            "444,8bit",
+            "422,12bit",
+            "420,12bit",
+            "420,10bit",
+            "420,8bit",
+            "rgb,12bit",
+            "rgb,10bit",
+            "rgb,8bit"
     };
     public static final String[] HDMI_COLOR_TITLE = {
-        "YCbCr444 12bit",
-        "YCbCr444 10bit",
-        "YCbCr444 8bit",
-        "YCbCr422 12bit",
-        "YCbCr420 12bit",
-        "YCbCr420 10bit",
-        "YCbCr420 8bit",
-        "RGB 12bit",
-        "RGB 10bit",
-        "RGB 8bit"
+            "YCbCr444 12bit",
+            "YCbCr444 10bit",
+            "YCbCr444 8bit",
+            "YCbCr422 12bit",
+            "YCbCr420 12bit",
+            "YCbCr420 10bit",
+            "YCbCr420 8bit",
+            "RGB 12bit",
+            "RGB 10bit",
+            "RGB 8bit"
     };
 
     public static final String[] COLOR_SPACE_LIST = {
-        "444",
-        "422",
-        "420",
-        "rgb",
+            "444",
+            "422",
+            "420",
+            "rgb",
     };
 
     public static final String[] COLOR_SPACE_TITLE = {
-        "YCbCr444",
-        "YCbCr422",
-        "YCbCr420",
-        "RGB",
+            "YCbCr444",
+            "YCbCr422",
+            "YCbCr420",
+            "RGB",
     };
 
     public static final String[] COLOR_DEPTH_LIST = {
-        "16bit",
-        "12bit",
-        "10bit",
-        "8bit",
+            "16bit",
+            "12bit",
+            "10bit",
+            "8bit",
     };
 
     private static final String[] CVBS_MODE_VALUE_LIST = {
-        "480cvbs",
-        "576cvbs"
+            "480cvbs",
+            "576cvbs"
     };
     private static final String[] CVBS_MODE_TITLE_LIST = {
-        "480 CVBS",
-        "576 CVBS"
+            "480 CVBS",
+            "576 CVBS"
     };
 
     private static final String[] DOLBY_VISION_TYPE = {
-         "DV_RGB_444_8BIT",
+            "DV_RGB_444_8BIT",
 //         "DV_YCbCr_422_12BIT",
-         "LL_YCbCr_422_12BIT",
-         "LL_RGB_444_12BIT",
-         "LL_RGB_444_10BIT"
+            "LL_YCbCr_422_12BIT",
+            "LL_RGB_444_12BIT",
+            "LL_RGB_444_10BIT"
     };
 
-    private static final int DV_LL_RGB            = 3;
-    private static final int DV_LL_YUV            = 2;
-    private static final int DV_ENABLE            = 1;
-    private static final int DV_DISABLE           = 0;
+    private static final int DV_LL_RGB = 3;
+    private static final int DV_LL_YUV = 2;
+    private static final int DV_ENABLE = 1;
+    private static final int DV_DISABLE = 0;
 
     private static final int DEFAULT_HDMI_MODE = 0;
     private static final int DEFAULT_CVBS_MODE = 1;
@@ -222,7 +223,7 @@ public class OutputUiManager {
     private static String tvSupportDolbyVisionMode;
     private static String tvSupportDolbyVisionType;
 
-    public OutputUiManager(Context context){
+    public OutputUiManager(Context context) {
         mContext = context;
         mOutputModeManager = OutputModeManager.getInstance(mContext);
         mDolbyVisionSettingManager = new DolbyVisionSettingManager(mContext);
@@ -232,9 +233,9 @@ public class OutputUiManager {
         initColorValues(mUiMode);
     }
 
-    public String getUiMode(){
+    public String getUiMode() {
         String currentMode = mOutputModeManager.getCurrentOutputMode();
-        Log.d(TAG,"getUiMode currentMode = " + currentMode);
+        Log.d(TAG, "getUiMode currentMode = " + currentMode);
         if (currentMode.contains(CVBS_MODE)) {
             mUiMode = CVBS_MODE;
         } else {
@@ -243,7 +244,7 @@ public class OutputUiManager {
         return mUiMode;
     }
 
-    public void updateUiMode(){
+    public void updateUiMode() {
         mUiMode = getUiMode();
         initModeValues(mUiMode);
         initColorValues(mUiMode);
@@ -255,12 +256,12 @@ public class OutputUiManager {
         return true;
     }
 
-    public String getCurrentMode(){
-         return mOutputModeManager.getCurrentOutputMode();
+    public String getCurrentMode() {
+        return mOutputModeManager.getCurrentOutputMode();
     }
 
-    public String getCurrentColorAttribute(){
-         return mOutputModeManager.getCurrentColorAttribute();
+    public String getCurrentColorAttribute() {
+        return mOutputModeManager.getCurrentColorAttribute();
     }
 
     public String getCurrentColorSpaceAttr() {
@@ -272,13 +273,14 @@ public class OutputUiManager {
         return "default";
     }
 
-    public void setHdrStrategy(String type){
+    public void setHdrStrategy(String type) {
         mOutputModeManager.setHdrStrategy(type);
     }
 
     public String getHdrStrategy() {
         return mOutputModeManager.getHdrStrategy();
     }
+
     public String getCurrentColorSpaceTitle() {
         for (int i = 0; i < HDMI_COLOR_LIST.length; i++) {
             if (getCurrentColorAttribute().contains(HDMI_COLOR_LIST[i])) {
@@ -297,13 +299,13 @@ public class OutputUiManager {
         return "default";
     }
 
-    private void initColorValues(String mode){
+    private void initColorValues(String mode) {
         filterColorAttribute();
         mColorTitleList.clear();
         mColorValueList.clear();
 
         if (mode.equalsIgnoreCase(HDMI_MODE)) {
-            for (int i=0 ; i< mHdmiColorValueList.length; i++) {
+            for (int i = 0; i < mHdmiColorValueList.length; i++) {
                 if (mHdmiColorTitleList[i] != null && mHdmiColorTitleList[i].length() != 0) {
                     mColorTitleList.add(mHdmiColorTitleList[i]);
                     mColorValueList.add(mHdmiColorValueList[i]);
@@ -321,15 +323,15 @@ public class OutputUiManager {
         mOutputModeManager.setOutputMode(getCurrentMode());
     }
 
-    public ArrayList<String> getColorTitleList(){
+    public ArrayList<String> getColorTitleList() {
         return mColorTitleList;
     }
 
-    public ArrayList<String> getColorValueList(){
+    public ArrayList<String> getColorValueList() {
         return mColorValueList;
     }
 
-    public void  filterColorAttribute() {
+    public void filterColorAttribute() {
         List<String> listValue = new ArrayList<String>();
         List<String> listTitle = new ArrayList<String>();
 
@@ -362,41 +364,41 @@ public class OutputUiManager {
         }
     }
 
-    public boolean isModeSupportColor(final String curMode, final String curValue){
+    public boolean isModeSupportColor(final String curMode, final String curValue) {
         return mOutputModeManager.isModeSupportColor(curMode, curValue);
     }
 
-    public int getCurrentModeIndex(){
-         String currentMode = mOutputModeManager.getCurrentOutputMode();
-         for (int i=0 ; i < mValueList.size();i++) {
-             if (currentMode.equals(mValueList.get(i))) {
-                return i ;
-             }
-         }
-         if (mUiMode.equals(HDMI_MODE)) {
+    public int getCurrentModeIndex() {
+        String currentMode = mOutputModeManager.getCurrentOutputMode();
+        for (int i = 0; i < mValueList.size(); i++) {
+            if (currentMode.equals(mValueList.get(i))) {
+                return i;
+            }
+        }
+        if (mUiMode.equals(HDMI_MODE)) {
             return DEFAULT_HDMI_MODE;
-         }else{
+        } else {
             return DEFAULT_CVBS_MODE;
-         }
+        }
     }
 
-    private void initModeValues(String mode){
+    private void initModeValues(String mode) {
         filterOutputMode();
         mTitleList.clear();
         mValueList.clear();
 
         if (mode.equalsIgnoreCase(HDMI_MODE)) {
-            for (int i=0 ; i< mHdmiValueList.length; i++) {
+            for (int i = 0; i < mHdmiValueList.length; i++) {
                 if (mHdmiTitleList[i] != null && mHdmiTitleList[i].length() != 0) {
                     mTitleList.add(mHdmiTitleList[i]);
                     mValueList.add(mHdmiValueList[i]);
                 }
             }
-        }else if (mode.equalsIgnoreCase(CVBS_MODE)) {
-            for (int i = 0 ; i< CVBS_MODE_VALUE_LIST.length; i++) {
+        } else if (mode.equalsIgnoreCase(CVBS_MODE)) {
+            for (int i = 0; i < CVBS_MODE_VALUE_LIST.length; i++) {
                 mTitleList.add(CVBS_MODE_VALUE_LIST[i]);
             }
-            for (int i=0 ; i < CVBS_MODE_VALUE_LIST.length ; i++) {
+            for (int i = 0; i < CVBS_MODE_VALUE_LIST.length; i++) {
                 mValueList.add(CVBS_MODE_VALUE_LIST[i]);
             }
         }
@@ -409,33 +411,36 @@ public class OutputUiManager {
     public void change2BestMode() {
         mOutputModeManager.setBestMode(null);
     }
-    public boolean isBestOutputmode(){
+
+    public boolean isBestOutputmode() {
         return mOutputModeManager.isBestOutputmode();
     }
 
     public void setBestDolbyVision(boolean enable) {
         mOutputModeManager.setBestDolbyVision(enable);
     }
-    public boolean isBestDolbyVsion(){
+
+    public boolean isBestDolbyVsion() {
         return mOutputModeManager.isBestDolbyVsion();
     }
+
     public void change2DeepColorMode() {
         mOutputModeManager.setDeepColorMode();
     }
 
-    public boolean isDeepColor(){
+    public boolean isDeepColor() {
         return mOutputModeManager.isDeepColor();
     }
 
-    public ArrayList<String> getOutputmodeTitleList(){
+    public ArrayList<String> getOutputmodeTitleList() {
         return mTitleList;
     }
 
-    public ArrayList<String> getOutputmodeValueList(){
+    public ArrayList<String> getOutputmodeValueList() {
         return mValueList;
     }
 
-    public void  filterOutputMode() {
+    public void filterOutputMode() {
         List<String> listValue = new ArrayList<String>();
         List<String> listTitle = new ArrayList<String>();
 
@@ -556,7 +561,7 @@ public class OutputUiManager {
         String dv_cap = mDolbyVisionSettingManager.isTvSupportDolbyVision();
         tvSupportDolbyVisionType = null;
         if (!dv_cap.equals("")) {
-            for (int i = 0;i < HDMI_LIST.length; i++) {
+            for (int i = 0; i < HDMI_LIST.length; i++) {
                 if (dv_cap.contains(HDMI_LIST[i])) {
                     tvSupportDolbyVisionMode = HDMI_LIST[i];
                     break;
@@ -590,7 +595,7 @@ public class OutputUiManager {
     public void checkOutputmodeDeepcolor() {
         String mode = getCurrentMode();
         if ((tvSupportDolbyVisionMode != null) && (tvSupportDolbyVisionMode.contains("hz"))
-            && (resolveResolutionValue(mode) > resolveResolutionValue(tvSupportDolbyVisionMode))) {
+                && (resolveResolutionValue(mode) > resolveResolutionValue(tvSupportDolbyVisionMode))) {
             change2NewMode(tvSupportDolbyVisionMode);
         }
 

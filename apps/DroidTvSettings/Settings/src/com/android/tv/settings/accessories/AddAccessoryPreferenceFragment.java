@@ -75,7 +75,7 @@ public class AddAccessoryPreferenceFragment extends BaseLeanbackPreferenceFragme
     }
 
     public void updateList(List<BluetoothDevice> devices, String currentTargetAddress,
-            String currentTargetStatus, String cancelledAddress) {
+                           String currentTargetStatus, String cancelledAddress) {
         final Context themedContext = getPreferenceManager().getContext();
 
         PreferenceScreen screen = getPreferenceScreen();

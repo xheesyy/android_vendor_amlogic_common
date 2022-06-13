@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.tv.settings.TvSettingsActivity;
 import com.android.tv.settings.overlay.FlavorUtils;
+
 /**
  * Activity to control Output mode settings.
  */
@@ -22,7 +23,7 @@ public class OutputmodeActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(OutputmodeFragment.class.getName(), null);
+                .newSettingsFragment(OutputmodeFragment.class.getName(), null);
     }
 
 }

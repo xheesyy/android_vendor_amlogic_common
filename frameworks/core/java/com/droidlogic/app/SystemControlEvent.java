@@ -20,40 +20,41 @@ import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
 import com.droidlogic.app.OutputModeManager;
+
 import vendor.amlogic.hardware.systemcontrol.V1_0.ISystemControlCallback;
 
 //this event from native system control service
 public class SystemControlEvent extends ISystemControlCallback.Stub {
-    private static final String TAG                             = "SystemControlEvent";
+    private static final String TAG = "SystemControlEvent";
 
-    public static final String ACTION_SYSTEM_CONTROL_EVENT      = "droidlogic.intent.action.SYSTEM_CONTROL_EVENT";
-    public final static String ACTION_HDMI_PLUGGED              = "android.intent.action.HDMI_PLUGGED";
-    public final static String EXTRA_HDMI_PLUGGED_STATE         = "state";
-    public static final String EVENT_TYPE                       = "event";
+    public static final String ACTION_SYSTEM_CONTROL_EVENT = "droidlogic.intent.action.SYSTEM_CONTROL_EVENT";
+    public final static String ACTION_HDMI_PLUGGED = "android.intent.action.HDMI_PLUGGED";
+    public final static String EXTRA_HDMI_PLUGGED_STATE = "state";
+    public static final String EVENT_TYPE = "event";
 
     //must sync with DisplayMode.h
-    public static final int EVENT_OUTPUT_MODE_CHANGE            = 0;
-    public static final int EVENT_DIGITAL_MODE_CHANGE           = 1;
-    public static final int EVENT_HDMI_PLUG_OUT                 = 2;
-    public static final int EVENT_HDMI_PLUG_IN                  = 3;
-    public static final int EVENT_HDMI_AUDIO_OUT                = 4;
-    public static final int EVENT_HDMI_AUDIO_IN                 = 5;
+    public static final int EVENT_OUTPUT_MODE_CHANGE = 0;
+    public static final int EVENT_DIGITAL_MODE_CHANGE = 1;
+    public static final int EVENT_HDMI_PLUG_OUT = 2;
+    public static final int EVENT_HDMI_PLUG_IN = 3;
+    public static final int EVENT_HDMI_AUDIO_OUT = 4;
+    public static final int EVENT_HDMI_AUDIO_IN = 5;
 
     // AudioManager.DEVICE_OUT_HDMI
-    public static final int DEVICE_OUT_AUX_DIGITAL              = 0x400;
+    public static final int DEVICE_OUT_AUX_DIGITAL = 0x400;
 
 
     private Context mContext = null;
     private final AudioManager mAudioManager;
 
     private FBCUpgradeEventListener mFBCUpgradeEventListener = null;
-    private DisplayModeListener     mDisplayModeListener     = null;
-    private AudioEventListener      mAudioListener           = null;
-    private HdrInfoListener         mHdrInfoListener         = null;
+    private DisplayModeListener mDisplayModeListener = null;
+    private AudioEventListener mAudioListener = null;
+    private HdrInfoListener mHdrInfoListener = null;
 
     public SystemControlEvent(Context context) {
         mContext = context;
-        mAudioManager = (AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
     @Override
@@ -62,13 +63,13 @@ public class SystemControlEvent extends ISystemControlCallback.Stub {
         Intent intent;
         if (event == EVENT_HDMI_PLUG_OUT || event == EVENT_HDMI_PLUG_IN) {
             intent = new Intent(ACTION_HDMI_PLUGGED);
-            boolean  plugged = (event - EVENT_HDMI_PLUG_OUT) ==1 ? true : false;
+            boolean plugged = (event - EVENT_HDMI_PLUG_OUT) == 1 ? true : false;
             intent.putExtra(EXTRA_HDMI_PLUGGED_STATE, plugged);
         } else if (event == EVENT_HDMI_AUDIO_OUT || event == EVENT_HDMI_AUDIO_IN) {
             setWiredDeviceConnectionState(DEVICE_OUT_AUX_DIGITAL, (event - EVENT_HDMI_AUDIO_OUT), "", "");
             //mAudioManager.setWiredDeviceConnectionState(AudioManager.DEVICE_OUT_HDMI, (event - EVENT_HDMI_AUDIO_OUT), "", "");
             return;
-        }  else {
+        } else {
             intent = new Intent(ACTION_SYSTEM_CONTROL_EVENT);
             intent.putExtra(EVENT_TYPE, event);
             if (EVENT_OUTPUT_MODE_CHANGE == event) {
@@ -140,9 +141,9 @@ public class SystemControlEvent extends ISystemControlCallback.Stub {
         void HandleFBCUpgradeEvent(int state, int param);
     }
 
-    public void SetFBCUpgradeEventListener (FBCUpgradeEventListener l) {
+    public void SetFBCUpgradeEventListener(FBCUpgradeEventListener l) {
         Log.d(TAG, "SetFBCUpgradeEventListener");
-        mFBCUpgradeEventListener  = l;
+        mFBCUpgradeEventListener = l;
     }
 
 
@@ -150,12 +151,12 @@ public class SystemControlEvent extends ISystemControlCallback.Stub {
         try {
             Class<?> audioManager = Class.forName("android.media.AudioManager");
             Method setwireState = audioManager.getMethod("setWiredDeviceConnectionState",
-                                    int.class, int.class, String.class, String.class);
-            Log.d(TAG,"setWireDeviceConnectionState "+setwireState);
+                    int.class, int.class, String.class, String.class);
+            Log.d(TAG, "setWireDeviceConnectionState " + setwireState);
 
             setwireState.invoke(mAudioManager, type, state, address, name);
 
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
@@ -177,8 +178,8 @@ public class SystemControlEvent extends ISystemControlCallback.Stub {
             ddpEnable = true;
         }
         Log.i(TAG, "Cur output mode=" + strMode +
-            ", Prev DDP enable=" + outModeManager.getForceDDPEnable() +
-            ", need set DDP enable=" + ddpEnable);
+                ", Prev DDP enable=" + outModeManager.getForceDDPEnable() +
+                ", need set DDP enable=" + ddpEnable);
         if (outModeManager.getForceDDPEnable() != ddpEnable) {
             outModeManager.setForceDDPEnable(ddpEnable);
         }

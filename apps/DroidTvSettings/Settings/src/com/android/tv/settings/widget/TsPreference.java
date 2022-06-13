@@ -23,7 +23,9 @@ import androidx.preference.Preference;
 
 import com.android.tv.settings.R;
 
-/** Augmented preference for TvSettings **/
+/**
+ * Augmented preference for TvSettings
+ **/
 public class TsPreference extends Preference {
     private boolean mUpdatableFromGoogleSettings;
 

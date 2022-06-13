@@ -35,17 +35,17 @@ import com.droidlogic.droidlivetvsettings.R;
 public class GuideListView extends ListView implements OnItemSelectedListener {
     private static final String TAG = "GuideListView";
 
-    public static final String ITEM_1               = "item1";
-    public static final String ITEM_2               = "item2";
-    public static final String ITEM_3               = "item3";
-    public static final String ITEM_4               = "item4";
-    public static final String ITEM_5               = "item5";
-    public static final String ITEM_6               = "item6";
+    public static final String ITEM_1 = "item1";
+    public static final String ITEM_2 = "item2";
+    public static final String ITEM_3 = "item3";
+    public static final String ITEM_4 = "item4";
+    public static final String ITEM_5 = "item5";
+    public static final String ITEM_6 = "item6";
 
-    public static final String STATUS_PLAYING      = "playing";
-    public static final String STATUS_APPOINTED_RECORD    = "appointed_record";
-    public static final String STATUS_APPOINTED_WATCH    = "appointed_watch";
-    public static final String STATUS_RECORDING    = "recording";
+    public static final String STATUS_PLAYING = "playing";
+    public static final String STATUS_APPOINTED_RECORD = "appointed_record";
+    public static final String STATUS_APPOINTED_WATCH = "appointed_watch";
+    public static final String STATUS_RECORDING = "recording";
 
     private Context mContext;
     private int selectedPosition = 0;
@@ -56,6 +56,7 @@ public class GuideListView extends ListView implements OnItemSelectedListener {
     public GuideListView(Context context) {
         super(context);
     }
+
     public GuideListView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -64,7 +65,7 @@ public class GuideListView extends ListView implements OnItemSelectedListener {
         setOnItemSelectedListener(this);
     }
 
-    public boolean dispatchKeyEvent (KeyEvent event) {
+    public boolean dispatchKeyEvent(KeyEvent event) {
         //Log.d(TAG, "dispatchKeyEvent event = " + event);
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (event.getKeyCode()) {
@@ -90,12 +91,12 @@ public class GuideListView extends ListView implements OnItemSelectedListener {
             switch (event.getKeyCode()) {
                 case KeyEvent.KEYCODE_DPAD_UP:
                 case KeyEvent.KEYCODE_DPAD_DOWN:
-                    if ( selectedView != null) {
+                    if (selectedView != null) {
                         clearChoosed(selectedView);
                     }
                 case KeyEvent.KEYCODE_DPAD_LEFT:
                 case KeyEvent.KEYCODE_DPAD_RIGHT:
-                    if ( selectedView != null) {
+                    if (selectedView != null) {
                         setItemTextColor(selectedView, false);
                     }
                     break;
@@ -121,7 +122,7 @@ public class GuideListView extends ListView implements OnItemSelectedListener {
             setChoosed(view);
         }
         if (mListItemSelectedListener != null)
-            mListItemSelectedListener.onListItemSelected((View)parent, position);
+            mListItemSelectedListener.onListItemSelected((View) parent, position);
     }
 
     @Override
@@ -129,7 +130,7 @@ public class GuideListView extends ListView implements OnItemSelectedListener {
     }
 
     @Override
-    protected void onFocusChanged (boolean gainFocus, int direction, Rect previouslyFocusedRect) {
+    protected void onFocusChanged(boolean gainFocus, int direction, Rect previouslyFocusedRect) {
         View item = getSelectedView();
         if (item != null) {
             if (gainFocus) {
@@ -142,28 +143,28 @@ public class GuideListView extends ListView implements OnItemSelectedListener {
         }
     }
 
-    private void setItemTextColor (View view, boolean focused) {
+    private void setItemTextColor(View view, boolean focused) {
         if (focused) {
             int color_text_focused = mContext.getResources().getColor(R.color.color_text_focused);
-            for (int i = 0; i < ((ViewGroup)view).getChildCount(); i++) {
-                View child = ((ViewGroup)view).getChildAt(i);
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View child = ((ViewGroup) view).getChildAt(i);
                 if (child instanceof TextView) {
-                    ((TextView)child).setTextColor(color_text_focused);
+                    ((TextView) child).setTextColor(color_text_focused);
                 }
             }
         } else {
             int color_text_item = mContext.getResources().getColor(R.color.color_text_blue_0);
-            for (int i = 0; i < ((ViewGroup)view).getChildCount(); i++) {
-                View child = ((ViewGroup)view).getChildAt(i);
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View child = ((ViewGroup) view).getChildAt(i);
                 if (child instanceof TextView) {
-                    ((TextView)child).setTextColor(color_text_item);
+                    ((TextView) child).setTextColor(color_text_item);
                 }
             }
         }
     }
 
     private void setRootView() {
-        rootView = ((ViewGroup)((Activity)mContext).findViewById(android.R.id.content));
+        rootView = ((ViewGroup) ((Activity) mContext).findViewById(android.R.id.content));
     }
 
     private boolean hasNextFocusView(int dec) {
@@ -175,7 +176,7 @@ public class GuideListView extends ListView implements OnItemSelectedListener {
     }
 
     public void cleanChoosed() {
-        for (int i = 0; i < getChildCount(); i ++) {
+        for (int i = 0; i < getChildCount(); i++) {
             View view = getChildAt(i);
             view.setBackgroundResource(0);
         }

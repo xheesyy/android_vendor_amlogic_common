@@ -33,8 +33,10 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 
 import com.android.tv.settings.R;
+
 import android.media.tv.TvContract;
 import android.media.tv.TvContract.Channels;
+
 import com.droidlogic.app.tv.ChannelInfo;
 import com.droidlogic.app.tv.TvDataBaseManager;
 import com.droidlogic.app.tv.TvInSignalInfo;
@@ -57,17 +59,20 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.SimpleTimeZone;
+
 import android.media.tv.TvInputManager;
 import android.media.tv.TvInputInfo;
+
 import java.util.List;
 import java.lang.reflect.Method;
+
 public class TvOptionSettingManager {
     public static final int SET_DTMB = 0;
     public static final int SET_DVB_C = 1;
     public static final int SET_DVB_T = 2;
     public static final int SET_DVB_T2 = 3;
     public static final int SET_ATSC_T = 4;
-    public static final int SET_ATSC_C= 5;
+    public static final int SET_ATSC_C = 5;
     public static final int SET_ISDB_T = 6;
 
     public static final String KEY_MENU_TIME = DroidLogicTvUtils.KEY_MENU_TIME;
@@ -93,7 +98,7 @@ public class TvOptionSettingManager {
     private DaylightSavingTime mDaylightSavingTime = null;
     private AudioManager mAudioManager;
 
-    public TvOptionSettingManager (Context context, boolean isothercontext) {
+    public TvOptionSettingManager(Context context, boolean isothercontext) {
         mContext = context;
         mResources = mContext.getResources();
         mSystemControlManager = SystemControlManager.getInstance();
@@ -107,35 +112,35 @@ public class TvOptionSettingManager {
         }
         mTvDataBaseManager = new TvDataBaseManager(mContext);
         mTvControlManager = TvControlManager.getInstance();
-        mDeviceId = ((TvSettingsActivity)context).getIntent().getIntExtra("tv_current_device_id", -1);
+        mDeviceId = ((TvSettingsActivity) context).getIntent().getIntExtra("tv_current_device_id", -1);
         mTvSourceInput = DroidLogicTvUtils.parseTvSourceInputFromDeviceId(mDeviceId);
-        mInputInfoId = ((TvSettingsActivity)context).getIntent().getStringExtra("current_tvinputinfo_id");
-        mCurrentChannel = mTvDataBaseManager.getChannelInfo(TvContract.buildChannelUri(((TvSettingsActivity)context).getIntent().getLongExtra("current_channel_id", -1)));
+        mInputInfoId = ((TvSettingsActivity) context).getIntent().getStringExtra("current_tvinputinfo_id");
+        mCurrentChannel = mTvDataBaseManager.getChannelInfo(TvContract.buildChannelUri(((TvSettingsActivity) context).getIntent().getLongExtra("current_channel_id", -1)));
     }
 
     private boolean CanDebug() {
         return TvOptionFragment.CanDebug();
     }
 
-    public int getDtvTypeStatus () {
+    public int getDtvTypeStatus() {
         String type = getDtvType();
         int ret = SET_ATSC_T;
         if (type != null) {
             if (CanDebug()) Log.d(TAG, "getDtvTypeStatus = " + type);
             if (TextUtils.equals(type, TvContract.Channels.TYPE_DTMB)) {
-                    ret = SET_DTMB;
+                ret = SET_DTMB;
             } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_C)) {
-                    ret = SET_DVB_C;
+                ret = SET_DVB_C;
             } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_T)) {
-                    ret = SET_DVB_T;
+                ret = SET_DVB_T;
             } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_T2)) {
-                    ret = SET_DVB_T2;
+                ret = SET_DVB_T2;
             } else if (TextUtils.equals(type, TvContract.Channels.TYPE_ATSC_T)) {
-                    ret = SET_ATSC_T;
+                ret = SET_ATSC_T;
             } else if (TextUtils.equals(type, TvContract.Channels.TYPE_ATSC_C)) {
-                    ret = SET_ATSC_C;
+                ret = SET_ATSC_C;
             } else if (TextUtils.equals(type, TvContract.Channels.TYPE_ISDB_T)) {
-                    ret = SET_ISDB_T;
+                ret = SET_ISDB_T;
             }
             return ret;
         } else {
@@ -146,11 +151,11 @@ public class TvOptionSettingManager {
 
     public String getDtvType() {
         String type = DataProviderManager.getStringValue(mContext,
-            DroidLogicTvUtils.TV_KEY_DTV_TYPE, null);
+                DroidLogicTvUtils.TV_KEY_DTV_TYPE, null);
         return type;
     }
 
-    public int getSoundChannelStatus () {
+    public int getSoundChannelStatus() {
         int type = 0;
         if (mCurrentChannel != null) {
             type = mCurrentChannel.getAudioChannel();
@@ -163,7 +168,7 @@ public class TvOptionSettingManager {
     }
 
     public ArrayList<HashMap<String, String>> getChannelInfoStatus() {
-        ArrayList<HashMap<String, String>> list =  new ArrayList<HashMap<String, String>>();
+        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
         TvControlManager.SourceInput_Type tvSource = DroidLogicTvUtils.parseTvSourceTypeFromDeviceId(mDeviceId);
         TvControlManager.SourceInput_Type virtualTvSource = tvSource;
         if (tvSource == TvControlManager.SourceInput_Type.SOURCE_TYPE_ADTV) {
@@ -205,26 +210,26 @@ public class TvOptionSettingManager {
         return list;
     }
 
-    public int getMenuTimeStatus () {
+    public int getMenuTimeStatus() {
         int type = DataProviderManager.getIntValue(mContext, KEY_MENU_TIME, DEFAULT_MENU_TIME);
         if (CanDebug()) Log.d(TAG, "getMenuTimeStatus = " + type);
         return type;
     }
 
-    public int getSleepTimerStatus () {
+    public int getSleepTimerStatus() {
         int time = DataProviderManager.getIntValue(mContext, DroidLogicTvUtils.PROP_DROID_TV_SLEEP_TIME, 0);
         Log.d(TAG, "getSleepTimerStatus:" + time);
         return time;
     }
 
-    public int getNoSignalSleepTimeStatus () {
+    public int getNoSignalSleepTimeStatus() {
         int mode = DataProviderManager.getIntValue(mContext, KEY_NO_SIGNAL_TIMEOUT, DEFAULT_MENU_TIME);
         if (CanDebug()) Log.d(TAG, "getNoSignalSleepTimeStatus = " + mode);
         return mode;
     }
 
     //0 1 ~ luncher livetv
-    public int getStartupSettingStatus () {
+    public int getStartupSettingStatus() {
         int type = DataProviderManager.getIntValue(mContext, DroidLogicTvUtils.TV_START_UP_ENTER_APP, 0);
         if (CanDebug()) Log.d(TAG, "getStartupSettingStatus = " + type);
         if (type != 0) {
@@ -234,7 +239,7 @@ public class TvOptionSettingManager {
     }
 
     // 0 1 ~ off on
-    public int getDynamicBacklightStatus () {
+    public int getDynamicBacklightStatus() {
         int switchVal = mSystemControlManager.GetDynamicBacklight();
         if (CanDebug()) Log.d(TAG, "getDynamicBacklightStatus = " + switchVal);
 
@@ -246,7 +251,7 @@ public class TvOptionSettingManager {
     }
 
     // 0 1 ~ off on others on
-    public int getADSwitchStatus () {
+    public int getADSwitchStatus() {
         int switchVal = DataProviderManager.getIntValue(mContext, DroidLogicTvUtils.TV_KEY_AD_SWITCH, 0);
         if (CanDebug()) Log.d(TAG, "getADSwitchStatus = " + switchVal);
         if (switchVal != 0) {
@@ -255,7 +260,7 @@ public class TvOptionSettingManager {
         return switchVal;
     }
 
-    public int getVolumeCompensateStatus () {
+    public int getVolumeCompensateStatus() {
         int value = 0;
         if (mCurrentChannel != null)
             value = mCurrentChannel.getAudioCompensation();
@@ -264,7 +269,7 @@ public class TvOptionSettingManager {
         return value;
     }
 
-    public int getStaticFrameStatus () {
+    public int getStaticFrameStatus() {
         //0:disable, 1:enable
         return mSystemControlManager.getStaticFrameStatus();
     }
@@ -273,7 +278,8 @@ public class TvOptionSettingManager {
         //0:black screen, 1:blue screen
         return mSystemControlManager.getScreenColorForSignalChange();
     }
-    public int getADMixStatus () {
+
+    public int getADMixStatus() {
         int val = DataProviderManager.getIntValue(mContext, DroidLogicTvUtils.TV_KEY_AD_MIX, 50);
         if (CanDebug()) Log.d(TAG, "getADMixStatus = " + val);
         return val;
@@ -282,7 +288,7 @@ public class TvOptionSettingManager {
     public int[] getFourHdmi20Status() {
         int[] fourhdmistatus = new int[4];
         TvControlManager.HdmiPortID[] allport = {TvControlManager.HdmiPortID.HDMI_PORT_1, TvControlManager.HdmiPortID.HDMI_PORT_2,
-            TvControlManager.HdmiPortID.HDMI_PORT_3, TvControlManager.HdmiPortID.HDMI_PORT_4};
+                TvControlManager.HdmiPortID.HDMI_PORT_3, TvControlManager.HdmiPortID.HDMI_PORT_4};
         for (int i = 0; i < allport.length; i++) {
             if (mTvControlManager.GetHdmiEdidVersion(allport[i]) == TvControlManager.HdmiEdidVer.HDMI_EDID_VER_20.toInt()) {
                 fourhdmistatus[i] = 1;
@@ -290,7 +296,8 @@ public class TvOptionSettingManager {
                 fourhdmistatus[i] = 0;
             }
         }
-        if (CanDebug()) Log.d(TAG, "getFourHdmi20Status 1 to 4 " + fourhdmistatus[0] + ", " + fourhdmistatus[1] + ", " + fourhdmistatus[2] + ", " + fourhdmistatus[3]);
+        if (CanDebug())
+            Log.d(TAG, "getFourHdmi20Status 1 to 4 " + fourhdmistatus[0] + ", " + fourhdmistatus[1] + ", " + fourhdmistatus[2] + ", " + fourhdmistatus[3]);
         return fourhdmistatus;
     }
 
@@ -299,11 +306,11 @@ public class TvOptionSettingManager {
         List<TvInputInfo> inputs = inputManager.getTvInputList();
         int num_hdmi = 0;
         for (TvInputInfo input : inputs) {
-            Log.d(TAG,"input:"+ input.toString());
+            Log.d(TAG, "input:" + input.toString());
             if (input.getId().contains("Hdmi") && input.getParentId() == null)
                 num_hdmi++;
         }
-        Log.d(TAG,"num_hdmi:"+num_hdmi);
+        Log.d(TAG, "num_hdmi:" + num_hdmi);
         return num_hdmi;
     }
 
@@ -315,7 +322,7 @@ public class TvOptionSettingManager {
         return result;
     }
 
-    public void setDtvType (int value) {
+    public void setDtvType(int value) {
         if (CanDebug()) Log.d(TAG, "setDtvType = " + value);
         String type = null;
         switch (value) {
@@ -346,7 +353,7 @@ public class TvOptionSettingManager {
         }
     }
 
-    public void setSoundChannel (int type) {
+    public void setSoundChannel(int type) {
         if (CanDebug()) Log.d(TAG, "setSoundChannel = " + type);
         if (mCurrentChannel != null) {
             mCurrentChannel.setAudioChannel(type);
@@ -355,18 +362,18 @@ public class TvOptionSettingManager {
         }
     }
 
-    public void setStartupSetting (int type) {
+    public void setStartupSetting(int type) {
         if (CanDebug()) Log.d(TAG, "setStartupSetting = " + type);
         DataProviderManager.putIntValue(mContext, DroidLogicTvUtils.TV_START_UP_ENTER_APP, type);
     }
 
-    public void setMenuTime (int type) {
+    public void setMenuTime(int type) {
         if (CanDebug()) Log.d(TAG, "setMenuTime = " + type);
         DataProviderManager.putIntValue(mContext, KEY_MENU_TIME, type);
     }
 
-    public void setSleepTimer (int mode) {
-        AlarmManager alarm = (AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
+    public void setSleepTimer(int mode) {
+        AlarmManager alarm = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent("droidlogic.intent.action.TIMER_SUSPEND");
         intent.addFlags(0x01000000/*Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND*/);
         intent.putExtra(DroidLogicTvUtils.KEY_ENABLE_SUSPEND_TIMEOUT, true);
@@ -380,16 +387,16 @@ public class TvOptionSettingManager {
         if (mode == 0) {
             return;
         } else if (mode < 5) {
-            timeout = (mode * 15  - 1) * 60 * 1000;
+            timeout = (mode * 15 - 1) * 60 * 1000;
         } else {
-            timeout = ((mode - 4) * 30 + 4 * 15  - 1) * 60 * 1000;
+            timeout = ((mode - 4) * 30 + 4 * 15 - 1) * 60 * 1000;
         }
 
         alarm.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + timeout, pendingIntent);
         Log.d(TAG, "start time count down elapsedRealtime " + SystemClock.elapsedRealtime() + "  timeout after " + timeout + " ms");
     }
 
-    public void setNoSignalSleepTime (int mode) {
+    public void setNoSignalSleepTime(int mode) {
         if (CanDebug()) Log.d(TAG, "setNoSignalSleepTime = " + mode);
         DataProviderManager.putIntValue(mContext, KEY_NO_SIGNAL_TIMEOUT, mode);
     }
@@ -405,7 +412,7 @@ public class TvOptionSettingManager {
         mSystemControlManager.SetDynamicBacklight(mode, 1);
     }
 
-    public void setAudioADSwitch (int switchVal) {
+    public void setAudioADSwitch(int switchVal) {
         if (CanDebug()) Log.d(TAG, "setAudioADSwitch = " + switchVal);
         DataProviderManager.putIntValue(mContext, DroidLogicTvUtils.TV_KEY_AD_SWITCH, switchVal);
         Intent intent = new Intent(DroidLogicTvUtils.ACTION_AD_SWITCH);
@@ -413,7 +420,7 @@ public class TvOptionSettingManager {
         mContext.sendBroadcast(intent);
     }
 
-    public void setVolumeCompensate (int value) {
+    public void setVolumeCompensate(int value) {
         if (mCurrentChannel != null) {
             int current = mCurrentChannel.getAudioCompensation();
             int offset = 0;
@@ -423,7 +430,7 @@ public class TvOptionSettingManager {
                 offset = -1;
             }
             if ((current < 20 && offset > 0)
-                || (current > -20 && offset < 0)) {
+                    || (current > -20 && offset < 0)) {
                 mCurrentChannel.setAudioCompensation(current + offset);
                 mTvDataBaseManager.updateChannelInfo(mCurrentChannel);
                 mTvControlManager.SetCurProgVolumeCompesition(mCurrentChannel.getAudioCompensation());
@@ -445,7 +452,7 @@ public class TvOptionSettingManager {
         mSystemControlManager.setScreenColorForSignalChange(screenColor, isSave);
     }
 
-    public void setADMix (int step) {
+    public void setADMix(int step) {
         if (CanDebug()) Log.d(TAG, "setADMix = " + step);
         int level = getADMixStatus() + step;
         if (level <= 100 && level >= 0) {
@@ -466,9 +473,9 @@ public class TvOptionSettingManager {
 
     public boolean isChannalSource() {
         if ((mDeviceId == DroidLogicTvUtils.DEVICE_ID_ATV)
-            || (mDeviceId == DroidLogicTvUtils.DEVICE_ID_DTV)
-            || (mDeviceId == DroidLogicTvUtils.DEVICE_ID_ADTV)
-            || (mDeviceId == DroidLogicTvUtils.DEVICE_ID_HDMIEXTEND)) {
+                || (mDeviceId == DroidLogicTvUtils.DEVICE_ID_DTV)
+                || (mDeviceId == DroidLogicTvUtils.DEVICE_ID_ADTV)
+                || (mDeviceId == DroidLogicTvUtils.DEVICE_ID_HDMIEXTEND)) {
             return true;
         } else {
             return false;
@@ -492,7 +499,7 @@ public class TvOptionSettingManager {
         for (int i = 0; i < tvPackages.length; i++) {
             ClearPackageData(tvPackages[i]);
         }*/
-        mTvDataBaseManager.deleteChannels("com.droidlogic.tvinput/.services.ADTVInputService/HW16",  null);
+        mTvDataBaseManager.deleteChannels("com.droidlogic.tvinput/.services.ADTVInputService/HW16", null);
         mTvControlManager.SSMInitDevice();
         mTvControlManager.FactoryCleanAllTableForProgram();
     }
@@ -518,36 +525,36 @@ public class TvOptionSettingManager {
         mContext.sendBroadcast(intent);
     }
 
-    private  void ClearPackageData(String packageName) {
+    private void ClearPackageData(String packageName) {
         Log.d(TAG, "ClearPackageData:" + packageName);
         //clear data
-        ActivityManager am = (ActivityManager)mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         //ClearUserDataObserver mClearDataObserver = new ClearUserDataObserver();
         boolean res = false;
         try {
             Class IPackageManagerclz = Class.forName("android.content.pm.IPackageDataObserver");
             Method clearApplicationUserDataMethod = ActivityManager.class.getMethod("clearApplicationUserData", String.class, IPackageManagerclz);
-            res = (boolean)clearApplicationUserDataMethod.invoke(am, packageName, null);
-                    //boolean res = am.clearApplicationUserData(packageName, mClearDataObserver);
-        if (!res) {
-            Log.i(TAG, " clear " + packageName + " data failed");
-        } else {
-            Log.i(TAG, " clear " + packageName + " data succeed");
-        }
+            res = (boolean) clearApplicationUserDataMethod.invoke(am, packageName, null);
+            //boolean res = am.clearApplicationUserData(packageName, mClearDataObserver);
+            if (!res) {
+                Log.i(TAG, " clear " + packageName + " data failed");
+            } else {
+                Log.i(TAG, " clear " + packageName + " data succeed");
+            }
 
-        //clear cache
-        PackageManager packageManager = mContext.getPackageManager();
+            //clear cache
+            PackageManager packageManager = mContext.getPackageManager();
             //ClearUserDataObserver mClearCacheObserver = new ClearUserDataObserver();
             //packageManager.deleteApplicationCacheFiles(packageName, mClearCacheObserver);
             Method delApplicationCacheFilesMethod = ActivityManager.class.getMethod("deleteApplicationCacheFiles", String.class, IPackageManagerclz);
             delApplicationCacheFilesMethod.invoke(packageManager, packageName, null);
-        //clear default
-        packageManager.clearPackagePreferredActivities(packageName);
-        }catch(Exception ex){
+            //clear default
+            packageManager.clearPackagePreferredActivities(packageName);
+        } catch (Exception ex) {
             ex.printStackTrace();
-    }
-
         }
+
+    }
 
 
     public void doFbcUpgrade() {
@@ -557,7 +564,7 @@ public class TvOptionSettingManager {
     public void setHdmi20Mode(int order, int mode) {
         if (CanDebug()) Log.d(TAG, "setHdmi20Mode order = " + order + ", mode = " + mode);
         TvControlManager.HdmiPortID[] allport = {TvControlManager.HdmiPortID.HDMI_PORT_1, TvControlManager.HdmiPortID.HDMI_PORT_2,
-            TvControlManager.HdmiPortID.HDMI_PORT_3, TvControlManager.HdmiPortID.HDMI_PORT_4};
+                TvControlManager.HdmiPortID.HDMI_PORT_3, TvControlManager.HdmiPortID.HDMI_PORT_4};
         if (order < 0 || order > 3) {
             Log.d(TAG, "setHdmi20Mode device id erro");
             return;
@@ -565,14 +572,14 @@ public class TvOptionSettingManager {
         if (mode == 1) {
             // set HDMI mode sequence: save than set
             mTvControlManager.SetHdmiEdidVersion(allport[order],
-                TvControlManager.HdmiEdidVer.HDMI_EDID_VER_20);
+                    TvControlManager.HdmiEdidVer.HDMI_EDID_VER_20);
             mTvControlManager.SaveHdmiEdidVersion(allport[order],
-                TvControlManager.HdmiEdidVer.HDMI_EDID_VER_20);
+                    TvControlManager.HdmiEdidVer.HDMI_EDID_VER_20);
         } else {
             mTvControlManager.SetHdmiEdidVersion(allport[order],
-                TvControlManager.HdmiEdidVer.HDMI_EDID_VER_14);
+                    TvControlManager.HdmiEdidVer.HDMI_EDID_VER_14);
             mTvControlManager.SaveHdmiEdidVersion(allport[order],
-                TvControlManager.HdmiEdidVer.HDMI_EDID_VER_14);
+                    TvControlManager.HdmiEdidVer.HDMI_EDID_VER_14);
         }
     }
 
@@ -581,7 +588,7 @@ public class TvOptionSettingManager {
         TvControlManager.HdmiPortID[] allport = {TvControlManager.HdmiPortID.HDMI_PORT_1, TvControlManager.HdmiPortID.HDMI_PORT_2,
                 TvControlManager.HdmiPortID.HDMI_PORT_3, TvControlManager.HdmiPortID.HDMI_PORT_4};
 
-        for (int i = 0; i  < allport.length; i++) {
+        for (int i = 0; i < allport.length; i++) {
             mTvControlManager.SaveHdmiEdidVersion(allport[i],
                     TvControlManager.HdmiEdidVer.HDMI_EDID_VER_14);
         }

@@ -40,7 +40,7 @@ public class TakeBugReportController extends AbstractPreferenceController {
                 && mContext != null
                 && mContext.getResources() != null
                 && mContext.getResources().getBoolean(
-                        R.bool.config_quick_settings_show_take_bugreport);
+                R.bool.config_quick_settings_show_take_bugreport);
     }
 
     @Override

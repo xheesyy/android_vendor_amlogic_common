@@ -25,9 +25,9 @@ import android.provider.Settings;
 import android.util.Log;
 
 public class SdrManager {
-    private static final String TAG                 = "SdrManager";
+    private static final String TAG = "SdrManager";
 
-    private static final String KEY_SDR_MODE        = "persist.vendor.sys.sdr.state";
+    private static final String KEY_SDR_MODE = "persist.vendor.sys.sdr.state";
 
     public static final int MODE_OFF = 0;
     public static final int MODE_AUTO = 2;
@@ -35,7 +35,7 @@ public class SdrManager {
     private Context mContext;
     private SystemControlManager mSystemControl;
 
-    public SdrManager(Context context){
+    public SdrManager(Context context) {
         mContext = context;
         mSystemControl = SystemControlManager.getInstance();
     }

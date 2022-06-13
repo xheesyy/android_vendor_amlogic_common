@@ -64,7 +64,7 @@ public class ConnectFailedState implements State {
     }
 
     /**
-     *  Fragment displaying the failure information when connection is failed.
+     * Fragment displaying the failure information when connection is failed.
      */
     public static class ConnectFailedFragment extends WifiConnectivityGuidedStepFragment {
         private static final int ACTION_ID_TRY_AGAIN = 100001;

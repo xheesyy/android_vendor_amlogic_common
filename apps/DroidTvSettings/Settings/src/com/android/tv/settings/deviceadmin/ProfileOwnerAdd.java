@@ -20,7 +20,7 @@ import android.os.Bundle;
 
 /**
  * ProfileOwnerAdd uses the DeviceAdminAdd logic to handle SET_PROFILE_OWNER intents
- *
+ * <p>
  * TODO(b/131713071): Move profile owner add logic from DeviceAdminAdd to here
  */
 public class ProfileOwnerAdd extends DeviceAdminAdd {

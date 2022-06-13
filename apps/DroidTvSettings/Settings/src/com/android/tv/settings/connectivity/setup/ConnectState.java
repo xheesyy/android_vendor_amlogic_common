@@ -114,7 +114,7 @@ public class ConnectState implements State {
          * @return new instance.
          */
         public static ConnectToWifiFragment newInstance(String title,
-                boolean showProgressIndicator) {
+                                                        boolean showProgressIndicator) {
             ConnectToWifiFragment fragment = new ConnectToWifiFragment();
             Bundle args = new Bundle();
             addArguments(args, title, showProgressIndicator);
@@ -210,8 +210,8 @@ public class ConnectState implements State {
                     } else if (wifiNetworkCapabilities.hasCapability(
                             NetworkCapabilities.NET_CAPABILITY_CAPTIVE_PORTAL)) {
                         notifyListener(StateMachine.RESULT_CAPTIVE_PORTAL);
-                    
-                    } 
+
+                    }
                     // DroidLogic start modify change wifi connected status to limited
                     else if (wifiNetworkCapabilities.hasCapability(
                             NetworkCapabilities.NET_CAPABILITY_INTERNET)) {

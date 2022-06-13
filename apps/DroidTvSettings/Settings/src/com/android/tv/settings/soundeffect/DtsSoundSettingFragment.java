@@ -17,11 +17,14 @@
 package com.android.tv.settings.soundeffect;
 
 import android.os.Bundle;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.TwoStatePreference;
+
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -35,9 +38,9 @@ public class DtsSoundSettingFragment extends SettingsPreferenceFragment implemen
 
     private static final String TAG = "DtsSoundSettingFragment";
 
-    private static final String KEY_TV_DTS_TRU_SURROUND         = "key_tv_dts_tru_surround";
-    private static final String KEY_TV_DTS_DIALOG_CLARITY       = "key_tv_dts_dialog_clarity";
-    private static final String KEY_TV_DTS_TRU_BASS             = "key_tv_dts_tru_bass";
+    private static final String KEY_TV_DTS_TRU_SURROUND = "key_tv_dts_tru_surround";
+    private static final String KEY_TV_DTS_DIALOG_CLARITY = "key_tv_dts_dialog_clarity";
+    private static final String KEY_TV_DTS_TRU_BASS = "key_tv_dts_tru_bass";
 
     private AudioEffectManager mAudioEffectManager;
 
@@ -56,7 +59,7 @@ public class DtsSoundSettingFragment extends SettingsPreferenceFragment implemen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (mAudioEffectManager == null) {
-            mAudioEffectManager = ((TvSettingsActivity)getActivity()).getAudioEffectManager();
+            mAudioEffectManager = ((TvSettingsActivity) getActivity()).getAudioEffectManager();
         }
         super.onCreate(savedInstanceState);
     }
@@ -85,9 +88,10 @@ public class DtsSoundSettingFragment extends SettingsPreferenceFragment implemen
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
 
-        final int selection = Integer.parseInt((String)newValue);
+        final int selection = Integer.parseInt((String) newValue);
         if (TextUtils.equals(preference.getKey(), KEY_TV_DTS_DIALOG_CLARITY)) {
             mAudioEffectManager.setDialogClarityMode(selection);
         }
@@ -96,7 +100,8 @@ public class DtsSoundSettingFragment extends SettingsPreferenceFragment implemen
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
         final String key = preference.getKey();
         if (key != null) {
             switch (key) {

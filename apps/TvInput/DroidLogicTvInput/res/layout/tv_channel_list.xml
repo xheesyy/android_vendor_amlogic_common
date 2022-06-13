@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,12 +14,12 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/content_item"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    >
+    android:orientation="horizontal">
+
     <TextView
         android:id="@+id/text_name"
         android:layout_width="0dp"
@@ -30,8 +29,8 @@
         android:paddingLeft="15dp"
         android:fontFamily="sans-serif"
         android:textColor="@color/ut_scan_description_text"
-        android:textSize="@dimen/ut_scan_description_text_size"
-        />
+        android:textSize="@dimen/ut_scan_description_text_size" />
+
     <TextView
         android:id="@+id/text_status"
         android:layout_width="0dp"
@@ -41,6 +40,5 @@
         android:singleLine="true"
         android:fontFamily="sans-serif"
         android:textColor="@color/ut_scan_description_text"
-        android:textSize="@dimen/ut_scan_description_text_size"
-        />
+        android:textSize="@dimen/ut_scan_description_text_size" />
 </LinearLayout>

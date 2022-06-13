@@ -30,7 +30,7 @@ public class HotSpotActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(HotSpotFragment.class.getName(), null);
+                .newSettingsFragment(HotSpotFragment.class.getName(), null);
     }
 
 }

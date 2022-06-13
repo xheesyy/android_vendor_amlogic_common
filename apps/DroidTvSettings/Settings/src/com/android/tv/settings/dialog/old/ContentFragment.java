@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 /**
  * *************************
- *   DO NOT ADD LOGIC HERE!
+ * DO NOT ADD LOGIC HERE!
  * *************************
  * This is a wrapper for {@link BaseContentFragment}. Place your logic in
  * there and call the function from here
@@ -46,17 +46,17 @@ public class ContentFragment extends Fragment implements LiteFragment {
     }
 
     public static ContentFragment newInstance(String title, String breadcrumb,
-            String description) {
+                                              String description) {
         return newInstance(title, breadcrumb, description, 0, Color.TRANSPARENT);
     }
 
     public static ContentFragment newInstance(String title, String breadcrumb, String description,
-            int iconResourceId) {
+                                              int iconResourceId) {
         return newInstance(title, breadcrumb, description, iconResourceId, Color.TRANSPARENT);
     }
 
     public static ContentFragment newInstance(String title, String breadcrumb, String description,
-            int iconResourceId, int iconBackgroundColor) {
+                                              int iconResourceId, int iconBackgroundColor) {
         ContentFragment fragment = new ContentFragment();
         fragment.setArguments(
                 BaseContentFragment.buildArgs(title, breadcrumb, description, iconResourceId,
@@ -65,21 +65,21 @@ public class ContentFragment extends Fragment implements LiteFragment {
     }
 
     public static ContentFragment newInstance(String title, String breadcrumb, String description,
-            Uri iconResourceUri) {
+                                              Uri iconResourceUri) {
         return newInstance(title, breadcrumb, description, iconResourceUri, Color.TRANSPARENT);
     }
 
     public static ContentFragment newInstance(String title, String breadcrumb, String description,
-            Uri iconResourceUri, int iconBackgroundColor) {
+                                              Uri iconResourceUri, int iconBackgroundColor) {
         ContentFragment fragment = new ContentFragment();
         fragment.setArguments(
                 BaseContentFragment.buildArgs(title, breadcrumb, description, iconResourceUri,
-                iconBackgroundColor));
+                        iconBackgroundColor));
         return fragment;
     }
 
     public static ContentFragment newInstance(String title, String breadcrumb, String description,
-            Bitmap iconbitmap) {
+                                              Bitmap iconbitmap) {
         ContentFragment fragment = new ContentFragment();
         fragment.setArguments(BaseContentFragment.buildArgs(title, breadcrumb, description,
                 iconbitmap));
@@ -112,7 +112,7 @@ public class ContentFragment extends Fragment implements LiteFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return mBase.onCreateView(inflater, container, savedInstanceState);
     }
 

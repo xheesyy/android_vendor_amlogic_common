@@ -82,7 +82,7 @@ public class PQAdvancedColorTemperatureResetAllActivity extends Activity {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             actions.add(new GuidedAction.Builder(getContext())
                     .clickAction(GuidedAction.ACTION_ID_CANCEL)
                     .build());
@@ -107,6 +107,7 @@ public class PQAdvancedColorTemperatureResetAllActivity extends Activity {
     public static class PQResetAllConfirmFragment extends GuidedStepFragment {
 
         private PQSettingsManager mPQSettingsManager;
+
         public static PQResetAllConfirmFragment newInstance() {
 
             Bundle args = new Bundle();
@@ -131,7 +132,7 @@ public class PQAdvancedColorTemperatureResetAllActivity extends Activity {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             actions.add(new GuidedAction.Builder(getContext())
                     .clickAction(GuidedAction.ACTION_ID_CANCEL)
                     .build());
@@ -158,13 +159,13 @@ public class PQAdvancedColorTemperatureResetAllActivity extends Activity {
         }
 
         private void performFactoryReset() {
-            Log.d(TAG,"performFactoryReset");
-            mPQSettingsManager.setAdvancedColorTemperatureRGainStatus (0);
-            mPQSettingsManager.setAdvancedColorTemperatureGGainStatus (0);
-            mPQSettingsManager.setAdvancedColorTemperatureBGainStatus (0);
-            mPQSettingsManager.setAdvancedColorTemperatureROffsetStatus (0);
-            mPQSettingsManager.setAdvancedColorTemperatureGOffsetStatus (0);
-            mPQSettingsManager.setAdvancedColorTemperatureBOffsetStatus (0);
+            Log.d(TAG, "performFactoryReset");
+            mPQSettingsManager.setAdvancedColorTemperatureRGainStatus(0);
+            mPQSettingsManager.setAdvancedColorTemperatureGGainStatus(0);
+            mPQSettingsManager.setAdvancedColorTemperatureBGainStatus(0);
+            mPQSettingsManager.setAdvancedColorTemperatureROffsetStatus(0);
+            mPQSettingsManager.setAdvancedColorTemperatureGOffsetStatus(0);
+            mPQSettingsManager.setAdvancedColorTemperatureBOffsetStatus(0);
             getActivity().finish();
         }
     }

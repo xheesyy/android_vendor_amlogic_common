@@ -26,6 +26,6 @@ public class SecurityActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(SecurityFragment.class.getName(), null);
+                .newSettingsFragment(SecurityFragment.class.getName(), null);
     }
 }

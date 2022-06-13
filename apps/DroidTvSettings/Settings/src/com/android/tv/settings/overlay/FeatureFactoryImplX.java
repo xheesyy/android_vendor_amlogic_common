@@ -23,7 +23,9 @@ import com.android.tv.settings.basic.BasicModeFeatureProviderImplX;
 import com.android.tv.settings.startup.StartupVerificationFeatureProvider;
 import com.android.tv.settings.startup.StartupVerificationFeatureProviderImplX;
 
-/** Implementation of {@FeatureFactory} that can be utilized with resource overlay. */
+/**
+ * Implementation of {@FeatureFactory} that can be utilized with resource overlay.
+ */
 @Keep
 public class FeatureFactoryImplX extends FeatureFactoryImplTwoPanel {
 

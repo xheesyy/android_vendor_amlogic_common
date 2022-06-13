@@ -134,8 +134,8 @@ public class MenuItem {
     private final Intent mIntent;
 
     private MenuItem(int id, String displayName,
-            TextGetter displayDescriptionTextGetter, UriGetter imageUriGetter,
-            Intent intent) {
+                     TextGetter displayDescriptionTextGetter, UriGetter imageUriGetter,
+                     Intent intent) {
         mId = id;
         mDisplayName = displayName;
         mDisplayDescriptionTextGetter = displayDescriptionTextGetter;

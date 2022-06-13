@@ -19,5 +19,6 @@ public final class UpdateEngineProperties {
      */
     public static final String PROPERTY_SKIP_POST_INSTALL = "RUN_POST_INSTALL=0";
 
-    private UpdateEngineProperties() {}
+    private UpdateEngineProperties() {
+    }
 }

@@ -49,7 +49,8 @@ public class HighPower extends SettingsPreferenceFragment implements
                             ApplicationsState.FILTER_ALL_ENABLED),
                     new ApplicationsState.AppFilter() {
                         @Override
-                        public void init() {}
+                        public void init() {
+                        }
 
                         @Override
                         public boolean filterApp(ApplicationsState.AppEntry info) {
@@ -87,7 +88,7 @@ public class HighPower extends SettingsPreferenceFragment implements
     @NonNull
     @Override
     public Preference bindPreference(@NonNull Preference preference,
-            ApplicationsState.AppEntry entry) {
+                                     ApplicationsState.AppEntry entry) {
         final TwoStatePreference switchPref = (SwitchPreference) preference;
         switchPref.setTitle(entry.label);
         switchPref.setKey(entry.info.packageName);

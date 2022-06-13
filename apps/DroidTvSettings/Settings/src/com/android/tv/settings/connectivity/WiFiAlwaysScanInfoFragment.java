@@ -28,7 +28,9 @@ import androidx.annotation.Keep;
 import com.android.tv.twopanelsettings.R;
 import com.android.tv.twopanelsettings.slices.InfoFragment;
 
-/**  An {@InfoFragment} that hosts preview pane of wifi always scan switch preference. */
+/**
+ * An {@InfoFragment} that hosts preview pane of wifi always scan switch preference.
+ */
 @Keep
 public class WiFiAlwaysScanInfoFragment extends InfoFragment {
 

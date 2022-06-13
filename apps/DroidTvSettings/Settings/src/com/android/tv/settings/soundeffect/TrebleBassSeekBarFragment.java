@@ -18,9 +18,12 @@ package com.android.tv.settings.soundeffect;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
 import android.util.Log;
 import android.text.TextUtils;
 import android.widget.SeekBar;
@@ -54,19 +57,19 @@ public class TrebleBassSeekBarFragment extends SettingsPreferenceFragment implem
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (mAudioEffectManager == null) {
-            mAudioEffectManager = ((TvSettingsActivity)getActivity()).getAudioEffectManager();
+            mAudioEffectManager = ((TvSettingsActivity) getActivity()).getAudioEffectManager();
         }
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.xml.tv_sound_treblebass_seekbar, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated (View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         initSeekBar(view);
     }
 
@@ -120,7 +123,7 @@ public class TrebleBassSeekBarFragment extends SettingsPreferenceFragment implem
             return;
         }
         switch (seekBar.getId()) {
-            case R.id.seekbar_tv_treble:{
+            case R.id.seekbar_tv_treble: {
                 setShow(R.id.seekbar_tv_treble, progress);
                 int soundMode = mAudioEffectManager.getSoundModeStatus();
                 if (soundMode != AudioEffectManager.EQ_SOUND_MODE_CUSTOM) {
@@ -130,7 +133,7 @@ public class TrebleBassSeekBarFragment extends SettingsPreferenceFragment implem
                 mAudioEffectManager.setTreble(progress/* - mTvOptionSettingManager.getTrebleStatus()*/);
                 break;
             }
-            case R.id.seekbar_tv_bass:{
+            case R.id.seekbar_tv_bass: {
                 setShow(R.id.seekbar_tv_bass, progress);
                 int soundMode = mAudioEffectManager.getSoundModeStatus();
                 if (soundMode != AudioEffectManager.EQ_SOUND_MODE_CUSTOM) {
@@ -157,11 +160,11 @@ public class TrebleBassSeekBarFragment extends SettingsPreferenceFragment implem
 
     private void setShow(int id, int value) {
         switch (id) {
-            case R.id.seekbar_tv_treble:{
+            case R.id.seekbar_tv_treble: {
                 text_treble.setText(getShowString(R.string.tv_treble, value));
                 break;
             }
-            case R.id.seekbar_tv_bass:{
+            case R.id.seekbar_tv_bass: {
                 text_bass.setText(getShowString(R.string.tv_bass, value));
                 break;
             }

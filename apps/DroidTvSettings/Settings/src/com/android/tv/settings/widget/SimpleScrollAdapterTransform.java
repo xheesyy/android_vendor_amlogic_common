@@ -32,10 +32,14 @@ import java.util.ArrayList;
  */
 public class SimpleScrollAdapterTransform implements ScrollAdapterTransform {
 
-    /** Animator for transform views on the right/down side of mScrollCenter */
+    /**
+     * Animator for transform views on the right/down side of mScrollCenter
+     */
     private Animator mHighItemTransform;
 
-    /** for transform views on the left/up side of mScrollCenter */
+    /**
+     * for transform views on the left/up side of mScrollCenter
+     */
     private Animator mLowItemTransform;
 
     private final DisplayMetrics mDisplayMetrics;

@@ -152,8 +152,8 @@ public class Action implements Parcelable {
     }
 
     protected Action(String key, String title, String description, String resourcePackageName,
-            int drawableResource, boolean checked, boolean multilineDescription,
-            boolean hasNext, boolean infoOnly, Intent intent, int checkSetId, boolean enabled) {
+                     int drawableResource, boolean checked, boolean multilineDescription,
+                     boolean hasNext, boolean infoOnly, Intent intent, int checkSetId, boolean enabled) {
         mKey = key;
         mTitle = title;
         mDescription = description;
@@ -185,7 +185,7 @@ public class Action implements Parcelable {
      * The key and title arrays must be of equal length.
      */
     public static ArrayList<Action> createActionsFromArrays(String[] keys, String[] titles,
-            int checkSetId, String checkedItemKey) {
+                                                            int checkSetId, String checkedItemKey) {
         int keysLength = keys.length;
         int titlesLength = titles.length;
 
@@ -238,6 +238,7 @@ public class Action implements Parcelable {
      * Returns the check set id this action is a part of.  All actions in the same list with the
      * same check set id are considered linked.  When one of the actions within that set is selected
      * that action becomes checked while all the other actions become unchecked.
+     *
      * @return an integer representing the check set this action is a part of or {@NO_CHECK_SET} if
      * this action isn't a part of a check set.
      */
@@ -263,8 +264,8 @@ public class Action implements Parcelable {
 
     /**
      * @return true if the action will request further user input when selected
-     *         (such as showing another dialog or launching a new activity).
-     *         False, otherwise.
+     * (such as showing another dialog or launching a new activity).
+     * False, otherwise.
      */
     public boolean hasNext() {
         return mHasNext;

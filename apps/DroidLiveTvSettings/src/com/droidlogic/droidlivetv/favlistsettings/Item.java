@@ -38,13 +38,21 @@ public abstract class Item {
     }
 
     protected abstract int getResourceId();
+
     protected abstract String getTitle();
+
     protected abstract boolean needTitle();
+
     protected abstract Drawable getDrawable();
+
     protected abstract boolean needIconDrawable();
+
     protected abstract String getLayoutIdInfo();
+
     protected abstract JSONObject getJSONObject();
+
     protected abstract boolean isNeedShowIcon();
+
     protected abstract String getOriginTitle();
 
     protected String getStringValueFromJSONObject(String key) {
@@ -79,7 +87,7 @@ public abstract class Item {
         return R.id.title_text;
     }
 
-    protected  int getIconTextId() {
+    protected int getIconTextId() {
         return R.id.icon_text;
     }
 
@@ -87,7 +95,7 @@ public abstract class Item {
         String result = null;
         JSONObject obj = new JSONObject();
         try {
-            obj.put("type", TextView .class);
+            obj.put("type", TextView.class);
             obj.put("resId", resId);
             obj.put("value", value);
         } catch (JSONException e) {
@@ -103,7 +111,7 @@ public abstract class Item {
         String result = null;
         JSONObject obj = new JSONObject();
         try {
-            obj.put("type", TextView .class);
+            obj.put("type", TextView.class);
             obj.put("resId", resId);
             obj.put("iconRes", iconRes);
         } catch (JSONException e) {

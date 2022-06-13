@@ -16,7 +16,9 @@
 
 package com.android.tv.settings.system.development.audio;
 
-/** Represents an error in an audio recording thread. */
+/**
+ * Represents an error in an audio recording thread.
+ */
 public class AudioReaderException extends Exception {
     public AudioReaderException(Throwable cause) {
         super(cause);

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2018 The Android Open Source Project
 
     Licensed under the Apache License, Version 2.0 (the "License")
@@ -16,14 +15,22 @@
 -->
 
 <resources>
+
     <style name="TwoPanelPreferenceTheme" parent="PreferenceThemeOverlayLeanback">
         <item name="android:windowBackground">@color/tp_preference_window_background</item>
         <item name="android:colorPrimary">@color/tp_preference_brand_color</item>
-        <item name="android:textAppearanceListItemSmall">@style/TextAppearance.TwoPanelPreference.Category</item>
-        <item name="android:titleTextAppearance">@style/TextAppearance.TwoPanelPreference.Title</item>
+        <item name="android:textAppearanceListItemSmall">
+            @style/TextAppearance.TwoPanelPreference.Category
+        </item>
+        <item name="android:titleTextAppearance">@style/TextAppearance.TwoPanelPreference.Title
+        </item>
         <item name="android:selectableItemBackground">@drawable/preference_item_background</item>
-        <item name="android:textAppearanceListItem">@style/TextAppearance.TwoPanelPreference.ListItem</item>
-        <item name="android:textAppearanceListItemSecondary">@style/TextAppearance.TwoPanelPreference.ListItem.Secondary</item>
+        <item name="android:textAppearanceListItem">
+            @style/TextAppearance.TwoPanelPreference.ListItem
+        </item>
+        <item name="android:textAppearanceListItemSecondary">
+            @style/TextAppearance.TwoPanelPreference.ListItem.Secondary
+        </item>
         <item name="android:imageButtonStyle">@style/TwoPanelPreferenceIconStyle</item>
         <item name="android:colorControlNormal">#FF808080</item>
         <item name="android:thumbTint">@drawable/switch_thumb</item>

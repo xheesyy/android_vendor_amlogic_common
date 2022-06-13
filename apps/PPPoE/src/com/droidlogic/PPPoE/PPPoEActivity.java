@@ -1,19 +1,19 @@
 /******************************************************************
-*
-*Copyright (C) 2012  Amlogic, Inc.
-*
-*Licensed under the Apache License, Version 2.0 (the "License");
-*you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing, software
-*distributed under the License is distributed on an "AS IS" BASIS,
-*WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*See the License for the specific language governing permissions and
-*limitations under the License.
-******************************************************************/
+ *
+ *Copyright (C) 2012  Amlogic, Inc.
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ ******************************************************************/
 
 package com.droidlogic.PPPoE;
 
@@ -45,7 +45,9 @@ public class PPPoEActivity extends Activity {
     public static final int MSG_CONNECT_TIMEOUT = 0xabcd0020;
     public static final int MSG_DISCONNECT_TIMEOUT = 0xabcd0040;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,17 +56,17 @@ public class PPPoEActivity extends Activity {
         mSystemControlManager = SystemControlManager.getInstance();
         String eth_link = mSystemControlManager.readSysFs("/sys/class/ethernet/linkspeed");
         if (eth_link.contains("unlink")) {
-            Toast toast = Toast.makeText(this,this.getResources().getString(R.string.please_insert_the_cable),Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(this, this.getResources().getString(R.string.please_insert_the_cable), Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             finish();
         } else {
             setContentView(R.layout.main);
             mPppoeConfigDialog = new PppoeConfigDialog(this);
-            ConnectivityManager cm = (ConnectivityManager)this.getSystemService( Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo info = cm.getActiveNetworkInfo();
             if (info != null) {
-               Log.d(TAG, info.toString());
+                Log.d(TAG, info.toString());
             }
             if (mPppoeConfigDialog != null) {
                 Log.d(TAG, "Show PppoeConfigDialog");
@@ -72,6 +74,7 @@ public class PPPoEActivity extends Activity {
             }
         }
     }
+
     @Override
     public void onDestroy() {
         if (mPppoeConfigDialog != null)

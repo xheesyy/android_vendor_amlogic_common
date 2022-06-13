@@ -29,6 +29,6 @@ public class DaydreamActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DaydreamFragment.class.getName(), null);
+                .newSettingsFragment(DaydreamFragment.class.getName(), null);
     }
 }

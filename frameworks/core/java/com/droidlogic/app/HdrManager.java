@@ -25,18 +25,18 @@ import android.provider.Settings;
 import android.util.Log;
 
 public class HdrManager {
-    private static final String TAG                 = "HdrManager";
+    private static final String TAG = "HdrManager";
 
-    private static final String KEY_HDR_MODE        = "persist.vendor.sys.hdr.state";
+    private static final String KEY_HDR_MODE = "persist.vendor.sys.hdr.state";
 
-    public static final int MODE_OFF  = 0;
-    public static final int MODE_ON   = 1;
+    public static final int MODE_OFF = 0;
+    public static final int MODE_ON = 1;
     public static final int MODE_AUTO = 2;
 
     private Context mContext;
     private SystemControlManager mSystemControl;
 
-    public HdrManager(Context context){
+    public HdrManager(Context context) {
         mContext = context;
         mSystemControl = SystemControlManager.getInstance();
     }
@@ -47,7 +47,7 @@ public class HdrManager {
     }
 
     public void setHdrMode(int mode) {
-        if ((mode >=0) && (mode <= 2)) {
+        if ((mode >= 0) && (mode <= 2)) {
             mSystemControl.setHdrMode(String.valueOf(mode));
         } else {
             mSystemControl.setHdrMode(String.valueOf(MODE_AUTO));

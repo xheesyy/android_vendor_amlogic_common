@@ -60,7 +60,9 @@ public abstract class PinDialogFragment extends SafeDismissDialogFragment
             PIN_DIALOG_TYPE_NEW_PIN,
             PIN_DIALOG_TYPE_OLD_PIN,
             PIN_DIALOG_TYPE_DELETE_PIN})
-    public @interface PinDialogType {}
+    public @interface PinDialogType {
+    }
+
     /**
      * PIN code dialog for unlock channel
      */
@@ -104,7 +106,7 @@ public abstract class PinDialogFragment extends SafeDismissDialogFragment
     public static final String DIALOG_TAG = PinDialogFragment.class.getName();
 
     private static final int NUMBER_PICKERS_RES_ID[] = {
-            R.id.first, R.id.second, R.id.third, R.id.fourth };
+            R.id.first, R.id.second, R.id.third, R.id.fourth};
 
     private int mType;
     private int mRetCode;
@@ -124,39 +126,45 @@ public abstract class PinDialogFragment extends SafeDismissDialogFragment
 
     /**
      * Get the bad PIN retry time
+     *
      * @return Retry time
      */
     public abstract long getPinDisabledUntil();
 
     /**
      * Set the bad PIN retry time
+     *
      * @param retryDisableTimeout Retry time
      */
     public abstract void setPinDisabledUntil(long retryDisableTimeout);
 
     /**
      * Set PIN password for the profile
-     * @param pin New PIN password
+     *
+     * @param pin      New PIN password
      * @param consumer Will be called with the success result from setting the pin
      */
     public abstract void setPin(String pin, String originalPin, Consumer<Boolean> consumer);
 
     /**
      * Delete PIN password for the profile
-     * @param oldPin Old PIN password (required)
+     *
+     * @param oldPin   Old PIN password (required)
      * @param consumer Will be called with the success result from deleting the pin
      */
     public abstract void deletePin(String oldPin, Consumer<Boolean> consumer);
 
     /**
      * Validate PIN password for the profile
-     * @param pin Password to check
+     *
+     * @param pin      Password to check
      * @param consumer Will be called with the result of the check
      */
     public abstract void isPinCorrect(String pin, Consumer<Boolean> consumer);
 
     /**
      * Check if there is a PIN password set on the profile
+     *
      * @param consumer Will be called with the result of the check
      */
     public abstract void isPinSet(Consumer<Boolean> consumer);
@@ -187,7 +195,7 @@ public abstract class PinDialogFragment extends SafeDismissDialogFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.pin_dialog, container, false);
 
         mWrongPinView = v.findViewById(R.id.wrong_pin);
@@ -424,11 +432,11 @@ public abstract class PinDialogFragment extends SafeDismissDialogFragment
 
     public static final class PinNumberPicker extends FrameLayout {
         private static final int NUMBER_VIEWS_RES_ID[] = {
-            R.id.previous2_number,
-            R.id.previous_number,
-            R.id.current_number,
-            R.id.next_number,
-            R.id.next2_number };
+                R.id.previous2_number,
+                R.id.previous_number,
+                R.id.current_number,
+                R.id.next_number,
+                R.id.next2_number};
         private static final int CURRENT_NUMBER_VIEW_INDEX = 2;
 
         private static Animator sFocusedNumberEnterAnimator;
@@ -466,7 +474,7 @@ public abstract class PinDialogFragment extends SafeDismissDialogFragment
         }
 
         public PinNumberPicker(Context context, AttributeSet attrs, int defStyleAttr,
-                int defStyleRes) {
+                               int defStyleRes) {
             super(context, attrs, defStyleAttr, defStyleRes);
             View view = inflate(context, R.layout.pin_number_picker, this);
             mNumberViewHolder = view.findViewById(R.id.number_view_holder);

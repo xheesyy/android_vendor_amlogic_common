@@ -41,7 +41,9 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
     static final String PREF_CLOCK_FACE = "face";
     static final String PREF_SHOW_CLOCK = "show_clock";
 
-    /** Cap alarm count at this number */
+    /**
+     * Cap alarm count at this number
+     */
     static final int MAX_ALARM_COUNT = 12;
 
     /**
@@ -56,7 +58,7 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
     private String mPm;
     private boolean mUserCheckedFlag;
 
-	private Context mContext;
+    private Context mContext;
     /*
      * FIXME: it would be nice for this to live in an xml config file.
      */
@@ -83,8 +85,8 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
 
         @Override
         public void bindView(View view, Context context, Cursor cursor) {
-             Log.d(TAG, "bindView");
-        	 Log.d(TAG, "bindView");
+            Log.d(TAG, "bindView");
+            Log.d(TAG, "bindView");
             final Alarm alarm = new Alarm(cursor);
             final Context cont = context;
             Switch onButton = (Switch) view.findViewById(R.id.alarmButton);
@@ -97,7 +99,7 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (!mUserCheckedFlag) {
                             Log.d(TAG, "onCheckedChanged user click return ");
-                        	
+
                             return;
                         }
                         Log.d(TAG, "isChecked = " + isChecked);
@@ -137,7 +139,9 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
                 }
             }
         }
-    };
+    }
+
+    ;
 
     @Override
     public boolean onContextItemSelected(final MenuItem item) {
@@ -157,7 +161,7 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-		mContext = this;
+        mContext = this;
         String[] ampm = new DateFormatSymbols().getAmPmStrings();
         mAm = ampm[0];
         mPm = ampm[1];
@@ -177,8 +181,8 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
         }
         registerForContextMenu(mAlarmsList);
 
-		getActionBar().setHomeButtonEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -242,15 +246,16 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
         }
     }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item){
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-		if(item.getItemId() == android.R.id.home){
-			  finish();
-			  return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onItemClick(AdapterView parent, View v, int pos, long id) {
         Log.d(TAG, "onItemClick, id is " + id);
@@ -262,25 +267,26 @@ public class AlarmClock extends PreferenceActivity implements OnItemClickListene
         startActivity(intent);
     }
 
-	@Override
-	public boolean dispatchKeyEvent(KeyEvent event) {
-		// TODO Auto-generated method stub
-		int keyCode = event.getKeyCode();
-		if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ){
-			final Cursor c = (Cursor) mAlarmsList.getAdapter().getItem(getSelectedItemPosition());
-			final Alarm alarm = new Alarm(c);
-			if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT){
-			 if(alarm.mEnabled)
-               Alarms.enableAlarm(mContext, alarm.mId, false);
-			}else{
-             if(!alarm.mEnabled){
-            Alarms.enableAlarm(mContext, alarm.mId, true);
-            SetAlarm.popAlarmSetToast(mContext, alarm.mHour, alarm.mMinutes, alarm.mDaysOfWeek, alarm.mId);          }
-			}
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        // TODO Auto-generated method stub
+        int keyCode = event.getKeyCode();
+        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+            final Cursor c = (Cursor) mAlarmsList.getAdapter().getItem(getSelectedItemPosition());
+            final Alarm alarm = new Alarm(c);
+            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                if (alarm.mEnabled)
+                    Alarms.enableAlarm(mContext, alarm.mId, false);
+            } else {
+                if (!alarm.mEnabled) {
+                    Alarms.enableAlarm(mContext, alarm.mId, true);
+                    SetAlarm.popAlarmSetToast(mContext, alarm.mHour, alarm.mMinutes, alarm.mDaysOfWeek, alarm.mId);
+                }
+            }
 
-			return true;
+            return true;
         }
-	     return super.dispatchKeyEvent(event);
-	}
+        return super.dispatchKeyEvent(event);
+    }
 
 }

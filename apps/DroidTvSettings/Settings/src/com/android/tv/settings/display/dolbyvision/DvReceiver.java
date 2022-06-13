@@ -20,7 +20,7 @@ public class DvReceiver extends BroadcastReceiver {
     //static final String ACTION = "android.intent.action.BOOT_COMPLETED";
 
     @Override
-    public void onReceive (Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equalsIgnoreCase(Intent.ACTION_BOOT_COMPLETED)) {
             Intent serviceIntent = new Intent(context, DolbyVisionService.class);
             context.startService(serviceIntent);

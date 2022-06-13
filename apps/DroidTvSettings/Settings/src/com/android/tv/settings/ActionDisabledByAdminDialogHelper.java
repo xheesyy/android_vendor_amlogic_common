@@ -37,6 +37,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.VisibleForTesting;
+
 import android.app.AlertDialog;
 
 import com.android.tv.settings.R;
@@ -52,7 +53,8 @@ import java.util.Objects;
 public class ActionDisabledByAdminDialogHelper {
 
     private static final String TAG = ActionDisabledByAdminDialogHelper.class.getName();
-    @VisibleForTesting EnforcedAdmin mEnforcedAdmin;
+    @VisibleForTesting
+    EnforcedAdmin mEnforcedAdmin;
     private ViewGroup mDialogView;
     private String mRestriction = null;
     private Activity mActivity;
@@ -74,7 +76,7 @@ public class ActionDisabledByAdminDialogHelper {
     }
 
     public AlertDialog.Builder prepareDialogBuilder(String restriction,
-            EnforcedAdmin enforcedAdmin) {
+                                                    EnforcedAdmin enforcedAdmin) {
         mEnforcedAdmin = enforcedAdmin;
         mRestriction = restriction;
         final AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
@@ -97,7 +99,7 @@ public class ActionDisabledByAdminDialogHelper {
     }
 
     private void initializeDialogViews(View root, ComponentName admin, int userId,
-            String restriction) {
+                                       String restriction) {
         if (admin == null) {
             return;
         }
@@ -151,7 +153,7 @@ public class ActionDisabledByAdminDialogHelper {
 
     @VisibleForTesting
     void setAdminSupportDetails(final Activity activity, final View root,
-            final EnforcedAdmin enforcedAdmin) {
+                                final EnforcedAdmin enforcedAdmin) {
         if (enforcedAdmin == null || enforcedAdmin.component == null) {
             return;
         }

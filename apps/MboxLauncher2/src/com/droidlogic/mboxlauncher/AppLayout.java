@@ -32,7 +32,7 @@ import android.util.Log;
 import java.lang.Character;
 import java.util.List;
 
-public class AppLayout extends RelativeLayout{
+public class AppLayout extends RelativeLayout {
     private final static String TAG = "AppLayout";
     public final static int ANIM_LEFT = 0;
     public final static int ANIM_RIGHT = 1;
@@ -47,27 +47,28 @@ public class AppLayout extends RelativeLayout{
     private int password = 0;
     private int currenPassword = 0;
     Animation animLeftIn, animLeftOut, animRightIn, animRightOut;
-    public AppLayout(Context context){
+
+    public AppLayout(Context context) {
         super(context);
         mContext = context;
     }
 
-    public AppLayout(Context context, AttributeSet attrs){
+    public AppLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         initlayout();
     }
 
-    public AppLayout(Context context, AttributeSet attrs, int defStyle){
+    public AppLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
     private void initlayout() {
         inflate(mContext, R.layout.layout_second_screen, this);
-        icon = (ImageView)findViewById(R.id.image_icon);
-        prompt = (ImageView)findViewById(R.id.image_prompt);
-        title = (TextView)findViewById(R.id.tx_title);
-        grid_layout = (MyGridLayout)findViewById(R.id.gl_shortcut);
+        icon = (ImageView) findViewById(R.id.image_icon);
+        prompt = (ImageView) findViewById(R.id.image_prompt);
+        title = (TextView) findViewById(R.id.tx_title);
+        grid_layout = (MyGridLayout) findViewById(R.id.gl_shortcut);
 
         animLeftIn = AnimationUtils.loadAnimation(mContext, R.anim.push_left_in);
         animLeftOut = AnimationUtils.loadAnimation(mContext, R.anim.push_left_out);
@@ -96,7 +97,7 @@ public class AppLayout extends RelativeLayout{
         grid_layout.clearFocus();
         grid_layout.setLayoutView(mode, list);
         if (mode != Launcher.MODE_HOME && grid_layout.getChildCount() > 0) {
-            MyRelativeLayout firstChild = (MyRelativeLayout)grid_layout.getChildAt(0);
+            MyRelativeLayout firstChild = (MyRelativeLayout) grid_layout.getChildAt(0);
             firstChild.requestFocus();
         }
     }
@@ -122,6 +123,7 @@ public class AppLayout extends RelativeLayout{
     private class MyAnimationListener implements AnimationListener {
         private int mType = -1;
         private int mPassword = -1;
+
         public MyAnimationListener(int type, int password) {
             mType = type;
             mPassword = password;
@@ -129,7 +131,7 @@ public class AppLayout extends RelativeLayout{
 
         @Override
         public void onAnimationStart(Animation animation) {
-            ((Launcher)mContext).getHoverView().setVisibility(View.INVISIBLE);
+            ((Launcher) mContext).getHoverView().setVisibility(View.INVISIBLE);
             //setVisibility(View.INVISIBLE);
             currenPassword = mPassword;
         }
@@ -139,7 +141,7 @@ public class AppLayout extends RelativeLayout{
             if (mType == TYPE_ANIM_IN) {
                 //setVisibility(View.VISIBLE);
                 if (currenPassword == mPassword) {
-                    ((Launcher)mContext).getHoverView().setVisibility(View.VISIBLE);
+                    ((Launcher) mContext).getHoverView().setVisibility(View.VISIBLE);
                 }
             }
         }

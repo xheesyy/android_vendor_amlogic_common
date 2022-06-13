@@ -27,9 +27,9 @@ import java.util.List;
 /**
  * A replacement of BufferedInputStream (no multiple thread): <p>
  * - use list of byte array (chunks) instead of keep growing a single byte array (more efficent)
- *   <br>
+ * <br>
  * - support overriding the markLimit passed in mark() call (The value that BitmapFactory
- *   uses 1024 is too small for detecting bitmap bounds and reset()) <br>
+ * uses 1024 is too small for detecting bitmap bounds and reset()) <br>
  */
 public class CachedInputStream extends FilterInputStream {
 
@@ -167,7 +167,7 @@ public class CachedInputStream extends FilterInputStream {
                 count -= reads;
                 if (invalidate()) {
                     reads = in.read(buffer, offset, count);
-                    if (reads >0 ) {
+                    if (reads > 0) {
                         totalReads += reads;
                     }
                     break;
@@ -216,7 +216,7 @@ public class CachedInputStream extends FilterInputStream {
         if (in == null) {
             throw streamClosed();
         }
-        if (mMarkPos <0) {
+        if (mMarkPos < 0) {
             return in.skip(byteCount);
         }
         long totalSkip = 0;

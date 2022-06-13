@@ -46,7 +46,7 @@ public class DisplaySound_Preference extends PreferenceActivity implements Prefe
         Screen_density_Preference = (ListPreference) findPreference(DISPLAY_DENSITY_KEY);
         bindPreferenceSummaryToValue(Screen_density_Preference);
 
-        MORE_DISPLAY_Preference = (PreferenceScreen)findPreference(MORE_DISPLAY_SETTINGS);
+        MORE_DISPLAY_Preference = (PreferenceScreen) findPreference(MORE_DISPLAY_SETTINGS);
         MORE_DISPLAY_Preference.setOnPreferenceClickListener(this);
     }
 
@@ -77,7 +77,7 @@ public class DisplaySound_Preference extends PreferenceActivity implements Prefe
                 // Set the summary to reflect the new value.
                 preference.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
 
-                if (DISPLAY_DENSITY_KEY.equals(key)){
+                if (DISPLAY_DENSITY_KEY.equals(key)) {
                     String command = index >= 0 ? listPreference.getEntries()[index].toString() : "";
                     try {
                         ComApi.execCommand(new String[]{"sh", "-c", "wm density " + command});
@@ -85,12 +85,12 @@ public class DisplaySound_Preference extends PreferenceActivity implements Prefe
                         e.printStackTrace();
                     }
 
-                }else if(DISPLAY_ROTATION_KEY.equals(key)){
-                    Settings.System.putInt(mContext.getContentResolver(),"user_rotation",index);
-                    SystemProperties.set("persist.sys.user_rotation",""+index);
+                } else if (DISPLAY_ROTATION_KEY.equals(key)) {
+                    Settings.System.putInt(mContext.getContentResolver(), "user_rotation", index);
+                    SystemProperties.set("persist.sys.user_rotation", "" + index);
                 }
 
-            }  else {
+            } else {
                 // For all other preferences, set the summary to the value's
                 // simple string representation.
                 preference.setSummary(stringValue);
@@ -98,6 +98,7 @@ public class DisplaySound_Preference extends PreferenceActivity implements Prefe
             return true;
         }
     };
+
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(sBindPreferenceSummaryToValueListener);
@@ -117,12 +118,12 @@ public class DisplaySound_Preference extends PreferenceActivity implements Prefe
     @Override
     public boolean onPreferenceClick(Preference preference) {
         final String key = preference.getKey();
-        if (MORE_DISPLAY_SETTINGS.equals(key)){
-            SystemProperties.set("persist.sys.use.tv_settings","1");
+        if (MORE_DISPLAY_SETTINGS.equals(key)) {
+            SystemProperties.set("persist.sys.use.tv_settings", "1");
             Intent intent = new Intent();
             intent.setClassName("com.android.tv.settings", "com.android.tv.settings.device.displaysound.DisplaySoundActivity");
             startActivity(intent);
-            SystemProperties.set("persist.sys.use.tv_settings","0");
+            SystemProperties.set("persist.sys.use.tv_settings", "0");
         }
         return true;
     }

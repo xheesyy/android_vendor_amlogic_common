@@ -41,6 +41,7 @@ import android.os.Handler;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Message;
+
 import com.android.tv.settings.tvoption.TvOptionSettingManager;
 import com.android.tv.settings.tvoption.SoundParameterSettingManager;
 import com.android.tv.settings.soundeffect.OptionParameterManager;
@@ -157,6 +158,7 @@ public abstract class TvSettingsActivity extends FragmentActivity {
             }
         }
     };
+
     public void registerSomeReceivers() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(INTENT_ACTION_FINISH_FRAGMENT);
@@ -167,7 +169,8 @@ public abstract class TvSettingsActivity extends FragmentActivity {
     public void unregisterSomeReceivers() {
         unregisterReceiver(mReceiver);
     }
-    public void startShowActivityTimer () {
+
+    public void startShowActivityTimer() {
         handler.removeMessages(0);
 
         int seconds = DataProviderManager.getIntValue(this, TvOptionSettingManager.KEY_MENU_TIME,
@@ -191,6 +194,7 @@ public abstract class TvSettingsActivity extends FragmentActivity {
             handler.removeMessages(0);
         }
     }
+
     Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             finish();
@@ -216,7 +220,7 @@ public abstract class TvSettingsActivity extends FragmentActivity {
     }
 
     @Override
-    public boolean dispatchKeyEvent (KeyEvent event) {
+    public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             switch (event.getKeyCode()) {
                 case KeyEvent.KEYCODE_DPAD_UP:
@@ -291,15 +295,18 @@ public abstract class TvSettingsActivity extends FragmentActivity {
         mOptionParameterManager = new OptionParameterManager(context);
         getAudioEffectManager();
     }
+
     public AudioEffectManager getAudioEffectManager() {
         return AudioEffectManager.getInstance(getApplicationContext());
     }
+
     public SoundParameterSettingManager getSoundParameterSettingManager() {
         if (mSoundParameterSettingManager == null) {
             mSoundParameterSettingManager = new SoundParameterSettingManager(this);
         }
         return mSoundParameterSettingManager;
     }
+
     public OptionParameterManager getOptionParameterManager() {
         if (mOptionParameterManager == null) {
             mOptionParameterManager = new OptionParameterManager(this);
@@ -314,7 +321,7 @@ public abstract class TvSettingsActivity extends FragmentActivity {
      * Subclass may override this to return true to indicate that the Activity may only be started
      * after some verification. Example: in special mode, we need to challenge the user with re-auth
      * before launching account settings.
-     *
+     * <p>
      * This only works in certain flavors as we do not have features requiring the startup
      * verification in classic flavor or ordinary two panel flavor.
      */
@@ -322,7 +329,9 @@ public abstract class TvSettingsActivity extends FragmentActivity {
         return false;
     }
 
-    /** Subclass may override this to specify the flavor, in which the activity is available. */
+    /**
+     * Subclass may override this to specify the flavor, in which the activity is available.
+     */
     protected int getAvailableFlavors() {
         return ALL_FLAVORS_MASK;
     }

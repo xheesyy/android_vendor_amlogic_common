@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,14 +19,14 @@
     <Preference
         android:key="picture"
         android:title="@string/picture_settings_title"
-        android:summary="@string/vendor_sample_settings_summary"/>
+        android:summary="@string/vendor_sample_settings_summary" />
     <Preference
         android:key="screen"
         android:title="@string/screen_settings_title"
-        android:summary="@string/vendor_sample_settings_summary"/>
+        android:summary="@string/vendor_sample_settings_summary" />
     <Preference
         android:key="sound"
         android:title="@string/sound_settings_title"
-        android:summary="@string/vendor_sample_settings_summary"/>
+        android:summary="@string/vendor_sample_settings_summary" />
 
 </PreferenceScreen>

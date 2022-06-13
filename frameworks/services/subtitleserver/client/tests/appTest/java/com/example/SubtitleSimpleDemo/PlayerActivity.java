@@ -56,6 +56,7 @@ public class PlayerActivity extends Activity implements
     private Button mTTNextPageBtn;
     private Button mTTNextSubPageBtn;
     private Button mTTGoHomeBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,7 +142,7 @@ public class PlayerActivity extends Activity implements
     };
 
 
-    private void startSubtitlePlay(){
+    private void startSubtitlePlay() {
         // Here, we simply use MediaPlayer to play, it use softdemux.
         // currently, softdemux need start subtitle first.
         // Middleware hardware demux no such limitation.
@@ -164,7 +165,7 @@ public class PlayerActivity extends Activity implements
     private void playVideo() {
         try {
             // Create a new media player and set the listeners
-            mMediaPlayer.setDataSource (this, Uri.parse(mFilePath), null);
+            mMediaPlayer.setDataSource(this, Uri.parse(mFilePath), null);
             mMediaPlayer.setDisplay(mHolder);
 
             mMediaPlayer.setUseLocalExtractor(mMediaPlayer);
@@ -193,7 +194,7 @@ public class PlayerActivity extends Activity implements
         stopSubtitlePlay();
 
         try {
-            mMediaPlayer.setDataSource (this, Uri.parse(mFilePath), null);
+            mMediaPlayer.setDataSource(this, Uri.parse(mFilePath), null);
             mMediaPlayer.setUseLocalExtractor(mMediaPlayer);
             mMediaPlayer.prepare();
         } catch (Exception ex) {
@@ -209,9 +210,9 @@ public class PlayerActivity extends Activity implements
             for (int j = 0; j < mTrackInfo.length; j++) {
                 if (mTrackInfo[j] != null) {
                     int trackType = mTrackInfo[j].getTrackType();
-                    Log.d(TAG, "get Track, track info="+mTrackInfo[j]);
+                    Log.d(TAG, "get Track, track info=" + mTrackInfo[j]);
                     if (trackType == MediaPlayer.TrackInfo.MEDIA_TRACK_TYPE_SUBTITLE || trackType == MediaPlayer.TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT) {
-                        Log.d(TAG, "get  subtitle Track, track info="+mTrackInfo[j]);
+                        Log.d(TAG, "get  subtitle Track, track info=" + mTrackInfo[j]);
                     }
                 }
 
@@ -228,18 +229,18 @@ public class PlayerActivity extends Activity implements
 
     @Override
     public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-        Log.d(TAG, "onVideoSizeChanged called width="+width +", height="+height);
+        Log.d(TAG, "onVideoSizeChanged called width=" + width + ", height=" + height);
         mVideoWidth = width;
         mVideoHeight = height;
 
         mApiWrapper.setDisplayRect(mVideoView.getLeft(), mVideoView.getTop(),
-                mVideoView.getRight()-mVideoView.getLeft(), mVideoView.getBottom()-mVideoView.getTop());
+                mVideoView.getRight() - mVideoView.getLeft(), mVideoView.getBottom() - mVideoView.getTop());
 
         // also update the default container.
         mStartXET.setText(Integer.toString(mVideoView.getLeft()));
         mStartYET.setText(Integer.toString(mVideoView.getTop()));
-        mWidthET.setText(Integer.toString(mVideoView.getRight()-mVideoView.getLeft()));
-        mHeightET.setText(Integer.toString(mVideoView.getBottom()-mVideoView.getTop()));
+        mWidthET.setText(Integer.toString(mVideoView.getRight() - mVideoView.getLeft()));
+        mHeightET.setText(Integer.toString(mVideoView.getBottom() - mVideoView.getTop()));
     }
 
     @Override

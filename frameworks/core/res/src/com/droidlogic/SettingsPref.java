@@ -15,10 +15,10 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class SettingsPref {
-    private static final String FIRST_RUN           = "first_run";
-    private static final String WIFI_SAVE_STATE     = "wifi_save_state";
-    private static final String SAVED_BUILD_DATE    = "saved_build_date";
-    private static final String SAVED_BOOT_COMPLETED_STATUS    = "saved_boot_completed_status";
+    private static final String FIRST_RUN = "first_run";
+    private static final String WIFI_SAVE_STATE = "wifi_save_state";
+    private static final String SAVED_BUILD_DATE = "saved_build_date";
+    private static final String SAVED_BOOT_COMPLETED_STATUS = "saved_boot_completed_status";
 
     public static void setFirstRun(Context c, boolean firstRun) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);

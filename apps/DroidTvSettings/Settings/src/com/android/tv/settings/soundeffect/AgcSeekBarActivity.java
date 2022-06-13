@@ -29,7 +29,7 @@ public class AgcSeekBarActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(AgcSeekBarFragment.class.getName(), null);
+                .newSettingsFragment(AgcSeekBarFragment.class.getName(), null);
     }
 
 }

@@ -23,12 +23,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
+
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -58,8 +62,8 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
     private static final String TAG = "PictrueModeFragment";
     private static final String PQ_PICTRUE_MODE = "pq_pictrue_mode";
     private static final String PQ_PICTRUE_MODE_SDR = "pq_pictrue_mode_sdr";
-    private static final String PQ_PICTRUE_MODE_HDR10= "pq_pictrue_mode_hdr10";
-    private static final String PQ_PICTRUE_MODE_HDR10PLUS= "pq_pictrue_mode_hdr10plus";
+    private static final String PQ_PICTRUE_MODE_HDR10 = "pq_pictrue_mode_hdr10";
+    private static final String PQ_PICTRUE_MODE_HDR10PLUS = "pq_pictrue_mode_hdr10plus";
     private static final String PQ_PICTRUE_MODE_HLG = "pq_pictrue_mode_hlg";
     private static final String PQ_PICTRUE_MODE_DOLBYVISION = "pq_pictrue_mode_dolbyvision";
     private static final String PQ_PICTRUE_MODE_CVUA = "pq_pictrue_mode_cvua";
@@ -67,8 +71,8 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
     private static String FLAG_CURRENT_SOURCE = "SDR";
     private boolean FLAG_PQ_PICTRUE_MODE = false;
     private boolean FLAG_PQ_PICTRUE_MODE_SDR = false;
-    private boolean FLAG_PQ_PICTRUE_MODE_HDR10= false;
-    private boolean FLAG_PQ_PICTRUE_MODE_HDR10PLUS= false;
+    private boolean FLAG_PQ_PICTRUE_MODE_HDR10 = false;
+    private boolean FLAG_PQ_PICTRUE_MODE_HDR10PLUS = false;
     private boolean FLAG_PQ_PICTRUE_MODE_HLG = false;
     private boolean FLAG_PQ_PICTRUE_MODE_DOLBYVISION = false;
     private boolean FLAG_PQ_PICTRUE_MODE_CVUA = false;
@@ -139,7 +143,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
 
         final Preference pictureCustomerPref = (Preference) findPreference(PQ_CUSTOM);
         if (curPictureMode.equals(PQSettingsManager.STATUS_MONITOR) ||
-            curPictureMode.equals(PQSettingsManager.STATUS_GAME)) {
+                curPictureMode.equals(PQSettingsManager.STATUS_GAME)) {
             pictureCustomerPref.setVisible(false);
         } else {
             pictureCustomerPref.setVisible(true);
@@ -148,7 +152,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView");
         final View innerView = super.onCreateView(inflater, container, savedInstanceState);
         if (getActivity().getIntent().getIntExtra("from_live_tv", 0) == 1) {
@@ -236,7 +240,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
 
         final Preference pictureCustomerPref = (Preference) findPreference(PQ_CUSTOM);
         if (curPictureMode.equals(PQSettingsManager.STATUS_MONITOR) ||
-            curPictureMode.equals(PQSettingsManager.STATUS_GAME)) {
+                curPictureMode.equals(PQSettingsManager.STATUS_GAME)) {
             pictureCustomerPref.setVisible(false);
         } else {
             pictureCustomerPref.setVisible(true);
@@ -244,7 +248,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
 
         final ListPreference aspectratioPref = (ListPreference) findPreference(PQ_ASPECT_RATIO);
         if (is_from_live_tv == 1 || (isTv && getActivity().getResources().getBoolean(R.bool.tv_pq_need_aspect_ratio)) ||
-                    (!isTv && getActivity().getResources().getBoolean(R.bool.box_pq_need_aspect_ratio))) {
+                (!isTv && getActivity().getResources().getBoolean(R.bool.box_pq_need_aspect_ratio))) {
             aspectratioPref.setValueIndex(mPQSettingsManager.getAspectRatioStatus());
             aspectratioPref.setOnPreferenceChangeListener(this);
         } else {
@@ -254,7 +258,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
         final ListPreference aipqPref = (ListPreference) findPreference(PQ_AI_PQ);
         // First judge like this, and add specific judgment criteria later
         if (mPQSettingsManager.getChipVersionInfo() != null &&
-                    PQ_PICTRUE_T5 == mPQSettingsManager.getChipVersionInfo()) {
+                PQ_PICTRUE_T5 == mPQSettingsManager.getChipVersionInfo()) {
             aipqPref.setValueIndex(mPQSettingsManager.getAIPQStatus());
             //aipqPref.setValueIndex(1);
             aipqPref.setOnPreferenceChangeListener(this);
@@ -272,7 +276,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
 
         final Preference pictureAllResetPref = (Preference) findPreference(PQ_ALLRESET);
         if (curPictureMode.equals(PQSettingsManager.STATUS_MONITOR) ||
-            curPictureMode.equals(PQSettingsManager.STATUS_GAME)) {
+                curPictureMode.equals(PQSettingsManager.STATUS_GAME)) {
             pictureAllResetPref.setVisible(false);
         } else {
             pictureAllResetPref.setVisible(true);
@@ -281,7 +285,8 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
         switch (preference.getKey()) {
             case PQ_ALLRESET:
                 Intent PQAllResetIntent = new Intent();
@@ -299,7 +304,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
         Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
         //final int selection = Integer.parseInt((String)newValue);
         if (TextUtils.equals(preference.getKey(), PQ_PICTRUE_MODE)) {
-            mPQSettingsManager.setPictureMode((String)newValue);
+            mPQSettingsManager.setPictureMode((String) newValue);
         } else if (TextUtils.equals(preference.getKey(), PQ_PICTRUE_MODE_SDR)) {
             //mPQSettingsManager.setPictureMode((String)newValue);
         } else if (TextUtils.equals(preference.getKey(), PQ_PICTRUE_MODE_HDR10)) {
@@ -313,10 +318,10 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
         } else if (TextUtils.equals(preference.getKey(), PQ_PICTRUE_MODE_CVUA)) {
             //mPQSettingsManager.setPictureMode((String)newValue);
         } else if (TextUtils.equals(preference.getKey(), PQ_ASPECT_RATIO)) {
-            final int selection = Integer.parseInt((String)newValue);
+            final int selection = Integer.parseInt((String) newValue);
             mPQSettingsManager.setAspectRatio(selection);
         } else if (TextUtils.equals(preference.getKey(), PQ_AI_PQ)) {
-            final int selection = Integer.parseInt((String)newValue);
+            final int selection = Integer.parseInt((String) newValue);
             mPQSettingsManager.setAIPQ(selection);
         }
         return true;
@@ -327,9 +332,9 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
         return 0;
     }
 
-    private final int[] HDMI_PIC_RES = {R.string.pq_standard, R.string.pq_vivid, R.string.pq_soft, R.string.pq_sport, R.string.pq_movie, R.string.pq_monitor,R.string.pq_game,R.string.pq_user};
+    private final int[] HDMI_PIC_RES = {R.string.pq_standard, R.string.pq_vivid, R.string.pq_soft, R.string.pq_sport, R.string.pq_movie, R.string.pq_monitor, R.string.pq_game, R.string.pq_user};
     private final String[] HDMI_PIC_MODE = {PQSettingsManager.STATUS_STANDARD, PQSettingsManager.STATUS_VIVID, PQSettingsManager.STATUS_SOFT,
-        PQSettingsManager.STATUS_SPORT, PQSettingsManager.STATUS_MOVIE, PQSettingsManager.STATUS_MONITOR, PQSettingsManager.STATUS_GAME, PQSettingsManager.STATUS_USER};
+            PQSettingsManager.STATUS_SPORT, PQSettingsManager.STATUS_MOVIE, PQSettingsManager.STATUS_MONITOR, PQSettingsManager.STATUS_GAME, PQSettingsManager.STATUS_USER};
 
     private String[] setHdmiPicEntries() {
         String[] temp = null;//new String[HDMI_PIC_RES.length];
@@ -342,7 +347,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
                 list.add(getString(HDMI_PIC_RES[i]));
             }
         }
-        temp = (String[])list.toArray(new String[list.size()]);
+        temp = (String[]) list.toArray(new String[list.size()]);
 
         return temp;
     }
@@ -358,7 +363,7 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
                 list.add(HDMI_PIC_MODE[i]);
             }
         }
-        temp = (String[])list.toArray(new String[list.size()]);
+        temp = (String[]) list.toArray(new String[list.size()]);
 
         return temp;
     }
@@ -397,51 +402,51 @@ public class PictrueModeFragment extends SettingsPreferenceFragment implements P
         int currentPictureModeSource = 0; //mPQSettingsManager.getPictureModeSource();
         if (currentPictureModeSource == Current_Source_Type.PQ_PICTRUE_MODE_SDR.toInt()) {
             FLAG_PQ_PICTRUE_MODE_SDR = true;
-            FLAG_PQ_PICTRUE_MODE_HDR10= false;
-            FLAG_PQ_PICTRUE_MODE_HDR10PLUS= false;
+            FLAG_PQ_PICTRUE_MODE_HDR10 = false;
+            FLAG_PQ_PICTRUE_MODE_HDR10PLUS = false;
             FLAG_PQ_PICTRUE_MODE_HLG = false;
             FLAG_PQ_PICTRUE_MODE_DOLBYVISION = false;
             FLAG_PQ_PICTRUE_MODE_CVUA = false;
         } else if (currentPictureModeSource == Current_Source_Type.PQ_PICTRUE_MODE_HDR10.toInt()) {
             FLAG_PQ_PICTRUE_MODE_SDR = false;
-            FLAG_PQ_PICTRUE_MODE_HDR10= true;
-            FLAG_PQ_PICTRUE_MODE_HDR10PLUS= false;
+            FLAG_PQ_PICTRUE_MODE_HDR10 = true;
+            FLAG_PQ_PICTRUE_MODE_HDR10PLUS = false;
             FLAG_PQ_PICTRUE_MODE_HLG = false;
             FLAG_PQ_PICTRUE_MODE_DOLBYVISION = false;
             FLAG_PQ_PICTRUE_MODE_CVUA = false;
         } else if (currentPictureModeSource == Current_Source_Type.PQ_PICTRUE_MODE_HDR10PLUS.toInt()) {
             FLAG_PQ_PICTRUE_MODE_SDR = false;
-            FLAG_PQ_PICTRUE_MODE_HDR10= false;
-            FLAG_PQ_PICTRUE_MODE_HDR10PLUS= true;
+            FLAG_PQ_PICTRUE_MODE_HDR10 = false;
+            FLAG_PQ_PICTRUE_MODE_HDR10PLUS = true;
             FLAG_PQ_PICTRUE_MODE_HLG = false;
             FLAG_PQ_PICTRUE_MODE_DOLBYVISION = false;
             FLAG_PQ_PICTRUE_MODE_CVUA = false;
         } else if (currentPictureModeSource == Current_Source_Type.PQ_PICTRUE_MODE_HLG.toInt()) {
             FLAG_PQ_PICTRUE_MODE_SDR = false;
-            FLAG_PQ_PICTRUE_MODE_HDR10= false;
-            FLAG_PQ_PICTRUE_MODE_HDR10PLUS= false;
+            FLAG_PQ_PICTRUE_MODE_HDR10 = false;
+            FLAG_PQ_PICTRUE_MODE_HDR10PLUS = false;
             FLAG_PQ_PICTRUE_MODE_HLG = true;
             FLAG_PQ_PICTRUE_MODE_DOLBYVISION = false;
             FLAG_PQ_PICTRUE_MODE_CVUA = false;
         } else if (currentPictureModeSource == Current_Source_Type.PQ_PICTRUE_MODE_DOLBYVISION.toInt()) {
             FLAG_PQ_PICTRUE_MODE_SDR = false;
-            FLAG_PQ_PICTRUE_MODE_HDR10= false;
-            FLAG_PQ_PICTRUE_MODE_HDR10PLUS= false;
+            FLAG_PQ_PICTRUE_MODE_HDR10 = false;
+            FLAG_PQ_PICTRUE_MODE_HDR10PLUS = false;
             FLAG_PQ_PICTRUE_MODE_HLG = false;
             FLAG_PQ_PICTRUE_MODE_DOLBYVISION = true;
             FLAG_PQ_PICTRUE_MODE_CVUA = false;
         } else if (currentPictureModeSource == Current_Source_Type.PQ_PICTRUE_MODE_CVUA.toInt()) {
             FLAG_PQ_PICTRUE_MODE_SDR = false;
-            FLAG_PQ_PICTRUE_MODE_HDR10= false;
-            FLAG_PQ_PICTRUE_MODE_HDR10PLUS= false;
+            FLAG_PQ_PICTRUE_MODE_HDR10 = false;
+            FLAG_PQ_PICTRUE_MODE_HDR10PLUS = false;
             FLAG_PQ_PICTRUE_MODE_HLG = false;
             FLAG_PQ_PICTRUE_MODE_DOLBYVISION = false;
             FLAG_PQ_PICTRUE_MODE_CVUA = true;
         } else {
             FLAG_PQ_PICTRUE_MODE = true;
             FLAG_PQ_PICTRUE_MODE_SDR = false;
-            FLAG_PQ_PICTRUE_MODE_HDR10= false;
-            FLAG_PQ_PICTRUE_MODE_HDR10PLUS= false;
+            FLAG_PQ_PICTRUE_MODE_HDR10 = false;
+            FLAG_PQ_PICTRUE_MODE_HDR10PLUS = false;
             FLAG_PQ_PICTRUE_MODE_HLG = false;
             FLAG_PQ_PICTRUE_MODE_DOLBYVISION = false;
             FLAG_PQ_PICTRUE_MODE_CVUA = false;

@@ -22,9 +22,13 @@ package com.android.tv.twopanelsettings.slices;
 public interface HasCustomContentDescription {
     String CONTENT_DESCRIPTION_SEPARATOR = ", ";
 
-    /** Set the content description for talkback */
+    /**
+     * Set the content description for talkback
+     */
     void setContentDescription(String contentDescription);
 
-    /** Return the content description. */
+    /**
+     * Return the content description.
+     */
     String getContentDescription();
 }

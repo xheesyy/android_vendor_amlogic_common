@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="settings_app_name" msgid="7931201304065140909">"Instellingen"</string>
     <string name="launcher_settings_app_name" msgid="1459269619779675736">"Instellingen"</string>
     <string name="launcher_network_app_name" msgid="8311763462169735002">"Netwerk"</string>
@@ -46,8 +44,8 @@
     <string name="accounts_category_title" msgid="7286858931427579845">"Accounts en inloggen"</string>
     <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"Geen accounts"</string>
     <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
-      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> accounts</item>
-      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> account</item>
+        <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> accounts</item>
+        <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> account</item>
     </plurals>
     <string name="accounts_slice_summary" msgid="1571012157154521119">"Mediaservices, Assistent, betalingen"</string>
     <string name="connectivity_network_category_title" msgid="8226264889892008114">"Netwerk en internet"</string>
@@ -57,8 +55,8 @@
     <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"Afstandsbedieningen en accessoires"</string>
     <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"Geen verbonden Bluetooth-apparaten"</string>
     <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
-      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> accessoires</item>
-      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> accessoire</item>
+        <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> accessoires</item>
+        <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> accessoire</item>
     </plurals>
     <string name="display_and_sound_category_title" msgid="9203309625380755860">"Weergave en geluid"</string>
     <string name="help_and_feedback_category_title" msgid="7036505833991003031">"Hulp en feedback"</string>
@@ -230,8 +228,8 @@
     <string name="about_serial" msgid="3432319328808745459">"Serienummer"</string>
     <string name="about_build" msgid="8467840394761634575">"OS-build van Android TV"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
-      <item quantity="other">Je moet nog <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> stappen uitvoeren om ontwikkelaar te worden</item>
-      <item quantity="one">Je moet nog <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> stap uitvoeren om ontwikkelaar te worden</item>
+        <item quantity="other">Je moet nog <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> stappen uitvoeren om ontwikkelaar te worden</item>
+        <item quantity="one">Je moet nog <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> stap uitvoeren om ontwikkelaar te worden</item>
     </plurals>
     <string name="about_ads" msgid="7662896442040086522">"Advertenties"</string>
     <string name="ads_description" msgid="8081069475265061074">"Je advertentie-instellingen beheren, zoals je advertentie-ID resetten."</string>
@@ -265,20 +263,20 @@
     <string name="license_title" msgid="4032466200355435641">"Licentie"</string>
     <string name="terms_title" msgid="192888187310800678">"Algemene voorwaarden"</string>
     <string name="webview_license_title" msgid="5370270485188947540">"Systeemlicentie voor WebView"</string>
-  <string-array name="wifi_signal_strength">
-    <item msgid="4475363344103354364">"Slecht"</item>
-    <item msgid="2098818614362343532">"Redelijk"</item>
-    <item msgid="2713050260700175954">"Goed"</item>
-    <item msgid="6005053494500517261">"Uitstekend"</item>
-  </string-array>
+    <string-array name="wifi_signal_strength">
+        <item msgid="4475363344103354364">"Slecht"</item>
+        <item msgid="2098818614362343532">"Redelijk"</item>
+        <item msgid="2713050260700175954">"Goed"</item>
+        <item msgid="6005053494500517261">"Uitstekend"</item>
+    </string-array>
     <string name="title_mac_address" msgid="7511588678922209883">"MAC-adres van apparaat"</string>
     <string name="title_randomized_mac_address" msgid="3359532498635833471">"Willekeurig MAC-adres"</string>
     <string name="title_signal_strength" msgid="5047116893338315998">"Signaalsterkte"</string>
     <string name="title_random_mac_settings" msgid="6685812569356353378">"Privacy"</string>
-  <string-array name="random_mac_settings_entries">
-    <item msgid="3457228452595715533">"Willekeurig MAC-adres gebruiken (standaard)"</item>
-    <item msgid="2490415280467390067">"MAC-adres van apparaat gebruiken"</item>
-  </string-array>
+    <string-array name="random_mac_settings_entries">
+        <item msgid="3457228452595715533">"Willekeurig MAC-adres gebruiken (standaard)"</item>
+        <item msgid="2490415280467390067">"MAC-adres van apparaat gebruiken"</item>
+    </string-array>
     <string name="mac_address_not_available" msgid="2992935344891853369">"Niet beschikbaar"</string>
     <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"Willekeurig MAC-adres"</string>
     <string name="title_ip_address" msgid="705842159484772807">"IP-adres"</string>
@@ -452,15 +450,15 @@
     <string name="system_set_time_format" msgid="902518158066450918">"24-uurs klok gebruiken"</string>
     <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="SAMPLE">%2$s</xliff:g>)"</string>
     <string name="system_auto_date_time" msgid="8458199433555868708">"Automatische tijd en datum"</string>
-  <string-array name="auto_date_time_entries">
-    <item msgid="8119837829162871025">"Netwerktijd gebruiken"</item>
-    <item msgid="369146066143710034">"Uit"</item>
-  </string-array>
-  <string-array name="auto_date_time_ts_entries">
-    <item msgid="1010003447137304123">"Netwerktijd gebruiken"</item>
-    <item msgid="5645263357181875427">"Transportstreamtijd gebruiken"</item>
-    <item msgid="5501503537181350884">"Uit"</item>
-  </string-array>
+    <string-array name="auto_date_time_entries">
+        <item msgid="8119837829162871025">"Netwerktijd gebruiken"</item>
+        <item msgid="369146066143710034">"Uit"</item>
+    </string-array>
+    <string-array name="auto_date_time_ts_entries">
+        <item msgid="1010003447137304123">"Netwerktijd gebruiken"</item>
+        <item msgid="5645263357181875427">"Transportstreamtijd gebruiken"</item>
+        <item msgid="5501503537181350884">"Uit"</item>
+    </string-array>
     <string name="system_location" msgid="4057295363709016511">"Locatie"</string>
     <string name="system_desc_location" msgid="1680134126100535031">"Apps die je toestemming hebben gevraagd, rechten geven om je locatiegegevens te gebruiken"</string>
     <string name="system_network_location_confirm" msgid="7128162421781085332">"Locatietoestemming"</string>
@@ -606,15 +604,15 @@
     <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"Teller voor overbelasting weergeven"</string>
     <string name="no_application" msgid="1904437693440706534">"Niets"</string>
     <string name="enable_opengl_traces_none" msgid="4718084947494592040">"Geen"</string>
-  <string-array name="animation_scale_entries">
-    <item msgid="5408992662476056082">"Animatie uit"</item>
-    <item msgid="6818290063799857019">"Animatieschaal 0,5x"</item>
-    <item msgid="8257959452691080724">"Animatieschaal 1x"</item>
-    <item msgid="4781052272686018414">"Animatieschaal 1,5x"</item>
-    <item msgid="2272016945160227610">"Animatieschaal 2x"</item>
-    <item msgid="5015441793276576312">"Animatieschaal 5x"</item>
-    <item msgid="1290233583371556415">"Animatieschaal 10x"</item>
-  </string-array>
+    <string-array name="animation_scale_entries">
+        <item msgid="5408992662476056082">"Animatie uit"</item>
+        <item msgid="6818290063799857019">"Animatieschaal 0,5x"</item>
+        <item msgid="8257959452691080724">"Animatieschaal 1x"</item>
+        <item msgid="4781052272686018414">"Animatieschaal 1,5x"</item>
+        <item msgid="2272016945160227610">"Animatieschaal 2x"</item>
+        <item msgid="5015441793276576312">"Animatieschaal 5x"</item>
+        <item msgid="1290233583371556415">"Animatieschaal 10x"</item>
+    </string-array>
     <string name="track_frame_time_off" msgid="8845064783618702239">"Uit"</string>
     <string name="track_frame_time_bars" msgid="5841531515222229632">"Op het scherm als balken"</string>
     <string name="app_process_limit_standard" msgid="6069948528843313888">"Standaardlimiet"</string>
@@ -667,16 +665,16 @@
     <string name="inputs_tv_auto_on" msgid="544848340484583318">"Tv automatisch aan"</string>
     <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"De tv aanzetten samen met het HDMI-apparaat"</string>
     <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
-      <item quantity="other">Aangesloten ingangen</item>
-      <item quantity="one">Aangesloten ingang</item>
+        <item quantity="other">Aangesloten ingangen</item>
+        <item quantity="one">Aangesloten ingang</item>
     </plurals>
     <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
-      <item quantity="other">Stand-by-ingangen</item>
-      <item quantity="one">Stand-by-ingang</item>
+        <item quantity="other">Stand-by-ingangen</item>
+        <item quantity="one">Stand-by-ingang</item>
     </plurals>
     <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
-      <item quantity="other">Niet-aangesloten ingangen</item>
-      <item quantity="one">Niet-aangesloten ingang</item>
+        <item quantity="other">Niet-aangesloten ingangen</item>
+        <item quantity="one">Niet-aangesloten ingang</item>
     </plurals>
     <string name="user_add_profile_item_summary" msgid="3211866291940617804">"Toegang tot apps en andere content in je account beperken"</string>
     <string name="user_new_profile_name" msgid="6637593067318708353">"Beperkt profiel"</string>
@@ -692,8 +690,8 @@
     <string name="restricted_profile_configure_title" msgid="3327502517511010296">"Instellingen"</string>
     <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"Apps die zijn toegestaan"</string>
     <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
-      <item quantity="other">%d apps toegestaan</item>
-      <item quantity="one">1 app toegestaan</item>
+        <item quantity="other">%d apps toegestaan</item>
+        <item quantity="one">1 app toegestaan</item>
     </plurals>
     <string name="restricted_profile_allowed" msgid="970921490464867884">"Toegestaan"</string>
     <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"Niet toegestaan"</string>
@@ -771,12 +769,12 @@
     <string name="confirm_factory_reset_device" msgid="4308646529880718465">"Alles wissen"</string>
     <string name="select_device_name_title" msgid="3045019448327493634">"Kies een naam voor je <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="select_device_name_description" msgid="8528185095614986580">"Geef je apparaat een naam zodat je dit kunt identificeren tijdens het casten of wanneer je vanaf andere apparaten verbinding met dit apparaat maakt."</string>
-  <string-array name="rooms">
-    <item msgid="6590829789532602097">"Android TV"</item>
-    <item msgid="1140506340411482365">"Tv in woonkamer"</item>
-    <item msgid="6448060889026244632">"Tv in huiskamer"</item>
-    <item msgid="3336274213215419228">"Tv in slaapkamer"</item>
-  </string-array>
+    <string-array name="rooms">
+        <item msgid="6590829789532602097">"Android TV"</item>
+        <item msgid="1140506340411482365">"Tv in woonkamer"</item>
+        <item msgid="6448060889026244632">"Tv in huiskamer"</item>
+        <item msgid="3336274213215419228">"Tv in slaapkamer"</item>
+    </string-array>
     <string name="custom_room" msgid="6798144004583173563">"Aangepaste naam opgeven…"</string>
     <string name="device_rename_title" msgid="9070021379000499270">"De naam van deze <xliff:g id="DEVICEMODEL">%1$s</xliff:g> wijzigen"</string>
     <string name="device_rename_description" msgid="1973894029492915135">"Deze <xliff:g id="DEVICEMODEL">%1$s</xliff:g> heeft momenteel de naam \'<xliff:g id="DEVICENAME">%2$s</xliff:g>\'"</string>

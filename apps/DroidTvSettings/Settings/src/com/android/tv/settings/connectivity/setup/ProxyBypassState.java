@@ -111,7 +111,7 @@ public class ProxyBypassState implements State {
             String title = getString(R.string.proxy_exclusionlist_hint);
             if (mAdvancedOptionsFlowInfo.containsPage(AdvancedOptionsFlowInfo.PROXY_BYPASS)) {
                 title = mAdvancedOptionsFlowInfo.get(AdvancedOptionsFlowInfo.PROXY_BYPASS);
-            }  else if (mAdvancedOptionsFlowInfo.getInitialProxyInfo() != null) {
+            } else if (mAdvancedOptionsFlowInfo.getInitialProxyInfo() != null) {
                 title = mAdvancedOptionsFlowInfo.getInitialProxyInfo().getExclusionListAsString();
             }
 

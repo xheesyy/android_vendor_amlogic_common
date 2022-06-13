@@ -13,6 +13,7 @@ package com.droidlogic.droidlivetv.shortcut;
 import android.media.tv.TvContract;
 import android.media.tv.TvContract.Channels;
 import android.media.tv.TvContract.Programs;
+
 import com.droidlogic.app.DroidLogicKeyEvent;
 import com.droidlogic.app.tv.DroidLogicTvUtils;
 import com.droidlogic.app.tv.ChannelInfo;
@@ -117,7 +118,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
     private TextView tx_program_extend;
     private ScrollView mDetailContainer;
     private ArrayList<ChannelInfo> channelInfoList;
-    private ArrayList<ArrayMap<String, Object>> list_channels  = new ArrayList<ArrayMap<String, Object>>();
+    private ArrayList<ArrayMap<String, Object>> list_channels = new ArrayList<ArrayMap<String, Object>>();
     private ArrayList<ArrayMap<String, Object>> list_date = new ArrayList<ArrayMap<String, Object>>();
     private ArrayList<ArrayMap<String, Object>> list_program = new ArrayList<ArrayMap<String, Object>>();
     private SimpleAdapter channelsAdapter;
@@ -153,7 +154,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         Intent intent = getIntent();
-        Bundle bundle= intent.getExtras();
+        Bundle bundle = intent.getExtras();
         registerMainReceiver();
         if (bundle != null) {
             mCurrentKeyCode = bundle.getInt("eventkey");
@@ -181,7 +182,9 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         super.onPause();
         Log.d(TAG, "------onResume");
         registerCommandReceiver();
-    };
+    }
+
+    ;
 
     @Override
     protected void onPause() {
@@ -239,7 +242,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         return super.onKeyUp(keyCode, event);
     }
 
-    private void setShortcutMode (int mode) {
+    private void setShortcutMode(int mode) {
         switch (mode) {
             case KeyEvent.KEYCODE_GUIDE:
                 setContentView(R.layout.layout_shortcut_guide);
@@ -250,7 +253,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         }
     }
 
-    private void startShowActivityTimer () {
+    private void startShowActivityTimer() {
         handler.removeMessages(MSG_FINISH);
         int seconds = Settings.System.getInt(getContentResolver(), KEY_MENU_TIME, DEFAULT_MENU_TIME);
         if (seconds == 0) {
@@ -320,7 +323,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
     };
 
     private HandlerThread mHandlerThread;
-    private Handler  mThreadHandler;
+    private Handler mThreadHandler;
 
     private void initHandlerThread() {
         mHandlerThread = new HandlerThread("check-message-coming");
@@ -429,7 +432,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
                 }
                 for (int i = 0; i < length; i++) {
                     try {
-                       result[i] = Integer.valueOf(splitone[i]);
+                        result[i] = Integer.valueOf(splitone[i]);
                     } catch (NumberFormatException e) {
                         Log.d(TAG, splitone[i] + " not integer:" + e.getMessage());
                     }
@@ -444,12 +447,12 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
 
         loadDateTime();
 
-        tx_program_description = (TextView)findViewById(R.id.program_short/*guide_details_content*/);
-        tx_program_event_name = (TextView)findViewById(R.id.program_event);
-        tx_program_genre = (TextView)findViewById(R.id.program_genre);
-        tx_program_rating = (TextView)findViewById(R.id.program_rating);
-        tx_program_extend = (TextView)findViewById(R.id.program_extend);
-        mDetailContainer = (ScrollView)findViewById(R.id.program_detail_container);
+        tx_program_description = (TextView) findViewById(R.id.program_short/*guide_details_content*/);
+        tx_program_event_name = (TextView) findViewById(R.id.program_event);
+        tx_program_genre = (TextView) findViewById(R.id.program_genre);
+        tx_program_rating = (TextView) findViewById(R.id.program_rating);
+        tx_program_extend = (TextView) findViewById(R.id.program_extend);
+        mDetailContainer = (ScrollView) findViewById(R.id.program_detail_container);
         //add if needed
         tx_program_description.setVisibility(View.GONE);
         tx_program_event_name.setVisibility(View.GONE);
@@ -458,9 +461,9 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         tx_program_extend.setVisibility(View.GONE);
         mDetailContainer.setVisibility(View.GONE);
 
-        lv_channel = (GuideListView)findViewById(R.id.list_guide_channel);
-        lv_date = (GuideListView)findViewById(R.id.list_guide_week);
-        lv_program = (GuideListView)findViewById(R.id.list_guide_programs);
+        lv_channel = (GuideListView) findViewById(R.id.list_guide_channel);
+        lv_date = (GuideListView) findViewById(R.id.list_guide_week);
+        lv_program = (GuideListView) findViewById(R.id.list_guide_programs);
 
         lv_channel.setListItemSelectedListener(this);
         lv_channel.setOnItemClickListener(this);
@@ -483,16 +486,16 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
     }
 
     private void loadDateTime() {
-        tx_date = (TextView)findViewById(R.id.guide_date);
+        tx_date = (TextView) findViewById(R.id.guide_date);
         String[] dateAndTime = getDateAndTime(mTvTime.getTime());
         tx_date.setText(dateAndTime[0] + "." + dateAndTime[1] + "." + dateAndTime[2] + "   " + dateAndTime[3] + ":" + dateAndTime[4]);
     }
 
-    public ArrayList<ArrayMap<String, Object>> getDTVChannelList (ArrayList<ChannelInfo> channelInfoList) {
-        ArrayList<ArrayMap<String, Object>> list =  new ArrayList<ArrayMap<String, Object>>();
+    public ArrayList<ArrayMap<String, Object>> getDTVChannelList(ArrayList<ChannelInfo> channelInfoList) {
+        ArrayList<ArrayMap<String, Object>> list = new ArrayList<ArrayMap<String, Object>>();
         int dtvchannelindex = 0;
         if (channelInfoList.size() > 0) {
-            for (int i = 0 ; i < channelInfoList.size(); i++) {
+            for (int i = 0; i < channelInfoList.size(); i++) {
                 ChannelInfo info = channelInfoList.get(i);
                 if (info != null && !info.isAnalogChannel()) {
                     ArrayMap<String, Object> item = new ArrayMap<String, Object>();
@@ -538,7 +541,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         Iterator it = channelInfoList.iterator();
         ChannelInfo channel = null;
         while (it.hasNext()) {
-            channel = (ChannelInfo)it.next();
+            channel = (ChannelInfo) it.next();
             if (channel != null && channel.isAnalogChannel()) {
                 it.remove();
             }
@@ -558,8 +561,8 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         list.addAll(list_channels);
 
         channelsAdapter = new SimpleAdapter(this, list,
-                                            R.layout.layout_guide_single_text,
-                                            new String[] {GuideListView.ITEM_1}, new int[] {R.id.text_name});
+                R.layout.layout_guide_single_text,
+                new String[]{GuideListView.ITEM_1}, new int[]{R.id.text_name});
         lv_channel.setAdapter(channelsAdapter);
 
         currentChannelIndex = (currentChannelIndex != -1 ? currentChannelIndex : 0);
@@ -593,15 +596,15 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         long lastProgramTime = channel_programs.get(channel_programs.size() - 1).getStartTimeUtcMillis();
         long currentStreamTime = mTvTime.getTime();
         int time_offset = TimeZone.getDefault().getOffset(currentStreamTime);
-        long tmp_time = (currentStreamTime + time_offset) - (currentStreamTime + time_offset)% DAY_TO_MS;//set tz time to 00:00:00
+        long tmp_time = (currentStreamTime + time_offset) - (currentStreamTime + time_offset) % DAY_TO_MS;//set tz time to 00:00:00
         int count = 0;
-        Log.d(TAG, "getDateList currentStreamTime = "  + Arrays.toString(getDateAndTime(tmp_time, true)) +
+        Log.d(TAG, "getDateList currentStreamTime = " + Arrays.toString(getDateAndTime(tmp_time, true)) +
                 ", firstProgramTime = " + Arrays.toString(getDateAndTime(firstProgramTime)) +
                 ", lastProgramTime = " + Arrays.toString(getDateAndTime(lastProgramTime)));
         while ((tmp_time <= (lastProgramTime + time_offset)) && count < 10) {//show 10 days at most
             if (currentDateIndex == -1) {
                 if ((currentStreamTime >= (tmp_time - time_offset))
-                    && (currentStreamTime < (tmp_time - time_offset + DAY_TO_MS)))
+                        && (currentStreamTime < (tmp_time - time_offset + DAY_TO_MS)))
                     currentDateIndex = count;
             }
             ArrayMap<String, Object> item = new ArrayMap<String, Object>();
@@ -628,7 +631,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
     }
 
     private ArrayList<ArrayMap<String, Object>> getNoProgramDateList(
-                ArrayList<ArrayMap<String, Object>> dates, int saveChannelIndex) {
+            ArrayList<ArrayMap<String, Object>> dates, int saveChannelIndex) {
         ArrayMap<String, Object> item = new ArrayMap<String, Object>();
         item.put(GuideListView.ITEM_1, mResources.getString(R.string.no_program));
 
@@ -649,7 +652,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
 
         SimpleAdapter dateAdapter = new SimpleAdapter(this, list,
                 R.layout.layout_guide_single_text_center,
-                new String[] {GuideListView.ITEM_1}, new int[] {R.id.text_name});
+                new String[]{GuideListView.ITEM_1}, new int[]{R.id.text_name});
         lv_date.setAdapter(dateAdapter);
 
         currentDateIndex = (currentDateIndex != -1 ? currentDateIndex : 0);
@@ -663,9 +666,9 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
 
         int saveChannelIndex = currentChannelIndex;
         if (currentDateIndex >= 0
-            && list_date.size() > currentDateIndex
-            && (channelInfoList.size() > currentChannelIndex)
-            && (list_date.get(currentDateIndex).get(GuideListView.ITEM_2) != null)) {
+                && list_date.size() > currentDateIndex
+                && (channelInfoList.size() > currentChannelIndex)
+                && (list_date.get(currentDateIndex).get(GuideListView.ITEM_2) != null)) {
             long dayStartTime = Long.valueOf(list_date.get(currentDateIndex).get(GuideListView.ITEM_2).toString());
             long dayEndTime = Long.valueOf(list_date.get(currentDateIndex).get(GuideListView.ITEM_3).toString());
             ChannelInfo currentChannel = channelInfoList.get(saveChannelIndex);
@@ -673,7 +676,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
             if (now >= dayStartTime && now <= dayEndTime)
                 dayStartTime = now;
             List<Program> programs = mTvDataBaseManager.getPrograms(
-                        TvContract.buildProgramsUriForChannel(currentChannel.getId(), dayStartTime, dayEndTime));
+                    TvContract.buildProgramsUriForChannel(currentChannel.getId(), dayStartTime, dayEndTime));
 
             for (int i = 0; i < programs.size(); i++) {
                 Program program = programs.get(i);
@@ -686,7 +689,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
                 ArrayMap<String, Object> item_program = new ArrayMap<String, Object>();
 
                 item_program.put(GuideListView.ITEM_1, dateAndTime[3] + ":" + dateAndTime[4]
-                                 + "~" + endTime[3] + ":" + endTime[4]);
+                        + "~" + endTime[3] + ":" + endTime[4]);
                 item_program.put(GuideListView.ITEM_2, program.getTitle());
                 String descrip = program.getDescription();
                 String longDescrip = program.getLongDescription();
@@ -798,7 +801,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
             lv_program.setSelection(currentProgramIndex);
             Log.d(TAG, "show Program init adapter");
         } else {
-            ((GuideAdapter)lv_program.getAdapter()).refill(list);
+            ((GuideAdapter) lv_program.getAdapter()).refill(list);
             Log.d(TAG, "show Program init refill adapter");
         }
         mHandleUpdate = false;
@@ -842,11 +845,11 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         switch (parent.getId()) {
             case R.id.list_guide_channel:
                 if (parent != null && parent instanceof GuideListView) {
-                    GuideListView listView = (GuideListView)parent;
+                    GuideListView listView = (GuideListView) parent;
                     int count = listView.getChildCount();
                     View last = null;
                     View next = null;
-                    View current = (View)listView.getSelectedView();
+                    View current = (View) listView.getSelectedView();
                     if (position > 0) {
                         last = listView.getChildAt(position - 1);
                     }
@@ -890,7 +893,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
                 Log.d(TAG, "onListItemSelected position = " + position + ", list_program.size() = " + list_program.size());
                 if (position < list_program.size()) {
                     currentProgramIndex = position;
-                    String jsonObjStr = (String)list_program.get(position).get(GuideListView.ITEM_3);
+                    String jsonObjStr = (String) list_program.get(position).get(GuideListView.ITEM_3);
                     String program_event = null;
                     String program_genre = null;
                     String program_rating = null;
@@ -1035,8 +1038,8 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         alert.show();
         //set size and background
         WindowManager.LayoutParams params = alert.getWindow().getAttributes();
-        params.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 400, getResources().getDisplayMetrics());
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+        params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 400, getResources().getDisplayMetrics());
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         alert.getWindow().setAttributes(params);
         alert.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
     }
@@ -1066,7 +1069,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
             @Override
             public void onClick(View v) {
                 newProgram.setScheduledRecordStatus(Program.RECORD_STATUS_APPOINTED);
-                ((ImageView)view.findViewById(R.id.img_appointed)).setImageResource(R.drawable.scheduled_recording);
+                ((ImageView) view.findViewById(R.id.img_appointed)).setImageResource(R.drawable.scheduled_recording);
                 String appointed_status = mResources.getString(R.string.appointed_success) + setAppointedRecordProgram(newProgram);
                 mTvDataBaseManager.updateProgram(newProgram);
                 alert.dismiss();
@@ -1083,8 +1086,8 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         alert.show();
         //set size and background
         WindowManager.LayoutParams params = alert.getWindow().getAttributes();
-        params.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 600, getResources().getDisplayMetrics());
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+        params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 600, getResources().getDisplayMetrics());
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         alert.getWindow().setAttributes(params);
         alert.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
     }
@@ -1116,7 +1119,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
             @Override
             public void onClick(View v) {
                 newProgram.setIsAppointed(true);
-                ((ImageView)view.findViewById(R.id.img_playing)).setImageResource(R.drawable.appointed);
+                ((ImageView) view.findViewById(R.id.img_playing)).setImageResource(R.drawable.appointed);
                 String appointed_status = mResources.getString(R.string.appointed_success) + setAppointedProgramAlarm(newProgram);
                 mTvDataBaseManager.updateProgram(newProgram);
                 showGuideToast(appointed_status);
@@ -1134,8 +1137,8 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         alert.show();
         //set size and background
         WindowManager.LayoutParams params = alert.getWindow().getAttributes();
-        params.width = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 600, getResources().getDisplayMetrics());
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT ;
+        params.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 600, getResources().getDisplayMetrics());
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
         alert.getWindow().setAttributes(params);
         alert.getWindow().setBackgroundDrawableResource(R.drawable.dialog_background);
     }
@@ -1147,7 +1150,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
                 if (mTvTime.getTime() < program.getStartTimeUtcMillis()) {
                     if (program.isAppointed()) {
                         program.setIsAppointed(false);
-                        ((ImageView)view.findViewById(R.id.img_playing)).setImageResource(0);
+                        ((ImageView) view.findViewById(R.id.img_playing)).setImageResource(0);
                         appointed_status = mResources.getString(R.string.appointed_cancel);
                         mTvDataBaseManager.updateProgram(program);
                         cancelAppointedProgramAlarm(program);
@@ -1156,7 +1159,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
                         Program conflictProgram = getAppointedTimeConflictedProgram(program.getStartTimeUtcMillis());
                         if (conflictProgram == null) {
                             program.setIsAppointed(true);
-                            ((ImageView)view.findViewById(R.id.img_playing)).setImageResource(R.drawable.appointed);
+                            ((ImageView) view.findViewById(R.id.img_playing)).setImageResource(R.drawable.appointed);
                             appointed_status = mResources.getString(R.string.appointed_success) + setAppointedProgramAlarm(program);
                             mTvDataBaseManager.updateProgram(program);
                             showGuideToast(appointed_status);
@@ -1172,7 +1175,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
                 if (mTvTime.getTime() < program.getStartTimeUtcMillis()) {
                     if (program.getScheduledRecordStatus() == Program.RECORD_STATUS_APPOINTED) {
                         program.setScheduledRecordStatus(Program.RECORD_STATUS_NOT_STARTED);
-                        ((ImageView)view.findViewById(R.id.img_appointed)).setImageResource(0);
+                        ((ImageView) view.findViewById(R.id.img_appointed)).setImageResource(0);
                         appointed_status = mResources.getString(R.string.appointed_cancel);
                         mTvDataBaseManager.updateProgram(program);
                         cancelAppointedRecordProgram(program);
@@ -1183,7 +1186,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
                             showOverlapConfirmDialog(context, view, overlapPrograms.get(0), program);
                         } else {
                             program.setScheduledRecordStatus(Program.RECORD_STATUS_APPOINTED);
-                            ((ImageView)view.findViewById(R.id.img_appointed)).setImageResource(R.drawable.scheduled_recording);
+                            ((ImageView) view.findViewById(R.id.img_appointed)).setImageResource(R.drawable.scheduled_recording);
                             appointed_status = mResources.getString(R.string.appointed_success) + setAppointedRecordProgram(program);
                             mTvDataBaseManager.updateProgram(program);
                         }
@@ -1198,13 +1201,13 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
 
     private void sendSwitchChannelBroadcast(int position) {
         if (position < 0 || (list_channels.size() <= position)
-            || (currentChannelIndex < 0) || (channelInfoList.size() <= currentChannelIndex)) {
+                || (currentChannelIndex < 0) || (channelInfoList.size() <= currentChannelIndex)) {
             Log.e(TAG, "sendSwitchChannelBroadcast error channel list size=" + list_channels.size()
-                        + " channel list size=" + channelInfoList.size()
-                        + " position=" + position + " currentIndex=" + currentChannelIndex);
+                    + " channel list size=" + channelInfoList.size()
+                    + " position=" + position + " currentIndex=" + currentChannelIndex);
             return;
         }
-        boolean isRadio = (boolean)list_channels.get(position).get(GuideListView.ITEM_3);
+        boolean isRadio = (boolean) list_channels.get(position).get(GuideListView.ITEM_3);
         ChannelInfo currentChannel = channelInfoList.get(currentChannelIndex);
         String inputId = currentChannel.getInputId();
         int deviceId = mDeviceId;
@@ -1242,7 +1245,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
     }
 
     private String setAppointedProgramAlarm(Program currentProgram) {
-        AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         String cancelProgram = "";
 
         List<Program> programList = mTvDataBaseManager.getAppointedPrograms();
@@ -1251,7 +1254,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
                 if (cancelProgram.length() == 0) {
                     cancelProgram = mResources.getString(R.string.cancel) + " " + program.getTitle();
                 } else {
-                    cancelProgram += " " +  program.getTitle();
+                    cancelProgram += " " + program.getTitle();
                 }
                 cancelAppointedProgramAlarm(program);
                 program.setIsAppointed(false);
@@ -1309,7 +1312,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         }
     }
 
-    private void sendAppointedWatchIntent (Program program, boolean add, long delay) {
+    private void sendAppointedWatchIntent(Program program, boolean add, long delay) {
         Intent intent = new Intent(DroidLogicTvUtils.ACTION_DROID_PROGRAM_WATCH_APPOINTED);
         intent.addFlags(0x01000000/*Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND*/);
         intent.setData(TvContract.buildProgramUri(program.getId()));
@@ -1323,7 +1326,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         Log.d(TAG, "sendSettingAppointedWatchIntent intent = " + intent);
     }
 
-    private void sendSchedulerIntent (Program program, boolean add) {
+    private void sendSchedulerIntent(Program program, boolean add) {
         Intent intent = new Intent(DroidLogicTvUtils.ACTION_DROID_PROGRAM_RECORD_APPOINTED);
         intent.addFlags(0x01000000/*Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND*/);
         intent.putExtra(DroidLogicTvUtils.EXTRA_PROGRAM_ID, program.getId());
@@ -1332,13 +1335,13 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
         sendBroadcast(intent);
     }
 
-    private PendingIntent getExistPendingIntent (Program program) {
+    private PendingIntent getExistPendingIntent(Program program) {
         Intent intent = new Intent(DroidLogicTvUtils.ACTION_DROID_PROGRAM_RECORD_APPOINTED);
         intent.addFlags(0x01000000/*Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND*/);
         intent.putExtra(DroidLogicTvUtils.EXTRA_PROGRAM_ID, program.getId());
         intent.putExtra(DroidLogicTvUtils.EXTRA_CHANNEL_ID, program.getChannelId());
         //sendBroadcast(intent);
-        return PendingIntent.getBroadcast(this, (int)program.getId(), intent, PendingIntent.FLAG_NO_CREATE);
+        return PendingIntent.getBroadcast(this, (int) program.getId(), intent, PendingIntent.FLAG_NO_CREATE);
     }
 
     private Program getAppointedTimeConflictedProgram(long startTime) {
@@ -1368,7 +1371,7 @@ public class ShortCutActivity extends Activity implements ListItemSelectedListen
 
             if (currentChannelIndex < 0 || channelInfoList.size() <= currentChannelIndex) {
                 Log.e(TAG, "onchange no need update for currentIndex=" + currentChannelIndex
-                            + " channel list size=" + channelInfoList.size());
+                        + " channel list size=" + channelInfoList.size());
                 return;
             }
 

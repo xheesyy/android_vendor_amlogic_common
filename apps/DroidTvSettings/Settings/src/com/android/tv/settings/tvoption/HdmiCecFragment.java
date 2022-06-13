@@ -17,12 +17,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
 import android.provider.Settings;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.TwoStatePreference;
+
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -37,21 +40,22 @@ import com.android.tv.settings.SoundFragment;
 import java.util.*;
 
 import android.os.SystemProperties;
+
 /**
  * Fragment to control HDMI Cec settings.
  */
-public class HdmiCecFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener{
+public class HdmiCecFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "HdmiCecFragment";
     private static HdmiCecFragment mHdmiCecFragment = null;
 
-    private static final String KEY_CEC_SWITCH                  = "key_cec_switch";
-    private static final String KEY_CEC_ONE_KEY_PLAY            = "key_cec_one_key_play";
-    private static final String KEY_CEC_AUTO_POWER_OFF          = "key_cec_auto_power_off";
-    private static final String KEY_CEC_AUTO_WAKE_UP            = "key_cec_auto_wake_up";
-    private static final String KEY_CEC_AUTO_CHANGE_LANGUAGE    = "key_cec_auto_change_language";
-    private static final String KEY_CEC_ARC_SWITCH              = "key_cec_arc_switch";
-    private static final String KEY_CEC_DEVICE_LIST             = "key_cec_device_list";
+    private static final String KEY_CEC_SWITCH = "key_cec_switch";
+    private static final String KEY_CEC_ONE_KEY_PLAY = "key_cec_one_key_play";
+    private static final String KEY_CEC_AUTO_POWER_OFF = "key_cec_auto_power_off";
+    private static final String KEY_CEC_AUTO_WAKE_UP = "key_cec_auto_wake_up";
+    private static final String KEY_CEC_AUTO_CHANGE_LANGUAGE = "key_cec_auto_change_language";
+    private static final String KEY_CEC_ARC_SWITCH = "key_cec_arc_switch";
+    private static final String KEY_CEC_DEVICE_LIST = "key_cec_device_list";
 
     private TwoStatePreference mCecSwitchPref;
     private TwoStatePreference mCecOnekeyPlayPref;
@@ -105,7 +109,7 @@ public class HdmiCecFragment extends SettingsPreferenceFragment implements Prefe
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.hdmicec, null);
         boolean tvFlag = SettingsConstant.needDroidlogicTvFeature(getContext())
-                    && (SystemProperties.getBoolean("vendor.tv.soc.as.mbox", false) == false);
+                && (SystemProperties.getBoolean("vendor.tv.soc.as.mbox", false) == false);
         mCecSwitchPref = (TwoStatePreference) findPreference(KEY_CEC_SWITCH);
         mCecOnekeyPlayPref = (TwoStatePreference) findPreference(KEY_CEC_ONE_KEY_PLAY);
         mCecDeviceAutoPoweroffPref = (TwoStatePreference) findPreference(KEY_CEC_AUTO_POWER_OFF);
@@ -168,38 +172,38 @@ public class HdmiCecFragment extends SettingsPreferenceFragment implements Prefe
             return super.onPreferenceTreeClick(preference);
         }
         switch (key) {
-        case KEY_CEC_SWITCH:
-            long curtime = System.currentTimeMillis();
-            long timeDiff = curtime - lastObserveredTime;
-            lastObserveredTime = curtime;
-            Message cecEnabled = mHandler.obtainMessage(MSG_ENABLE_CEC_SWITCH, 0, 0);
-            mHandler.removeMessages(MSG_ENABLE_CEC_SWITCH);
-            mHandler.sendMessageDelayed(cecEnabled, ((timeDiff > TIME_DELAYED) ? 0 : TIME_DELAYED));
-            //SWPL-54584 Fix selecting "HDMI CEC switch" carsh
+            case KEY_CEC_SWITCH:
+                long curtime = System.currentTimeMillis();
+                long timeDiff = curtime - lastObserveredTime;
+                lastObserveredTime = curtime;
+                Message cecEnabled = mHandler.obtainMessage(MSG_ENABLE_CEC_SWITCH, 0, 0);
+                mHandler.removeMessages(MSG_ENABLE_CEC_SWITCH);
+                mHandler.sendMessageDelayed(cecEnabled, ((timeDiff > TIME_DELAYED) ? 0 : TIME_DELAYED));
+                //SWPL-54584 Fix selecting "HDMI CEC switch" carsh
             /*mCecSwitchPref.setEnabled(false);
             mCecOnekeyPlayPref.setEnabled(false);
             mCecDeviceAutoPoweroffPref.setEnabled(false);
             mCecAutoWakeupPref.setEnabled(false);
             mCecAutoChangeLanguagePref.setEnabled(false);
             mArcSwitchPref.setEnabled(false);*/
-            return true;
-        case KEY_CEC_ONE_KEY_PLAY:
-            mHdmiCecManager.enableOneTouchPlay(mCecOnekeyPlayPref.isChecked());
-            return true;
-        case KEY_CEC_AUTO_POWER_OFF:
-            mHdmiCecManager.enableAutoPowerOff(mCecDeviceAutoPoweroffPref.isChecked());
-            return true;
-        case KEY_CEC_AUTO_WAKE_UP:
-            mHdmiCecManager.enableAutoWakeUp(mCecAutoWakeupPref.isChecked());
-            return true;
-        case KEY_CEC_AUTO_CHANGE_LANGUAGE:
-            mHdmiCecManager.enableAutoChangeLanguage(mCecAutoChangeLanguagePref.isChecked());
-            return true;
-        case KEY_CEC_ARC_SWITCH:
-            mHdmiCecManager.enableArc(mArcSwitchPref.isChecked());
-            mHandler.sendEmptyMessageDelayed(MSG_ENABLE_ARC_SWITCH, TIME_DELAYED);
-            mArcSwitchPref.setEnabled(false);
-            return true;
+                return true;
+            case KEY_CEC_ONE_KEY_PLAY:
+                mHdmiCecManager.enableOneTouchPlay(mCecOnekeyPlayPref.isChecked());
+                return true;
+            case KEY_CEC_AUTO_POWER_OFF:
+                mHdmiCecManager.enableAutoPowerOff(mCecDeviceAutoPoweroffPref.isChecked());
+                return true;
+            case KEY_CEC_AUTO_WAKE_UP:
+                mHdmiCecManager.enableAutoWakeUp(mCecAutoWakeupPref.isChecked());
+                return true;
+            case KEY_CEC_AUTO_CHANGE_LANGUAGE:
+                mHdmiCecManager.enableAutoChangeLanguage(mCecAutoChangeLanguagePref.isChecked());
+                return true;
+            case KEY_CEC_ARC_SWITCH:
+                mHdmiCecManager.enableArc(mArcSwitchPref.isChecked());
+                mHandler.sendEmptyMessageDelayed(MSG_ENABLE_ARC_SWITCH, TIME_DELAYED);
+                mArcSwitchPref.setEnabled(false);
+                return true;
         }
         return super.onPreferenceTreeClick(preference);
     }
@@ -208,9 +212,9 @@ public class HdmiCecFragment extends SettingsPreferenceFragment implements Prefe
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
         if (TextUtils.equals(preference.getKey(), SoundFragment.KEY_DIGITALSOUND_FORMAT)) {
-            mSoundParameterSettingManager.setDigitalAudioFormat((String)newValue);
+            mSoundParameterSettingManager.setDigitalAudioFormat((String) newValue);
         } else if (TextUtils.equals(preference.getKey(), SoundFragment.KEY_AUDIO_OUTPUT_LATENCY)) {
-            mAudioConfigManager.setAudioOutputAllDelay((int)newValue);
+            mAudioConfigManager.setAudioOutputAllDelay((int) newValue);
         }
         return true;
     }

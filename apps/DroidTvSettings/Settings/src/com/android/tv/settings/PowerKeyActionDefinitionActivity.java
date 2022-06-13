@@ -26,7 +26,7 @@ public class PowerKeyActionDefinitionActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PowerKeyActionDefinitionFragment.class.getName(), null);
+                .newSettingsFragment(PowerKeyActionDefinitionFragment.class.getName(), null);
     }
 
 }

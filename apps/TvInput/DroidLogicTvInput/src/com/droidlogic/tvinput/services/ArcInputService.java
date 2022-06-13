@@ -27,8 +27,10 @@ import android.media.tv.TvStreamConfig;
 import android.media.tv.TvInputManager.Hardware;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import android.view.Surface;
 import android.net.Uri;
 import android.media.tv.TvInputManager;
@@ -50,21 +52,21 @@ public class ArcInputService extends DroidLogicTvInputService {
     @Override
     public Session onCreateSession(String inputId) {
         super.onCreateSession(inputId);
-        Utils.logd(TAG, "onCreateSession:"+inputId);
+        Utils.logd(TAG, "onCreateSession:" + inputId);
         mCurrentSession = new ArcInputSession(this, inputId, getHardwareDeviceId(inputId));
         mCurrentSession.setSessionId(id);
         registerInputSession(mCurrentSession);
         sessionMap.put(id, mCurrentSession);
         id++;
         if (mSystemControlManager == null) {
-            mSystemControlManager =  SystemControlManager.getInstance();
+            mSystemControlManager = SystemControlManager.getInstance();
         }
         return mCurrentSession;
     }
 
     @Override
     public void setCurrentSessionById(int sessionId) {
-        Utils.logd(TAG, "setCurrentSessionById:"+sessionId);
+        Utils.logd(TAG, "setCurrentSessionById:" + sessionId);
         ArcInputSession session = sessionMap.get(sessionId);
         if (session != null) {
             mCurrentSession = session;
@@ -73,7 +75,7 @@ public class ArcInputService extends DroidLogicTvInputService {
 
     @Override
     public void doTuneFinish(int result, Uri uri, int sessionId) {
-        Utils.logd(TAG, "doTuneFinish,result:"+result+"sessionId:"+sessionId);
+        Utils.logd(TAG, "doTuneFinish,result:" + result + "sessionId:" + sessionId);
         if (result == ACTION_SUCCESS) {
             ArcInputSession session = sessionMap.get(sessionId);
             if (session != null) {
@@ -99,12 +101,14 @@ public class ArcInputService extends DroidLogicTvInputService {
         @Override
         public boolean onSetSurface(Surface surface) {
             super.onSetSurface(surface);
-            return setSurfaceInService(surface,this);
+            return setSurfaceInService(surface, this);
         }
+
         @Override
         public boolean onTune(Uri channelUri) {
             return doTuneInService(channelUri, getSessionId());
         }
+
         @Override
         public void doRelease() {
             if (sessionMap.containsKey(getSessionId())) {

@@ -17,7 +17,6 @@
 package com.droidlogic.droidlivetv.ui;
 
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +53,8 @@ public class MultiOptionFragment extends SideFragment {
     private final static String[] TYPE = {"PMODE", "SMODE", "RATIO", "FAV", "LIST", "SLEEP"};
     private final static String[] LISTKEYWORD = {"PROGLIST", "FAVLIST"};
     private final static int[] KEYVALUE = {DroidLogicKeyEvent.KEYCODE_TV_SHORTCUTKEY_VIEWMODE, DroidLogicKeyEvent.KEYCODE_TV_SHORTCUTKEY_VOICEMODE
-        , DroidLogicKeyEvent.KEYCODE_TV_SHORTCUTKEY_DISPAYMODE, DroidLogicKeyEvent.KEYCODE_FAV,
-        DroidLogicKeyEvent.KEYCODE_LIST, DroidLogicKeyEvent.KEYCODE_TV_SLEEP};
+            , DroidLogicKeyEvent.KEYCODE_TV_SHORTCUTKEY_DISPAYMODE, DroidLogicKeyEvent.KEYCODE_FAV,
+            DroidLogicKeyEvent.KEYCODE_LIST, DroidLogicKeyEvent.KEYCODE_TV_SLEEP};
     private final static int[] PICTRUEMODE = {R.string.picture_mode, R.string.standard, R.string.vivid, R.string.soft, R.string.sport, R.string.movie, R.string.user};
     private final static int[] HDMI_PICTRUEMODE = {R.string.picture_mode, R.string.standard, R.string.vivid, R.string.soft, R.string.sport, R.string.movie, R.string.monitor, R.string.user};
     private final static int[] SOUNDMODE = {R.string.sound_mode, R.string.standard, R.string.music, R.string.news, R.string.movie, R.string.game, R.string.user};
@@ -63,7 +62,7 @@ public class MultiOptionFragment extends SideFragment {
     private final static int[] FAV = {R.string.favourite_list, R.string.tv, R.string.radio};
     private final static int[] LIST = {R.string.channel_list, R.string.tv, R.string.radio};
     private final static int[] SLEEPMODE = {R.string.sleep_timer, R.string.off, R.string.time_15min, R.string.time_30min, R.string.time_45min, R.string.time_60min,
-        R.string.time_90min, R.string.time_120min};
+            R.string.time_90min, R.string.time_120min};
     private final static int TVLIST = 0;
     private final static int RADIOLIST = 1;
     private final static int HIDELIST = -1;
@@ -205,7 +204,7 @@ public class MultiOptionFragment extends SideFragment {
             int pos = 0;
             for (int i = 1; i < getoption.length; i++) {
                 RadioButtonItem item = new MultiAudioOptionItem(
-                    getoption[i], String.valueOf(i - 1));
+                        getoption[i], String.valueOf(i - 1));
                 if (slectedindex.equals(String.valueOf(i - 1))) {
                     item.setChecked(true);
                     mInitialSelectedPosition = pos;

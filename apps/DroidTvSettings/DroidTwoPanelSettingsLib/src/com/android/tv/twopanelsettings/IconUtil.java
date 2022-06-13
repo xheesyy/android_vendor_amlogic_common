@@ -50,7 +50,7 @@ public class IconUtil {
 
         }
 
-        LayerDrawable compoundDrawable = new LayerDrawable(new Drawable[] {container, icon});
+        LayerDrawable compoundDrawable = new LayerDrawable(new Drawable[]{container, icon});
         compoundDrawable.setLayerGravity(0, Gravity.CENTER);
         compoundDrawable.setLayerGravity(1, Gravity.CENTER);
         compoundDrawable.setLayerInset(1, INSET, INSET, INSET, INSET);

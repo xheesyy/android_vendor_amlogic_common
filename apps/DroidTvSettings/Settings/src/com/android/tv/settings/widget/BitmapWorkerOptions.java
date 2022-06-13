@@ -32,12 +32,18 @@ import android.text.TextUtils;
  */
 public class BitmapWorkerOptions {
 
-    /** Max image size handled by android.graphics */
+    /**
+     * Max image size handled by android.graphics
+     */
     static final int MAX_IMAGE_DIMENSION_PX = 2048;
 
-    /** flag to force disable memory cache */
+    /**
+     * flag to force disable memory cache
+     */
     public static final int CACHE_FLAG_MEM_DISABLED = 1;
-    /** TODO support disk cache options */
+    /**
+     * TODO support disk cache options
+     */
     public static final int CACHE_FLAG_DISK_DISABLED = 2;
 
     private ShortcutIconResource mIconResource;
@@ -200,7 +206,7 @@ public class BitmapWorkerOptions {
     }
 
     /**
-     * @return  preferred Bitmap config to decode bitmap, null for auto detect.
+     * @return preferred Bitmap config to decode bitmap, null for auto detect.
      * Use {@link Builder#bitmapConfig(android.graphics.Bitmap.Config)} to change it.
      */
     public Bitmap.Config getBitmapConfig() {

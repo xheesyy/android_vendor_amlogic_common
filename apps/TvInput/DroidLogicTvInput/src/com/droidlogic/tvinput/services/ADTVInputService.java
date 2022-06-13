@@ -62,8 +62,10 @@ import com.droidlogic.app.tv.TvControlManager;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import android.net.Uri;
 import android.view.Surface;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
@@ -144,26 +146,27 @@ public class ADTVInputService extends DTVInputService {
                     StringBuilder param = new StringBuilder("{")
                             .append("\"type\":\"atv\"")
                             .append("," + fe.toString("fe"))
-                            .append(",\"a\":{\"AudComp\":"+info.getAudioCompensation()+"}")
+                            .append(",\"a\":{\"AudComp\":" + info.getAudioCompensation() + "}")
                             .append("}");
 
                     mTvControlManager.startPlay("ntsc", param.toString());
                 } else {
                     String subPidString = new String("\"pid\":0");
-                    int subCount = (info.getSubtitlePids() == null)? 0 : info.getSubtitlePids().length;
+                    int subCount = (info.getSubtitlePids() == null) ? 0 : info.getSubtitlePids().length;
                     if (subCount != 0) {
                         subPidString = new String("");
                         for (int i = 0; i < subCount; i++) {
-                            subPidString = subPidString + "\"pid" + i+ "\":" + info.getSubtitlePids()[i];
-                            if (i != (subCount - 1 ))
+                            subPidString = subPidString + "\"pid" + i + "\":" + info.getSubtitlePids()[i];
+                            if (i != (subCount - 1))
                                 subPidString = subPidString + ",";
                         }
                         Log.d(TAG, "subpid- string: " + subPidString);
                     }
-                    JSONArray as = new JSONArray();;
+                    JSONArray as = new JSONArray();
+                    ;
                     try {
                         /*audio tracks*/
-                        int audioCount = (info.getAudioPids() == null)? 0 : info.getAudioPids().length;
+                        int audioCount = (info.getAudioPids() == null) ? 0 : info.getAudioPids().length;
                         if (audioCount != 0) {
                             for (int i = 0; i < audioCount; i++) {
                                 as.put(new JSONObject()
@@ -173,24 +176,24 @@ public class ADTVInputService extends DTVInputService {
                         }
                         Log.d(TAG, "audio string: " + as.toString());
                     } catch (JSONException e) {
-                        Log.e(TAG, "Json fail for audio param:"+e);
+                        Log.e(TAG, "Json fail for audio param:" + e);
                     }
                     TvControlManager.FEParas fe = new TvControlManager.FEParas(info.getFEParas());
 
                     mTvControlManager.SetAVPlaybackListener(this);
                     openTvAudio(DroidLogicTvUtils.SOURCE_TYPE_DTV);
-                    int timeshiftMaxTime = mSystemControlManager.getPropertyInt("tv.dtv.tf.max.time", 10*60);/*seconds*/
+                    int timeshiftMaxTime = mSystemControlManager.getPropertyInt("tv.dtv.tf.max.time", 10 * 60);/*seconds*/
                     int timeshiftMaxSize = mSystemControlManager.getPropertyInt(MAX_CACHE_SIZE_KEY, MAX_CACHE_SIZE_DEF * 1024);/*bytes*/
                     String timeshiftPath = mSystemControlManager.getPropertyString("tv.dtv.tf.path", getCacheStoragePath());
                     StringBuilder param = new StringBuilder("{")
                             .append("\"fe\":" + info.getFEParas())
-                            .append(",\"v\":{\"pid\":"+info.getVideoPid()+",\"fmt\":"+info.getVfmt()+"}")
-                            .append(",\"a\":{\"pid\":"+(audio != null ? audio.mPid : -1)+",\"fmt\":"+(audio != null ? audio.mFormat : -1)+",\"AudComp\":"+info.getAudioCompensation()+"}")
-                            .append(",\"p\":{\"pid\":"+info.getPcrPid()+"}")
+                            .append(",\"v\":{\"pid\":" + info.getVideoPid() + ",\"fmt\":" + info.getVfmt() + "}")
+                            .append(",\"a\":{\"pid\":" + (audio != null ? audio.mPid : -1) + ",\"fmt\":" + (audio != null ? audio.mFormat : -1) + ",\"AudComp\":" + info.getAudioCompensation() + "}")
+                            .append(",\"p\":{\"pid\":" + info.getPcrPid() + "}")
                             //.append(",\"para\":{"+"\"disableTimeShifting\":1"+"}")
                             .append(",\"para\":{")
-                            .append("\"max\":{"+"\"time\":"+timeshiftMaxTime+"}")//",\"size\":"+timeshiftMaxSize+
-                            .append(",\"path\":\""+timeshiftPath+"\"")
+                            .append("\"max\":{" + "\"time\":" + timeshiftMaxTime + "}")//",\"size\":"+timeshiftMaxSize+
+                            .append(",\"path\":\"" + timeshiftPath + "\"")
                             .append(",\"subpid\":{" + subPidString)
                             .append("},\"subcnt\":" + subCount)
                             .append(",\"as\":" + as.toString())
@@ -202,7 +205,7 @@ public class ADTVInputService extends DTVInputService {
                     startAudioADMainMix(info, audioAuto);
                 }
                 mSystemControlManager.setProperty(DTV_AUDIO_TRACK_IDX,
-                ((audioAuto>=0)? String.valueOf(audioAuto) : "-1"));
+                        ((audioAuto >= 0) ? String.valueOf(audioAuto) : "-1"));
                 mSystemControlManager.setProperty(DTV_AUDIO_TRACK_ID, generateAudioIdString(audio));
             }
 

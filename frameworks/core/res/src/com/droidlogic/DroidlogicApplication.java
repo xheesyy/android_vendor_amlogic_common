@@ -52,7 +52,7 @@ public class DroidlogicApplication extends Application {
         if (isGtvsVersion() && SystemProperties.getBoolean("ro.vendor.platform.earlysuspend", true)) {
             PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
             mWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-                "EarlysuspendTag[ro.vendor.platform.earlysuspend]:"+this);
+                    "EarlysuspendTag[ro.vendor.platform.earlysuspend]:" + this);
             mWakeLock.acquire();
             Log.d(TAG, "wakelocked");
         }
@@ -70,9 +70,9 @@ public class DroidlogicApplication extends Application {
         }
 
         return (mAudioSettingManager.isTunerAudio() && tvProvider != null || !mAudioSettingManager.isTunerAudio()) &&
-                (((SystemProperties.getInt("persist.vendor.media.bootvideo", 50)  > 100)
+                (((SystemProperties.getInt("persist.vendor.media.bootvideo", 50) > 100)
                         && TextUtils.equals(SystemProperties.get("service.bootvideo.exit", "1"), "0"))
-                || ((SystemProperties.getInt("persist.vendor.media.bootvideo", 50)  <= 100)));
+                        || ((SystemProperties.getInt("persist.vendor.media.bootvideo", 50) <= 100)));
     }
 
     private static final int MSG_CHECK_BOOTVIDEO_FINISHED = 0;
@@ -96,7 +96,7 @@ public class DroidlogicApplication extends Application {
         }
     };
 
-    private void initAudio () {
+    private void initAudio() {
         startDroidLogicServices(AudioSystemCmdManager.SERVICE_PACKEGE_NANME, AudioSystemCmdManager.SERVICE_NANME);
         startDroidLogicServices(AudioEffectManager.SERVICE_PACKEGE_NANME, AudioEffectManager.SERVICE_NANME);
         mAudioSettingManager.registerSurroundObserver();
@@ -109,69 +109,72 @@ public class DroidlogicApplication extends Application {
             setDoblyMode(this);
         }
     }
-    private void setDoblyMode(final Context context) {
-         new Thread(new Runnable() {
-             @Override
-             public void run() {
-                 OutputModeManager mOutputModeManager = new OutputModeManager(context);
-                 String selection  = getDrcModePassthroughSetting();
-                 Log.i(TAG, "setDoblyMode selection  " + selection);
-                 if (null != mOutputModeManager) {
-                     switch (selection) {
-                     case DRC_OFF:
-                         mOutputModeManager.enableDobly_DRC(false);
-                         mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
-                         setDrcModePassthroughSetting(OutputModeManager.IS_DRC_OFF);
-                         break;
-                     case DRC_LINE:
-                         mOutputModeManager.enableDobly_DRC(true);
-                         mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
-                         setDrcModePassthroughSetting(OutputModeManager.IS_DRC_LINE);
-                         break;
-                     case DRC_RF:
-                         mOutputModeManager.enableDobly_DRC(false);
-                         mOutputModeManager.setDoblyMode(OutputModeManager.RF_DRCMODE);
-                         setDrcModePassthroughSetting(OutputModeManager.IS_DRC_RF);
-                         break;
-                     default:
-                         throw new IllegalArgumentException("Unknown drc mode pref value");
-                     }
-                 } else {
-                     Log.e(TAG, "setDoblyMode mOutputModeManager is null");
-                 }
 
-             }
-         }).start();
-     }
+    private void setDoblyMode(final Context context) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OutputModeManager mOutputModeManager = new OutputModeManager(context);
+                String selection = getDrcModePassthroughSetting();
+                Log.i(TAG, "setDoblyMode selection  " + selection);
+                if (null != mOutputModeManager) {
+                    switch (selection) {
+                        case DRC_OFF:
+                            mOutputModeManager.enableDobly_DRC(false);
+                            mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
+                            setDrcModePassthroughSetting(OutputModeManager.IS_DRC_OFF);
+                            break;
+                        case DRC_LINE:
+                            mOutputModeManager.enableDobly_DRC(true);
+                            mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
+                            setDrcModePassthroughSetting(OutputModeManager.IS_DRC_LINE);
+                            break;
+                        case DRC_RF:
+                            mOutputModeManager.enableDobly_DRC(false);
+                            mOutputModeManager.setDoblyMode(OutputModeManager.RF_DRCMODE);
+                            setDrcModePassthroughSetting(OutputModeManager.IS_DRC_RF);
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unknown drc mode pref value");
+                    }
+                } else {
+                    Log.e(TAG, "setDoblyMode mOutputModeManager is null");
+                }
+
+            }
+        }).start();
+    }
+
     public void setDrcModePassthroughSetting(int newVal) {
         Settings.Global.putInt(this.getContentResolver(),
                 OutputModeManager.DRC_MODE, newVal);
     }
+
     public String getDrcModePassthroughSetting() {
-    String isSupportDTVKIT = SystemControlManager.getInstance().getPropertyString("ro.vendor.platform.is.tv", "");
-    boolean tvflag = isSupportDTVKIT.equals("1");
+        String isSupportDTVKIT = SystemControlManager.getInstance().getPropertyString("ro.vendor.platform.is.tv", "");
+        boolean tvflag = isSupportDTVKIT.equals("1");
 
         int value;
         if (tvflag) {
             value = Settings.Global.getInt(this.getContentResolver(),
-                OutputModeManager.DRC_MODE, OutputModeManager.IS_DRC_RF);
+                    OutputModeManager.DRC_MODE, OutputModeManager.IS_DRC_RF);
         } else {
             value = Settings.Global.getInt(this.getContentResolver(),
-                OutputModeManager.DRC_MODE, OutputModeManager.IS_DRC_LINE);
+                    OutputModeManager.DRC_MODE, OutputModeManager.IS_DRC_LINE);
         }
 
         switch (value) {
-        case OutputModeManager.IS_DRC_OFF:
-            return DRC_OFF;
-        case OutputModeManager.IS_DRC_LINE:
-        default:
-            return DRC_LINE;
-        case OutputModeManager.IS_DRC_RF:
-            return DRC_RF;
+            case OutputModeManager.IS_DRC_OFF:
+                return DRC_OFF;
+            case OutputModeManager.IS_DRC_LINE:
+            default:
+                return DRC_LINE;
+            case OutputModeManager.IS_DRC_RF:
+                return DRC_RF;
         }
     }
 
-    private void startDroidLogicServices (String packageName, String name) {
+    private void startDroidLogicServices(String packageName, String name) {
         Intent intent = new Intent();
         intent.setComponent(new ComponentName(packageName, name));
         intent.setAction(name + ".STARTUP");

@@ -9,7 +9,6 @@
  */
 
 
-
 package com.android.tv.settings.pqsettings.advanced;
 
 import android.content.Context;
@@ -18,13 +17,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 import androidx.preference.PreferenceCategory;
+
 import android.util.ArrayMap;
 import android.util.Log;
 import android.text.TextUtils;
@@ -74,7 +77,8 @@ public class PQAdvancedColorCustomizeFragment extends SettingsPreferenceFragment
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
         switch (preference.getKey()) {
             case PQ_ADVANCED_COLOR_CUSTOMIZE_ALLRESET:
                 Intent PQAdvancedColorCustomizeResetAllResetIntent = new Intent();

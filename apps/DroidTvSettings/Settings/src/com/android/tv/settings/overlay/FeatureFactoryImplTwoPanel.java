@@ -37,7 +37,9 @@ import com.android.tv.settings.system.LeanbackPickerDialogFragment;
 import com.android.tv.settings.system.LeanbackPickerDialogPreference;
 import com.android.tv.twopanelsettings.TwoPanelSettingsFragment;
 
-/** Two panel customized implementation of the feature factory. */
+/**
+ * Two panel customized implementation of the feature factory.
+ */
 @Keep
 public class FeatureFactoryImplTwoPanel implements FeatureFactory {
 
@@ -71,9 +73,12 @@ public class FeatureFactoryImplTwoPanel implements FeatureFactory {
 
         private static final String EXTRA_FRAGMENT_CLASS_NAME = "fragmentClassName";
 
-        public SettingsFragment() {}
+        public SettingsFragment() {
+        }
 
-        /** Constructs a new instance of a settings fragment. */
+        /**
+         * Constructs a new instance of a settings fragment.
+         */
         public static SettingsFragment newInstance(String className, Bundle arguments) {
             SettingsFragment fragment = new SettingsFragment();
             Bundle args = arguments == null ? new Bundle() : new Bundle(arguments);
@@ -112,7 +117,7 @@ public class FeatureFactoryImplTwoPanel implements FeatureFactory {
                 fragment.setArguments(getArguments());
                 startPreferenceFragment(fragment);
             } catch (IllegalAccessException | ClassNotFoundException
-                    | java.lang.InstantiationException e) {
+                     | java.lang.InstantiationException e) {
                 Log.e(TAG, "Unable to start initial preference screen.", e);
             }
         }

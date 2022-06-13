@@ -44,7 +44,7 @@ public class EnableDisablePreference extends AppActionPreference {
     private final PackageManager mPackageManager;
 
     public EnableDisablePreference(Context context,
-            ApplicationsState.AppEntry entry) {
+                                   ApplicationsState.AppEntry entry) {
         super(context, entry);
         mPackageManager = context.getPackageManager();
         refresh();

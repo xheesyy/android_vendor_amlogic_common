@@ -12,11 +12,15 @@ package com.droidlogic.app;
 
 //** @hide */
 public interface IMediaPlayerClient extends android.os.IInterface {
-    /** Local-side IPC implementation stub class. */
+    /**
+     * Local-side IPC implementation stub class.
+     */
     public static abstract class Stub extends android.os.Binder implements com.droidlogic.app.IMediaPlayerClient {
         private static final java.lang.String DESCRIPTOR = "android.media.IMediaPlayerClient";
 
-        /** Construct the stub at attach it to the interface. */
+        /**
+         * Construct the stub at attach it to the interface.
+         */
         public Stub() {
             this.attachInterface(this, DESCRIPTOR);
         }
@@ -32,7 +36,7 @@ public interface IMediaPlayerClient extends android.os.IInterface {
 
             android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR);
             if (((iin != null) && (iin instanceof com.droidlogic.app.IMediaPlayerClient))) {
-                return ((com.droidlogic.app.IMediaPlayerClient)iin);
+                return ((com.droidlogic.app.IMediaPlayerClient) iin);
             }
 
             return new com.droidlogic.app.IMediaPlayerClient.Stub.Proxy(obj);
@@ -46,14 +50,12 @@ public interface IMediaPlayerClient extends android.os.IInterface {
         @Override
         public boolean onTransact(int code, android.os.Parcel data, android.os.Parcel reply, int flags) throws android.os.RemoteException {
             switch (code) {
-                case INTERFACE_TRANSACTION:
-                {
+                case INTERFACE_TRANSACTION: {
                     reply.writeString(DESCRIPTOR);
                     return true;
                 }
 
-                case TRANSACTION_notify :
-                {
+                case TRANSACTION_notify: {
                     data.enforceInterface(DESCRIPTOR);
                     int msg = data.readInt();
                     int ext1 = data.readInt();
@@ -72,6 +74,7 @@ public interface IMediaPlayerClient extends android.os.IInterface {
 
         private static class Proxy implements com.droidlogic.app.IMediaPlayerClient {
             private android.os.IBinder mRemote;
+
             Proxy(android.os.IBinder remote) {
                 mRemote = remote;
             }
@@ -91,17 +94,16 @@ public interface IMediaPlayerClient extends android.os.IInterface {
                 android.os.Parcel _reply = android.os.Parcel.obtain();
 
                 try {
-                    _data.writeInterfaceToken (DESCRIPTOR);
-                    _data.writeInt (msg);
-                    _data.writeInt (ext1);
-                    _data.writeInt (ext2);
+                    _data.writeInterfaceToken(DESCRIPTOR);
+                    _data.writeInt(msg);
+                    _data.writeInt(ext1);
+                    _data.writeInt(ext2);
                     if (obj != null && obj.dataSize() > 0) {
                         _data.appendFrom(obj, 0, obj.dataSize());
                     }
-                    mRemote.transact (Stub.TRANSACTION_notify, _data, _reply, 0);
+                    mRemote.transact(Stub.TRANSACTION_notify, _data, _reply, 0);
                     _reply.readException();
-                }
-                finally {
+                } finally {
                     _reply.recycle();
                     _data.recycle();
                 }
@@ -110,5 +112,6 @@ public interface IMediaPlayerClient extends android.os.IInterface {
 
         static final int TRANSACTION_notify = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     }
+
     public void notify(int msg, int ext1, int ext2, android.os.Parcel obj) throws android.os.RemoteException;
 }

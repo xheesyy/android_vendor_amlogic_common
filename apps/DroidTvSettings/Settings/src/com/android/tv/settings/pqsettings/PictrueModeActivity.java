@@ -29,7 +29,7 @@ public class PictrueModeActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PictrueModeFragment.class.getName(), null);
+                .newSettingsFragment(PictrueModeFragment.class.getName(), null);
     }
 
 }

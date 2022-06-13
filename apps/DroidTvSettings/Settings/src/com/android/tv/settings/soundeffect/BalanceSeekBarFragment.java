@@ -18,9 +18,12 @@ package com.android.tv.settings.soundeffect;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
 import android.util.Log;
 import android.text.TextUtils;
 import android.widget.SeekBar;
@@ -51,19 +54,19 @@ public class BalanceSeekBarFragment extends SettingsPreferenceFragment implement
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (mAudioEffectManager == null) {
-            mAudioEffectManager = ((TvSettingsActivity)getActivity()).getAudioEffectManager();
+            mAudioEffectManager = ((TvSettingsActivity) getActivity()).getAudioEffectManager();
         }
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.xml.tv_sound_balance_seekbar, container, false);
         return view;
     }
 
     @Override
-    public void onViewCreated (View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         initSeekBar(view);
     }
 
@@ -80,7 +83,7 @@ public class BalanceSeekBarFragment extends SettingsPreferenceFragment implement
     private void initSeekBar(View view) {
         int status = -1;
         boolean hasfocused = false;
-        seekbar_balance= (SeekBar) view.findViewById(R.id.seekbar_tv_balance);
+        seekbar_balance = (SeekBar) view.findViewById(R.id.seekbar_tv_balance);
         text_balance = (TextView) view.findViewById(R.id.text_tv_balance);
         if (true) {
             status = mAudioEffectManager.getBalanceStatus();
@@ -104,7 +107,7 @@ public class BalanceSeekBarFragment extends SettingsPreferenceFragment implement
             return;
         }
         switch (seekBar.getId()) {
-            case R.id.seekbar_tv_balance:{
+            case R.id.seekbar_tv_balance: {
                 setShow(R.id.seekbar_tv_balance, progress);
                 mAudioEffectManager.setBalance(progress/* - mTvOptionSettingManager.getBalanceStatus()*/);
                 break;
@@ -126,7 +129,7 @@ public class BalanceSeekBarFragment extends SettingsPreferenceFragment implement
 
     private void setShow(int id, int value) {
         switch (id) {
-            case R.id.seekbar_tv_balance:{
+            case R.id.seekbar_tv_balance: {
                 text_balance.setText(getShowString(R.string.tv_balance_effect, value));
                 break;
             }

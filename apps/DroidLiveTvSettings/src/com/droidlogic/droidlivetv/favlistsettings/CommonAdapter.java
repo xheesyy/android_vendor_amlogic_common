@@ -37,7 +37,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 
     public void setDataByPosition(int position, T item) {
         if (mData != null && mData.size() >= position) {
-            mData.set(position,item );
+            mData.set(position, item);
         }
     }
 

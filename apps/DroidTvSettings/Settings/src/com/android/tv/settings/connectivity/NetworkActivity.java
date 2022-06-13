@@ -24,7 +24,7 @@ import com.android.tv.settings.overlay.FlavorUtils;
 public class NetworkActivity extends TvSettingsActivity {
 
     @Override
-    protected Fragment createSettingsFragment()  {
+    protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
                 .newSettingsFragment(NetworkFragment.class.getName(), null);
     }

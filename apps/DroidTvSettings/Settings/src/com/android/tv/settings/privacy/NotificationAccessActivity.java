@@ -24,11 +24,13 @@ import com.android.tv.settings.TvSettingsActivity;
 import com.android.tv.settings.device.apps.specialaccess.NotificationAccess;
 import com.android.tv.settings.overlay.FlavorUtils;
 
-/** The Activity that shows notification access settings UI. */
+/**
+ * The Activity that shows notification access settings UI.
+ */
 public class NotificationAccessActivity extends TvSettingsActivity {
 
     @Override
-    protected Fragment createSettingsFragment()  {
+    protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
                 .newSettingsFragment(NotificationAccess.class.getName(), null);
     }

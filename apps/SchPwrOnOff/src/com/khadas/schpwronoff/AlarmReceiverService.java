@@ -28,14 +28,14 @@ public class AlarmReceiverService extends IntentService {
         Intent i = new Intent(context, AlarmReceiverService.class);
         i.setAction(ACTION_BROADCAST);
         i.putExtra(Intent.EXTRA_INTENT, broadcastIntent);
-  Log.d(TAG, "startService");
+        Log.d(TAG, "startService");
         context.startService(i);
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
         int userId = UserHandle.myUserId();
-  Log.d(TAG, "onHandleIntent, User Id = " + userId);
+        Log.d(TAG, "onHandleIntent, User Id = " + userId);
         final String action = intent.getAction();
         if (!ACTION_BROADCAST.equals(action)) {
             return;
@@ -43,11 +43,11 @@ public class AlarmReceiverService extends IntentService {
 
         final Intent broadcastIntent = intent.getParcelableExtra(Intent.EXTRA_INTENT);
         final String broadcastAction = broadcastIntent.getAction();
-  Log.d(TAG, "action= " + broadcastAction);
+        Log.d(TAG, "action= " + broadcastAction);
         if (Intent.ACTION_BOOT_COMPLETED.equals(broadcastAction)) {
             // ALPS00448092.
             boolean b = copyDbFileFromDataPath();
-   Log.d(TAG, "copy db file result " + b);
+            Log.d(TAG, "copy db file result " + b);
             Alarms.saveSnoozeAlert(this, -1, -1);
             Alarms.disableExpiredAlarms(this);
             Alarms.setNextAlert(this);
@@ -69,10 +69,10 @@ public class AlarmReceiverService extends IntentService {
     }
 
     private boolean copyDbFileFromDataPath() {
-    Log.d(TAG, "copyDbFileFromDataPath");
+        Log.d(TAG, "copyDbFileFromDataPath");
         File tempDbDirFile = new File(TEMP_DB_PATH);
         if (!tempDbDirFile.exists()) {
-     Log.d(TAG, "/data/schpwrs.db does not exist");
+            Log.d(TAG, "/data/schpwrs.db does not exist");
             return false;
         }
         File dbPathFile = new File("/data/data/com.khadas.schpwronoff/databases/");
@@ -86,7 +86,7 @@ public class AlarmReceiverService extends IntentService {
             fis = new FileInputStream(tempDbDirFile);
             fos = new FileOutputStream(schPwrsDbFile);
         } catch (FileNotFoundException e) {
-      Log.e(TAG, "FileNotFoundException " + e.getMessage());
+            Log.e(TAG, "FileNotFoundException " + e.getMessage());
             return false;
         }
         byte[] buffer = new byte[1024];
@@ -99,11 +99,11 @@ public class AlarmReceiverService extends IntentService {
             fos.close();
             fis.close();
         } catch (IOException e) {
-       Log.e(TAG, "IOException " + e.getMessage());
+            Log.e(TAG, "IOException " + e.getMessage());
             return false;
         }
         if (!tempDbDirFile.delete()) {
-        Log.e(TAG, "delete temp db file failed.");
+            Log.e(TAG, "delete temp db file failed.");
         }
         return true;
     }

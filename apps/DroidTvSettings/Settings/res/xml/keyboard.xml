@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2018 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,8 +21,7 @@
     <PreferenceCategory
         android:key="keyboardCategory"
         android:order="0"
-        android:title="@string/system_keyboard">
-    </PreferenceCategory>
+        android:title="@string/system_keyboard"></PreferenceCategory>
 
     <ListPreference
         android:key="currentKeyboard"
@@ -38,7 +36,7 @@
         android:fragment="com.android.tv.settings.inputmethod.AvailableVirtualKeyboardFragment"
         android:key="manageKeyboards"
         android:order="3"
-        android:title="@string/manage_keyboards"/>
+        android:title="@string/manage_keyboards" />
 
     <PreferenceCategory
         android:order="4"

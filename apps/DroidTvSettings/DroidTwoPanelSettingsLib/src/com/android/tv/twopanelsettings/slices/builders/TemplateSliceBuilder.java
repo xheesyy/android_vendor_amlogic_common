@@ -112,7 +112,7 @@ public abstract class TemplateSliceBuilder {
      * @hide
      */
     static <T> Pair<SliceSpec, Class<? extends TemplateBuilderImpl>> pair(SliceSpec spec,
-            Class<T> cls) {
+                                                                          Class<T> cls) {
         return new Pair(spec, cls);
     }
 }

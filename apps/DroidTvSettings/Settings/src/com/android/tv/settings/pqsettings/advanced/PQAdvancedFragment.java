@@ -9,7 +9,6 @@
  */
 
 
-
 package com.android.tv.settings.pqsettings.advanced;
 
 import android.content.Context;
@@ -18,20 +17,23 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.Preference.OnPreferenceChangeListener;
+
 import android.util.ArrayMap;
 import android.util.Log;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 
 
 import com.droidlogic.app.DisplayPositionManager;
@@ -126,8 +128,8 @@ public class PQAdvancedFragment extends SettingsPreferenceFragment implements Pr
         final Preference pictureAdvancedMemcPref = (Preference) findPreference(PQ_PICTRUE_ADVANCED_MEMC);
 
         if (PQ_PICTRUE_ADVANCED_SOURCE_HDR == mPQSettingsManager.GetSourceHdrType() &&
-                 (mPQSettingsManager.getChipVersionInfo() != null &&
-                  PQ_PICTRUE_T5 == mPQSettingsManager.getChipVersionInfo())) {//Leave blank first, add conditions later
+                (mPQSettingsManager.getChipVersionInfo() != null &&
+                        PQ_PICTRUE_T5 == mPQSettingsManager.getChipVersionInfo())) {//Leave blank first, add conditions later
             pictureAdvancedDynamicToneMappingPref.setValueIndex(mPQSettingsManager.getAdvancedDynamicToneMappingStatus());
             pictureAdvancedDynamicToneMappingPref.setOnPreferenceChangeListener(this);
         } else {
@@ -220,7 +222,7 @@ public class PQAdvancedFragment extends SettingsPreferenceFragment implements Pr
 
         if (mPQSettingsManager.getChipVersionInfo() != null &&
                 (PQ_PICTRUE_T5 == mPQSettingsManager.getChipVersionInfo() ||
-                 PQ_PICTRUE_T3 == mPQSettingsManager.getChipVersionInfo())) {//Leave blank first, add conditions later
+                        PQ_PICTRUE_T3 == mPQSettingsManager.getChipVersionInfo())) {//Leave blank first, add conditions later
             pictureAdvancedDecontourPref.setValueIndex(mPQSettingsManager.getAdvancedDecontourStatus());
             pictureAdvancedDecontourPref.setOnPreferenceChangeListener(this);
         } else {
@@ -270,8 +272,9 @@ public class PQAdvancedFragment extends SettingsPreferenceFragment implements Pr
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
-        final int selection = Integer.parseInt((String)newValue);
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
+        final int selection = Integer.parseInt((String) newValue);
         switch (preference.getKey()) {
             case PQ_PICTRUE_ADVANCED_DYNAMIC_TONE_MAPPING:
                 mPQSettingsManager.setAdvancedDynamicToneMappingStatus(selection);

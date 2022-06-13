@@ -19,11 +19,14 @@ package com.android.tv.settings.pqsettings.advanced;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.ListPreference;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -109,7 +112,8 @@ public class PQAdvancedColorCustomizeMagentaFragment extends SettingsPreferenceF
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
         return super.onPreferenceTreeClick(preference);
     }
 
@@ -117,15 +121,15 @@ public class PQAdvancedColorCustomizeMagentaFragment extends SettingsPreferenceF
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
             case PQ_PICTRUE_ADVANCED_COLOR_CUSTOMIZE_MAGENTA_SATURATION:
-                mPQSettingsManager.setAdvancedColorCustomizeMagentaSaturationStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorCustomizeMagentaSaturationStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_VL_AMOUNT, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_COLOR_CUSTOMIZE_MAGENTA_LUMA:
-                mPQSettingsManager.setAdvancedColorCustomizeMagentaLumaStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorCustomizeMagentaLumaStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_DE_AMOUNT, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_COLOR_CUSTOMIZE_MAGENTA_HUE:
-                mPQSettingsManager.setAdvancedColorCustomizeMagentaHueStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorCustomizeMagentaHueStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_SURROUND_BOOST, (int)newValue);
                 break;
         }

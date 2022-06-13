@@ -30,7 +30,7 @@ public class StructInformation {
             String result = null;
             Object obj = getKeyValueStringFromJson(mExtraJson, KEY_NAME);
             if (obj != null && obj instanceof String) {
-                result = (String)obj;
+                result = (String) obj;
             }
             return result;
         }
@@ -50,11 +50,11 @@ public class StructInformation {
             List<Integer> result = new ArrayList<Integer>();
             Object obj = getKeyValueStringFromJson(mExtraJson, FAV_INFO);
             if (obj != null && obj instanceof JSONArray) {
-                JSONArray array = (JSONArray)obj;
+                JSONArray array = (JSONArray) obj;
                 if (array != null && array.length() > 0) {
                     for (int i = 0; i < array.length(); i++) {
                         try {
-                            result.add((Integer)array.get(i));
+                            result.add((Integer) array.get(i));
                         } catch (JSONException e) {
                             Log.d(TAG, "getFavInfo JSONException " + e);
                             e.printStackTrace();
@@ -88,7 +88,7 @@ public class StructInformation {
             List<Integer> result = new ArrayList<Integer>();
             Object obj = getKeyValueStringFromJson(mExtraJson, KEY_FAV_LIST);
             if (obj != null && obj instanceof JSONArray) {
-                JSONArray array = (JSONArray)obj;
+                JSONArray array = (JSONArray) obj;
                 if (array != null && array.length() > 0) {
                     for (int i = 0; i < array.length(); i++) {
                         result.add(i);

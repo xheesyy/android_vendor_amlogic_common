@@ -26,14 +26,17 @@ import android.media.tv.TvStreamConfig;
 import android.media.tv.TvInputManager.Hardware;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import android.view.Surface;
 import android.net.Uri;
 import android.media.tv.TvInputManager;
 
 public class SPDIFInputService extends DroidLogicTvInputService {
-    private static final String TAG = SPDIFInputService.class.getSimpleName();;
+    private static final String TAG = SPDIFInputService.class.getSimpleName();
+    ;
     private SPDIFInputSession mCurrentSession;
     private int id = 0;
     private Map<Integer, SPDIFInputSession> sessionMap = new HashMap<>();
@@ -59,7 +62,7 @@ public class SPDIFInputService extends DroidLogicTvInputService {
 
     @Override
     public void setCurrentSessionById(int sessionId) {
-        Utils.logd(TAG, "setCurrentSessionById:"+sessionId);
+        Utils.logd(TAG, "setCurrentSessionById:" + sessionId);
         SPDIFInputSession session = sessionMap.get(sessionId);
         if (session != null) {
             mCurrentSession = session;
@@ -68,7 +71,7 @@ public class SPDIFInputService extends DroidLogicTvInputService {
 
     @Override
     public void doTuneFinish(int result, Uri uri, int sessionId) {
-        Utils.logd(TAG, "doTuneFinish,result:"+result+"sessionId:"+sessionId);
+        Utils.logd(TAG, "doTuneFinish,result:" + result + "sessionId:" + sessionId);
         if (result == ACTION_SUCCESS) {
             SPDIFInputSession session = sessionMap.get(sessionId);
             if (session != null) {
@@ -92,16 +95,16 @@ public class SPDIFInputService extends DroidLogicTvInputService {
         @Override
         public boolean onSetSurface(Surface surface) {
             super.onSetSurface(surface);
-            return setSurfaceInService(surface,this);
+            return setSurfaceInService(surface, this);
         }
 
         @Override
         public boolean onTune(Uri channelUri) {
-             doTuneInService(channelUri, getSessionId());
-             if (mOverlayView != null) {
+            doTuneInService(channelUri, getSessionId());
+            if (mOverlayView != null) {
                 mOverlayView.setImageVisibility(true);
-             }
-             return false;
+            }
+            return false;
         }
 
         @Override

@@ -22,12 +22,21 @@ import androidx.slice.core.SliceActionImpl;
  * Indicates the preference has the slice action to be triggered.
  */
 public interface HasSliceAction {
-    /** Return the Action ID to be digested for logging. */
+    /**
+     * Return the Action ID to be digested for logging.
+     */
     int getActionId();
-    /** Set the Action ID to be digested for logging. */
+
+    /**
+     * Set the Action ID to be digested for logging.
+     */
     void setActionId(int actionId);
+
     SliceActionImpl getSliceAction();
+
     void setSliceAction(SliceActionImpl sliceAction);
+
     SliceActionImpl getFollowupSliceAction();
+
     void setFollowupSliceAction(SliceActionImpl sliceAction);
 }

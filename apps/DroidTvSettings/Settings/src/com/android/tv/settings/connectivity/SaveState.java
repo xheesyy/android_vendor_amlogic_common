@@ -43,13 +43,13 @@ public class SaveState implements State {
     @Override
     public void processForward() {
         EditSettingsInfo editSettingsInfo =
-                    ViewModelProviders.of(mActivity).get(EditSettingsInfo.class);
+                ViewModelProviders.of(mActivity).get(EditSettingsInfo.class);
         NetworkConfiguration networkConfig = editSettingsInfo.getNetworkConfiguration();
         AdvancedOptionsFlowInfo advInfo =
-                    ViewModelProviders.of(mActivity).get(AdvancedOptionsFlowInfo.class);
+                ViewModelProviders.of(mActivity).get(AdvancedOptionsFlowInfo.class);
         networkConfig.setIpConfiguration(advInfo.getIpConfiguration());
         mFragment = SaveWifiConfigurationFragment.newInstance(
-                    mActivity.getString(R.string.wifi_saving, networkConfig.getPrintableName()));
+                mActivity.getString(R.string.wifi_saving, networkConfig.getPrintableName()));
         FragmentChangeListener listener = (FragmentChangeListener) mActivity;
         listener.onFragmentChange(mFragment, true);
     }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +15,11 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/main_frame1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:transitionGroup="false">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_frame1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="false">
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -29,12 +28,13 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/settings_info_fragment_image_margin_top"
         app:cardCornerRadius="12dp">
+
         <ImageView
             android:id="@+id/info_image"
             android:layout_width="@dimen/settings_info_fragment_image_width"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop" />
     </androidx.cardview.widget.CardView>
 
     <RelativeLayout
@@ -43,7 +43,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/settings_info_fragment_bottom_section_margin_bottom"
-        android:paddingEnd="@dimen/settings_info_fragment_bottom_section_padding_end" >
+        android:paddingEnd="@dimen/settings_info_fragment_bottom_section_padding_end">
 
         <ImageView
             android:id="@+id/info_title_icon"
@@ -64,7 +64,7 @@
             android:layout_marginBottom="@dimen/settings_info_fragment_title_margin_bottom"
             android:maxLines="2"
             android:ellipsize="end"
-            style="@style/TwoPanelInfoTitleTextStyle"/>
+            style="@style/TwoPanelInfoTitleTextStyle" />
 
         <TextView
             android:id="@+id/info_status"
@@ -74,7 +74,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/settings_info_fragment_status_margin_start"
             android:visibility="gone"
-            style="@style/TwoPanelInfoTitleTextStyle"/>
+            style="@style/TwoPanelInfoTitleTextStyle" />
 
         <TextView
             android:id="@+id/info_summary"
@@ -85,7 +85,7 @@
             android:layout_alignWithParentIfMissing="true"
             android:maxLines="12"
             android:ellipsize="end"
-            style="@style/TwoPanelInfoSummaryTextStyle"/>
+            style="@style/TwoPanelInfoSummaryTextStyle" />
 
     </RelativeLayout>
 

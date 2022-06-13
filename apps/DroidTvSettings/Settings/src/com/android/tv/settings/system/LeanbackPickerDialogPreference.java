@@ -36,7 +36,7 @@ public class LeanbackPickerDialogPreference extends DialogPreference {
     private final String mPreferenceType;
 
     public LeanbackPickerDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
-                              int defStyleRes) {
+                                          int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         final TypedArray a = context.obtainStyledAttributes(attrs,
                 R.styleable.LeanbackPickerDialogPreference, 0, 0);

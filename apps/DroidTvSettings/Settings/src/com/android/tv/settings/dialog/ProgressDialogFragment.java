@@ -44,7 +44,7 @@ public class ProgressDialogFragment extends Fragment {
 
     @Override
     public @Nullable View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-            Bundle savedInstanceState) {
+                                       Bundle savedInstanceState) {
         final ViewGroup view =
                 (ViewGroup) inflater.inflate(R.layout.progress_fragment, container, false);
 
@@ -131,6 +131,7 @@ public class ProgressDialogFragment extends Fragment {
 
     /**
      * Sets customized line spacing
+     *
      * @param multiplier line spacing multiplier
      */
     public void setDescriptionLineSpacingMultiplier(float multiplier) {

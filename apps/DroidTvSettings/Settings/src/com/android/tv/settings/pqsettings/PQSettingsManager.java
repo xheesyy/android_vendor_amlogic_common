@@ -35,63 +35,64 @@ import com.droidlogic.app.tv.DroidLogicTvUtils;
 import com.droidlogic.app.tv.ChannelInfo;
 import com.droidlogic.app.tv.TvDataBaseManager;
 import com.droidlogic.app.DataProviderManager;
+
 import android.media.tv.TvContract;
 
 
 public class PQSettingsManager {
-    public static final String TAG                                  = "PQSettingsManager";
-    public static final String CURRENT_DEVICE_ID                    = "current_device_id";
-    public static final String CURRENT_CHANNEL_ID                   = "current_channel_id";
-    public static final String TV_CURRENT_DEVICE_ID                 = "tv_current_device_id";
+    public static final String TAG = "PQSettingsManager";
+    public static final String CURRENT_DEVICE_ID = "current_device_id";
+    public static final String CURRENT_CHANNEL_ID = "current_channel_id";
+    public static final String TV_CURRENT_DEVICE_ID = "tv_current_device_id";
 
-    public static final String KEY_PICTURE                          = "picture";
-    public static final String KEY_PICTURE_MODE                     = "picture_mode";
-    public static final String KEY_BRIGHTNESS                       = "brightness";
-    public static final String KEY_CONTRAST                         = "contrast";
-    public static final String KEY_COLOR                            = "color";
-    public static final String KEY_SHARPNESS                        = "sharpness";
-    public static final String KEY_BACKLIGHT                        = "backlight";
-    public static final String KEY_TONE                             = "tone";
-    public static final String KEY_COLOR_TEMPERATURE                = "color_temperature";
-    public static final String KEY_ASPECT_RATIO                     = "aspect_ratio";
-    public static final String KEY_DNR                              = "dnr";
-    public static final String KEY_3D_SETTINGS                      = "settings_3d";
+    public static final String KEY_PICTURE = "picture";
+    public static final String KEY_PICTURE_MODE = "picture_mode";
+    public static final String KEY_BRIGHTNESS = "brightness";
+    public static final String KEY_CONTRAST = "contrast";
+    public static final String KEY_COLOR = "color";
+    public static final String KEY_SHARPNESS = "sharpness";
+    public static final String KEY_BACKLIGHT = "backlight";
+    public static final String KEY_TONE = "tone";
+    public static final String KEY_COLOR_TEMPERATURE = "color_temperature";
+    public static final String KEY_ASPECT_RATIO = "aspect_ratio";
+    public static final String KEY_DNR = "dnr";
+    public static final String KEY_3D_SETTINGS = "settings_3d";
 
-    public static final String STATUS_STANDARD                      = "standard";
-    public static final String STATUS_VIVID                         = "vivid";
-    public static final String STATUS_SOFT                          = "soft";
-    public static final String STATUS_SPORT                         = "sport";
-    public static final String STATUS_MONITOR                       = "monitor";
-    public static final String STATUS_GAME                          = "game";
-    public static final String STATUS_USER                          = "user";
-    public static final String STATUS_WARM                          = "warm";
-    public static final String STATUS_MUSIC                         = "music";
-    public static final String STATUS_NEWS                          = "news";
-    public static final String STATUS_MOVIE                         = "movie";
-    public static final String STATUS_COOL                          = "cool";
-    public static final String STATUS_ON                            = "on";
-    public static final String STATUS_OFF                           = "off";
-    public static final String STATUS_AUTO                          = "auto";
-    public static final String STATUS_4_TO_3                        = "4:3";
-    public static final String STATUS_PANORAMA                      = "panorama";
-    public static final String STATUS_FULL_SCREEN                   = "full_screen";
-    public static final String STATUS_MEDIUM                        = "medium";
-    public static final String STATUS_HIGH                          = "high";
-    public static final String STATUS_LOW                           = "low";
-    public static final String STATUS_3D_LR_MODE                    = "left right mode";
-    public static final String STATUS_3D_RL_MODE                    = "right left mode";
-    public static final String STATUS_3D_UD_MODE                    = "up down mode";
-    public static final String STATUS_3D_DU_MODE                    = "down up mode";
-    public static final String STATUS_3D_TO_2D                      = "3D to 2D";
-    public static final String STATUS_PCM                           = "pcm";
-    public static final String STATUS_STEREO                        = "stereo";
-    public static final String STATUS_LEFT_CHANNEL                  = "left channel";
-    public static final String STATUS_RIGHT_CHANNEL                 = "right channel";
-    public static final String STATUS_RAW                           = "raw";
+    public static final String STATUS_STANDARD = "standard";
+    public static final String STATUS_VIVID = "vivid";
+    public static final String STATUS_SOFT = "soft";
+    public static final String STATUS_SPORT = "sport";
+    public static final String STATUS_MONITOR = "monitor";
+    public static final String STATUS_GAME = "game";
+    public static final String STATUS_USER = "user";
+    public static final String STATUS_WARM = "warm";
+    public static final String STATUS_MUSIC = "music";
+    public static final String STATUS_NEWS = "news";
+    public static final String STATUS_MOVIE = "movie";
+    public static final String STATUS_COOL = "cool";
+    public static final String STATUS_ON = "on";
+    public static final String STATUS_OFF = "off";
+    public static final String STATUS_AUTO = "auto";
+    public static final String STATUS_4_TO_3 = "4:3";
+    public static final String STATUS_PANORAMA = "panorama";
+    public static final String STATUS_FULL_SCREEN = "full_screen";
+    public static final String STATUS_MEDIUM = "medium";
+    public static final String STATUS_HIGH = "high";
+    public static final String STATUS_LOW = "low";
+    public static final String STATUS_3D_LR_MODE = "left right mode";
+    public static final String STATUS_3D_RL_MODE = "right left mode";
+    public static final String STATUS_3D_UD_MODE = "up down mode";
+    public static final String STATUS_3D_DU_MODE = "down up mode";
+    public static final String STATUS_3D_TO_2D = "3D to 2D";
+    public static final String STATUS_PCM = "pcm";
+    public static final String STATUS_STEREO = "stereo";
+    public static final String STATUS_LEFT_CHANNEL = "left channel";
+    public static final String STATUS_RIGHT_CHANNEL = "right channel";
+    public static final String STATUS_RAW = "raw";
 
-    public static final int PERCENT_INCREASE                        = 1;
-    public static final int PERCENT_DECREASE                        = -1;
-    public static final int ADVANCED_GAMMA_FIXED_DIFFERENCE         = -6;
+    public static final int PERCENT_INCREASE = 1;
+    public static final int PERCENT_DECREASE = -1;
+    public static final int ADVANCED_GAMMA_FIXED_DIFFERENCE = -6;
     public static String currentTag = null;
 
     private Resources mResources;
@@ -107,9 +108,9 @@ public class PQSettingsManager {
     private int mVideoStd;
     private Activity mActivity;
 
-    public PQSettingsManager (Context context) {
+    public PQSettingsManager(Context context) {
         mContext = context;
-        mActivity = (Activity)context;
+        mActivity = (Activity) context;
         mDeviceId = mActivity.getIntent().getIntExtra(TV_CURRENT_DEVICE_ID, -1);
         mChannelId = mActivity.getIntent().getLongExtra(CURRENT_CHANNEL_ID, -1);
         mResources = mContext.getResources();
@@ -159,7 +160,7 @@ public class PQSettingsManager {
     public static final int PIC_GAME = 7;
     public static final int PIC_SPORT = 8;
 
-    public String getPictureModeStatus () {
+    public String getPictureModeStatus() {
         int pictureModeIndex = mSystemControlManager.GetPQMode();
         if (CanDebug()) Log.d(TAG, "getPictureModeStatus : " + pictureModeIndex);
         switch (pictureModeIndex) {
@@ -184,43 +185,43 @@ public class PQSettingsManager {
         }
     }
 
-    public String getChipVersionInfo () {
+    public String getChipVersionInfo() {
         String chipVersion = mSystemControlManager.getChipVersionInfo();
-        if (CanDebug()) Log.d(TAG, "getChipVersionInfo: "+chipVersion);
+        if (CanDebug()) Log.d(TAG, "getChipVersionInfo: " + chipVersion);
         return chipVersion;
     }
 
-    public int getBrightnessStatus () {
+    public int getBrightnessStatus() {
         int value = mSystemControlManager.GetBrightness();
         if (CanDebug()) Log.d(TAG, "getBrightnessStatus : " + value);
         return value;
     }
 
-    public int getContrastStatus () {
+    public int getContrastStatus() {
         int value = mSystemControlManager.GetContrast();
         if (CanDebug()) Log.d(TAG, "getContrastStatus : " + value);
         return value;
     }
 
-    public int getColorStatus () {
+    public int getColorStatus() {
         int value = mSystemControlManager.GetSaturation();
         if (CanDebug()) Log.d(TAG, "getColorStatus : " + value);
         return value;
     }
 
-    public int getSharpnessStatus () {
+    public int getSharpnessStatus() {
         int value = mSystemControlManager.GetSharpness();
         if (CanDebug()) Log.d(TAG, "getSharpnessStatus : " + value);
         return value;
     }
 
-    public int getToneStatus () {
+    public int getToneStatus() {
         int value = mSystemControlManager.GetHue();
         if (CanDebug()) Log.d(TAG, "getTintStatus : " + value);
         return value;
     }
 
-    public int getPictureModeSource () {
+    public int getPictureModeSource() {
         if (CanDebug()) Log.d(TAG, "getPictureModeSource");
         return mSystemControlManager.GetSourceHdrType();
     }
@@ -243,7 +244,7 @@ public class PQSettingsManager {
         }
     }
 
-    public int getAspectRatioStatus () {
+    public int getAspectRatioStatus() {
         int itemPosition = mSystemControlManager.GetDisplayMode(TvControlManager.SourceInput.XXXX.toInt());
         if (CanDebug()) Log.d(TAG, "getAspectRatioStatus:" + itemPosition);
         if (itemPosition == SystemControlManager.Display_Mode.DISPLAY_MODE_MODE43.toInt())
@@ -252,193 +253,193 @@ public class PQSettingsManager {
             return Aspect_Ratio_Mode.ASPEC_RATIO_PANORAMA.toInt();
         else if (itemPosition == SystemControlManager.Display_Mode.DISPLAY_MODE_169.toInt())
             return Aspect_Ratio_Mode.ASPEC_RATIO_FULL_SCREEN.toInt();
-        else if (itemPosition == SystemControlManager.Display_Mode. DISPLAY_MODE_NOSCALEUP.toInt())
+        else if (itemPosition == SystemControlManager.Display_Mode.DISPLAY_MODE_NOSCALEUP.toInt())
             return Aspect_Ratio_Mode.ASPEC_RATIO_DOT_BY_NOT.toInt();
         else
             return Aspect_Ratio_Mode.ASPEC_RATIO_AUTO.toInt();
     }
 
-    public int getAIPQStatus () {
+    public int getAIPQStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAspectRatioStatus");
         boolean AIPQStatus = mSystemControlManager.getAipqEnable();
-        return AIPQStatus ? 0: 1;//0 is on ,1 is off
+        return AIPQStatus ? 0 : 1;//0 is on ,1 is off
     }
 
-    public int GetSourceHdrType () {
+    public int GetSourceHdrType() {
         if (CanDebug()) Log.d(TAG, "GetSourceHdrType");
         return mSystemControlManager.GetSourceHdrType();
     }
 
-    public int getAdvancedDynamicToneMappingStatus () {
+    public int getAdvancedDynamicToneMappingStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedDynamicToneMappingStatus");
         int dynamicToneMappingStatus = mSystemControlManager.GetHDRTMOMode();
-        return dynamicToneMappingStatus != -1 ? dynamicToneMappingStatus: 0;//0 is on ,1 is off
+        return dynamicToneMappingStatus != -1 ? dynamicToneMappingStatus : 0;//0 is on ,1 is off
     }
 
-    public int getAdvancedColorManagementStatus () {
+    public int getAdvancedColorManagementStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedColorManagementStatus");
         int colorManagementStatus = mSystemControlManager.GetColorBaseMode();
         return colorManagementStatus != -1 ? colorManagementStatus : 0;
     }
 
-    public int getAdvancedColorSpaceStatus () {
+    public int getAdvancedColorSpaceStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedColorSpaceStatus");
         return 0;
     }
 
-    public int getAdvancedGlobalDimmingStatus () {
+    public int getAdvancedGlobalDimmingStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedGlobalDimmingStatus");
         return mSystemControlManager.GetDynamicBacklight();
     }
 
-    public int getAdvancedLocalDimmingStatus () {
+    public int getAdvancedLocalDimmingStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedLocalDimmingStatus");
         return 0;
     }
 
-    public int getAdvancedBlackStretchStatus () {
+    public int getAdvancedBlackStretchStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedBlackStretchStatus");
         return mSystemControlManager.GetBlackExtensionMode();
     }
 
-    public int getAdvancedDNLPStatus () {
+    public int getAdvancedDNLPStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedDNLPStatus");
         int CurrentSourceInfo[] = mSystemControlManager.GetCurrentSourceInfo();
         int DNLPStatus = mSystemControlManager.getDNLPCurveParams(SystemControlManager.SourceInput.valueOf(CurrentSourceInfo[0]), SystemControlManager.SignalFmt.valueOf(CurrentSourceInfo[1]), SystemControlManager.TransFmt.valueOf(CurrentSourceInfo[2]));
-        return DNLPStatus != -1? DNLPStatus :0;
+        return DNLPStatus != -1 ? DNLPStatus : 0;
     }
 
-    public int getAdvancedLocalContrastStatus () {
+    public int getAdvancedLocalContrastStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedLocalContrastStatus");
         return mSystemControlManager.GetLocalContrastMode();
     }
 
-    public int getAdvancedSRStatus () {
+    public int getAdvancedSRStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedSRStatus");
         return 0;
     }
 
-    public int getAdvancedDeBlockStatus () {
+    public int getAdvancedDeBlockStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedDeBlockStatus");
         int deBlockStatus = mSystemControlManager.GetDeblockMode();
-        return deBlockStatus != -1? deBlockStatus :0;
+        return deBlockStatus != -1 ? deBlockStatus : 0;
     }
 
-    public int getAdvancedDeMosquitoStatus () {
+    public int getAdvancedDeMosquitoStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedDeMosquitoStatus");
         int deMosquitoStatus = mSystemControlManager.GetDemoSquitoMode();
-        return deMosquitoStatus != -1? deMosquitoStatus :0;
+        return deMosquitoStatus != -1 ? deMosquitoStatus : 0;
     }
 
-    public int getAdvancedDecontourStatus () {
+    public int getAdvancedDecontourStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedDecontourStatus");
         return mSystemControlManager.GetSmoothPlusMode();
     }
 
-    public int getAdvancedMemcSwitchStatus () {
+    public int getAdvancedMemcSwitchStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedMemcSwitchStatus");
         return 0;
     }
 
-    public int getAdvancedMemcCustomizeDejudderStatus () {
+    public int getAdvancedMemcCustomizeDejudderStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedMemcCustomizeDejudderStatus");
         return 5;
     }
 
-    public int getAdvancedMemcCustomizeDeblurStatus () {
+    public int getAdvancedMemcCustomizeDeblurStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedMemcCustomizeDeblurStatus");
         return 5;
     }
 
-    public int getAdvancedGammaStatus () {
+    public int getAdvancedGammaStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedGammaStatus");
         return mSystemControlManager.GetGammaValue() + ADVANCED_GAMMA_FIXED_DIFFERENCE;
     }
 
-    public int getAdvancedManualGammaLevelStatus () {
+    public int getAdvancedManualGammaLevelStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedManualGammaLevelStatus");
         return 0;
     }
 
-    public int getAdvancedManualGammaRGainStatus () {
+    public int getAdvancedManualGammaRGainStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedManualGammaRGainStatus");
         return 0;
     }
 
-    public int getAdvancedManualGammaGGainStatus () {
+    public int getAdvancedManualGammaGGainStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedManualGammaGGainStatus");
         return 0;
     }
 
-    public int getAdvancedManualGammaBGainStatus () {
+    public int getAdvancedManualGammaBGainStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedManualGammaBGainStatus");
         return 0;
     }
 
-    public int getColorTemperatureStatus () {
+    public int getColorTemperatureStatus() {
         int itemPosition = mSystemControlManager.GetColorTemperature();
         if (CanDebug()) Log.d(TAG, "getColorTemperatureStatus : " + itemPosition);
         return itemPosition;
     }
 
-    public int getAdvancedColorTemperatureRGainStatus () {
+    public int getAdvancedColorTemperatureRGainStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedColorTemperatureRGainStatus");
         return mSystemControlManager.GetColorTemperatureUserParam().r_gain;
     }
 
-    public int getAdvancedColorTemperatureGGainStatus () {
+    public int getAdvancedColorTemperatureGGainStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedColorTemperatureGGainStatus");
         return mSystemControlManager.GetColorTemperatureUserParam().g_gain;
     }
 
-    public int getAdvancedColorTemperatureBGainStatus () {
+    public int getAdvancedColorTemperatureBGainStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedColorTemperatureBGainStatus");
         return mSystemControlManager.GetColorTemperatureUserParam().b_gain;
     }
 
-    public int getAdvancedColorTemperatureROffsetStatus () {
+    public int getAdvancedColorTemperatureROffsetStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedColorTemperatureROffsetStatus");
         return mSystemControlManager.GetColorTemperatureUserParam().r_offset;
     }
 
-    public int getAdvancedColorTemperatureGOffsetStatus () {
+    public int getAdvancedColorTemperatureGOffsetStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedColorTemperatureGOffsetStatus");
         return mSystemControlManager.GetColorTemperatureUserParam().g_offset;
     }
 
-    public int getAdvancedColorTemperatureBOffsetStatus () {
+    public int getAdvancedColorTemperatureBOffsetStatus() {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedColorTemperatureBOffsetStatus");
         return mSystemControlManager.GetColorTemperatureUserParam().b_offset;
     }
 
-    public int getDnrStatus () {
+    public int getDnrStatus() {
         int itemPosition = mSystemControlManager.GetNoiseReductionMode();
         if (CanDebug()) Log.d(TAG, "getDnrStatus : " + itemPosition);
         return itemPosition;
@@ -606,7 +607,7 @@ public class PQSettingsManager {
         return 0;
     }
 
-    public void setPictureMode (String mode) {
+    public void setPictureMode(String mode) {
         if (CanDebug()) Log.d(TAG, "setPictureMode : " + mode);
         if (mode.equals(STATUS_STANDARD)) {
             mSystemControlManager.SetPQMode(PIC_STANDARD, 1, 0);
@@ -627,8 +628,8 @@ public class PQSettingsManager {
         }
     }
 
-    public void setBrightness (int step) {
-        if (CanDebug())  Log.d(TAG, "setBrightness step : " + step );
+    public void setBrightness(int step) {
+        if (CanDebug()) Log.d(TAG, "setBrightness step : " + step);
         int PQMode = mSystemControlManager.GetPQMode();
         if (PQMode == 3) {
             int tmp = mSystemControlManager.GetBrightness();
@@ -638,8 +639,8 @@ public class PQSettingsManager {
         }
     }
 
-    public void setContrast (int step) {
-        if (CanDebug())  Log.d(TAG, "setContrast step : " + step);
+    public void setContrast(int step) {
+        if (CanDebug()) Log.d(TAG, "setContrast step : " + step);
         int PQMode = mSystemControlManager.GetPQMode();
         if (PQMode == 3) {
             int tmp = mSystemControlManager.GetContrast();
@@ -649,8 +650,8 @@ public class PQSettingsManager {
         }
     }
 
-    public void setColor (int step) {
-        if (CanDebug())  Log.d(TAG, "setColor step : " + step);
+    public void setColor(int step) {
+        if (CanDebug()) Log.d(TAG, "setColor step : " + step);
         int PQMode = mSystemControlManager.GetPQMode();
         if (PQMode == 3) {
             int tmp = mSystemControlManager.GetSaturation();
@@ -660,18 +661,18 @@ public class PQSettingsManager {
         }
     }
 
-    public void setSharpness (int step) {
-        if (CanDebug())  Log.d(TAG, "setSharpness step : " + step);
+    public void setSharpness(int step) {
+        if (CanDebug()) Log.d(TAG, "setSharpness step : " + step);
         int PQMode = mSystemControlManager.GetPQMode();
         if (PQMode == 3) {
             int tmp = mSystemControlManager.GetSharpness();
-            mSystemControlManager.SetSharpness(tmp + step , 1 , 1);
+            mSystemControlManager.SetSharpness(tmp + step, 1, 1);
         } else
-            mSystemControlManager.SetSharpness(setPictureUserMode(KEY_SHARPNESS) + step, 1 , 1);
+            mSystemControlManager.SetSharpness(setPictureUserMode(KEY_SHARPNESS) + step, 1, 1);
     }
 
     public void setTone(int step) {
-        if (CanDebug())  Log.d(TAG, "setTint step : " + step);
+        if (CanDebug()) Log.d(TAG, "setTint step : " + step);
         int PQMode = mSystemControlManager.GetPQMode();
         if (PQMode == 3) {
             int tmp = mSystemControlManager.GetHue();
@@ -681,7 +682,7 @@ public class PQSettingsManager {
         }
     }
 
-    public String getVideoStd () {
+    public String getVideoStd() {
         if (mVideoStd != -1) {
             switch (mVideoStd) {
                 case 1:
@@ -702,7 +703,7 @@ public class PQSettingsManager {
         TvInSignalInfo info;
         String videoStd = getVideoStd();
         if (mTvSource == TvControlManager.SourceInput_Type.SOURCE_TYPE_TV
-            && videoStd != null && videoStd.equals(mResources.getString(R.string.ntsc))) {
+                && videoStd != null && videoStd.equals(mResources.getString(R.string.ntsc))) {
             if (mTvControlManager == null) {
                 mTvControlManager = TvControlManager.getInstance();
             }
@@ -754,358 +755,358 @@ public class PQSettingsManager {
         mSystemControlManager.setAipqEnable(mode == 0 ? true : false);
     }
 
-    public void setAdvancedDynamicToneMappingStatus (int value) {
+    public void setAdvancedDynamicToneMappingStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedDynamicToneMappingStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedDynamicToneMappingStatus value:" + value);
         mSystemControlManager.SetHDRTMOMode(value, 1);
     }
 
-    public void setAdvancedColorManagementStatus (int value) {
+    public void setAdvancedColorManagementStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedColorManagementStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedColorManagementStatus value:" + value);
         switch (value) {
-                case 0:
-                    mSystemControlManager.SetColorBaseMode( SystemControlManager.ColorBaseMode.COLOR_BASE_MODE_OFF, 1);// off
-                    break;
-                case 1:
-                    mSystemControlManager.SetColorBaseMode( SystemControlManager.ColorBaseMode. COLOR_BASE_MODE_OPTIMIZE, 1);// low
-                    break;
-                case 2:
-                    mSystemControlManager.SetColorBaseMode( SystemControlManager.ColorBaseMode. COLOR_BASE_MODE_ENHANCE, 1);// middle
-                    break;
-                case 3:
-                    mSystemControlManager.SetColorBaseMode( SystemControlManager.ColorBaseMode. COLOR_BASE_MODE_MAX, 1); // high
-                    break;
-                default:
-                    mSystemControlManager.SetColorBaseMode( SystemControlManager.ColorBaseMode.COLOR_BASE_MODE_OFF, 1);// off
-                    break;
+            case 0:
+                mSystemControlManager.SetColorBaseMode(SystemControlManager.ColorBaseMode.COLOR_BASE_MODE_OFF, 1);// off
+                break;
+            case 1:
+                mSystemControlManager.SetColorBaseMode(SystemControlManager.ColorBaseMode.COLOR_BASE_MODE_OPTIMIZE, 1);// low
+                break;
+            case 2:
+                mSystemControlManager.SetColorBaseMode(SystemControlManager.ColorBaseMode.COLOR_BASE_MODE_ENHANCE, 1);// middle
+                break;
+            case 3:
+                mSystemControlManager.SetColorBaseMode(SystemControlManager.ColorBaseMode.COLOR_BASE_MODE_MAX, 1); // high
+                break;
+            default:
+                mSystemControlManager.SetColorBaseMode(SystemControlManager.ColorBaseMode.COLOR_BASE_MODE_OFF, 1);// off
+                break;
         }
     }
 
-    public void setAdvancedColorSpaceStatus (int value) {
+    public void setAdvancedColorSpaceStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedColorSpaceStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedColorSpaceStatus value:" + value);
         switch (value) {
-                case 0:
-                    // auto
-                    break;
-                case 1:
-                     // srgb/rec.709
-                    break;
-                case 2:
-                     // dci-p3
-                    break;
-                case 3:
-                     // adobe rgb
-                    break;
-                case 4:
-                     // bt.2020
-                    break;
-                default:
-                    // auto
-                    break;
+            case 0:
+                // auto
+                break;
+            case 1:
+                // srgb/rec.709
+                break;
+            case 2:
+                // dci-p3
+                break;
+            case 3:
+                // adobe rgb
+                break;
+            case 4:
+                // bt.2020
+                break;
+            default:
+                // auto
+                break;
         }
     }
 
-    public void setAdvancedGlobalDimmingStatus (int value) {
+    public void setAdvancedGlobalDimmingStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedGlobalDimmingStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedGlobalDimmingStatus value:" + value);
         mSystemControlManager.SetDynamicBacklight(SystemControlManager.Dynamic_Backlight_Mode.valueOf(value), 1);
     }
 
-    public void setAdvancedLocalDimmingStatus (int value) {
+    public void setAdvancedLocalDimmingStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedLocalDimmingStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedLocalDimmingStatus value:" + value);
         switch (value) {
-                case 0:
-                    // off
-                    break;
-                case 1:
-                     // low
-                    break;
-                case 2:
-                     // middle
-                    break;
-                case 3:
-                     // high
-                    break;
-                default:
-                    // off
-                    break;
+            case 0:
+                // off
+                break;
+            case 1:
+                // low
+                break;
+            case 2:
+                // middle
+                break;
+            case 3:
+                // high
+                break;
+            default:
+                // off
+                break;
         }
     }
 
-    public void setAdvancedBlackStretchStatus (int value) {
+    public void setAdvancedBlackStretchStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedBlackStretchStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedBlackStretchStatus value:" + value);
         mSystemControlManager.SetBlackExtensionMode(SystemControlManager.Black_Extension_Mode.valueOf(value), 1);
     }
 
-    public void setAdvancedDNLPStatus (int value) {
+    public void setAdvancedDNLPStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedDNLPStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedDNLPStatus value:" + value);
         int CurrentSourceInfo[] = mSystemControlManager.GetCurrentSourceInfo();
         mSystemControlManager.setDNLPCurveParams(SystemControlManager.SourceInput.valueOf(CurrentSourceInfo[0]), SystemControlManager.SignalFmt.valueOf(CurrentSourceInfo[1]), SystemControlManager.TransFmt.valueOf(CurrentSourceInfo[2]), value);
     }
 
-    public void setAdvancedLocalContrastStatus (int value) {
+    public void setAdvancedLocalContrastStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedLocalContrastStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedLocalContrastStatus value:" + value);
         switch (value) {
-                case 0:
-                    mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_OFF,1);// off
-                    break;
-                case 1:
-                     mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_LOW,1); // low
-                    break;
-                case 2:
-                     mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_MID,1); // middle
-                    break;
-                case 3:
-                     mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_HIGH,1); // high
-                    break;
-                default:
-                     mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_OFF,1); // off
-                    break;
+            case 0:
+                mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_OFF, 1);// off
+                break;
+            case 1:
+                mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_LOW, 1); // low
+                break;
+            case 2:
+                mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_MID, 1); // middle
+                break;
+            case 3:
+                mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_HIGH, 1); // high
+                break;
+            default:
+                mSystemControlManager.SetLocalContrastMode(SystemControlManager.Local_Contrast_Mode.LOCAL_CONTRAST_MODE_OFF, 1); // off
+                break;
         }
     }
 
-    public void setAdvancedSRStatus (int value) {
+    public void setAdvancedSRStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedSRStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedSRStatus value:" + value);
         switch (value) {
-                case 0:
-                    // off
-                    break;
-                case 1:
-                     // standard
-                    break;
-                case 2:
-                     // enhance
-                    break;
-                default:
-                    // off
-                    break;
+            case 0:
+                // off
+                break;
+            case 1:
+                // standard
+                break;
+            case 2:
+                // enhance
+                break;
+            default:
+                // off
+                break;
         }
     }
 
-    public void setAdvancedDeBlockStatus (int value) {
+    public void setAdvancedDeBlockStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedDeBlockStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedDeBlockStatus value:" + value);
         mSystemControlManager.SetDeblockMode(SystemControlManager.Deblock_Mode.valueOf(value), 1);
     }
 
-    public void setAdvancedDeMosquitoStatus (int value) {
+    public void setAdvancedDeMosquitoStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedDeMosquitoStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedDeMosquitoStatus value:" + value);
         mSystemControlManager.SetDemoSquitoMode(SystemControlManager.DemoSquito_Mode.valueOf(value), 1);
     }
 
-    public void setAdvancedDecontourStatus (int value) {
+    public void setAdvancedDecontourStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedDecontourStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedDecontourStatus value:" + value);
         mSystemControlManager.SetSmoothPlusMode(value, 1);
     }
 
-    public void setAdvancedMemcSwitchStatus (int value) {
+    public void setAdvancedMemcSwitchStatus(int value) {
         // Leave blank first, add later
-        if (CanDebug()) Log.d(TAG, "setAdvancedGlobalDimmingStatus value:"+value);
+        if (CanDebug()) Log.d(TAG, "setAdvancedGlobalDimmingStatus value:" + value);
         switch (value) {
-                case 0:
-                    // off
-                    break;
-                case 1:
-                     // on
-                    break;
-                default:
-                    // off
-                    break;
+            case 0:
+                // off
+                break;
+            case 1:
+                // on
+                break;
+            default:
+                // off
+                break;
         }
     }
 
-    public void setAdvancedGammaStatus (int value) {
+    public void setAdvancedGammaStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedGammaStatus");
         mSystemControlManager.SetGammaValue(value - ADVANCED_GAMMA_FIXED_DIFFERENCE, 1);
     }
 
-    public void setAdvancedManualGammaLevelStatus (int value) {
+    public void setAdvancedManualGammaLevelStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedManualGammaLevelStatus");
     }
 
-    public void setAdvancedManualGammaRGainStatus (int value) {
+    public void setAdvancedManualGammaRGainStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedManualGammaRGainStatus");
     }
 
-    public void setAdvancedManualGammaGGainStatus (int value) {
+    public void setAdvancedManualGammaGGainStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedManualGammaGGainStatus");
     }
 
-    public void setAdvancedManualGammaBGainStatus (int value) {
+    public void setAdvancedManualGammaBGainStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedManualGammaBGainStatus");
     }
 
-    public void setAdvancedMemcCustomizeDejudderStatus (int value) {
+    public void setAdvancedMemcCustomizeDejudderStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "getAdvancedMemcSwitchStatus");
     }
 
-    public void setAdvancedMemcCustomizeDeblurStatus (int value) {
+    public void setAdvancedMemcCustomizeDeblurStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedMemcCustomizeDeblurStatus");
     }
 
     // 0 1 2 3 ~ standard warm1 cool warm2
     public void setColorTemperature(int mode) {
-        if (CanDebug())  Log.d(TAG, "setColorTemperature : " + mode);
+        if (CanDebug()) Log.d(TAG, "setColorTemperature : " + mode);
         mSystemControlManager.SetColorTemperature(mode, 1);
     }
 
-    public void setAdvancedColorTemperatureRGainStatus (int value) {
+    public void setAdvancedColorTemperatureRGainStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedColorTemperatureRGainStatus");
         int currentColorTemperatureType = mSystemControlManager.GetColorTemperature();
         switch (currentColorTemperatureType) {
-                case 0:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.R_GAIN, value);
-                    break;
-                case 1:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.R_GAIN, value);
-                    break;
-                case 2:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature. COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.R_GAIN, value);
-                    break;
-                case 3:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.R_GAIN, value);
-                    break;
-                default:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.R_GAIN, value);
-                    break;
+            case 0:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.R_GAIN, value);
+                break;
+            case 1:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.R_GAIN, value);
+                break;
+            case 2:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.R_GAIN, value);
+                break;
+            case 3:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.R_GAIN, value);
+                break;
+            default:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.R_GAIN, value);
+                break;
         }
     }
 
-    public void setAdvancedColorTemperatureGGainStatus (int value) {
+    public void setAdvancedColorTemperatureGGainStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedColorTemperatureGGainStatus");
         int currentColorTemperatureType = mSystemControlManager.GetColorTemperature();
         switch (currentColorTemperatureType) {
-                case 0:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.G_GAIN, value);
-                    break;
-                case 1:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.G_GAIN, value);
-                    break;
-                case 2:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature. COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.G_GAIN, value);
-                    break;
-                case 3:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.G_GAIN, value);
-                    break;
-                default:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.G_GAIN, value);
-                    break;
+            case 0:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.G_GAIN, value);
+                break;
+            case 1:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.G_GAIN, value);
+                break;
+            case 2:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.G_GAIN, value);
+                break;
+            case 3:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.G_GAIN, value);
+                break;
+            default:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.G_GAIN, value);
+                break;
         }
     }
 
-    public void setAdvancedColorTemperatureBGainStatus (int value) {
+    public void setAdvancedColorTemperatureBGainStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedColorTemperatureBGainStatus");
         int currentColorTemperatureType = mSystemControlManager.GetColorTemperature();
         switch (currentColorTemperatureType) {
-                case 0:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.B_GAIN, value);
-                    break;
-                case 1:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.B_GAIN, value);
-                    break;
-                case 2:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature. COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.B_GAIN, value);
-                    break;
-                case 3:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.B_GAIN, value);
-                    break;
-                default:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.B_GAIN, value);
-                    break;
+            case 0:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.B_GAIN, value);
+                break;
+            case 1:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.B_GAIN, value);
+                break;
+            case 2:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.B_GAIN, value);
+                break;
+            case 3:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.B_GAIN, value);
+                break;
+            default:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.B_GAIN, value);
+                break;
         }
     }
 
-    public void setAdvancedColorTemperatureROffsetStatus (int value) {
+    public void setAdvancedColorTemperatureROffsetStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedColorTemperatureROffsetStatus");
         int currentColorTemperatureType = mSystemControlManager.GetColorTemperature();
         switch (currentColorTemperatureType) {
-                case 0:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
-                    break;
-                case 1:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
-                    break;
-                case 2:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature. COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
-                    break;
-                case 3:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
-                    break;
-                default:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
-                    break;
+            case 0:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
+                break;
+            case 1:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
+                break;
+            case 2:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
+                break;
+            case 3:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
+                break;
+            default:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.R_POST_OFFSET, value);
+                break;
         }
     }
 
-    public void setAdvancedColorTemperatureGOffsetStatus (int value) {
+    public void setAdvancedColorTemperatureGOffsetStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedColorTemperatureGOffsetStatus");
         int currentColorTemperatureType = mSystemControlManager.GetColorTemperature();
         switch (currentColorTemperatureType) {
-                case 0:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
-                    break;
-                case 1:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
-                    break;
-                case 2:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature. COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
-                    break;
-                case 3:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
-                    break;
-                default:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
-                    break;
+            case 0:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
+                break;
+            case 1:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
+                break;
+            case 2:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
+                break;
+            case 3:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
+                break;
+            default:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.G_POST_OFFSET, value);
+                break;
         }
     }
 
-    public void setAdvancedColorTemperatureBOffsetStatus (int value) {
+    public void setAdvancedColorTemperatureBOffsetStatus(int value) {
         // Leave blank first, add later
         if (CanDebug()) Log.d(TAG, "setAdvancedColorTemperatureBOffsetStatus");
         int currentColorTemperatureType = mSystemControlManager.GetColorTemperature();
         switch (currentColorTemperatureType) {
-                case 0:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
-                    break;
-                case 1:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
-                    break;
-                case 2:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature. COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
-                    break;
-                case 3:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
-                    break;
-                default:
-                    mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
-                    break;
+            case 0:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
+                break;
+            case 1:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_WARM, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
+                break;
+            case 2:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_COLD, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
+                break;
+            case 3:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_USER, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
+                break;
+            default:
+                mSystemControlManager.SetColorTemperatureUserParam(SystemControlManager.color_temperature.COLOR_TEMP_STANDARD, 1, SystemControlManager.rgb_type.B_POST_OFFSET, value);
+                break;
         }
     }
 
     //0 1 2 3 4 ~ off low medium high auto
-    public void setDnr (int mode) {
-        if (CanDebug()) Log.d(TAG, "setDnr : "+ mode);
+    public void setDnr(int mode) {
+        if (CanDebug()) Log.d(TAG, "setDnr : " + mode);
         mSystemControlManager.SetNoiseReductionMode(mode, 1);
     }
 
@@ -1245,7 +1246,7 @@ public class PQSettingsManager {
     }
 
     private int setPictureUserMode(String key) {
-        if (CanDebug()) Log.d(TAG, "setPictureUserMode : "+ key);
+        if (CanDebug()) Log.d(TAG, "setPictureUserMode : " + key);
         int brightness = mSystemControlManager.GetBrightness();
         int contrast = mSystemControlManager.GetContrast();
         int color = mSystemControlManager.GetSaturation();
@@ -1266,7 +1267,8 @@ public class PQSettingsManager {
                 break;
         }
 
-        if (CanDebug()) Log.d(TAG, " brightness=" + brightness + " contrast=" + contrast + " color=" + color + " sharp=" + sharpness);
+        if (CanDebug())
+            Log.d(TAG, " brightness=" + brightness + " contrast=" + contrast + " color=" + color + " sharp=" + sharpness);
         if (!key.equals(KEY_BRIGHTNESS))
             mSystemControlManager.SetBrightness(brightness, 1);
         else
@@ -1283,7 +1285,7 @@ public class PQSettingsManager {
             ret = color;
 
         if (!key.equals(KEY_SHARPNESS))
-            mSystemControlManager.SetSharpness(sharpness, 1 , 1);
+            mSystemControlManager.SetSharpness(sharpness, 1, 1);
         else
             ret = sharpness;
 
@@ -1294,12 +1296,12 @@ public class PQSettingsManager {
         return ret;
     }
 
-    public void setBacklightValue (int value) {
-        if (CanDebug()) Log.d(TAG, "setBacklightValue : "+ value);
+    public void setBacklightValue(int value) {
+        if (CanDebug()) Log.d(TAG, "setBacklightValue : " + value);
         mSystemControlManager.SetBacklight(getBacklightStatus() + value, 1);
     }
 
-    public int getBacklightStatus () {
+    public int getBacklightStatus() {
         int value = mSystemControlManager.GetBacklight();
         if (CanDebug()) Log.d(TAG, "getBacklightStatus : " + value);
         return value;
@@ -1315,17 +1317,17 @@ public class PQSettingsManager {
     private static final int FULL_RANGE = 1;
     private static final int LIMIT_RANGE = 2;
 
-    public void setHdmiColorRangeValue (int value) {
-        if (CanDebug()) Log.d(TAG, "setHdmiColorRangeValue : "+ value);
+    public void setHdmiColorRangeValue(int value) {
+        if (CanDebug()) Log.d(TAG, "setHdmiColorRangeValue : " + value);
         TvControlManager.HdmiColorRangeMode hdmicolor = TvControlManager.HdmiColorRangeMode.AUTO_RANGE;
         switch (value) {
-            case AUTO_RANGE :
+            case AUTO_RANGE:
                 hdmicolor = TvControlManager.HdmiColorRangeMode.AUTO_RANGE;
                 break;
-            case FULL_RANGE :
+            case FULL_RANGE:
                 hdmicolor = TvControlManager.HdmiColorRangeMode.FULL_RANGE;
                 break;
-            case LIMIT_RANGE :
+            case LIMIT_RANGE:
                 hdmicolor = TvControlManager.HdmiColorRangeMode.LIMIT_RANGE;
                 break;
             default:
@@ -1340,7 +1342,7 @@ public class PQSettingsManager {
         }
     }
 
-    public int getHdmiColorRangeStatus () {
+    public int getHdmiColorRangeStatus() {
         int value = 0;
         if (mTvControlManager == null) {
             mTvControlManager = TvControlManager.getInstance();

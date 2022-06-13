@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +15,13 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:title="@string/advanced_sound_settings_title">
+    android:title="@string/advanced_sound_settings_title">
 
     <!-- DroidLogic start -->
     <SwitchPreference
         android:key="key_spdif_output_switch"
         android:persistent="false"
-        android:title="@string/title_sound_spdif_output"/>
+        android:title="@string/title_sound_spdif_output" />
 
     <ListPreference
         android:entries="@array/key_ac4_enhancer_switch_entries"
@@ -30,10 +29,10 @@
         android:key="key_ac4_output_switch"
         android:persistent="true"
         android:summary="Increase the quality and clarity of the dialogue"
-        android:title="@string/title_sound_ac4_output"/>
+        android:title="@string/title_sound_ac4_output" />
     <!-- DroidLogic end -->
 
- <!-- TODO(b/172050661) - add sidebar text -->
+    <!-- TODO(b/172050661) - add sidebar text -->
     <ListPreference
         android:dialogMessage="@string/surround_sound_auto_info"
         android:entries="@array/surround_sound_entries"
@@ -41,6 +40,6 @@
         android:key="surround_passthrough"
         android:persistent="true"
         android:summary="%s"
-        android:title="@string/surround_sound_select_formats"/>
+        android:title="@string/surround_sound_select_formats" />
 
 </PreferenceScreen>

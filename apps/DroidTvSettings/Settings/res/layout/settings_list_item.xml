@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,7 +20,7 @@
     android:focusable="true"
     android:minHeight="@dimen/list_item_min_height"
     android:paddingBottom="@dimen/list_item_vertical_padding"
-    android:paddingTop="@dimen/list_item_vertical_padding" >
+    android:paddingTop="@dimen/list_item_vertical_padding">
 
     <ImageView
         android:id="@+id/action_checkmark"
@@ -54,7 +53,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/list_item_delimiter_padding"
-        android:paddingEnd="@dimen/list_item_end_padding" >
+        android:paddingEnd="@dimen/list_item_end_padding">
 
         <ImageView
             android:id="@+id/action_next_chevron"
@@ -74,7 +73,7 @@
         android:layout_centerVertical="true"
         android:layout_toStartOf="@id/action_next_chevron_background"
         android:layout_toEndOf="@id/action_icon"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/action_title"

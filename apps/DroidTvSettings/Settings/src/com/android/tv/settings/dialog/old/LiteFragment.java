@@ -27,9 +27,14 @@ import android.view.View;
  */
 public interface LiteFragment {
     public Activity getActivity();
+
     public Bundle getArguments();
+
     public View getView();
+
     public void startActivity(Intent intent);
+
     public Resources getResources();
+
     public boolean isAdded();
 }

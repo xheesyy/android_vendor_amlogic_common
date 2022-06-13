@@ -19,11 +19,14 @@ package com.android.tv.settings.pqsettings.advanced;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.ListPreference;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -120,7 +123,8 @@ public class PQAdvancedManualGammaFragment extends SettingsPreferenceFragment im
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
         switch (preference.getKey()) {
             case PQ_PICTRUE_ADVANCED_MANUAL_GAMMA_RESET:
                 Intent PQPictureAdvancedManualGammaResetAllIntent = new Intent();
@@ -137,21 +141,21 @@ public class PQAdvancedManualGammaFragment extends SettingsPreferenceFragment im
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
             case PQ_PICTRUE_ADVANCED_MANUAL_GAMMA_LEVEL:
-                mPQSettingsManager.setAdvancedManualGammaLevelStatus((int)newValue);
+                mPQSettingsManager.setAdvancedManualGammaLevelStatus((int) newValue);
                 //final int progress = Integer.parseInt((String)newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_GEQ_ENABLE, progress);
                 //updateGeq(progress);
                 break;
             case PQ_PICTRUE_ADVANCED_MANUAL_GAMMA_RGAIN:
-                mPQSettingsManager.setAdvancedManualGammaRGainStatus((int)newValue);
+                mPQSettingsManager.setAdvancedManualGammaRGainStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_VL_AMOUNT, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_MANUAL_GAMMA_GGAIN:
-                mPQSettingsManager.setAdvancedManualGammaGGainStatus((int)newValue);
+                mPQSettingsManager.setAdvancedManualGammaGGainStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_DE_AMOUNT, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_MANUAL_GAMMA_BGAIN:
-                mPQSettingsManager.setAdvancedManualGammaBGainStatus((int)newValue);
+                mPQSettingsManager.setAdvancedManualGammaBGainStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_SURROUND_BOOST, (int)newValue);
                 break;
         }

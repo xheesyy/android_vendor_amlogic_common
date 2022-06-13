@@ -56,7 +56,7 @@ public class AddAccountWithTypeActivity extends FragmentActivity {
                 } else {
                     startActivityForResult(addAccountIntent, REQUEST_ADD_ACCOUNT);
                 }
-            } catch (IOException|AuthenticatorException|OperationCanceledException e) {
+            } catch (IOException | AuthenticatorException | OperationCanceledException e) {
                 Log.e(TAG, "Failed to get add account intent: ", e);
                 setResultAndFinish(Activity.RESULT_CANCELED);
             }

@@ -34,7 +34,7 @@ public class PictureInPictureActivity extends TvSettingsActivity {
             return null;
         } else {
             return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-                .newSettingsFragment(PictureInPicture.class.getName(), null);
+                    .newSettingsFragment(PictureInPicture.class.getName(), null);
         }
     }
 }

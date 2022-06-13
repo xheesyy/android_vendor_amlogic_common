@@ -19,9 +19,12 @@ package com.android.tv.settings.tvoption;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -76,7 +79,7 @@ public class AdjustHdmiAudioLatencyFragment extends SettingsPreferenceFragment i
     }
 
     @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (mTvOptionSettingManager == null) {
             mTvOptionSettingManager = new TvOptionSettingManager(getActivity(), false);
         }
@@ -85,7 +88,7 @@ public class AdjustHdmiAudioLatencyFragment extends SettingsPreferenceFragment i
     }
 
     @Override
-    public void onViewCreated (View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         initSeekBar(view);
     }
 
@@ -118,7 +121,7 @@ public class AdjustHdmiAudioLatencyFragment extends SettingsPreferenceFragment i
             return;
         }
         switch (seekBar.getId()) {
-            case R.id.seekbar_audio_latency:{
+            case R.id.seekbar_audio_latency: {
                 int latency = convertProgressToAudioLatency(progress);
                 setShow(R.id.seekbar_audio_latency, latency);
                 sendSetAudioLatencyMessage(latency);
@@ -151,7 +154,7 @@ public class AdjustHdmiAudioLatencyFragment extends SettingsPreferenceFragment i
             res = R.string.arc_hdmi_audio_latency;
         }
         switch (id) {
-            case R.id.seekbar_audio_latency:{
+            case R.id.seekbar_audio_latency: {
                 text_hdmi_audio.setText(getShowString(res, value));
                 break;
             }

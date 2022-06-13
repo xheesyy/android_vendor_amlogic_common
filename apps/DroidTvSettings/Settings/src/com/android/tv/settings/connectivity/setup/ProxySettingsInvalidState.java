@@ -98,7 +98,7 @@ public class ProxySettingsInvalidState implements State {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             Context context = getActivity();
             actions.add(new GuidedAction.Builder(context)
                     .title(getString(R.string.wifi_action_try_again))

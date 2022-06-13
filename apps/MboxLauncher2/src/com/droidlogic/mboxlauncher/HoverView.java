@@ -28,7 +28,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 
 
-public class HoverView extends RelativeLayout{
+public class HoverView extends RelativeLayout {
     private final static String TAG = "HoverView";
     private final static int TYPE_ANIM_IN = 0;
     private final static int TYPE_ANIM_OUT = 1;
@@ -43,31 +43,31 @@ public class HoverView extends RelativeLayout{
     private TextView textTop;
     private TextView textBottom;
 
-    public HoverView(Context context){
+    public HoverView(Context context) {
         super(context);
         mContext = context;
     }
 
-    public HoverView(Context context, AttributeSet attrs){
+    public HoverView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
         initlayout();
     }
 
-    public HoverView(Context context, AttributeSet attrs, int defStyle){
+    public HoverView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
     private void initlayout() {
         inflate(mContext, R.layout.layout_hover, this);
-        hoverImage_home = (ImageView)findViewById(R.id.img_hover_home);
-        hoverImage_second= (ImageView)findViewById(R.id.img_hover_second);
-        textTop = (TextView)findViewById(R.id.tx_hover_top);
-        textBottom = (TextView)findViewById(R.id.tx_hover_bottom);
+        hoverImage_home = (ImageView) findViewById(R.id.img_hover_home);
+        hoverImage_second = (ImageView) findViewById(R.id.img_hover_second);
+        textTop = (TextView) findViewById(R.id.tx_hover_top);
+        textBottom = (TextView) findViewById(R.id.tx_hover_bottom);
     }
 
-    private void startAnimation(){
-        ScaleAnimation shadowAnim = new ScaleAnimation(0.95f, 1f, 0.95f, 1f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f );
+    private void startAnimation() {
+        ScaleAnimation shadowAnim = new ScaleAnimation(0.95f, 1f, 0.95f, 1f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         shadowAnim.setDuration(animDuration);
         shadowAnim.setStartTime(animDelay);
         shadowAnim.setAnimationListener(new ScaleAnimationListener());
@@ -87,7 +87,7 @@ public class HoverView extends RelativeLayout{
         setViewPosition(this, new Rect(0, 0, 0, 0));
     }
 
-    public void setHover(MyRelativeLayout focusView){
+    public void setHover(MyRelativeLayout focusView) {
         Rect layoutRect;
         Rect imgRect = new Rect();
         final float scale = focusView.getScale();
@@ -96,36 +96,36 @@ public class HoverView extends RelativeLayout{
 
         focusView.getGlobalVisibleRect(imgRect);
 
-        if (((Launcher)mContext).needPreviewFeture()) {
+        if (((Launcher) mContext).needPreviewFeture()) {
             if (focusView.getType() == Launcher.TYPE_VIDEO) {
-                ((Launcher)mContext).setTvViewElevation(MyRelativeLayout.ELEVATION_ABOVE_HOVER);
+                ((Launcher) mContext).setTvViewElevation(MyRelativeLayout.ELEVATION_ABOVE_HOVER);
             } else {
-                ((Launcher)mContext).setTvViewElevation(MyRelativeLayout.ELEVATION_UNDER_HOVER);
+                ((Launcher) mContext).setTvViewElevation(MyRelativeLayout.ELEVATION_UNDER_HOVER);
             }
 
-            if (((Launcher)mContext).getCurrentScreenMode() != Launcher.MODE_HOME
-                    && ((Launcher)mContext).getCurrentScreenMode() != Launcher.MODE_CUSTOM) {
-                if (((Launcher)mContext).tvViewMode != Launcher.TV_MODE_TOP
-                    && (imgRect.top + imgRect.bottom) / 2 >  ((Launcher)mContext).dipToPx(mContext, 360))
-                    ((Launcher)mContext).setTvViewPosition(Launcher.TV_MODE_TOP);
-                else if (((Launcher)mContext).tvViewMode != Launcher.TV_MODE_BOTTOM
-                    && (imgRect.top + imgRect.bottom) / 2 <= ((Launcher)mContext).dipToPx(mContext, 360))
-                    ((Launcher)mContext).setTvViewPosition(Launcher.TV_MODE_BOTTOM);
+            if (((Launcher) mContext).getCurrentScreenMode() != Launcher.MODE_HOME
+                    && ((Launcher) mContext).getCurrentScreenMode() != Launcher.MODE_CUSTOM) {
+                if (((Launcher) mContext).tvViewMode != Launcher.TV_MODE_TOP
+                        && (imgRect.top + imgRect.bottom) / 2 > ((Launcher) mContext).dipToPx(mContext, 360))
+                    ((Launcher) mContext).setTvViewPosition(Launcher.TV_MODE_TOP);
+                else if (((Launcher) mContext).tvViewMode != Launcher.TV_MODE_BOTTOM
+                        && (imgRect.top + imgRect.bottom) / 2 <= ((Launcher) mContext).dipToPx(mContext, 360))
+                    ((Launcher) mContext).setTvViewPosition(Launcher.TV_MODE_BOTTOM);
             }
         }
 
-        int scale_w = (int)((scale - 1) * imgRect.width() / 2);
-        int scale_h = (int)((scale - 1) * imgRect.height() / 2);
-        layoutRect = new Rect(imgRect.left-scale_w, imgRect.top-scale_h, imgRect.right+scale_w, imgRect.bottom+scale_h);
+        int scale_w = (int) ((scale - 1) * imgRect.width() / 2);
+        int scale_h = (int) ((scale - 1) * imgRect.height() / 2);
+        layoutRect = new Rect(imgRect.left - scale_w, imgRect.top - scale_h, imgRect.right + scale_w, imgRect.bottom + scale_h);
         setViewPosition(this, layoutRect);
 
         ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
-                outline.setRoundRect((int)((1 - shadowScale) * view.getWidth() / 2),
-                        (int)((1 - shadowScale) * view.getHeight() / 2),
-                        (int)(((1 + shadowScale) / 2) * view.getWidth()),
-                        (int)(((1 + shadowScale) / 2) * view.getHeight()),
+                outline.setRoundRect((int) ((1 - shadowScale) * view.getWidth() / 2),
+                        (int) ((1 - shadowScale) * view.getHeight() / 2),
+                        (int) (((1 + shadowScale) / 2) * view.getWidth()),
+                        (int) (((1 + shadowScale) / 2) * view.getHeight()),
                         RADIUS);
                 outline.setAlpha(ALPHA_HOVER);
             }
@@ -133,9 +133,9 @@ public class HoverView extends RelativeLayout{
         this.setOutlineProvider(viewOutlineProvider);
         this.setElevation(elevation);
 
-        setHoverImage(focusView, (ImageView)(focusView.getChildAt(0)));
+        setHoverImage(focusView, (ImageView) (focusView.getChildAt(0)));
         if (focusView.getChildAt(1) instanceof TextView) {
-            setHoverText(focusView, ((TextView)focusView.getChildAt(1)).getText().toString());
+            setHoverText(focusView, ((TextView) focusView.getChildAt(1)).getText().toString());
         } else {
             setHoverText(focusView, null);
         }
@@ -159,7 +159,7 @@ public class HoverView extends RelativeLayout{
         }
     }
 
-    private void setHoverText(MyRelativeLayout focusView, String s){
+    private void setHoverText(MyRelativeLayout focusView, String s) {
         if (focusView.getType() != Launcher.TYPE_APP_SHORTCUT) {
             textTop.setText(s);
             textBottom.setText(null);
@@ -169,7 +169,7 @@ public class HoverView extends RelativeLayout{
         }
     }
 
-    public static void setViewPosition(View view, Rect rect){
+    public static void setViewPosition(View view, Rect rect) {
         android.widget.FrameLayout.LayoutParams para;
         para = new android.widget.FrameLayout.LayoutParams(rect.width(), rect.height());
 
@@ -181,10 +181,12 @@ public class HoverView extends RelativeLayout{
         @Override
         public void onAnimationStart(Animation animation) {
         }
+
         @Override
         public void onAnimationEnd(Animation animation) {
             //(this.setVisibility(View.VISIBLE);
         }
+
         @Override
         public void onAnimationRepeat(Animation animation) {
         }

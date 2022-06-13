@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2016 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,13 +15,13 @@
 -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/cec_control" >
+    android:title="@string/cec_control">
 
     <SwitchPreference
         android:key="key_cec_switch"
         android:persistent="false"
         android:title="@string/title_cec_switch"
-        android:summary="@string/cec_switch_description"/>
+        android:summary="@string/cec_switch_description" />
     <SwitchPreference
         android:key="key_cec_one_key_play"
         android:persistent="false"
@@ -32,27 +31,27 @@
         android:key="key_cec_auto_power_off"
         android:persistent="false"
         android:title="@string/title_cec_auto_power_off"
-        android:summary="@string/cec_auto_power_off_description"/>
+        android:summary="@string/cec_auto_power_off_description" />
     <SwitchPreference
         android:key="key_cec_auto_wake_up"
         android:persistent="false"
         android:title="@string/title_cec_auto_wake_up"
-        android:summary="@string/cec_auto_wake_up_description"/>
+        android:summary="@string/cec_auto_wake_up_description" />
     <SwitchPreference
         android:key="key_cec_auto_change_language"
         android:persistent="false"
         android:title="@string/title_cec_auto_change_language"
-        android:summary="@string/cec_auto_change_language_description"/>
+        android:summary="@string/cec_auto_change_language_description" />
     <SwitchPreference
         android:key="key_cec_arc_switch"
         android:persistent="false"
         android:title="@string/title_cec_arc_switch"
-        android:summary="@string/cec_arc_switch_description"/>
+        android:summary="@string/cec_arc_switch_description" />
     <Preference
         android:fragment="com.android.tv.settings.tvoption.HdmiCecDeviceSelectFragment"
         android:key="key_cec_device_list"
         android:title="@string/title_cec_device_list"
-        android:summary="@string/cec_device_list_description"/>
+        android:summary="@string/cec_device_list_description" />
     <ListPreference
         android:key="key_digital_audio_format"
         android:persistent="false"

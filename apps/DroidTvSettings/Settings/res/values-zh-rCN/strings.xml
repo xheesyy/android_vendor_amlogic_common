@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="settings_app_name" msgid="7931201304065140909">"设置"</string>
     <string name="launcher_settings_app_name" msgid="1459269619779675736">"设置"</string>
     <string name="launcher_network_app_name" msgid="8311763462169735002">"网络"</string>
@@ -46,8 +44,8 @@
     <string name="accounts_category_title" msgid="7286858931427579845">"帐号和登录"</string>
     <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"未登录任何帐号"</string>
     <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
-      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> 个帐号</item>
-      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> 个帐号</item>
+        <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> 个帐号</item>
+        <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> 个帐号</item>
     </plurals>
     <string name="accounts_slice_summary" msgid="1571012157154521119">"媒体服务、Google 助理、付款功能"</string>
     <string name="connectivity_network_category_title" msgid="8226264889892008114">"网络和互联网"</string>
@@ -57,8 +55,8 @@
     <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"遥控器和配件"</string>
     <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"未连接任何蓝牙设备"</string>
     <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
-      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> 个配件</item>
-      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> 个配件</item>
+        <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> 个配件</item>
+        <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> 个配件</item>
     </plurals>
     <string name="display_and_sound_category_title" msgid="9203309625380755860">"画质和音效"</string>
     <string name="help_and_feedback_category_title" msgid="7036505833991003031">"帮助和反馈"</string>
@@ -230,8 +228,8 @@
     <string name="about_serial" msgid="3432319328808745459">"序列号"</string>
     <string name="about_build" msgid="8467840394761634575">"Android TV 操作系统版本"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
-      <item quantity="other">现在只需再执行 <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> 步操作即可进入开发者模式</item>
-      <item quantity="one">现在只需再执行 <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> 步操作即可进入开发者模式</item>
+        <item quantity="other">现在只需再执行 <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> 步操作即可进入开发者模式</item>
+        <item quantity="one">现在只需再执行 <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> 步操作即可进入开发者模式</item>
     </plurals>
     <string name="about_ads" msgid="7662896442040086522">"广告"</string>
     <string name="ads_description" msgid="8081069475265061074">"管理广告设置，例如重置广告 ID。"</string>
@@ -265,20 +263,20 @@
     <string name="license_title" msgid="4032466200355435641">"许可"</string>
     <string name="terms_title" msgid="192888187310800678">"条款及条件"</string>
     <string name="webview_license_title" msgid="5370270485188947540">"系统 WebView 许可"</string>
-  <string-array name="wifi_signal_strength">
-    <item msgid="4475363344103354364">"弱"</item>
-    <item msgid="2098818614362343532">"一般"</item>
-    <item msgid="2713050260700175954">"强"</item>
-    <item msgid="6005053494500517261">"极强"</item>
-  </string-array>
+    <string-array name="wifi_signal_strength">
+        <item msgid="4475363344103354364">"弱"</item>
+        <item msgid="2098818614362343532">"一般"</item>
+        <item msgid="2713050260700175954">"强"</item>
+        <item msgid="6005053494500517261">"极强"</item>
+    </string-array>
     <string name="title_mac_address" msgid="7511588678922209883">"设备 MAC 地址"</string>
     <string name="title_randomized_mac_address" msgid="3359532498635833471">"随机 MAC 地址"</string>
     <string name="title_signal_strength" msgid="5047116893338315998">"信号强度"</string>
     <string name="title_random_mac_settings" msgid="6685812569356353378">"隐私设置"</string>
-  <string-array name="random_mac_settings_entries">
-    <item msgid="3457228452595715533">"使用随机 MAC（默认）"</item>
-    <item msgid="2490415280467390067">"使用设备 MAC"</item>
-  </string-array>
+    <string-array name="random_mac_settings_entries">
+        <item msgid="3457228452595715533">"使用随机 MAC（默认）"</item>
+        <item msgid="2490415280467390067">"使用设备 MAC"</item>
+    </string-array>
     <string name="mac_address_not_available" msgid="2992935344891853369">"不可用"</string>
     <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"随机 MAC"</string>
     <string name="title_ip_address" msgid="705842159484772807">"IP 地址"</string>
@@ -452,15 +450,15 @@
     <string name="system_set_time_format" msgid="902518158066450918">"使用 24 小时制"</string>
     <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g>（<xliff:g id="SAMPLE">%2$s</xliff:g>）"</string>
     <string name="system_auto_date_time" msgid="8458199433555868708">"自动确定日期和时间"</string>
-  <string-array name="auto_date_time_entries">
-    <item msgid="8119837829162871025">"使用网络提供的时间"</item>
-    <item msgid="369146066143710034">"关闭"</item>
-  </string-array>
-  <string-array name="auto_date_time_ts_entries">
-    <item msgid="1010003447137304123">"使用网络提供的时间"</item>
-    <item msgid="5645263357181875427">"使用传输流提供的时间"</item>
-    <item msgid="5501503537181350884">"关闭"</item>
-  </string-array>
+    <string-array name="auto_date_time_entries">
+        <item msgid="8119837829162871025">"使用网络提供的时间"</item>
+        <item msgid="369146066143710034">"关闭"</item>
+    </string-array>
+    <string-array name="auto_date_time_ts_entries">
+        <item msgid="1010003447137304123">"使用网络提供的时间"</item>
+        <item msgid="5645263357181875427">"使用传输流提供的时间"</item>
+        <item msgid="5501503537181350884">"关闭"</item>
+    </string-array>
     <string name="system_location" msgid="4057295363709016511">"位置信息"</string>
     <string name="system_desc_location" msgid="1680134126100535031">"允许获得您许可的应用使用您的位置信息"</string>
     <string name="system_network_location_confirm" msgid="7128162421781085332">"同意记录位置信息"</string>
@@ -606,15 +604,15 @@
     <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"显示过度绘制计数器"</string>
     <string name="no_application" msgid="1904437693440706534">"无"</string>
     <string name="enable_opengl_traces_none" msgid="4718084947494592040">"无"</string>
-  <string-array name="animation_scale_entries">
-    <item msgid="5408992662476056082">"关闭动画"</item>
-    <item msgid="6818290063799857019">"动画缩放 0.5x"</item>
-    <item msgid="8257959452691080724">"动画缩放 1x"</item>
-    <item msgid="4781052272686018414">"动画缩放 1.5x"</item>
-    <item msgid="2272016945160227610">"动画缩放 2x"</item>
-    <item msgid="5015441793276576312">"动画缩放 5x"</item>
-    <item msgid="1290233583371556415">"动画缩放 10x"</item>
-  </string-array>
+    <string-array name="animation_scale_entries">
+        <item msgid="5408992662476056082">"关闭动画"</item>
+        <item msgid="6818290063799857019">"动画缩放 0.5x"</item>
+        <item msgid="8257959452691080724">"动画缩放 1x"</item>
+        <item msgid="4781052272686018414">"动画缩放 1.5x"</item>
+        <item msgid="2272016945160227610">"动画缩放 2x"</item>
+        <item msgid="5015441793276576312">"动画缩放 5x"</item>
+        <item msgid="1290233583371556415">"动画缩放 10x"</item>
+    </string-array>
     <string name="track_frame_time_off" msgid="8845064783618702239">"关闭"</string>
     <string name="track_frame_time_bars" msgid="5841531515222229632">"在屏幕上显示为条形图"</string>
     <string name="app_process_limit_standard" msgid="6069948528843313888">"标准限制"</string>
@@ -667,16 +665,16 @@
     <string name="inputs_tv_auto_on" msgid="544848340484583318">"电视自动开机"</string>
     <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"打开HDMI设备时让电视自动开机"</string>
     <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
-      <item quantity="other">已连接的输入设备</item>
-      <item quantity="one">已连接的输入设备</item>
+        <item quantity="other">已连接的输入设备</item>
+        <item quantity="one">已连接的输入设备</item>
     </plurals>
     <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
-      <item quantity="other">待机的输入设备</item>
-      <item quantity="one">待机的输入设备</item>
+        <item quantity="other">待机的输入设备</item>
+        <item quantity="one">待机的输入设备</item>
     </plurals>
     <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
-      <item quantity="other">未连接的输入设备</item>
-      <item quantity="one">未连接的输入设备</item>
+        <item quantity="other">未连接的输入设备</item>
+        <item quantity="one">未连接的输入设备</item>
     </plurals>
     <string name="user_add_profile_item_summary" msgid="3211866291940617804">"限制其他人使用您帐号中的应用和内容"</string>
     <string name="user_new_profile_name" msgid="6637593067318708353">"受限个人资料"</string>
@@ -692,8 +690,8 @@
     <string name="restricted_profile_configure_title" msgid="3327502517511010296">"设置"</string>
     <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"允许的应用"</string>
     <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
-      <item quantity="other">允许使用 %d 个应用</item>
-      <item quantity="one">允许使用 1 个应用</item>
+        <item quantity="other">允许使用 %d 个应用</item>
+        <item quantity="one">允许使用 1 个应用</item>
     </plurals>
     <string name="restricted_profile_allowed" msgid="970921490464867884">"允许"</string>
     <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"不允许"</string>
@@ -771,12 +769,12 @@
     <string name="confirm_factory_reset_device" msgid="4308646529880718465">"全部清除"</string>
     <string name="select_device_name_title" msgid="3045019448327493634">"为您的 <xliff:g id="DEVICEMODEL">%1$s</xliff:g> 选择名称"</string>
     <string name="select_device_name_description" msgid="8528185095614986580">"为您的设备命名，以便在通过其他设备向其投射内容或与其建立连接时能够识别该设备。"</string>
-  <string-array name="rooms">
-    <item msgid="6590829789532602097">"Android TV"</item>
-    <item msgid="1140506340411482365">"客厅电视"</item>
-    <item msgid="6448060889026244632">"家庭活动室电视"</item>
-    <item msgid="3336274213215419228">"卧室电视"</item>
-  </string-array>
+    <string-array name="rooms">
+        <item msgid="6590829789532602097">"Android TV"</item>
+        <item msgid="1140506340411482365">"客厅电视"</item>
+        <item msgid="6448060889026244632">"家庭活动室电视"</item>
+        <item msgid="3336274213215419228">"卧室电视"</item>
+    </string-array>
     <string name="custom_room" msgid="6798144004583173563">"输入自定义名称…"</string>
     <string name="device_rename_title" msgid="9070021379000499270">"重命名此 <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="device_rename_description" msgid="1973894029492915135">"此 <xliff:g id="DEVICEMODEL">%1$s</xliff:g> 目前的名称为“<xliff:g id="DEVICENAME">%2$s</xliff:g>”"</string>
@@ -990,7 +988,7 @@
     </string>
     <string name="crypt_keeper_setup_time_remaining">"您的电视正在加密，请耐心等待。剩余时间：<xliff:g id="DURATION">^1</xliff:g>"</string>
     <string name="crypt_keeper_force_power_cycle">"要解锁您的电视，请将其关机然后再重启。"</string>
-        <!-- Warn user their device will be wiped if they make x more failed attempts -->
+    <!-- Warn user their device will be wiped if they make x more failed attempts -->
     <string name="crypt_keeper_warn_wipe">"警告：如果解锁尝试再失败<xliff:g id="COUNT">^1</xliff:g>次，您的设备将被清空！"
     </string>
 

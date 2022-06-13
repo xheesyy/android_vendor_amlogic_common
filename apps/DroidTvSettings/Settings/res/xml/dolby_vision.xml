@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2016 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,12 +16,12 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/dolby_vision">
-        <ListPreference
-            android:key="dolby_vision_set"
-            android:persistent="true"
-            android:entries="@array/dolby_vision_entries"
-            android:entryValues="@array/dolby_vision_entry_values"
-            android:defaultValue="dolby_vision_off"
-            android:title="@string/dolby_vision_set"
-            android:summary="%s" />
+    <ListPreference
+        android:key="dolby_vision_set"
+        android:persistent="true"
+        android:entries="@array/dolby_vision_entries"
+        android:entryValues="@array/dolby_vision_entry_values"
+        android:defaultValue="dolby_vision_off"
+        android:title="@string/dolby_vision_set"
+        android:summary="%s" />
 </PreferenceScreen>

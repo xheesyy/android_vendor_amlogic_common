@@ -102,7 +102,7 @@ public abstract class PreferenceControllerFragment extends SettingsPreferenceFra
     }
 
     @SuppressWarnings("unchecked")
-    protected  <T extends AbstractPreferenceController> Collection<T> getPreferenceControllers(
+    protected <T extends AbstractPreferenceController> Collection<T> getPreferenceControllers(
             Class<T> clazz) {
         return (Collection<T>) mPreferenceControllers.stream()
                 .filter(clazz::isInstance).collect(Collectors.toList());

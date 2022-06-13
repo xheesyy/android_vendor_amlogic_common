@@ -44,6 +44,7 @@ import android.media.IAudioRoutesObserver;
 import android.media.IAudioService;
 import android.media.tv.TvInputManager;
 import android.net.Uri;
+
 import com.droidlogic.app.AudioSystemCmdManager;
 import com.droidlogic.app.DroidLogicUtils;
 import com.droidlogic.app.OutputModeManager;
@@ -93,34 +94,34 @@ public class AudioSystemCmdService extends Service {
     private static final String AUDIO_FORMAT_KEY = "audio_format";
     private static final String AUDIO_FORMAT_VALUE_KEY = "audio_format_value";
     private final UEventObserver mObserver = new UEventObserver() {
-    @Override
-    public void onUEvent(UEventObserver.UEvent event) {
-        Log.d(TAG, "UEVENT: " + event.toString());
-        Log.d(TAG, "DEVPATH: " + event.get("DEVPATH"));
+        @Override
+        public void onUEvent(UEventObserver.UEvent event) {
+            Log.d(TAG, "UEVENT: " + event.toString());
+            Log.d(TAG, "DEVPATH: " + event.get("DEVPATH"));
 
-        if (PATH_AUDIOFORMAT_UEVENT.equals(event.get("DEVPATH", null))) {
-            Log.d(TAG, "audio format string event");
-            String audioFormatStr = event.get("AUDIO_FORMAT", null);
-            if (audioFormatStr == null) {
-                Log.e(TAG, "Error! got audio uevent from kernel, but no AUDIO_FORMAT value set!");
-                return;
-            }
+            if (PATH_AUDIOFORMAT_UEVENT.equals(event.get("DEVPATH", null))) {
+                Log.d(TAG, "audio format string event");
+                String audioFormatStr = event.get("AUDIO_FORMAT", null);
+                if (audioFormatStr == null) {
+                    Log.e(TAG, "Error! got audio uevent from kernel, but no AUDIO_FORMAT value set!");
+                    return;
+                }
 
-            Log.d(TAG, "AUDIO_FORMAT = " + audioFormatStr);
-            final int audioFormat = Integer.parseInt(audioFormatStr.substring(audioFormatStr.indexOf("=")+1));
-            Log.d(TAG, "audioFormat = " + audioFormat);
-            if (audioFormat < 0) {
-                Log.d(TAG, "ignoring incorrect audio event");
-                return;
-            } else {
-                String extra = covertAudioFormatIndextToString(audioFormat);
-                Intent intent = new Intent(ACTION_AUDIO_FORMAT_CHANGE);
-                intent.putExtra(AUDIO_FORMAT_KEY, extra);
-                intent.putExtra(AUDIO_FORMAT_VALUE_KEY,audioFormat);
-                mContext.sendBroadcast(intent);
+                Log.d(TAG, "AUDIO_FORMAT = " + audioFormatStr);
+                final int audioFormat = Integer.parseInt(audioFormatStr.substring(audioFormatStr.indexOf("=") + 1));
+                Log.d(TAG, "audioFormat = " + audioFormat);
+                if (audioFormat < 0) {
+                    Log.d(TAG, "ignoring incorrect audio event");
+                    return;
+                } else {
+                    String extra = covertAudioFormatIndextToString(audioFormat);
+                    Intent intent = new Intent(ACTION_AUDIO_FORMAT_CHANGE);
+                    intent.putExtra(AUDIO_FORMAT_KEY, extra);
+                    intent.putExtra(AUDIO_FORMAT_VALUE_KEY, audioFormat);
+                    mContext.sendBroadcast(intent);
+                }
             }
         }
-    }
     };
 
     private String covertAudioFormatIndextToString(int audioFormat) {
@@ -172,6 +173,7 @@ public class AudioSystemCmdService extends Service {
             handleVolumeChange(context, intent);
         }
     };
+
     public AudioSystemCmdService() {
         mAudioSystemCmdService = this;
     }
@@ -179,8 +181,8 @@ public class AudioSystemCmdService extends Service {
     private boolean mHasStartedDecoder = false;
     private boolean mHasOpenedDecoder = false;
     private boolean mHasReceivedStartDecoderCmd;
-    private boolean  mMixAdSupported;
-    private boolean  mNotImptTvHardwareInputService = false;
+    private boolean mMixAdSupported;
+    private boolean mNotImptTvHardwareInputService = false;
     private boolean mForceManagePatch = false;
     private IAudioService mAudioService;
     private AudioRoutesInfo mCurAudioRoutesInfo;
@@ -211,7 +213,7 @@ public class AudioSystemCmdService extends Service {
             mHandleAudioSinkUpdatedRunnable = new Runnable() {
                 public void run() {
                     synchronized (mLock) {
-                        if (mHasOpenedDecoder ) {
+                        if (mHasOpenedDecoder) {
                             if (mNotImptTvHardwareInputService)
                                 handleAudioSinkUpdated();
                             mHasOpenedDecoder = false;
@@ -226,7 +228,7 @@ public class AudioSystemCmdService extends Service {
             } else {
                 try {
                     mHandler.postDelayed(mHandleAudioSinkUpdatedRunnable,
-                        mAudioService.isBluetoothA2dpOn() ? 2500 : 500);
+                            mAudioService.isBluetoothA2dpOn() ? 2500 : 500);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }
@@ -240,7 +242,7 @@ public class AudioSystemCmdService extends Service {
                         Log.i(TAG, "dispatchAudioRoutesChanged ADTV mCurSourceType:" + mCurSourceType);
                         if (mCurSourceType == DroidLogicTvUtils.SOURCE_TYPE_ATV) {
                             mAudioManager.setParameters("hal_param_tuner_in=atv");
-                        } else if (mCurSourceType == DroidLogicTvUtils.SOURCE_TYPE_DTV){
+                        } else if (mCurSourceType == DroidLogicTvUtils.SOURCE_TYPE_DTV) {
                             mAudioManager.setParameters("hal_param_tuner_in=dtv");
                             HandleAudioEvent(AudioSystemCmdManager.AUDIO_SERVICE_CMD_START_DECODE,
                                     mCurrentFmt, mCurrentHasDtvVideo, mDtvDemuxIdCurrentWork, false);
@@ -273,7 +275,7 @@ public class AudioSystemCmdService extends Service {
         @Override
         public void HandleAudioEvent(int cmd, int param1, int param2) {
             if (mAudioSystemCmdService != null) {
-                mAudioSystemCmdService.HandleAudioEvent(cmd, param1, param2, 0,false);
+                mAudioSystemCmdService.HandleAudioEvent(cmd, param1, param2, 0, false);
             } else {
                 Log.w(TAG, "ADtvAudioEvent HandleAudioEvent mAudioSystemCmdService is null");
             }
@@ -286,7 +288,7 @@ public class AudioSystemCmdService extends Service {
         super.onCreate();
         mContext = getApplicationContext();
         mSystemControlManager = SystemControlManager.getInstance();
-        mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mTvInputManager = (TvInputManager) getSystemService(Context.TV_INPUT_SERVICE);
 
         if (DroidLogicUtils.isBuildLivetv()) {
@@ -313,8 +315,8 @@ public class AudioSystemCmdService extends Service {
         mContext.registerReceiver(mVolumeReceiver, filter);
         mObserver.startObserving(PATH_AUDIOFORMAT_UEVENT);
         mNotImptTvHardwareInputService = (mTvInputManager.getHardwareList() == null) || (mTvInputManager.getHardwareList().isEmpty());
-        Log.d(TAG, "mNotImptTvHardwareInputService:"+ mNotImptTvHardwareInputService + ", mTvInputManager.getHardwareList():" + mTvInputManager.getHardwareList());
-        mForceManagePatch =  SystemProperties.getBoolean("vendor.media.dtv.force.manage.patch", false);
+        Log.d(TAG, "mNotImptTvHardwareInputService:" + mNotImptTvHardwareInputService + ", mTvInputManager.getHardwareList():" + mTvInputManager.getHardwareList());
+        mForceManagePatch = SystemProperties.getBoolean("vendor.media.dtv.force.manage.patch", false);
         Log.d(TAG, "mForceManagePatch :" + mForceManagePatch);
         updateVolume();
 
@@ -366,15 +368,15 @@ public class AudioSystemCmdService extends Service {
                 result = true;
                 break;
             default:
-                Log.i(TAG,"setAdFunction unkown  msg:" + msg + ", param1:" + param1);
+                Log.i(TAG, "setAdFunction unkown  msg:" + msg + ", param1:" + param1);
                 break;
         }
-              return result;
+        return result;
     }
 
     public void HandleAudioEvent(int cmd, int param1, int param2, int param3, boolean isDtvkit) {
-        Log.i(TAG, "HandleAudioEvent cmd:"+ AudioSystemCmdManager.AudioCmdToString(cmd) +
-                ", param1:" + param1 + ", param2:" + param2 +", param3:" + param3 + ", is " + (isDtvkit ? "": "not ") +"Dtvkit.");
+        Log.i(TAG, "HandleAudioEvent cmd:" + AudioSystemCmdManager.AudioCmdToString(cmd) +
+                ", param1:" + param1 + ", param2:" + param2 + ", param3:" + param3 + ", is " + (isDtvkit ? "" : "not ") + "Dtvkit.");
         if (mAudioManager == null) {
             Log.e(TAG, "HandleAudioEvent mAudioManager is null");
             return;
@@ -464,8 +466,8 @@ public class AudioSystemCmdService extends Service {
             case AudioSystemCmdManager.AUDIO_SERVICE_CMD_CLOSE_DECODER://
                 mAudioManager.setParameters("hal_param_dtv_patch_cmd=" + cmd);
                 if (mAudioPatch != null) {
-                   Log.d(TAG, "ADEC_CLOSE_DECODER mAudioPatch:"
-                        + mAudioPatch);
+                    Log.d(TAG, "ADEC_CLOSE_DECODER mAudioPatch:"
+                            + mAudioPatch);
                     mAudioManager.releaseAudioPatch(mAudioPatch);
                 }
                 mAudioPatch = null;
@@ -495,8 +497,8 @@ public class AudioSystemCmdService extends Service {
                 boolean isDvbPlayback = (param1 == 0);
                 int forceManagePatchMode = param2;
                 if (param3 != 0) {
-                    isDvbPlayback = ((param1 -(param3 << mDtvDemuxIdBase)) == 0);
-                    forceManagePatchMode = (param2 -(param3 << mDtvDemuxIdBase));
+                    isDvbPlayback = ((param1 - (param3 << mDtvDemuxIdBase)) == 0);
+                    forceManagePatchMode = (param2 - (param3 << mDtvDemuxIdBase));
                 }
                 boolean hasTif = !(mTvInputManager.getHardwareList() == null || mTvInputManager.getHardwareList().isEmpty());
 
@@ -518,13 +520,13 @@ public class AudioSystemCmdService extends Service {
                 }
 
                 Log.i(TAG, "mForceManagePatch: " + mForceManagePatch
-                    + ", isDvbPlayback: " + isDvbPlayback
-                    + ", forceManagePatchMode: " + forceManagePatchMode
-                    + ", hasTif: " + hasTif
-                    + ", so mNotImptTvHardwareInputService set to " + mNotImptTvHardwareInputService);
+                        + ", isDvbPlayback: " + isDvbPlayback
+                        + ", forceManagePatchMode: " + forceManagePatchMode
+                        + ", hasTif: " + hasTif
+                        + ", so mNotImptTvHardwareInputService set to " + mNotImptTvHardwareInputService);
                 break;
             default:
-                Log.w(TAG,"HandleAudioEvent unkown audio cmd:" + cmd);
+                Log.w(TAG, "HandleAudioEvent unkown audio cmd:" + cmd);
                 break;
         }
     }
@@ -538,7 +540,7 @@ public class AudioSystemCmdService extends Service {
      * Convert volume from float [0.0 - 1.0] to media volume UI index
      */
     private int volumeToMediaIndex(float volume) {
-        return mCurrentMinIndex + (int)(volume * (mCurrentMaxIndex - mCurrentMinIndex));
+        return mCurrentMinIndex + (int) (volume * (mCurrentMaxIndex - mCurrentMinIndex));
     }
 
     /**
@@ -547,19 +549,19 @@ public class AudioSystemCmdService extends Service {
      */
     private int indexToGainMbForDevice(int index, int device, AudioGain gain) {
         float gainDb = AudioSystem.getStreamVolumeDB(AudioManager.STREAM_MUSIC,
-                                                       index,
-                                                       device);
+                index,
+                device);
         float maxGainDb = AudioSystem.getStreamVolumeDB(AudioManager.STREAM_MUSIC,
-                                                        mCurrentMaxIndex,
-                                                        device);
+                mCurrentMaxIndex,
+                device);
         float minGainDb = AudioSystem.getStreamVolumeDB(AudioManager.STREAM_MUSIC,
-                                                        mCurrentMinIndex,
-                                                        device);
+                mCurrentMinIndex,
+                device);
 
         // Rescale gain from dB to mB and within gain conroller range and snap to steps
-        int gainMb = (int)((float)(((gainDb - minGainDb) * (gain.maxValue() - gain.minValue()))
-                        / (maxGainDb - minGainDb)) + gain.minValue());
-        gainMb = (int)(((float)gainMb / gain.stepValue()) * gain.stepValue());
+        int gainMb = (int) ((float) (((gainDb - minGainDb) * (gain.maxValue() - gain.minValue()))
+                / (maxGainDb - minGainDb)) + gain.minValue());
+        gainMb = (int) (((float) gainMb / gain.stepValue()) * gain.stepValue());
 
         return gainMb;
     }
@@ -568,7 +570,7 @@ public class AudioSystemCmdService extends Service {
         mCurrentMaxIndex = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         mCurrentMinIndex = mAudioManager.getStreamMinVolume(AudioManager.STREAM_MUSIC);
         mCurrentIndex = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-        Log.d(TAG, "updateVolume mCurrentIndex:"+ mCurrentIndex + ", mCommitedIndex:" + mCommitedIndex);
+        Log.d(TAG, "updateVolume mCurrentIndex:" + mCurrentIndex + ", mCommitedIndex:" + mCommitedIndex);
     }
 
     private void handleVolumeChange(Context context, Intent intent) {
@@ -642,7 +644,7 @@ public class AudioSystemCmdService extends Service {
         AudioDevicePort port;
         for (AudioPort audioPort : audioPorts) {
             if (audioPort instanceof AudioDevicePort) {
-                port = (AudioDevicePort)audioPort;
+                port = (AudioDevicePort) audioPort;
                 if ((port.type() & sinkDevice) != 0 && mAudioManager.isOutputDevice(port.type())) {
                     sinks.add(port);
                 }
@@ -662,7 +664,7 @@ public class AudioSystemCmdService extends Service {
         AudioDevicePort port;
         for (AudioPort audioPort : audioPorts) {
             if (audioPort instanceof AudioDevicePort) {
-                port = (AudioDevicePort)audioPort;
+                port = (AudioDevicePort) audioPort;
                 if (port.type() == type && port.address().equals(address)) {
                     return port;
                 }
@@ -673,17 +675,17 @@ public class AudioSystemCmdService extends Service {
 
     private void reStartAdecDecoderIfPossible() {
         Log.i(TAG, "reStartAdecDecoderIfPossiblem HasOpenedDecoder:" + mHasOpenedDecoder +
-                   " StartDecoderCmd:" + mHasReceivedStartDecoderCmd +
-                   ", mMixAdSupported:" + mMixAdSupported);
-        if (mAudioSource != null &&!mAudioSink.isEmpty() && !mHasOpenedDecoder ) {
+                " StartDecoderCmd:" + mHasReceivedStartDecoderCmd +
+                ", mMixAdSupported:" + mMixAdSupported);
+        if (mAudioSource != null && !mAudioSink.isEmpty() && !mHasOpenedDecoder) {
             mAudioManager.setParameters("hal_param_tuner_in=dtv");
             if (mHasReceivedStartDecoderCmd) {
-                mAudioManager.setParameters("hal_param_dtv_audio_fmt="+mCurrentFmt);
-                mAudioManager.setParameters("hal_param_has_dtv_video="+mCurrentHasDtvVideo);
+                mAudioManager.setParameters("hal_param_dtv_audio_fmt=" + mCurrentFmt);
+                mAudioManager.setParameters("hal_param_has_dtv_video=" + mCurrentHasDtvVideo);
                 int cmd = AudioSystemCmdManager.AUDIO_SERVICE_CMD_START_DECODE + (mDtvDemuxIdCurrentWork << mDtvDemuxIdBase);
                 mAudioManager.setParameters("hal_param_dtv_patch_cmd=" + cmd);
                 mHasStartedDecoder = true;
-             }
+            }
         }
     }
 
@@ -693,7 +695,7 @@ public class AudioSystemCmdService extends Service {
 
         if (mAudioSource == null || mAudioSink.isEmpty()) {
             Log.i(TAG, "updateAudioConfigLocked return, mAudioSource:" +
-                    mAudioSource + ", mAudioSink empty:" +  mAudioSink.isEmpty());
+                    mAudioSource + ", mAudioSink empty:" + mAudioSink.isEmpty());
             if (mAudioPatch != null) {
                 mAudioManager.releaseAudioPatch(mAudioPatch);
                 mAudioPatch = null;
@@ -706,13 +708,13 @@ public class AudioSystemCmdService extends Service {
 
         AudioPortConfig sourceConfig = mAudioSource.activeConfig();
         List<AudioPortConfig> sinkConfigs = new ArrayList<>();
-        AudioPatch[] audioPatchArray = new AudioPatch[] { mAudioPatch };
+        AudioPatch[] audioPatchArray = new AudioPatch[]{mAudioPatch};
         boolean shouldRecreateAudioPatch = sinkUpdated;
         boolean shouldApplyGain = false;
 
         Log.i(TAG, "updateAudioConfigLocked sinkUpdated:" + sinkUpdated + ", mAudioPatch is empty:"
                 + (mAudioPatch == null));
-         //mAudioPatch should not be null when current hardware is active.
+        //mAudioPatch should not be null when current hardware is active.
         if (mAudioPatch == null) {
             shouldRecreateAudioPatch = true;
             mHasStartedDecoder = false;
@@ -803,7 +805,7 @@ public class AudioSystemCmdService extends Service {
                 }
             }
             if (sourceGain != null && ((mSourceVolume != mCommittedSourceVolume) ||
-                                       (mCurrentIndex != mCommitedIndex))) {
+                    (mCurrentIndex != mCommitedIndex))) {
                 // use first sink device as referrence for volume curves
                 int deviceType = mAudioSink.get(0).type();
 
@@ -814,16 +816,16 @@ public class AudioSystemCmdService extends Service {
                 // then convert media volume index to mBs
                 int indexGainMb = indexToGainMbForDevice(mCurrentIndex, deviceType, sourceGain);
 
-                Log.d(TAG, "updateAudioConfigLocked mCurrentIndex= "+ mCurrentIndex + ",mCommitedIndex="+mCommitedIndex+",indexGainMb="+indexGainMb);
+                Log.d(TAG, "updateAudioConfigLocked mCurrentIndex= " + mCurrentIndex + ",mCommitedIndex=" + mCommitedIndex + ",indexGainMb=" + indexGainMb);
 
                 // apply combined gains
                 int gainValueMb = sourceGainMb + indexGainMb;
                 gainValueMb = Math.max(sourceGain.minValue(),
-                                       Math.min(sourceGain.maxValue(), gainValueMb));
+                        Math.min(sourceGain.maxValue(), gainValueMb));
 
                 // NOTE: we only change the source gain in MODE_JOINT here.
                 // size of gain values is 1 in MODE_JOINT
-                int[] gainValues = new int[] { gainValueMb };
+                int[] gainValues = new int[]{gainValueMb};
                 sourceGainConfig = sourceGain.buildConfig(AudioGain.MODE_JOINT,
                         sourceGain.channelMask(), gainValues, 0);
             } else {
@@ -873,10 +875,10 @@ public class AudioSystemCmdService extends Service {
             }
             mAudioManager.createAudioPatch(
                     audioPatchArray,
-                    new AudioPortConfig[] { sourceConfig },
+                    new AudioPortConfig[]{sourceConfig},
                     sinkConfigs.toArray(new AudioPortConfig[sinkConfigs.size()]));
             mAudioPatch = audioPatchArray[0];
-            Log.d(TAG,"createAudioPatch end" + mAudioPatch);
+            Log.d(TAG, "createAudioPatch end" + mAudioPatch);
             if (sourceGainConfig != null) {
                 mCommitedIndex = mCurrentIndex;
                 mCommittedSourceVolume = mSourceVolume;
@@ -910,7 +912,7 @@ public class AudioSystemCmdService extends Service {
         public String getParameters(String arg) {
             String value = mAudioManager.getParameters(arg);
             if (DroidLogicUtils.getAudioDebugEnable()) {
-                Log.d(TAG, "getParameters arg:" + arg +", value:" + value);
+                Log.d(TAG, "getParameters arg:" + arg + ", value:" + value);
             }
             return value;
         }
@@ -931,7 +933,7 @@ public class AudioSystemCmdService extends Service {
             } else if (sourceType == DroidLogicTvUtils.SOURCE_TYPE_DTV) {
                 mAudioManager.setParameters("hal_param_tuner_in=dtv");
             } else {
-                Log.w(TAG, "openTvAudio unsupported source type:" + sourceType );
+                Log.w(TAG, "openTvAudio unsupported source type:" + sourceType);
             }
             mCurSourceType = sourceType;
             return;

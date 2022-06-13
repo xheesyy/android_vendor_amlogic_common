@@ -1,24 +1,25 @@
 /******************************************************************
-*
-*Copyright (C) 2012  Amlogic, Inc.
-*
-*Licensed under the Apache License, Version 2.0 (the "License");
-*you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing, software
-*distributed under the License is distributed on an "AS IS" BASIS,
-*WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*See the License for the specific language governing permissions and
-*limitations under the License.
-******************************************************************/
+ *
+ *Copyright (C) 2012  Amlogic, Inc.
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ ******************************************************************/
 
 package com.droidlogic.PPPoE;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -29,25 +30,30 @@ import android.net.NetworkInfo.State;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.content.SharedPreferences;
+
 import com.amlogic.pppoe.PppoeOperation;
 import com.droidlogic.pppoe.PppoeStateTracker;
 import com.droidlogic.pppoe.PppoeService;
+
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.SystemProperties;
 import android.content.ServiceConnection;
+
 import com.droidlogic.pppoe.IPppoeManager;
+
 import android.content.ComponentName;
+
 import com.droidlogic.app.SystemControlManager;
 
 public class PppoeBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = "PppoeBroadcastReceiver";
     private static final String ACTION_BOOT_COMPLETED =
-        "android.intent.action.BOOT_COMPLETED";
+            "android.intent.action.BOOT_COMPLETED";
     public static final String ETH_STATE_CHANGED_ACTION =
-        "android.net.ethernet.ETH_STATE_CHANGED";
+            "android.net.ethernet.ETH_STATE_CHANGED";
     public static final int DELAY_TIME = 2000;
     private Handler mHandler = null;
     private boolean mAutoDialFlag = false;
@@ -65,8 +71,7 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
     IPppoeManager mService = null;
     private SystemControlManager mSystemControlManager;
 
-    void StartPppoeService(Context context)
-    {
+    void StartPppoeService(Context context) {
         boolean needPppoe = true;
         if (needPppoe) {
             final PppoeStateTracker pppoetracker;
@@ -74,19 +79,19 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
             handlerThread.start();
             Handler handler = new Handler(handlerThread.getLooper());
             try {
-                pppoetracker = new PppoeStateTracker(handlerThread.getLooper(),ConnectivityManager.TYPE_ETHERNET, PPPOE_SERVICE);
-                PppoeService pppoe = new PppoeService(context,pppoetracker);
+                pppoetracker = new PppoeStateTracker(handlerThread.getLooper(), ConnectivityManager.TYPE_ETHERNET, PPPOE_SERVICE);
+                PppoeService pppoe = new PppoeService(context, pppoetracker);
                 Log.e(TAG, "start add service pppoe");
                 try {
-                    Class.forName("android.os.ServiceManager").getMethod("addService", new Class[] {String.class, IBinder.class })
-                    .invoke(null, new Object[] { PPPOE_SERVICE, pppoe });
-                }catch (Exception ex) {
+                    Class.forName("android.os.ServiceManager").getMethod("addService", new Class[]{String.class, IBinder.class})
+                            .invoke(null, new Object[]{PPPOE_SERVICE, pppoe});
+                } catch (Exception ex) {
                     Log.e(TAG, "addService " + PPPOE_SERVICE + " fail:" + ex);
                 }
                 Log.d(TAG, "end add service pppoe");
-                pppoetracker.startMonitoring(context,handler);
+                pppoetracker.startMonitoring(context, handler);
                 //  if (config.isDefault()) {
-                    pppoetracker.reconnect();
+                pppoetracker.reconnect();
                 //  }
             } catch (IllegalArgumentException e) {
                 Log.e(TAG, "Problem creating TYPE_PPPOE tracker: " + e);
@@ -94,42 +99,34 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
         }
     }
 
-    private String getNetworkInterfaceSelected(Context context)
-    {
+    private String getNetworkInterfaceSelected(Context context) {
         SharedPreferences sharedata = context.getSharedPreferences("inputdata", 0);
-        if (sharedata != null && sharedata.getAll().size() > 0)
-        {
+        if (sharedata != null && sharedata.getAll().size() > 0) {
             return sharedata.getString(PppoeConfigDialog.INFO_NETWORK_INTERFACE_SELECTED, null);
         }
         return null;
     }
 
 
-    private boolean getAutoDialFlag(Context context)
-    {
+    private boolean getAutoDialFlag(Context context) {
         SharedPreferences sharedata = context.getSharedPreferences("inputdata", 0);
-        if (sharedata != null && sharedata.getAll().size() > 0)
-        {
+        if (sharedata != null && sharedata.getAll().size() > 0) {
             return sharedata.getBoolean(PppoeConfigDialog.INFO_AUTO_DIAL_FLAG, false);
         }
         return false;
     }
 
-    private String getUserName(Context context)
-    {
+    private String getUserName(Context context) {
         SharedPreferences sharedata = context.getSharedPreferences("inputdata", 0);
-        if (sharedata != null && sharedata.getAll().size() > 0)
-        {
+        if (sharedata != null && sharedata.getAll().size() > 0) {
             return sharedata.getString(PppoeConfigDialog.INFO_USERNAME, null);
         }
         return null;
     }
 
-    private String getPassword(Context context)
-    {
+    private String getPassword(Context context) {
         SharedPreferences sharedata = context.getSharedPreferences("inputdata", 0);
-        if (sharedata != null && sharedata.getAll().size() > 0)
-        {
+        if (sharedata != null && sharedata.getAll().size() > 0) {
             return sharedata.getString(PppoeConfigDialog.INFO_PASSWORD, null);
         }
         return null;
@@ -145,18 +142,18 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
         mUserName = getUserName(context);
         mPassword = getPassword(context);
         mSystemControlManager = SystemControlManager.getInstance();
-        Log.d(TAG , "mInterfaceSelected: " + mInterfaceSelected + " onReceive: " +intent.getAction());
+        Log.d(TAG, "mInterfaceSelected: " + mInterfaceSelected + " onReceive: " + intent.getAction());
 
         if (ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             StartPppoeService(context);
-            context.startService(new Intent(context,MyPppoeService.class));
+            context.startService(new Intent(context, MyPppoeService.class));
             mFirstAutoDialDone = true;
         }
 
         if (null == mInterfaceSelected
-            || !mAutoDialFlag
-            || null == mUserName
-            || null == mPassword) {
+                || !mAutoDialFlag
+                || null == mUserName
+                || null == mPassword) {
             mFirstAutoDialDone = false;
             return;
         }
@@ -174,7 +171,7 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
                 mHandler.sendEmptyMessageDelayed(PPPoEActivity.MSG_START_DIAL, DELAY_TIME);
                 mFirstAutoDialDone = false;
             } else {
-                if (!mInterfaceSelected.startsWith("eth") )
+                if (!mInterfaceSelected.startsWith("eth"))
                     return;
                 //Timeout after 5 seconds
                 mHandler.sendEmptyMessageDelayed(PPPoEActivity.MSG_MANDATORY_DIAL, DELAY_TIME);
@@ -183,8 +180,7 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
     }
 
 
-    void setPppoeRunningFlag()
-    {
+    void setPppoeRunningFlag() {
         mSystemControlManager.setProperty(PppoeConfigDialog.ETHERNETDHCP, "disabled");
 
         mSystemControlManager.setProperty(PppoeConfigDialog.PPPOERUNNING, "100");
@@ -194,7 +190,8 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
             try {
                 n = Integer.parseInt(propVal);
                 Log.d(TAG, "setPppoeRunningFlag as " + n);
-            } catch (NumberFormatException e) {}
+            } catch (NumberFormatException e) {
+            }
         } else {
             Log.d(TAG, "failed to setPppoeRunningFlag");
         }
@@ -202,8 +199,7 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
         return;
     }
 
-    private class PppoeHandler extends Handler
-    {
+    private class PppoeHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -214,16 +210,16 @@ public class PppoeBroadcastReceiver extends BroadcastReceiver {
                     operation.terminate();
                     operation.disconnect();
                     mHandler.sendEmptyMessageDelayed(PPPoEActivity.MSG_START_DIAL, DELAY_TIME);
-                break;
+                    break;
 
                 case PPPoEActivity.MSG_START_DIAL:
                     setPppoeRunningFlag();
                     operation.connect(mInterfaceSelected, mUserName, mPassword);
-                break;
+                    break;
 
                 default:
                     Log.d(TAG, "handleMessage: " + msg.what);
-                break;
+                    break;
             }
         }
     }

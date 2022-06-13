@@ -50,7 +50,7 @@ class ApplicationInfo {
     /**
      * Creates the application intent based on a component name and various launch flags.
      *
-     * @param className the class name of the component representing the intent
+     * @param className   the class name of the component representing the intent
      * @param launchFlags the launch flags
      */
     final void setActivity(ComponentName className, int launchFlags) {
@@ -58,9 +58,8 @@ class ApplicationInfo {
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
         intent.setComponent(className);
         intent.setFlags(launchFlags);
-		componentName = className;
+        componentName = className;
     }
-
 
 
 }

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,14 +15,15 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                  xmlns:app="http://schemas.android.com/apk/res-auto"
-                  android:title="@string/system_date_time">
-    <ListPreference android:key="auto_date_time"
-                    android:persistent="true"
-                    android:title="@string/system_auto_date_time"
-                    android:summary="%s"
-                    android:entries="@array/auto_date_time_entries"
-                    android:entryValues="@array/auto_date_time_entry_values" />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:title="@string/system_date_time">
+    <ListPreference
+        android:key="auto_date_time"
+        android:persistent="true"
+        android:title="@string/system_auto_date_time"
+        android:summary="%s"
+        android:entries="@array/auto_date_time_entries"
+        android:entryValues="@array/auto_date_time_entry_values" />
 
 
     <com.android.tv.settings.system.LeanbackPickerDialogPreference
@@ -38,13 +38,15 @@
         android:title="@string/system_set_time"
         app:pickerType="time" />
 
-    <Preference android:key="set_time_zone"
-                android:persistent="true"
-                android:title="@string/system_set_time_zone"
-                android:fragment="com.android.tv.settings.system.TimeZoneFragment" />
+    <Preference
+        android:key="set_time_zone"
+        android:persistent="true"
+        android:title="@string/system_set_time_zone"
+        android:fragment="com.android.tv.settings.system.TimeZoneFragment" />
 
-    <SwitchPreference android:key="use_24_hour"
-                      android:persistent="true"
-                      android:title="@string/system_set_time_format" />
+    <SwitchPreference
+        android:key="use_24_hour"
+        android:persistent="true"
+        android:title="@string/system_set_time_format" />
 
 </PreferenceScreen>

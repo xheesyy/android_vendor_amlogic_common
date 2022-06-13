@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements SurfaceHolder.Callback {
 
     public static final String TAG = Tools.TAG;
 
-    public static String test_board="VIM4";
+    public static String test_board = "VIM4";
 
     public static boolean tfcard_test = false;
     public static boolean usb20_test = false;

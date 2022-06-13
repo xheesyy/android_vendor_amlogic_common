@@ -82,63 +82,67 @@ public class Alarms {
     // Shared with DigitalClock
     static final String M24 = "kk:mm";
 
-	private static final String BootAlarmFileName="/sys/class/rtc/rtc0/bootalarm";
+    private static final String BootAlarmFileName = "/sys/class/rtc/rtc0/bootalarm";
 
-    public static class BootAlarmInfo{
-	  boolean isEnabled;
-      long   timeMillis;
-	  boolean shutdown;
-	  public BootAlarmInfo(boolean isEnabled, long timeMillis, boolean shutdown){
-          this.isEnabled = isEnabled;
-		  this.timeMillis = timeMillis;
-		  this.shutdown = shutdown;
-	  }
+    public static class BootAlarmInfo {
+        boolean isEnabled;
+        long timeMillis;
+        boolean shutdown;
+
+        public BootAlarmInfo(boolean isEnabled, long timeMillis, boolean shutdown) {
+            this.isEnabled = isEnabled;
+            this.timeMillis = timeMillis;
+            this.shutdown = shutdown;
+        }
 
     }
 
 
-	private static class BootAlarmTask extends AsyncTask<Void, Void, String>{
+    private static class BootAlarmTask extends AsyncTask<Void, Void, String> {
 
-	  private BootAlarmInfo info;
+        private BootAlarmInfo info;
 
-	  public BootAlarmTask(BootAlarmInfo info){
-		  this.info = info;
-	   }
-       @Override
-	   protected String  doInBackground(Void... params) {
-	      try{
-				long timeMillis = info.timeMillis;
-				String millis;
-				if(info.isEnabled){
-                   if ( info.shutdown ){
-                      millis= "="+Long.toString(info.timeMillis/1000);
-				   }else {
-                      millis= "+"+Long.toString(info.timeMillis/1000);
-				   }
-				}else{
+        public BootAlarmTask(BootAlarmInfo info) {
+            this.info = info;
+        }
 
-                   millis= "-1471417030";
-				}
+        @Override
+        protected String doInBackground(Void... params) {
+            try {
+                long timeMillis = info.timeMillis;
+                String millis;
+                if (info.isEnabled) {
+                    if (info.shutdown) {
+                        millis = "=" + Long.toString(info.timeMillis / 1000);
+                    } else {
+                        millis = "+" + Long.toString(info.timeMillis / 1000);
+                    }
+                } else {
+
+                    millis = "-1471417030";
+                }
                 RandomAccessFile rdf = null;
-				rdf = new RandomAccessFile(BootAlarmFileName, "rw");
-				rdf.writeBytes(millis);
-				rdf.close();
+                rdf = new RandomAccessFile(BootAlarmFileName, "rw");
+                rdf.writeBytes(millis);
+                rdf.close();
 
-           }catch (IOException re) {
-               Log.e(TAG, "IO Exception");
-			   re.printStackTrace();
-		   }
-		   return "0";
-       }
+            } catch (IOException re) {
+                Log.e(TAG, "IO Exception");
+                re.printStackTrace();
+            }
+            return "0";
+        }
 
-	}
+    }
 
-	public static void setBootAlarm(BootAlarmInfo info){
-       BootAlarmTask mBootAlarmTask = new BootAlarmTask(info);
-	   mBootAlarmTask.execute();
-	}
+    public static void setBootAlarm(BootAlarmInfo info) {
+        BootAlarmTask mBootAlarmTask = new BootAlarmTask(info);
+        mBootAlarmTask.execute();
+    }
+
     /**
      * Creates a new Alarm.
+     *
      * @param contentResolver ContentResolver
      * @return Uri data for alarm uri
      */
@@ -151,6 +155,7 @@ public class Alarms {
 
     /**
      * Removes an existing Alarm. If this alarm is snoozing, disables snooze. Sets next alert.
+     *
      * @param context Context
      * @param alarmId int alarm id
      */
@@ -168,6 +173,7 @@ public class Alarms {
 
     /**
      * Queries all alarms
+     *
      * @param contentResolver ContentResolver
      * @return cursor over all alarms
      */
@@ -191,8 +197,9 @@ public class Alarms {
     /**
      * Return an Alarm object representing the alarm id in the database.
      * Returns null if no alarm exists.
+     *
      * @param contentResolver ContentResolver
-     * @param alarmId id
+     * @param alarmId         id
      * @return Alarm object
      */
     public static Alarm getAlarm(ContentResolver contentResolver, int alarmId) {
@@ -216,18 +223,19 @@ public class Alarms {
 
     /**
      * A convenience method to set an alarm in the Alarms content provider.
-     * @param context Context
-     * @param id corresponds to the _id column
-     * @param enabled corresponds to the ENABLED column
-     * @param hour corresponds to the HOUR column
-     * @param minutes corresponds to the MINUTES column
+     *
+     * @param context    Context
+     * @param id         corresponds to the _id column
+     * @param enabled    corresponds to the ENABLED column
+     * @param hour       corresponds to the HOUR column
+     * @param minutes    corresponds to the MINUTES column
      * @param daysOfWeek corresponds to the DAYS_OF_WEEK column
-     * @param vibrate corresponds to the VIBRATE column
-     * @param message corresponds to the MESSAGE column
-     * @param alert corresponds to the ALERT column
+     * @param vibrate    corresponds to the VIBRATE column
+     * @param message    corresponds to the MESSAGE column
+     * @param alert      corresponds to the ALERT column
      */
     public static void setAlarm(Context context, int id, boolean enabled, int hour, int minutes,
-            Alarm.DaysOfWeek daysOfWeek, boolean vibrate, String message, String alert) {
+                                Alarm.DaysOfWeek daysOfWeek, boolean vibrate, String message, String alert) {
         final int initSize = 8;
         ContentValues values = new ContentValues(initSize);
         ContentResolver resolver = context.getContentResolver();
@@ -238,7 +246,7 @@ public class Alarms {
             time = calculateAlarm(hour, minutes, daysOfWeek).getTimeInMillis();
         }
 
-        Log.d(TAG, "**  setAlarm * idx " + id + " hour " + hour + " minutes " + minutes + " enabled " + enabled + " time "+time);
+        Log.d(TAG, "**  setAlarm * idx " + id + " hour " + hour + " minutes " + minutes + " enabled " + enabled + " time " + time);
 
         values.put(Alarm.Columns.ENABLED, enabled ? 1 : 0);
         values.put(Alarm.Columns.HOUR, hour);
@@ -261,8 +269,9 @@ public class Alarms {
 
     /**
      * A convenience method to enable or disable an alarm.
+     *
      * @param context Context
-     * @param id corresponds to the _id column
+     * @param id      corresponds to the _id column
      * @param enabled corresponds to the ENABLED column
      */
     public static void enableAlarm(final Context context, final int id, boolean enabled) {
@@ -303,6 +312,7 @@ public class Alarms {
 
     /**
      * calculate Next Alert alarm
+     *
      * @param context final Context
      * @param alarmId final int
      * @return Alarm
@@ -351,6 +361,7 @@ public class Alarms {
 
     /**
      * Disables non-repeating alarms that have passed. Called at boot.
+     *
      * @param context Context
      */
     public static void disableExpiredAlarms(final Context context) {
@@ -365,7 +376,7 @@ public class Alarms {
                         // A time of 0 means this alarm repeats. If the time is
                         // non-zero, check if the time is before now.
                         if (alarm.mTime != 0 && alarm.mTime < now) {
-                           Log.d(TAG, "** DISABLE " + alarm.mId + " now " + now + " set " + alarm.mTime);
+                            Log.d(TAG, "** DISABLE " + alarm.mId + " now " + now + " set " + alarm.mTime);
                             enableAlarmInternal(context, alarm, false);
                         }
                     } while (cur.moveToNext());
@@ -381,6 +392,7 @@ public class Alarms {
     /**
      * Called at system startup, on time/timezone change, and whenever the user changes alarm settings. Activates snooze if
      * set, otherwise loads all alarms, activates next alert.
+     *
      * @param context Context
      */
     public static void setNextAlert(final Context context) {
@@ -402,6 +414,7 @@ public class Alarms {
 
     /**
      * set Next Alert Power Off
+     *
      * @param context Context
      */
     public static void setNextAlertPowerOff(final Context context) {
@@ -416,10 +429,8 @@ public class Alarms {
     /**
      * Sets alert in AlarmManger and StatusBar. This is what will actually launch the alert when the alarm triggers.
      *
-     * @param alarm
-     *            Alarm.
-     * @param atTimeInMillis
-     *            milliseconds since epoch
+     * @param alarm          Alarm.
+     * @param atTimeInMillis milliseconds since epoch
      */
     private static void enableAlert(Context context, final Alarm alarm, final long atTimeInMillis) {
         if (alarm == null) {
@@ -449,8 +460,8 @@ public class Alarms {
 
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-    Log.d(TAG, "Alarms.enableAlertPowerOff(): setAlert id " + alarm.mId + " atTime " + atTimeInMillis);
-       am.setExact(AlarmManager.RTC_WAKEUP, atTimeInMillis, sender); 
+        Log.d(TAG, "Alarms.enableAlertPowerOff(): setAlert id " + alarm.mId + " atTime " + atTimeInMillis);
+        am.setExact(AlarmManager.RTC_WAKEUP, atTimeInMillis, sender);
 
         Calendar c = Calendar.getInstance();
         c.setTime(new java.util.Date(atTimeInMillis));
@@ -461,8 +472,7 @@ public class Alarms {
     /**
      * Disables alert in AlarmManger and StatusBar.
      *
-     * @param id
-     *            Alarm ID.
+     * @param id Alarm ID.
      */
     static void disableAlert(Context context) {
         Intent intent = new Intent(context, com.khadas.schpwronoff.SchPwrOffReceiver.class);
@@ -477,6 +487,7 @@ public class Alarms {
     /**
      * Called at system startup, on time/timezone change, and whenever the user changes alarm settings. Activates snooze if
      * set, otherwise loads all alarms, activates next alert.
+     *
      * @param context Context
      */
     public static void setNextAlertPowerOn(final Context context, boolean shutdown) {
@@ -491,10 +502,8 @@ public class Alarms {
     /**
      * Sets alert in AlarmManger and StatusBar. This is what will actually launch the alert when the alarm triggers.
      *
-     * @param alarm
-     *            Alarm.
-     * @param atTimeInMillis
-     *            milliseconds since epoch
+     * @param alarm          Alarm.
+     * @param atTimeInMillis milliseconds since epoch
      */
     private static void enableAlertPowerOn(Context context, final Alarm alarm, final long atTimeInMillis, boolean shutdown) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -521,11 +530,11 @@ public class Alarms {
 
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
-		/* yangjinqing need add the function for write rtc */
-       //am.setExact(7, atTimeInMillis, sender);
-	    BootAlarmInfo info =new BootAlarmInfo(true, atTimeInMillis, shutdown);
-	    setBootAlarm(info);
-    Log.d(TAG, "Alarms.enableAlertPowerOn(): setAlert id " + alarm.mId + " atTime " + atTimeInMillis);
+        /* yangjinqing need add the function for write rtc */
+        //am.setExact(7, atTimeInMillis, sender);
+        BootAlarmInfo info = new BootAlarmInfo(true, atTimeInMillis, shutdown);
+        setBootAlarm(info);
+        Log.d(TAG, "Alarms.enableAlertPowerOn(): setAlert id " + alarm.mId + " atTime " + atTimeInMillis);
 
         // setStatusBarIcon(context, true);
 
@@ -538,18 +547,17 @@ public class Alarms {
     /**
      * Disables alert in AlarmManger and StatusBar.
      *
-     * @param id
-     *            Alarm ID.
+     * @param id Alarm ID.
      */
     static void disableAlertPowerOn(Context context) {
         Intent intent = new Intent(context, com.khadas.schpwronoff.SchPwrOnReceiver.class);
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
         /*yangjinqing need to add the function for write rtc*/
-       // am.setExact(7, 0, sender);
-		BootAlarmInfo info =new BootAlarmInfo(false,0,false);
-		setBootAlarm(info);
-       // am.cancelPoweroffAlarm(context.getPackageName());
+        // am.setExact(7, 0, sender);
+        BootAlarmInfo info = new BootAlarmInfo(false, 0, false);
+        setBootAlarm(info);
+        // am.cancelPoweroffAlarm(context.getPackageName());
         Log.d(TAG, "Alarms.disableAlertPowerOn(): disableForPowerOn");
         // am.cancel(sender);
         // setStatusBarIcon(context, false);
@@ -592,7 +600,9 @@ public class Alarms {
         ed.remove(PREF_SNOOZE_ID);
         ed.remove(PREF_SNOOZE_TIME);
         ed.commit();
-    };
+    }
+
+    ;
 
     /**
      * If there is a snooze set, enable it in AlarmManager
@@ -632,12 +642,9 @@ public class Alarms {
     /**
      * Given an alarm in hours and minutes, return a time suitable for setting in AlarmManager.
      *
-     * @param hour
-     *            Always in 24 hour 0-23
-     * @param minute
-     *            0-59
-     * @param daysOfWeek
-     *            0-59
+     * @param hour       Always in 24 hour 0-23
+     * @param minute     0-59
+     * @param daysOfWeek 0-59
      */
     static Calendar calculateAlarm(int hour, int minute, Alarm.DaysOfWeek daysOfWeek) {
 

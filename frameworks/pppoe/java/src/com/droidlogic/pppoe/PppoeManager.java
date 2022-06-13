@@ -1,9 +1,9 @@
 /*
-*Copyright (c) 2014 Amlogic, Inc. All rights reserved.
-*
-*This source code is subject to the terms and conditions defined in the
-*file 'LICENSE' which is part of this source code package.
-*/
+ *Copyright (c) 2014 Amlogic, Inc. All rights reserved.
+ *
+ *This source code is subject to the terms and conditions defined in the
+ *file 'LICENSE' which is part of this source code package.
+ */
 
 package com.droidlogic.pppoe;
 
@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.os.RemoteException;
 import android.util.Slog;
 import android.net.DhcpInfo;
+
 import com.droidlogic.pppoe.PppoeDevInfo;
 import com.droidlogic.pppoe.IPppoeManager;
 import com.droidlogic.pppoe.PppoeService;
@@ -88,13 +89,13 @@ public class PppoeManager {
 
     public void setPppoeEnabled(boolean enable) {
         try {
-            mService.setPppoeState(enable ? PPPOE_STATE_ENABLED:PPPOE_STATE_DISABLED);
+            mService.setPppoeState(enable ? PPPOE_STATE_ENABLED : PPPOE_STATE_DISABLED);
         } catch (RemoteException e) {
-            Slog.i(TAG,"Can not set new state");
+            Slog.i(TAG, "Can not set new state");
         }
     }
 
-    public int getPppoeState( ) {
+    public int getPppoeState() {
         try {
             return mService.getPppoeState();
         } catch (RemoteException e) {

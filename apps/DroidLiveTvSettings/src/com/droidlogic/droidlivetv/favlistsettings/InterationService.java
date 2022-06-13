@@ -106,6 +106,7 @@ public class InterationService extends Service {
             clinet = IInterationService.Stub.asInterface(service);
             mIsBounded = true;
         }
+
         public void onServiceDisconnected(ComponentName name) {
             mIsBounded = false;
             clinet = null;

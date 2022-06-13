@@ -23,12 +23,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+
 import androidx.annotation.Keep;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import android.text.TextUtils;
+
 import com.android.tv.settings.dialog.old.Action;
 import com.android.tv.settings.RadioPreference;
 import com.android.tv.settings.R;
@@ -43,6 +48,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -65,13 +71,15 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            hpdFlag = intent.getBooleanExtra ("state", false);
+            hpdFlag = intent.getBooleanExtra("state", false);
             mHandler.sendEmptyMessageDelayed(MSG_FRESH_UI, hpdFlag ^ isHdmiMode() ? 2000 : 1000);
         }
     };
+
     public static ColorAttributeFragment newInstance() {
         return new ColorAttributeFragment();
     }
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         mOutputUiManager = new OutputUiManager(getActivity());
@@ -79,6 +87,7 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
         mIntentFilter.addAction(Intent.ACTION_TIME_TICK);
         updatePreferenceFragment();
     }
+
     private boolean needfresh() {
         ArrayList<String> list = mOutputUiManager.getColorTitleList();
         Log.d(LOG_TAG, "colorTitleList: " + colorTitleList.toString() + "\n list: " + list.toString());
@@ -87,11 +96,12 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
                 if (!list.contains(title))
                     return true;
             }
-        }else {
+        } else {
             return true;
         }
         return false;
     }
+
     private void updatePreferenceFragment() {
         mOutputUiManager.updateUiMode();
         if (!needfresh()) return;
@@ -118,7 +128,8 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
             screen.addPreference(radioPreference);
         }
     }
-    private boolean isModeSupportColor(final String curMode, final String curValue){
+
+    private boolean isModeSupportColor(final String curMode, final String curValue) {
         return mOutputUiManager.isModeSupportColor(curMode, curValue);
     }
 
@@ -126,14 +137,14 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
         ArrayList<Action> actions = new ArrayList<Action>();
         colorTitleList.clear();
         ArrayList<String> mList = mOutputUiManager.getColorTitleList();
-        for (String color:mList) {
+        for (String color : mList) {
             colorTitleList.add(color);
         }
         ArrayList<String> colorValueList = mOutputUiManager.getColorValueList();
         String value = null;
         String filterValue = null;
-        String  curColorSpaceValue = mOutputUiManager.getCurrentColorAttribute();
-        Log.i(LOG_TAG,"curColorSpaceValue: "+curColorSpaceValue);
+        String curColorSpaceValue = mOutputUiManager.getCurrentColorAttribute();
+        Log.i(LOG_TAG, "curColorSpaceValue: " + curColorSpaceValue);
         if (curColorSpaceValue.equals("default"))
             curColorSpaceValue = DEFAULT_VALUE;
         for (int i = 0; i < colorTitleList.size(); i++) {
@@ -149,22 +160,23 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
             if (filterValue.contains(OutputUiManager.HDMI_COLOR_LIST[i])) {
                 if (curColorSpaceValue.contains(OutputUiManager.HDMI_COLOR_LIST[i])) {
                     actions.add(new Action.Builder().key(OutputUiManager.HDMI_COLOR_LIST[i])
-                        .title("        " + OutputUiManager.HDMI_COLOR_TITLE[i])
-                        .checked(true).build());
+                            .title("        " + OutputUiManager.HDMI_COLOR_TITLE[i])
+                            .checked(true).build());
                 } else {
                     actions.add(new Action.Builder().key(OutputUiManager.HDMI_COLOR_LIST[i])
-                        .title("        " + OutputUiManager.HDMI_COLOR_TITLE[i])
-                        .description("").build());
+                            .title("        " + OutputUiManager.HDMI_COLOR_TITLE[i])
+                            .description("").build());
                 }
             }
         }
         if (actions.size() == 0) {
             actions.add(new Action.Builder().key(DEFAULT_VALUE)
-                .title("        " + DEFAULT_TITLE)
-                .checked(true).build());
+                    .title("        " + DEFAULT_TITLE)
+                    .checked(true).build());
         }
         return actions;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -194,10 +206,10 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
                 }
             } else {
                 radioPreference.setChecked(true);
-                Log.i(LOG_TAG,"not checked");
+                Log.i(LOG_TAG, "not checked");
             }
         }
-      return super.onPreferenceTreeClick(preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -207,14 +219,14 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
 
     public boolean onClickHandle(String key) {
         curValue = key;
-        saveValue= mOutputUiManager.getCurrentColorAttribute().trim();
+        saveValue = mOutputUiManager.getCurrentColorAttribute().trim();
         if (saveValue.equals("default"))
             saveValue = DEFAULT_VALUE;
         curMode = mOutputUiManager.getCurrentMode().trim();
-        Log.i(LOG_TAG,"Set Color Space Value: "+curValue + "CurValue: "+saveValue);
+        Log.i(LOG_TAG, "Set Color Space Value: " + curValue + "CurValue: " + saveValue);
         if (!curValue.equals(saveValue)) {
-            if (isModeSupportColor(curMode,curValue)) {
-               mOutputUiManager.changeColorAttribte(curValue);
+            if (isModeSupportColor(curMode, curValue)) {
+                mOutputUiManager.changeColorAttribte(curValue);
             } else {
                 curValue = DEFAULT_VALUE;
                 mOutputUiManager.changeColorAttribte(curValue);
@@ -234,6 +246,7 @@ public class ColorAttributeFragment extends SettingsPreferenceFragment {
             }
         }
     };
+
     private boolean isHdmiMode() {
         return mOutputUiManager.isHdmiMode();
     }

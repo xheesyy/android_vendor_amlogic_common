@@ -1,24 +1,25 @@
 /******************************************************************
-*
-*Copyright (C) 2012  Amlogic, Inc.
-*
-*Licensed under the Apache License, Version 2.0 (the "License");
-*you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing, software
-*distributed under the License is distributed on an "AS IS" BASIS,
-*WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*See the License for the specific language governing permissions and
-*limitations under the License.
-******************************************************************/
+ *
+ *Copyright (C) 2012  Amlogic, Inc.
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ ******************************************************************/
 
 package com.droidlogic.PPPoE;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.os.Message;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -50,18 +51,19 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import java.net.NetworkInterface;
 import java.util.Enumeration;
 import java.util.ArrayList;
 import java.net.SocketException;
+
 import com.droidlogic.pppoe.PppoeManager;
 import com.droidlogic.pppoe.PppoeStateTracker;
 import com.droidlogic.app.SystemControlManager;
 import com.amlogic.pppoe.PppoeOperation;
 
 
-public class PppoeConfigDialog extends AlertDialog implements DialogInterface.OnClickListener, TextWatcher
-{
+public class PppoeConfigDialog extends AlertDialog implements DialogInterface.OnClickListener, TextWatcher {
     private static final String PPPOE_DIAL_RESULT_ACTION =
             "PppoeConfigDialog.PPPOE_DIAL_RESULT";
     public static final int EVENT_HW_PHYCONNECTED = 5;
@@ -128,22 +130,21 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
     private TextView mDns;
 
 
-    private boolean isPppoeRunning()
-    {
+    private boolean isPppoeRunning() {
         String propVal = mSystemControlManager.getProperty(PPPOERUNNING);
         int n = 0;
         if (propVal.length() != 0) {
             try {
                 n = Integer.parseInt(propVal);
-            } catch (NumberFormatException e) {}
+            } catch (NumberFormatException e) {
+            }
         } else {
             Log.d(TAG, "net.pppoe.running not FOUND");
         }
         return (n != 0);
     }
 
-    private void setPppoeRunningFlag()
-    {
+    private void setPppoeRunningFlag() {
         mSystemControlManager.setProperty(ETHERNETDHCP, "disabled");
         mSystemControlManager.setProperty(PPPOERUNNING, "100");
         String propVal = mSystemControlManager.getProperty(PPPOERUNNING);
@@ -152,15 +153,15 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
             try {
                 n = Integer.parseInt(propVal);
                 Log.d(TAG, "setPppoeRunningFlag as " + n);
-            } catch (NumberFormatException e) {}
+            } catch (NumberFormatException e) {
+            }
         } else {
             Log.d(TAG, "failed to setPppoeRunningFlag");
         }
         return;
     }
 
-    private void clearPppoeRunningFlag()
-    {
+    private void clearPppoeRunningFlag() {
         mSystemControlManager.setProperty(ETHERNETDHCP, "enabled");
         mSystemControlManager.setProperty(PPPOERUNNING, "0");
         String propVal = mSystemControlManager.getProperty(PPPOERUNNING);
@@ -169,7 +170,8 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
             try {
                 n = Integer.parseInt(propVal);
                 Log.d(TAG, "clearPppoeRunningFlag as " + n);
-            } catch (NumberFormatException e) {}
+            } catch (NumberFormatException e) {
+            }
         } else {
             Log.d(TAG, "failed to clearPppoeRunningFlag");
         }
@@ -177,8 +179,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
     }
 
 
-    public PppoeConfigDialog(Context context)
-    {
+    public PppoeConfigDialog(Context context) {
         super(context);
         this.context = context;
         mHandlerThread = new ConnectThread();
@@ -197,9 +198,9 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         context.registerReceiver(pppoeReceiver, filter);
     }
 
-    class SpinnerSelectedListener implements OnItemSelectedListener{
+    class SpinnerSelectedListener implements OnItemSelectedListener {
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-                long arg3) {
+                                   long arg3) {
             mNetIfSelected = mNetworkIfList.get(arg2);
             Log.d(TAG, "interface selected: " + mNetIfSelected);
         }
@@ -211,7 +212,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
     private boolean isEthDeviceAdded() {
         String str = mSystemControlManager.readSysFs(ETHERNETLINK);
         if (str == null)
-            return false ;
+            return false;
         if (str.contains("unlink")) {
             return false;
         } else {
@@ -219,52 +220,50 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         }
     }
 
-    private void buildDialog(Context context)
-    {
+    private void buildDialog(Context context) {
         String eth_name = null;
         String wifi_name = null;
         Log.d(TAG, "buildDialog");
         setTitle(R.string.pppoe_config_title);
         this.setView(mView = getLayoutInflater().inflate(R.layout.pppoe_configure, null));
-        mPppoeName = (EditText)mView.findViewById(R.id.pppoe_name_edit);
-        mPppoePasswd = (EditText)mView.findViewById(R.id.pppoe_passwd_edit);
-        mCbAutoDial = (CheckBox)mView.findViewById(R.id.auto_dial_checkbox);
+        mPppoeName = (EditText) mView.findViewById(R.id.pppoe_name_edit);
+        mPppoePasswd = (EditText) mView.findViewById(R.id.pppoe_passwd_edit);
+        mCbAutoDial = (CheckBox) mView.findViewById(R.id.auto_dial_checkbox);
         mCbAutoDial.setVisibility(View.VISIBLE);
         mCbAutoDial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
-                boolean isChecked) {
-                        //saveAutoDialFlag();
-                    if (isChecked) {
-                        Log.d(TAG, "AutoDial Selected");
-                    }else{
-                        Log.d(TAG, "AutoDial Unselected");
-                    }
+                                         boolean isChecked) {
+                //saveAutoDialFlag();
+                if (isChecked) {
+                    Log.d(TAG, "AutoDial Selected");
+                } else {
+                    Log.d(TAG, "AutoDial Unselected");
                 }
-            });
+            }
+        });
         mPppoeName.setEnabled(true);
         mPppoeName.addTextChangedListener(this);
         mPppoePasswd.setEnabled(true);
         mPppoePasswd.addTextChangedListener(this);
         this.setInverseBackgroundForced(true);
-        mNetworkIfList=new ArrayList<String>();
+        mNetworkIfList = new ArrayList<String>();
         try {
-            for (Enumeration<NetworkInterface> list = NetworkInterface.getNetworkInterfaces(); list.hasMoreElements();)
-            {
+            for (Enumeration<NetworkInterface> list = NetworkInterface.getNetworkInterfaces(); list.hasMoreElements(); ) {
                 NetworkInterface netIf = list.nextElement();
                 if (netIf.isUp() &&
-                    !netIf.isLoopback() &&
-                    !netIf.isPointToPoint() &&
-                    !netIf.getDisplayName().startsWith("sit") &&
-                    !netIf.getDisplayName().startsWith("ip6tnl") &&
-                    !netIf.getDisplayName().startsWith("p2p")) {
-                        Log.d(TAG, "network_interface: " + netIf.getDisplayName());
-                        Log.d(TAG, "Wire Intert: " + isEthDeviceAdded());
-                        if (netIf.getDisplayName().startsWith("eth") && isEthDeviceAdded())
-                            eth_name = netIf.getDisplayName();
-                        else if (netIf.getDisplayName().startsWith("wlan"))
-                            wifi_name = netIf.getDisplayName();
-                    }
+                        !netIf.isLoopback() &&
+                        !netIf.isPointToPoint() &&
+                        !netIf.getDisplayName().startsWith("sit") &&
+                        !netIf.getDisplayName().startsWith("ip6tnl") &&
+                        !netIf.getDisplayName().startsWith("p2p")) {
+                    Log.d(TAG, "network_interface: " + netIf.getDisplayName());
+                    Log.d(TAG, "Wire Intert: " + isEthDeviceAdded());
+                    if (netIf.getDisplayName().startsWith("eth") && isEthDeviceAdded())
+                        eth_name = netIf.getDisplayName();
+                    else if (netIf.getDisplayName().startsWith("wlan"))
+                        wifi_name = netIf.getDisplayName();
+                }
             }
         } catch (SocketException e) {
             return;
@@ -275,8 +274,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
             if (eth_name != null && mNetIfSelected.equals(eth_name)) {
                 mNetworkIfList.add(eth_name);
                 eth_name = null;
-            }
-            else if (wifi_name != null && mNetIfSelected.equals(wifi_name)) {
+            } else if (wifi_name != null && mNetIfSelected.equals(wifi_name)) {
                 mNetworkIfList.add(wifi_name);
                 wifi_name = null;
             }
@@ -291,21 +289,19 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         mGw = (TextView) mView.findViewById(R.id.address_mask_text);
         mDns = (TextView) mView.findViewById(R.id.address_dns_text);
         spinner = (Spinner) mView.findViewById(R.id.network_inteface_list_spinner);
-        adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,mNetworkIfList);
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mNetworkIfList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
         spinner.setVisibility(View.VISIBLE);
-        if (connectStatus() != PppoeOperation.PPP_STATUS_CONNECTED)
-        {
+        if (connectStatus() != PppoeOperation.PPP_STATUS_CONNECTED) {
             mIP.setVisibility(View.GONE);
             mNet.setVisibility(View.GONE);
             mGw.setVisibility(View.GONE);
             mDns.setVisibility(View.GONE);
             isDialogOfDisconnect = false;
             this.setButton(BUTTON_POSITIVE, context.getText(R.string.pppoe_dial), this);
-        }
-        else {
+        } else {
             Log.d(TAG, "connectStatus is CONNECTED");
 
             String address_ip = SystemProperties.get(PppoeStateTracker.PROP_PPP_ADDR, ADDRSES_NONE);
@@ -315,23 +311,23 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
             String address_dns2 = SystemProperties.get(PppoeStateTracker.PROP_PPP_DNS2, ADDRSES_NONE);
 
             if (!address_ip.equals(ADDRSES_NONE)
-                && !address_gw.equals(ADDRSES_NONE)
-                && !address_dns1.equals(ADDRSES_NONE)) {
-                mIP.setText( "IP ：" + address_ip);
+                    && !address_gw.equals(ADDRSES_NONE)
+                    && !address_dns1.equals(ADDRSES_NONE)) {
+                mIP.setText("IP ：" + address_ip);
                 mNet.setText("Net mask : " + address_net);
-                mGw.setText( "Gate way : " + address_gw);
+                mGw.setText("Gate way : " + address_gw);
                 if (address_dns2.equals(ADDRSES_NONE)) {
                     mDns.setText("DNS : " + address_dns1);
                 } else {
                     mDns.setText("DNS : " + address_dns1 + "; " + address_dns2);
                 }
 
-                } else {
-                    mIP.setVisibility(View.GONE);
-                    mNet.setVisibility(View.GONE);
-                    mGw.setVisibility(View.GONE);
-                    mDns.setVisibility(View.GONE);
-                }
+            } else {
+                mIP.setVisibility(View.GONE);
+                mNet.setVisibility(View.GONE);
+                mGw.setVisibility(View.GONE);
+                mDns.setVisibility(View.GONE);
+            }
 
             isDialogOfDisconnect = true;
             //hide AutoDial CheckBox
@@ -355,8 +351,8 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         }
         this.setButton(BUTTON_NEGATIVE, context.getText(R.string.menu_cancel), this);
         if (user_name != null
-          && user_passwd != null
-          && user_name.equals("")== false) {
+                && user_passwd != null
+                && user_name.equals("") == false) {
             mPppoeName.setText(user_name);
             mPppoePasswd.setText(user_passwd);
         } else {
@@ -380,8 +376,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
     }
 
     @Override
-    public void show()
-    {
+    public void show() {
         Log.d(TAG, "show");
         super.show();
         if (connectStatus() != PppoeOperation.PPP_STATUS_CONNECTED) {
@@ -390,17 +385,20 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
                 mDial.setEnabled(false);
         }
     }
+
     @Override
     public void dismiss() {
         Log.d(TAG, "dismiss");
         super.dismiss();
     }
-    class ConnectThread extends Thread{
+
+    class ConnectThread extends Thread {
         public Handler thander;
+
         @Override
         public void run() {
             Looper.prepare();
-            thander = new Handler(){
+            thander = new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     super.handleMessage(msg);
@@ -418,7 +416,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
                             break;
                         default:
                             Log.d(TAG, "handleMessage: " + msg.what);
-                        break;
+                            break;
                     }
                 }
             };
@@ -454,7 +452,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
                     waitDialog.setMessage(context.getResources().getString(id));
                     waitDialog.setIcon(null);
                     if (id == R.string.pppoe_dial_waiting_msg) {
-                        waitDialog.setButton(android.content.DialogInterface.BUTTON_POSITIVE,context.getResources().getString(R.string.menu_cancel),cancelBtnClickListener);
+                        waitDialog.setButton(android.content.DialogInterface.BUTTON_POSITIVE, context.getResources().getString(R.string.menu_cancel), cancelBtnClickListener);
                         pppoe_state = PPPOE_STATE_CONNECTING;
                         setPppoeRunningFlag();
                     }
@@ -474,8 +472,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         }
     }
 
-    void showWaitDialog(int id)
-    {
+    void showWaitDialog(int id) {
         if (waitDialog == null) {
             return;
         }
@@ -488,15 +485,12 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         mHandler.sendMessage(message);
     }
 
-    private void handleStopDial()
-    {
+    private void handleStopDial() {
         Log.d(TAG, "handleStopDial");
         pppoe_state = PPPOE_STATE_DISCONNECTING;
         mDisconnectTimer = new Timer();
-        TimerTask check_task = new TimerTask()
-        {
-            public void run()
-            {
+        TimerTask check_task = new TimerTask() {
+            public void run() {
                 Message message = new Message();
                 message.what = PPPoEActivity.MSG_DISCONNECT_TIMEOUT;
                 Log.d(TAG, "Send MSG_DISCONNECT_TIMEOUT");
@@ -510,19 +504,16 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         mHandlerThread.thander.sendMessage(cmsgs);
         showWaitDialog(R.string.pppoe_hangup_waiting_msg);
     }
-    private void handleStartDial()
-    {
+
+    private void handleStartDial() {
         Log.d(TAG, "handleStartDial");
         tmp_name = mPppoeName.getText().toString();
         tmp_passwd = mPppoePasswd.getText().toString();
-        if (!TextUtils.isEmpty(tmp_name) && !TextUtils.isEmpty(tmp_passwd))
-        {
+        if (!TextUtils.isEmpty(tmp_name) && !TextUtils.isEmpty(tmp_passwd)) {
             saveInfoData();
             mConnectTimer = new Timer();
-            TimerTask check_task = new TimerTask()
-            {
-                public void run()
-                {
+            TimerTask check_task = new TimerTask() {
+                public void run() {
                     Message message = new Message();
                     Log.d(TAG, "Send MSG_CONNECT_TIMEOUT");
                     message.what = PPPoEActivity.MSG_CONNECT_TIMEOUT;
@@ -537,8 +528,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         }
     }
 
-    private void saveInfoData()
-    {
+    private void saveInfoData() {
         SharedPreferences.Editor sharedata = context.getSharedPreferences("inputdata", 0).edit();
         sharedata.clear();
         sharedata.putString(INFO_USERNAME, mPppoeName.getText().toString());
@@ -548,33 +538,27 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         sharedata.commit();
     }
 
-    private void getInfoData()
-    {
+    private void getInfoData() {
         SharedPreferences sharedata = context.getSharedPreferences("inputdata", 0);
-        if (sharedata != null && sharedata.getAll().size() > 0)
-        {
+        if (sharedata != null && sharedata.getAll().size() > 0) {
             user_name = sharedata.getString(INFO_USERNAME, null);
             user_passwd = sharedata.getString(INFO_PASSWORD, null);
             mNetIfSelected = sharedata.getString(INFO_NETWORK_INTERFACE_SELECTED, null);
             mAtuoDialFlag = sharedata.getBoolean(INFO_AUTO_DIAL_FLAG, false);
-        }
-        else
-        {
+        } else {
             user_name = null;
             user_passwd = null;
         }
     }
 
-    private void saveAutoDialFlag()
-    {
+    private void saveAutoDialFlag() {
         SharedPreferences.Editor sharedata = context.getSharedPreferences("inputdata", 0).edit();
         //sharedata.clear();
         sharedata.putBoolean(INFO_AUTO_DIAL_FLAG, mCbAutoDial.isChecked());
         sharedata.commit();
     }
 
-    private int connectStatus()
-    {
+    private int connectStatus() {
         if (null == mNetIfSelected) {
             Log.d(TAG, "mNetIfSelected is null");
             return PppoeOperation.PPP_STATUS_DISCONNECTED;
@@ -583,14 +567,13 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
     }
 
 
-    private void showAlertDialog(final String msg)
-    {
+    private void showAlertDialog(final String msg) {
         AlertDialog.Builder ab = new AlertDialog.Builder(context);
         alertDia = ab.create();
         alertDia.setTitle(" ");
         alertDia.setMessage(msg);
         alertDia.setIcon(null);
-        alertDia.setButton(android.content.DialogInterface.BUTTON_POSITIVE,context.getResources().getString(R.string.amlogic_ok),AlertClickListener);
+        alertDia.setButton(android.content.DialogInterface.BUTTON_POSITIVE, context.getResources().getString(R.string.amlogic_ok), AlertClickListener);
         alertDia.setCancelable(false);
         alertDia.setInverseBackgroundForced(true);
         alertDia.show();
@@ -601,41 +584,35 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
         button.requestFocusFromTouch();
     }
 
-    OnClickListener AlertClickListener = new OnClickListener()
-    {
-        public void onClick(DialogInterface dialog, int which)
-        {
+    OnClickListener AlertClickListener = new OnClickListener() {
+        public void onClick(DialogInterface dialog, int which) {
             alertDia.dismiss();
             switch (which) {
-            case android.content.DialogInterface.BUTTON_POSITIVE:
-                {
+                case android.content.DialogInterface.BUTTON_POSITIVE: {
                     Log.d(TAG, "User click OK button, exit APK");
                     if (pppoeReceiver != null) {
                         Log.d(TAG, "unregisterReceiver pppoeReceiver");
                         context.unregisterReceiver(pppoeReceiver);
                     }
-                    ((PPPoEActivity)context).finish();
+                    ((PPPoEActivity) context).finish();
                 }
                 break;
-            case android.content.DialogInterface.BUTTON_NEGATIVE:
-                break;
-            default:
-                break;
+                case android.content.DialogInterface.BUTTON_NEGATIVE:
+                    break;
+                default:
+                    break;
             }
 
         }
     };
 
-    private void handleCancelDial()
-    {
+    private void handleCancelDial() {
         operation.disconnect();
     }
 
 
-    OnClickListener cancelBtnClickListener = new OnClickListener()
-    {
-        public void onClick(DialogInterface dialog, int which)
-        {
+    OnClickListener cancelBtnClickListener = new OnClickListener() {
+        public void onClick(DialogInterface dialog, int which) {
             Log.d(TAG, "Cancel button is clicked");
             if (mDisconnectTimer != null)
                 mDisconnectTimer.cancel();
@@ -648,50 +625,46 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
                 Log.d(TAG, "unregisterReceiver pppoeReceiver");
                 context.unregisterReceiver(pppoeReceiver);
             }
-            ((PPPoEActivity)context).finish();
+            ((PPPoEActivity) context).finish();
         }
     };
 
 
     @Override
-    public void onClick(DialogInterface dialog, int which)
-    {
+    public void onClick(DialogInterface dialog, int which) {
         switch (which) {
-        case BUTTON_POSITIVE:
-            saveAutoDialFlag();
-            if (isDialogOfDisconnect) {
-                if (connectStatus() != PppoeOperation.PPP_STATUS_CONNECTED) {
-                    Log.d(TAG, "DANGER: SHOULD CONNECTED when in DialogOfDisconnect");
+            case BUTTON_POSITIVE:
+                saveAutoDialFlag();
+                if (isDialogOfDisconnect) {
+                    if (connectStatus() != PppoeOperation.PPP_STATUS_CONNECTED) {
+                        Log.d(TAG, "DANGER: SHOULD CONNECTED when in DialogOfDisconnect");
+                    }
+                    handleStopDial();
+                } else
+                    handleStartDial();
+                break;
+            case BUTTON_NEGATIVE:
+                Log.d(TAG, "User click Discard button, exit APK");
+                saveAutoDialFlag();
+                if (pppoeReceiver != null) {
+                    Log.d(TAG, "unregisterReceiver pppoeReceiver");
+                    context.unregisterReceiver(pppoeReceiver);
                 }
-                handleStopDial();
-            }
-            else
-                handleStartDial();
-            break;
-        case BUTTON_NEGATIVE:
-            Log.d(TAG, "User click Discard button, exit APK");
-            saveAutoDialFlag();
-            if (pppoeReceiver != null) {
-                Log.d(TAG, "unregisterReceiver pppoeReceiver");
-                context.unregisterReceiver(pppoeReceiver);
-            }
-            ((PPPoEActivity)context).finish();
-            break;
-        default:
-            break;
+                ((PPPoEActivity) context).finish();
+                break;
+            default:
+                break;
         }
     }
 
-    public class PppoeReceiver extends BroadcastReceiver
-    {
+    public class PppoeReceiver extends BroadcastReceiver {
         @Override
-        public void onReceive(Context context, Intent intent)
-        {
+        public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Log.d(TAG, "PppoeReceiver: " + action);
 
             if (action.equals(PppoeManager.PPPOE_STATE_CHANGED_ACTION)) {
-                int event = intent.getIntExtra(PppoeManager.EXTRA_PPPOE_STATE,PppoeManager.PPPOE_STATE_UNKNOWN);
+                int event = intent.getIntExtra(PppoeManager.EXTRA_PPPOE_STATE, PppoeManager.PPPOE_STATE_UNKNOWN);
                 Log.d(TAG, "event " + event);
                 if (event == PppoeStateTracker.EVENT_CONNECTED) {
                     if (pppoe_state == PPPOE_STATE_CONNECTING) {
@@ -729,37 +702,34 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
                     showAlertDialog(context.getResources().getString(R.string.pppoe_connect_failed) + "\n" + reason);
                     mSystemControlManager.setProperty("net.pppoe.isConnected", "false");
                 }
-            }
-            else if (action.equals(ETH_STATE_CHANGED_ACTION)) {
+            } else if (action.equals(ETH_STATE_CHANGED_ACTION)) {
                 int event = intent.getIntExtra(EXTRA_ETH_STATE, -1);
                 if (event == EVENT_HW_PHYCONNECTED &&
-                    isEthDeviceAdded()) {
+                        isEthDeviceAdded()) {
                     Log.d(TAG, "Ether.EVENT_HW_PHYCONNECTED");
                     mNetworkIfList.add("eth0");
                     if (connectStatus() != PppoeOperation.PPP_STATUS_CONNECTED) {
                         if (mDial != null && mNetworkIfList.size() > 0)
                             mDial.setEnabled(true);
                     }
-                    adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,mNetworkIfList);
+                    adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mNetworkIfList);
                     spinner.setAdapter(adapter);
-                }
-                else if (event == EVENT_HW_DISCONNECTED) {
-                        Log.d(TAG, "Ether.EVENT_HW_DISCONNECTED");
+                } else if (event == EVENT_HW_DISCONNECTED) {
+                    Log.d(TAG, "Ether.EVENT_HW_DISCONNECTED");
 
                     mNetworkIfList.remove("eth0");
                     if (connectStatus() != PppoeOperation.PPP_STATUS_CONNECTED) {
                         if (mDial != null && 0 == mNetworkIfList.size())
                             mDial.setEnabled(false);
                     }
-                    adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,mNetworkIfList);
+                    adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mNetworkIfList);
                     spinner.setAdapter(adapter);
                 }
             }
         }
     }
 
-    public void clearSelf()
-    {
+    public void clearSelf() {
         if (pppoeReceiver != null) {
             Log.d(TAG, "unregisterReceiver pppoeReceiver");
             context.unregisterReceiver(pppoeReceiver);
@@ -794,7 +764,7 @@ public class PppoeConfigDialog extends AlertDialog implements DialogInterface.On
                 Log.d(TAG, "unregisterReceiver pppoeReceiver");
                 context.unregisterReceiver(pppoeReceiver);
             }
-            ((PPPoEActivity)context).finish();
+            ((PPPoEActivity) context).finish();
             return true;
         }
         Log.d(TAG, "keyCode " + keyCode + " is down, do nothing");

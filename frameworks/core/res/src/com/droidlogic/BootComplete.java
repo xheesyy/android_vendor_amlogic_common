@@ -29,6 +29,7 @@ import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 
@@ -40,7 +41,7 @@ import com.droidlogic.app.SystemControlManager;
 import com.droidlogic.app.UsbCameraManager;
 
 public class BootComplete extends BroadcastReceiver {
-    private static final String TAG             = "BootComplete";
+    private static final String TAG = "BootComplete";
     private static final String DECRYPT_STATE = "encrypted";
     private static final String DECRYPT_TYPE = "file";
     private static final String DROID_SETTINGS_PACKAGE = "com.droidlogic.tv.settings";
@@ -59,7 +60,7 @@ public class BootComplete extends BroadcastReceiver {
             return;
         }
         SettingsPref.setSavedBootCompletedStatus(context, true);
-        mSystemControlManager =  SystemControlManager.getInstance();
+        mSystemControlManager = SystemControlManager.getInstance();
         mHasTvUiMode = DroidLogicUtils.isTv();
         final ContentResolver resolver = context.getContentResolver();
 
@@ -85,8 +86,8 @@ public class BootComplete extends BroadcastReceiver {
             context.startService(new Intent(context, NetflixService.class));
         }
 
-        context.startService(new Intent(context,NtpService.class));
-        context.startService(new Intent(context,ShuntdownService.class));
+        context.startService(new Intent(context, NtpService.class));
+        context.startService(new Intent(context, ShuntdownService.class));
 
         if (mHasTvUiMode)
             context.startService(new Intent(context, DroidLogicPowerService.class));
@@ -127,10 +128,10 @@ public class BootComplete extends BroadcastReceiver {
 
     private boolean getBooleanProperty(String property, boolean defVal) {
         try {
-            return (boolean)Class.forName("android.os.SystemProperties")
-                .getMethod("getBoolean", new Class[] { String.class, Boolean.TYPE })
-                .invoke(null, new Object[] { property, defVal });
-        } catch(Exception e) {
+            return (boolean) Class.forName("android.os.SystemProperties")
+                    .getMethod("getBoolean", new Class[]{String.class, Boolean.TYPE})
+                    .invoke(null, new Object[]{property, defVal});
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;

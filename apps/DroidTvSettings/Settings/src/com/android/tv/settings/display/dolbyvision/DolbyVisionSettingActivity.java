@@ -25,7 +25,7 @@ public class DolbyVisionSettingActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DolbyVisionSettingFragment.class.getName(), null);
+                .newSettingsFragment(DolbyVisionSettingFragment.class.getName(), null);
     }
 
 }

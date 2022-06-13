@@ -16,7 +16,9 @@
 
 package com.droidlogic.updater.util;
 
-/** Utility class for an OTA package. */
+/**
+ * Utility class for an OTA package.
+ */
 public final class PackageFiles {
 
     /**
@@ -36,7 +38,7 @@ public final class PackageFiles {
      * {@code update_engine} might throw error when rebooting if {@code UpdateEngine#applyPayload}
      * is not supplied right headers and tokens.
      * This behavior might change in future android versions.
-     *
+     * <p>
      * To avoid extra network request in {@code update_engine}, this file has to be
      * downloaded and put in {@code OTA_PACKAGE_DIR}.
      */
@@ -44,7 +46,9 @@ public final class PackageFiles {
 
     public static final String PAYLOAD_PROPERTIES_FILE_NAME = "payload_properties.txt";
 
-    /** The zip entry in an A/B OTA package, which will be used by update_verifier. */
+    /**
+     * The zip entry in an A/B OTA package, which will be used by update_verifier.
+     */
     public static final String CARE_MAP_FILE_NAME = "care_map.txt";
 
     public static final String METADATA_FILE_NAME = "metadata";
@@ -55,5 +59,6 @@ public final class PackageFiles {
      */
     public static final String COMPATIBILITY_ZIP_FILE_NAME = "compatibility.zip";
 
-    private PackageFiles() {}
+    private PackageFiles() {
+    }
 }

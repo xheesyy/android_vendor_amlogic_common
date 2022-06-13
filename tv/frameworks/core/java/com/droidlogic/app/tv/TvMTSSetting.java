@@ -112,16 +112,16 @@ public class TvMTSSetting {
 
         public String toString() {
             String str = "STD: " + STD.getName() + "(" + STD.getValue() + ")\n" +
-                   "In: " + In.getName() + "(" + In.getValue() + ")\n" +
-                   "Out: " + Out.getName() + "(" + Out.getValue() + ")\n" +
-                   "Out Mode List: \n";
+                    "In: " + In.getName() + "(" + In.getValue() + ")\n" +
+                    "Out: " + Out.getName() + "(" + Out.getValue() + ")\n" +
+                    "Out Mode List: \n";
 
-           for (Mode mode : OutList) {
-               if (mode.getName() == null || mode.getName().equals(""))
-                   continue;
+            for (Mode mode : OutList) {
+                if (mode.getName() == null || mode.getName().equals(""))
+                    continue;
 
-               str = str + mode.getName() + "(" + mode.getValue() + ")\n";
-           }
+                str = str + mode.getName() + "(" + mode.getValue() + ")\n";
+            }
 
             return str;
         }
@@ -130,13 +130,13 @@ public class TvMTSSetting {
     public static final int BTSC_STD = TvControlManager.AUDIO_STANDARD_BTSC;
     public static final String BTSC_Name = "BTSC";
 
-    public static final int BTSC_OUT_MONO   = TvControlManager.AUDIO_OUTMODE_MONO;
+    public static final int BTSC_OUT_MONO = TvControlManager.AUDIO_OUTMODE_MONO;
     public static final int BTSC_OUT_STEREO = TvControlManager.AUDIO_OUTMODE_STEREO;
-    public static final int BTSC_OUT_SAP    = TvControlManager.AUDIO_OUTMODE_SAP;
+    public static final int BTSC_OUT_SAP = TvControlManager.AUDIO_OUTMODE_SAP;
 
-    public static final int BTSC_IN_MONO       = TvControlManager.AUDIO_INMODE_MONO;
-    public static final int BTSC_IN_STEREO     = TvControlManager.AUDIO_INMODE_STEREO;
-    public static final int BTSC_IN_SAP        = TvControlManager.AUDIO_INMODE_MONO_SAP;
+    public static final int BTSC_IN_MONO = TvControlManager.AUDIO_INMODE_MONO;
+    public static final int BTSC_IN_STEREO = TvControlManager.AUDIO_INMODE_STEREO;
+    public static final int BTSC_IN_SAP = TvControlManager.AUDIO_INMODE_MONO_SAP;
     public static final int BTSC_IN_STEREO_SAP = TvControlManager.AUDIO_INMODE_STEREO_SAP;
 
     public MTSMode createMtsBtsc(int std, int in, int out) {
@@ -201,22 +201,22 @@ public class TvMTSSetting {
         return (std == BTSC_STD);
     }
 
-    public static final int A2_STD_K   = TvControlManager.AUDIO_STANDARD_A2_K;
-    public static final int A2_STD_BG  = TvControlManager.AUDIO_STANDARD_A2_BG;
+    public static final int A2_STD_K = TvControlManager.AUDIO_STANDARD_A2_K;
+    public static final int A2_STD_BG = TvControlManager.AUDIO_STANDARD_A2_BG;
     public static final int A2_STD_DK1 = TvControlManager.AUDIO_STANDARD_A2_DK1;
     public static final int A2_STD_DK2 = TvControlManager.AUDIO_STANDARD_A2_DK2;
     public static final int A2_STD_DK3 = TvControlManager.AUDIO_STANDARD_A2_DK3;
     public static final String A2_Name = "A2";
 
-    public static final int A2_OUT_MONO     = TvControlManager.AUDIO_OUTMODE_A2_MONO;
-    public static final int A2_OUT_STEREO   = TvControlManager.AUDIO_OUTMODE_A2_STEREO;
-    public static final int A2_OUT_DUALI    = TvControlManager.AUDIO_OUTMODE_A2_DUAL_A;
-    public static final int A2_OUT_DUALII   = TvControlManager.AUDIO_OUTMODE_A2_DUAL_B;
+    public static final int A2_OUT_MONO = TvControlManager.AUDIO_OUTMODE_A2_MONO;
+    public static final int A2_OUT_STEREO = TvControlManager.AUDIO_OUTMODE_A2_STEREO;
+    public static final int A2_OUT_DUALI = TvControlManager.AUDIO_OUTMODE_A2_DUAL_A;
+    public static final int A2_OUT_DUALII = TvControlManager.AUDIO_OUTMODE_A2_DUAL_B;
     public static final int A2_OUT_DUALI_II = TvControlManager.AUDIO_OUTMODE_A2_DUAL_AB;
 
-    public static final int A2_IN_MONO   = TvControlManager.AUDIO_INMODE_MONO;
+    public static final int A2_IN_MONO = TvControlManager.AUDIO_INMODE_MONO;
     public static final int A2_IN_STEREO = TvControlManager.AUDIO_INMODE_STEREO;
-    public static final int A2_IN_DUAL   = TvControlManager.AUDIO_INMODE_DUAL;
+    public static final int A2_IN_DUAL = TvControlManager.AUDIO_INMODE_DUAL;
 
     public MTSMode createMtsA2(int std, int in, int out) {
 
@@ -274,23 +274,23 @@ public class TvMTSSetting {
                 || std == A2_STD_DK3);
     }
 
-    public static final int NICAM_STD_I  = TvControlManager.AUDIO_STANDARD_NICAM_I;
+    public static final int NICAM_STD_I = TvControlManager.AUDIO_STANDARD_NICAM_I;
     public static final int NICAM_STD_BG = TvControlManager.AUDIO_STANDARD_NICAM_BG;
-    public static final int NICAM_STD_L  = TvControlManager.AUDIO_STANDARD_NICAM_L;
+    public static final int NICAM_STD_L = TvControlManager.AUDIO_STANDARD_NICAM_L;
     public static final int NICAM_STD_DK = TvControlManager.AUDIO_STANDARD_NICAM_DK;
     public static final String NICAM_Name = "NICAM";
 
-    public static final int NICAM_OUT_MONO     = TvControlManager.AUDIO_OUTMODE_NICAM_MONO;
-    public static final int NICAM_OUT_MONO1    = TvControlManager.AUDIO_OUTMODE_NICAM_MONO1;
-    public static final int NICAM_OUT_STEREO   = TvControlManager.AUDIO_OUTMODE_NICAM_STEREO;
-    public static final int NICAM_OUT_DUALI    = TvControlManager.AUDIO_OUTMODE_NICAM_DUAL_A;
-    public static final int NICAM_OUT_DUALII   = TvControlManager.AUDIO_OUTMODE_NICAM_DUAL_B;
+    public static final int NICAM_OUT_MONO = TvControlManager.AUDIO_OUTMODE_NICAM_MONO;
+    public static final int NICAM_OUT_MONO1 = TvControlManager.AUDIO_OUTMODE_NICAM_MONO1;
+    public static final int NICAM_OUT_STEREO = TvControlManager.AUDIO_OUTMODE_NICAM_STEREO;
+    public static final int NICAM_OUT_DUALI = TvControlManager.AUDIO_OUTMODE_NICAM_DUAL_A;
+    public static final int NICAM_OUT_DUALII = TvControlManager.AUDIO_OUTMODE_NICAM_DUAL_B;
     public static final int NICAM_OUT_DUALI_II = TvControlManager.AUDIO_OUTMODE_NICAM_DUAL_AB;
 
-    public static final int NICAM_IN_MONO   = TvControlManager.AUDIO_INMODE_MONO;
+    public static final int NICAM_IN_MONO = TvControlManager.AUDIO_INMODE_MONO;
     public static final int NICAM_IN_STEREO = TvControlManager.AUDIO_INMODE_STEREO;
-    public static final int NICAM_IN_DUAL   = TvControlManager.AUDIO_INMODE_DUAL;
-    public static final int NICAM_IN_MONO1  = TvControlManager.AUDIO_INMODE_NICAM_MONO;
+    public static final int NICAM_IN_DUAL = TvControlManager.AUDIO_INMODE_DUAL;
+    public static final int NICAM_IN_MONO1 = TvControlManager.AUDIO_INMODE_NICAM_MONO;
 
     public MTSMode createMtsNicam(int std, int in, int out) {
 
@@ -360,11 +360,11 @@ public class TvMTSSetting {
                 || std == NICAM_STD_DK);
     }
 
-    public static final int MONO_STD_BG  = TvControlManager.AUDIO_STANDARD_MONO_BG;
-    public static final int MONO_STD_DK  = TvControlManager.AUDIO_STANDARD_MONO_DK;
-    public static final int MONO_STD_I   = TvControlManager.AUDIO_STANDARD_MONO_I;
-    public static final int MONO_STD_M   = TvControlManager.AUDIO_STANDARD_MONO_M;
-    public static final int MONO_STD_L   = TvControlManager.AUDIO_STANDARD_MONO_L;
+    public static final int MONO_STD_BG = TvControlManager.AUDIO_STANDARD_MONO_BG;
+    public static final int MONO_STD_DK = TvControlManager.AUDIO_STANDARD_MONO_DK;
+    public static final int MONO_STD_I = TvControlManager.AUDIO_STANDARD_MONO_I;
+    public static final int MONO_STD_M = TvControlManager.AUDIO_STANDARD_MONO_M;
+    public static final int MONO_STD_L = TvControlManager.AUDIO_STANDARD_MONO_L;
     public static final String MONO_Name = "MONO";
 
     public static final int MONO_OUT_MONO = TvControlManager.AUDIO_OUTMODE_MONO;

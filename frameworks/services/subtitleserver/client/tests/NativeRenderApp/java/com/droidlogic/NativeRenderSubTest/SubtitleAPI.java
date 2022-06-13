@@ -4,14 +4,15 @@ import android.util.Log;
 
 public class SubtitleAPI {
 
-    public static final int E_SUBTITLE_FMQ   = 0;   /* for soft support subtitle data, use hidl FastMessageQueue */
-    public static final int E_SUBTITLE_DEV   = 1;      /* use /dev/amstream_sub_read as the IO source */
-    public static final int E_SUBTITLE_FILE  = 2;      /* for external subtitle file */
-    public static final int E_SUBTITLE_SOCK  = 3;      /* deprecated, android not permmit to use anymore */
+    public static final int E_SUBTITLE_FMQ = 0;   /* for soft support subtitle data, use hidl FastMessageQueue */
+    public static final int E_SUBTITLE_DEV = 1;      /* use /dev/amstream_sub_read as the IO source */
+    public static final int E_SUBTITLE_FILE = 2;      /* for external subtitle file */
+    public static final int E_SUBTITLE_SOCK = 3;      /* deprecated, android not permmit to use anymore */
     public static final int E_SUBTITLE_DEMUX = 4;     /* use aml hwdemux as the data source */
 
     private static final String TAG = "SubtitleAPI";
     private long mHandle;
+
     static {
         try {
             System.loadLibrary("subtitleApiTestJni");
@@ -19,6 +20,7 @@ public class SubtitleAPI {
             Log.e(TAG, "Error load:", e);
         }
     }
+
     SubtitleAPI() {
         mHandle = 0;
     }
@@ -82,17 +84,26 @@ public class SubtitleAPI {
     }
 
     private native long nativeSubtitleCreate();
+
     private native boolean nativeSubtitleDestroy(long handle);
+
     private native boolean nativeSubtitleOpen(long handle, int ioType, int SubType,
-           int pid, int videoFmt, int channelId, int ancId, int cmpositionId);
+                                              int pid, int videoFmt, int channelId, int ancId, int cmpositionId);
+
     private native boolean nativeSubtitleClose(long handle);
+
     private native boolean nativeShow(long handle);
+
     private native boolean nativeHide(long handle);
+
     private native boolean nativeDisplayRect(long handle, int x, int y, int w, int h);
 
     private native boolean nativeTTgoHome(long handle);
+
     private native boolean nativeTTnextPage(long handle, boolean dir);
+
     private native boolean nativeTTnextSubPage(long handle, boolean dir);
+
     private native boolean nativeTTgotoPage(long handle, int pageNo, int subPageNo);
 
 }

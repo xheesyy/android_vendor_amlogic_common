@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="settings_app_name" msgid="7931201304065140909">"Ustawienia"</string>
     <string name="launcher_settings_app_name" msgid="1459269619779675736">"Ustawienia"</string>
     <string name="launcher_network_app_name" msgid="8311763462169735002">"Sieć"</string>
@@ -46,10 +44,10 @@
     <string name="accounts_category_title" msgid="7286858931427579845">"Konta i logowanie"</string>
     <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"Brak kont"</string>
     <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
-      <item quantity="few"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> konta</item>
-      <item quantity="many"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> kont</item>
-      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> konta</item>
-      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> konto</item>
+        <item quantity="few"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> konta</item>
+        <item quantity="many"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> kont</item>
+        <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> konta</item>
+        <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> konto</item>
     </plurals>
     <string name="accounts_slice_summary" msgid="1571012157154521119">"Usługi multimedialne, Asystent, płatności"</string>
     <string name="connectivity_network_category_title" msgid="8226264889892008114">"Sieć i internet"</string>
@@ -59,10 +57,10 @@
     <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"Piloty i akcesoria"</string>
     <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"Brak podłączonych urządzeń Bluetooth"</string>
     <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
-      <item quantity="few"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> akcesoria</item>
-      <item quantity="many"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> akcesoriów</item>
-      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> akcesorium</item>
-      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> akcesorium</item>
+        <item quantity="few"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> akcesoria</item>
+        <item quantity="many"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> akcesoriów</item>
+        <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> akcesorium</item>
+        <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> akcesorium</item>
     </plurals>
     <string name="display_and_sound_category_title" msgid="9203309625380755860">"Wyświetlacz i dźwięk"</string>
     <string name="help_and_feedback_category_title" msgid="7036505833991003031">"Pomoc i opinie"</string>
@@ -234,10 +232,10 @@
     <string name="about_serial" msgid="3432319328808745459">"Numer seryjny"</string>
     <string name="about_build" msgid="8467840394761634575">"Kompilacja systemu operacyjnego Android TV"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
-      <item quantity="few">Od zostania programistą dzielą Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroki.</item>
-      <item quantity="many">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroków.</item>
-      <item quantity="other">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroku.</item>
-      <item quantity="one">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> krok.</item>
+        <item quantity="few">Od zostania programistą dzielą Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroki.</item>
+        <item quantity="many">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroków.</item>
+        <item quantity="other">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> kroku.</item>
+        <item quantity="one">Od zostania programistą dzieli Cię już tylko <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> krok.</item>
     </plurals>
     <string name="about_ads" msgid="7662896442040086522">"Reklamy"</string>
     <string name="ads_description" msgid="8081069475265061074">"Zarządzaj ustawieniami reklam, np. resetowaniem identyfikatora wyświetlania reklam."</string>
@@ -271,20 +269,20 @@
     <string name="license_title" msgid="4032466200355435641">"Licencja"</string>
     <string name="terms_title" msgid="192888187310800678">"Warunki korzystania z usługi"</string>
     <string name="webview_license_title" msgid="5370270485188947540">"Systemowa licencja na WebView"</string>
-  <string-array name="wifi_signal_strength">
-    <item msgid="4475363344103354364">"Słaba"</item>
-    <item msgid="2098818614362343532">"Dostateczna"</item>
-    <item msgid="2713050260700175954">"Dobra"</item>
-    <item msgid="6005053494500517261">"Doskonała"</item>
-  </string-array>
+    <string-array name="wifi_signal_strength">
+        <item msgid="4475363344103354364">"Słaba"</item>
+        <item msgid="2098818614362343532">"Dostateczna"</item>
+        <item msgid="2713050260700175954">"Dobra"</item>
+        <item msgid="6005053494500517261">"Doskonała"</item>
+    </string-array>
     <string name="title_mac_address" msgid="7511588678922209883">"Adres MAC urządzenia"</string>
     <string name="title_randomized_mac_address" msgid="3359532498635833471">"Randomizowany adres MAC"</string>
     <string name="title_signal_strength" msgid="5047116893338315998">"Siła sygnału"</string>
     <string name="title_random_mac_settings" msgid="6685812569356353378">"Prywatność"</string>
-  <string-array name="random_mac_settings_entries">
-    <item msgid="3457228452595715533">"Używaj randomizowanego adresu MAC (domyślnie)"</item>
-    <item msgid="2490415280467390067">"Używaj adresu MAC urządzenia"</item>
-  </string-array>
+    <string-array name="random_mac_settings_entries">
+        <item msgid="3457228452595715533">"Używaj randomizowanego adresu MAC (domyślnie)"</item>
+        <item msgid="2490415280467390067">"Używaj adresu MAC urządzenia"</item>
+    </string-array>
     <string name="mac_address_not_available" msgid="2992935344891853369">"Niedostępny"</string>
     <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"Randomizowany adres MAC"</string>
     <string name="title_ip_address" msgid="705842159484772807">"Adres IP"</string>
@@ -458,15 +456,15 @@
     <string name="system_set_time_format" msgid="902518158066450918">"Format 24-godzinny"</string>
     <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="SAMPLE">%2$s</xliff:g>)"</string>
     <string name="system_auto_date_time" msgid="8458199433555868708">"Automatyczna data i godzina"</string>
-  <string-array name="auto_date_time_entries">
-    <item msgid="8119837829162871025">"Użyj czasu podanego przez sieć"</item>
-    <item msgid="369146066143710034">"Wył."</item>
-  </string-array>
-  <string-array name="auto_date_time_ts_entries">
-    <item msgid="1010003447137304123">"Użyj czasu podanego przez sieć"</item>
-    <item msgid="5645263357181875427">"Użyj czasu podanego przez strumień transportu"</item>
-    <item msgid="5501503537181350884">"Wył."</item>
-  </string-array>
+    <string-array name="auto_date_time_entries">
+        <item msgid="8119837829162871025">"Użyj czasu podanego przez sieć"</item>
+        <item msgid="369146066143710034">"Wył."</item>
+    </string-array>
+    <string-array name="auto_date_time_ts_entries">
+        <item msgid="1010003447137304123">"Użyj czasu podanego przez sieć"</item>
+        <item msgid="5645263357181875427">"Użyj czasu podanego przez strumień transportu"</item>
+        <item msgid="5501503537181350884">"Wył."</item>
+    </string-array>
     <string name="system_location" msgid="4057295363709016511">"Lokalizacja"</string>
     <string name="system_desc_location" msgid="1680134126100535031">"Zezwalaj aplikacjom, które zapytały o pozwolenie, na korzystanie z informacji o lokalizacji."</string>
     <string name="system_network_location_confirm" msgid="7128162421781085332">"Zgoda na usługę lokalizacyjną"</string>
@@ -612,15 +610,15 @@
     <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"Pokaż licznik przerysowań"</string>
     <string name="no_application" msgid="1904437693440706534">"Brak"</string>
     <string name="enable_opengl_traces_none" msgid="4718084947494592040">"Brak"</string>
-  <string-array name="animation_scale_entries">
-    <item msgid="5408992662476056082">"Animacja wyłączona"</item>
-    <item msgid="6818290063799857019">"Skala animacji 0,5x"</item>
-    <item msgid="8257959452691080724">"Skala animacji 1x"</item>
-    <item msgid="4781052272686018414">"Skala animacji 1,5x"</item>
-    <item msgid="2272016945160227610">"Skala animacji 2x"</item>
-    <item msgid="5015441793276576312">"Skala animacji 5x"</item>
-    <item msgid="1290233583371556415">"Skala animacji 10x"</item>
-  </string-array>
+    <string-array name="animation_scale_entries">
+        <item msgid="5408992662476056082">"Animacja wyłączona"</item>
+        <item msgid="6818290063799857019">"Skala animacji 0,5x"</item>
+        <item msgid="8257959452691080724">"Skala animacji 1x"</item>
+        <item msgid="4781052272686018414">"Skala animacji 1,5x"</item>
+        <item msgid="2272016945160227610">"Skala animacji 2x"</item>
+        <item msgid="5015441793276576312">"Skala animacji 5x"</item>
+        <item msgid="1290233583371556415">"Skala animacji 10x"</item>
+    </string-array>
     <string name="track_frame_time_off" msgid="8845064783618702239">"Wył."</string>
     <string name="track_frame_time_bars" msgid="5841531515222229632">"Na ekranie w postaci pasków"</string>
     <string name="app_process_limit_standard" msgid="6069948528843313888">"Standardowy limit"</string>
@@ -673,22 +671,22 @@
     <string name="inputs_tv_auto_on" msgid="544848340484583318">"Autom. wyłączanie TV włączone"</string>
     <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"Włączanie TV za pomocą urządzenia HDMI"</string>
     <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
-      <item quantity="few">Podłączone wejścia</item>
-      <item quantity="many">Podłączone wejścia</item>
-      <item quantity="other">Podłączone wejścia</item>
-      <item quantity="one">Podłączone wejście</item>
+        <item quantity="few">Podłączone wejścia</item>
+        <item quantity="many">Podłączone wejścia</item>
+        <item quantity="other">Podłączone wejścia</item>
+        <item quantity="one">Podłączone wejście</item>
     </plurals>
     <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
-      <item quantity="few">Wejścia zapasowe</item>
-      <item quantity="many">Wejścia zapasowe</item>
-      <item quantity="other">Wejścia zapasowe</item>
-      <item quantity="one">Wejście zapasowe</item>
+        <item quantity="few">Wejścia zapasowe</item>
+        <item quantity="many">Wejścia zapasowe</item>
+        <item quantity="other">Wejścia zapasowe</item>
+        <item quantity="one">Wejście zapasowe</item>
     </plurals>
     <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
-      <item quantity="few">Niepodłączone wejścia</item>
-      <item quantity="many">Niepodłączone wejścia</item>
-      <item quantity="other">Niepodłączone wejścia</item>
-      <item quantity="one">Niepodłączone wejście</item>
+        <item quantity="few">Niepodłączone wejścia</item>
+        <item quantity="many">Niepodłączone wejścia</item>
+        <item quantity="other">Niepodłączone wejścia</item>
+        <item quantity="one">Niepodłączone wejście</item>
     </plurals>
     <string name="user_add_profile_item_summary" msgid="3211866291940617804">"Ogranicz dostęp do aplikacji i innych treści na swoim koncie"</string>
     <string name="user_new_profile_name" msgid="6637593067318708353">"Profil ograniczony"</string>
@@ -704,10 +702,10 @@
     <string name="restricted_profile_configure_title" msgid="3327502517511010296">"Ustawienia"</string>
     <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"Dozwolone aplikacje"</string>
     <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
-      <item quantity="few">%d dozwolone aplikacje</item>
-      <item quantity="many">%d dozwolonych aplikacji</item>
-      <item quantity="other">Dozwolone aplikacje: %d</item>
-      <item quantity="one">1 dozwolona aplikacja</item>
+        <item quantity="few">%d dozwolone aplikacje</item>
+        <item quantity="many">%d dozwolonych aplikacji</item>
+        <item quantity="other">Dozwolone aplikacje: %d</item>
+        <item quantity="one">1 dozwolona aplikacja</item>
     </plurals>
     <string name="restricted_profile_allowed" msgid="970921490464867884">"Dozwolone"</string>
     <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"Niedozwolone"</string>
@@ -785,12 +783,12 @@
     <string name="confirm_factory_reset_device" msgid="4308646529880718465">"Wymaż wszystko"</string>
     <string name="select_device_name_title" msgid="3045019448327493634">"Wybierz nazwę urządzenia <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="select_device_name_description" msgid="8528185095614986580">"Nadaj nazwę swojemu urządzeniu, by móc je łatwo rozpoznać podczas przesyłania treści lub łączenia się z innych urządzeń."</string>
-  <string-array name="rooms">
-    <item msgid="6590829789532602097">"Android TV"</item>
-    <item msgid="1140506340411482365">"Telewizor w salonie"</item>
-    <item msgid="6448060889026244632">"Telewizor w pokoju rodzinnym"</item>
-    <item msgid="3336274213215419228">"Telewizor w sypialni"</item>
-  </string-array>
+    <string-array name="rooms">
+        <item msgid="6590829789532602097">"Android TV"</item>
+        <item msgid="1140506340411482365">"Telewizor w salonie"</item>
+        <item msgid="6448060889026244632">"Telewizor w pokoju rodzinnym"</item>
+        <item msgid="3336274213215419228">"Telewizor w sypialni"</item>
+    </string-array>
     <string name="custom_room" msgid="6798144004583173563">"Wpisz własną nazwę…"</string>
     <string name="device_rename_title" msgid="9070021379000499270">"Zmień nazwę tego urządzenia <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="device_rename_description" msgid="1973894029492915135">"To urządzenie <xliff:g id="DEVICEMODEL">%1$s</xliff:g> ma nazwę „<xliff:g id="DEVICENAME">%2$s</xliff:g>”"</string>

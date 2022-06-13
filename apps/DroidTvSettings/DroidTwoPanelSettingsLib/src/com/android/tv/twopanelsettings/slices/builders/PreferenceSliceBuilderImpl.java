@@ -68,6 +68,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: Remove unused code, add test.
+
 /**
  * Provide the implementation for PreferenceSliceBuilder
  */
@@ -164,6 +165,7 @@ public class PreferenceSliceBuilderImpl extends TemplateBuilderImpl {
 
     /**
      * Set the redirected slice uri.
+     *
      * @param redirectedSliceUri the new redirected slice uri
      */
     public void setRedirectedSliceUri(CharSequence redirectedSliceUri) {
@@ -369,8 +371,8 @@ public class PreferenceSliceBuilderImpl extends TemplateBuilderImpl {
 
         private void addInfoItem(String title, String summary) {
             Slice.Builder sb = new Slice.Builder(getBuilder())
-                        .addText(title, null, HINT_TITLE)
-                        .addText(summary, null, HINT_SUMMARY);
+                    .addText(title, null, HINT_TITLE)
+                    .addText(summary, null, HINT_SUMMARY);
             mInfoItems.add(sb.build());
         }
 
@@ -428,12 +430,16 @@ public class PreferenceSliceBuilderImpl extends TemplateBuilderImpl {
             mFollowupAction = action;
         }
 
-        /** Set the actionId to be digested for logging. */
+        /**
+         * Set the actionId to be digested for logging.
+         */
         public void setActionId(int actionId) {
             mActionIdItem = new SliceItem(actionId, FORMAT_INT, EXTRA_ACTION_ID, new String[]{});
         }
 
-        /** Set the pageId to be digested for logging. */
+        /**
+         * Set the pageId to be digested for logging.
+         */
         public void setPageId(int pageId) {
             mPageIdItem = new SliceItem(pageId, FORMAT_INT, EXTRA_PAGE_ID, new String[]{});
         }
@@ -503,7 +509,7 @@ public class PreferenceSliceBuilderImpl extends TemplateBuilderImpl {
         }
 
         public void setKey(CharSequence key) {
-            mKeyItem = new SliceItem(key, FORMAT_TEXT, TAG_KEY, new String[] {HINT_KEYWORDS});
+            mKeyItem = new SliceItem(key, FORMAT_TEXT, TAG_KEY, new String[]{HINT_KEYWORDS});
         }
 
         public void setInfoText(CharSequence infoText) {

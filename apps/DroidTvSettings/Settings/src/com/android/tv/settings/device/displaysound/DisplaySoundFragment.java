@@ -130,7 +130,7 @@ public class DisplaySoundFragment extends SettingsPreferenceFragment {
         Preference cecPreference = findPreference(KEY_CEC);
         if (cecPreference instanceof SlicePreference
                 && SliceUtils.isSliceProviderValid(
-                        getContext(), ((SlicePreference) cecPreference).getUri())) {
+                getContext(), ((SlicePreference) cecPreference).getUri())) {
             ContentResolver resolver = getContext().getContentResolver();
             // Note that default CEC is enabled. You'll find similar retrieval of property in
             // HdmiControlService.

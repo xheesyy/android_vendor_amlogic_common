@@ -44,10 +44,10 @@ public class DisplayPositionManager {
     private int mPreWidth = 0;
     private int mPreHeight = 0;
 
-    private  String mCurrentMode = null;
+    private String mCurrentMode = null;
 
     private int mMaxRight = 0;
-    private int mMaxBottom=0;
+    private int mMaxBottom = 0;
     private int offsetStep = 2;  // because 20% is too large ,so we divide a value to smooth the view
 
     public DisplayPositionManager(Context context) {
@@ -65,48 +65,48 @@ public class DisplayPositionManager {
     }
 
     private void initCurrentPostion() {
-        int [] position = mOutputModeManager.getPosition(mCurrentMode);
+        int[] position = mOutputModeManager.getPosition(mCurrentMode);
         mPreLeft = mCurrentLeft = position[0];
-        mPreRight = mCurrentTop  = position[1];
+        mPreRight = mCurrentTop = position[1];
         mPreWidth = mCurrentWidth = position[2];
-        mPreHeight = mCurrentHeight= position[3];
+        mPreHeight = mCurrentHeight = position[3];
     }
 
     public int getInitialRateValue() {
         mCurrentMode = mOutputModeManager.getCurrentOutputMode();
         initStep(mCurrentMode);
-        int m = (100*2*offsetStep)*mPreLeft ;
+        int m = (100 * 2 * offsetStep) * mPreLeft;
         if (m == 0) {
             return 100;
         }
-        int rate =  100 - m/(mMaxRight+1) - 1;
+        int rate = 100 - m / (mMaxRight + 1) - 1;
         return rate;
     }
 
-    public int getCurrentRateValue(){
+    public int getCurrentRateValue() {
         return screen_rate;
     }
 
     private void zoom(int step) {
         screen_rate = screen_rate + step;
-        if (screen_rate >MAX_Height) {
+        if (screen_rate > MAX_Height) {
             screen_rate = MAX_Height;
-        }else if (screen_rate <MIN_Height) {
-            screen_rate = MIN_Height ;
+        } else if (screen_rate < MIN_Height) {
+            screen_rate = MIN_Height;
         }
         zoomByPercent(screen_rate);
     }
 
-    public void zoomIn(){
+    public void zoomIn() {
         zoom(1);
     }
 
-    public void zoomOut(){
+    public void zoomOut() {
         zoom(-1);
     }
 
     public void saveDisplayPosition() {
-        if ( !isScreenPositionChanged())
+        if (!isScreenPositionChanged())
             return;
 
         mOutputModeManager.savePosition(mCurrentLeft, mCurrentTop, mCurrentWidth, mCurrentHeight);
@@ -120,16 +120,16 @@ public class DisplayPositionManager {
         if (mode.contains(OutputModeManager.HDMI_480)) {
             mMaxRight = 719;
             mMaxBottom = 479;
-        }else if (mode.contains(OutputModeManager.HDMI_576)) {
+        } else if (mode.contains(OutputModeManager.HDMI_576)) {
             mMaxRight = 719;
             mMaxBottom = 575;
-        }else if (mode.contains(OutputModeManager.HDMI_720)) {
+        } else if (mode.contains(OutputModeManager.HDMI_720)) {
             mMaxRight = 1279;
             mMaxBottom = 719;
-        }else if (mode.contains(OutputModeManager.HDMI_1080)) {
+        } else if (mode.contains(OutputModeManager.HDMI_1080)) {
             mMaxRight = 1919;
             mMaxBottom = 1079;
-        }else if (mode.contains(OutputModeManager.HDMI_4K2K)) {
+        } else if (mode.contains(OutputModeManager.HDMI_4K2K)) {
             mMaxRight = 3839;
             mMaxBottom = 2159;
         } else if (mode.contains(OutputModeManager.HDMI_SMPTE)) {
@@ -141,57 +141,58 @@ public class DisplayPositionManager {
         }
     }
 
-    public void zoomByPercent(int percent){
+    public void zoomByPercent(int percent) {
 
-        if (percent > 100 ) {
+        if (percent > 100) {
             percent = 100;
-            return ;
+            return;
         }
 
-        if (percent < 80 ) {
+        if (percent < 80) {
             percent = 80;
-            return ;
+            return;
         }
 
         mCurrentMode = mOutputModeManager.getCurrentOutputMode();
         initStep(mCurrentMode);
 
-        mCurrentLeft = (100-percent)*(mMaxRight)/(100*2*offsetStep);
-        mCurrentTop  = (100-percent)*(mMaxBottom)/(100*2*offsetStep);
+        mCurrentLeft = (100 - percent) * (mMaxRight) / (100 * 2 * offsetStep);
+        mCurrentTop = (100 - percent) * (mMaxBottom) / (100 * 2 * offsetStep);
         mCurrentRight = mMaxRight - mCurrentLeft;
         mCurrentBottom = mMaxBottom - mCurrentTop;
         mCurrentWidth = mCurrentRight - mCurrentLeft + 1;
         mCurrentHeight = mCurrentBottom - mCurrentTop + 1;
 
-        setPosition(mCurrentLeft, mCurrentTop,mCurrentRight, mCurrentBottom, 0);
+        setPosition(mCurrentLeft, mCurrentTop, mCurrentRight, mCurrentBottom, 0);
     }
+
     private void setPosition(int l, int t, int r, int b, int mode) {
         String str = "";
-        int left =  l;
-        int top =  t;
+        int left = l;
+        int top = t;
         int width = mCurrentWidth;
         int height = mCurrentHeight;
 
         if (left < 0) {
-            left = 0 ;
+            left = 0;
         }
 
         if (top < 0) {
-            top = 0 ;
+            top = 0;
         }
         mOutputModeManager.savePosition(left, top, width, height);
         mOutputModeManager.setOsdMouse(left, top, width, height);
     }
 
-    public boolean isScreenPositionChanged(){
-        if (mPreLeft== mCurrentLeft && mPreTop == mCurrentTop
-            && mPreWidth == mCurrentWidth && mPreHeight == mCurrentHeight)
+    public boolean isScreenPositionChanged() {
+        if (mPreLeft == mCurrentLeft && mPreTop == mCurrentTop
+                && mPreWidth == mCurrentWidth && mPreHeight == mCurrentHeight)
             return false;
         else
             return true;
     }
 
-    public void zoomByPosition(int x, int y, int w, int h){
+    public void zoomByPosition(int x, int y, int w, int h) {
         mOutputModeManager.savePosition(x, y, w, h);
         mOutputModeManager.setOsdMouse(x, y, w, h);
     }

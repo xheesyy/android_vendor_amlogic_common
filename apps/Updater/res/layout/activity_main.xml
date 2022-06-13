@@ -4,6 +4,7 @@
     android:padding="40dp"
     android:orientation="vertical"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:paddingTop="60dp"
         android:id="@+id/layer_online"
@@ -21,25 +22,28 @@
             style="@style/ActionPrimaryButton"
             android:text="@string/update_online" />
     </LinearLayout>
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
+
     <LinearLayout
         android:layout_weight="1"
         android:id="@+id/update_progress"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
+
         <TextView
             android:id="@+id/running_status"
             android:background="#03000000"
             android:scrollbars="vertical"
             android:singleLine="false"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        />
+            android:layout_height="wrap_content" />
+
         <ProgressBar
             android:id="@+id/progressBar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
@@ -49,6 +53,7 @@
             android:progressDrawable="@drawable/progress_gray"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/rebootbtn"
             android:visibility="gone"
@@ -58,24 +63,27 @@
             android:layout_height="wrap_content"
             android:text="@string/reboot_btn" />
     </LinearLayout>
+
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:id="@+id/layer_local"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:id="@+id/logcal_zip_path"
-            android:hint="@string/path_hit"
-            ></TextView>
+            android:hint="@string/path_hit"></TextView>
+
         <Button
             android:id="@+id/update_cmd"
             android:enabled="false"
@@ -86,6 +94,7 @@
             android:background="@drawable/menu_heighlight"
             style="@style/ActionPrimaryButton"
             android:text="@string/update_cmd" />
+
         <Button
             android:id="@+id/update_local"
             android:layout_width="@dimen/btn_width"
@@ -95,10 +104,10 @@
             style="@style/ActionPrimaryButton"
             android:text="@string/update_local" />
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/file_path"
-        android:visibility="invisible"
-        ></TextView>
+        android:visibility="invisible"></TextView>
 </LinearLayout>

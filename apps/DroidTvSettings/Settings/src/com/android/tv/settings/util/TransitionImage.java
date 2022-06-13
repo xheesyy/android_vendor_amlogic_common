@@ -48,7 +48,7 @@ import com.android.tv.settings.widget.DrawableDownloader;
  * The transition image has three bounds, all relative to window<p>
  * - {@link #setRect(Rect)}  bounds of the image view, including background color<p>
  * - {@link #setUnclippedRect(RectF)} bounds of original bitmap without clipping,  the rect
- *   might be bigger than the image view<p>
+ * might be bigger than the image view<p>
  * - {@link #setClippedRect(RectF)} bounds of clipping<p>
  */
 public class TransitionImage {
@@ -211,7 +211,7 @@ public class TransitionImage {
             if (bundle.containsKey(EXTRA_TRANSITION_BITMAP)) {
                 bitmap = new BitmapDrawable(context.getResources(),
                         ActivityTransitionBitmapHelper.getBitmapFromBinderBundle(
-                        bundle.getBundle(EXTRA_TRANSITION_BITMAP)));
+                                bundle.getBundle(EXTRA_TRANSITION_BITMAP)));
             }
             if (bitmap == null) {
                 return false;
@@ -304,7 +304,7 @@ public class TransitionImage {
      * set bounds and bitmap
      *
      * @param backgroundView background view can be larger than the image view that will
-     * be drawn with background color
+     *                       be drawn with background color
      */
     public void createFromImageView(ImageView view, View backgroundView) {
         Drawable drawable = view.getDrawable();

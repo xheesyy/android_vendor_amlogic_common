@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,25 +15,25 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/tv_hdmi_switch">
-        <ListPreference
-            android:key="tv_hdmi1_switch"
-            android:persistent="false"
-            android:title="@string/tv_hdmi1_switch"
-            android:summary="%s" />
-        <ListPreference
-            android:key="tv_hdmi2_switch"
-            android:persistent="false"
-            android:title="@string/tv_hdmi2_switch"
-            android:summary="%s" />
-        <ListPreference
-            android:key="tv_hdmi3_switch"
-            android:persistent="false"
-            android:title="@string/tv_hdmi3_switch"
-            android:summary="%s" />
-        <ListPreference
-            android:key="tv_hdmi4_switch"
-            android:persistent="false"
-            android:title="@string/tv_hdmi4_switch"
-            android:summary="%s" />
+    android:title="@string/tv_hdmi_switch">
+    <ListPreference
+        android:key="tv_hdmi1_switch"
+        android:persistent="false"
+        android:title="@string/tv_hdmi1_switch"
+        android:summary="%s" />
+    <ListPreference
+        android:key="tv_hdmi2_switch"
+        android:persistent="false"
+        android:title="@string/tv_hdmi2_switch"
+        android:summary="%s" />
+    <ListPreference
+        android:key="tv_hdmi3_switch"
+        android:persistent="false"
+        android:title="@string/tv_hdmi3_switch"
+        android:summary="%s" />
+    <ListPreference
+        android:key="tv_hdmi4_switch"
+        android:persistent="false"
+        android:title="@string/tv_hdmi4_switch"
+        android:summary="%s" />
 </PreferenceScreen>

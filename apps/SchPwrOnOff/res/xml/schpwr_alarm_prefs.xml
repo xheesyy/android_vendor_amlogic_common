@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2008 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,18 +13,19 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/schedule_power_on_off_set"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    android:title="@string/schedule_power_on_off_set"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <Preference android:key="time" 
+    <Preference
+        android:key="time"
         android:persistent="false"
-        android:title="@string/schedule_power_on_off_time"/>
+        android:title="@string/schedule_power_on_off_time" />
 
     <com.khadas.schpwronoff.RepeatPreference
         android:persistent="false"
-        android:key="setRepeat" 
+        android:key="setRepeat"
         android:title="@string/schedule_power_on_off_repeat" />
 
 </PreferenceScreen>

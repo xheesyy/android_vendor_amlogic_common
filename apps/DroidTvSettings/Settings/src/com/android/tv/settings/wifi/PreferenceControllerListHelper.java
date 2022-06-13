@@ -45,7 +45,7 @@ public class PreferenceControllerListHelper {
      */
     @NonNull
     public static List<BasePreferenceController> getPreferenceControllersFromXml(Context context,
-            @XmlRes int xmlResId) {
+                                                                                 @XmlRes int xmlResId) {
         final List<BasePreferenceController> controllers = new ArrayList<>();
         List<Bundle> preferenceMetadata;
         try {

@@ -11,6 +11,7 @@
 package com.android.tv.settings.tvoption;
 
 import androidx.fragment.app.Fragment;
+
 import com.android.tv.settings.TvSettingsActivity;
 import com.android.tv.settings.overlay.FlavorUtils;
 
@@ -22,7 +23,7 @@ public class HdmiCecActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(HdmiCecFragment.class.getName(), null);
+                .newSettingsFragment(HdmiCecFragment.class.getName(), null);
     }
 
 }

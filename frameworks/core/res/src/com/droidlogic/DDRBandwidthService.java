@@ -83,15 +83,15 @@ public class DDRBandwidthService extends Service {
         mStat = busy;
         if ((mPolicy & POLICY_URGENT_CONFIG) != 0) {
             if (mCpuType >= MESON_CPU_MAJOR_ID_G12A) {
-                mScm.writeSysFs(BANDWIDTH_URGENT_PATH, busy?"3F0010 4":"3F0010 0");
-                mScm.writeSysFs(BANDWIDTH_URGENT_PATH, busy?"3 1":"3 0");
+                mScm.writeSysFs(BANDWIDTH_URGENT_PATH, busy ? "3F0010 4" : "3F0010 0");
+                mScm.writeSysFs(BANDWIDTH_URGENT_PATH, busy ? "3 1" : "3 0");
             } else if (mCpuType >= MESON_CPU_MAJOR_ID_GXL) {
-                mScm.writeSysFs(BANDWIDTH_URGENT_PATH, busy?"3F10 4":"3F10 0");
-                mScm.writeSysFs(BANDWIDTH_URGENT_PATH, busy?"7 1":"7 0");
+                mScm.writeSysFs(BANDWIDTH_URGENT_PATH, busy ? "3F10 4" : "3F10 0");
+                mScm.writeSysFs(BANDWIDTH_URGENT_PATH, busy ? "7 1" : "7 0");
             }
         }
         if ((mPolicy & POLICY_MALI_CORE_REDUCE) != 0) {
-            mScm.setProperty(PORPERTY_BUSY, busy?"1":"0");
+            mScm.setProperty(PORPERTY_BUSY, busy ? "1" : "0");
         }
         /*if ((mPolicy & POLICY_DISABLE_ANIMATION) != 0) {
             try {
@@ -116,7 +116,7 @@ public class DDRBandwidthService extends Service {
             }
         }*/
         if ((mPolicy & POLICY_VIDEO_VSKIP) != 0) {
-            mScm.writeSysFs(BANDWIDTH_VIDEO_SKIP_PATH, busy?"1":"0");
+            mScm.writeSysFs(BANDWIDTH_VIDEO_SKIP_PATH, busy ? "1" : "0");
         }
     }
 

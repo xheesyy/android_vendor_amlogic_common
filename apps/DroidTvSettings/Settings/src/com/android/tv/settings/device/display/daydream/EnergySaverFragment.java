@@ -223,7 +223,7 @@ public class EnergySaverFragment extends SettingsPreferenceFragment implements
     // TODO(b/158783050): update logging for new options 4H, 8H, 24H.
     // Map @array/screen_off_timeout_entries to defined log enum
     private int getSleepTimeEntryId(int sleepTimeValue) {
-        switch(sleepTimeValue) {
+        switch (sleepTimeValue) {
             case -1:
                 return TvSettingsEnums.SYSTEM_ENERGYSAVER_START_DELAY_NEVER;
             case 900000:

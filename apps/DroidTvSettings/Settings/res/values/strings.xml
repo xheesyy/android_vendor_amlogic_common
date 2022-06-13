@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -359,10 +358,10 @@
     <!-- Description text for bluetooth device pairing instructions. [CHAR LIMIT=150] -->
     <string name="accessories_add_bluetooth_inst">Before pairing your Bluetooth devices, make sure they\'re in pairing mode.</string>
     <!-- Extra description text for bluetooth device pairing instructions. It is a placeholder to be overrode. -->
-    <string name="accessories_add_bluetooth_inst_extra" translatable="false"/>
+    <string name="accessories_add_bluetooth_inst_extra" translatable="false" />
     <!-- The extra description is presented with button icons. These two strings can be overrode to be used for describing the pairing buttons for accessibility feature such as Talkback. -->
-    <string name="accessories_pairing_button1" translatable="false"/>
-    <string name="accessories_pairing_button2" translatable="false"/>
+    <string name="accessories_pairing_button1" translatable="false" />
+    <string name="accessories_pairing_button2" translatable="false" />
     <!-- Description text for autopairing when the user is in the pairing activity due to pressing the back HW button.  %1 will be replaced with the countdown value. [CHAR LIMIT=150] -->
     <string name="accessories_autopair_msg">A device was found and will automatically pair in <xliff:g id="countdown">%1$s</xliff:g> seconds</string>
     <!-- Error message displayed to the user indicating that a selected action is not supported on this device. [CHAR LIMIT=150] -->
@@ -596,16 +595,20 @@
     <!-- Legal screen -->
     <!-- About phone settings screen, setting option name to go to dialog that shows legal info -->
     <string name="legal_information">Legal information</string>
-    <!-- Note: this may be replaced by a more-specific title of the activity that will get launched --> <skip />
+    <!-- Note: this may be replaced by a more-specific title of the activity that will get launched -->
+    <skip />
     <!-- About phone settings screen, setting option name to see copyright-related info -->
     <string name="copyright_title">Copyright</string>
-    <!-- Note: this may be replaced by a more-specific title of the activity that will get launched --> <skip />
+    <!-- Note: this may be replaced by a more-specific title of the activity that will get launched -->
+    <skip />
     <!-- About phone settings screen, setting option name to see licensing info -->
     <string name="license_title">License</string>
-    <!-- Note: this may be replaced by a more-specific title of the activity that will get launched --> <skip />
+    <!-- Note: this may be replaced by a more-specific title of the activity that will get launched -->
+    <skip />
     <!-- About phone settings screen, setting option name to see terms and conditions -->
     <string name="terms_title">Terms and conditions</string>
-    <!-- Note: this may be replaced by a more-specific title of the activity that will get launched --> <skip />
+    <!-- Note: this may be replaced by a more-specific title of the activity that will get launched -->
+    <skip />
     <!-- About phone settings screen, setting option name to see licensing info for WebView component. [CHAR LIMIT=35] -->
     <string name="webview_license_title">System WebView License</string>
 
@@ -994,7 +997,7 @@
     <!-- Manage applications, text for move error messages -->
     <string name="insufficient_storage">Not enough storage space.</string>
     <string name="does_not_exist">App doesn\u2019t exist.</string>
-        <string name="invalid_location">Install location isn\u2019t valid.</string>
+    <string name="invalid_location">Install location isn\u2019t valid.</string>
     <string name="system_package">System updates can\u2019t be installed on external media.</string>
     <!-- Error message shown when trying to move device administrators to external disks, such as SD card [CHAR_LIMIT=none] -->
     <string name="move_error_device_admin">Device Administrator can\u2019t be installed on external media.</string>
@@ -1368,7 +1371,7 @@
     </string-array>
 
     <!-- Values for window animation scale preference. -->
-    <string-array name="animation_scale_values" translatable="false" >
+    <string-array name="animation_scale_values" translatable="false">
         <item>0</item>
         <item>.5</item>
         <item>1</item>
@@ -1537,36 +1540,36 @@
     <!-- Restrictions title for allowing location sharing [CHAR LIMIT=35] -->
     <string name="restriction_location_enable_title">Location</string>
     <!-- Restrictions summary for allowing location sharing [CHAR LIMIT=100] -->
-    <string name="restriction_location_enable_summary" >Let apps use your location information</string>
+    <string name="restriction_location_enable_summary">Let apps use your location information</string>
     <!-- Action to switch to a restricted profile [CHAR LIMIT=100] -->
-    <string name="restricted_profile_switch_to" >Enter restricted profile</string>
+    <string name="restricted_profile_switch_to">Enter restricted profile</string>
     <!-- Action to switch out of a restricted profile [CHAR LIMIT=100] -->
-    <string name="restricted_profile_switch_out" >Exit restricted profile</string>
+    <string name="restricted_profile_switch_out">Exit restricted profile</string>
     <!-- Title for action to delete a restricted profile [CHAR LIMIT=100] -->
-    <string name="restricted_profile_delete_title" >Delete restricted profile</string>
+    <string name="restricted_profile_delete_title">Delete restricted profile</string>
     <!-- Title for action to create a restricted profile [CHAR LIMIT=100] -->
     <string name="restricted_profile_create_title">Create restricted profile</string>
     <!-- Title for action to configure a restricted profile [CHAR LIMIT=100] -->
-    <string name="restricted_profile_configure_title" >Settings</string>
+    <string name="restricted_profile_configure_title">Settings</string>
     <!-- Title for action to configure apps for a restricted profile [CHAR LIMIT=100] -->
-    <string name="restricted_profile_configure_apps_title" >Allowed apps</string>
+    <string name="restricted_profile_configure_apps_title">Allowed apps</string>
     <!-- Description for action to configure apps for a restricted profile indicating number of allow apps will be ready in a moment [CHAR LIMIT=100] -->
     <plurals name="restricted_profile_configure_apps_description">
         <item quantity="one">1 app allowed</item>
         <item quantity="other">%d apps allowed</item>
     </plurals>
     <!-- An action label indicating the package will be or is allowed [CHAR LIMIT=100] -->
-    <string name="restricted_profile_allowed" >Allowed</string>
+    <string name="restricted_profile_allowed">Allowed</string>
     <!-- An action label indicating the package will be or is not allowed [CHAR LIMIT=100] -->
-    <string name="restricted_profile_not_allowed" >Not allowed</string>
+    <string name="restricted_profile_not_allowed">Not allowed</string>
     <!-- Action to customize restrictions for a package [CHAR LIMIT=100] -->
-    <string name="restricted_profile_customize_restrictions" >Customize restrictions</string>
+    <string name="restricted_profile_customize_restrictions">Customize restrictions</string>
     <!-- Description for action to configure apps for a restricted profile indicating the number of allow apps [CHAR LIMIT=100] -->
-    <string name="restricted_profile_configure_apps_description_loading" >One moment\u2026</string>
+    <string name="restricted_profile_configure_apps_description_loading">One moment\u2026</string>
     <!-- Title for action to change the PIN code to use when exiting restricted profile [CHAR LIMIT=100] -->
-    <string name="restricted_profile_change_password_title" >Change pin</string>
+    <string name="restricted_profile_change_password_title">Change pin</string>
     <!-- Description for action to configure an application's restriction [CHAR LIMIT=200] -->
-    <string name="restriction_description" ><xliff:g id="description">%1$s</xliff:g>\n<xliff:g id="value">%2$s</xliff:g></string>
+    <string name="restriction_description"><xliff:g id="description">%1$s</xliff:g>\n<xliff:g id="value">%2$s</xliff:g></string>
     <!-- Summary for a case when app entries that are controlled by another entry and app can access user accounts [CHAR LIMIT=none] -->
     <string name="app_sees_restricted_accounts_and_controlled_by">This app can access your accounts. Controlled by <xliff:g id="app">%1$s</xliff:g></string>
 
@@ -1913,35 +1916,35 @@
     <string name="data_saver_header_info">You can connect to the internet with Wi-Fi, Ethernet, or your phone\'s hotspot. For more help, visit <b>g.co/network</b>."</string>
 
     <!-- Slice uri for "Accounts & Sign in" -->
-    <string name="account_slice_uri" translatable="false"/>
+    <string name="account_slice_uri" translatable="false" />
     <!-- Slice uri and title for manange user services settings -->
     <string name="manage_user_services_slice_uri" translatable="false" />
     <string name="manage_user_services_slice_title" translatable="false" />
 
     <!-- Title of preference for help center [CHAR LIMIT=60] -->
-    <string name="help_center_title" translatable="true"/>
-    <string name="help_center_link" translatable="false"/>
+    <string name="help_center_title" translatable="true" />
+    <string name="help_center_link" translatable="false" />
 
     <!-- Slice uri for "Privacy" -->
-    <string name="privacy_assistant_slice_uri" translatable="false"/>
-    <string name="privacy_purchases_slice_uri" translatable="false"/>
+    <string name="privacy_assistant_slice_uri" translatable="false" />
+    <string name="privacy_purchases_slice_uri" translatable="false" />
 
     <!-- Slice uri and title for "Ambient mode" -->
     <string name="ambient_slice_uri" translatable="false" />
     <string name="ambient_settings_title" translatable="false" />
 
     <!-- Slice uri for "Connected devices" -->
-    <string name="connected_devices_slice_uri" translatable="false"/>
-    <string name="cec_settings_slice_uri" translatable="false"/>
+    <string name="connected_devices_slice_uri" translatable="false" />
+    <string name="cec_settings_slice_uri" translatable="false" />
 
-    <string name="storage_summary_fragment_name" translatable="false"/>
+    <string name="storage_summary_fragment_name" translatable="false" />
     <!-- Slice uri for hdr fomat selection -->
-    <string name="format_selection_slice_uri" translatable="false"/>
+    <string name="format_selection_slice_uri" translatable="false" />
     <!-- Slice uri for resolution and frequency -->
-    <string name="resolution_slice_uri" translatable="false"/>
+    <string name="resolution_slice_uri" translatable="false" />
 
     <!-- Slice uri for general information -->
-    <string name="general_info_slice_uri" translatable="false"/>
+    <string name="general_info_slice_uri" translatable="false" />
 
     <!-- Title for dialog displayed when user selects on a setting locked by an admin [CHAR LIMIT=30 BACKUP_MESSAGE_ID:4867639270211833535] -->
     <string name="disabled_by_policy_title">Action not allowed</string>
@@ -2198,7 +2201,7 @@
     <string name="system_cec">HDMI CEC</string>
     <string name="cec_control">CEC Control</string>
     <string name="title_cec_switch">CEC Switch</string>
-	<string name="cec_volume_control">Volume Control</string>
+    <string name="cec_volume_control">Volume Control</string>
     <string name="title_cec_one_key_play">One key play</string>
     <string name="title_cec_auto_power_off">Device auto power off</string>
     <string name="title_cec_auto_wake_up">Tv auto power on</string>
@@ -2244,7 +2247,7 @@
     The encryption operation is irreversible and if you interrupt it, you\u2019ll lose data.
     Encryption takes an hour or more, during which the tablet will restart several times.
     </string>
- <!-- Title of the progress screen while encrypting the device -->
+    <!-- Title of the progress screen while encrypting the device -->
     <string name="crypt_keeper_setup_title">Encrypting</string>
 
     <string name="crypt_keeper_setup_description">Wait while your phone

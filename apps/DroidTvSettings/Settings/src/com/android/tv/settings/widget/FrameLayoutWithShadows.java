@@ -77,7 +77,7 @@ public class FrameLayoutWithShadows extends FrameLayout {
                 // setAlpha(),  it will trigger another repaint event thus cause system
                 // never stop rendering.
                 background.setCallback(null);
-                background.setAlpha((int)(255 * mAlpha));
+                background.setAlpha((int) (255 * mAlpha));
             }
         }
 
@@ -86,7 +86,7 @@ public class FrameLayoutWithShadows extends FrameLayout {
             if (mAlpha != alpha) {
                 mAlpha = alpha;
                 Drawable d = getBackground();
-                int alphaMulitplied = (int)(alpha * 255);
+                int alphaMulitplied = (int) (alpha * 255);
                 if (d != null) {
                     d.setAlpha(alphaMulitplied);
                 }
@@ -111,7 +111,7 @@ public class FrameLayoutWithShadows extends FrameLayout {
         public void setDrawableBottom(Drawable drawable) {
             mDrawableBottom = drawable;
             if (mAlpha >= 0) {
-                mDrawableBottom.setAlpha((int)(255 * mAlpha));
+                mDrawableBottom.setAlpha((int) (255 * mAlpha));
             }
             invalidate();
         }
@@ -124,7 +124,7 @@ public class FrameLayoutWithShadows extends FrameLayout {
             if (mDrawableBottom != null) {
                 mDrawableBottom.setBounds(getPaddingLeft(), getHeight() - getPaddingBottom(),
                         getWidth() - getPaddingRight(), getHeight() - getPaddingBottom()
-                        + mDrawableBottom.getIntrinsicHeight());
+                                + mDrawableBottom.getIntrinsicHeight());
                 mDrawableBottom.draw(canvas);
             }
         }
@@ -200,7 +200,7 @@ public class FrameLayoutWithShadows extends FrameLayout {
      * prune shadow views whose related view was detached from FrameLayoutWithShadows
      */
     private void prune() {
-        if (getWindowToken() ==null) {
+        if (getWindowToken() == null) {
             return;
         }
         for (int i = getChildCount() - 1; i >= 0; i--) {
@@ -261,7 +261,7 @@ public class FrameLayoutWithShadows extends FrameLayout {
                         rect.bottom = (int) (rectf.bottom + 0.5f);
                     }
                 }
-                if (!isImageMatrix){
+                if (!isImageMatrix) {
                     rect.left = view.getPaddingLeft() - shadow.getPaddingLeft();
                     rect.top = view.getPaddingTop() - shadow.getPaddingTop();
                     rect.right = view.getWidth() + view.getPaddingRight()

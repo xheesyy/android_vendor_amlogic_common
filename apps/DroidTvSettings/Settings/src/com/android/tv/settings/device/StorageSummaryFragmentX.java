@@ -24,7 +24,9 @@ import androidx.preference.PreferenceCategory;
 import com.android.tv.twopanelsettings.slices.EmbeddedSlicePreference;
 import com.android.tv.twopanelsettings.slices.EmbeddedSlicePreferenceHelper;
 
-/** The "Storage" screen in TV settings that can be utilized by res overlay package. */
+/**
+ * The "Storage" screen in TV settings that can be utilized by res overlay package.
+ */
 @Keep
 public class StorageSummaryFragmentX extends StorageSummaryFragment implements
         EmbeddedSlicePreferenceHelper.SlicePreferenceListener {

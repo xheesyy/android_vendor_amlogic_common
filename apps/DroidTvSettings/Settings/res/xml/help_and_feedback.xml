@@ -8,7 +8,6 @@
         android:key="help_center"
         android:title="@string/launch_help"
         android:visible="false">
-        <intent
-            android:action="com.android.settings.action.LAUNCH_HELP" />
+        <intent android:action="com.android.settings.action.LAUNCH_HELP" />
     </Preference>
 </PreferenceScreen>

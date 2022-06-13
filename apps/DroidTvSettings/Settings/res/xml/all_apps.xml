@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2018 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,26 +14,25 @@
   limitations under the License.
   -->
 
-<android:PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android:PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/all_apps_title">
 
     <PreferenceCategory
         android:key="InstalledPreferenceGroup"
         android:title="@string/all_apps_installed"
-        android:orderingFromXml="false"/>
+        android:orderingFromXml="false" />
     <PreferenceCategory
         android:key="DisabledPreferenceGroup"
         android:title="@string/all_apps_disabled"
         android:visible="false"
-        android:orderingFromXml="false"/>
+        android:orderingFromXml="false" />
     <Preference
         android:key="ShowOtherApps"
-        android:title="@string/all_apps_show_system_apps"/>
+        android:title="@string/all_apps_show_system_apps" />
     <PreferenceCategory
         android:key="OtherPreferenceGroup"
         android:title="@string/all_apps_other"
         android:visible="false"
-        android:orderingFromXml="false"/>
+        android:orderingFromXml="false" />
 
 </android:PreferenceScreen>

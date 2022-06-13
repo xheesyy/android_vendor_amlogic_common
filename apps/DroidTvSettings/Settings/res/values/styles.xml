@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -83,11 +82,11 @@
     <style name="Theme.Settings.Transparent">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
-    <item name="android:windowAnimationStyle">@style/SettingsWindowAnimationStyle</item>
-    <!-- DroidLogic start -->
-    <item name="android:backgroundDimEnabled">false</item>
-    <item name="android:windowShowWallpaper">false</item>
-    <!-- DroidLogic end -->
+        <item name="android:windowAnimationStyle">@style/SettingsWindowAnimationStyle</item>
+        <!-- DroidLogic start -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowShowWallpaper">false</item>
+        <!-- DroidLogic end -->
     </style>
 
     <style name="Theme.Settings.BluetoothPairing" parent="@style/SettingsStyle.TextAppearanceMedium">
@@ -296,8 +295,7 @@
         <item name="android:layout_marginEnd">16dp</item>
     </style>
 
-    <style name="TextAppearance.DialogMessage"
-           parent="@*android:style/TextAppearance.DeviceDefault.Body1">
+    <style name="TextAppearance.DialogMessage" parent="@*android:style/TextAppearance.DeviceDefault.Body1">
         <item name="android:textSize">16sp</item>
     </style>
 
@@ -306,7 +304,8 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_alignParentStart">true</item>
         <item name="android:layout_alignParentTop">true</item>
-        <item name="android:verticalSpacing">@dimen/guided_actions_list_vertical_spacing_two_panel</item>
+        <item name="android:verticalSpacing">@dimen/guided_actions_list_vertical_spacing_two_panel
+        </item>
         <item name="android:paddingStart">0dp</item>
         <item name="android:paddingEnd">0dp</item>
         <item name="android:paddingTop">@dimen/guided_actions_vertical_offset</item>
@@ -376,7 +375,8 @@
 
     <style name="GuidedActionItemDescriptionStyleTwoPanel" parent="Widget.Leanback.GuidedActionItemDescriptionStyle">
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textColor">@color/tp_preference_item_secondary_text_color_selector</item>
+        <item name="android:textColor">@color/tp_preference_item_secondary_text_color_selector
+        </item>
         <item name="android:textSize">@dimen/guided_action_description_text_size_two_panel</item>
         <item name="android:duplicateParentState">true</item>
         <item name="android:focusable">true</item>
@@ -408,7 +408,9 @@
 
     <style name="GuidanceDescriptionStyle">
         <item name="android:gravity">start</item>
-        <item name="android:lineSpacingMultiplier">@dimen/setup_description_line_spacing_multiplier</item>
+        <item name="android:lineSpacingMultiplier">
+            @dimen/setup_description_line_spacing_multiplier
+        </item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">14sp</item>

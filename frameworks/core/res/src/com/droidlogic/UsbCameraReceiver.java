@@ -27,13 +27,12 @@ public class UsbCameraReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         Log.i(TAG, "action: " + action);
 
-        if(UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)){
-            UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+        if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
+            UsbDevice device = (UsbDevice) intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
 
             new UsbCameraManager(context).UsbDeviceAttach(device, true);
-        }
-        else if(UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)){
-            UsbDevice device = (UsbDevice)intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
+        } else if (UsbManager.ACTION_USB_DEVICE_DETACHED.equals(action)) {
+            UsbDevice device = (UsbDevice) intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
 
             new UsbCameraManager(context).UsbDeviceAttach(device, false);
         }

@@ -77,7 +77,7 @@ public class SortFavActivity extends Activity {
                     bindInterationService();
                     break;
                 case UPDATE_FAV_GROUP:
-                    dealFavGroupChange((Bundle)msg.obj);
+                    dealFavGroupChange((Bundle) msg.obj);
                     break;
                 default:
                     break;
@@ -378,7 +378,7 @@ public class SortFavActivity extends Activity {
     private void dealActionUI(int action) {
         LOG(LOGD, null, "dealActionUI = " + action);
         switch (action) {
-            case ACTION_CHANNEL_SORT_ALL:{
+            case ACTION_CHANNEL_SORT_ALL: {
                 mLeftTitle.setText(R.string.channel_list_all);
                 //mAllListView.updateAllItem(this, mChannelDataManager.getChannelListItem(mInputId));
                 mSortListView.updateAllItem(this, mChannelDataManager.getChannelServiceTypeListItem(mInputId));
@@ -396,7 +396,7 @@ public class SortFavActivity extends Activity {
                 mContentListView.updateAllItem(this, mChannelDataManager.getChannelListItemByType(mInputId, key));
                 break;
             }
-            case ACTION_CHANNEL_SORT_AZ:{
+            case ACTION_CHANNEL_SORT_AZ: {
                 mLeftTitle.setText(R.string.channel_list_all);
                 mSortListView.updateAllItem(this, mChannelDataManager.getAZSortKeyChannelListItem(mInputId));
                 mSortListView.setSelection(0);
@@ -470,12 +470,12 @@ public class SortFavActivity extends Activity {
                 if (mRightShowContainner.getVisibility() == View.VISIBLE && mCurrentEditChannelList != null && mCurrentEditChannelIndex > -1 && mCurrentEditChannelId > -1) {
                     ItemAdapter adapter = null;
                     if (TextUtils.equals(mCurrentEditChannelList, LIST_ALL_CHANNEL)) {
-                        adapter = (ItemAdapter)mAllListView.getAdapter();
+                        adapter = (ItemAdapter) mAllListView.getAdapter();
                     } else if (TextUtils.equals(mCurrentEditChannelList, LIST_SORT_CONTENT)) {
-                        adapter = (ItemAdapter)mContentListView.getAdapter();
+                        adapter = (ItemAdapter) mContentListView.getAdapter();
                     }
                     if (adapter != null && adapter.getCount() > 0 && adapter.getCount() > mCurrentEditChannelIndex) {
-                        mFavListView.updateAllItem(this, mChannelDataManager.getChannelFavListItem((ChannelListItem)adapter.getItem(mCurrentEditChannelIndex)));
+                        mFavListView.updateAllItem(this, mChannelDataManager.getChannelFavListItem((ChannelListItem) adapter.getItem(mCurrentEditChannelIndex)));
                         mFavListView.requestFocus();
                         mFavListView.setSelection(0);
                     }
@@ -543,25 +543,25 @@ public class SortFavActivity extends Activity {
     }*/
 
     private void init() {
-        mLeftTitle = (TextView)findViewById(R.id.channellist_title);
-        mRightTitle = (TextView)findViewById(R.id.favlist_title);
-        mAllButton = (Button)findViewById(R.id.red_sort_button);
-        mATwoZButton = (Button)findViewById(R.id.green_sort_button);
-        mTPButton = (Button)findViewById(R.id.yellow_sort_button);
-        mNetWorkIdButton = (Button)findViewById(R.id.blue_sort_button);
-        mExtraSortButton = (Button)findViewById(R.id.sort_sort_button);
-        mSatelliteText = (TextView)findViewById(R.id.sat_text);
-        mSatellite = (TextView)findViewById(R.id.sat);
-        mTransponder = (TextView)findViewById(R.id.trans);
+        mLeftTitle = (TextView) findViewById(R.id.channellist_title);
+        mRightTitle = (TextView) findViewById(R.id.favlist_title);
+        mAllButton = (Button) findViewById(R.id.red_sort_button);
+        mATwoZButton = (Button) findViewById(R.id.green_sort_button);
+        mTPButton = (Button) findViewById(R.id.yellow_sort_button);
+        mNetWorkIdButton = (Button) findViewById(R.id.blue_sort_button);
+        mExtraSortButton = (Button) findViewById(R.id.sort_sort_button);
+        mSatelliteText = (TextView) findViewById(R.id.sat_text);
+        mSatellite = (TextView) findViewById(R.id.sat);
+        mTransponder = (TextView) findViewById(R.id.trans);
 
-        mFindButton = (Button)findViewById(R.id.f1_button);
-        mAddToFavButton = (Button)findViewById(R.id.f2_button);
-        mSatelliteButton = (Button)findViewById(R.id.f3_button);
-        mFavListButton = (Button)findViewById(R.id.f4_button);
+        mFindButton = (Button) findViewById(R.id.f1_button);
+        mAddToFavButton = (Button) findViewById(R.id.f2_button);
+        mSatelliteButton = (Button) findViewById(R.id.f3_button);
+        mFavListButton = (Button) findViewById(R.id.f4_button);
 
         mSortListView = (ChannelListListView) findViewById(R.id.sort_key);
-        mContentListView = (ChannelListListView)findViewById(R.id.sort_channel);
-        mAllListView = (ChannelListListView)findViewById(R.id.sort_channel_all);
+        mContentListView = (ChannelListListView) findViewById(R.id.sort_channel);
+        mAllListView = (ChannelListListView) findViewById(R.id.sort_channel_all);
         mFavListView = (FavListListView) findViewById(R.id.favourite);
         mRightShowContainner = (LinearLayout) findViewById(R.id.right_show);
         mCustomedDialogView = new CustomedDialogView(this, mDialogCallback);
@@ -625,7 +625,7 @@ public class SortFavActivity extends Activity {
         mTPButton.setOnFocusChangeListener(mOnItemFocusChangeListener);
         mNetWorkIdButton.setOnClickListener(mOnClickListener);
         mNetWorkIdButton.setOnFocusChangeListener(mOnItemFocusChangeListener);
-        mExtraSortButton = (Button)findViewById(R.id.sort_sort_button);
+        mExtraSortButton = (Button) findViewById(R.id.sort_sort_button);
         mExtraSortButton.setOnClickListener(mOnClickListener);
         mExtraSortButton.setOnFocusChangeListener(mOnItemFocusChangeListener);
 
@@ -662,14 +662,14 @@ public class SortFavActivity extends Activity {
     private static final String LIST_ALL_FAV_LIST = "all_fav_list";
     private static final String LIST_CHANNEL_FAV_LIST = "all_channel_fav_list";
     private static final String LIST_EDIT_ALL_FAV_LIST = "edit_fav_list";
-    private String mCurrentEditChannelList =  LIST_ALL_CHANNEL;//content or all channel
-    private long mCurrentEditChannelId =  -1;
-    private int mCurrentEditChannelIndex =  -1;
-    private String mCurrentFavlList =  LIST_ALL_FAV_LIST;//all or channel fav
+    private String mCurrentEditChannelList = LIST_ALL_CHANNEL;//content or all channel
+    private long mCurrentEditChannelId = -1;
+    private int mCurrentEditChannelIndex = -1;
+    private String mCurrentFavlList = LIST_ALL_FAV_LIST;//all or channel fav
     //private int mCurrentFavId = -1;
     private String mCurrentFavName = null;
-    private int mCurrentFavIndex =  -1;
-    private int mCurrentActionId =  ACTION_CHANNEL_SORT_ALL;
+    private int mCurrentFavIndex = -1;
+    private int mCurrentActionId = ACTION_CHANNEL_SORT_ALL;
 
     private AdapterView.OnItemSelectedListener mOnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
@@ -698,7 +698,7 @@ public class SortFavActivity extends Activity {
                         if (parent instanceof FavListListView) {
                             Object obj = parent.getItemAtPosition(position);
                             if (obj instanceof FavListItem) {
-                                item = (FavListItem)obj;
+                                item = (FavListItem) obj;
                             }
                         }
                         if (item != null) {
@@ -707,7 +707,7 @@ public class SortFavActivity extends Activity {
                                 //mCurrentFavId = item.getFavId();
                                 mCurrentFavName = item.getTitle();
                                 mCurrentFavIndex = position;
-                            } else if (LIST_CHANNEL_FAV_LIST.equals(item.getFavListType())){
+                            } else if (LIST_CHANNEL_FAV_LIST.equals(item.getFavListType())) {
                                 mCurrentFavlList = LIST_CHANNEL_FAV_LIST;
                                 //mCurrentFavId = item.getFavId();
                                 mCurrentFavName = item.getTitle();
@@ -762,7 +762,7 @@ public class SortFavActivity extends Activity {
                         LOG(LOGD, null, "onItemClick favourite position = " + position + ", id = " + id);
                         FavListItem favItem = null;
                         if (parent instanceof FavListListView) {
-                            favItem = (FavListItem)(parent.getItemAtPosition(position));
+                            favItem = (FavListItem) (parent.getItemAtPosition(position));
                         }
                         if (favItem != null) {
                             if (LIST_ALL_FAV_LIST.equals(favItem.getFavListType())) {
@@ -770,7 +770,7 @@ public class SortFavActivity extends Activity {
                                 //mCurrentFavId = favItem.getFavId();
                                 mCurrentFavName = favItem.getTitle();
                                 mCurrentFavIndex = position;
-                            } else if (LIST_CHANNEL_FAV_LIST.equals(favItem.getFavListType())){
+                            } else if (LIST_CHANNEL_FAV_LIST.equals(favItem.getFavListType())) {
                                 mCurrentFavlList = LIST_CHANNEL_FAV_LIST;
                                 //mCurrentFavId = favItem.getFavId();
                                 mCurrentFavName = favItem.getTitle();
@@ -844,7 +844,7 @@ public class SortFavActivity extends Activity {
                                 mSortListView.requestFocus();
                             }
                         } else if (KeyEvent.KEYCODE_DPAD_RIGHT == data.getInt(CustomedListView.KEY_ACTION_CODE)) {
-                            if (TextUtils.equals(listType, CustomedListView.SORT_EDIT_ALL_FAV_LIST) && item !=  null && item instanceof FavListItem) {
+                            if (TextUtils.equals(listType, CustomedListView.SORT_EDIT_ALL_FAV_LIST) && item != null && item instanceof FavListItem) {
                                 if (mRightShowContainner.getVisibility() == View.VISIBLE) {
                                     //display current page
                                     if (mCurrentFavName != null) {
@@ -860,7 +860,7 @@ public class SortFavActivity extends Activity {
                                         mLeftTitle.setText(mCurrentFavName);
                                         mAllListView.updateAllItem(SortFavActivity.this, mChannelDataManager.getChannelItemByFavPage(mCurrentFavName));
                                     }
-                                    mCustomedDialogView.creatEditFavDialog((FavListItem)item).show();
+                                    mCustomedDialogView.creatEditFavDialog((FavListItem) item).show();
                                 }
                             }
                         }
@@ -981,7 +981,7 @@ public class SortFavActivity extends Activity {
                         int flag = bundle.getInt(CustomedDialogView.DIALOG_LIST_POSITION, -1);
                         if (flag > -1) {
                             if (mAllListView.getVisibility() == View.VISIBLE && mAllListView.getAdapter() != null && mAllListView.getAdapter().getCount() > 0) {
-                                LinkedList<Item> allData = ((ItemAdapter)mAllListView.getAdapter()).getAllData();
+                                LinkedList<Item> allData = ((ItemAdapter) mAllListView.getAdapter()).getAllData();
                                 //int position = mAllListView.getPositionForView(mAllListView.getSelectedView());
                                 switch (flag) {
                                     case CustomedDialogView.FLAG_SORT_ITEM_AZ:
@@ -996,7 +996,7 @@ public class SortFavActivity extends Activity {
                                 mAllListView.updateAllItem(SortFavActivity.this, allData);
                                 //mAllListView.setSelection(position);
                             } else if (mContentListView.getVisibility() == View.VISIBLE && mContentListView.getAdapter() != null && mContentListView.getAdapter().getCount() > 0) {
-                                LinkedList<Item> allData = ((ItemAdapter)mContentListView.getAdapter()).getAllData();
+                                LinkedList<Item> allData = ((ItemAdapter) mContentListView.getAdapter()).getAllData();
                                 switch (flag) {
                                     case CustomedDialogView.FLAG_SORT_ITEM_AZ:
                                         allData = mChannelDataManager.getAZSortedItemList(allData);
@@ -1035,8 +1035,8 @@ public class SortFavActivity extends Activity {
             boolean isSelectedFav = false;
             //int favId = -1;
             String favTitle = null;
-            favItem = (FavListItem)parent.getItemAtPosition(position);
-            LinkedList<Item> data =  ((ItemAdapter)parent.getAdapter()).getAllData();
+            favItem = (FavListItem) parent.getItemAtPosition(position);
+            LinkedList<Item> data = ((ItemAdapter) parent.getAdapter()).getAllData();
             if (favItem != null) {
                 favType = favItem.getFavListType();
                 //favId = favItem.getFavId();
@@ -1048,7 +1048,7 @@ public class SortFavActivity extends Activity {
                     //mCurrentFavId = favItem.getFavId();
                     mCurrentFavName = favItem.getTitle();
                     mCurrentFavIndex = position;
-                } else if (LIST_CHANNEL_FAV_LIST.equals(favItem.getFavListType())){
+                } else if (LIST_CHANNEL_FAV_LIST.equals(favItem.getFavListType())) {
                     mCurrentFavlList = LIST_CHANNEL_FAV_LIST;
                     //mCurrentFavId = favItem.getFavId();
                     mCurrentFavName = favItem.getTitle();
@@ -1064,8 +1064,8 @@ public class SortFavActivity extends Activity {
                     favItem.setNeedShowIcon(isSelectedFav);
                     mFavListView.updateItem(position, favItem);
                     if (TextUtils.equals(mCurrentEditChannelList, LIST_ALL_CHANNEL)) {
-                        ItemAdapter adapter = (ItemAdapter)(mAllListView.getAdapter());
-                        ChannelListItem channelItem = (ChannelListItem)(adapter.getItem(mCurrentEditChannelIndex));
+                        ItemAdapter adapter = (ItemAdapter) (mAllListView.getAdapter());
+                        ChannelListItem channelItem = (ChannelListItem) (adapter.getItem(mCurrentEditChannelIndex));
                         channelItem.getUpdateFavAllIndexArrayString(isSelectedFav, favTitle);
                         mAllListView.updateItem(mCurrentEditChannelIndex, channelItem);
                         //adapter = (ItemAdapter)(mAllListView.getAdapter());
@@ -1073,8 +1073,8 @@ public class SortFavActivity extends Activity {
                         //mChannelDataManager.updateChannelListChangeToDatabase(updateChannel);
                         mChannelDataManager.updateChannelFavChangeToTvProvider(channelItem.getChannelId(), channelItem.getFavArrayJsonStr());
                     } else if (TextUtils.equals(mCurrentEditChannelList, LIST_SORT_CONTENT)) {
-                        ItemAdapter adapter = (ItemAdapter)(mContentListView.getAdapter());
-                        ChannelListItem channelItem = (ChannelListItem)(adapter.getItem(mCurrentEditChannelIndex));
+                        ItemAdapter adapter = (ItemAdapter) (mContentListView.getAdapter());
+                        ChannelListItem channelItem = (ChannelListItem) (adapter.getItem(mCurrentEditChannelIndex));
                         channelItem.getUpdateFavAllIndexArrayString(isSelectedFav, favTitle);
                         mContentListView.updateItem(mCurrentEditChannelIndex, channelItem);
                         //String updateChannel = mChannelDataManager.genarateUpdatedChannelListJsonSrt(mChannelDataManager.getChannelList(mInputId), channelItem.getChannelId(), channelItem.getFavArrayJsonStr());
@@ -1118,7 +1118,7 @@ public class SortFavActivity extends Activity {
         }
         mCurrentEditChannelIndex = position;
         if (parent != null && parent instanceof ChannelListListView) {
-            ChannelListItem item = (ChannelListItem)parent.getItemAtPosition(position);
+            ChannelListItem item = (ChannelListItem) parent.getItemAtPosition(position);
             mCurrentEditChannelId = item.getChannelId();
             String satellitename = item.getSatellite();
             if (TextUtils.isEmpty(satellitename)) {
@@ -1132,12 +1132,12 @@ public class SortFavActivity extends Activity {
             if (mRightShowContainner.getVisibility() == View.VISIBLE && mCurrentEditChannelList != null && mCurrentEditChannelIndex > -1 && mCurrentEditChannelId > -1) {
                 ItemAdapter adapter = null;
                 if (TextUtils.equals(mCurrentEditChannelList, LIST_ALL_CHANNEL)) {
-                    adapter = (ItemAdapter)mAllListView.getAdapter();
+                    adapter = (ItemAdapter) mAllListView.getAdapter();
                 } else if (TextUtils.equals(mCurrentEditChannelList, LIST_SORT_CONTENT)) {
-                    adapter = (ItemAdapter)mContentListView.getAdapter();
+                    adapter = (ItemAdapter) mContentListView.getAdapter();
                 }
                 if (LIST_CHANNEL_FAV_LIST.equals(mCurrentFavlList) && adapter != null && adapter.getCount() > 0 && adapter.getCount() > mCurrentEditChannelIndex) {
-                    mFavListView.updateAllItem(this, mChannelDataManager.getChannelFavListItem((ChannelListItem)adapter.getItem(mCurrentEditChannelIndex)));
+                    mFavListView.updateAllItem(this, mChannelDataManager.getChannelFavListItem((ChannelListItem) adapter.getItem(mCurrentEditChannelIndex)));
                     //mFavListView.requestFocus();
                     mFavListView.setSelection(0);
                 }
@@ -1148,7 +1148,7 @@ public class SortFavActivity extends Activity {
 
     private void switchChannelWhenClick(AdapterView<?> parent, int resId, int position) {
         if (parent != null && parent instanceof ChannelListListView) {
-            ChannelListItem item = (ChannelListItem)parent.getItemAtPosition(position);
+            ChannelListItem item = (ChannelListItem) parent.getItemAtPosition(position);
             long channelId = item.getChannelId();
             sendSwitchChannelBroadcast(channelId);
         }
@@ -1159,9 +1159,9 @@ public class SortFavActivity extends Activity {
         if (parent instanceof ChannelListListView) {
             ChannelListItem sortKeyItem = null;
             ItemAdapter sortKeyAdapter = null;
-            sortKeyItem = (ChannelListItem)parent.getItemAtPosition(position);
+            sortKeyItem = (ChannelListItem) parent.getItemAtPosition(position);
             int sortKeyType;
-            String key =  null;
+            String key = null;
             if (sortKeyItem != null) {
                 sortKeyType = sortKeyItem.getItemType();
                 key = sortKeyItem.getKey();
@@ -1264,7 +1264,7 @@ public class SortFavActivity extends Activity {
         int actionFlag = bundle.getInt(CustomedDialogView.DIALOG_ACTION_FLAG);
         String previousName = bundle.getString(CustomedDialogView.DIALOG_ACTION_FAV_PREVIOUS_VALUE);
         String newName = bundle.getString(CustomedDialogView.DIALOG_ACTION_FAV_EDIT_VALUE);
-        ItemAdapter adapter = (ItemAdapter)mContentListView.getAdapter();
+        ItemAdapter adapter = (ItemAdapter) mContentListView.getAdapter();
         String newFavDisplay = null;
         int position = 0;
         switch (actionFlag) {
@@ -1291,7 +1291,7 @@ public class SortFavActivity extends Activity {
         if (position < 0) {
             position = 0;
         }
-        if (actionFlag >= CustomedDialogView.FLAG_EDIT_FAV_ADD && actionFlag <=CustomedDialogView.FLAG_EDIT_FAV_EDIT) {
+        if (actionFlag >= CustomedDialogView.FLAG_EDIT_FAV_ADD && actionFlag <= CustomedDialogView.FLAG_EDIT_FAV_EDIT) {
             mFavListView.updateAllItem(this, mChannelDataManager.getEditFavListItem());
             mFavListView.requestFocus();
             mFavListView.setSelection(position);
@@ -1323,6 +1323,7 @@ public class SortFavActivity extends Activity {
             }
             mIsBounded = true;
         }
+
         public void onServiceDisconnected(ComponentName name) {
             LOG(LOGD, null, "onServiceDisconnected name = " + name);
             mIsBounded = false;

@@ -29,7 +29,7 @@ public class PQAdvancedColorCustomizeYellowGreenActivity extends TvSettingsActiv
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PQAdvancedColorCustomizeYellowGreenFragment.class.getName(), null);
+                .newSettingsFragment(PQAdvancedColorCustomizeYellowGreenFragment.class.getName(), null);
     }
 
 }

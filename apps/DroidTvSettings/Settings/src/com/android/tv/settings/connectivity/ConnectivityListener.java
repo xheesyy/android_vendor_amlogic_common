@@ -117,6 +117,7 @@ public class ConnectivityListener implements WifiTracker.WifiListener, Lifecycle
     /**
      * Starts {@link ConnectivityListener}.
      * This should be called only from main thread.
+     *
      * @deprecated not needed when a {@link Lifecycle} is provided
      */
     @UiThread
@@ -152,6 +153,7 @@ public class ConnectivityListener implements WifiTracker.WifiListener, Lifecycle
     /**
      * Stops {@link ConnectivityListener}.
      * This should be called only from main thread.
+     *
      * @deprecated not needed when a {@link Lifecycle} is provided
      */
     @UiThread
@@ -179,6 +181,7 @@ public class ConnectivityListener implements WifiTracker.WifiListener, Lifecycle
 
     /**
      * Causes the background thread to quit.
+     *
      * @deprecated not needed when a {@link Lifecycle} is provided
      */
     @Deprecated
@@ -213,7 +216,7 @@ public class ConnectivityListener implements WifiTracker.WifiListener, Lifecycle
             WifiConfiguration wifiConfig = ap.getConfig();
             if (wifiConfig != null
                     && wifiConfig.macRandomizationSetting
-                            == WifiConfiguration.RANDOMIZATION_PERSISTENT) {
+                    == WifiConfiguration.RANDOMIZATION_PERSISTENT) {
                 return wifiConfig.getRandomizedMacAddress().toString();
             }
         }
@@ -228,12 +231,16 @@ public class ConnectivityListener implements WifiTracker.WifiListener, Lifecycle
         return "";
     }
 
-    /** Return whether the connected Wifi supports MAC address randomization. */
+    /**
+     * Return whether the connected Wifi supports MAC address randomization.
+     */
     public boolean isMacAddressRandomizationSupported() {
         return mWifiManager.isConnectedMacRandomizationSupported();
     }
 
-    /** Return whether the MAC address of the currently connected Wifi AP is randomized. */
+    /**
+     * Return whether the MAC address of the currently connected Wifi AP is randomized.
+     */
     public int getWifiMacRandomizationSetting(AccessPoint ap) {
         if (ap == null || ap.getConfig() == null) {
             return WifiConfiguration.RANDOMIZATION_NONE;
@@ -241,7 +248,9 @@ public class ConnectivityListener implements WifiTracker.WifiListener, Lifecycle
         return ap.getConfig().macRandomizationSetting;
     }
 
-    /** Apply the setting of whether to use MAC address randimization. */
+    /**
+     * Apply the setting of whether to use MAC address randimization.
+     */
     public void applyMacRandomizationSetting(AccessPoint ap, boolean enable) {
         if (ap != null && ap.getConfig() != null) {
             ap.getConfig().macRandomizationSetting = enable
@@ -448,6 +457,7 @@ public class ConnectivityListener implements WifiTracker.WifiListener, Lifecycle
 
     /**
      * Get the SSID of current connected network.
+     *
      * @return SSID
      */
     public String getSsid() {

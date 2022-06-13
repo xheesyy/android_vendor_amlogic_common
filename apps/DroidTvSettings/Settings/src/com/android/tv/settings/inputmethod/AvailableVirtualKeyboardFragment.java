@@ -95,8 +95,8 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
 
     @Nullable
     private static Drawable loadDrawable(@NonNull final PackageManager packageManager,
-            @NonNull final String packageName, @DrawableRes final int resId,
-            @NonNull final ApplicationInfo applicationInfo) {
+                                         @NonNull final String packageName, @DrawableRes final int resId,
+                                         @NonNull final ApplicationInfo applicationInfo) {
         if (resId == 0) {
             return null;
         }
@@ -109,7 +109,7 @@ public final class AvailableVirtualKeyboardFragment extends SettingsPreferenceFr
 
     @NonNull
     private static Drawable getInputMethodIcon(@NonNull final PackageManager packageManager,
-            @NonNull final InputMethodInfo imi) {
+                                               @NonNull final InputMethodInfo imi) {
         final ServiceInfo si = imi.getServiceInfo();
         final ApplicationInfo ai = si != null ? si.applicationInfo : null;
         final String packageName = imi.getPackageName();

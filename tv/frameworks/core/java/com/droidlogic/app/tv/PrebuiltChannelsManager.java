@@ -26,14 +26,14 @@ public class PrebuiltChannelsManager {
     protected TvDataBaseManager mTvDataBaseManager;
     private static final String FILE_PATH_TV_PRESET_CHANNEL_TABLE = Environment.getExternalStorageDirectory()
             + "/tv_preset_channel_table.cfg";
-    public static final int RETURN_VALUE_SUCCESS                        = 0;
-    public static final int RETURN_VALUE_FAILED                         = -1;
+    public static final int RETURN_VALUE_SUCCESS = 0;
+    public static final int RETURN_VALUE_FAILED = -1;
 
-    public static final String CHECKOUT_HEAD_STRING                     = "+++++";
-    public static final String CHECKOUT_TAIL_STRING                     = "-----";
+    public static final String CHECKOUT_HEAD_STRING = "+++++";
+    public static final String CHECKOUT_TAIL_STRING = "-----";
 
-    public static final int DISPATCH_CMD_BACKUP_CHANNEL_INFO_TO_FILE    = 0x0;
-    public static final int DISPATCH_CMD_CFG_CHANNEL_INFO_TO_DB         = 0x1;
+    public static final int DISPATCH_CMD_BACKUP_CHANNEL_INFO_TO_FILE = 0x0;
+    public static final int DISPATCH_CMD_CFG_CHANNEL_INFO_TO_DB = 0x1;
 
     private final String TV_INPUT_ID = "com.droidlogic.tvinput/.services.ADTVInputService/HW16";
 
@@ -183,7 +183,7 @@ public class PrebuiltChannelsManager {
             }
             mBufferWriter.write(CHECKOUT_TAIL_STRING + "----------------------------------------------------------\n\n");
         } catch (Exception e) {
-            Log.e(TAG,"write Channel Info failed!");
+            Log.e(TAG, "write Channel Info failed!");
             e.printStackTrace();
             return RETURN_VALUE_FAILED;
         }
@@ -192,7 +192,7 @@ public class PrebuiltChannelsManager {
 
     private int buildChannelInfo(String oneLineString, ChannelInfo.Builder builder) {
         int index = 0;
-        for (index=0; index< mChannelInfoKey.length; index++) {
+        for (index = 0; index < mChannelInfoKey.length; index++) {
             if (oneLineString.startsWith(mChannelInfoKey[index])) {
                 break;
             }
@@ -315,7 +315,7 @@ public class PrebuiltChannelsManager {
                 break;
             case ChannelInfo.KEY_SUBT_LANGS:
                 builder.setSubtitleLangs(oneLineString.split(","));
-                                break;
+                break;
             case ChannelInfo.KEY_SUBT_TRACK_INDEX:
                 builder.setSubtitleTrackIndex(stringToint(oneLineString));
                 break;
@@ -390,7 +390,7 @@ public class PrebuiltChannelsManager {
         try {
             tempValue = Integer.parseInt(stringValue);
         } catch (NumberFormatException e) {
-            Log.e(TAG,"string covert to int failed, stringValue:" + stringValue);
+            Log.e(TAG, "string covert to int failed, stringValue:" + stringValue);
             e.printStackTrace();
         }
         return tempValue;
@@ -429,14 +429,14 @@ public class PrebuiltChannelsManager {
         }
         int[] intArray = new int[stringArray.length];
 
-        for (int i=0; i<stringArray.length; i++) {
+        for (int i = 0; i < stringArray.length; i++) {
             intArray[i] = Integer.parseInt(stringArray[i]);
         }
         return intArray;
     }
 
     public int configFileReadToDbChannelInfo() {
-        Log.i(TAG,"configFileReadToDbChannelInfo enter");
+        Log.i(TAG, "configFileReadToDbChannelInfo enter");
         mTvDataBaseManager = new TvDataBaseManager(mContext);
         ArrayList<ChannelInfo> channelListAll = mTvDataBaseManager.getChannelList(TV_INPUT_ID, TvContract.Channels.SERVICE_TYPE_AUDIO_VIDEO);
 
@@ -453,11 +453,11 @@ public class PrebuiltChannelsManager {
     }
 
     public int dbChannelInfoWriteToConfigFile() {
-        Log.i(TAG,"dbChannelInfoWriteToConfigFile enter");
+        Log.i(TAG, "dbChannelInfoWriteToConfigFile enter");
         mTvDataBaseManager = new TvDataBaseManager(mContext);
         ArrayList<ChannelInfo> channelListAll = mTvDataBaseManager.getChannelList(TV_INPUT_ID, TvContract.Channels.SERVICE_TYPE_AUDIO_VIDEO);
         if (0 == channelListAll.size()) {
-            Log.i(TAG,"Db channel info count is 0!");
+            Log.i(TAG, "Db channel info count is 0!");
             return RETURN_VALUE_SUCCESS;
         }
         int ret = RETURN_VALUE_SUCCESS;
@@ -473,7 +473,7 @@ public class PrebuiltChannelsManager {
         return ret;
     }
 
-    private int fileReadInit(){
+    private int fileReadInit() {
         try {
             File tvChannelInfoFile = new File(FILE_PATH_TV_PRESET_CHANNEL_TABLE);
             if (!tvChannelInfoFile.exists()) {
@@ -483,14 +483,14 @@ public class PrebuiltChannelsManager {
             mFileReader = new FileReader(tvChannelInfoFile);
             mBufferedReader = new BufferedReader(mFileReader);
         } catch (Exception e) {
-            Log.e(TAG,"file read operation failed!");
+            Log.e(TAG, "file read operation failed!");
             e.printStackTrace();
             return RETURN_VALUE_FAILED;
         }
         return RETURN_VALUE_SUCCESS;
     }
 
-    private int fileWriteInit(){
+    private int fileWriteInit() {
         try {
             File tvChannelInfoFile = new File(FILE_PATH_TV_PRESET_CHANNEL_TABLE);
             if (tvChannelInfoFile.exists()) {
@@ -502,7 +502,7 @@ public class PrebuiltChannelsManager {
             mFileWritter = new FileWriter(tvChannelInfoFile);
             mBufferWriter = new BufferedWriter(mFileWritter);
         } catch (Exception e) {
-            Log.e(TAG,"file write operation failed!");
+            Log.e(TAG, "file write operation failed!");
             e.printStackTrace();
             return RETURN_VALUE_FAILED;
         }
@@ -515,7 +515,7 @@ public class PrebuiltChannelsManager {
             mBufferWriter.close();
             mFileWritter.close();
         } catch (IOException e) {
-            Log.e(TAG,"file close failed!");
+            Log.e(TAG, "file close failed!");
             e.printStackTrace();
             return RETURN_VALUE_FAILED;
         }
@@ -527,7 +527,7 @@ public class PrebuiltChannelsManager {
             mFileReader.close();
             mBufferedReader.close();
         } catch (IOException e) {
-            Log.e(TAG,"file close failed!");
+            Log.e(TAG, "file close failed!");
             e.printStackTrace();
             return RETURN_VALUE_FAILED;
         }
@@ -537,7 +537,7 @@ public class PrebuiltChannelsManager {
     private ArrayList<ChannelInfo> readChannelInfoFromFlile() {
         ArrayList<ChannelInfo> channelInfoList = new ArrayList<ChannelInfo>();
         try {
-            String oneLineString ="";
+            String oneLineString = "";
             int channelCnt = 0;
 
             while ((oneLineString = mBufferedReader.readLine()) != null) {
@@ -549,7 +549,7 @@ public class PrebuiltChannelsManager {
                         if (oneLineString.startsWith(CHECKOUT_TAIL_STRING)) {
                             channelInfoList.add(builder.build());
                             channelCnt++;
-                            Log.d(TAG,"current channel info build complete! channelCnt: " + channelCnt);
+                            Log.d(TAG, "current channel info build complete! channelCnt: " + channelCnt);
                             //Log.d(TAG, builder.build().toString());
                             break;
                         }
@@ -559,7 +559,7 @@ public class PrebuiltChannelsManager {
                 }
             }
         } catch (Exception e) {
-            Log.e(TAG,"write Channel Info failed!");
+            Log.e(TAG, "write Channel Info failed!");
             e.printStackTrace();
             return null;
         }
@@ -569,7 +569,7 @@ public class PrebuiltChannelsManager {
 
     private int saveChannelInfoListToDb(ArrayList<ChannelInfo> channelInfoList) {
         if (null == channelInfoList) {
-            Log.w(TAG,"not find channel info in config file!");
+            Log.w(TAG, "not find channel info in config file!");
             return RETURN_VALUE_FAILED;
         }
         ArrayList<ChannelInfo> atvChannels = new ArrayList<ChannelInfo>();

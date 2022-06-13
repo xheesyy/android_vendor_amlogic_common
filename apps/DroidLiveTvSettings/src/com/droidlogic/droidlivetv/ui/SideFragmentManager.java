@@ -28,7 +28,7 @@ import android.view.View;
 import com.droidlogic.droidlivetvsettings.R;
 
 public class SideFragmentManager {
-	private static final String TAG = "SideFragmentManager";
+    private static final String TAG = "SideFragmentManager";
     private static final String FIRST_BACKSTACK_RECORD_NAME = "0";
 
     private final Activity mActivity;

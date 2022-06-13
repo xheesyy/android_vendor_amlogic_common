@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class ManageApplicationsController implements LifecycleObserver {
     /**
-     *  Use this preference key for a header pref not removed during refresh
+     * Use this preference key for a header pref not removed during refresh
      */
     public static final String HEADER_KEY = "header";
 
@@ -95,8 +95,8 @@ public class ManageApplicationsController implements LifecycleObserver {
             };
 
     public ManageApplicationsController(@NonNull Context context, @NonNull Callback callback,
-            @NonNull Lifecycle lifecycle, ApplicationsState.AppFilter filter,
-            Comparator<ApplicationsState.AppEntry> comparator) {
+                                        @NonNull Lifecycle lifecycle, ApplicationsState.AppFilter filter,
+                                        Comparator<ApplicationsState.AppEntry> comparator) {
         mCallback = callback;
         lifecycle.addObserver(this);
         mLifecycle = lifecycle;
@@ -155,30 +155,37 @@ public class ManageApplicationsController implements LifecycleObserver {
         /**
          * Configure the {@link Preference} object with the data in the
          * {@link ApplicationsState.AppEntry}
+         *
          * @param preference Preference to configure
-         * @param entry Entry containing data to bind
+         * @param entry      Entry containing data to bind
          * @return Return the configured Preference object
          */
-        @NonNull Preference bindPreference(@NonNull Preference preference,
-                ApplicationsState.AppEntry entry);
+        @NonNull
+        Preference bindPreference(@NonNull Preference preference,
+                                  ApplicationsState.AppEntry entry);
 
         /**
          * Create a new instance of a {@link Preference} subclass to be used to display an
          * {@link ApplicationsState.AppEntry}
+         *
          * @return New Preference object
          */
-        @NonNull Preference createAppPreference();
+        @NonNull
+        Preference createAppPreference();
 
         /**
          * @return {@link Preference} object to be used as an empty state placeholder
          */
-        @NonNull Preference getEmptyPreference();
+        @NonNull
+        Preference getEmptyPreference();
 
         /**
          * The {@link PreferenceGroup} returned here should contain only app preference objects,
          * plus optionally a header preference with the key {@link #HEADER_KEY}
+         *
          * @return PreferenceGroup to manipulate
          */
-        @NonNull PreferenceGroup getAppPreferenceGroup();
+        @NonNull
+        PreferenceGroup getAppPreferenceGroup();
     }
 }

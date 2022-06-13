@@ -29,21 +29,22 @@ import java.util.ArrayList;
 
 public class RestrictionUtils {
 
-    public static final String [] sRestrictionKeys = {
-        UserManager.DISALLOW_SHARE_LOCATION,
+    public static final String[] sRestrictionKeys = {
+            UserManager.DISALLOW_SHARE_LOCATION,
     };
 
-    public static final int [] sRestrictionTitles = {
-        R.string.restriction_location_enable_title,
+    public static final int[] sRestrictionTitles = {
+            R.string.restriction_location_enable_title,
     };
 
-    public static final int [] sRestrictionDescriptions = {
-        R.string.restriction_location_enable_summary,
+    public static final int[] sRestrictionDescriptions = {
+            R.string.restriction_location_enable_summary,
     };
 
     /**
      * Returns the current user restrictions in the form of application
      * restriction entries.
+     *
      * @return list of RestrictionEntry objects with user-visible text.
      */
     public static ArrayList<RestrictionEntry> getRestrictions(Context context, UserHandle user) {
@@ -66,7 +67,7 @@ public class RestrictionUtils {
     }
 
     public static void setRestrictions(Context context, ArrayList<RestrictionEntry> entries,
-            UserHandle user) {
+                                       UserHandle user) {
         UserManager um = UserManager.get(context);
 
         for (RestrictionEntry entry : entries) {

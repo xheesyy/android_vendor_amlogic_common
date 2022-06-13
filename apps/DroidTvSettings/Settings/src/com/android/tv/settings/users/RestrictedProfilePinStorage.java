@@ -60,26 +60,31 @@ public class RestrictedProfilePinStorage {
 
     @VisibleForTesting
     RestrictedProfilePinStorage(LockPatternUtils lpu, int ownerUserId,
-            RestrictedProfilePinServiceConnection connection) {
+                                RestrictedProfilePinServiceConnection connection) {
         mLockPatternUtils = lpu;
         mOwnerUserId = ownerUserId;
         mConnection = connection;
     }
 
-    /** Binds the pin service to be used later for all pin operations. To be called before any
-     * other use of this class. */
+    /**
+     * Binds the pin service to be used later for all pin operations. To be called before any
+     * other use of this class.
+     */
     public void bind() {
         mConnection.bindPinService();
     }
 
-    /** Unbinds the pin service. */
+    /**
+     * Unbinds the pin service.
+     */
     public void unbind() {
         mConnection.unbindPinService();
     }
 
     /**
      * Set PIN password for the profile.
-     * @param pin New PIN password
+     *
+     * @param pin         New PIN password
      * @param originalPin Original PIN password
      */
     boolean setPin(@NonNull String pin, String originalPin) {

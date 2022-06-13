@@ -22,13 +22,21 @@ public class GIFDecodesManager {
     }
 
     private static native void nativeDecodeStream(InputStream istream);
+
     private static native void nativeDestructor();
+
     private static native int nativeWidth();
+
     private static native int nativeHeight();
+
     private static native int nativeTotalDuration();
+
     private static native boolean nativeSetCurrFrame(int frameIndex);
+
     private static native int nativeGetFrameDuration(int frameIndex);
+
     private static native int nativeGetFrameCount();
+
     private static native Bitmap nativeGetFrameBitmap(int frameIndex);
 
     public static void decodeStream(InputStream is) {

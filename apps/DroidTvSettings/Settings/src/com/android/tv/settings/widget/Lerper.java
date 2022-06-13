@@ -45,7 +45,7 @@ public final class Lerper {
         int retValue;
         if (delta > 0) {
             // make sure change currentValue and not exceeding targetValue
-            delta = (int)(Math.ceil(delta / mDivisor));
+            delta = (int) (Math.ceil(delta / mDivisor));
             if (delta == 0) {
                 delta = 1;
             }
@@ -55,7 +55,7 @@ public final class Lerper {
             }
         } else if (delta < 0) {
             // make sure change currentValue and not exceeding targetValue
-            delta = (int)(Math.floor(delta / mDivisor));
+            delta = (int) (Math.floor(delta / mDivisor));
             if (delta == 0) {
                 delta = -1;
             }

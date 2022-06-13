@@ -38,7 +38,7 @@ public class OptionParameterManager {
     private Resources mResources;
     private Context mContext;
 
-    public OptionParameterManager (Context context) {
+    public OptionParameterManager(Context context) {
         mContext = context;
         mResources = mContext.getResources();
     }

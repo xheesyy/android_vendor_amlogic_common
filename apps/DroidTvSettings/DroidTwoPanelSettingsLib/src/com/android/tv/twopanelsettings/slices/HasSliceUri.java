@@ -21,5 +21,6 @@ package com.android.tv.twopanelsettings.slices;
  */
 public interface HasSliceUri {
     void setUri(String uri);
+
     String getUri();
 }

@@ -35,6 +35,7 @@ public class FormatAsPrivateStepFragment extends GuidedStepSupportFragment {
 
     public interface Callback {
         void onRequestFormatAsPrivate(String diskId);
+
         void onCancelFormatDialog();
     }
 

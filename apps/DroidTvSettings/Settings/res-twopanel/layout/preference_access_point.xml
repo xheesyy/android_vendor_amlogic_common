@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2018 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +16,7 @@
 
 <!-- Based off preference_material_settings.xml except that the ripple effect is active only on
      the left side. -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
@@ -41,18 +39,18 @@
         android:clipToPadding="false">
 
         <FrameLayout
-                android:id="@+id/icon_frame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:duplicateParentState="true">
+            android:id="@+id/icon_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:duplicateParentState="true">
+
             <ImageView
-                    android:id="@android:id/icon"
-                    android:layout_width="@dimen/lb_preference_item_icon_size"
-                    android:layout_height="@dimen/lb_preference_item_icon_size"
-                    android:layout_marginEnd="@dimen/lb_preference_item_icon_margin_end"
-                    style="?android:attr/imageButtonStyle"
-            />
+                android:id="@android:id/icon"
+                android:layout_width="@dimen/lb_preference_item_icon_size"
+                android:layout_height="@dimen/lb_preference_item_icon_size"
+                android:layout_marginEnd="@dimen/lb_preference_item_icon_margin_end"
+                style="?android:attr/imageButtonStyle" />
         </FrameLayout>
 
         <RelativeLayout

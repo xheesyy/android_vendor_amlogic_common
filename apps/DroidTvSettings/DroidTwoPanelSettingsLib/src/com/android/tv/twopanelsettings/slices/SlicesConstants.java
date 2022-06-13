@@ -51,7 +51,7 @@ public final class SlicesConstants {
     public static final String PARAMETER_ERROR = "error";
     public static final String PARAMETER_URI = "uri";
     public static final String EXTRA_PREFERENCE_KEY = "extra_preference_key";
-    public static final String EXTRA_PREFERENCE_INFO_TEXT= "extra_preference_info_text";
+    public static final String EXTRA_PREFERENCE_INFO_TEXT = "extra_preference_info_text";
     public static final String EXTRA_PREFERENCE_INFO_IMAGE = "extra_preference_info_image";
     public static final String EXTRA_PREFERENCE_INFO_TITLE_ICON =
             "extra_preference_info_title_icon";
@@ -67,5 +67,6 @@ public final class SlicesConstants {
 
     @IntDef({SWITCH, CHECKMARK, RADIO})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BUTTONSTYLE {}
+    public @interface BUTTONSTYLE {
+    }
 }

@@ -106,25 +106,25 @@ public class FileListManager {
 
     //music
     private static final String[] music_extensions = {
-        ".mp3", ".wma", ".m4a", ".aac", ".ape", ".mp2", ".ogg", ".flac", ".alac", ".wav",
-        ".mid", ".xmf", ".mka", ".aiff", ".aifc", ".aif", ".pcm", ".adpcm"
+            ".mp3", ".wma", ".m4a", ".aac", ".ape", ".mp2", ".ogg", ".flac", ".alac", ".wav",
+            ".mid", ".xmf", ".mka", ".aiff", ".aifc", ".aif", ".pcm", ".adpcm"
     };
 
     //photo
     private static final String[] photo_extensions = {
-        ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".png", ".gif", ".giff", ".jfi", ".jpe", ".jif",
-        ".jfif", ".mpo", ".webp", ".3dg", "3dp"
+            ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".png", ".gif", ".giff", ".jfi", ".jpe", ".jif",
+            ".jfif", ".mpo", ".webp", ".3dg", "3dp"
     };
 
-    private static final String[] plain_extensions = {".txt",".c",".cpp",".java",",conf",".h",
-        ".log",".rc"
+    private static final String[] plain_extensions = {".txt", ".c", ".cpp", ".java", ",conf", ".h",
+            ".log", ".rc"
     };
 
     public FileListManager(Context context) {
         mContext = context;
         mDebug = false;
         mStorageManager = (StorageManager) mContext.getSystemService(Context.STORAGE_SERVICE);
-        mSystemControl =  SystemControlManager.getInstance();
+        mSystemControl = SystemControlManager.getInstance();
 
         //remove droidvold from andorid p
         /*try {
@@ -208,24 +208,24 @@ public class FileListManager {
         mSystemControl.loopMountUnmount(true, path);
     }
 
-    public static boolean isISOFile (File file) {
+    public static boolean isISOFile(File file) {
         String fname = file.getName();
         String sname = ".iso";
         if (fname == "") {
             return false;
         }
-        if (file.isFile() && fname.toLowerCase().endsWith (sname)) {
+        if (file.isFile() && fname.toLowerCase().endsWith(sname)) {
             return true;
         }
         return false;
     }
 
     private static boolean isHasDir(File[] files, String name) {
-       for (File file : files) {
-           if (name != null && name.equals(file.getName()) && file.isDirectory())
-               return true;
-       }
-       return false;
+        for (File file : files) {
+            if (name != null && name.equals(file.getName()) && file.isDirectory())
+                return true;
+        }
+        return false;
     }
 
     public static boolean isBDFile(File file) {
@@ -238,33 +238,33 @@ public class FileListManager {
                 for (int i = 0; i < files.length; i++)
                     names.add(files[i]);
                 if (names.contains("index.bdmv") && names.contains("PLAYLIST")
-                    && names.contains("CLIPINF") && names.contains("STREAM"))
+                        && names.contains("CLIPINF") && names.contains("STREAM"))
                     return true;
-              }
-          } else if (isISOFile(file)) {
-              ISOpath = file.getPath();
-              mount(ISOpath);
-              File isofile = new File(iso_mount_dir_s);
-              if (isofile.exists() && isofile.isDirectory()) {
-                  File[] rootFiles = isofile.listFiles();
-                  if (rootFiles != null && rootFiles.length >= 1 && isHasDir(rootFiles, "BDMV")) {
-                      File bdfiles = new File(iso_mount_dir_s, "BDMV");
-                      String[] bdmvFiles = bdfiles.list();
-                      ArrayList<String> names = new ArrayList<String>();
-                      for (int i = 0; i < bdmvFiles.length; i++)
-                          names.add(bdmvFiles[i]);
-                      if (names.contains("index.bdmv") && names.contains("PLAYLIST")
-                          && names.contains("CLIPINF") && names.contains("STREAM")) {
-                          return true;
-                      }
-                  }
-              }
-          }
-          return false;
-      }
+            }
+        } else if (isISOFile(file)) {
+            ISOpath = file.getPath();
+            mount(ISOpath);
+            File isofile = new File(iso_mount_dir_s);
+            if (isofile.exists() && isofile.isDirectory()) {
+                File[] rootFiles = isofile.listFiles();
+                if (rootFiles != null && rootFiles.length >= 1 && isHasDir(rootFiles, "BDMV")) {
+                    File bdfiles = new File(iso_mount_dir_s, "BDMV");
+                    String[] bdmvFiles = bdfiles.list();
+                    ArrayList<String> names = new ArrayList<String>();
+                    for (int i = 0; i < bdmvFiles.length; i++)
+                        names.add(bdmvFiles[i]);
+                    if (names.contains("index.bdmv") && names.contains("PLAYLIST")
+                            && names.contains("CLIPINF") && names.contains("STREAM")) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
-    public static String CheckMediaType(File file){
-        String typeStr="application/*";
+    public static String CheckMediaType(File file) {
+        String typeStr = "application/*";
         String filename = file.getName();
 
         if (isVideo(filename))
@@ -289,11 +289,13 @@ public class FileListManager {
 
     public class MyFilter implements FileFilter {
         private String extensions;
-        public MyFilter (String extensions) {
+
+        public MyFilter(String extensions) {
             this.extensions = extensions;
         }
-        public boolean accept (File file) {
-            StringTokenizer st = new StringTokenizer (this.extensions, ",");
+
+        public boolean accept(File file) {
+            StringTokenizer st = new StringTokenizer(this.extensions, ",");
             if (file.isDirectory()) {
                 return true;
             }
@@ -301,20 +303,18 @@ public class FileListManager {
             if (st.countTokens() == 1) {
                 String str = st.nextToken();
                 String filenamelowercase = name.toLowerCase();
-                return filenamelowercase.endsWith (str);
+                return filenamelowercase.endsWith(str);
             } else {
-                int index = name.lastIndexOf (".");
+                int index = name.lastIndexOf(".");
                 if (index == -1) {
                     return false;
-                }
-                else if (index == (name.length() - 1)) {
+                } else if (index == (name.length() - 1)) {
                     return false;
-                }
-                else {
+                } else {
                     //for(int i = 0; i<st.countTokens(); i++)
                     while (st.hasMoreElements()) {
                         String extension = st.nextToken();
-                        if (extension.equals (name.substring (index + 1).toLowerCase())) {
+                        if (extension.equals(name.substring(index + 1).toLowerCase())) {
                             return true;
                         }
                     }
@@ -371,17 +371,17 @@ public class FileListManager {
             getDiskId = volumeInfoClazz.getMethod("getDiskId");
             fsType = volumeInfoClazz.getDeclaredField("fsType");
             volumeId = volumeInfoClazz.getDeclaredField("id");
-            volumes = (List<?>)getVolumes.invoke(mStorageManager);
+            volumes = (List<?>) getVolumes.invoke(mStorageManager);
             //Collections.sort(volumes, getDescriptionComparator.invoke());
 
             for (Object vol : volumes) {
-                if (vol != null && (boolean)isMountedReadable.invoke(vol) && (int)getType.invoke(vol) == 0) {
-                    File pathFile = (File)getPath.invoke(vol);
+                if (vol != null && (boolean) isMountedReadable.invoke(vol) && (int) getType.invoke(vol) == 0) {
+                    File pathFile = (File) getPath.invoke(vol);
                     String path = pathFile.getAbsolutePath();
-                    String name = (String)getBestVolumeDescription.invoke(mStorageManager, vol);
-                    String fsTypeStr = (String)fsType.get(vol);
-                    String volumeIdStr = (String)volumeId.get(vol);
-                    String diskIdStr = (String)getDiskId.invoke(vol);
+                    String name = (String) getBestVolumeDescription.invoke(mStorageManager, vol);
+                    String fsTypeStr = (String) fsType.get(vol);
+                    String volumeIdStr = (String) volumeId.get(vol);
+                    String diskIdStr = (String) getDiskId.invoke(vol);
 
                     map = new HashMap<String, Object>();
                     map.put(KEY_NAME, name);
@@ -397,7 +397,8 @@ public class FileListManager {
                     if (disk.isUsb()) {
                         map.put(KEY_TYPE, TYPE_UDISK);
                     }
-                    else */{
+                    else */
+                    {
                         map.put(KEY_TYPE, TYPE_SDCARD);
                     }
 
@@ -477,8 +478,7 @@ public class FileListManager {
                         Log.i(TAG, "getDevices() diskFlag:" + diskFlag);
                         if (diskFlag == 8) {
                             map.put(KEY_TYPE, TYPE_UDISK);
-                        }
-                        else if (diskFlag == 4){
+                        } else if (diskFlag == 4) {
                             map.put(KEY_TYPE, TYPE_SDCARD);
                         }
                         if (mDebug) {

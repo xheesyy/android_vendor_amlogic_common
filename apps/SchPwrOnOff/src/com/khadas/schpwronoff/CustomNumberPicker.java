@@ -8,7 +8,7 @@ import android.view.ViewParent;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
-public class CustomNumberPicker extends NumberPicker{
+public class CustomNumberPicker extends NumberPicker {
 
     public CustomNumberPicker(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,7 +39,7 @@ public class CustomNumberPicker extends NumberPicker{
         updateView(child);
     }
 
-   @Override
+    @Override
     public void addView(View child, android.view.ViewGroup.LayoutParams params) {
         super.addView(child, params);
         updateView(child);

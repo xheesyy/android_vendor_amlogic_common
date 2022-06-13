@@ -50,14 +50,15 @@ public class AccessibilityServiceFragment extends SettingsPreferenceFragment imp
 
     /**
      * Put args in bundle
-     * @param args Bundle to prepare
-     * @param packageName Package of accessibility service
-     * @param serviceName Class of accessibility service
+     *
+     * @param args         Bundle to prepare
+     * @param packageName  Package of accessibility service
+     * @param serviceName  Class of accessibility service
      * @param activityName Class of accessibility service settings activity
-     * @param label Screen title
+     * @param label        Screen title
      */
     public static void prepareArgs(@NonNull Bundle args, String packageName, String serviceName,
-            String activityName, String label) {
+                                   String activityName, String label) {
         args.putString(ARG_PACKAGE_NAME, packageName);
         args.putString(ARG_SERVICE_NAME, serviceName);
         args.putString(ARG_SETTINGS_ACTIVITY_NAME, activityName);

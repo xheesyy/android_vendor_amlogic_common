@@ -25,7 +25,9 @@ import java.nio.ShortBuffer;
 import java.util.HashSet;
 import java.util.Set;
 
-/** Records audio, and passes it to listeners on completion. */
+/**
+ * Records audio, and passes it to listeners on completion.
+ */
 public class AudioReader implements Runnable {
 
     private static final String TAG = "AudioReader";
@@ -43,9 +45,13 @@ public class AudioReader implements Runnable {
     private volatile boolean mActive = true;
     private volatile boolean mCancelled = false;
 
-    /** Interface for receiving recorded audio. */
+    /**
+     * Interface for receiving recorded audio.
+     */
     public interface Listener {
-        /** Callback for receiving recorded audio. */
+        /**
+         * Callback for receiving recorded audio.
+         */
         void onAudioRecorded(ShortBuffer data);
     }
 
@@ -81,17 +87,23 @@ public class AudioReader implements Runnable {
         mListeners = new HashSet<>();
     }
 
-    /** Adds a listener. */
+    /**
+     * Adds a listener.
+     */
     public void addListener(Listener listener) {
         mListeners.add(listener);
     }
 
-    /** Removes a listener. */
+    /**
+     * Removes a listener.
+     */
     public void removeListener(Listener listener) {
         mListeners.remove(listener);
     }
 
-    /** Records an audio track and sends it to all listeners. */
+    /**
+     * Records an audio track and sends it to all listeners.
+     */
     @Override
     public void run() {
         long startTs = System.currentTimeMillis();
@@ -146,12 +158,16 @@ public class AudioReader implements Runnable {
         }
     }
 
-    /** Stops audio recording, and sends recorded audio to listeners. */
+    /**
+     * Stops audio recording, and sends recorded audio to listeners.
+     */
     public void stop() {
         mActive = false;
     }
 
-    /** Stops audio recording, and discards the recorded audio. */
+    /**
+     * Stops audio recording, and discards the recorded audio.
+     */
     public void cancel() {
         mCancelled = true;
         mActive = false;

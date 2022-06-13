@@ -28,7 +28,7 @@ public class ItemAdapter extends CommonAdapter<Item> {
     public void setDataByPosition(int position, Item item) {
         super.setDataByPosition(position, item);
         if (mData != null && mData.size() >= position) {
-            mData.set(position,item );
+            mData.set(position, item);
         }
     }
 
@@ -69,14 +69,14 @@ public class ItemAdapter extends CommonAdapter<Item> {
         try {
             JSONArray array = new JSONArray(item.getLayoutIdInfo());
             if (array != null && array.length() > 1) {
-                int viewNum = (int)array.get(0);
+                int viewNum = (int) array.get(0);
                 if (viewNum >= 1) {
-                    titleTextResId = ((JSONObject)array.get(1)).getInt("resId");
-                    title = ((JSONObject)array.get(1)).getString("value");
+                    titleTextResId = ((JSONObject) array.get(1)).getInt("resId");
+                    title = ((JSONObject) array.get(1)).getString("value");
                     //Log.d(TAG, "setViewContent parsed titleTextResId = " + titleTextResId + ", title = " + title);
                 }
                 if (viewNum >= 2) {
-                    JSONObject obj = (JSONObject)array.get(2);
+                    JSONObject obj = (JSONObject) array.get(2);
                     iconTextResId = obj.getInt("resId");
                     iconDrawable = mContext.getDrawable(obj.getInt("iconRes"));
                     //Log.d(TAG, "setViewContent parsed iconTextResId = " + iconTextResId + ", iconDrawable = " + iconDrawable);
@@ -87,9 +87,9 @@ public class ItemAdapter extends CommonAdapter<Item> {
         }
         if (item.needTitle()) {
             if (item instanceof ChannelListItem) {
-                long channelId = ((ChannelListItem)item).getChannelId();
+                long channelId = ((ChannelListItem) item).getChannelId();
                 if (channelId != -1) {
-                    title = /*String.valueOf(position + 1)*/((ChannelListItem)item).getOriginDisplayNumber() + "   " + title;
+                    title = /*String.valueOf(position + 1)*/((ChannelListItem) item).getOriginDisplayNumber() + "   " + title;
                 }
             }
             viewHolder.setText(titleTextResId, title);

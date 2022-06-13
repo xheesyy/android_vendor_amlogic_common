@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,12 +17,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toast_layout_root"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="100dip"
-        android:background="@color/toast_notification_background" >
+        android:background="@color/toast_notification_background">
 
         <TextView
             android:id="@+id/text"

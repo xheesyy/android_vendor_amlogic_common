@@ -114,7 +114,7 @@ public class IpAddressState implements State {
                 title = mAdvancedOptionsFlowInfo.get(AdvancedOptionsFlowInfo.IP_ADDRESS);
             } else if (mAdvancedOptionsFlowInfo.getInitialLinkAddress() != null) {
                 title = mAdvancedOptionsFlowInfo.getInitialLinkAddress()
-                            .getAddress().getHostAddress();
+                        .getAddress().getHostAddress();
             }
 
             mAction = new GuidedAction.Builder(context)

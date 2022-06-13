@@ -34,10 +34,12 @@ import java.lang.System;
 import java.lang.reflect.Method;
 
 import android.media.tv.TvInputInfo;
+
 import com.droidlogic.app.SystemControlManager;
 
 import android.media.tv.TvContract;
 import android.media.tv.TvContract.Channels;
+
 import com.droidlogic.app.tv.ChannelInfo;
 import com.droidlogic.app.tv.TvDataBaseManager;
 import com.droidlogic.app.tv.TvControlManager;
@@ -52,107 +54,107 @@ import com.droidlogic.tvinput.R;
 public class SettingsManager {
     public static final String TAG = "SettingsManager";
 
-    public static final String KEY_PICTURE                          = "picture";
-    public static final String KEY_PICTURE_MODE                     = "picture_mode";
-    public static final String KEY_BRIGHTNESS                       = "brightness";
-    public static final String KEY_CONTRAST                         = "contrast";
-    public static final String KEY_COLOR                            = "color";
-    public static final String KEY_SHARPNESS                        = "sharpness";
-    public static final String KEY_BACKLIGHT                        = "backlight";
-    public static final String KEY_TINT                             = "tint";
-    public static final String KEY_COLOR_TEMPERATURE                = "color_temperature";
-    public static final String KEY_ASPECT_RATIO                     = "aspect_ratio";
-    public static final String KEY_DNR                              = "dnr";
-    public static final String KEY_3D_SETTINGS                      = "settings_3d";
+    public static final String KEY_PICTURE = "picture";
+    public static final String KEY_PICTURE_MODE = "picture_mode";
+    public static final String KEY_BRIGHTNESS = "brightness";
+    public static final String KEY_CONTRAST = "contrast";
+    public static final String KEY_COLOR = "color";
+    public static final String KEY_SHARPNESS = "sharpness";
+    public static final String KEY_BACKLIGHT = "backlight";
+    public static final String KEY_TINT = "tint";
+    public static final String KEY_COLOR_TEMPERATURE = "color_temperature";
+    public static final String KEY_ASPECT_RATIO = "aspect_ratio";
+    public static final String KEY_DNR = "dnr";
+    public static final String KEY_3D_SETTINGS = "settings_3d";
 
-    public static final String KEY_SOUND                            = "sound";
-    public static final String KEY_SOUND_MODE                       = "sound_mode";
-    public static final String KEY_TREBLE                           = "treble";
-    public static final String KEY_BASS                             = "bass";
-    public static final String KEY_BALANCE                          = "balance";
-    public static final String KEY_SPDIF                            = "spdif";
-    public static final String KEY_VIRTUAL_SURROUND                 = "virtual_surround";
-    public static final String KEY_SURROUND                         = "surround";
-    public static final String KEY_DIALOG_CLARITY                   = "dialog_clarity";
-    public static final String KEY_BASS_BOOST                       = "bass_boost";
+    public static final String KEY_SOUND = "sound";
+    public static final String KEY_SOUND_MODE = "sound_mode";
+    public static final String KEY_TREBLE = "treble";
+    public static final String KEY_BASS = "bass";
+    public static final String KEY_BALANCE = "balance";
+    public static final String KEY_SPDIF = "spdif";
+    public static final String KEY_VIRTUAL_SURROUND = "virtual_surround";
+    public static final String KEY_SURROUND = "surround";
+    public static final String KEY_DIALOG_CLARITY = "dialog_clarity";
+    public static final String KEY_BASS_BOOST = "bass_boost";
 
-    public static final String KEY_CHANNEL                          = "channel";
-    public static final String KEY_AUIDO_TRACK                      = "audio_track";
-    public static final String KEY_SOUND_CHANNEL                    = "sound_channel";
-    public static final String KEY_CHANNEL_INFO                     = "channel_info";
-    public static final String KEY_COLOR_SYSTEM                     = "color_system";
-    public static final String KEY_SOUND_SYSTEM                     = "sound_system";
-    public static final String KEY_VOLUME_COMPENSATE                = "volume_compensate";
-    public static final String KEY_FINE_TUNE                        = "fine_tune";
-    public static final String KEY_MANUAL_SEARCH                    = "manual_search";
-    public static final String KEY_AUTO_SEARCH                      = "auto_search";
-    public static final String KEY_CHANNEL_EDIT                     = "channel_edit";
-    public static final String KEY_SWITCH_CHANNEL                   = "switch_channel";
-    public static final String KEY_MTS                              ="mts";
+    public static final String KEY_CHANNEL = "channel";
+    public static final String KEY_AUIDO_TRACK = "audio_track";
+    public static final String KEY_SOUND_CHANNEL = "sound_channel";
+    public static final String KEY_CHANNEL_INFO = "channel_info";
+    public static final String KEY_COLOR_SYSTEM = "color_system";
+    public static final String KEY_SOUND_SYSTEM = "sound_system";
+    public static final String KEY_VOLUME_COMPENSATE = "volume_compensate";
+    public static final String KEY_FINE_TUNE = "fine_tune";
+    public static final String KEY_MANUAL_SEARCH = "manual_search";
+    public static final String KEY_AUTO_SEARCH = "auto_search";
+    public static final String KEY_CHANNEL_EDIT = "channel_edit";
+    public static final String KEY_SWITCH_CHANNEL = "switch_channel";
+    public static final String KEY_MTS = "mts";
 
-    public static final String KEY_SETTINGS                         = "settings";
-    public static final String KEY_DTV_TYPE                         = "dtv_type";
-    public static final String KEY_SLEEP_TIMER                      = "sleep_timer";
-    public static final String KEY_MENU_TIME                        = "menu_time";
-    public static final String KEY_STARTUP_SETTING                  = "startup_setting";
-    public static final String KEY_DYNAMIC_BACKLIGHT                = "dynamic_backlight";
-    public static final String KEY_RESTORE_FACTORY                  = "restore_factory";
-    public static final String KEY_DEFAULT_LANGUAGE                 = "default_language";
-    public static final String KEY_SUBTITLE_SWITCH                  = "sub_switch";
-    public static final String KEY_AD_SWITCH                        = "ad_switch";
-    public static final String KEY_AD_MIX                           = "ad_mix_level";
-    public static final String KEY_AD_LIST                          = "ad_list";
-    public static final String KEY_HDMI20                           = "hdmi20";
-    public static final String KEY_FBC_UPGRADE                      ="fbc_upgrade";
+    public static final String KEY_SETTINGS = "settings";
+    public static final String KEY_DTV_TYPE = "dtv_type";
+    public static final String KEY_SLEEP_TIMER = "sleep_timer";
+    public static final String KEY_MENU_TIME = "menu_time";
+    public static final String KEY_STARTUP_SETTING = "startup_setting";
+    public static final String KEY_DYNAMIC_BACKLIGHT = "dynamic_backlight";
+    public static final String KEY_RESTORE_FACTORY = "restore_factory";
+    public static final String KEY_DEFAULT_LANGUAGE = "default_language";
+    public static final String KEY_SUBTITLE_SWITCH = "sub_switch";
+    public static final String KEY_AD_SWITCH = "ad_switch";
+    public static final String KEY_AD_MIX = "ad_mix_level";
+    public static final String KEY_AD_LIST = "ad_list";
+    public static final String KEY_HDMI20 = "hdmi20";
+    public static final String KEY_FBC_UPGRADE = "fbc_upgrade";
 
-    public static final String STATUS_STANDARD                      = "standard";
-    public static final String STATUS_VIVID                         = "vivid";
-    public static final String STATUS_SOFT                          = "soft";
-    public static final String STATUS_MONITOR                       = "monitor";
-    public static final String STATUS_USER                          = "user";
-    public static final String STATUS_WARM                          = "warm";
-    public static final String STATUS_MUSIC                         = "music";
-    public static final String STATUS_NEWS                          = "news";
-    public static final String STATUS_MOVIE                         = "movie";
-    public static final String STATUS_COOL                          = "cool";
-    public static final String STATUS_ON                            = "on";
-    public static final String STATUS_OFF                           = "off";
-    public static final String STATUS_AUTO                          = "auto";
-    public static final String STATUS_4_TO_3                        = "4:3";
-    public static final String STATUS_PANORAMA                      = "panorama";
-    public static final String STATUS_FULL_SCREEN                   = "full_screen";
-    public static final String STATUS_MEDIUM                        = "medium";
-    public static final String STATUS_HIGH                          = "high";
-    public static final String STATUS_LOW                           = "low";
-    public static final String STATUS_3D_LR_MODE                    = "left right mode";
-    public static final String STATUS_3D_RL_MODE                    = "right left mode";
-    public static final String STATUS_3D_UD_MODE                    = "up down mode";
-    public static final String STATUS_3D_DU_MODE                    = "down up mode";
-    public static final String STATUS_3D_TO_2D                      = "3D to 2D";
-    public static final String STATUS_PCM                           = "pcm";
-    public static final String STATUS_STEREO                        = "stereo";
-    public static final String STATUS_LEFT_CHANNEL                  = "left channel";
-    public static final String STATUS_RIGHT_CHANNEL                 = "right channel";
-    public static final String STATUS_RAW                           = "raw";
+    public static final String STATUS_STANDARD = "standard";
+    public static final String STATUS_VIVID = "vivid";
+    public static final String STATUS_SOFT = "soft";
+    public static final String STATUS_MONITOR = "monitor";
+    public static final String STATUS_USER = "user";
+    public static final String STATUS_WARM = "warm";
+    public static final String STATUS_MUSIC = "music";
+    public static final String STATUS_NEWS = "news";
+    public static final String STATUS_MOVIE = "movie";
+    public static final String STATUS_COOL = "cool";
+    public static final String STATUS_ON = "on";
+    public static final String STATUS_OFF = "off";
+    public static final String STATUS_AUTO = "auto";
+    public static final String STATUS_4_TO_3 = "4:3";
+    public static final String STATUS_PANORAMA = "panorama";
+    public static final String STATUS_FULL_SCREEN = "full_screen";
+    public static final String STATUS_MEDIUM = "medium";
+    public static final String STATUS_HIGH = "high";
+    public static final String STATUS_LOW = "low";
+    public static final String STATUS_3D_LR_MODE = "left right mode";
+    public static final String STATUS_3D_RL_MODE = "right left mode";
+    public static final String STATUS_3D_UD_MODE = "up down mode";
+    public static final String STATUS_3D_DU_MODE = "down up mode";
+    public static final String STATUS_3D_TO_2D = "3D to 2D";
+    public static final String STATUS_PCM = "pcm";
+    public static final String STATUS_STEREO = "stereo";
+    public static final String STATUS_LEFT_CHANNEL = "left channel";
+    public static final String STATUS_RIGHT_CHANNEL = "right channel";
+    public static final String STATUS_RAW = "raw";
 
-    public static final String STATUS_DEFAULT_PERCENT               = "50%";
-    public static final double STATUS_DEFAUT_FREQUENCY              = 44250000;
-    public static final int PERCENT_INCREASE                        = 1;
-    public static final int PERCENT_DECREASE                        = -1;
-    public static final int DEFAULT_SLEEP_TIMER                     = 0;
-    public static final int DEFAULT_MENU_TIME                       = 10;
-    public static final String LAUNCHER_NAME                        = "com.android.launcher";
-    public static final String LAUNCHER_ACTIVITY                    = "com.android.launcher2.Launcher";
-    public static final String TV_NAME                              = "com.droidlogic.tv";
-    public static final String TV_ACTIVITY                          = "com.droidlogic.tv.DroidLogicTv";
+    public static final String STATUS_DEFAULT_PERCENT = "50%";
+    public static final double STATUS_DEFAUT_FREQUENCY = 44250000;
+    public static final int PERCENT_INCREASE = 1;
+    public static final int PERCENT_DECREASE = -1;
+    public static final int DEFAULT_SLEEP_TIMER = 0;
+    public static final int DEFAULT_MENU_TIME = 10;
+    public static final String LAUNCHER_NAME = "com.android.launcher";
+    public static final String LAUNCHER_ACTIVITY = "com.android.launcher2.Launcher";
+    public static final String TV_NAME = "com.droidlogic.tv";
+    public static final String TV_ACTIVITY = "com.droidlogic.tv.DroidLogicTv";
 
-    public static final String STRING_ICON                          = "icon";
-    public static final String STRING_NAME                          = "name";
-    public static final String STRING_STATUS                        = "status";
-    public static final String STRING_PRIVATE                       = "private";
+    public static final String STRING_ICON = "icon";
+    public static final String STRING_NAME = "name";
+    public static final String STRING_STATUS = "status";
+    public static final String STRING_PRIVATE = "private";
 
-    public static final String ATSC_TV_SEARCH_SYS                   = "atsc_tv_search_sys";
-    public static final String ATSC_TV_SEARCH_SOUND_SYS             = "atsc_tv_search_sound_sys";
+    public static final String ATSC_TV_SEARCH_SYS = "atsc_tv_search_sys";
+    public static final String ATSC_TV_SEARCH_SOUND_SYS = "atsc_tv_search_sound_sys";
     public static String currentTag = null;
     public static final int STREAM_MUSIC = 3;
 
@@ -171,7 +173,7 @@ public class SettingsManager {
     private boolean isRadioChannel = false;
     private int mResult = DroidLogicTvUtils.RESULT_OK;
 
-    public SettingsManager (Context context, Intent intent) {
+    public SettingsManager(Context context, Intent intent) {
         mContext = context;
         mTvDataBaseManager = new TvDataBaseManager(mContext);
         mSystemControlManager = SystemControlManager.getInstance();
@@ -211,7 +213,7 @@ public class SettingsManager {
         Log.d(TAG, "curVirtualSource=" + mVirtualTvSource);
 
         if (mTvSource == TvControlManager.SourceInput_Type.SOURCE_TYPE_TV
-            || mTvSource == TvControlManager.SourceInput_Type.SOURCE_TYPE_DTV) {
+                || mTvSource == TvControlManager.SourceInput_Type.SOURCE_TYPE_DTV) {
             long channelId = intent.getLongExtra(DroidLogicTvUtils.EXTRA_CHANNEL_NUMBER, -1);
             currentChannel = mTvDataBaseManager.getChannelInfo(TvContract.buildChannelUri(channelId));
             if (currentChannel != null) {
@@ -223,19 +225,19 @@ public class SettingsManager {
         }
     }
 
-    public void setTag (String tag) {
+    public void setTag(String tag) {
         currentTag = tag;
     }
 
-    public String getTag () {
+    public String getTag() {
         return currentTag;
     }
 
-    public TvControlManager.SourceInput_Type getCurentTvSource () {
+    public TvControlManager.SourceInput_Type getCurentTvSource() {
         return mTvSource;
     }
 
-    public TvControlManager.SourceInput_Type getCurentVirtualTvSource () {
+    public TvControlManager.SourceInput_Type getCurentVirtualTvSource() {
         return mVirtualTvSource;
     }
 
@@ -247,9 +249,6 @@ public class SettingsManager {
         return mResult;
     }
 
-   
-
-
 
     public String getDtvType() {
         int deviceId = DroidLogicTvUtils.getHardwareDeviceId(mInputId);
@@ -257,9 +256,9 @@ public class SettingsManager {
         if (type != null) {
             return type;
         } else {
-            if (deviceId == DroidLogicTvUtils.DEVICE_ID_ADTV ) {
+            if (deviceId == DroidLogicTvUtils.DEVICE_ID_ADTV) {
                 return TvContract.Channels.TYPE_ATSC_T;
-            }else {
+            } else {
                 return TvContract.Channels.TYPE_DTMB;
             }
         }
@@ -316,25 +315,25 @@ public class SettingsManager {
     public String getDtvTypeStatus(String type) {
         String ret = "";
         if (TextUtils.equals(type, TvContract.Channels.TYPE_DTMB)) {
-                ret = mResources.getString(R.string.dtmb);
+            ret = mResources.getString(R.string.dtmb);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_C)) {
-                ret = mResources.getString(R.string.dvbc);
+            ret = mResources.getString(R.string.dvbc);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_T)) {
-                ret = mResources.getString(R.string.dvbt);
+            ret = mResources.getString(R.string.dvbt);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_S)) {
-                ret = mResources.getString(R.string.dvbs);
+            ret = mResources.getString(R.string.dvbs);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_C2)) {
-                ret = mResources.getString(R.string.dvbc2);
+            ret = mResources.getString(R.string.dvbc2);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_T2)) {
-                ret = mResources.getString(R.string.dvbt2);
+            ret = mResources.getString(R.string.dvbt2);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_DVB_S2)) {
-                ret = mResources.getString(R.string.dvbs2);
+            ret = mResources.getString(R.string.dvbs2);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_ATSC_T)) {
-                ret = mResources.getString(R.string.atsc_t);
+            ret = mResources.getString(R.string.atsc_t);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_ATSC_C)) {
-                ret = mResources.getString(R.string.atsc_c);
+            ret = mResources.getString(R.string.atsc_c);
         } else if (TextUtils.equals(type, TvContract.Channels.TYPE_ISDB_T)) {
-                ret = mResources.getString(R.string.isdb_t);
+            ret = mResources.getString(R.string.isdb_t);
         }
         return ret;
     }
@@ -348,7 +347,7 @@ public class SettingsManager {
     }
 
     private String[] tvPackages = {
-        "com.android.providers.tv",
+            "com.android.providers.tv",
     };
 
     public String getInputId() {
@@ -360,6 +359,7 @@ public class SettingsManager {
         intent.putExtra("tv_play_extra", extra);
         mContext.sendBroadcast(intent);
     }
+
     public void sendBroadcastToTvapp(String action, Bundle bundle) {
         Intent intent = new Intent(action);
         intent.putExtra(DroidLogicTvUtils.EXTRA_MORE, bundle);
@@ -367,14 +367,14 @@ public class SettingsManager {
     }
 
     public void startTvPlayAndSetSourceInput() {
-            mTvControlManager.StartTv();
-            int deviceId = DroidLogicTvUtils.getHardwareDeviceId(mInputId);
-            //Log.e(TAG,"deviceId:"+deviceId);
-            mTvControlManager.SetSourceInput(mTvSourceInput, DroidLogicTvUtils.parseTvSourceInputFromDeviceId(deviceId));
-        }
+        mTvControlManager.StartTv();
+        int deviceId = DroidLogicTvUtils.getHardwareDeviceId(mInputId);
+        //Log.e(TAG,"deviceId:"+deviceId);
+        mTvControlManager.SetSourceInput(mTvSourceInput, DroidLogicTvUtils.parseTvSourceInputFromDeviceId(deviceId));
+    }
 
     public void deleteChannels(String type) {
-            mTvDataBaseManager.deleteChannels(mInputId, type);
+        mTvDataBaseManager.deleteChannels(mInputId, type);
     }
 
     public void deleteAtvOrDtvChannels(boolean isatv) {

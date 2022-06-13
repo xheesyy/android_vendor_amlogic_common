@@ -97,13 +97,17 @@ public class SoundFormatPreferenceController extends AbstractPreferenceControlle
         }
     }
 
-    /** @return true if the format checkboxes should be enabled, i.e. in manual mode. */
+    /**
+     * @return true if the format checkboxes should be enabled, i.e. in manual mode.
+     */
     private boolean getFormatPreferencesEnabledState() {
         return AdvancedVolumeFragment.getSurroundPassthroughSetting(mContext)
                 == AdvancedVolumeFragment.VAL_SURROUND_SOUND_MANUAL;
     }
 
-    /** @return the formats that are enabled in global settings */
+    /**
+     * @return the formats that are enabled in global settings
+     */
     HashSet<Integer> getEnabledFormats() {
         HashSet<Integer> formats = new HashSet<>();
         String enabledFormats = Settings.Global.getString(mContext.getContentResolver(),
@@ -136,7 +140,9 @@ public class SoundFormatPreferenceController extends AbstractPreferenceControlle
         }
     }
 
-    /** @return true if the given format is reported by the device. */
+    /**
+     * @return true if the given format is reported by the device.
+     */
     private boolean isReportedFormat() {
         return mReportedFormats != null && mReportedFormats.get(mFormatId) != null;
     }
@@ -155,24 +161,24 @@ public class SoundFormatPreferenceController extends AbstractPreferenceControlle
 
     private void showWarningDialogOnEnableUnsupportedFormat(SwitchPreference preference) {
         new AlertDialog.Builder(mContext)
-            .setTitle(R.string.surround_sound_enable_unsupported_dialog_title)
-            .setMessage(R.string.surround_sound_enable_unsupported_dialog_desc)
-            .setPositiveButton(
-                    R.string.surround_sound_enable_unsupported_dialog_ok,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            updateEnabledFormatsSetting(true);
-                            dialog.dismiss();
-                        }
-                    })
-            .setNegativeButton(
-                    R.string.surround_sound_enable_unsupported_dialog_cancel,
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            preference.setChecked(false);
-                            dialog.dismiss();
-                        }
-                    })
-            .show();
+                .setTitle(R.string.surround_sound_enable_unsupported_dialog_title)
+                .setMessage(R.string.surround_sound_enable_unsupported_dialog_desc)
+                .setPositiveButton(
+                        R.string.surround_sound_enable_unsupported_dialog_ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                updateEnabledFormatsSetting(true);
+                                dialog.dismiss();
+                            }
+                        })
+                .setNegativeButton(
+                        R.string.surround_sound_enable_unsupported_dialog_cancel,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                preference.setChecked(false);
+                                dialog.dismiss();
+                            }
+                        })
+                .show();
     }
 }

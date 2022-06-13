@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -86,7 +85,7 @@
     </string-array>
 
     <!-- Values for captioning typeface preference. -->
-    <string-array name="captioning_typeface_selector_values" translatable="false" >
+    <string-array name="captioning_typeface_selector_values" translatable="false">
         <item>default</item>
         <item>sans-serif</item>
         <item>sans-serif-condensed</item>
@@ -108,7 +107,7 @@
     </string-array>
 
     <!-- Values for captioning font size preference. -->
-    <string-array name="captioning_font_size_selector_values" translatable="false" >
+    <string-array name="captioning_font_size_selector_values" translatable="false">
         <item>0.25</item>
         <item>0.5</item>
         <item>1.0</item>
@@ -126,7 +125,7 @@
     </string-array>
 
     <!-- Values for captioning character edge type preference. -->
-    <string-array name="captioning_edge_type_selector_values" translatable="false" >
+    <string-array name="captioning_edge_type_selector_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -135,7 +134,7 @@
     </string-array>
 
     <!-- Titles for captioning color preference. -->
-    <string-array name="captioning_color_selector_titles" translatable="false" >
+    <string-array name="captioning_color_selector_titles" translatable="false">
         <item>@string/color_white</item>
         <item>@string/color_black</item>
         <item>@string/color_red</item>
@@ -147,7 +146,7 @@
     </string-array>
 
     <!-- Index to id mapping for captioning color preference. -->
-    <array name="captioning_color_selector_ids" translatable="false" >
+    <array name="captioning_color_selector_ids" translatable="false">
         <item>@color/captioning_color_FFFFFF</item>
         <item>@color/captioning_color_000000</item>
         <item>@color/captioning_color_FF0000</item>
@@ -216,7 +215,7 @@
     </array>
 
     <!-- Titles for captioning opacity preference. [CHAR LIMIT=35] -->
-    <string-array name="captioning_opacity_selector_titles" >
+    <string-array name="captioning_opacity_selector_titles">
         <item>25%</item>
         <item>50%</item>
         <item>75%</item>
@@ -224,7 +223,7 @@
     </string-array>
 
     <!-- Values for captioning opacity preference. -->
-    <string-array name="captioning_opacity_selector_values" translatable="false" >
+    <string-array name="captioning_opacity_selector_values" translatable="false">
         <item>40FFFFFF</item>
         <item>80FFFFFF</item>
         <item>C0FFFFFF</item>
@@ -248,8 +247,7 @@
     </string-array>
 
     <!-- Blacklist packages which should be seen as system apps in "All apps" page -->
-    <string-array name="system_app_packages" translatable="false">
-    </string-array>
+    <string-array name="system_app_packages" translatable="false"></string-array>
 
     <!-- Type of EAP method -->
     <string-array name="wifi_eap_entries" translatable="false">
@@ -286,11 +284,10 @@
     </string-array>
 
     <!-- customized ignored packages for system alert window-->
-    <string-array name="customized_ignored_system_alert_window_packages" translatable="false">
-    </string-array>
+    <string-array name="customized_ignored_system_alert_window_packages" translatable="false"></string-array>
 
     <!-- DroidLogic start -->
-    
+
     <!-- key_ac4_enhancer_switch_entries. -->
     <string-array name="key_ac4_enhancer_switch_entries" translatable="false">
         <item>@string/key_ac4_enhancer_switch_off</item>

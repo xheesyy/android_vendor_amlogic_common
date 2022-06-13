@@ -71,9 +71,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class Launcher extends Activity{
+public class Launcher extends Activity {
 
-    private final static String TAG="MediaBoxLauncher";
+    private final static String TAG = "MediaBoxLauncher";
 
     private final String net_change_action = "android.net.conn.CONNECTIVITY_CHANGE";
     private final String wifi_signal_action = "android.net.wifi.RSSI_CHANGED";
@@ -96,44 +96,44 @@ public class Launcher extends Activity{
     public static boolean isLaunchingTvSettings = false;
     public static boolean isLaunchingThomasroom = false;
 
-    public static final int TYPE_VIDEO                           = 0;
-    public static final int TYPE_RECOMMEND                       = 1;
-    public static final int TYPE_MUSIC                           = 2;
-    public static final int TYPE_APP                             = 3;
-    public static final int TYPE_LOCAL                           = 4;
-    public static final int TYPE_SETTINGS                        = 5;
-    public static final int TYPE_HOME_SHORTCUT                   = 6;
-    public static final int TYPE_APP_SHORTCUT                    = 7;
+    public static final int TYPE_VIDEO = 0;
+    public static final int TYPE_RECOMMEND = 1;
+    public static final int TYPE_MUSIC = 2;
+    public static final int TYPE_APP = 3;
+    public static final int TYPE_LOCAL = 4;
+    public static final int TYPE_SETTINGS = 5;
+    public static final int TYPE_HOME_SHORTCUT = 6;
+    public static final int TYPE_APP_SHORTCUT = 7;
 
-    public static final int MODE_HOME                            = 0;
-    public static final int MODE_VIDEO                           = 1;
-    public static final int MODE_RECOMMEND                       = 2;
-    public static final int MODE_MUSIC                           = 3;
-    public static final int MODE_APP                             = 4;
-    public static final int MODE_LOCAL                           = 5;
-    public static final int MODE_CUSTOM                          = 6;
+    public static final int MODE_HOME = 0;
+    public static final int MODE_VIDEO = 1;
+    public static final int MODE_RECOMMEND = 2;
+    public static final int MODE_MUSIC = 3;
+    public static final int MODE_APP = 4;
+    public static final int MODE_LOCAL = 5;
+    public static final int MODE_CUSTOM = 6;
     private int current_screen_mode = 0;
     private int saveModeBeforeCustom = 0;
 
-    private static final int MSG_REFRESH_SHORTCUT                = 0;
-    private static final int MSG_RECOVER_HOME                    = 1;
-    private static final int MSG_START_CUSTOM_SCREEN             = 2;
-    private static final int MSG_SET_HOVER_VIEW                  = 3;
-    private static final int animDuration                        = 70;
-    private static final int animDelay                           = 0;
+    private static final int MSG_REFRESH_SHORTCUT = 0;
+    private static final int MSG_RECOVER_HOME = 1;
+    private static final int MSG_START_CUSTOM_SCREEN = 2;
+    private static final int MSG_SET_HOVER_VIEW = 3;
+    private static final int animDuration = 70;
+    private static final int animDelay = 0;
 
     private static final int[] childScreens = {
-        MODE_VIDEO,
-        MODE_RECOMMEND,
-        MODE_APP,
-        MODE_MUSIC,
-        MODE_LOCAL
+            MODE_VIDEO,
+            MODE_RECOMMEND,
+            MODE_APP,
+            MODE_MUSIC,
+            MODE_LOCAL
     };
     private static final int[] childScreensTv = {
-        MODE_RECOMMEND,
-        MODE_APP,
-        MODE_MUSIC,
-        MODE_LOCAL
+            MODE_RECOMMEND,
+            MODE_APP,
+            MODE_MUSIC,
+            MODE_LOCAL
     };
     private int[] mChildScreens = childScreens;
 
@@ -151,31 +151,31 @@ public class Launcher extends Activity{
     private MyRelativeLayout mSettingsView;
     private CustomView mCustomView = null;
 
-    public static int HOME_SHORTCUT_COUNT                      = 10;
+    public static int HOME_SHORTCUT_COUNT = 10;
 
     private TvView tvView = null;
     private TextView tvPrompt = null;
-    public static final int TV_MODE_NORMAL                     = 0;
-    public static final int TV_MODE_TOP                        = 1;
-    public static final int TV_MODE_BOTTOM                     = 2;
-    private static final int TV_PROMPT_GOT_SIGNAL              = 0;
-    private static final int TV_PROMPT_NO_SIGNAL               = 1;
-    private static final int TV_PROMPT_IS_SCRAMBLED            = 2;
-    private static final int TV_PROMPT_NO_DEVICE               = 3;
-    private static final int TV_PROMPT_SPDIF                   = 4;
-    private static final int TV_PROMPT_BLOCKED                 = 5;
-    private static final int TV_PROMPT_NO_CHANNEL              = 6;
-    private static final int TV_PROMPT_RADIO                   = 7;
-    private static final int TV_PROMPT_TUNING                  = 8;
-    private static final int TV_WINDOW_WIDTH                   = 296;
-    private static final int TV_WINDOW_HEIGHT                  = 176;
-    private static final int TV_WINDOW_NORMAL_LEFT             = 130;
-    private static final int TV_WINDOW_NORMAL_TOP              = 196;
-    private static final int TV_WINDOW_RIGHT_LEFT              = 1230 - TV_WINDOW_WIDTH;
+    public static final int TV_MODE_NORMAL = 0;
+    public static final int TV_MODE_TOP = 1;
+    public static final int TV_MODE_BOTTOM = 2;
+    private static final int TV_PROMPT_GOT_SIGNAL = 0;
+    private static final int TV_PROMPT_NO_SIGNAL = 1;
+    private static final int TV_PROMPT_IS_SCRAMBLED = 2;
+    private static final int TV_PROMPT_NO_DEVICE = 3;
+    private static final int TV_PROMPT_SPDIF = 4;
+    private static final int TV_PROMPT_BLOCKED = 5;
+    private static final int TV_PROMPT_NO_CHANNEL = 6;
+    private static final int TV_PROMPT_RADIO = 7;
+    private static final int TV_PROMPT_TUNING = 8;
+    private static final int TV_WINDOW_WIDTH = 296;
+    private static final int TV_WINDOW_HEIGHT = 176;
+    private static final int TV_WINDOW_NORMAL_LEFT = 130;
+    private static final int TV_WINDOW_NORMAL_TOP = 196;
+    private static final int TV_WINDOW_RIGHT_LEFT = 1230 - TV_WINDOW_WIDTH;
     private static final int TV_WINDOW_TOP_TOP = 0;
-    private static final int TV_WINDOW_BOTTOM_TOP              = 690 - TV_WINDOW_HEIGHT;
-    private static final int TV_MSG_PLAY_TV                    = 0;
-    private static final int TV_MSG_BOOTUP_TO_TVAPP                = 1;
+    private static final int TV_WINDOW_BOTTOM_TOP = 690 - TV_WINDOW_HEIGHT;
+    private static final int TV_MSG_PLAY_TV = 0;
+    private static final int TV_MSG_BOOTUP_TO_TVAPP = 1;
 
     private static final int INPUT_ID_LENGTH = 3;
 
@@ -246,15 +246,15 @@ public class Launcher extends Activity{
         initChildViews();
     }
 
-    public boolean isMboxFeture () {
+    public boolean isMboxFeture() {
         return mSystemControlManager.getPropertyBoolean("ro.vendor.platform.has.mbxuimode", false);
     }
 
-    public boolean isTvFeture () {
+    public boolean isTvFeture() {
         return TextUtils.equals(mSystemControlManager.getPropertyString("ro.vendor.platform.is.tv", ""), "1");
     }
 
-    public boolean needPreviewFeture () {
+    public boolean needPreviewFeture() {
         return isTvFeture() && mSystemControlManager.getPropertyBoolean("vendor.tv.need.droidlogic.preview_window", false);
     }
 
@@ -349,7 +349,7 @@ public class Launcher extends Activity{
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         Log.d(TAG, "------onDestroy");
         super.onDestroy();
     }
@@ -360,7 +360,7 @@ public class Launcher extends Activity{
         if (Intent.ACTION_MAIN.equals(intent.getAction())) {
             setHomeViewVisible(true);
             current_screen_mode = MODE_HOME;
-            MyRelativeLayout videoView = (MyRelativeLayout)findViewById(R.id.layout_video);
+            MyRelativeLayout videoView = (MyRelativeLayout) findViewById(R.id.layout_video);
             videoView.requestFocus();
         }
     }
@@ -376,7 +376,7 @@ public class Launcher extends Activity{
     }
 
     @Override
-    public boolean onTouchEvent (MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
         }
         return true;
@@ -384,20 +384,20 @@ public class Launcher extends Activity{
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-                switch (current_screen_mode) {
-                    case MODE_APP:
-                        mSecondScreen.clearAnimation();
-                    case MODE_VIDEO:
-                    case MODE_RECOMMEND:
-                    case MODE_MUSIC:
-                    case MODE_LOCAL:
-                        setHomeViewVisible(true);
-                        break;
-                    case MODE_CUSTOM:
-                        current_screen_mode = saveModeBeforeCustom;
-                        mAppDataLoader.update();
-                        break;
-                }
+            switch (current_screen_mode) {
+                case MODE_APP:
+                    mSecondScreen.clearAnimation();
+                case MODE_VIDEO:
+                case MODE_RECOMMEND:
+                case MODE_MUSIC:
+                case MODE_LOCAL:
+                    setHomeViewVisible(true);
+                    break;
+                case MODE_CUSTOM:
+                    current_screen_mode = saveModeBeforeCustom;
+                    mAppDataLoader.update();
+                    break;
+            }
             return true;
         } else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
         } else if (keyCode == KeyEvent.KEYCODE_SEARCH) {
@@ -425,22 +425,22 @@ public class Launcher extends Activity{
         LocalAdapter ad = new LocalAdapter(this,
                 mStatusLoader.getStatusData(),
                 R.layout.homelist_item,
-                new String[] {StatusLoader.ICON},
-                new int[] {R.id.item_type});
+                new String[]{StatusLoader.ICON},
+                new int[]{R.id.item_type});
         lv_status.setAdapter(ad);
     }
 
     private void displayDate() {
-        TextView  time = (TextView)findViewById(R.id.tx_time);
-        TextView  date = (TextView)findViewById(R.id.tx_date);
+        TextView time = (TextView) findViewById(R.id.tx_time);
+        TextView date = (TextView) findViewById(R.id.tx_date);
         time.setText(mStatusLoader.getTime());
         time.setTypeface(Typeface.DEFAULT_BOLD);
         date.setText(mStatusLoader.getDate());
     }
 
-    private void initChildViews(){
-        lv_status = (GridView)findViewById(R.id.list_status);
-        lv_status.setOnTouchListener(new OnTouchListener(){
+    private void initChildViews() {
+        lv_status = (GridView) findViewById(R.id.list_status);
+        lv_status.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_MOVE) {
@@ -449,20 +449,20 @@ public class Launcher extends Activity{
                 return false;
             }
         });
-        mHoverView = (HoverView)findViewById(R.id.hover_view);
-        mHomeView = (ViewGroup)findViewById(R.id.layout_homepage);
-        mSecondScreen  = (AppLayout)findViewById(R.id.second_screen);
-        mHomeShortcutView = (MyGridLayout)findViewById(R.id.gv_shortcut);
-        mVideoView = (MyRelativeLayout)findViewById(R.id.layout_video);
-        mRecommendView = (MyRelativeLayout)findViewById(R.id.layout_recommend);
-        mMusicView = (MyRelativeLayout)findViewById(R.id.layout_music);
-        mAppView = (MyRelativeLayout)findViewById(R.id.layout_app);
-        mLocalView = (MyRelativeLayout)findViewById(R.id.layout_local);
-        mSettingsView = (MyRelativeLayout)findViewById(R.id.layout_setting);
+        mHoverView = (HoverView) findViewById(R.id.hover_view);
+        mHomeView = (ViewGroup) findViewById(R.id.layout_homepage);
+        mSecondScreen = (AppLayout) findViewById(R.id.second_screen);
+        mHomeShortcutView = (MyGridLayout) findViewById(R.id.gv_shortcut);
+        mVideoView = (MyRelativeLayout) findViewById(R.id.layout_video);
+        mRecommendView = (MyRelativeLayout) findViewById(R.id.layout_recommend);
+        mMusicView = (MyRelativeLayout) findViewById(R.id.layout_music);
+        mAppView = (MyRelativeLayout) findViewById(R.id.layout_app);
+        mLocalView = (MyRelativeLayout) findViewById(R.id.layout_local);
+        mSettingsView = (MyRelativeLayout) findViewById(R.id.layout_setting);
         setHomeRectType();
 
-        tvView = (TvView)findViewById(R.id.tv_view);
-        tvPrompt = (TextView)findViewById(R.id.tx_tv_prompt);
+        tvView = (TvView) findViewById(R.id.tv_view);
+        tvPrompt = (TextView) findViewById(R.id.tx_tv_prompt);
         if (needPreviewFeture()) {
             mChildScreens = childScreensTv;
             setTvView();
@@ -477,12 +477,12 @@ public class Launcher extends Activity{
 
     private void setBigBackgroundDrawable() {
         getMainView().setBackgroundDrawable(getResources().getDrawable(R.drawable.bg));
-        ((ImageView)findViewById(R.id.img_video)).setImageDrawable(getResources().getDrawable(R.drawable.img_video));
-        ((ImageView)findViewById(R.id.img_recommend)).setImageDrawable(getResources().getDrawable(R.drawable.img_recommend));
-        ((ImageView)findViewById(R.id.img_music)).setImageDrawable(getResources().getDrawable(R.drawable.img_music));
-        ((ImageView)findViewById(R.id.img_app)).setImageDrawable(getResources().getDrawable(R.drawable.img_app));
-        ((ImageView)findViewById(R.id.img_local)).setImageDrawable(getResources().getDrawable(R.drawable.img_local));
-        ((ImageView)findViewById(R.id.img_setting)).setImageDrawable(getResources().getDrawable(R.drawable.img_setting));
+        ((ImageView) findViewById(R.id.img_video)).setImageDrawable(getResources().getDrawable(R.drawable.img_video));
+        ((ImageView) findViewById(R.id.img_recommend)).setImageDrawable(getResources().getDrawable(R.drawable.img_recommend));
+        ((ImageView) findViewById(R.id.img_music)).setImageDrawable(getResources().getDrawable(R.drawable.img_music));
+        ((ImageView) findViewById(R.id.img_app)).setImageDrawable(getResources().getDrawable(R.drawable.img_app));
+        ((ImageView) findViewById(R.id.img_local)).setImageDrawable(getResources().getDrawable(R.drawable.img_local));
+        ((ImageView) findViewById(R.id.img_setting)).setImageDrawable(getResources().getDrawable(R.drawable.img_setting));
     }
 
     private void recycleBigBackgroundDrawable() {
@@ -491,12 +491,12 @@ public class Launcher extends Activity{
         if (drawable != null)
             drawable.setCallback(null);
 
-        drawable = ((ImageView)findViewById(R.id.img_video)).getDrawable();
+        drawable = ((ImageView) findViewById(R.id.img_video)).getDrawable();
         if (drawable != null)
             drawable.setCallback(null);
     }
 
-    private void setHomeRectType(){
+    private void setHomeRectType() {
         mVideoView.setType(TYPE_VIDEO);
         mMusicView.setType(TYPE_MUSIC);
         mRecommendView.setType(TYPE_RECOMMEND);
@@ -534,6 +534,7 @@ public class Launcher extends Activity{
     public int getCurrentScreenMode() {
         return current_screen_mode;
     }
+
     public void setShortcutScreen(int mode) {
         resetShortcutScreen(mode);
         current_screen_mode = mode;
@@ -569,7 +570,7 @@ public class Launcher extends Activity{
         return mAppDataLoader;
     }
 
-    public void switchSecondScren(int animType){
+    public void switchSecondScren(int animType) {
         int mode = -1;
         if (animType == AppLayout.ANIM_LEFT) {
             mode = mChildScreens[(getChildModeIndex() + mChildScreens.length - 1) % mChildScreens.length];
@@ -580,7 +581,7 @@ public class Launcher extends Activity{
         current_screen_mode = mode;
     }
 
-    public void setHomeViewVisible (boolean isShowHome) {
+    public void setHomeViewVisible(boolean isShowHome) {
         if (isShowHome) {
             if (mCustomView != null && current_screen_mode == MODE_CUSTOM) {
                 mCustomView.recoverMainView();
@@ -589,7 +590,7 @@ public class Launcher extends Activity{
             mSecondScreen.setVisibility(View.GONE);
             mHomeView.setVisibility(View.VISIBLE);
             if (!mHomeView.hasFocus()) {
-                MyRelativeLayout videoView = (MyRelativeLayout)findViewById(R.id.layout_video);
+                MyRelativeLayout videoView = (MyRelativeLayout) findViewById(R.id.layout_video);
                 videoView.requestFocus();
             }
             if (needPreviewFeture())
@@ -603,20 +604,20 @@ public class Launcher extends Activity{
         }
     }
 
-    public HoverView getHoverView(){
+    public HoverView getHoverView() {
         return mHoverView;
     }
 
-    public ViewGroup getHomeView(){
+    public ViewGroup getHomeView() {
         return mHomeView;
     }
 
-    public ViewGroup getMainView(){
-        return (ViewGroup)findViewById(R.id.layout_main);
+    public ViewGroup getMainView() {
+        return (ViewGroup) findViewById(R.id.layout_main);
     }
 
-    public ViewGroup getRootView(){
-        return (ViewGroup)findViewById(R.id.layout_root);
+    public ViewGroup getRootView() {
+        return (ViewGroup) findViewById(R.id.layout_root);
     }
 
     public Object getLock() {
@@ -627,8 +628,8 @@ public class Launcher extends Activity{
         saveHomeFocusView = view;
     }
 
-    private void sendKeyCode(final int keyCode){
-        new Thread () {
+    private void sendKeyCode(final int keyCode) {
+        new Thread() {
             public void run() {
                 try {
                     Instrumentation inst = new Instrumentation();
@@ -640,7 +641,7 @@ public class Launcher extends Activity{
         }.start();
     }
 
-    private void updateAppList(Intent intent){
+    private void updateAppList(Intent intent) {
         boolean isShortcutIndex = false;
         String packageName = null;
 
@@ -666,11 +667,11 @@ public class Launcher extends Activity{
                     resetShortcutScreen(current_screen_mode);
                     break;
                 case MSG_START_CUSTOM_SCREEN:
-                    View CustomView=(View)msg.obj;
+                    View CustomView = (View) msg.obj;
                     CustomScreen(CustomView);
                     break;
                 case MSG_SET_HOVER_VIEW:
-                    getHoverView().setHover((MyRelativeLayout)(msg.obj));
+                    getHoverView().setHover((MyRelativeLayout) (msg.obj));
                     break;
                 default:
                     break;
@@ -690,10 +691,10 @@ public class Launcher extends Activity{
             if (Intent.ACTION_MEDIA_EJECT.equals(action)
                     || Intent.ACTION_MEDIA_UNMOUNTED.equals(action)
                     || Intent.ACTION_MEDIA_MOUNTED.equals(action)
-                    || action.equals ("com.droidvold.action.MEDIA_UNMOUNTED")
-                    || action.equals ("com.droidvold.action.MEDIA_EJECT")
-                    || action.equals ("com.droidvold.action.MEDIA_MOUNTED")
-                    ) {
+                    || action.equals("com.droidvold.action.MEDIA_UNMOUNTED")
+                    || action.equals("com.droidvold.action.MEDIA_EJECT")
+                    || action.equals("com.droidvold.action.MEDIA_MOUNTED")
+            ) {
                 displayStatus();
                 updateStatus();
             }
@@ -708,7 +709,7 @@ public class Launcher extends Activity{
             if (action == null)
                 return;
 
-             //Log.d(TAG, "netReceiver         action = " + action);
+            //Log.d(TAG, "netReceiver         action = " + action);
             if (action.equals(Intent.ACTION_TIME_CHANGED)) {
                 displayDate();
             }
@@ -717,20 +718,20 @@ public class Launcher extends Activity{
             } else if (Intent.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE.equals(action)
                     || Intent.ACTION_EXTERNAL_APPLICATIONS_UNAVAILABLE.equals(action)) {
                 updateAppList(intent);
-            }else {
+            } else {
                 displayStatus();
                 updateStatus();
             }
         }
     };
 
-    private BroadcastReceiver appReceiver = new BroadcastReceiver(){
+    private BroadcastReceiver appReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             // TODO Auto-generated method stub
 
             final String action = intent.getAction();
-            Log.d(TAG,"appReceiver receive " + action);
+            Log.d(TAG, "appReceiver receive " + action);
             if (Intent.ACTION_PACKAGE_CHANGED.equals(action)
                     || Intent.ACTION_PACKAGE_REMOVED.equals(action)
                     || Intent.ACTION_PACKAGE_ADDED.equals(action)) {
@@ -741,12 +742,12 @@ public class Launcher extends Activity{
     };
 
     private Intent mDelayedSourceChange;
-    private BroadcastReceiver otherReceiver = new BroadcastReceiver(){
+    private BroadcastReceiver otherReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
 
             final String action = intent.getAction();
-            Log.d(TAG," receive " + action);
+            Log.d(TAG, " receive " + action);
             if (ACTION_OTP_INPUT_SOURCE_CHANGE.equals(action)) {
                 Intent i = new Intent(TvInputManager.ACTION_SETUP_INPUTS);
                 i.putExtra("from_cec_otp", true);
@@ -760,21 +761,22 @@ public class Launcher extends Activity{
                     Toast.makeText(Launcher.this, R.string.toast_otp_input_change, Toast.LENGTH_LONG).show();
                     startOtpSource(i);
                 } else {
-                    Log.d(TAG," acitivity not resumed or bootvideo not finished, drop " + ACTION_OTP_INPUT_SOURCE_CHANGE);
+                    Log.d(TAG, " acitivity not resumed or bootvideo not finished, drop " + ACTION_OTP_INPUT_SOURCE_CHANGE);
                 }
             }
         }
     };
 
     private boolean mBroadcastsRegistered = false;
+
     private void registerBroadcasts() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MEDIA_EJECT);
         filter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
         filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
-        filter.addAction (DROIDVOLD_MEDIA_UNMOUNTED_ACTION);
-        filter.addAction (DROIDVOLD_MEDIA_MOUNTED_ACTION);
-        filter.addAction (DROIDVOLD_MEDIA_EJECT_ACTION);
+        filter.addAction(DROIDVOLD_MEDIA_UNMOUNTED_ACTION);
+        filter.addAction(DROIDVOLD_MEDIA_MOUNTED_ACTION);
+        filter.addAction(DROIDVOLD_MEDIA_EJECT_ACTION);
         filter.addDataScheme("file");
         registerReceiver(mediaReceiver, filter);
 
@@ -882,9 +884,9 @@ public class Launcher extends Activity{
     private boolean checkNeedStartTvApp(boolean close) {
         boolean ret = false;
         if ((DroidLogicUtils.isTv() &&
-            !TextUtils.equals(mSystemControlManager.getProperty("tv.launcher.firsttime.launch"), "false") &&
-            DataProviderManager.getIntValue(Launcher.this, "tv_start_up_enter_app", 0) > 0)
-            || mDelayedSourceChange != null) {
+                !TextUtils.equals(mSystemControlManager.getProperty("tv.launcher.firsttime.launch"), "false") &&
+                DataProviderManager.getIntValue(Launcher.this, "tv_start_up_enter_app", 0) > 0)
+                || mDelayedSourceChange != null) {
             Log.d(TAG, "starting tvapp...");
 
             ret = true;
@@ -939,6 +941,7 @@ public class Launcher extends Activity{
         mHandler.removeMessages(MSG_SET_HOVER_VIEW);
         getHoverView().setHover(view);
     }
+
     public void setHoverViewDelayed(MyRelativeLayout view, long time) {
         mHandler.removeMessages(MSG_SET_HOVER_VIEW);
         Message msg = new Message();
@@ -958,7 +961,7 @@ public class Launcher extends Activity{
     }
 
     private void setTvView() {
-        TextView title_video = (TextView)findViewById(R.id.tx_video);
+        TextView title_video = (TextView) findViewById(R.id.tx_video);
         title_video.setText(R.string.str_tvapp);
         tvView.setVisibility(View.VISIBLE);
         tvView.setCallback(new TvViewInputCallback());
@@ -967,12 +970,12 @@ public class Launcher extends Activity{
         setTvViewPosition(TV_MODE_NORMAL);
     }
 
-    private void hideTvViewForCustom () {
+    private void hideTvViewForCustom() {
         tvPrompt.setBackgroundDrawable(getResources().getDrawable(R.drawable.black));
         tvView.setVisibility(View.INVISIBLE);
     }
 
-    private void recoverTvViewForCustom () {
+    private void recoverTvViewForCustom() {
         tvView.setVisibility(View.VISIBLE);
         if (isRadioChannel) {
             tvPrompt.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_radio));
@@ -1021,22 +1024,22 @@ public class Launcher extends Activity{
         HoverView.setViewPosition(tvPrompt, new Rect(left, top, right, bottom));
 
         tvView.animate()
-            .translationY(transY)
-            .setDuration(duration)
-            .start();
+                .translationY(transY)
+                .setDuration(duration)
+                .start();
         tvPrompt.animate()
-            .translationY(transY)
-            .setDuration(duration)
-            .start();
+                .translationY(transY)
+                .setDuration(duration)
+                .start();
     }
 
     private boolean isBootvideoStopped() {
         ContentProviderClient tvProvider = getContentResolver().acquireContentProviderClient(TvContract.AUTHORITY);
 
         return (tvProvider != null) &&
-                (((SystemProperties.getInt("persist.vendor.media.bootvideo", 50)  > 100)
+                (((SystemProperties.getInt("persist.vendor.media.bootvideo", 50) > 100)
                         && TextUtils.equals(SystemProperties.get("service.bootvideo.exit", "1"), "0"))
-                || ((SystemProperties.getInt("persist.vendor.media.bootvideo", 50)  <= 100)));
+                        || ((SystemProperties.getInt("persist.vendor.media.bootvideo", 50) <= 100)));
     }
 
     private boolean isCurrentChannelBlocked() {
@@ -1047,11 +1050,11 @@ public class Launcher extends Activity{
         return DataProviderManager.getBooleanValue(this, DroidLogicTvUtils.TV_CURRENT_CHANNELBLOCK_STATUS, false);
     }
 
-    public void setCurrentChannelBlocked(boolean blocked){
+    public void setCurrentChannelBlocked(boolean blocked) {
         DataProviderManager.putBooleanValue(this, DroidLogicTvUtils.TV_CURRENT_BLOCK_STATUS, blocked);
     }
 
-    private boolean isTunerSource (String inputId) {
+    private boolean isTunerSource(String inputId) {
         return !mTvInputManager.getTvInputInfo(inputId).isPassthroughInput();
     }
 
@@ -1077,7 +1080,7 @@ public class Launcher extends Activity{
         device_id = DataProviderManager.getIntValue(Launcher.this, DroidLogicTvUtils.TV_CURRENT_DEVICE_ID, 0);
         channel_id = DataProviderManager.getLongValue(Launcher.this, DroidLogicTvUtils.TV_DTV_CHANNEL_INDEX, -1);
         isRadioChannel = DataProviderManager.getIntValue(Launcher.this, DroidLogicTvUtils.TV_CURRENT_CHANNEL_IS_RADIO, 0) == 1 ? true : false;
-        Log.d(TAG, "TV get device_id=" + device_id + " dtv=" + channel_id );
+        Log.d(TAG, "TV get device_id=" + device_id + " dtv=" + channel_id);
 
         List<TvInputInfo> input_list = mTvInputManager.getTvInputList();
         String inputid = DroidLogicTvUtils.getCurrentInputId(this);
@@ -1192,11 +1195,11 @@ public class Launcher extends Activity{
         }
     }
 
-    private void setChannelUri (long     channelId) {
+    private void setChannelUri(long channelId) {
         Uri channelUri = TvContract.buildChannelUri(channelId);
         ChannelInfo currentChannel = mTvDataBaseManager.getChannelInfo(channelUri);
         String currentSignalType = DroidLogicTvUtils.getCurrentSignalType(this) == DroidLogicTvUtils.SIGNAL_TYPE_ERROR
-            ? TvContract.Channels.TYPE_ATSC_T : DroidLogicTvUtils.getCurrentSignalType(this);
+                ? TvContract.Channels.TYPE_ATSC_T : DroidLogicTvUtils.getCurrentSignalType(this);
         Log.d(TAG, "channelid = " + channelId + "   [currentChannel] =" + currentChannel);
         if (currentChannel != null) {
             if (!TvContract.Channels.TYPE_OTHER.equals(currentChannel.getType())) {
@@ -1207,9 +1210,9 @@ public class Launcher extends Activity{
                         setTvPrompt(TV_PROMPT_GOT_SIGNAL);
                     }
                 } else if (DroidLogicTvUtils.isATV(this) && currentChannel.isAnalogChannel()) {
-                        isRadioChannel = ChannelInfo.isRadioChannel(currentChannel);
-                        mChannelUri = channelUri;
-                        setTvPrompt(TV_PROMPT_GOT_SIGNAL);
+                    isRadioChannel = ChannelInfo.isRadioChannel(currentChannel);
+                    mChannelUri = channelUri;
+                    setTvPrompt(TV_PROMPT_GOT_SIGNAL);
                 } else if (DroidLogicTvUtils.isDTV(this) && currentChannel.isDigitalChannel()) {
                     isRadioChannel = ChannelInfo.isRadioChannel(currentChannel);
                     mChannelUri = channelUri;
@@ -1223,7 +1226,7 @@ public class Launcher extends Activity{
                 }
             }
         } else {
-            ArrayList<ChannelInfo> channelList =  mTvDataBaseManager.getChannelList(mTvInputId, ChannelInfo.COMMON_PROJECTION, null, null);
+            ArrayList<ChannelInfo> channelList = mTvDataBaseManager.getChannelList(mTvInputId, ChannelInfo.COMMON_PROJECTION, null, null);
             if (channelList != null && channelList.size() > 0) {
                 for (int i = 0; i < channelList.size(); i++) {
                     ChannelInfo channel = channelList.get(i);
@@ -1233,7 +1236,7 @@ public class Launcher extends Activity{
                             Log.d(TAG, "current other type channel not exisit, find a new channel instead: " + mChannelUri);
                             return;
                         }
-                     } else if (DroidLogicTvUtils.isAtscCountry(this)) {
+                    } else if (DroidLogicTvUtils.isAtscCountry(this)) {
                         if (channel.getSignalType().equals(currentSignalType)) {
                             mChannelUri = channel.getUri();
                             Log.d(TAG, "current channel not exisit, find a new channel instead: " + mChannelUri);
@@ -1283,7 +1286,7 @@ public class Launcher extends Activity{
                 tvPrompt.setText(getResources().getString(R.string.str_scrambeled));
                 if (isRadioChannel) {
                     tvPrompt.setBackgroundDrawable(getResources().getDrawable(R.drawable.black));
-                }  else {
+                } else {
                     tvPrompt.setBackground(null);
                 }
                 break;
@@ -1317,9 +1320,9 @@ public class Launcher extends Activity{
     //stop the background music player
     public void stopMusicPlayer() {
         Intent intent = new Intent();
-        intent.setAction ("com.android.music.pause");
-        intent.putExtra ("command", "stop");
-        sendBroadcast (intent);
+        intent.setAction("com.android.music.pause");
+        intent.putExtra("command", "stop");
+        sendBroadcast(intent);
     }
 
     private Handler mTvHandler = new Handler() {
@@ -1364,7 +1367,7 @@ public class Launcher extends Activity{
     public class TvViewInputCallback extends TvView.TvInputCallback {
         @Override
         public void onEvent(String inputId, String eventType, Bundle eventArgs) {
-            Log.d(TAG, "====onEvent==inputId =" + inputId +", ===eventType ="+ eventType);
+            Log.d(TAG, "====onEvent==inputId =" + inputId + ", ===eventType =" + eventType);
             if (eventType.equals(DroidLogicTvUtils.AV_SIG_SCRAMBLED)) {
                 setTvPrompt(TV_PROMPT_IS_SCRAMBLED);
             }
@@ -1393,9 +1396,9 @@ public class Launcher extends Activity{
         @Override
         public void onConnectionFailed(String inputId) {
             Log.d(TAG, "====onConnectionFailed==inputId =" + inputId);
-            new Thread( new Runnable() {
+            new Thread(new Runnable() {
                 public void run() {
-                    try{
+                    try {
                         Thread.sleep(200);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1409,7 +1412,7 @@ public class Launcher extends Activity{
 
         @Override
         public void onVideoUnavailable(String inputId, int reason) {
-            Log.d(TAG, "====onVideoUnavailable==inputId =" + inputId +", ===reason ="+ reason);
+            Log.d(TAG, "====onVideoUnavailable==inputId =" + inputId + ", ===reason =" + reason);
             switch (reason) {
                 case TvInputManager.VIDEO_UNAVAILABLE_REASON_UNKNOWN:
                 case TvInputManager.VIDEO_UNAVAILABLE_REASON_TUNING:
@@ -1504,7 +1507,7 @@ public class Launcher extends Activity{
 
         @Override
         public void onInputRemoved(String inputId) {
-            Log.d(TAG, "==== onInputRemoved, inputId=" + inputId + " curent inputid=" + mTvInputId+",this:"+this);
+            Log.d(TAG, "==== onInputRemoved, inputId=" + inputId + " curent inputid=" + mTvInputId + ",this:" + this);
             if (TextUtils.equals(inputId, mTvInputId)) {
                 Log.d(TAG, "==== current input device removed");
                 mTvInputId = null;

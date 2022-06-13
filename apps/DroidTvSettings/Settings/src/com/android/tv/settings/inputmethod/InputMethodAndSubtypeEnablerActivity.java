@@ -29,6 +29,6 @@ public class InputMethodAndSubtypeEnablerActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(InputMethodAndSubtypeEnablerFragment.class.getName(), null);
+                .newSettingsFragment(InputMethodAndSubtypeEnablerFragment.class.getName(), null);
     }
 }

@@ -26,7 +26,7 @@ public class PowerOnModeActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PowerOnModeFragment.class.getName(), null);
+                .newSettingsFragment(PowerOnModeFragment.class.getName(), null);
     }
 
 }

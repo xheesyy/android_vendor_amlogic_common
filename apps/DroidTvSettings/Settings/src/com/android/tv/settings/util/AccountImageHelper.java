@@ -34,13 +34,13 @@ import android.text.TextUtils;
  */
 public final class AccountImageHelper {
 
-    static final String[] CONTACT_PROJECTION_DATA = new String[] {
-        ContactsContract.Data._ID,
-        ContactsContract.Data.CONTACT_ID,
-        ContactsContract.Data.RAW_CONTACT_ID,
-        ContactsContract.Data.LOOKUP_KEY,
-        ContactsContract.Data.PHOTO_URI,
-        ContactsContract.Data.PHOTO_FILE_ID
+    static final String[] CONTACT_PROJECTION_DATA = new String[]{
+            ContactsContract.Data._ID,
+            ContactsContract.Data.CONTACT_ID,
+            ContactsContract.Data.RAW_CONTACT_ID,
+            ContactsContract.Data.LOOKUP_KEY,
+            ContactsContract.Data.PHOTO_URI,
+            ContactsContract.Data.PHOTO_FILE_ID
     };
     static final String CONTACT_SELECTION =
             ContactsContract.CommonDataKinds.Email.ADDRESS + " LIKE ?";
@@ -57,8 +57,8 @@ public final class AccountImageHelper {
     public static String getAccountPictureUri(Context context, Account account) {
         // Look up this account in the contacts database.
 
-        String[] selectionArgs = new String[] {
-        account.name };
+        String[] selectionArgs = new String[]{
+                account.name};
         Cursor c = null;
         long contactId = -1;
         String lookupKey = null;

@@ -52,6 +52,7 @@ public class AccessibilityShortcutFragment extends SettingsPreferenceFragment {
     private static final String LAST_SHORTCUT_SERVICE = "last_shortcut_service";
 
     private SharedPreferences mSharedPref;
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.accessibility_shortcut, null);
@@ -96,6 +97,7 @@ public class AccessibilityShortcutFragment extends SettingsPreferenceFragment {
             }
         }
     }
+
     private void setAccessibilityShortcutEnabled(boolean enabled) {
         if (enabled) {
             String updatedComponent = getLastShortcutService();

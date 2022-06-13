@@ -23,8 +23,9 @@ public class SurfaceOverlay {
     /**
      * Sets the {@link SurfaceHolder} to use for displaying the picture
      * that show in video layer
-     *
+     * <p>
      * Either a surface holder or surface must be set if a display is needed.
+     *
      * @param sh the SurfaceHolder to use for video display
      */
     public static void setDisplay(SurfaceHolder sh) {

@@ -27,7 +27,7 @@ import com.android.tv.settings.widget.ScrollAdapterView;
 
 /**
  * *************************
- *   DO NOT ADD LOGIC HERE!
+ * DO NOT ADD LOGIC HERE!
  * *************************
  * This is a wrapper for {@link BaseScrollAdapterFragment}. Place your logic
  * in there and call the function from here
@@ -38,7 +38,7 @@ public class ScrollAdapterFragment extends Fragment implements LiteFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         return mBase.onCreateView(inflater, container, savedInstanceState);
     }
 

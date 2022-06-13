@@ -110,7 +110,7 @@ public class GatewayState implements State {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             String title = getString(R.string.wifi_gateway_hint);
             if (mAdvancedOptionsFlowInfo.containsPage(AdvancedOptionsFlowInfo.GATEWAY)) {
                 title = mAdvancedOptionsFlowInfo.get(AdvancedOptionsFlowInfo.GATEWAY);

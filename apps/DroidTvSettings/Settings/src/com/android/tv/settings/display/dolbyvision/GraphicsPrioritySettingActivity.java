@@ -25,7 +25,7 @@ public class GraphicsPrioritySettingActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(GraphicsPrioritySettingFragment.class.getName(), null);
+                .newSettingsFragment(GraphicsPrioritySettingFragment.class.getName(), null);
     }
 
 }

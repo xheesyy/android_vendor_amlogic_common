@@ -33,29 +33,28 @@ import java.nio.charset.CharsetDecoder;
 import android.util.Log;
 
 /**
- *
  * @author
  */
 public class CharsetDetector {
     private static final String TAG = "CharsetDetector";
 
     String[] mCharsetsToBeTested = {
-        "UTF8",
-        "GBK",
-        "BIG5",
-        "cp932",
-        "cp949",
-        "Windows-1255",
-        "cp1250",
-        "cp1254",
-        "cp1098",
-        "iso 8859-2",
-        "UTF-16LE",
-        "CP1256",
-        "cp1252",
-        "iso 8859-8",
-        "UTF-16BE",
-        "iso-8859-1"
+            "UTF8",
+            "GBK",
+            "BIG5",
+            "cp932",
+            "cp949",
+            "Windows-1255",
+            "cp1250",
+            "cp1254",
+            "cp1098",
+            "iso 8859-2",
+            "UTF-16LE",
+            "CP1256",
+            "cp1252",
+            "iso 8859-8",
+            "UTF-16BE",
+            "iso-8859-1"
     };
 
 
@@ -73,7 +72,7 @@ public class CharsetDetector {
         len = getFileSize(f);
         //Log.i(TAG,"file size:" + len);
         if (len <= 0) {
-            Log.e(TAG,"file is not valid!");
+            Log.e(TAG, "file is not valid!");
             return null;
         }
 
@@ -89,16 +88,16 @@ public class CharsetDetector {
 
     public static int getFileSize(File file) {
         if (!file.exists() || !file.isFile()) {
-            Log.e(TAG,"file is not exist!!");
+            Log.e(TAG, "file is not exist!!");
             return 0;
         }
-        return (int)file.length();
+        return (int) file.length();
 
     }
 
-    public static String detectCharsetFromFilePath(File file){
+    public static String detectCharsetFromFilePath(File file) {
         if (!file.exists() || !file.isFile()) {
-            Log.e(TAG,"file is not exist!!");
+            Log.e(TAG, "file is not exist!!");
             return null;
         }
 
@@ -107,7 +106,7 @@ public class CharsetDetector {
             return null;
         }
 
-        Log.i(TAG,"detectCharsetFromFilePath pathName:" + pathName);
+        Log.i(TAG, "detectCharsetFromFilePath pathName:" + pathName);
 
         if (pathName.contains("8859-1") || pathName.contains("8859_1")) {
             return "iso-8859-1";
@@ -124,7 +123,7 @@ public class CharsetDetector {
         try {
             BufferedInputStream input = new BufferedInputStream(new FileInputStream(f));
 
-            Log.i (TAG,"[detectCharset]len:" + len);
+            Log.i(TAG, "[detectCharset]len:" + len);
             CharsetDecoder decoder = charset.newDecoder();
             decoder.reset();
 

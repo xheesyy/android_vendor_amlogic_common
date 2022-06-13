@@ -24,7 +24,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ShortBuffer;
 
-/** Contains a static method for writing an audio buffer to a WAV file. */
+/**
+ * Contains a static method for writing an audio buffer to a WAV file.
+ */
 public class WavWriter {
 
     private static final String TAG = "WavWriter";

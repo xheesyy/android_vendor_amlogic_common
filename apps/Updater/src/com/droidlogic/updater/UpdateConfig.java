@@ -130,7 +130,7 @@ public class UpdateConfig implements Parcelable {
 
             c.mRawJson = json;
         } catch (JSONException ex) {
-           // ex.printStackTrace();
+            // ex.printStackTrace();
         } finally {
             return c;
         }

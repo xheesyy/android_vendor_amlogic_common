@@ -25,7 +25,7 @@ public class SdrSettingActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(SdrSettingFragment.class.getName(), null);
+                .newSettingsFragment(SdrSettingFragment.class.getName(), null);
     }
 
 }

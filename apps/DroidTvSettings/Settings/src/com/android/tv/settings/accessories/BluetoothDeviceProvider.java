@@ -18,29 +18,45 @@ package com.android.tv.settings.accessories;
 
 import android.bluetooth.BluetoothDevice;
 
-/** An interface for interacting with BluetoothDevice. */
+/**
+ * An interface for interacting with BluetoothDevice.
+ */
 public interface BluetoothDeviceProvider {
 
-    /** A Listener that wishes to be notified when devices are updated. */
+    /**
+     * A Listener that wishes to be notified when devices are updated.
+     */
     interface Listener {
         void onDeviceUpdated(BluetoothDevice device);
     }
 
-    /** Registers a Listener that will be notified when device status is updated. */
+    /**
+     * Registers a Listener that will be notified when device status is updated.
+     */
     void addListener(Listener listener);
 
-    /** Unregisters the Listener that monitors the device status. */
+    /**
+     * Unregisters the Listener that monitors the device status.
+     */
     void removeListener(Listener listener);
 
-    /** Connects to a "remembered" device that was unpaired. */
+    /**
+     * Connects to a "remembered" device that was unpaired.
+     */
     void connectDevice(BluetoothDevice device);
 
-    /** Disconnects with (but not forget) a paired device. */
+    /**
+     * Disconnects with (but not forget) a paired device.
+     */
     void disconnectDevice(BluetoothDevice device);
 
-    /** Renames a device. */
+    /**
+     * Renames a device.
+     */
     void renameDevice(BluetoothDevice device, String newName);
 
-    /** Forgets a paired device. */
+    /**
+     * Forgets a paired device.
+     */
     void forgetDevice(BluetoothDevice device);
 }

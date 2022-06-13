@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,14 +22,14 @@
     android:animateLayoutChanges="true"
     android:background="@color/common_tv_background"
     android:keepScreenOn="true"
-    android:weightSum="5" >
+    android:weightSum="5">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 
         <ImageView
             android:id="@+id/tune_icon"
@@ -46,7 +45,7 @@
         android:layout_height="fill_parent"
         android:gravity="left|center_vertical"
         android:orientation="vertical"
-        android:layout_weight="3" >
+        android:layout_weight="3">
 
         <TextView
             android:id="@+id/tv_tune_title"
@@ -81,7 +80,7 @@
             android:textSize="@dimen/ut_scan_description_text_size"
             android:text="@string/ut_channel_scan_time" />
 
-       <TextView
+        <TextView
             android:id="@+id/mode_option"
             android:accessibilityLiveRegion="polite"
             android:layout_width="wrap_content"
@@ -95,12 +94,12 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/country"
@@ -132,7 +131,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/search_mode"
@@ -146,6 +145,7 @@
                     android:textColor="@color/ut_scan_description_text"
                     android:textSize="@dimen/ut_scan_description_text_size"
                     android:text="@string/tv_search_mode" />
+
                 <Spinner
                     android:id="@+id/search_mode_spinner"
                     android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/search_type"
@@ -177,6 +177,7 @@
                     android:textColor="@color/ut_scan_description_text"
                     android:textSize="@dimen/ut_scan_description_text_size"
                     android:text="@string/tv_search_type" />
+
                 <Spinner
                     android:id="@+id/search_type_spinner"
                     android:layout_width="wrap_content"
@@ -206,13 +207,13 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:id="@+id/channel_input_type_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/channel"
@@ -230,7 +231,8 @@
                 <LinearLayout
                     android:id="@+id/channel_input_from_container"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/channel_from"
                         android:accessibilityLiveRegion="polite"
@@ -255,13 +257,14 @@
                         android:textSize="@dimen/ut_scan_description_text_size"
                         android:inputType="number"
                         android:imeOptions="actionDone"
-                        android:hint=""/>
+                        android:hint="" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/channel_input_to_container"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/channel_to"
                         android:accessibilityLiveRegion="polite"
@@ -284,7 +287,7 @@
                         android:textSize="@dimen/ut_scan_description_text_size"
                         android:inputType="number"
                         android:imeOptions="actionDone"
-                        android:hint=""/>
+                        android:hint="" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -292,7 +295,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/ut_scan_icon_margin_right"
-                    android:paddingTop="@dimen/ut_scan_button_margin_top" >
+                    android:paddingTop="@dimen/ut_scan_button_margin_top">
 
                     <Button
                         android:id="@+id/button_left"
@@ -328,7 +331,7 @@
                 android:id="@+id/order_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/order"
@@ -342,6 +345,7 @@
                     android:textColor="@color/ut_scan_description_text"
                     android:textSize="@dimen/ut_scan_description_text_size"
                     android:text="@string/tv_search_order" />
+
                 <Spinner
                     android:id="@+id/order_spinner"
                     android:layout_width="wrap_content"
@@ -358,7 +362,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/atv_color"
@@ -372,6 +376,7 @@
                     android:textColor="@color/ut_scan_description_text"
                     android:textSize="@dimen/ut_scan_description_text_size"
                     android:text="@string/tv_search_atv_clolor" />
+
                 <Spinner
                     android:id="@+id/atv_color_spinner"
                     android:layout_width="wrap_content"
@@ -389,7 +394,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/atv_sound"
@@ -403,6 +408,7 @@
                     android:textColor="@color/ut_scan_description_text"
                     android:textSize="@dimen/ut_scan_description_text_size"
                     android:text="@string/tv_search_atv_sound" />
+
                 <Spinner
                     android:id="@+id/atv_sound_spinner"
                     android:layout_width="wrap_content"
@@ -420,7 +426,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/dvbc_qam_mode"
@@ -434,6 +440,7 @@
                     android:textColor="@color/ut_scan_description_text"
                     android:textSize="@dimen/ut_scan_description_text_size"
                     android:text="@string/ut_tune_dvb_c_qam" />
+
                 <Spinner
                     android:id="@+id/dvbc_qam_mode_spinner"
                     android:layout_width="wrap_content"
@@ -451,7 +458,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/dvbc_symbol"
@@ -464,6 +471,7 @@
                     android:textColor="@color/ut_scan_description_text"
                     android:textSize="@dimen/ut_scan_description_text_size"
                     android:text="@string/ut_tune_dvb_c_symbol" />
+
                 <EditText
                     android:id="@+id/dvbc_symbol_in"
                     android:accessibilityLiveRegion="polite"
@@ -474,7 +482,7 @@
                     android:fontFamily="sans-serif"
                     android:textColor="@color/ut_scan_description_text"
                     android:textSize="@dimen/ut_scan_description_text_size"
-                    android:hint=""/>
+                    android:hint="" />
 
             </LinearLayout>
 
@@ -508,7 +516,7 @@
         android:descendantFocusability="blocksDescendants"
         android:animateLayoutChanges="true"
         android:layout_weight="1"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <ListView
             android:id="@+id/channel_list"

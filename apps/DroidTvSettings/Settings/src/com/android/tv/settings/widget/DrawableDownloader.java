@@ -82,6 +82,7 @@ public class DrawableDownloader {
         final int mOriginalHeight;
         final ArrayList<BitmapDrawable> mBitmaps = new ArrayList<>(3);
         int mByteCount;
+
         public BitmapItem(int originalWidth, int originalHeight) {
             mOriginalWidth = originalWidth;
             mOriginalHeight = originalHeight;
@@ -158,7 +159,7 @@ public class DrawableDownloader {
      */
     public final static DrawableDownloader getInstance(Context context) {
         if (sBitmapDownloader == null) {
-            synchronized(sBitmapDownloaderLock) {
+            synchronized (sBitmapDownloaderLock) {
                 if (sBitmapDownloader == null) {
                     sBitmapDownloader = new DrawableDownloader(context);
                 }
@@ -169,9 +170,9 @@ public class DrawableDownloader {
 
     private static String getBucketKey(String baseKey, Bitmap.Config bitmapConfig) {
         return new StringBuilder(baseKey.length() + 16).append(baseKey)
-                         .append(":").append(bitmapConfig == null ? "" : bitmapConfig.ordinal())
-                         .toString();
-     }
+                .append(":").append(bitmapConfig == null ? "" : bitmapConfig.ordinal())
+                .toString();
+    }
 
     public static Drawable getDrawable(Context context, ShortcutIconResource iconResource)
             throws NameNotFoundException {
@@ -192,6 +193,7 @@ public class DrawableDownloader {
             protected int sizeOf(String key, BitmapItem bitmap) {
                 return bitmap.mByteCount;
             }
+
             @Override
             protected void entryRemoved(
                     boolean evicted, String key, BitmapItem oldValue, BitmapItem newValue) {
@@ -217,6 +219,7 @@ public class DrawableDownloader {
     /**
      * load bitmap in current thread, will *block* current thread.
      * FIXME: Should avoid using this function at all cost.
+     *
      * @deprecated
      */
     @Deprecated
@@ -322,12 +325,13 @@ public class DrawableDownloader {
 
     /**
      * Cancel download<p>
+     *
      * @param key {@link BitmapCallback} or {@link ImageView}
      */
     public boolean cancelDownload(Object key) {
         DrawableLoader task = null;
         if (key instanceof ImageView) {
-            ImageView imageView = (ImageView)key;
+            ImageView imageView = (ImageView) key;
             SoftReference<DrawableLoader> softReference =
                     (SoftReference<DrawableLoader>) imageView.getTag(R.id.imageDownloadTask);
             if (softReference != null) {
@@ -335,7 +339,7 @@ public class DrawableDownloader {
                 softReference.clear();
             }
         } else if (key instanceof BitmapCallback) {
-            BitmapCallback callback = (BitmapCallback)key;
+            BitmapCallback callback = (BitmapCallback) key;
             if (callback.mTask != null) {
                 task = callback.mTask.get();
                 callback.mTask = null;
@@ -348,7 +352,7 @@ public class DrawableDownloader {
     }
 
     private void addBitmapToMemoryCache(BitmapWorkerOptions key, Drawable bitmap,
-            DrawableLoader loader) {
+                                        DrawableLoader loader) {
         if (!key.isMemCacheEnabled()) {
             return;
         }
@@ -358,7 +362,7 @@ public class DrawableDownloader {
         String bucketKey = getBucketKey(key.getCacheKey(), key.getBitmapConfig());
         BitmapItem bitmapItem = mMemoryCache.get(bucketKey);
         if (DEBUG) {
-            Log.d(TAG, "add cache "+bucketKey);
+            Log.d(TAG, "add cache " + bucketKey);
         }
         if (bitmapItem != null) {
             // remove and re-add to update size

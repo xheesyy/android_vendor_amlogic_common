@@ -38,7 +38,7 @@ public class SuggestionContentProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
-            String sortOrder) {
+                        String sortOrder) {
         throw new UnsupportedOperationException("query operation not supported currently.");
     }
 

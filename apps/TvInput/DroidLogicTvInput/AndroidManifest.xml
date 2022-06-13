@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.droidlogic.tvinput"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <uses-sdk android:minSdkVersion="24" />
 
@@ -22,7 +22,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.android.tv.permission.RECEIVE_INPUT_EVENT" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.HDMI_CEC"/>
+    <uses-permission android:name="android.permission.HDMI_CEC" />
 
     <application
         android:name=".TvApplication"
@@ -33,103 +33,114 @@
 
         <uses-library android:name="droidlogic.software.core" />
         <uses-library android:name="droidlogic.tv.software.core" />
+
         <service
             android:name=".services.Hdmi1InputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
-            <intent-filter >
+            android:permission="android.permission.BIND_TV_INPUT">
+            <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
-                android:resource="@xml/hdmi_input_service"/>
+            <meta-data
+                android:name="android.media.tv.input"
+                android:resource="@xml/hdmi_input_service" />
         </service>
         <service
             android:name=".services.Hdmi2InputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
-            <intent-filter >
+            android:permission="android.permission.BIND_TV_INPUT">
+            <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
-                android:resource="@xml/hdmi_input_service"/>
+            <meta-data
+                android:name="android.media.tv.input"
+                android:resource="@xml/hdmi_input_service" />
         </service>
         <service
             android:name=".services.Hdmi3InputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
-            <intent-filter >
+            android:permission="android.permission.BIND_TV_INPUT">
+            <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
-                android:resource="@xml/hdmi_input_service"/>
+            <meta-data
+                android:name="android.media.tv.input"
+                android:resource="@xml/hdmi_input_service" />
         </service>
-		<service
+        <service
             android:name=".services.Hdmi4InputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
-            <intent-filter >
+            android:permission="android.permission.BIND_TV_INPUT">
+            <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
-                android:resource="@xml/hdmi_input_service"/>
+            <meta-data
+                android:name="android.media.tv.input"
+                android:resource="@xml/hdmi_input_service" />
         </service>
 
         <service
             android:name=".services.AV1InputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
-            <intent-filter >
+            android:permission="android.permission.BIND_TV_INPUT">
+            <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
-                android:resource="@xml/av_input_service"/>
+            <meta-data
+                android:name="android.media.tv.input"
+                android:resource="@xml/av_input_service" />
         </service>
         <service
             android:name=".services.AV2InputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
-            <intent-filter >
+            android:permission="android.permission.BIND_TV_INPUT">
+            <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
-                android:resource="@xml/av_input_service"/>
+            <meta-data
+                android:name="android.media.tv.input"
+                android:resource="@xml/av_input_service" />
         </service>
 
         <service
             android:name=".services.DTVInputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
+            android:permission="android.permission.BIND_TV_INPUT">
             <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
+            <meta-data
+                android:name="android.media.tv.input"
                 android:resource="@xml/dtvinputservice" />
         </service>
 
         <service
             android:name=".services.ATVInputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
+            android:permission="android.permission.BIND_TV_INPUT">
             <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
+            <meta-data
+                android:name="android.media.tv.input"
                 android:resource="@xml/atvinputservice" />
         </service>
 
-         <service
+        <service
             android:name=".services.ADTVInputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
+            android:permission="android.permission.BIND_TV_INPUT">
             <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
+            <meta-data
+                android:name="android.media.tv.input"
                 android:resource="@xml/adtvinputservice" />
         </service>
 
         <service
             android:name=".services.SPDIFInputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
+            android:permission="android.permission.BIND_TV_INPUT">
             <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
+            <meta-data
+                android:name="android.media.tv.input"
                 android:resource="@xml/spdifinputservice" />
         </service>
 
-        <service android:name=".services.TvScanService" >
+        <service android:name=".services.TvScanService">
             <intent-filter>
                 <action android:name="com.droidlogic.tvinput.services.TvScanService" />
             </intent-filter>
@@ -137,28 +148,30 @@
 
         <service
             android:name=".services.AUXInputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
+            android:permission="android.permission.BIND_TV_INPUT">
             <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
+            <meta-data
+                android:name="android.media.tv.input"
                 android:resource="@xml/auxinputservice" />
         </service>
 
         <service
             android:name=".services.ArcInputService"
-            android:permission="android.permission.BIND_TV_INPUT" >
+            android:permission="android.permission.BIND_TV_INPUT">
             <intent-filter>
                 <action android:name="android.media.tv.TvInputService" />
             </intent-filter>
-            <meta-data android:name="android.media.tv.input"
+            <meta-data
+                android:name="android.media.tv.input"
                 android:resource="@xml/arcinputservice" />
         </service>
 
         <receiver android:name=".services.TvScanServiceReceiver">
-             <intent-filter>
-                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
-             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
         </receiver>
 
         <activity

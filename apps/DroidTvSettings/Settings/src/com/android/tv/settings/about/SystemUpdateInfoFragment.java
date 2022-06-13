@@ -27,7 +27,9 @@ import androidx.annotation.Keep;
 import com.android.tv.twopanelsettings.R;
 import com.android.tv.twopanelsettings.slices.InfoFragment;
 
-/** An {@InfoFragment} that hosts preview pane of system update. */
+/**
+ * An {@InfoFragment} that hosts preview pane of system update.
+ */
 @Keep
 public class SystemUpdateInfoFragment extends InfoFragment {
     @Override
@@ -42,6 +44,7 @@ public class SystemUpdateInfoFragment extends InfoFragment {
         view.findViewById(R.id.info_summary).setVisibility(View.VISIBLE);
         return view;
     }
+
     @Override
     public void updateInfoFragment() {
         // No-op as this is hosting a static info preview panel

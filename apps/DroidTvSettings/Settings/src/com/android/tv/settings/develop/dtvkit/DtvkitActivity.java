@@ -29,6 +29,6 @@ public class DtvkitActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DtvkitFragment.class.getName(), null);
+                .newSettingsFragment(DtvkitFragment.class.getName(), null);
     }
 }

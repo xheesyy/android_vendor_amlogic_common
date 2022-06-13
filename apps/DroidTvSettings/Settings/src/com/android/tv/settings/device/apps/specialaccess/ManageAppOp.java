@@ -68,6 +68,7 @@ public abstract class ManageAppOp extends SettingsPreferenceFragment
     /**
      * Subclasses may override this to provide an alternate app filter. The default filter inserts
      * {@link PermissionState} objects into the {@link ApplicationsState.AppEntry#extraInfo} field.
+     *
      * @return {@link ApplicationsState.AppFilter}
      */
     @NonNull
@@ -87,13 +88,16 @@ public abstract class ManageAppOp extends SettingsPreferenceFragment
         };
     }
 
-    /** Provide array resource id for customized ignored packages */
+    /**
+     * Provide array resource id for customized ignored packages
+     */
     public int customizedIgnoredPackagesArray() {
         return 0;
     }
 
     /**
      * Subclasses may override this to provide an alternate comparator for sorting apps
+     *
      * @return {@link Comparator} for {@link ApplicationsState.AppEntry} objects.
      */
     @Nullable
@@ -153,7 +157,7 @@ public abstract class ManageAppOp extends SettingsPreferenceFragment
      * Checks for packages that should be ignored for further processing
      */
     static boolean shouldIgnorePackage(Context context, String packageName,
-            int customizedIgnoredPackagesArray) {
+                                       int customizedIgnoredPackagesArray) {
         if (context == null) {
             return true;
         }
@@ -178,7 +182,7 @@ public abstract class ManageAppOp extends SettingsPreferenceFragment
         public final int appOpMode;
 
         private PermissionState(boolean permissionRequested, boolean permissionGranted,
-                int appOpMode) {
+                                int appOpMode) {
             this.permissionRequested = permissionRequested;
             this.permissionGranted = permissionGranted;
             this.appOpMode = appOpMode;

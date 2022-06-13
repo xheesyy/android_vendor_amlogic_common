@@ -29,9 +29,10 @@ public final class CustomContentDescriptionUtil {
 
     /**
      * Generate fallback content description for Switch Preferences
+     *
      * @param context
      * @param contentDescription to generate first portion of full content description
-     * @param isChecked is the toggle state of SwitchPreference
+     * @param isChecked          is the toggle state of SwitchPreference
      * @return the full content description for switch preferences
      */
     public static String getFullSwitchContentDescription(

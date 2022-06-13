@@ -77,7 +77,7 @@ public class TvDataBaseManager {
     private Context mContext;
     private ContentResolver mContentResolver;
 
-    public TvDataBaseManager (Context context) {
+    public TvDataBaseManager(Context context) {
         mContext = context;
         mContentResolver = mContext.getContentResolver();
     }
@@ -92,7 +92,7 @@ public class TvDataBaseManager {
             if (type == null)
                 mContentResolver.delete(channelsUri, Channels._ID + "!=-1", null);
             else
-                mContentResolver.delete(channelsUri, Channels._ID + "!=-1 and " + Channels.COLUMN_TYPE + "='" + type +"'", null);
+                mContentResolver.delete(channelsUri, Channels._ID + "!=-1 and " + Channels.COLUMN_TYPE + "='" + type + "'", null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -113,17 +113,17 @@ public class TvDataBaseManager {
     }
 
     public void deleteAtvOrDtvChannels(boolean isatv) {
-        final String atvwhere = Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_PAL +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_NTSC +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_SECAM + "'";
-        final String dtvwhere = Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_DTMB +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_DVB_T +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_DVB_C +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_DVB_S +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_ATSC_T +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_ATSC_C +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_ISDB_T +"' or " +
-                          Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_ATSC_M_H + "'";
+        final String atvwhere = Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_PAL + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_NTSC + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_SECAM + "'";
+        final String dtvwhere = Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_DTMB + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_DVB_T + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_DVB_C + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_DVB_S + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_ATSC_T + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_ATSC_C + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_ISDB_T + "' or " +
+                Channels.COLUMN_TYPE + "='" + TvContract.Channels.TYPE_ATSC_M_H + "'";
         try {
             if (isatv)
                 mContentResolver.delete(Channels.CONTENT_URI, atvwhere, null);
@@ -137,8 +137,8 @@ public class TvDataBaseManager {
     public void deleteOtherTypeAtvOrDtvChannels(String type, boolean isatv) {
         final String[] ATVTYPE = {TvContract.Channels.TYPE_PAL, TvContract.Channels.TYPE_NTSC, TvContract.Channels.TYPE_SECAM};
         final String[] DTVTYPE = {TvContract.Channels.TYPE_DTMB, TvContract.Channels.TYPE_DVB_T, TvContract.Channels.TYPE_DVB_C,
-                                 TvContract.Channels.TYPE_DVB_S, TvContract.Channels.TYPE_ATSC_T, TvContract.Channels.TYPE_ATSC_C,
-                                 TvContract.Channels.TYPE_ATSC_M_H, TvContract.Channels.TYPE_ISDB_T};
+                TvContract.Channels.TYPE_DVB_S, TvContract.Channels.TYPE_ATSC_T, TvContract.Channels.TYPE_ATSC_C,
+                TvContract.Channels.TYPE_ATSC_M_H, TvContract.Channels.TYPE_ISDB_T};
         String where = null;
         String[] typelist = null;
         if (isatv) {
@@ -187,11 +187,11 @@ public class TvDataBaseManager {
             while (cursor != null && cursor.moveToNext()) {
                 values = new ContentValues();
                 if (value instanceof byte[]) {
-                    values.put(columnKey, (byte[])value);
+                    values.put(columnKey, (byte[]) value);
                 } else if (value instanceof String) {
-                    values.put(columnKey, (String)value);
+                    values.put(columnKey, (String) value);
                 } else if (value instanceof Integer) {
-                    values.put(columnKey, (Integer)value);
+                    values.put(columnKey, (Integer) value);
                 } else {
                     Log.i(TAG, "updateChannelInternalProviderData unkown data type");
                     return ret;
@@ -259,14 +259,14 @@ public class TvDataBaseManager {
                 } else {
                     Iterator it = jsonObject.keys();
                     while (it.hasNext()) {
-                        String k = (String)it.next();
+                        String k = (String) it.next();
                         String v;
                         //String childStr = jsonObject.get(k).toString();
                         //JSONObject childJsonObject = new JSONObject(childStr);
                         JSONObject childJsonObject = null;
                         Object childObject = jsonObject.get(k);
                         if (childObject instanceof JSONObject) {
-                            childJsonObject = (JSONObject)childObject;
+                            childJsonObject = (JSONObject) childObject;
                         }
                         if (childJsonObject != null && childJsonObject.length() > 0 && childJsonObject.has(key)) {
                             if (flagKey != null) {
@@ -328,17 +328,17 @@ public class TvDataBaseManager {
         }
 
         if (DEBUG)
-            Log.d(TAG, "updateSingleChannelInternalProviderData " + (ret ? "found" : (addInCustomed ? "addnew" : "notfound" ))
+            Log.d(TAG, "updateSingleChannelInternalProviderData " + (ret ? "found" : (addInCustomed ? "addnew" : "notfound"))
                     + " _id:" + id + " key:" + key + " value:" + value);
         return ret;
     }
 
-    private ContentValues buildSingleChannelInternalProviderData(Object obj){
+    private ContentValues buildSingleChannelInternalProviderData(Object obj) {
         ContentValues values = new ContentValues();
         if (obj instanceof String) {
-            values.put(TvContract.Channels.COLUMN_INTERNAL_PROVIDER_DATA, (String)obj);
+            values.put(TvContract.Channels.COLUMN_INTERNAL_PROVIDER_DATA, (String) obj);
         } else if (obj instanceof byte[]) {
-            values.put(TvContract.Channels.COLUMN_INTERNAL_PROVIDER_DATA, (byte[])obj);
+            values.put(TvContract.Channels.COLUMN_INTERNAL_PROVIDER_DATA, (byte[]) obj);
         } else {
             Log.i(TAG, "buildSingleChannelInternalProviderData unkown obj type");
         }
@@ -362,12 +362,12 @@ public class TvDataBaseManager {
         int ret = 0;
         Uri channelsUri = TvContract.buildChannelsUriForInput(channel.getInputId());
         String[] projection = {Channels._ID,
-            Channels.COLUMN_SERVICE_ID,
-            Channels.COLUMN_ORIGINAL_NETWORK_ID,
-            Channels.COLUMN_TRANSPORT_STREAM_ID,
-            Channels.COLUMN_DISPLAY_NUMBER,
-            Channels.COLUMN_DISPLAY_NAME,
-            Channels.COLUMN_INTERNAL_PROVIDER_DATA};
+                Channels.COLUMN_SERVICE_ID,
+                Channels.COLUMN_ORIGINAL_NETWORK_ID,
+                Channels.COLUMN_TRANSPORT_STREAM_ID,
+                Channels.COLUMN_DISPLAY_NUMBER,
+                Channels.COLUMN_DISPLAY_NAME,
+                Channels.COLUMN_INTERNAL_PROVIDER_DATA};
 
         Cursor cursor = null;
         try {
@@ -388,10 +388,10 @@ public class TvDataBaseManager {
                         frequency = Integer.parseInt(parsedMap.get(ChannelInfo.KEY_FREQUENCY));
                     }
                     if (serviceId == channel.getServiceId()
-                        && originalNetworkId == channel.getOriginalNetworkId()
-                        && transportStreamId == channel.getTransportStreamId()
-                        && frequency == channel.getFrequency()
-                        && TextUtils.equals(name, channel.getDisplayName()))
+                            && originalNetworkId == channel.getOriginalNetworkId()
+                            && transportStreamId == channel.getTransportStreamId()
+                            && frequency == channel.getFrequency()
+                            && TextUtils.equals(name, channel.getDisplayName()))
                         found = true;
                 } else if (rowId == channel.getId()) {
                     found = true;
@@ -418,12 +418,12 @@ public class TvDataBaseManager {
 
         if (DEBUG)
             Log.d(TAG, "update " + ((ret == UPDATE_SUCCESS) ? "found" : "notfound")
-                +" DTV CH: [_id:"+channel.getId()
-                +"][sid:"+channel.getServiceId()
-                +"][freq:"+channel.getFrequency()
-                +"][name:"+channel.getDisplayName()
-                +"][num:"+channel.getDisplayNumber()
-                +"]");
+                    + " DTV CH: [_id:" + channel.getId()
+                    + "][sid:" + channel.getServiceId()
+                    + "][freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
         return ret;
     }
 
@@ -447,7 +447,7 @@ public class TvDataBaseManager {
 
                 if (channel.getId() == -1) {
                     Map<String, String> parsedMap = parseInternalProviderData(cursor.getString(
-                                findPosition(projection, Channels.COLUMN_INTERNAL_PROVIDER_DATA)));
+                            findPosition(projection, Channels.COLUMN_INTERNAL_PROVIDER_DATA)));
                     int frequency = Integer.parseInt(parsedMap.get(ChannelInfo.KEY_FREQUENCY));
                     if (frequency == channel.getFrequency())
                         found = true;
@@ -475,11 +475,11 @@ public class TvDataBaseManager {
 
         if (DEBUG)
             Log.d(TAG, "update " + ((ret == UPDATE_SUCCESS) ? "found" : "notfound")
-                +" ATV CH: [_id:"+channel.getId()
-                +"][freq:"+channel.getFrequency()
-                +"][name:"+channel.getDisplayName()
-                +"][num:"+channel.getDisplayNumber()
-                +"]");
+                    + " ATV CH: [_id:" + channel.getId()
+                    + "][freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
         return ret;
     }
 
@@ -502,7 +502,7 @@ public class TvDataBaseManager {
 
                 if (channel.getId() == -1) {
                     Map<String, String> parsedMap = parseInternalProviderData(cursor.getString(
-                                findPosition(projection, Channels.COLUMN_INTERNAL_PROVIDER_DATA)));
+                            findPosition(projection, Channels.COLUMN_INTERNAL_PROVIDER_DATA)));
                     int frequency = Integer.parseInt(parsedMap.get(ChannelInfo.KEY_FREQUENCY));
                     int diff = frequency - channel.getFrequency();
                     if ((diff < ATV_FREQUENCE_RANGE) && (diff > -ATV_FREQUENCE_RANGE))
@@ -532,11 +532,11 @@ public class TvDataBaseManager {
 
         if (DEBUG)
             Log.d(TAG, "update " + ((ret == UPDATE_SUCCESS) ? "found" : "notfound")
-                +" ATV CH: [_id:"+channel.getId()
-                +"][freq:"+channel.getFrequency()
-                +"][name:"+channel.getDisplayName()
-                +"][num:"+channel.getDisplayNumber()
-                +"]");
+                    + " ATV CH: [_id:" + channel.getId()
+                    + "][freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
         return ret;
     }
 
@@ -563,7 +563,7 @@ public class TvDataBaseManager {
                 insertLogo(channel.getLogoUrl(), uri);
                 ret = UPDATE_SUCCESS;
             } else {
-                Log.w(TAG, "toBeUpdated is illegal, [_id:"+toBeUpdated.getId()+"]");
+                Log.w(TAG, "toBeUpdated is illegal, [_id:" + toBeUpdated.getId() + "]");
             }
         } catch (Exception e) {
         } finally {
@@ -574,11 +574,11 @@ public class TvDataBaseManager {
 
         if (DEBUG)
             Log.d(TAG, "update " + ((ret == UPDATE_SUCCESS) ? "found" : "notfound")
-                +" ATV CH: [_id:"+ ((ret == UPDATE_SUCCESS) ? toBeUpdated.getId() : channel.getId())
-                +"][freq:"+channel.getFrequency()
-                +"][name:"+channel.getDisplayName()
-                +"][num:"+channel.getDisplayNumber()
-                +"]");
+                    + " ATV CH: [_id:" + ((ret == UPDATE_SUCCESS) ? toBeUpdated.getId() : channel.getId())
+                    + "][freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
         return ret;
     }
 
@@ -593,11 +593,11 @@ public class TvDataBaseManager {
         insertLogo(channel.getLogoUrl(), uri);
 
         if (DEBUG)
-            Log.d(TAG, "Insert DTV CH: [sid:"+channel.getServiceId()
-                    +"][freq:"+channel.getFrequency()
-                    +"][name:"+channel.getDisplayName()
-                    +"][num:"+channel.getDisplayNumber()
-                    +"]");
+            Log.d(TAG, "Insert DTV CH: [sid:" + channel.getServiceId()
+                    + "][freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
     }
 
     public void insertAtvChannel(ChannelInfo channel, int channelNumber) {
@@ -611,10 +611,10 @@ public class TvDataBaseManager {
         insertLogo(channel.getLogoUrl(), uri);
 
         if (DEBUG)
-            Log.d(TAG, "Insert ATV CH: [freq:"+channel.getFrequency()
-                +"][name:"+channel.getDisplayName()
-                +"][num:"+channel.getDisplayNumber()
-                +"]");
+            Log.d(TAG, "Insert ATV CH: [freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
     }
 
     public int insertAtvChannelWithFreOrder(ChannelInfo channel) {
@@ -665,7 +665,7 @@ public class TvDataBaseManager {
     }
 
 
-    private ContentValues  buildDtvChannelData (ChannelInfo channel){
+    private ContentValues buildDtvChannelData(ChannelInfo channel) {
         ContentValues values = new ContentValues();
         values.put(Channels.COLUMN_INPUT_ID, channel.getInputId());
         values.put(Channels.COLUMN_DISPLAY_NAME, channel.getDisplayName());
@@ -674,7 +674,7 @@ public class TvDataBaseManager {
         values.put(Channels.COLUMN_TRANSPORT_STREAM_ID, channel.getTransportStreamId());
         values.put(Channels.COLUMN_SERVICE_ID, channel.getServiceId());
         values.put(Channels.COLUMN_TYPE, channel.getType());
-        values.put(Channels.COLUMN_BROWSABLE, channel.isBrowsable()? 1 : 0);
+        values.put(Channels.COLUMN_BROWSABLE, channel.isBrowsable() ? 1 : 0);
         values.put(Channels.COLUMN_SERVICE_TYPE, channel.getServiceType());
         values.put(Channels.COLUMN_VIDEO_FORMAT, channel.getVideoFormat());
 
@@ -714,7 +714,7 @@ public class TvDataBaseManager {
         map.put(ChannelInfo.KEY_HIDE_GUIDE, String.valueOf(channel.getHideGuide()));
         map.put(ChannelInfo.KEY_CONTENT_RATINGS, DroidLogicTvUtils.TvString.toString(channel.getContentRatings()));
         map.put(ChannelInfo.KEY_SIGNAL_TYPE, DroidLogicTvUtils.TvString.toString(channel.getSignalType()));
-        map.put(ChannelInfo.KEY_VCT, "\""+channel.getVct()+"\"");
+        map.put(ChannelInfo.KEY_VCT, "\"" + channel.getVct() + "\"");
         map.put(ChannelInfo.KEY_EITV, Arrays.toString(channel.getEitVersions()));
         map.put(ChannelInfo.KEY_PROGRAMS_IN_PAT, String.valueOf(channel.getProgramsInPat()));
         map.put(ChannelInfo.KEY_PAT_TS_ID, String.valueOf(channel.getPatTsId()));
@@ -729,7 +729,7 @@ public class TvDataBaseManager {
         return values;
     }
 
-    private ContentValues  buildAtvChannelData (ChannelInfo channel){
+    private ContentValues buildAtvChannelData(ChannelInfo channel) {
         ContentValues values = new ContentValues();
         values.put(Channels.COLUMN_INPUT_ID, channel.getInputId());
         values.put(Channels.COLUMN_DISPLAY_NUMBER, channel.getDisplayNumber());
@@ -744,7 +744,7 @@ public class TvDataBaseManager {
         return values;
     }
 
-    private Map<String, String>  buildAtvChannelMap (ChannelInfo channel){
+    private Map<String, String> buildAtvChannelMap(ChannelInfo channel) {
         Map<String, String> map = new HashMap<String, String>();
         map.put(ChannelInfo.KEY_VFMT, String.valueOf(channel.getVfmt()));
         map.put(ChannelInfo.KEY_FREQUENCY, String.valueOf(channel.getFrequency()));
@@ -788,7 +788,7 @@ public class TvDataBaseManager {
         return map;
     }
 
-    private void declineChannelNum( ChannelInfo channel) {
+    private void declineChannelNum(ChannelInfo channel) {
         /*
         Uri channelsUri = TvContract.buildChannelsUriForInput(channel.getInputId());
         String[] projection = {Channels._ID, Channels.COLUMN_DISPLAY_NUMBER};
@@ -815,7 +815,7 @@ public class TvDataBaseManager {
         */
     }
 
-    public void setChannelName (ChannelInfo channel, String targetName) {
+    public void setChannelName(ChannelInfo channel, String targetName) {
         if (channel != null) {
             channel.setDisplayNameLocal(targetName);
             updateChannelInfo(channel);
@@ -838,21 +838,21 @@ public class TvDataBaseManager {
             Cursor cursor = null;
             try {
                 cursor = mContentResolver.query(channelsUri, projection,
-                    Channels.COLUMN_SERVICE_TYPE + "=?", new String[]{channel.getServiceType()}, null);
+                        Channels.COLUMN_SERVICE_TYPE + "=?", new String[]{channel.getServiceType()}, null);
                 while (cursor != null && cursor.moveToNext()) {
                     long rowId = cursor.getLong(findPosition(projection, Channels._ID));
-                    int number = cursor.getInt(findPosition(projection,Channels.COLUMN_DISPLAY_NUMBER));
-                    String name = cursor.getString(findPosition(projection,Channels.COLUMN_DISPLAY_NAME));
+                    int number = cursor.getInt(findPosition(projection, Channels.COLUMN_DISPLAY_NUMBER));
+                    String name = cursor.getString(findPosition(projection, Channels.COLUMN_DISPLAY_NAME));
 
                     if (number > channel.getNumber()) {
                         if (DEBUG)
                             Log.d(TAG, "deleteChannel: update channel: number=" + number + " name=" + name);
                         Uri uri = TvContract.buildChannelUri(rowId);
                         ContentValues updateValues = new ContentValues();
-                        updateValues.put(Channels.COLUMN_DISPLAY_NUMBER, number -1);
+                        updateValues.put(Channels.COLUMN_DISPLAY_NUMBER, number - 1);
                         ops.add(ContentProviderOperation.newUpdate(uri)
-                            .withValues(updateValues)
-                            .build());
+                                .withValues(updateValues)
+                                .build());
                     }
                 }
                 mContentResolver.applyBatch(TvContract.AUTHORITY, ops);
@@ -872,14 +872,14 @@ public class TvDataBaseManager {
 
     public void deleteChannels(ArrayList<ChannelInfo> channels) {
         if (channels.size() <= 0)
-            return ;
+            return;
 
         Uri channelsUri = TvContract.buildChannelsUriForInput(channels.get(0).getInputId());
         ArrayList<ContentProviderOperation> ops = new ArrayList();
         try {
-           for (ChannelInfo c : channels) {
-               Log.d(TAG, "delete:"+c.getId());
-               mContentResolver.delete(channelsUri, Channels._ID + "=?", new String[]{c.getId() + ""});
+            for (ChannelInfo c : channels) {
+                Log.d(TAG, "delete:" + c.getId());
+                mContentResolver.delete(channelsUri, Channels._ID + "=?", new String[]{c.getId() + ""});
        /*        ops.add(ContentProviderOperation.newDelete(
                         TvContract.buildChannelUri(c.getId()))
                         .build()
@@ -890,18 +890,18 @@ public class TvDataBaseManager {
         } catch (Exception e) {
             //TODO
         }
-   }
+    }
 
     public void deleteChannelsContinuous(ArrayList<ChannelInfo> channels, boolean updateChannelNumber) {
         int count = channels.size();
         if (count <= 0)
-            return ;
+            return;
 
         Uri channelsUri = TvContract.buildChannelsUriForInput(channels.get(0).getInputId());
         String[] projection = {Channels._ID, Channels.COLUMN_DISPLAY_NUMBER, Channels.COLUMN_DISPLAY_NAME};
 
         long startID = channels.get(0).getId();
-        long endID = channels.get(count-1).getId();
+        long endID = channels.get(count - 1).getId();
 
         int deleteCount = 0;
         deleteCount = mContentResolver.delete(channelsUri, Channels._ID + ">=? and " + Channels._ID + "<=?", new String[]{startID + "", endID + ""});
@@ -912,21 +912,21 @@ public class TvDataBaseManager {
             ArrayList<ContentProviderOperation> ops = new ArrayList<>();
             try {
                 cursor = mContentResolver.query(channelsUri, projection,
-                    Channels.COLUMN_SERVICE_TYPE + "=?", new String[]{channels.get(0).getServiceType()}, null);
+                        Channels.COLUMN_SERVICE_TYPE + "=?", new String[]{channels.get(0).getServiceType()}, null);
                 while (cursor != null && cursor.moveToNext()) {
                     long rowId = cursor.getLong(findPosition(projection, Channels._ID));
-                    int number = cursor.getInt(findPosition(projection,Channels.COLUMN_DISPLAY_NUMBER));
-                    String name = cursor.getString(findPosition(projection,Channels.COLUMN_DISPLAY_NAME));
+                    int number = cursor.getInt(findPosition(projection, Channels.COLUMN_DISPLAY_NUMBER));
+                    String name = cursor.getString(findPosition(projection, Channels.COLUMN_DISPLAY_NAME));
 
-                    if (number > channels.get(count-1).getNumber()) {
+                    if (number > channels.get(count - 1).getNumber()) {
                         if (DEBUG)
                             Log.d(TAG, "deleteChannel: update channel: number=" + number + " name=" + name);
                         Uri uri = TvContract.buildChannelUri(rowId);
                         ContentValues updateValues = new ContentValues();
                         updateValues.put(Channels.COLUMN_DISPLAY_NUMBER, number - count);
                         ops.add(ContentProviderOperation.newUpdate(uri)
-                            .withValues(updateValues)
-                            .build());
+                                .withValues(updateValues)
+                                .build());
                     }
                 }
                 mContentResolver.applyBatch(TvContract.AUTHORITY, ops);
@@ -941,9 +941,9 @@ public class TvDataBaseManager {
     }
 
 
-    public void swapChannel (ChannelInfo sourceChannel, ChannelInfo targetChannel) {
+    public void swapChannel(ChannelInfo sourceChannel, ChannelInfo targetChannel) {
         if (sourceChannel == null || targetChannel == null
-            || sourceChannel.getNumber() == targetChannel.getNumber())
+                || sourceChannel.getNumber() == targetChannel.getNumber())
             return;
         ContentValues updateValues = new ContentValues();
 
@@ -956,8 +956,8 @@ public class TvDataBaseManager {
         mContentResolver.update(targetUri, updateValues, null, null);
     }
 
-    public void moveChannel (ChannelInfo sourceChannel, ChannelInfo targetChannel) {
-        if ( sourceChannel == null ||  targetChannel == null
+    public void moveChannel(ChannelInfo sourceChannel, ChannelInfo targetChannel) {
+        if (sourceChannel == null || targetChannel == null
                 || targetChannel.getNumber() == sourceChannel.getNumber())
             return;
 
@@ -967,11 +967,11 @@ public class TvDataBaseManager {
         Cursor cursor = null;
         try {
             cursor = mContentResolver.query(channelsUri, projection,
-                Channels.COLUMN_SERVICE_TYPE + "=?", new String[]{sourceChannel.getServiceType()}, null);
+                    Channels.COLUMN_SERVICE_TYPE + "=?", new String[]{sourceChannel.getServiceType()}, null);
             while (cursor != null && cursor.moveToNext()) {
                 long rowId = cursor.getLong(findPosition(projection, Channels._ID));
-                int number = cursor.getInt(findPosition(projection,Channels.COLUMN_DISPLAY_NUMBER));
-                String name = cursor.getString(findPosition(projection,Channels.COLUMN_DISPLAY_NAME));
+                int number = cursor.getInt(findPosition(projection, Channels.COLUMN_DISPLAY_NUMBER));
+                String name = cursor.getString(findPosition(projection, Channels.COLUMN_DISPLAY_NAME));
 
                 Uri uri = TvContract.buildChannelUri(rowId);
                 ContentValues updateValues = new ContentValues();
@@ -980,7 +980,7 @@ public class TvDataBaseManager {
                         updateValues.put(Channels.COLUMN_DISPLAY_NUMBER, number + 1);
                         mContentResolver.update(uri, updateValues, null, null);
                     }
-                } else if (targetChannel.getNumber() > sourceChannel.getNumber()){
+                } else if (targetChannel.getNumber() > sourceChannel.getNumber()) {
                     if (number > sourceChannel.getNumber() && number <= targetChannel.getNumber()) {
                         updateValues.put(Channels.COLUMN_DISPLAY_NUMBER, number - 1);
                         mContentResolver.update(uri, updateValues, null, null);
@@ -1001,7 +1001,7 @@ public class TvDataBaseManager {
         }
     }
 
-    public void skipChannel (ChannelInfo channel) {
+    public void skipChannel(ChannelInfo channel) {
         if (channel != null) {
             if (channel.isBrowsable()) {
                 channel.setBrowsable(false);
@@ -1012,7 +1012,7 @@ public class TvDataBaseManager {
         }
     }
 
-    public void setFavouriteChannel (ChannelInfo channel) {
+    public void setFavouriteChannel(ChannelInfo channel) {
         if (channel != null) {
             if (!channel.isFavourite()) {
                 channel.setFavourite(true);
@@ -1024,10 +1024,10 @@ public class TvDataBaseManager {
     }
 
     // move the channel to first, this function only used for no LCN product
-    public void topChannel (ChannelInfo topChannel) {
-       if ( topChannel == null || topChannel.getNumber() <= 1) {
+    public void topChannel(ChannelInfo topChannel) {
+        if (topChannel == null || topChannel.getNumber() <= 1) {
             return;
-       }
+        }
 
         Uri channelsUri = TvContract.buildChannelsUriForInput(topChannel.getInputId());
 
@@ -1049,7 +1049,7 @@ public class TvDataBaseManager {
                         updateValues.put(Channels.COLUMN_DISPLAY_NUMBER, number + 1);
                         mContentResolver.update(uri, updateValues, null, null);
                     } else if (channel.getNumber() == topChannel.getNumber()) {
-                        updateValues.put(Channels.COLUMN_DISPLAY_NUMBER,  1);
+                        updateValues.put(Channels.COLUMN_DISPLAY_NUMBER, 1);
                         mContentResolver.update(uri, updateValues, null, null);
                     }
                 }
@@ -1124,26 +1124,26 @@ public class TvDataBaseManager {
         if (isdtv) {
             if (isupdate) {
                 return ContentProviderOperation.newUpdate(
-                                    TvContract.buildChannelUri(id))
-                                    .withValues(buildDtvChannelData(ch))
-                                    .build();
+                                TvContract.buildChannelUri(id))
+                        .withValues(buildDtvChannelData(ch))
+                        .build();
             } else {
                 return ContentProviderOperation.newInsert(
-                                    TvContract.Channels.CONTENT_URI)
-                                    .withValues(buildDtvChannelData(ch))
-                                    .build();
+                                TvContract.Channels.CONTENT_URI)
+                        .withValues(buildDtvChannelData(ch))
+                        .build();
             }
         } else {
             if (isupdate) {
                 return ContentProviderOperation.newUpdate(
-                                    TvContract.buildChannelUri(id))
-                                    .withValues(buildAtvChannelData(ch))
-                                    .build();
+                                TvContract.buildChannelUri(id))
+                        .withValues(buildAtvChannelData(ch))
+                        .build();
             } else {
                 return ContentProviderOperation.newInsert(
-                                    TvContract.Channels.CONTENT_URI)
-                                    .withValues(buildAtvChannelData(ch))
-                                    .build();
+                                TvContract.Channels.CONTENT_URI)
+                        .withValues(buildAtvChannelData(ch))
+                        .build();
             }
         }
     }
@@ -1151,7 +1151,7 @@ public class TvDataBaseManager {
     public long queryChannelIdInDb(ChannelInfo channel) {
         long id = -1;//-1 means not init; -2 means not exist
         if (channel != null) {
-             id = channel.getId();
+            id = channel.getId();
             if (id > -1) {
                 return id;
             }
@@ -1160,12 +1160,12 @@ public class TvDataBaseManager {
         }
         Uri channelsUri = TvContract.buildChannelsUriForInput(channel.getInputId());
         String[] projection = {Channels._ID,
-            Channels.COLUMN_SERVICE_ID,
-            Channels.COLUMN_ORIGINAL_NETWORK_ID,
-            Channels.COLUMN_TRANSPORT_STREAM_ID,
-            Channels.COLUMN_DISPLAY_NUMBER,
-            Channels.COLUMN_DISPLAY_NAME,
-            Channels.COLUMN_INTERNAL_PROVIDER_DATA};
+                Channels.COLUMN_SERVICE_ID,
+                Channels.COLUMN_ORIGINAL_NETWORK_ID,
+                Channels.COLUMN_TRANSPORT_STREAM_ID,
+                Channels.COLUMN_DISPLAY_NUMBER,
+                Channels.COLUMN_DISPLAY_NAME,
+                Channels.COLUMN_INTERNAL_PROVIDER_DATA};
 
         Cursor cursor = null;
         try {
@@ -1196,16 +1196,16 @@ public class TvDataBaseManager {
                         signalType = parsedMap.get(ChannelInfo.KEY_SIGNAL_TYPE);
                     }
                     if (TextUtils.equals(signalType, channel.getSignalType())
-                        && (serviceId == channel.getServiceId()
-                        && originalNetworkId == channel.getOriginalNetworkId()
-                        && transportStreamId == channel.getTransportStreamId()
-                        && frequency == channel.getFrequency()
-                        && TextUtils.equals(name, channel.getDisplayName()))
+                            && (serviceId == channel.getServiceId()
+                            && originalNetworkId == channel.getOriginalNetworkId()
+                            && transportStreamId == channel.getTransportStreamId()
+                            && frequency == channel.getFrequency()
+                            && TextUtils.equals(name, channel.getDisplayName()))
                             || (channel.isAnalogChannel()
-                                && frequency == channel.getFrequency()
-                                && videostd == channel.getVideoStd()
-                                && audiostd == channel.getAudioStd()
-                                && vfmt == channel.getVfmt()))
+                            && frequency == channel.getFrequency()
+                            && videostd == channel.getVideoStd()
+                            && audiostd == channel.getAudioStd()
+                            && vfmt == channel.getVfmt()))
                         found = true;
                 }
 
@@ -1294,10 +1294,10 @@ public class TvDataBaseManager {
             ChannelInfo channelInfo = null;
             while (cursor != null && cursor.moveToNext()) {
                 int index = cursor.getColumnIndex(Channels.COLUMN_SERVICE_TYPE);
-                Log.d(TAG,"index:"+index+","+ cursor.getString(index)+",srvType:"+srvType);
+                Log.d(TAG, "index:" + index + "," + cursor.getString(index) + ",srvType:" + srvType);
                 if (srvType.equals(cursor.getString(index))) {
                     channelInfo = ChannelInfo.fromCommonCursor(cursor);
-                    if (channelInfo == null )
+                    if (channelInfo == null)
                         continue;
                     if (!need_browserable) {
                         channelList.add(channelInfo);
@@ -1310,7 +1310,7 @@ public class TvDataBaseManager {
                 }
             }
         } catch (Exception e) {
-            Log.d(TAG,"getChannelList Exception");
+            Log.d(TAG, "getChannelList Exception");
             // TODO: handle exception
             e.printStackTrace();
         } finally {
@@ -1323,7 +1323,7 @@ public class TvDataBaseManager {
             Collections.sort(channelList, new SortNumberComparator());
         else if (channelList.size() > 0 && channelList.get(0).isAnalogChannel()) {
             if (channelList.get(0).getSignalType().equals(TvContract.Channels.TYPE_ATSC_C) ||
-                channelList.get(0).getSignalType().equals(TvContract.Channels.TYPE_ATSC_T)) {
+                    channelList.get(0).getSignalType().equals(TvContract.Channels.TYPE_ATSC_T)) {
                 /* For ATSC analog search, sort by channel number */
                 Collections.sort(channelList, new SortNumberComparator());
             } else {
@@ -1347,10 +1347,10 @@ public class TvDataBaseManager {
             ChannelInfo channelInfo = null;
             while (cursor != null && cursor.moveToNext()) {
                 int index = cursor.getColumnIndex(Channels.COLUMN_SERVICE_TYPE);
-                Log.d(TAG,"add hide index:"+index+","+ cursor.getString(index)+",srvType:"+srvType);
+                Log.d(TAG, "add hide index:" + index + "," + cursor.getString(index) + ",srvType:" + srvType);
                 if (srvType.equals(cursor.getString(index))) {
                     channelInfo = ChannelInfo.fromCommonCursor(cursor);
-                    if (channelInfo == null )
+                    if (channelInfo == null)
                         continue;
                     boolean hidden = channelInfo.getHidden() > 0 ? true : false;
                     boolean browserable = channelInfo.isBrowsable();
@@ -1370,7 +1370,7 @@ public class TvDataBaseManager {
                 }
             }
         } catch (Exception e) {
-            Log.d(TAG,"getChannelList Exception");
+            Log.d(TAG, "getChannelList Exception");
             // TODO: handle exception
             e.printStackTrace();
         } finally {
@@ -1383,7 +1383,7 @@ public class TvDataBaseManager {
             Collections.sort(channelList, new SortNumberComparator());
         else if (channelList.size() > 0 && channelList.get(0).isAnalogChannel()) {
             if (channelList.get(0).getSignalType().equals(TvContract.Channels.TYPE_ATSC_C) ||
-                channelList.get(0).getSignalType().equals(TvContract.Channels.TYPE_ATSC_T)) {
+                    channelList.get(0).getSignalType().equals(TvContract.Channels.TYPE_ATSC_T)) {
                 /* For ATSC analog search, sort by channel number */
                 Collections.sort(channelList, new SortNumberComparator());
             } else {
@@ -1426,17 +1426,17 @@ public class TvDataBaseManager {
         return info;
     }
 
-    public Map<String, String> parseInternalProviderData(String internalData){
+    public Map<String, String> parseInternalProviderData(String internalData) {
         return DroidLogicTvUtils.jsonToMap(internalData);
     }
 
-    public void insertUrl( Uri contentUri, URL sourceUrl){
+    public void insertUrl(Uri contentUri, URL sourceUrl) {
         if (DEBUG) {
             Log.d(TAG, "Inserting " + sourceUrl + " to " + contentUri);
         }
         InputStream is = null;
         OutputStream os = null;
-        try{
+        try {
             is = sourceUrl.openStream();
             os = mContentResolver.openOutputStream(contentUri);
             copy(is, os);
@@ -1449,7 +1449,8 @@ public class TvDataBaseManager {
                 } catch (IOException e) {
                     // Ignore exception.
                 }
-            } if (os != null) {
+            }
+            if (os != null) {
                 try {
                     os.close();
                 } catch (IOException e) {
@@ -1467,7 +1468,7 @@ public class TvDataBaseManager {
         }
     }
 
-    private void insertLogo (String logoUrl, Uri uri) {
+    private void insertLogo(String logoUrl, Uri uri) {
         Map<Uri, String> logos = new HashMap<Uri, String>();
         if (!TextUtils.isEmpty(logoUrl))
             logos.put(TvContract.buildChannelLogoUri(uri), logoUrl);
@@ -1484,18 +1485,18 @@ public class TvDataBaseManager {
         }
 
         @Override
-            public Void doInBackground(Map<Uri, String>... logosList) {
-                for (Map<Uri, String> logos : logosList) {
-                    for (Uri uri : logos.keySet()) {
-                        try {
-                            insertUrl(uri, new URL(logos.get(uri)));
-                        } catch (MalformedURLException e) {
-                            Log.e(TAG, "Can't load " + logos.get(uri), e);
-                        }
+        public Void doInBackground(Map<Uri, String>... logosList) {
+            for (Map<Uri, String> logos : logosList) {
+                for (Uri uri : logos.keySet()) {
+                    try {
+                        insertUrl(uri, new URL(logos.get(uri)));
+                    } catch (MalformedURLException e) {
+                        Log.e(TAG, "Can't load " + logos.get(uri), e);
                     }
                 }
-                return null;
             }
+            return null;
+        }
     }
 
     public class SortComparator implements Comparator<ChannelInfo> {
@@ -1568,7 +1569,7 @@ public class TvDataBaseManager {
             while (cursor != null && cursor.moveToNext()) {
                 long rowId = cursor.getLong(findPosition(projection, Channels._ID));
                 Map<String, String> parsedMap = parseInternalProviderData(cursor.getString(
-                            findPosition(projection, Channels.COLUMN_INTERNAL_PROVIDER_DATA)));
+                        findPosition(projection, Channels.COLUMN_INTERNAL_PROVIDER_DATA)));
                 int frequency = Integer.parseInt(parsedMap.get(ChannelInfo.KEY_FREQUENCY));
                 if (frequency == channel.getFrequency()) {
                     channelUri = TvContract.buildChannelUri(rowId);
@@ -1591,10 +1592,10 @@ public class TvDataBaseManager {
         }
         if (DEBUG)
             Log.d(TAG, "update " + ((ret == UPDATE_SUCCESS) ? "found" : "notfound")
-                +"][freq:"+channel.getFrequency()
-                +"][name:"+channel.getDisplayName()
-                +"][num:"+channel.getDisplayNumber()
-                +"]");
+                    + "][freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
 
         if (ret != UPDATE_SUCCESS) {
             channelUri = insertAtvChannel2(channel, ret);
@@ -1619,10 +1620,10 @@ public class TvDataBaseManager {
 
         Uri channelsUri = TvContract.buildChannelsUriForInput(channel.getInputId());
         String[] projection = {Channels._ID,
-            Channels.COLUMN_SERVICE_ID,
-            Channels.COLUMN_DISPLAY_NUMBER,
-            Channels.COLUMN_DISPLAY_NAME,
-            Channels.COLUMN_INTERNAL_PROVIDER_DATA};
+                Channels.COLUMN_SERVICE_ID,
+                Channels.COLUMN_DISPLAY_NUMBER,
+                Channels.COLUMN_DISPLAY_NAME,
+                Channels.COLUMN_INTERNAL_PROVIDER_DATA};
 
         Cursor cursor = null;
         try {
@@ -1638,9 +1639,9 @@ public class TvDataBaseManager {
                     frequency = Integer.parseInt(parsedMap.get(ChannelInfo.KEY_FREQUENCY));
                 }
                 if (serviceId == channel.getServiceId() && frequency == channel.getFrequency()
-                    && name.equals(channel.getDisplayName())) {
+                        && name.equals(channel.getDisplayName())) {
                     channelUri = TvContract.buildChannelUri(rowId);
-                    channel.setDisplayNumber(cursor.getString(findPosition(projection,Channels.COLUMN_DISPLAY_NUMBER)));
+                    channel.setDisplayNumber(cursor.getString(findPosition(projection, Channels.COLUMN_DISPLAY_NUMBER)));
                     mContentResolver.update(channelUri, buildDtvChannelData(channel), null, null);
                     insertLogo(channel.getLogoUrl(), channelUri);
                     ret = UPDATE_SUCCESS;
@@ -1660,11 +1661,11 @@ public class TvDataBaseManager {
         }
         if (DEBUG)
             Log.d(TAG, "update " + ((ret == UPDATE_SUCCESS) ? "found" : "notfound")
-                +" DTV CH: [sid:"+channel.getServiceId()
-                +"][freq:"+channel.getFrequency()
-                +"][name:"+channel.getDisplayName()
-                +"][num:"+channel.getDisplayNumber()
-                +"]");
+                    + " DTV CH: [sid:" + channel.getServiceId()
+                    + "][freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
 
         if (ret != UPDATE_SUCCESS) {
             channelUri = insertDtvChannel2(channel, ret);
@@ -1680,11 +1681,11 @@ public class TvDataBaseManager {
         insertLogo(channel.getLogoUrl(), uri);
 
         if (DEBUG)
-            Log.d(TAG, "Insert DTV CH: [sid:"+channel.getServiceId()
-                    +"][freq:"+channel.getFrequency()
-                    +"][name:"+channel.getDisplayName()
-                    +"][num:"+channel.getDisplayNumber()
-                    +"]");
+            Log.d(TAG, "Insert DTV CH: [sid:" + channel.getServiceId()
+                    + "][freq:" + channel.getFrequency()
+                    + "][name:" + channel.getDisplayName()
+                    + "][num:" + channel.getDisplayNumber()
+                    + "]");
 
         return uri;
     }
@@ -1722,7 +1723,7 @@ public class TvDataBaseManager {
         //If program's startTime == EndTime == 0,
         //it is a special program for descr update in atsc.
         return program.getStartTimeUtcMillis() == 0
-            && program.getEndTimeUtcMillis() == 0;
+                && program.getEndTimeUtcMillis() == 0;
     }
 
     /**
@@ -1731,11 +1732,11 @@ public class TvDataBaseManager {
      * <p>If there is any overlap between the given and existing programs, the existing ones
      * will be updated with the given ones if they have the same title or replaced.
      *
-     * @param channelUri The channel where the program info will be added.
+     * @param channelUri  The channel where the program info will be added.
      * @param newPrograms A list of {@link Program} instances which includes program
-     *         information.
+     *                    information.
      */
-    public void updatePrograms(Uri channelUri,        long channelId, List<Program> newPrograms) {
+    public void updatePrograms(Uri channelUri, long channelId, List<Program> newPrograms) {
         updatePrograms(channelUri, channelId, newPrograms, null, false);
     }
 
@@ -1745,13 +1746,11 @@ public class TvDataBaseManager {
             long m1 = object1.getStartTimeUtcMillis();
             long m2 = object2.getStartTimeUtcMillis();
             int result = 0;
-            if (m1 > m2)
-            {
+            if (m1 > m2) {
                 result = 1;
             }
-            if (m1 < m2)
-            {
-                result=-1;
+            if (m1 < m2) {
+                result = -1;
             }
             return result;
         }
@@ -1759,26 +1758,25 @@ public class TvDataBaseManager {
 
     public boolean isProgramAtTime(Program program, Long timeUtcMillis) {
         return (timeUtcMillis != null
-            && timeUtcMillis >= program.getStartTimeUtcMillis()
-            && timeUtcMillis < program.getEndTimeUtcMillis());
+                && timeUtcMillis >= program.getStartTimeUtcMillis()
+                && timeUtcMillis < program.getEndTimeUtcMillis());
     }
 
     public boolean updatePrograms(long channelId, List<Program> newPrograms, Long timeUtcMillis) {
         boolean updated = false;
         Log.d(TAG, "updatePrograms epg start-----");
-        for (Program p: newPrograms) {
-            String sql_start ;
+        for (Program p : newPrograms) {
+            String sql_start;
             Program oldProgram = null;
-            String sql_query ;
-            Cursor cursor ;
-            Log.d(TAG, "updatePrograms epg title:"+p.getTitle()+" des:"+p.getDescription()+" chid:"+p.getChannelId()+" id:"+p.getId()+" start:" + p.getStartTimeUtcMillis() + " end:" + p.getEndTimeUtcMillis());
-            if (isATSCSpecialProgram(p))
-            {
+            String sql_query;
+            Cursor cursor;
+            Log.d(TAG, "updatePrograms epg title:" + p.getTitle() + " des:" + p.getDescription() + " chid:" + p.getChannelId() + " id:" + p.getId() + " start:" + p.getStartTimeUtcMillis() + " end:" + p.getEndTimeUtcMillis());
+            if (isATSCSpecialProgram(p)) {
                 // if (true)
                 //  continue;
                 //sql_query = "(_id=" + p.getId() + ")";
-                sql_query = "(" + TvContract.Programs.COLUMN_CHANNEL_ID + "=" + channelId + ") AND ("+ TvContract.Programs.COLUMN_INTERNAL_PROVIDER_FLAG2 +"=" + p.getProgramId() + ")";
-                cursor =  mContentResolver.query(TvContract.Programs.CONTENT_URI, null, sql_query, null, null);
+                sql_query = "(" + TvContract.Programs.COLUMN_CHANNEL_ID + "=" + channelId + ") AND (" + TvContract.Programs.COLUMN_INTERNAL_PROVIDER_FLAG2 + "=" + p.getProgramId() + ")";
+                cursor = mContentResolver.query(TvContract.Programs.CONTENT_URI, null, sql_query, null, null);
                 if (cursor != null && cursor.getCount() != 0) {
                     cursor.moveToNext();
                     oldProgram = Program.fromCursor(cursor);
@@ -1786,24 +1784,19 @@ public class TvDataBaseManager {
                 if (cursor != null) {
                     cursor.close();
                 }
-                if (oldProgram != null && !TextUtils.equals(p.getDescription(), oldProgram.getDescription()))
-                {
+                if (oldProgram != null && !TextUtils.equals(p.getDescription(), oldProgram.getDescription())) {
                     ContentValues vals = new ContentValues();
                     vals.put(TvContract.Programs.COLUMN_SHORT_DESCRIPTION, p.getDescription());
                     Log.d(TAG, "updatePrograms sql sql_query:" + sql_query);
                     mContentResolver.update(TvContract.Programs.CONTENT_URI, vals, sql_query, null);
-                }
-                else
-                {
+                } else {
                     Log.d(TAG, "updatePrograms isATSCSpecialProgram true");
                 }
-            }
-            else
-            {
-                 sql_start = TvContract.Programs.COLUMN_START_TIME_UTC_MILLIS + "=" + p.getStartTimeUtcMillis() + " AND " + TvContract.Programs.COLUMN_END_TIME_UTC_MILLIS + " = " +p.getEndTimeUtcMillis();
-                 oldProgram = null;
-                 sql_query = "(" + TvContract.Programs.COLUMN_CHANNEL_ID + "=" + channelId + ") AND (" + sql_start + ")";
-                 cursor =  mContentResolver.query(TvContract.Programs.CONTENT_URI, null, sql_query, null, null);
+            } else {
+                sql_start = TvContract.Programs.COLUMN_START_TIME_UTC_MILLIS + "=" + p.getStartTimeUtcMillis() + " AND " + TvContract.Programs.COLUMN_END_TIME_UTC_MILLIS + " = " + p.getEndTimeUtcMillis();
+                oldProgram = null;
+                sql_query = "(" + TvContract.Programs.COLUMN_CHANNEL_ID + "=" + channelId + ") AND (" + sql_start + ")";
+                cursor = mContentResolver.query(TvContract.Programs.CONTENT_URI, null, sql_query, null, null);
                 if (cursor != null && cursor.getCount() != 0) {
                     cursor.moveToNext();
                     oldProgram = Program.fromCursor(cursor);
@@ -1811,10 +1804,9 @@ public class TvDataBaseManager {
                 if (cursor != null) {
                     cursor.close();
                 }
-                if (oldProgram == null || !isProgramEq(oldProgram, p))
-                {
-                    sql_start = TvContract.Programs.COLUMN_START_TIME_UTC_MILLIS + "<=" + p.getStartTimeUtcMillis() + " AND " + TvContract.Programs.COLUMN_END_TIME_UTC_MILLIS + " > " +p.getStartTimeUtcMillis();
-                    String sql_end = TvContract.Programs.COLUMN_START_TIME_UTC_MILLIS + "<=" + p.getEndTimeUtcMillis() + " AND " + TvContract.Programs.COLUMN_END_TIME_UTC_MILLIS + " > " +p.getEndTimeUtcMillis();
+                if (oldProgram == null || !isProgramEq(oldProgram, p)) {
+                    sql_start = TvContract.Programs.COLUMN_START_TIME_UTC_MILLIS + "<=" + p.getStartTimeUtcMillis() + " AND " + TvContract.Programs.COLUMN_END_TIME_UTC_MILLIS + " > " + p.getStartTimeUtcMillis();
+                    String sql_end = TvContract.Programs.COLUMN_START_TIME_UTC_MILLIS + "<=" + p.getEndTimeUtcMillis() + " AND " + TvContract.Programs.COLUMN_END_TIME_UTC_MILLIS + " > " + p.getEndTimeUtcMillis();
                     String sql_del = "(" + TvContract.Programs.COLUMN_CHANNEL_ID + "=" + channelId + ") AND ((" + sql_start + ") OR (" + sql_end + "))";
                     if (oldProgram == null) {
                         Log.d(TAG, "updatePrograms oldProgram is null insert sql:" + sql_del);
@@ -1824,9 +1816,7 @@ public class TvDataBaseManager {
                     mContentResolver.delete(TvContract.Programs.CONTENT_URI, sql_del, null);
                     mContentResolver.insert(TvContract.Programs.CONTENT_URI, p.toContentValues());
                     updated = isProgramAtTime(p, timeUtcMillis);
-                }
-                else
-                {
+                } else {
                     Log.d(TAG, "updatePrograms no insert true");
                 }
             }
@@ -1901,33 +1891,32 @@ public class TvDataBaseManager {
             Program newProgram = newPrograms.get(newProgramsIndex);
             boolean addNewProgram = false;
             boolean foundMatchEid = false;
-            for (oldProgramsIndex = oldProgramStartIndex; oldProgramsIndex < oldPrograms.size();oldProgramsIndex++) {
+            for (oldProgramsIndex = oldProgramStartIndex; oldProgramsIndex < oldPrograms.size(); oldProgramsIndex++) {
                 Program oldProgram = oldPrograms.get(oldProgramsIndex);
-                    if (oldProgram == null) {
-                    oldProgramsIndex ++;
+                if (oldProgram == null) {
+                    oldProgramsIndex++;
                     continue;
                 }
                 if (oldProgram.getProgramId() == newProgram.getProgramId()) {
                     foundMatchEid = true;
                     if (isAtsc && isATSCSpecialProgram(newProgram)) {
-                        if (!TextUtils.equals(oldProgram.getDescription(), newProgram.getDescription()))
-                        {
+                        if (!TextUtils.equals(oldProgram.getDescription(), newProgram.getDescription())) {
                             oldProgram.setDescription(newProgram.getDescription());
                             epg_ops.add(ContentProviderOperation.newUpdate(
-                                    TvContract.Programs.CONTENT_URI)
+                                            TvContract.Programs.CONTENT_URI)
                                     .withValues(oldProgram.toContentValues())
-                                    .withSelection("channel_id="+channelId+" and start_time_utc_millis="+oldProgram.getStartTimeUtcMillis(), null)
+                                    .withSelection("channel_id=" + channelId + " and start_time_utc_millis=" + oldProgram.getStartTimeUtcMillis(), null)
                                     .build());
                         }
                     } else if (oldProgram.matchsWithoutDescription(newProgram)
-                      || (oldProgram.equals(newProgram))) {
+                            || (oldProgram.equals(newProgram))) {
                         //Log.d(TAG, "same program");
                         //just break
                     } else if (needsUpdate(oldProgram, newProgram)) {
                         epg_ops.add(ContentProviderOperation.newUpdate(
-                                TvContract.Programs.CONTENT_URI)
+                                        TvContract.Programs.CONTENT_URI)
                                 .withValues(newProgram.toContentValues())
-                                .withSelection("channel_id="+channelId+" and start_time_utc_millis="+oldProgram.getStartTimeUtcMillis(), null)
+                                .withSelection("channel_id=" + channelId + " and start_time_utc_millis=" + oldProgram.getStartTimeUtcMillis(), null)
                                 .build());
                         oldPrograms.set(oldProgramsIndex, newProgram);
                     }
@@ -1936,24 +1925,24 @@ public class TvDataBaseManager {
             if ((foundMatchEid == false) && (!isATSCSpecialProgram(newProgram))) {
                 addNewProgram = true;
             }
-            newProgramsIndex ++;
+            newProgramsIndex++;
 
             if (addNewProgram) {
-                 epg_ops.add(ContentProviderOperation
+                epg_ops.add(ContentProviderOperation
                         .newInsert(TvContract.Programs.CONTENT_URI)
                         .withValues(newProgram.toContentValues())
                         .build());
-                 oldPrograms.add(oldProgramsIndex, newProgram);
-                 oldProgramsIndex ++;
+                oldPrograms.add(oldProgramsIndex, newProgram);
+                oldProgramsIndex++;
             }
 
             if (!updated) {
                 updated = isProgramAtTime(newProgram, timeUtcMillis);
             }
-       }
+        }
 
-       // Throttle the batch operation not to cause TransactionTooLargeException.
-       if ((epg_ops.size() > 200) || updated) {
+        // Throttle the batch operation not to cause TransactionTooLargeException.
+        if ((epg_ops.size() > 200) || updated) {
             try {
                 mContentResolver.applyBatch(TvContract.AUTHORITY, epg_ops);
             } catch (RemoteException | OperationApplicationException e) {
@@ -1961,8 +1950,8 @@ public class TvDataBaseManager {
                 return updated;
             }
             epg_ops.clear();
-       }
-       return updated;
+        }
+        return updated;
     }
 
     public void updateProgram(Program program) {
@@ -1987,7 +1976,7 @@ public class TvDataBaseManager {
             Log.d(TAG, "getDescription is old is null new not null");
             return false;
         } else if (!Objects.equals(Program.contentRatingsToString(oldProgram.getContentRatings()),
-            Program.contentRatingsToString(newProgram.getContentRatings()))) {
+                Program.contentRatingsToString(newProgram.getContentRatings()))) {
             Log.d(TAG, "ratings not eq");
             return false;
         } else {
@@ -1995,6 +1984,7 @@ public class TvDataBaseManager {
             return true;
         }
     }
+
     /**
      * Returns {@code true} if the {@code oldProgram} program needs to be updated with the
      * {@code newProgram} program.
@@ -2003,14 +1993,14 @@ public class TvDataBaseManager {
         // NOTE: Here, we update the old program if it has the same title and overlaps with the new
         // program. The test logic is just an example and you can modify this. E.g. check whether
         // the both programs have the same program ID if your EPG supports any ID for the programs.
-        if (oldProgram.getTitle()== null ||oldProgram.getTitle().isEmpty()) {
+        if (oldProgram.getTitle() == null || oldProgram.getTitle().isEmpty()) {
             return false;
-        }else {
+        } else {
             return oldProgram.getTitle().equals(newProgram.getTitle())
-                && !(oldProgram.getStartTimeUtcMillis() == newProgram.getStartTimeUtcMillis()
+                    && !(oldProgram.getStartTimeUtcMillis() == newProgram.getStartTimeUtcMillis()
                     && oldProgram.getEndTimeUtcMillis() == newProgram.getEndTimeUtcMillis())
-                && oldProgram.getStartTimeUtcMillis() < newProgram.getEndTimeUtcMillis()
-                && newProgram.getStartTimeUtcMillis() < oldProgram.getEndTimeUtcMillis();
+                    && oldProgram.getStartTimeUtcMillis() < newProgram.getEndTimeUtcMillis()
+                    && newProgram.getStartTimeUtcMillis() < oldProgram.getEndTimeUtcMillis();
         }
     }
 
@@ -2156,7 +2146,7 @@ public class TvDataBaseManager {
             for (Program temp : periodPrograms) {
                 if (program.getId() != temp.getId() &&
                         (temp.getScheduledRecordStatus() == Program.RECORD_STATUS_APPOINTED ||
-                        temp.getScheduledRecordStatus() == Program.RECORD_STATUS_IN_PROGRESS)) {
+                                temp.getScheduledRecordStatus() == Program.RECORD_STATUS_IN_PROGRESS)) {
                     findProgams.add(temp);
                 }
             }
@@ -2173,7 +2163,7 @@ public class TvDataBaseManager {
         int deleteCount = mContentResolver.delete(
                 TvContract.Programs.CONTENT_URI,
                 TvContract.Programs.COLUMN_CHANNEL_ID + "=?",
-                new String[] { String.valueOf(channelId)});
+                new String[]{String.valueOf(channelId)});
         if (deleteCount > 0) {
             Log.d(TAG, "Deleted " + deleteCount + " programs");
         }
@@ -2184,9 +2174,9 @@ public class TvDataBaseManager {
         int deleteCount = mContentResolver.delete(
                 TvContract.Programs.CONTENT_URI,
                 TvContract.Programs.COLUMN_CHANNEL_ID + "=? AND "
-                + TvContract.Programs.COLUMN_VERSION_NUMBER + "!=? AND "
-                + TvContract.Programs.COLUMN_INTERNAL_PROVIDER_FLAG3 + "=?",
-                new String[] { String.valueOf(channelId), versionNotEqual, eitExt});
+                        + TvContract.Programs.COLUMN_VERSION_NUMBER + "!=? AND "
+                        + TvContract.Programs.COLUMN_INTERNAL_PROVIDER_FLAG3 + "=?",
+                new String[]{String.valueOf(channelId), versionNotEqual, eitExt});
         if (deleteCount > 0) {
             Log.d(TAG, "Deleted " + deleteCount + " programs");
         }
@@ -2197,8 +2187,8 @@ public class TvDataBaseManager {
         int deleteCount = mContentResolver.delete(
                 TvContract.Programs.CONTENT_URI,
                 TvContract.Programs.COLUMN_CHANNEL_ID + "=? AND "
-                + TvContract.Programs.COLUMN_VERSION_NUMBER + "!=?",
-                new String[] { String.valueOf(channelId), versionNotEqual});
+                        + TvContract.Programs.COLUMN_VERSION_NUMBER + "!=?",
+                new String[]{String.valueOf(channelId), versionNotEqual});
         if (deleteCount > 0) {
             Log.d(TAG, "Deleted " + deleteCount + " programs");
         }

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="950dp"
         android:layout_height="520dp"
         android:background="@drawable/bg_guide"
-        android:layout_centerInParent="true"
-        >
+        android:layout_centerInParent="true">
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            >
+            android:layout_height="70dp">
+
             <TextView
                 android:id="@+id/guide_date"
                 android:layout_width="200dp"
@@ -22,8 +22,8 @@
                 android:gravity="center"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/color_text_blue_1"
-                />
+                android:textColor="@color/color_text_blue_1" />
+
             <TextView
                 android:id="@+id/guide_week"
                 android:layout_width="150dp"
@@ -32,8 +32,8 @@
                 android:text="@string/date"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:textColor="@color/color_text_blue_1"
-                />
+                android:textColor="@color/color_text_blue_1" />
+
             <TextView
                 android:id="@+id/guide_program"
                 android:layout_width="380dp"
@@ -42,8 +42,8 @@
                 android:text="@string/program_guide"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:textColor="@color/color_text_blue_1"
-                />
+                android:textColor="@color/color_text_blue_1" />
+
             <TextView
                 android:id="@+id/guide_program_details"
                 android:layout_width="220dp"
@@ -52,22 +52,22 @@
                 android:text="@string/program_information"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                android:textColor="@color/color_text_blue_1"
-                />
+                android:textColor="@color/color_text_blue_1" />
         </LinearLayout>
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
-            >
+            android:layout_marginBottom="20dp">
+
             <com.droidlogic.droidlivetv.shortcut.GuideListView
                 android:id="@+id/list_guide_channel"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:nextFocusRight="@+id/list_guide_week"
-                android:listSelector="@drawable/item_background"
-                />
+                android:listSelector="@drawable/item_background" />
+
             <com.droidlogic.droidlivetv.shortcut.GuideListView
                 android:id="@+id/list_guide_week"
                 android:layout_width="150dp"
@@ -76,16 +76,15 @@
                 android:nextFocusRight="@+id/list_guide_programs"
                 android:divider="@color/divider_1"
                 android:dividerHeight="1px"
-                android:listSelector="@drawable/item_background"
-                />
+                android:listSelector="@drawable/item_background" />
+
             <com.droidlogic.droidlivetv.shortcut.GuideListView
                 android:id="@+id/list_guide_programs"
                 android:layout_width="380dp"
                 android:layout_height="wrap_content"
                 android:nextFocusLeft="@+id/list_guide_week"
                 android:nextFocusRight="@+id/program_event"
-                android:listSelector="@drawable/item_background"
-                />
+                android:listSelector="@drawable/item_background" />
             <!-- <RelativeLayout
                 android:orientation="vertical"
                 android:layout_width="220dp"

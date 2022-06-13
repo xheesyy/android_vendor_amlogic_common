@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="settings_app_name" msgid="7931201304065140909">"Cilësimet"</string>
     <string name="launcher_settings_app_name" msgid="1459269619779675736">"Cilësimet"</string>
     <string name="launcher_network_app_name" msgid="8311763462169735002">"Rrjeti"</string>
@@ -46,8 +44,8 @@
     <string name="accounts_category_title" msgid="7286858931427579845">"Llogaritë dhe identifikimi"</string>
     <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"Asnjë llogari"</string>
     <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
-      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> llogari</item>
-      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> llogari</item>
+        <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> llogari</item>
+        <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_0">%1$d</xliff:g> llogari</item>
     </plurals>
     <string name="accounts_slice_summary" msgid="1571012157154521119">"Shërbimet e medias, \"Asistenti\", pagesat"</string>
     <string name="connectivity_network_category_title" msgid="8226264889892008114">"Rrjeti dhe interneti"</string>
@@ -57,8 +55,8 @@
     <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"Telekomandat dhe aksesorët"</string>
     <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"Nuk ka pajisje të lidhura Bluetooth"</string>
     <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
-      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> aksesorë</item>
-      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> aksesor</item>
+        <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> aksesorë</item>
+        <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_0">%1$d</xliff:g> aksesor</item>
     </plurals>
     <string name="display_and_sound_category_title" msgid="9203309625380755860">"Ekrani dhe tingulli"</string>
     <string name="help_and_feedback_category_title" msgid="7036505833991003031">"Ndihmë dhe komente"</string>
@@ -230,8 +228,8 @@
     <string name="about_serial" msgid="3432319328808745459">"Numri i serisë"</string>
     <string name="about_build" msgid="8467840394761634575">"Ndërtimi i sistemit operativ të Android TV"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
-      <item quantity="other">Tani të duhen edhe <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> hapa për t\'u bërë zhvillues</item>
-      <item quantity="one">Tani të duhet edhe <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> hap për t\'u bërë zhvillues</item>
+        <item quantity="other">Tani të duhen edhe <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> hapa për t\'u bërë zhvillues</item>
+        <item quantity="one">Tani të duhet edhe <xliff:g id="STEP_COUNT_0">%1$d</xliff:g> hap për t\'u bërë zhvillues</item>
     </plurals>
     <string name="about_ads" msgid="7662896442040086522">"Reklamat"</string>
     <string name="ads_description" msgid="8081069475265061074">"Menaxho cilësimet e reklamave, si rivendosjen e ID-së sate reklamuese."</string>
@@ -265,20 +263,20 @@
     <string name="license_title" msgid="4032466200355435641">"Licenca"</string>
     <string name="terms_title" msgid="192888187310800678">"Kushtet e përgjithshme"</string>
     <string name="webview_license_title" msgid="5370270485188947540">"Licenca e WebView në sistem"</string>
-  <string-array name="wifi_signal_strength">
-    <item msgid="4475363344103354364">"I dobët"</item>
-    <item msgid="2098818614362343532">"Pak i dobët"</item>
-    <item msgid="2713050260700175954">"I mirë"</item>
-    <item msgid="6005053494500517261">"I shkëlqyer"</item>
-  </string-array>
+    <string-array name="wifi_signal_strength">
+        <item msgid="4475363344103354364">"I dobët"</item>
+        <item msgid="2098818614362343532">"Pak i dobët"</item>
+        <item msgid="2713050260700175954">"I mirë"</item>
+        <item msgid="6005053494500517261">"I shkëlqyer"</item>
+    </string-array>
     <string name="title_mac_address" msgid="7511588678922209883">"Adresa MAC e pajisjes"</string>
     <string name="title_randomized_mac_address" msgid="3359532498635833471">"Adresa MAC e rastësishme"</string>
     <string name="title_signal_strength" msgid="5047116893338315998">"Fuqia e sinjalit"</string>
     <string name="title_random_mac_settings" msgid="6685812569356353378">"Privatësia"</string>
-  <string-array name="random_mac_settings_entries">
-    <item msgid="3457228452595715533">"Përdor adresë MAC të rastësishme (parazgjedhje)"</item>
-    <item msgid="2490415280467390067">"Përdor adresën MAC të pajisjes"</item>
-  </string-array>
+    <string-array name="random_mac_settings_entries">
+        <item msgid="3457228452595715533">"Përdor adresë MAC të rastësishme (parazgjedhje)"</item>
+        <item msgid="2490415280467390067">"Përdor adresën MAC të pajisjes"</item>
+    </string-array>
     <string name="mac_address_not_available" msgid="2992935344891853369">"Nuk ofrohet"</string>
     <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"Adresa MAC e rastësishme"</string>
     <string name="title_ip_address" msgid="705842159484772807">"Adresa e IP-së"</string>
@@ -452,15 +450,15 @@
     <string name="system_set_time_format" msgid="902518158066450918">"Përdor formatin 24-orësh"</string>
     <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="SAMPLE">%2$s</xliff:g>)"</string>
     <string name="system_auto_date_time" msgid="8458199433555868708">"Data dhe ora automatike"</string>
-  <string-array name="auto_date_time_entries">
-    <item msgid="8119837829162871025">"Përdor orën e ofruar nga rrjeti"</item>
-    <item msgid="369146066143710034">"Joaktive"</item>
-  </string-array>
-  <string-array name="auto_date_time_ts_entries">
-    <item msgid="1010003447137304123">"Përdor orën e ofruar nga rrjeti"</item>
-    <item msgid="5645263357181875427">"Përdor orën e ofruar nga transmetimi i transportit"</item>
-    <item msgid="5501503537181350884">"Joaktive"</item>
-  </string-array>
+    <string-array name="auto_date_time_entries">
+        <item msgid="8119837829162871025">"Përdor orën e ofruar nga rrjeti"</item>
+        <item msgid="369146066143710034">"Joaktive"</item>
+    </string-array>
+    <string-array name="auto_date_time_ts_entries">
+        <item msgid="1010003447137304123">"Përdor orën e ofruar nga rrjeti"</item>
+        <item msgid="5645263357181875427">"Përdor orën e ofruar nga transmetimi i transportit"</item>
+        <item msgid="5501503537181350884">"Joaktive"</item>
+    </string-array>
     <string name="system_location" msgid="4057295363709016511">"Vendndodhja"</string>
     <string name="system_desc_location" msgid="1680134126100535031">"Lejoji aplikacionet që kanë kërkuar lejen tënde të përdorin informacionin e vendndodhjes"</string>
     <string name="system_network_location_confirm" msgid="7128162421781085332">"Miratimi i vendndodhjes"</string>
@@ -606,15 +604,15 @@
     <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"Shfaq numëruesin e mbivendosjes"</string>
     <string name="no_application" msgid="1904437693440706534">"Asgjë"</string>
     <string name="enable_opengl_traces_none" msgid="4718084947494592040">"Asnjë"</string>
-  <string-array name="animation_scale_entries">
-    <item msgid="5408992662476056082">"Animacioni është joaktiv"</item>
-    <item msgid="6818290063799857019">"Shkalla e animacionit 0,5x"</item>
-    <item msgid="8257959452691080724">"Shkalla e aminacionit 1x"</item>
-    <item msgid="4781052272686018414">"Shkalla e animacionit 1,5x"</item>
-    <item msgid="2272016945160227610">"Shkalla e animacionit 2x"</item>
-    <item msgid="5015441793276576312">"Shkalla e animacionit 5x"</item>
-    <item msgid="1290233583371556415">"Shkalla e animacionit 10x"</item>
-  </string-array>
+    <string-array name="animation_scale_entries">
+        <item msgid="5408992662476056082">"Animacioni është joaktiv"</item>
+        <item msgid="6818290063799857019">"Shkalla e animacionit 0,5x"</item>
+        <item msgid="8257959452691080724">"Shkalla e aminacionit 1x"</item>
+        <item msgid="4781052272686018414">"Shkalla e animacionit 1,5x"</item>
+        <item msgid="2272016945160227610">"Shkalla e animacionit 2x"</item>
+        <item msgid="5015441793276576312">"Shkalla e animacionit 5x"</item>
+        <item msgid="1290233583371556415">"Shkalla e animacionit 10x"</item>
+    </string-array>
     <string name="track_frame_time_off" msgid="8845064783618702239">"Joaktive"</string>
     <string name="track_frame_time_bars" msgid="5841531515222229632">"Në ekran si shirita"</string>
     <string name="app_process_limit_standard" msgid="6069948528843313888">"Kufiri standard"</string>
@@ -667,16 +665,16 @@
     <string name="inputs_tv_auto_on" msgid="544848340484583318">"Ndezja automatike e televizorit"</string>
     <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"Ndize televizorin me pajisjen HDMI"</string>
     <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
-      <item quantity="other">Hyrje të lidhura</item>
-      <item quantity="one">Hyrje e lidhur</item>
+        <item quantity="other">Hyrje të lidhura</item>
+        <item quantity="one">Hyrje e lidhur</item>
     </plurals>
     <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
-      <item quantity="other">Hyrje në gatishmëri</item>
-      <item quantity="one">Hyrje në gatishmëri</item>
+        <item quantity="other">Hyrje në gatishmëri</item>
+        <item quantity="one">Hyrje në gatishmëri</item>
     </plurals>
     <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
-      <item quantity="other">Hyrje të palidhura</item>
-      <item quantity="one">Hyrje e palidhur</item>
+        <item quantity="other">Hyrje të palidhura</item>
+        <item quantity="one">Hyrje e palidhur</item>
     </plurals>
     <string name="user_add_profile_item_summary" msgid="3211866291940617804">"Kufizo qasjen tek aplikacionet dhe përmbajtjet e tjera në llogarinë tënde"</string>
     <string name="user_new_profile_name" msgid="6637593067318708353">"Profil i kufizuar"</string>
@@ -692,8 +690,8 @@
     <string name="restricted_profile_configure_title" msgid="3327502517511010296">"Cilësimet"</string>
     <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"Aplikacionet e lejuara"</string>
     <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
-      <item quantity="other">%d aplikacione të lejuara</item>
-      <item quantity="one">1 aplikacion i lejuar</item>
+        <item quantity="other">%d aplikacione të lejuara</item>
+        <item quantity="one">1 aplikacion i lejuar</item>
     </plurals>
     <string name="restricted_profile_allowed" msgid="970921490464867884">"Lejohet"</string>
     <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"Nuk lejohet"</string>
@@ -771,12 +769,12 @@
     <string name="confirm_factory_reset_device" msgid="4308646529880718465">"Spastroji të gjitha"</string>
     <string name="select_device_name_title" msgid="3045019448327493634">"Zgjidh një emër për pajisjen tënde <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="select_device_name_description" msgid="8528185095614986580">"Jepi një emër pajisjes sate për të ndihmuar ta identifikosh atë kur transmeton ose kur lidhesh me të nga pajisjet e tjera."</string>
-  <string-array name="rooms">
-    <item msgid="6590829789532602097">"Android TV"</item>
-    <item msgid="1140506340411482365">"Televizori i dhomës së ndenjjes"</item>
-    <item msgid="6448060889026244632">"Televizori i dhomës familjare"</item>
-    <item msgid="3336274213215419228">"Televizori i dhomës së gjumit"</item>
-  </string-array>
+    <string-array name="rooms">
+        <item msgid="6590829789532602097">"Android TV"</item>
+        <item msgid="1140506340411482365">"Televizori i dhomës së ndenjjes"</item>
+        <item msgid="6448060889026244632">"Televizori i dhomës familjare"</item>
+        <item msgid="3336274213215419228">"Televizori i dhomës së gjumit"</item>
+    </string-array>
     <string name="custom_room" msgid="6798144004583173563">"Fut një emër të personalizuar…"</string>
     <string name="device_rename_title" msgid="9070021379000499270">"Riemërtoje këtë pajisje <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="device_rename_description" msgid="1973894029492915135">"Kjo pajisje <xliff:g id="DEVICEMODEL">%1$s</xliff:g> është emërtuar aktualisht si \"<xliff:g id="DEVICENAME">%2$s</xliff:g>\""</string>

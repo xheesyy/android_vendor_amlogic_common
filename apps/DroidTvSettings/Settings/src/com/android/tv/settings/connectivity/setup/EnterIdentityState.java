@@ -109,7 +109,7 @@ public class EnterIdentityState implements State {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             Context context = getActivity();
             CharSequence prevIdendity = mUserChoiceInfo.getPageSummary(UserChoiceInfo.IDENTITY);
             mAction = new GuidedAction.Builder(context)

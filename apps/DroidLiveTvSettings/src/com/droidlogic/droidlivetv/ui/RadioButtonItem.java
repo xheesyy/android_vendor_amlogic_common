@@ -19,7 +19,7 @@ package com.droidlogic.droidlivetv.ui;
 import com.droidlogic.droidlivetvsettings.R;
 
 public class RadioButtonItem extends CompoundButtonItem {
-	public RadioButtonItem(String title) {
+    public RadioButtonItem(String title) {
         super(title, null);
     }
 

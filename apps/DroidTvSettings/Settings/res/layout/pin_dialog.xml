@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -57,24 +56,28 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <view class="com.android.tv.settings.dialog.PinDialogFragment$PinNumberPicker"
+            <view
+                class="com.android.tv.settings.dialog.PinDialogFragment$PinNumberPicker"
                 android:id="@+id/first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <view class="com.android.tv.settings.dialog.PinDialogFragment$PinNumberPicker"
+            <view
+                class="com.android.tv.settings.dialog.PinDialogFragment$PinNumberPicker"
                 android:id="@+id/second"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/pin_dialog_pin_number_spacing" />
 
-            <view class="com.android.tv.settings.dialog.PinDialogFragment$PinNumberPicker"
+            <view
+                class="com.android.tv.settings.dialog.PinDialogFragment$PinNumberPicker"
                 android:id="@+id/third"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/pin_dialog_pin_number_spacing" />
 
-            <view class="com.android.tv.settings.dialog.PinDialogFragment$PinNumberPicker"
+            <view
+                class="com.android.tv.settings.dialog.PinDialogFragment$PinNumberPicker"
                 android:id="@+id/fourth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

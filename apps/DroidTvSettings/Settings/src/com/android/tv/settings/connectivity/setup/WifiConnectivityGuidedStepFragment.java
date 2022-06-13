@@ -82,7 +82,7 @@ public class WifiConnectivityGuidedStepFragment extends GuidedStepSupportFragmen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         // action_fragment_root's padding cannot be set via attributes so we do it programmatically.
         final View actionFragmentRoot = view.findViewById(R.id.action_fragment_root);

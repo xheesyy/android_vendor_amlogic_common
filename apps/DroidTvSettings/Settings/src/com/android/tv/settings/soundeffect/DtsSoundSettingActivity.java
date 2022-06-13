@@ -29,7 +29,7 @@ public class DtsSoundSettingActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DtsSoundSettingFragment.class.getName(), null);
+                .newSettingsFragment(DtsSoundSettingFragment.class.getName(), null);
     }
 
 }

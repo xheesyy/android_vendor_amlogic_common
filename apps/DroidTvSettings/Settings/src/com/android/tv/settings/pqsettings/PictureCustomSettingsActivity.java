@@ -25,7 +25,7 @@ public class PictureCustomSettingsActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PictureCustomSettingsFragment.class.getName(), null);
+                .newSettingsFragment(PictureCustomSettingsFragment.class.getName(), null);
     }
 
 }

@@ -486,7 +486,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment {
 
     private void dataCleared(boolean succeeded) {
         if (succeeded) {
-            final int userId =  UserHandle.getUserId(mEntry.info.uid);
+            final int userId = UserHandle.getUserId(mEntry.info.uid);
             mApplicationsState.requestSize(mPackageName, userId);
         } else {
             Log.w(TAG, "Failed to clear data!");
@@ -500,7 +500,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment {
         mPackageManager.deleteApplicationCacheFiles(mEntry.info.packageName,
                 new IPackageDataObserver.Stub() {
                     public void onRemoveCompleted(final String packageName,
-                            final boolean succeeded) {
+                                                  final boolean succeeded) {
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -515,7 +515,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment {
 
     private void cacheCleared(boolean succeeded) {
         if (succeeded) {
-            final int userId =  UserHandle.getUserId(mEntry.info.uid);
+            final int userId = UserHandle.getUserId(mEntry.info.uid);
             mApplicationsState.requestSize(mPackageName, userId);
         } else {
             Log.w(TAG, "Failed to clear cache!");
@@ -562,10 +562,12 @@ public class AppManagementFragment extends SettingsPreferenceFragment {
         }
 
         @Override
-        public void onRebuildComplete(ArrayList<ApplicationsState.AppEntry> apps) {}
+        public void onRebuildComplete(ArrayList<ApplicationsState.AppEntry> apps) {
+        }
 
         @Override
-        public void onPackageIconChanged() {}
+        public void onPackageIconChanged() {
+        }
 
         @Override
         public void onPackageSizeChanged(String packageName) {

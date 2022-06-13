@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="right|top">
+
         <ImageView
             android:id="@+id/dobly_vision_image"
             android:layout_height="wrap_content"
@@ -16,8 +17,7 @@
             android:src="@drawable/certifi_dobly_vision"
             android:layout_marginTop="70dp"
             android:layout_marginRight="30dp"
-            android:visibility="gone">
-        </ImageView>
+            android:visibility="gone"></ImageView>
     </LinearLayout>
 
     <LinearLayout
@@ -25,14 +25,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical">
+
         <ImageView
             android:id="@+id/msg_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_no_signal"
             android:scaleType="centerInside"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/msg_text"
             android:layout_width="match_parent"
@@ -42,8 +43,7 @@
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
     </LinearLayout>
 </com.droidlogic.tvinput.widget.OverlayView>
 

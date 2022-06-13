@@ -23,7 +23,7 @@ public class ColorAttributeActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(ColorAttributeFragment.class.getName(), null);
+                .newSettingsFragment(ColorAttributeFragment.class.getName(), null);
     }
 
 }

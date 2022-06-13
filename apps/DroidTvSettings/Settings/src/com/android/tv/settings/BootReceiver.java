@@ -23,7 +23,9 @@ import android.util.Log;
 
 import com.android.tv.settings.accessories.BluetoothDevicesService;
 
-/** The {@BroadcastReceiver} for performing actions upon device boot. */
+/**
+ * The {@BroadcastReceiver} for performing actions upon device boot.
+ */
 public class BootReceiver extends BroadcastReceiver {
 
     private static final String TAG = "BootReceiver";
@@ -41,7 +43,7 @@ public class BootReceiver extends BroadcastReceiver {
         // overlaid.
         if (context != null
                 && NATIVE_CONNECTED_DEVICE_SLICE_PROVIDER_URI.equals(
-                        context.getResources().getString(R.string.connected_devices_slice_uri))) {
+                context.getResources().getString(R.string.connected_devices_slice_uri))) {
             Intent mainIntent = new Intent(context, BluetoothDevicesService.class);
             context.startService(mainIntent);
         }

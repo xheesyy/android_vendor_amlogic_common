@@ -21,41 +21,41 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 
 public class ImagePlayerManager {
-    private static final String TAG                 = "ImagePlayerManager";
+    private static final String TAG = "ImagePlayerManager";
 
-    private static final String IMAGE_TOKEN         = "droidlogic.IImagePlayerService";
-    public static final int ARGUMENTS_ERROR         = -0xfffe;
-    public static final int REMOTE_EXCEPTION        = -0xffff;
-    int TRANSACTION_INIT                            = IBinder.FIRST_CALL_TRANSACTION;
-    int TRANSACTION_SET_DATA_SOURCE                 = IBinder.FIRST_CALL_TRANSACTION + 1;
-    int TRANSACTION_SET_SAMPLE_SURFACE_SIZE         = IBinder.FIRST_CALL_TRANSACTION + 2;
-    int TRANSACTION_SET_ROTATE                      = IBinder.FIRST_CALL_TRANSACTION + 3;
-    int TRANSACTION_SET_SCALE                       = IBinder.FIRST_CALL_TRANSACTION + 4;
-    int TRANSACTION_SET_ROTATE_SCALE                = IBinder.FIRST_CALL_TRANSACTION + 5;
-    int TRANSACTION_SET_CROP_RECT                   = IBinder.FIRST_CALL_TRANSACTION + 6;
-    int TRANSACTION_START                           = IBinder.FIRST_CALL_TRANSACTION + 7;
-    int TRANSACTION_PREPARE                         = IBinder.FIRST_CALL_TRANSACTION + 8;
-    int TRANSACTION_SHOW                            = IBinder.FIRST_CALL_TRANSACTION + 9;
-    int TRANSACTION_RELEASE                         = IBinder.FIRST_CALL_TRANSACTION + 10;
-    int TRANSACTION_PREPARE_BUF                     = IBinder.FIRST_CALL_TRANSACTION + 11;
-    int TRANSACTION_SHOW_BUF                        = IBinder.FIRST_CALL_TRANSACTION + 12;
-    int TRANSACTION_SET_DATA_SOURCE_URL             = IBinder.FIRST_CALL_TRANSACTION + 13;
-    int TRANSACTION_NOTIFY_PROCESSDIED              = IBinder.FIRST_CALL_TRANSACTION + 14;
-    int TRANSACTION_SET_TRANSLATE                   = IBinder.FIRST_CALL_TRANSACTION + 15;
-    int TRANSACTION_SET_HWSCALE                     = IBinder.FIRST_CALL_TRANSACTION + 16;
+    private static final String IMAGE_TOKEN = "droidlogic.IImagePlayerService";
+    public static final int ARGUMENTS_ERROR = -0xfffe;
+    public static final int REMOTE_EXCEPTION = -0xffff;
+    int TRANSACTION_INIT = IBinder.FIRST_CALL_TRANSACTION;
+    int TRANSACTION_SET_DATA_SOURCE = IBinder.FIRST_CALL_TRANSACTION + 1;
+    int TRANSACTION_SET_SAMPLE_SURFACE_SIZE = IBinder.FIRST_CALL_TRANSACTION + 2;
+    int TRANSACTION_SET_ROTATE = IBinder.FIRST_CALL_TRANSACTION + 3;
+    int TRANSACTION_SET_SCALE = IBinder.FIRST_CALL_TRANSACTION + 4;
+    int TRANSACTION_SET_ROTATE_SCALE = IBinder.FIRST_CALL_TRANSACTION + 5;
+    int TRANSACTION_SET_CROP_RECT = IBinder.FIRST_CALL_TRANSACTION + 6;
+    int TRANSACTION_START = IBinder.FIRST_CALL_TRANSACTION + 7;
+    int TRANSACTION_PREPARE = IBinder.FIRST_CALL_TRANSACTION + 8;
+    int TRANSACTION_SHOW = IBinder.FIRST_CALL_TRANSACTION + 9;
+    int TRANSACTION_RELEASE = IBinder.FIRST_CALL_TRANSACTION + 10;
+    int TRANSACTION_PREPARE_BUF = IBinder.FIRST_CALL_TRANSACTION + 11;
+    int TRANSACTION_SHOW_BUF = IBinder.FIRST_CALL_TRANSACTION + 12;
+    int TRANSACTION_SET_DATA_SOURCE_URL = IBinder.FIRST_CALL_TRANSACTION + 13;
+    int TRANSACTION_NOTIFY_PROCESSDIED = IBinder.FIRST_CALL_TRANSACTION + 14;
+    int TRANSACTION_SET_TRANSLATE = IBinder.FIRST_CALL_TRANSACTION + 15;
+    int TRANSACTION_SET_HWSCALE = IBinder.FIRST_CALL_TRANSACTION + 16;
 
     private Context mContext;
     private IBinder mIBinder = null;
+
     public ImagePlayerManager(Context context) {
         mContext = context;
 
         try {
             Object object = Class.forName("android.os.ServiceManager")
-                    .getMethod("getService", new Class[] { String.class })
-                    .invoke(null, new Object[] { "image.player" });
-            mIBinder = (IBinder)object;
-        }
-        catch (Exception ex) {
+                    .getMethod("getService", new Class[]{String.class})
+                    .invoke(null, new Object[]{"image.player"});
+            mIBinder = (IBinder) object;
+        } catch (Exception ex) {
             Log.e(TAG, "image player init fail:" + ex);
         }
 
@@ -70,7 +70,7 @@ public class ImagePlayerManager {
                 Parcel reply = Parcel.obtain();
                 data.writeInterfaceToken(IMAGE_TOKEN);
                 mIBinder.transact(TRANSACTION_INIT,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -83,18 +83,18 @@ public class ImagePlayerManager {
         return REMOTE_EXCEPTION;
     }
 
-    public int  notifyProcessDied(IBinder cb) {
+    public int notifyProcessDied(IBinder cb) {
         try {
             if (null != mIBinder) {
                 Parcel data = Parcel.obtain();
                 Parcel reply = Parcel.obtain();
                 data.writeInterfaceToken(IMAGE_TOKEN);
-                data.writeInt((cb != null)?1:0);
+                data.writeInt((cb != null) ? 1 : 0);
                 if (cb != null) {
                     data.writeStrongBinder(cb);
                 }
                 mIBinder.transact(TRANSACTION_NOTIFY_PROCESSDIED,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -135,13 +135,13 @@ public class ImagePlayerManager {
                 data.writeInterfaceToken(IMAGE_TOKEN);
 
                 IBinder httpBinder = getHttpServiceBinder(url);
-                data.writeInt((httpBinder != null)?1:0);
+                data.writeInt((httpBinder != null) ? 1 : 0);
                 if (httpBinder != null) {
                     data.writeStrongBinder(httpBinder);
                 }
                 data.writeString(url);
                 mIBinder.transact(TRANSACTION_SET_DATA_SOURCE_URL,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -174,7 +174,7 @@ public class ImagePlayerManager {
                 data.writeInterfaceToken(IMAGE_TOKEN);
                 data.writeString(path);
                 mIBinder.transact(TRANSACTION_SET_DATA_SOURCE,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -197,7 +197,7 @@ public class ImagePlayerManager {
                 data.writeInt(surfaceW);
                 data.writeInt(surfaceH);
                 mIBinder.transact(TRANSACTION_SET_SAMPLE_SURFACE_SIZE,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -219,7 +219,7 @@ public class ImagePlayerManager {
                 data.writeFloat(degrees);
                 data.writeInt(autoCrop);
                 mIBinder.transact(TRANSACTION_SET_ROTATE,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -242,7 +242,7 @@ public class ImagePlayerManager {
                 data.writeFloat(sy);
                 data.writeInt(autoCrop);
                 mIBinder.transact(TRANSACTION_SET_SCALE,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -275,7 +275,7 @@ public class ImagePlayerManager {
         return REMOTE_EXCEPTION;
     }
 
-    public int setTranslate (float tx, float ty) {
+    public int setTranslate(float tx, float ty) {
         try {
             if (null != mIBinder) {
                 Parcel data = Parcel.obtain();
@@ -284,7 +284,7 @@ public class ImagePlayerManager {
                 data.writeFloat(tx);
                 data.writeFloat(ty);
                 mIBinder.transact(TRANSACTION_SET_TRANSLATE,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -308,7 +308,7 @@ public class ImagePlayerManager {
                 data.writeFloat(sy);
                 data.writeInt(autoCrop);
                 mIBinder.transact(TRANSACTION_SET_ROTATE_SCALE,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -332,7 +332,7 @@ public class ImagePlayerManager {
                 data.writeInt(cropWidth);
                 data.writeInt(cropHeight);
                 mIBinder.transact(TRANSACTION_SET_CROP_RECT,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -352,7 +352,7 @@ public class ImagePlayerManager {
                 Parcel reply = Parcel.obtain();
                 data.writeInterfaceToken(IMAGE_TOKEN);
                 mIBinder.transact(TRANSACTION_START,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -372,7 +372,7 @@ public class ImagePlayerManager {
                 Parcel reply = Parcel.obtain();
                 data.writeInterfaceToken(IMAGE_TOKEN);
                 mIBinder.transact(TRANSACTION_PREPARE,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -392,7 +392,7 @@ public class ImagePlayerManager {
                 Parcel reply = Parcel.obtain();
                 data.writeInterfaceToken(IMAGE_TOKEN);
                 mIBinder.transact(TRANSACTION_SHOW,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -412,7 +412,7 @@ public class ImagePlayerManager {
                 Parcel reply = Parcel.obtain();
                 data.writeInterfaceToken(IMAGE_TOKEN);
                 mIBinder.transact(TRANSACTION_RELEASE,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -429,7 +429,7 @@ public class ImagePlayerManager {
         return _prepareBuf("file://" + path);
     }
 
-    private int _prepareBuf(String path){
+    private int _prepareBuf(String path) {
         try {
             if (null != mIBinder) {
                 Parcel data = Parcel.obtain();
@@ -437,7 +437,7 @@ public class ImagePlayerManager {
                 data.writeInterfaceToken(IMAGE_TOKEN);
                 data.writeString(path);
                 mIBinder.transact(TRANSACTION_PREPARE_BUF,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -457,7 +457,7 @@ public class ImagePlayerManager {
                 Parcel reply = Parcel.obtain();
                 data.writeInterfaceToken(IMAGE_TOKEN);
                 mIBinder.transact(TRANSACTION_SHOW_BUF,
-                                        data, reply, 0);
+                        data, reply, 0);
                 int result = reply.readInt();
                 reply.recycle();
                 data.recycle();
@@ -473,8 +473,9 @@ public class ImagePlayerManager {
     /**
      * Sets the {@link SurfaceHolder} to use for displaying the picture
      * that show in video layer
-     *
+     * <p>
      * Either a surface holder or surface must be set if a display is needed.
+     *
      * @param sh the SurfaceHolder to use for video display
      */
     public void setDisplay(SurfaceHolder sh) {

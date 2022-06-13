@@ -14,12 +14,16 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.RemoteException;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
+
 import android.util.ArrayMap;
 import android.util.Log;
 import android.text.TextUtils;
@@ -34,6 +38,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
@@ -59,11 +64,11 @@ public class HdrPriorityFragment extends SettingsPreferenceFragment implements O
     private static final int MSG_FRESH_UI = 0;
     private static final int MSG_COUNT_DOWN = 1;
 
-    private static final int DOLBY_VISION           = 0;
-    private static final int HDR10                  = 1;
-    private static final int SDR                    = 2;
-    public int preType                              = 0;
-    public int curType                              = 0;
+    private static final int DOLBY_VISION = 0;
+    private static final int HDR10 = 1;
+    private static final int SDR = 2;
+    public int preType = 0;
+    public int curType = 0;
 
     private OutputModeManager mOutputModeManager;
 
@@ -134,11 +139,11 @@ public class HdrPriorityFragment extends SettingsPreferenceFragment implements O
 
     private ArrayList<Action> getActions() {
         int mode = mOutputModeManager.getHdrPriority();
-        boolean customConfig       = mOutputModeManager.isSupportNetflix();
+        boolean customConfig = mOutputModeManager.isSupportNetflix();
         boolean displaydebugConfig = mOutputModeManager.isSupportDisplayDebug();
-        Log.d(TAG,"Current Hdr Priority: " + mode);
-        Log.d(TAG,"customConfig "+ customConfig);
-        Log.d(TAG,"displaydebugConfig "+ displaydebugConfig);
+        Log.d(TAG, "Current Hdr Priority: " + mode);
+        Log.d(TAG, "customConfig " + customConfig);
+        Log.d(TAG, "displaydebugConfig " + displaydebugConfig);
 
         ArrayList<Action> actions = new ArrayList<Action>();
         actions.add(new Action.Builder().key(Integer.toString(DOLBY_VISION)).title(getString(R.string.dolby_vision))
@@ -148,28 +153,28 @@ public class HdrPriorityFragment extends SettingsPreferenceFragment implements O
         //netflix not display sdr
         if (displaydebugConfig) {
             actions.add(new Action.Builder().key(Integer.toString(SDR)).title(getString(R.string.sdr))
-                .checked(mode == SDR).build());
+                    .checked(mode == SDR).build());
         }
 
         return actions;
     }
 
-    private void showDialog () {
+    private void showDialog() {
         if (mAlertDialog == null) {
-            LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view_dialog = inflater.inflate(R.layout.dialog_outputmode, null);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             mAlertDialog = builder.create();
             mAlertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
 
-            tx_title = (TextView)view_dialog.findViewById(R.id.dialog_title);
-            tx_content = (TextView)view_dialog.findViewById(R.id.dialog_content);
+            tx_title = (TextView) view_dialog.findViewById(R.id.dialog_title);
+            tx_content = (TextView) view_dialog.findViewById(R.id.dialog_content);
 
-            TextView button_cancel = (TextView)view_dialog.findViewById(R.id.dialog_cancel);
+            TextView button_cancel = (TextView) view_dialog.findViewById(R.id.dialog_cancel);
             button_cancel.setOnClickListener(this);
 
-            TextView button_ok = (TextView)view_dialog.findViewById(R.id.dialog_ok);
+            TextView button_ok = (TextView) view_dialog.findViewById(R.id.dialog_ok);
             button_ok.setOnClickListener(this);
         }
         mAlertDialog.show();
@@ -216,7 +221,9 @@ public class HdrPriorityFragment extends SettingsPreferenceFragment implements O
                 mHandler.sendEmptyMessage(MSG_COUNT_DOWN);
             }
         }
-    };
+    }
+
+    ;
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
@@ -243,27 +250,27 @@ public class HdrPriorityFragment extends SettingsPreferenceFragment implements O
     }
 
     private void recoverHdrPriority() {
-       mOutputModeManager.setHdrPriority(preType);
-       // need revert Preference display.
-       curPreference = prePreference;
-       mHandler.sendEmptyMessage(MSG_FRESH_UI);
+        mOutputModeManager.setHdrPriority(preType);
+        // need revert Preference display.
+        curPreference = prePreference;
+        mHandler.sendEmptyMessage(MSG_FRESH_UI);
     }
 
     public String getHDRPriorityString(int curType) {
         String HDRPriorityString;
         switch (curType) {
-            case 0 :
-               HDRPriorityString = getString(R.string.dolby_vision);
-               break;
-            case 1 :
-               HDRPriorityString = getString(R.string.hdr10);
-               break;
-            case 2 :
-               HDRPriorityString = getString(R.string.sdr);
-               break;
-            default :
-               HDRPriorityString = getString(R.string.dolby_vision);
-               break;
+            case 0:
+                HDRPriorityString = getString(R.string.dolby_vision);
+                break;
+            case 1:
+                HDRPriorityString = getString(R.string.hdr10);
+                break;
+            case 2:
+                HDRPriorityString = getString(R.string.sdr);
+                break;
+            default:
+                HDRPriorityString = getString(R.string.dolby_vision);
+                break;
         }
 
         return HDRPriorityString;

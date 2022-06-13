@@ -23,14 +23,14 @@ public class HdmiInManager {
         System.loadLibrary("hdmiin");
     }
 
-    public HdmiInManager(Context context){
+    public HdmiInManager(Context context) {
         mContext = context;
 
         mSystemControl = SystemControlManager.getInstance();
     }
 
     private boolean getHdmiInEnable() {
-        return mSystemControl.getPropertyBoolean("ro.sys.hdmiin.enable",false);
+        return mSystemControl.getPropertyBoolean("ro.sys.hdmiin.enable", false);
     }
 
     /**
@@ -195,7 +195,7 @@ public class HdmiInManager {
 
     /**
      * @hide
-    */
+     */
     public int setAmaudioMusicGain(int gain) {
         int ret = -1;
         if (getHdmiInEnable())
@@ -204,8 +204,8 @@ public class HdmiInManager {
     }
 
     /**
-        * @hide
-    */
+     * @hide
+     */
     public int setAmaudioLeftGain(int gain) {
         int ret = -1;
         if (getHdmiInEnable())
@@ -215,7 +215,7 @@ public class HdmiInManager {
 
     /**
      * @hide
-    */
+     */
     public int setAmaudioRightGain(int gain) {
         int ret = -1;
         if (getHdmiInEnable())
@@ -288,7 +288,7 @@ public class HdmiInManager {
     /**
      * @hide
      */
-    public int setCrop(int x, int y, int width, int height){
+    public int setCrop(int x, int y, int width, int height) {
         int ret = -1;
         if (getHdmiInEnable())
             ret = _setCrop(x, y, width, height);
@@ -344,38 +344,71 @@ public class HdmiInManager {
     }
 
     private native void _init(int source, boolean isFullscreen);
+
     private native void _deinit();
+
     private native int _displayHdmi();
+
     private native int _displayAndroid();
+
     private native void _displayPip(int x, int y, int width, int height);
+
     private native int _getHActive();
+
     private native int _getVActive();
+
     private native String _getHdmiInSize();
+
     private native boolean _isDvi();
+
     private native boolean _isPowerOn();
+
     private native boolean _isEnable();
+
     private native boolean _isInterlace();
+
     private native boolean _hdmiPlugged();
+
     private native boolean _hdmiSignal();
+
     private native void _enableAudio(int flag);
+
     private native int _handleAudio();
+
     private native void _startMonitorUsbHostBusThread();
+
     private native int _setAmaudioMusicGain(int gain);
+
     private native int _setAmaudioLeftGain(int gain);
+
     private native int _setAmaudioRightGain(int gain);
+
     private native void _setEnable(boolean enable);
+
     private native void _setMainWindowPosition(int x, int y);
+
     private native void _setMainWindowFull();
+
     private native int _setSourceType();
+
     private native void _displayOSD(int width, int height);
+
     private native boolean _isSurfaceAvailable(Surface surface);
+
     private native boolean _setPreviewWindow(Surface surface);
+
     private native int _setCrop(int x, int y, int width, int height);
+
     private native void _startMov();
+
     private native void _stopMov();
+
     private native void _pauseMov();
+
     private native void _resumeMov();
+
     private native void _startVideo();
+
     private native void _stopVideo();
 }
 

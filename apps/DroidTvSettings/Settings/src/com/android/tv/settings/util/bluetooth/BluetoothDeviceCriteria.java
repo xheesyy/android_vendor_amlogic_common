@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 /**
  * Class that decides whether a BluetoothDevice matches the parameters of the
  * type of device that is being looked for.
- *
+ * <p>
  * For example, does the device MAC address match the expected pattern and
  * does the device provide the types of services (audio, video, input, etc) that
  * are needed.
@@ -71,6 +71,7 @@ public class BluetoothDeviceCriteria {
 
     /**
      * Override this method to restrict the major device classes that match.
+     *
      * @param majorDeviceClass constant from {@link BluetoothClass.Device.Major}.
      */
     public boolean isMatchingMajorDeviceClass(int majorDeviceClass) {
@@ -79,6 +80,7 @@ public class BluetoothDeviceCriteria {
 
     /**
      * Override this method to restrict specific device classes that match.
+     *
      * @param majorMinorClass constant from {@link BluetoothClass.Device}
      */
     public boolean isMatchingDeviceClass(int majorMinorClass) {

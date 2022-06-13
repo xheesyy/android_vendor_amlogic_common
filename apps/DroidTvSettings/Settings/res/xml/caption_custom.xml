@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2016 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -79,7 +78,7 @@
         android:persistent="true"
         android:dependency="window_show"
         android:title="@string/captions_windowcolor"
-        android:summary="%s"/>
+        android:summary="%s" />
     <ListPreference
         android:key="window_opacity"
         android:persistent="true"

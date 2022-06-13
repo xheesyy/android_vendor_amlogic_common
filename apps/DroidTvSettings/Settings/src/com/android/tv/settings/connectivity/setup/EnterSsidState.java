@@ -109,7 +109,7 @@ public class EnterSsidState implements State {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             Context context = getActivity();
             CharSequence prevSsid = mUserChoiceInfo.getPageSummary(UserChoiceInfo.SSID);
             mAction = new GuidedAction.Builder(context)

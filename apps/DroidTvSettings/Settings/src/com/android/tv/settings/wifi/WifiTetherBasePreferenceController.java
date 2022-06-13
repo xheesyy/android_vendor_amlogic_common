@@ -19,14 +19,18 @@ package com.android.tv.settings.wifi;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
+
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import android.util.Log;
+
 import com.android.settingslib.core.AbstractPreferenceController;
 
 public abstract class WifiTetherBasePreferenceController extends AbstractPreferenceController
         implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "WifiTetherBasePreferenceController";
+
     public interface OnTetherConfigUpdateListener {
         void onTetherConfigUpdated();
     }
@@ -39,7 +43,7 @@ public abstract class WifiTetherBasePreferenceController extends AbstractPrefere
     protected Preference mPreference;
 
     public WifiTetherBasePreferenceController(Context context,
-            OnTetherConfigUpdateListener listener) {
+                                              OnTetherConfigUpdateListener listener) {
         super(context);
         mListener = listener;
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
@@ -54,15 +58,17 @@ public abstract class WifiTetherBasePreferenceController extends AbstractPrefere
 
     @Override
     public void displayPreference(PreferenceScreen screen) {
-        Log.d(TAG,"displayPreference"+getPreferenceKey());
+        Log.d(TAG, "displayPreference" + getPreferenceKey());
         super.displayPreference(screen);
         mPreference = screen.findPreference(getPreferenceKey());
         updateDisplay();
     }
+
     public void setEnabled(boolean enable) {
         if (mPreference != null) {
             mPreference.setEnabled(enable);
         }
     }
+
     public abstract void updateDisplay();
 }

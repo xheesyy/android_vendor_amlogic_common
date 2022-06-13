@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2015 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,8 +27,7 @@
         android:layout_centerVertical="true"
         android:maxHeight="80dp"
         android:maxWidth="80dp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <TextView
         android:id="@android:id/title"
@@ -37,8 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@android:id/progress"
         android:layout_toEndOf="@android:id/icon"
-        style="@style/SettingsStyle.TextAppearanceLarge"
-        />
+        style="@style/SettingsStyle.TextAppearanceLarge" />
 
     <ProgressBar
         android:id="@android:id/progress"
@@ -49,8 +46,7 @@
         android:layout_marginBottom="24dp"
         android:layout_marginTop="24dp"
         android:indeterminate="true"
-        style="@android:style/Widget.Material.ProgressBar.Horizontal"
-        />
+        style="@android:style/Widget.Material.ProgressBar.Horizontal" />
 
     <TextView
         android:id="@android:id/summary"
@@ -58,8 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@android:id/progress"
         android:layout_toEndOf="@android:id/icon"
-        style="@style/SettingsStyle.TextAppearanceMedium"
-        />
+        style="@style/SettingsStyle.TextAppearanceMedium" />
 
     <TextView
         android:id="@+id/extra"
@@ -68,6 +63,5 @@
         android:layout_below="@android:id/summary"
         android:layout_toEndOf="@android:id/icon"
         style="@style/SettingsStyle.TextAppearanceMedium"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 </RelativeLayout>

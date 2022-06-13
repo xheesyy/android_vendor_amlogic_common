@@ -24,6 +24,7 @@ import com.android.tv.settings.SettingsConstant;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+
 import androidx.leanback.widget.ArrayObjectAdapter;
 import androidx.leanback.widget.HeaderItem;
 
@@ -32,49 +33,49 @@ import androidx.leanback.widget.HeaderItem;
  */
 public class DisplayBrowseInfo extends BrowseInfoBase {
 
-	private static final boolean WIFI_DISPLAY_SUPPORTED = false;
-	private static final int HEADER_ID = 1;
-	private final Context mContext;
-	private final ArrayObjectAdapter mRow = new ArrayObjectAdapter();
-	private int mNextItemId;
+    private static final boolean WIFI_DISPLAY_SUPPORTED = false;
+    private static final int HEADER_ID = 1;
+    private final Context mContext;
+    private final ArrayObjectAdapter mRow = new ArrayObjectAdapter();
+    private int mNextItemId;
 
-	DisplayBrowseInfo(Context context) {
-		mContext = context;
-		mNextItemId = 0;
-		mHeaderItems.add(new HeaderItem(HEADER_ID, mContext.getString(R.string.device_display)));
-		mRows.put(HEADER_ID, mRow);
-	}
+    DisplayBrowseInfo(Context context) {
+        mContext = context;
+        mNextItemId = 0;
+        mHeaderItems.add(new HeaderItem(HEADER_ID, mContext.getString(R.string.device_display)));
+        mRows.put(HEADER_ID, mRow);
+    }
 
-	void init() {
-		mRow.clear();
+    void init() {
+        mRow.clear();
 
-		if (SettingsConstant.needDroidlogicMboxFeature(mContext)) {
-			if (SettingsConstant.needScreenResolutionFeture(mContext))
-				mRow.add(
-						new MenuItem.Builder().id(mNextItemId++).title(mContext.getString(R.string.device_outputmode))
-								.imageResourceId(mContext, R.drawable.ic_settings_display)
-								.intent(getIntent(SettingsConstant.PACKAGE,
-										SettingsConstant.PACKAGE + ".device.display.outputmode.OutputmodeActivity"))
-						.build());
+        if (SettingsConstant.needDroidlogicMboxFeature(mContext)) {
+            if (SettingsConstant.needScreenResolutionFeture(mContext))
+                mRow.add(
+                        new MenuItem.Builder().id(mNextItemId++).title(mContext.getString(R.string.device_outputmode))
+                                .imageResourceId(mContext, R.drawable.ic_settings_display)
+                                .intent(getIntent(SettingsConstant.PACKAGE,
+                                        SettingsConstant.PACKAGE + ".device.display.outputmode.OutputmodeActivity"))
+                                .build());
 
-			mRow.add(new MenuItem.Builder().id(mNextItemId++).title(mContext.getString(R.string.device_position))
-					.imageResourceId(mContext, R.drawable.ic_settings_overscan)
-					.intent(getIntent(SettingsConstant.PACKAGE,
-							SettingsConstant.PACKAGE + ".device.display.position.DisplayPositionActivity"))
-					.build());
-		}
-		if (SettingsConstant.needDroidlogicHdrFeature(mContext)) {
-			mRow.add(new MenuItem.Builder().id(mNextItemId++).title(mContext.getString(R.string.device_hdr))
-					.imageResourceId(mContext, R.drawable.ic_settings_hdr).intent(getIntent(SettingsConstant.PACKAGE,
-							SettingsConstant.PACKAGE + ".device.display.hdr.HdrSettingActivity"))
-					.build());
-		}
-	}
+            mRow.add(new MenuItem.Builder().id(mNextItemId++).title(mContext.getString(R.string.device_position))
+                    .imageResourceId(mContext, R.drawable.ic_settings_overscan)
+                    .intent(getIntent(SettingsConstant.PACKAGE,
+                            SettingsConstant.PACKAGE + ".device.display.position.DisplayPositionActivity"))
+                    .build());
+        }
+        if (SettingsConstant.needDroidlogicHdrFeature(mContext)) {
+            mRow.add(new MenuItem.Builder().id(mNextItemId++).title(mContext.getString(R.string.device_hdr))
+                    .imageResourceId(mContext, R.drawable.ic_settings_hdr).intent(getIntent(SettingsConstant.PACKAGE,
+                            SettingsConstant.PACKAGE + ".device.display.hdr.HdrSettingActivity"))
+                    .build());
+        }
+    }
 
-	private Intent getIntent(String targetPackage, String targetClass) {
-		ComponentName componentName = new ComponentName(targetPackage, targetClass);
-		Intent i = new Intent();
-		i.setComponent(componentName);
-		return i;
-	}
+    private Intent getIntent(String targetPackage, String targetClass) {
+        ComponentName componentName = new ComponentName(targetPackage, targetClass);
+        Intent i = new Intent();
+        i.setComponent(componentName);
+        return i;
+    }
 }

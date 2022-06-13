@@ -59,16 +59,24 @@ public class TextToSpeechFragment extends SettingsPreferenceFragment implements
     private static final String TAG = "TextToSpeechSettings";
     private static final boolean DBG = false;
 
-    /** Preference key for the engine settings preference */
+    /**
+     * Preference key for the engine settings preference
+     */
     private static final String KEY_ENGINE_SETTINGS = "tts_engine_settings";
 
-    /** Preference key for the "play TTS example" preference. */
+    /**
+     * Preference key for the "play TTS example" preference.
+     */
     private static final String KEY_PLAY_EXAMPLE = "tts_play_example";
 
-    /** Preference key for the TTS rate selection dialog. */
+    /**
+     * Preference key for the TTS rate selection dialog.
+     */
     private static final String KEY_DEFAULT_RATE = "tts_default_rate";
 
-    /** Preference key for the TTS status field. */
+    /**
+     * Preference key for the TTS status field.
+     */
     private static final String KEY_STATUS = "tts_status";
 
     /**
@@ -200,10 +208,12 @@ public class TextToSpeechFragment extends SettingsPreferenceFragment implements
         }
         mTts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
-            public void onStart(String utteranceId) {}
+            public void onStart(String utteranceId) {
+            }
 
             @Override
-            public void onDone(String utteranceId) {}
+            public void onDone(String utteranceId) {
+            }
 
             @Override
             public void onError(String utteranceId) {
@@ -243,7 +253,7 @@ public class TextToSpeechFragment extends SettingsPreferenceFragment implements
         for (TextToSpeech.EngineInfo engine : engines) {
             TtsEnginePreference enginePref =
                     new TtsEnginePreference(getPreferenceManager().getContext(), engine,
-                    this);
+                            this);
             mEnginePreferenceCategory.addPreference(enginePref);
         }
 
@@ -258,7 +268,8 @@ public class TextToSpeechFragment extends SettingsPreferenceFragment implements
             if (DBG) Log.d(TAG, "TTS engine for settings screen initialized.");
             checkDefaultLocale();
         } else {
-            if (DBG) Log.d(TAG, "TTS engine for settings screen failed to initialize successfully.");
+            if (DBG)
+                Log.d(TAG, "TTS engine for settings screen failed to initialize successfully.");
             updateWidgetState(false);
         }
     }
@@ -582,7 +593,7 @@ public class TextToSpeechFragment extends SettingsPreferenceFragment implements
             return;
         }
 
-        if (data == null){
+        if (data == null) {
             Log.e(TAG, "Engine failed voice data integrity check (null return)" +
                     mTts.getCurrentEngine());
             return;

@@ -126,7 +126,7 @@ public class BluetoothPairingDialog extends DialogActivity {
 
             case BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION:
                 int passkey =
-                    intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
+                        intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
                 if (passkey == BluetoothDevice.ERROR) {
                     Log.e(TAG, "Invalid Confirmation Passkey received, not showing any dialog");
                     finish();
@@ -144,7 +144,7 @@ public class BluetoothPairingDialog extends DialogActivity {
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY:
             case BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN:
                 int pairingKey =
-                    intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
+                        intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_KEY, BluetoothDevice.ERROR);
                 if (pairingKey == BluetoothDevice.ERROR) {
                     Log.e(TAG,
                             "Invalid Confirmation Passkey or PIN received, not showing any dialog");
@@ -356,7 +356,7 @@ public class BluetoothPairingDialog extends DialogActivity {
 
         @Override
         public @Nullable View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                Bundle savedInstanceState) {
+                                           Bundle savedInstanceState) {
             final View v = inflater.inflate(R.layout.bt_pairing_passkey_entry, container, false);
 
             final TextView titleText = (TextView) v.findViewById(R.id.title_text);
@@ -367,9 +367,9 @@ public class BluetoothPairingDialog extends DialogActivity {
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     String value = textInput.getText().toString();
                     if (actionId == EditorInfo.IME_ACTION_NEXT ||
-                        (actionId == EditorInfo.IME_NULL &&
-                         event.getAction() == KeyEvent.ACTION_DOWN)) {
-                        ((BluetoothPairingDialog)getActivity()).onPair(value);
+                            (actionId == EditorInfo.IME_NULL &&
+                                    event.getAction() == KeyEvent.ACTION_DOWN)) {
+                        ((BluetoothPairingDialog) getActivity()).onPair(value);
                     }
                     return true;
                 }
@@ -419,7 +419,7 @@ public class BluetoothPairingDialog extends DialogActivity {
         private int mType;
 
         public static ConfirmationDialogFragment newInstance(BluetoothDevice device,
-                String pairingKey, int type) {
+                                                             String pairingKey, int type) {
             final ConfirmationDialogFragment fragment = new ConfirmationDialogFragment();
             final Bundle b = new Bundle(3);
             b.putParcelable(ARG_DEVICE, device);
@@ -442,7 +442,7 @@ public class BluetoothPairingDialog extends DialogActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             final View v = inflater.inflate(R.layout.bt_pairing_passkey_display, container, false);
 
             final TextView titleText = (TextView) v.findViewById(R.id.title);

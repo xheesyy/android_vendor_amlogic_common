@@ -9,7 +9,7 @@ import android.os.SystemProperties;
 import android.util.Log;
 
 public class FastBootComplete extends BroadcastReceiver {
-    private static final String TAG             = "FastBootComplete";
+    private static final String TAG = "FastBootComplete";
 
     @Override
     public void onReceive(Context context, Intent intent) {

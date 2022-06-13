@@ -107,7 +107,7 @@ public class ProxyPortState implements State {
             String title = getString(R.string.proxy_port_hint);
             if (mAdvancedOptionsFlowInfo.containsPage(AdvancedOptionsFlowInfo.PROXY_PORT)) {
                 title = mAdvancedOptionsFlowInfo.get(AdvancedOptionsFlowInfo.PROXY_PORT);
-            }  else if (mAdvancedOptionsFlowInfo.getInitialProxyInfo() != null) {
+            } else if (mAdvancedOptionsFlowInfo.getInitialProxyInfo() != null) {
                 title = Integer.toString(mAdvancedOptionsFlowInfo.getInitialProxyInfo().getPort());
             }
 

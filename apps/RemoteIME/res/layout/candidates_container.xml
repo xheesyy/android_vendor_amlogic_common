@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2009 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -13,11 +12,50 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<com.droidlogic.inputmethod.remote.CandidatesContainer xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/candidates_container" android:background="@drawable/cands_container_bg" android:orientation="horizontal" android:layout_width="0dip" android:layout_height="0dip" android:focusable="true" android:focusableInTouchMode="true">
-  <ImageButton android:id="@+id/arrow_left_btn" android:background="@drawable/arrow_bg" android:src="@drawable/arrow_left" android:layout_height="match_parent" android:layout_width="30dip" android:clickable="true" android:layout_alignParentLeft="true" />
-  <ImageButton android:id="@+id/arrow_right_btn" android:background="@drawable/arrow_bg" android:src="@drawable/arrow_right" android:layout_width="30dip" android:layout_height="match_parent" android:clickable="true" android:layout_alignParentRight="true" />
-  <ViewFlipper android:id="@+id/candidate_flipper" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_toLeftOf="@id/arrow_right_btn" android:layout_toRightOf="@id/arrow_left_btn">
-    <view class="com.droidlogic.inputmethod.remote.CandidateView" android:id="@+id/candidate_view1" android:layout_width="match_parent" android:layout_height="match_parent" />
-    <view class="com.droidlogic.inputmethod.remote.CandidateView" android:id="@+id/candidate_view2" android:layout_width="match_parent" android:layout_height="match_parent" />
-  </ViewFlipper>
+<com.droidlogic.inputmethod.remote.CandidatesContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/candidates_container"
+    android:background="@drawable/cands_container_bg"
+    android:orientation="horizontal"
+    android:layout_width="0dip"
+    android:layout_height="0dip"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageButton
+        android:id="@+id/arrow_left_btn"
+        android:background="@drawable/arrow_bg"
+        android:src="@drawable/arrow_left"
+        android:layout_height="match_parent"
+        android:layout_width="30dip"
+        android:clickable="true"
+        android:layout_alignParentLeft="true" />
+
+    <ImageButton
+        android:id="@+id/arrow_right_btn"
+        android:background="@drawable/arrow_bg"
+        android:src="@drawable/arrow_right"
+        android:layout_width="30dip"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:layout_alignParentRight="true" />
+
+    <ViewFlipper
+        android:id="@+id/candidate_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/arrow_right_btn"
+        android:layout_toRightOf="@id/arrow_left_btn">
+
+        <view
+            class="com.droidlogic.inputmethod.remote.CandidateView"
+            android:id="@+id/candidate_view1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <view
+            class="com.droidlogic.inputmethod.remote.CandidateView"
+            android:id="@+id/candidate_view2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ViewFlipper>
 </com.droidlogic.inputmethod.remote.CandidatesContainer>

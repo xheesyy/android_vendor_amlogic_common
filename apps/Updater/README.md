@@ -7,7 +7,6 @@ sample client for `update_engine` to install A/B (seamless) updates.
 A/B (seamless) update is available since Android Nougat (API 24), but this sample
 targets the latest android.
 
-
 ## Workflow
 
 ABUpdater app shows list of available updates on the UI. User is allowed
@@ -15,7 +14,6 @@ to select an update and apply it to the device. App shows installation progress,
 logs can be found in `adb logcat`. User can stop or reset an update. Resetting
 the update requests update engine to cancel any ongoing update, and revert
 if the update has been applied. Stopping does not revert the applied update.
-
 
 ## Update Config file
 
@@ -50,7 +48,6 @@ become active, and user can manually set updated partition as the active slot.
 Config files can be generated using `tools/gen_update_config.py`.
 Running `./tools/gen_update_config.py --help` shows usage of the script.
 
-
 ## Sample App State vs UpdateEngine Status
 
 UpdateEngine provides status for different stages of update application
@@ -77,7 +74,6 @@ If they doesn't match, sample app calls `applyPayload` again with the same
 parameters, and handles update completion properly using `onPayloadApplicationCompleted`
 callback. The second problem is solved by adding `PAUSED` updater state.
 
-
 ## Sample App UI
 
 ### Text fields
@@ -94,13 +90,12 @@ callback. The second problem is solved by adding `PAUSED` updater state.
 - `Apply` - applies selected update config.
 - `Stop` - cancel running update, calls `UpdateEngine#cancel`.
 - `Reset` - reset update, calls `UpdateEngine#resetStatus`, can be called
-            only when update is not running.
+  only when update is not running.
 - `Suspend` - suspend running update, uses `UpdateEngine#cancel`.
 - `Resume` - resumes suspended update, uses `UpdateEngine#applyPayload`.
 - `Switch Slot` - if `ab_config.force_switch_slot` config set true,
-            this button will be enabled after payload is applied,
-            to switch A/B slot on next reboot.
-
+  this button will be enabled after payload is applied,
+  to switch A/B slot on next reboot.
 
 ## Sending HTTP headers from UpdateEngine
 
@@ -111,7 +106,6 @@ as of writing this sample app, these headers are `Authorization` and `User-Agent
 
 `android.os.UpdateEngine#applyPayload` contains information on
 which HTTP headers are supported.
-
 
 ## Used update_engine APIs
 
@@ -153,7 +147,6 @@ except when update_engine fails to initialize.
 
 Called whenever an update attempt is completed or failed.
 
-
 ## Running on a device
 
 The commands are expected to be run from `$ANDROID_BUILD_TOP` and for demo
@@ -184,7 +177,7 @@ privileged system app, so it's granted the required permissions to access
    e.g. add a line containing `PRODUCT_PACKAGES += ABUpdater`
    to `device/google/marlin/device-common.mk`.
 3. [Whitelist the sample app](https://source.android.com/devices/tech/config/perms-whitelist)
-   * Add
+    * Add
    ```
     <privapp-permissions package="com.droidlogic.android.abupdater">
         <permission name="android.permission.ACCESS_CACHE_FILESYSTEM"/>
@@ -192,7 +185,8 @@ privileged system app, so it's granted the required permissions to access
    ```
    to `frameworks/base/data/etc/privapp-permissions-platform.xml`
 4. Add `privileged: true` to ABUpdater
-   [building rule](https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/master/updater_sample/Android.bp).
+   [building rule](https://android.googlesource.com/platform/bootable/recovery/+/refs/heads/master/updater_sample/Android.bp)
+   .
 5. Build sample app `make -j ABUpdater`.
 6. Build Android `make -j`
 7. [Flash the device](https://source.android.com/setup/build/running)
@@ -203,13 +197,12 @@ privileged system app, so it's granted the required permissions to access
    `chcon -R u:object_r:ota_package_file:s0 /data/my-sample-ota-builds-dir`
 10. Run the sample app.
 
-
 ## Development
 
 - [x] Create a UI with list of configs, current version,
-      control buttons, progress bar and log viewer
+  control buttons, progress bar and log viewer
 - [x] Add `PayloadSpec` and `PayloadSpecs` for working with
-      update zip file
+  update zip file
 - [x] Add `UpdateConfig` for working with json config files
 - [x] Add applying non-streaming update
 - [x] Prepare streaming update (partially downloading package)
@@ -223,7 +216,6 @@ privileged system app, so it's granted the required permissions to access
 - [x] Add smart update completion detection using onStatusUpdate
 - [x] Add pause/resume demo
 - [x] Verify system partition checksum for package
-
 
 ## Running tests
 
@@ -243,17 +235,14 @@ The commands are expected to be run from `$ANDROID_BUILD_TOP`.
      com.droidlogic.android.abupdater.tests/android.support.test.runner.AndroidJUnitRunner
    ```
 
-
 ## Accessing `android.os.UpdateEngine` API
 
 `android.os.UpdateEngine` APIs are marked as `@SystemApi`, meaning only system
 apps can access them.
 
-
 ## Getting read/write access to `/data/ota_package/`
 
 Access to cache filesystem is granted only to system apps.
-
 
 ## Setting SELinux mode to permissive (0)
 
@@ -263,7 +252,6 @@ local$ adb shell
 android# setenforce 0
 android# getenforce
 ```
-
 
 ## License
 

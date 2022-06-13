@@ -19,7 +19,9 @@ package com.droidlogic.updater.util;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+
 import androidx.core.app.ActivityCompat;
+
 import android.os.SystemProperties;
 
 public class PermissionUtils {

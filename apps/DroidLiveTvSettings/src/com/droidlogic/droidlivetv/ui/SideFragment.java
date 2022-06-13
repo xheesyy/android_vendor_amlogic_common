@@ -39,10 +39,10 @@ public abstract class SideFragment extends Fragment {
 
     private static final int RECYCLED_VIEW_POOL_SIZE = 7;
     private static final int[] PRELOADED_VIEW_IDS = {
-        R.layout.option_item_radio_button//,
-        //R.layout.option_item_channel_lock,
-        //R.layout.option_item_check_box,
-        //R.layout.option_item_channel_check
+            R.layout.option_item_radio_button//,
+            //R.layout.option_item_channel_lock,
+            //R.layout.option_item_check_box,
+            //R.layout.option_item_channel_check
     };
 
     private static RecyclerView.RecycledViewPool sRecycledViewPool;
@@ -64,9 +64,9 @@ public abstract class SideFragment extends Fragment {
     }
 
     /**
-     * @param hideKey the KeyCode used to hide the fragment
+     * @param hideKey      the KeyCode used to hide the fragment
      * @param debugHideKey the KeyCode used to hide the fragment if
-     *            {@link SystemProperties#USE_DEBUG_KEYS}.
+     *                     {@link SystemProperties#USE_DEBUG_KEYS}.
      */
     public SideFragment(int Key) {
         this.mKeycode = Key;
@@ -82,7 +82,7 @@ public abstract class SideFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         if (sRecycledViewPool == null) {
             // sRecycledViewPool should be initialized by calling preloadRecycledViews()
             // before the entering animation of this fragment starts,
@@ -209,6 +209,7 @@ public abstract class SideFragment extends Fragment {
     protected abstract String getTitle();
 
     public abstract String getTrackerLabel();
+
     protected abstract List<Item> getItemList();
 
     public interface SideFragmentListener {

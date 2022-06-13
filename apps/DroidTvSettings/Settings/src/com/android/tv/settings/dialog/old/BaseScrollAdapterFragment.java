@@ -53,7 +53,7 @@ public class BaseScrollAdapterFragment implements OnScrollListener {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.settings_list, container, false);
         mScrollAdapterView = null;
         return v;
@@ -137,7 +137,7 @@ public class BaseScrollAdapterFragment implements OnScrollListener {
 
     /**
      * Sets {@link BaseScrollAdapterFragment#mFadedOut}
-     *
+     * <p>
      * {@link BaseScrollAdapterFragment#mFadedOut} is true, iff
      * {@link BaseScrollAdapterFragment#mSelectorView} has an alpha of 0
      * (faded out). If false the view either has an alpha of 1 (visible) or
@@ -153,7 +153,7 @@ public class BaseScrollAdapterFragment implements OnScrollListener {
 
         @Override
         public void onAnimationStart(Animator animation) {
-            if(!mFadingOut) {
+            if (!mFadingOut) {
                 mFadedOut = false;
             }
         }
@@ -180,7 +180,7 @@ public class BaseScrollAdapterFragment implements OnScrollListener {
     // we dim the last highlighted view so that while a user is scrolling, nothing is highlighted.
     @Override
     public synchronized void onScrolled(View view, int position, float mainPosition,
-            float secondPosition) {
+                                        float secondPosition) {
         boolean hasFocus = (mainPosition == 0.0);
         if (hasFocus) {
             if (view != null) {

@@ -23,6 +23,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.droidlogic.audioservice.services.IAudioSystemCmdService;
 
 public class AudioSystemCmdManager {
@@ -32,32 +33,32 @@ public class AudioSystemCmdManager {
     private IAudioSystemCmdService mAudioSystemCmdService = null;
     private Context mContext;
 
-    public static final int AUDIO_SERVICE_CMD_START_DECODE                          = 1;
-    public static final int AUDIO_SERVICE_CMD_PAUSE_DECODE                          = 2;
-    public static final int AUDIO_SERVICE_CMD_RESUME_DECODE                         = 3;
-    public static final int AUDIO_SERVICE_CMD_STOP_DECODE                           = 4;
-    public static final int AUDIO_SERVICE_CMD_SET_DECODE_AD                         = 5;
-    public static final int AUDIO_SERVICE_CMD_SET_VOLUME                            = 6;
-    public static final int AUDIO_SERVICE_CMD_SET_MUTE                              = 7;
-    public static final int AUDIO_SERVICE_CMD_SET_OUTPUT_MODE                       = 8;
-    public static final int AUDIO_SERVICE_CMD_SET_PRE_GAIN                          = 9;
-    public static final int AUDIO_SERVICE_CMD_SET_PRE_MUTE                          = 10;
-    public static final int AUDIO_SERVICE_CMD_OPEN_DECODER                          = 12;
-    public static final int AUDIO_SERVICE_CMD_CLOSE_DECODER                         = 13;
-    public static final int AUDIO_SERVICE_CMD_SET_DEMUX_INFO                        = 14;
-    public static final int AUDIO_SERVICE_CMD_SET_SECURITY_MEM_LEVEL                = 15;
-    public static final int AUDIO_SERVICE_CMD_SET_HAS_VIDEO                         = 16;
-    public static final int AUDIO_SERVICE_CMD_SET_MEDIA_SYCN_ID                     = 17;
+    public static final int AUDIO_SERVICE_CMD_START_DECODE = 1;
+    public static final int AUDIO_SERVICE_CMD_PAUSE_DECODE = 2;
+    public static final int AUDIO_SERVICE_CMD_RESUME_DECODE = 3;
+    public static final int AUDIO_SERVICE_CMD_STOP_DECODE = 4;
+    public static final int AUDIO_SERVICE_CMD_SET_DECODE_AD = 5;
+    public static final int AUDIO_SERVICE_CMD_SET_VOLUME = 6;
+    public static final int AUDIO_SERVICE_CMD_SET_MUTE = 7;
+    public static final int AUDIO_SERVICE_CMD_SET_OUTPUT_MODE = 8;
+    public static final int AUDIO_SERVICE_CMD_SET_PRE_GAIN = 9;
+    public static final int AUDIO_SERVICE_CMD_SET_PRE_MUTE = 10;
+    public static final int AUDIO_SERVICE_CMD_OPEN_DECODER = 12;
+    public static final int AUDIO_SERVICE_CMD_CLOSE_DECODER = 13;
+    public static final int AUDIO_SERVICE_CMD_SET_DEMUX_INFO = 14;
+    public static final int AUDIO_SERVICE_CMD_SET_SECURITY_MEM_LEVEL = 15;
+    public static final int AUDIO_SERVICE_CMD_SET_HAS_VIDEO = 16;
+    public static final int AUDIO_SERVICE_CMD_SET_MEDIA_SYCN_ID = 17;
 
     //audio ad
-    public static final int AUDIO_SERVICE_CMD_AD_DUAL_SUPPORT                       = 20;
-    public static final int AUDIO_SERVICE_CMD_AD_MIX_SUPPORT                        = 21;
-    public static final int AUDIO_SERVICE_CMD_AD_MIX_LEVEL                          = 22;
-    public static final int AUDIO_SERVICE_CMD_AD_SET_MAIN                           = 23;
-    public static final int AUDIO_SERVICE_CMD_AD_SET_ASSOCIATE                      = 24;
+    public static final int AUDIO_SERVICE_CMD_AD_DUAL_SUPPORT = 20;
+    public static final int AUDIO_SERVICE_CMD_AD_MIX_SUPPORT = 21;
+    public static final int AUDIO_SERVICE_CMD_AD_MIX_LEVEL = 22;
+    public static final int AUDIO_SERVICE_CMD_AD_SET_MAIN = 23;
+    public static final int AUDIO_SERVICE_CMD_AD_SET_ASSOCIATE = 24;
 
-    public static final int AUDIO_SERVICE_CMD_SET_MEDIA_PRESENTATION_ID             = 25;
-    public static final int AUDIO_SERVICE_CMD_SET_AUDIO_PATCH_MANAGE_MODE           = 26;
+    public static final int AUDIO_SERVICE_CMD_SET_MEDIA_PRESENTATION_ID = 25;
+    public static final int AUDIO_SERVICE_CMD_SET_AUDIO_PATCH_MANAGE_MODE = 26;
 
     private static AudioSystemCmdManager mInstance;
 
@@ -89,11 +90,12 @@ public class AudioSystemCmdManager {
                     if (mIsBind || retry <= 0) {
                         break;
                     }
-                    retry --;
+                    retry--;
                     Thread.sleep(500);
                 }
             }
-        } catch (InterruptedException e){}
+        } catch (InterruptedException e) {
+        }
     }
 
     private ServiceConnection serConn = new ServiceConnection() {
@@ -103,6 +105,7 @@ public class AudioSystemCmdManager {
             mAudioSystemCmdService = null;
 
         }
+
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mAudioSystemCmdService = IAudioSystemCmdService.Stub.asInterface(service);
@@ -115,7 +118,7 @@ public class AudioSystemCmdManager {
     }
 
     public static String AudioCmdToString(int cmd) {
-        String temp = "["+cmd+"]";
+        String temp = "[" + cmd + "]";
         switch (cmd) {
             case AUDIO_SERVICE_CMD_START_DECODE:
                 return temp + "START_DECODE";

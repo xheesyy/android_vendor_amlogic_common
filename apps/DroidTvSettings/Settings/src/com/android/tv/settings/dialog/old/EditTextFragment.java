@@ -63,7 +63,7 @@ public class EditTextFragment extends Fragment
     }
 
     public static EditTextFragment newInstance(String description, String initialText,
-            boolean password) {
+                                               boolean password) {
         EditTextFragment fragment = new EditTextFragment();
         Bundle args = new Bundle();
         args.putString(EXTRA_DESC, description);
@@ -84,7 +84,7 @@ public class EditTextFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View view = null;
         EditText editText = null;
         int layoutResId = getArguments().getInt(EXTRA_LAYOUT_RES_ID, R.layout.edittext_fragment);

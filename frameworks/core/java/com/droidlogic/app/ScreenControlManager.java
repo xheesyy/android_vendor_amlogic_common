@@ -1,19 +1,19 @@
 /*
-**
-** Copyright 2008, The Android Open Source Project
-**
-** Licensed under the Apache License, Version 2.0 (the "License");
-** you may not use this file except in compliance with the License.
-** You may obtain a copy of the License at
-**
-**     http://www.apache.org/licenses/LICENSE-2.0
-**
-** Unless required by applicable law or agreed to in writing, software
-** distributed under the License is distributed on an "AS IS" BASIS,
-** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-** See the License for the specific language governing permissions and
-** limitations under the License.
-*/
+ **
+ ** Copyright 2008, The Android Open Source Project
+ **
+ ** Licensed under the Apache License, Version 2.0 (the "License");
+ ** you may not use this file except in compliance with the License.
+ ** You may obtain a copy of the License at
+ **
+ **     http://www.apache.org/licenses/LICENSE-2.0
+ **
+ ** Unless required by applicable law or agreed to in writing, software
+ ** distributed under the License is distributed on an "AS IS" BASIS,
+ ** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ ** See the License for the specific language governing permissions and
+ ** limitations under the License.
+ */
 
 package com.droidlogic.app;
 
@@ -22,8 +22,11 @@ import android.os.HwBinder;
 import android.os.RemoteException;
 import android.graphics.Rect;
 import android.graphics.Bitmap;
+
 import java.util.NoSuchElementException;
+
 import android.util.Log;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.io.FileNotFoundException;
@@ -31,6 +34,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
+
 import android.os.Build;
 import android.content.Intent;
 import android.content.BroadcastReceiver;
@@ -52,9 +56,13 @@ public class ScreenControlManager {
     }
 
     private native void native_ConnectScreenControl();
+
     private native int native_ScreenCap(int left, int top, int right, int bottom, int width, int height, int sourceType, String filename);
+
     private native int native_ScreenRecord(int width, int height, int frameRate, int bitRate, int limitTimeSec, int sourceType, String filename);
+
     private native byte[] native_ScreenCapBuffer(int left, int top, int right, int bottom, int width, int height, int sourceType);
+
     private native void native_ForceStop();
 
     public ScreenControlManager(Context context) {
@@ -69,13 +77,13 @@ public class ScreenControlManager {
     }
 
     public static ScreenControlManager getInstance() {
-         if (null == mInstance) mInstance = new ScreenControlManager();
-         return mInstance;
+        if (null == mInstance) mInstance = new ScreenControlManager();
+        return mInstance;
     }
 
     public static ScreenControlManager getInstance(Context ctx) {
-         if (null == mInstance) mInstance = new ScreenControlManager(ctx);
-         return mInstance;
+        if (null == mInstance) mInstance = new ScreenControlManager(ctx);
+        return mInstance;
     }
 
     private void connectToProxy() {
@@ -106,7 +114,8 @@ public class ScreenControlManager {
                         Log.i(TAG, "Get action [Shutdown]");
                         native_ForceStop();
                         break;
-                    default: break;
+                    default:
+                        break;
                 }
             }
         };
@@ -131,7 +140,7 @@ public class ScreenControlManager {
     }
 
     public int startScreenRecord(int width, int height, int frameRate, int bitRate, int limitTimeSec, int sourceType, String filename) {
-        Log.d(TAG, "startScreenRecord wdith:" + width + ",height:"+ height + ",frameRate:" + frameRate + ",bitRate:" + bitRate + ",limitTimeSec:" + limitTimeSec + ",sourceType:" + sourceType + ",filename:" + filename);
+        Log.d(TAG, "startScreenRecord wdith:" + width + ",height:" + height + ",frameRate:" + frameRate + ",bitRate:" + bitRate + ",limitTimeSec:" + limitTimeSec + ",sourceType:" + sourceType + ",filename:" + filename);
         synchronized (mLock) {
             try {
                 return native_ScreenRecord(width, height, frameRate, bitRate, limitTimeSec, sourceType, filename);
@@ -143,7 +152,7 @@ public class ScreenControlManager {
     }
 
     public int startScreenCap(int left, int top, int right, int bottom, int width, int height, int sourceType, String filename) {
-        Log.d(TAG, "startScreenCap left:" + left + ",top:"+ top + ",right:" + right + ",bottom:" + bottom + ",width:" + width + ",height:" + height + ",sourceType:" + sourceType + ",filename:" + filename);
+        Log.d(TAG, "startScreenCap left:" + left + ",top:" + top + ",right:" + right + ",bottom:" + bottom + ",width:" + width + ",height:" + height + ",sourceType:" + sourceType + ",filename:" + filename);
         int result = 0;
         synchronized (mLock) {
             if (sourceType == 2) { // osd only
@@ -151,7 +160,7 @@ public class ScreenControlManager {
                 try {
                     Class clz = Class.forName("android.view.SurfaceControl");
                     Method screenshot = clz.getMethod("screenshot", Rect.class, int.class, int.class, int.class);
-                    Bitmap mBitmap = (Bitmap)screenshot.invoke(null, new Rect(left, top, right, bottom), width, height, 0);
+                    Bitmap mBitmap = (Bitmap) screenshot.invoke(null, new Rect(left, top, right, bottom), width, height, 0);
                     //mBitmap = SurfaceControl.screenshot(new Rect(left, top, right, bottom), width, height, 0);
                     if (mBitmap != null) {
                         // Convert to a software bitmap so it can be set in an ImageView.
@@ -184,7 +193,7 @@ public class ScreenControlManager {
     }
 
     public byte[] startScreenCapBuffer(int left, int top, int right, int bottom, int width, int height, int sourceType) {
-        Log.d(TAG, "startScreenCapBuffer left:" + left + ",top:"+ top + ",right:" + right + ",bottom:" + bottom + ",width:" + width + ",height:" + height + ",sourceType:" + sourceType);
+        Log.d(TAG, "startScreenCapBuffer left:" + left + ",top:" + top + ",right:" + right + ",bottom:" + bottom + ",width:" + width + ",height:" + height + ",sourceType:" + sourceType);
         ByteBuffer byteBuffer;
         byte[] byteArray = null;
         synchronized (mLock) {
@@ -192,7 +201,7 @@ public class ScreenControlManager {
                 try {
                     Class clz = Class.forName("android.view.SurfaceControl");
                     Method screenshot = clz.getMethod("screenshot", Rect.class, int.class, int.class, int.class);
-                    Bitmap mBitmap = (Bitmap)screenshot.invoke(null, new Rect(left, top, right, bottom), width, height, 0);
+                    Bitmap mBitmap = (Bitmap) screenshot.invoke(null, new Rect(left, top, right, bottom), width, height, 0);
                     //mBitmap = SurfaceControl.screenshot(new Rect(left, top, right, bottom), width, height, 0);
                     if (mBitmap != null) {
                         // Convert to a software bitmap so it can be set in an ImageView.
@@ -216,8 +225,7 @@ public class ScreenControlManager {
         return null;
     }
 
-    public void release()
-    {
+    public void release() {
         Log.d(TAG, "release()");
         unregisterReceiver();
     }

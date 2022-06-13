@@ -1,11 +1,11 @@
 /*
-* Copyright (c) 2014 Amlogic, Inc. All rights reserved.
-*
-* This source code is subject to the terms and conditions defined in the
-* file 'LICENSE' which is part of this source code package.
-*
-* Description:
-*/
+ * Copyright (c) 2014 Amlogic, Inc. All rights reserved.
+ *
+ * This source code is subject to the terms and conditions defined in the
+ * file 'LICENSE' which is part of this source code package.
+ *
+ * Description:
+ */
 package com.droidlogic.videoplayer;
 
 import android.app.Activity;
@@ -25,8 +25,8 @@ import java.util.List;
 
 
 public class OnlineActivity extends Activity implements View.OnClickListener {
-	private static String TAG = "OnlineActivity";
-	private boolean DEBUG = true;
+    private static String TAG = "OnlineActivity";
+    private boolean DEBUG = true;
 
     private ExtEditText urlEditText;
     private Button playBtn;
@@ -38,33 +38,35 @@ public class OnlineActivity extends Activity implements View.OnClickListener {
         initView();
     }
 
-    private void LOGI (String tag, String msg) {
-        if (DEBUG) { Log.i (tag, msg); }
+    private void LOGI(String tag, String msg) {
+        if (DEBUG) {
+            Log.i(tag, msg);
+        }
     }
 
-    private void initView(){
+    private void initView() {
         urlEditText = (ExtEditText) findViewById(R.id.et_url);
         playBtn = (Button) findViewById(R.id.btn_play);
         playBtn.setOnClickListener(this);
     }
 
-    private boolean isValidUrl(String url){
+    private boolean isValidUrl(String url) {
         if (url != null) {
             if (url.startsWith("http:")
-             || url.startsWith("udp:")
-             || url.startsWith("rtsp:")
-             || url.startsWith("rtp:")
-             || url.startsWith("https:")) {
-                 return true;
+                    || url.startsWith("udp:")
+                    || url.startsWith("rtsp:")
+                    || url.startsWith("rtp:")
+                    || url.startsWith("https:")) {
+                return true;
             }
         }
         return false;
     }
 
-    private void makeTextToast(String text){
-        Toast toast = Toast.makeText (OnlineActivity.this, text, Toast.LENGTH_SHORT);
-        toast.setGravity (Gravity.BOTTOM,0, 0);
-        toast.setDuration (0x00000001);
+    private void makeTextToast(String text) {
+        Toast toast = Toast.makeText(OnlineActivity.this, text, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.BOTTOM, 0, 0);
+        toast.setDuration(0x00000001);
         toast.show();
     }
 
@@ -77,16 +79,16 @@ public class OnlineActivity extends Activity implements View.OnClickListener {
                 String defaultUri = urlEditText.getText().toString();
                 if (isValidUrl(defaultUri)) {
                     List<String> paths = new ArrayList<String>();
-                    paths.add (defaultUri);
-                    PlayList.getinstance().setlist (paths, 0);
+                    paths.add(defaultUri);
+                    PlayList.getinstance().setlist(paths, 0);
                     Intent intent = new Intent();
-                    intent.setClass (OnlineActivity.this, VideoPlayer.class);
+                    intent.setClass(OnlineActivity.this, VideoPlayer.class);
                     startActivity(intent);
                 } else {
                     makeTextToast("Invalid Url");
                 }
                 break;
             default:
-      }
-  }
+        }
+    }
 }

@@ -220,7 +220,7 @@ public final class Program implements Comparable<Program> {
     }
 
     public boolean matchsWithoutDescription(Program program) {
-         return mChannelId == program.mChannelId
+        return mChannelId == program.mChannelId
                 && mStartTimeUtcMillis == program.mStartTimeUtcMillis
                 && mEndTimeUtcMillis == program.mEndTimeUtcMillis
                 && Objects.equals(mTitle, program.mTitle)
@@ -234,7 +234,7 @@ public final class Program implements Comparable<Program> {
                 && mSeasonNumber == program.mSeasonNumber
                 && mEpisodeNumber == program.mEpisodeNumber
                 && Objects.equals(contentRatingsToString(mContentRatings),
-                    contentRatingsToString(program.mContentRatings));
+                contentRatingsToString(program.mContentRatings));
     }
 
     @Override
@@ -253,8 +253,8 @@ public final class Program implements Comparable<Program> {
                 .append(", episodeTitle=").append(mEpisodeTitle)
                 .append(", seasonNumber=").append(mSeasonNumber)
                 .append(", episodeNumber=").append(mEpisodeNumber)
-                .append(", startTimeUtcSec=").append(mStartTimeUtcMillis/1000)
-                .append(", endTimeUtcSec=").append(mEndTimeUtcMillis/1000)
+                .append(", startTimeUtcSec=").append(mStartTimeUtcMillis / 1000)
+                .append(", endTimeUtcSec=").append(mEndTimeUtcMillis / 1000)
                 .append(", videoWidth=").append(mVideoWidth)
                 .append(", videoHeight=").append(mVideoHeight)
                 .append(", contentRatings=").append(mContentRatings)
@@ -264,7 +264,7 @@ public final class Program implements Comparable<Program> {
                 .append(", genres=").append(mCanonicalGenres)
                 .append(", isAppointed=").append(mIsAppointed)
                 .append(", scheduledRecordStatus=").append(mScheduledRecordStatus)
-                .append(", ext=").append(mVersion).append(":"+mEitExt);
+                .append(", ext=").append(mVersion).append(":" + mEitExt);
         return builder.append("}").toString();
     }
 
@@ -475,7 +475,8 @@ public final class Program implements Comparable<Program> {
                 }
                 if (DEBUG) Log.d(TAG, "blob to String = " + strValue);
             } else {
-                if (DEBUG) Log.d(TAG, "COLUMN_INTERNAL_PROVIDER_DATA other type = " + cursor.getType(index));
+                if (DEBUG)
+                    Log.d(TAG, "COLUMN_INTERNAL_PROVIDER_DATA other type = " + cursor.getType(index));
             }
             builder.setInternalProviderData(strValue);
         }
@@ -496,7 +497,7 @@ public final class Program implements Comparable<Program> {
             builder.setVersion(cursor.getString(index));
         }
         index = cursor.getColumnIndex(TvContract.Programs.COLUMN_INTERNAL_PROVIDER_FLAG3);
-        if (index >=0 && !cursor.isNull(index)) {
+        if (index >= 0 && !cursor.isNull(index)) {
             builder.setEitExt(cursor.getString(index));
         }
         return builder.build();

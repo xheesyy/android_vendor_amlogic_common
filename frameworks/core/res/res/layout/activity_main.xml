@@ -7,20 +7,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="#000000"
-    tools:context="com.droidlogic.btpair.BtSetupActivity" >
+    tools:context="com.droidlogic.btpair.BtSetupActivity">
 
     <TextView
         android:id="@+id/TiptextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"   />
-     <TextView
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
         android:id="@+id/ExittextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:textAppearance="?android:attr/textAppearanceLarge"  />
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -29,11 +30,12 @@
         android:layout_below="@+id/TiptextView"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/remote_marginStart" />
+
     <ImageView
         android:id="@+id/imageView1"
         android:src="@drawable/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"  />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

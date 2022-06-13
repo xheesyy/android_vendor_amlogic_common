@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2016 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,15 +32,15 @@
     <Preference
         android:key="outputmode"
         android:title="@string/device_outputmode"
-        android:fragment="com.android.tv.settings.display.outputmode.ScreenResolutionFragment"/>
+        android:fragment="com.android.tv.settings.display.outputmode.ScreenResolutionFragment" />
     <Preference
         android:key="position"
         android:title="@string/device_position"
-        android:fragment="com.android.tv.settings.display.position.DisplayPositionFragment"/>
+        android:fragment="com.android.tv.settings.display.position.DisplayPositionFragment" />
     <Preference
         android:key="hdmicec"
         android:title="@string/system_cec"
-        android:fragment="com.android.tv.settings.tvoption.HdmiCecFragment"/>
+        android:fragment="com.android.tv.settings.tvoption.HdmiCecFragment" />
     <Preference
         android:key="advanced_display_settings"
         android:title="@string/advanced_display_settings_title"
@@ -52,7 +51,7 @@
     <SwitchPreference
         android:key="sound_effects"
         android:persistent="true"
-        android:title="@string/device_sound_effects"/>
+        android:title="@string/device_sound_effects" />
     <Preference
         android:key="advanced_sound_settings"
         android:title="@string/advanced_sound_settings_title"

@@ -24,22 +24,22 @@ public class LedConfiguration implements Parcelable {
     public static final Parcelable.Creator<LedConfiguration> CREATOR =
             new Parcelable.Creator<LedConfiguration>() {
 
-        @Override
-        public LedConfiguration createFromParcel(Parcel source) {
-            int color0 = source.readInt();
-            int color1 = source.readInt();
-            boolean[] bools = new boolean[2];
+                @Override
+                public LedConfiguration createFromParcel(Parcel source) {
+                    int color0 = source.readInt();
+                    int color1 = source.readInt();
+                    boolean[] bools = new boolean[2];
                     source.readBooleanArray(bools);
-            LedConfiguration config = new LedConfiguration(color0, color1, bools[0]);
-            config.isTransient = bools[1];
-            return config;
-        }
+                    LedConfiguration config = new LedConfiguration(color0, color1, bools[0]);
+                    config.isTransient = bools[1];
+                    return config;
+                }
 
-        @Override
-        public LedConfiguration[] newArray(int size) {
-            return new LedConfiguration[size];
-        }
-    };
+                @Override
+                public LedConfiguration[] newArray(int size) {
+                    return new LedConfiguration[size];
+                }
+            };
 
     public final int color0;
     public final int color1;
@@ -63,7 +63,7 @@ public class LedConfiguration implements Parcelable {
         if (!(o instanceof LedConfiguration)) {
             return false;
         }
-        final LedConfiguration that = (LedConfiguration)o;
+        final LedConfiguration that = (LedConfiguration) o;
         return areColorsEqual(that)
                 && this.pulse == that.pulse
                 && this.isTransient == that.isTransient;
@@ -84,7 +84,7 @@ public class LedConfiguration implements Parcelable {
 
     public String getNameString() {
         return String.format("#%06x-#%06x%s%s", color0 & 0x00ffffff, color1 & 0x00ffffff,
-                        this.pulse ? "p" : "", this.isTransient ? "t" : "");
+                this.pulse ? "p" : "", this.isTransient ? "t" : "");
     }
 
     @Override
@@ -96,6 +96,6 @@ public class LedConfiguration implements Parcelable {
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeInt(color0);
         parcel.writeInt(color1);
-        parcel.writeBooleanArray(new boolean[] {pulse, isTransient});
+        parcel.writeBooleanArray(new boolean[]{pulse, isTransient});
     }
 }

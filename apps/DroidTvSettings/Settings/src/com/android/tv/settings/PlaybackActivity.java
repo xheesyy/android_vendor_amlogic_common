@@ -28,7 +28,7 @@ public class PlaybackActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PlaybackFragment.class.getName(), null);
+                .newSettingsFragment(PlaybackFragment.class.getName(), null);
     }
 
 }

@@ -15,6 +15,7 @@
  */
 
 package com.android.tv.settings.wifi;
+
 import static android.net.ConnectivityManager.ACTION_TETHER_STATE_CHANGED;
 import static android.net.wifi.WifiManager.WIFI_AP_STATE_CHANGED_ACTION;
 
@@ -26,23 +27,30 @@ import android.net.wifi.SoftApConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.UserManager;
+
 import androidx.annotation.VisibleForTesting;
+
 import android.util.Log;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.TwoStatePreference;
+
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.tv.settings.R;
+
 import java.util.ArrayList;
 import java.util.List;
+
 public class HotSpotFragment extends HotSpotBaseFragment implements
-                WifiTetherBasePreferenceController.OnTetherConfigUpdateListener,
-                WifiTetherEnablePreferenceController.CheckboxCallback{
+        WifiTetherBasePreferenceController.OnTetherConfigUpdateListener,
+        WifiTetherEnablePreferenceController.CheckboxCallback {
     private static final String TAG = "HotSpotFragment";
     private static final IntentFilter TETHER_STATE_CHANGE_FILTER;
+
     static {
         TETHER_STATE_CHANGE_FILTER = new IntentFilter(ACTION_TETHER_STATE_CHANGED);
         TETHER_STATE_CHANGE_FILTER.addAction(WIFI_AP_STATE_CHANGED_ACTION);
@@ -62,29 +70,33 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
     private WifiManager mWifiManager;
     TetherChangeReceiver mTetherChangeReceiver;
     private Context mContext;
+
     public static HotSpotFragment newInstance() {
         return new HotSpotFragment();
     }
 
     @Override
     public void onAttach(Context context) {
-        Log.d(TAG,"onAttach");
+        Log.d(TAG, "onAttach");
         super.onAttach(context);
         mContext = context;
         mWifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         mTetherChangeReceiver = new TetherChangeReceiver();
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
 
     }
-    protected int getPreferenceScreenResId(){
+
+    protected int getPreferenceScreenResId() {
         return R.xml.hotspot;
     }
+
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
-        Log.d(TAG,"createPreferenceControllers");
+        Log.d(TAG, "createPreferenceControllers");
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         mSSIDPreferenceController = new WifiTetherSSIDPreferenceController(context, this);
         mSecurityPreferenceController = new WifiTetherSecurityPreferenceController(context, this);
@@ -100,7 +112,7 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
     }
 
     private void updateDisplayWithNewConfig() {
-        Log.d(TAG,"updateDisplayWithNewConfig");
+        Log.d(TAG, "updateDisplayWithNewConfig");
         use(WifiTetherSSIDPreferenceController.class)
                 .updateDisplay();
         use(WifiTetherSecurityPreferenceController.class)
@@ -111,11 +123,13 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
                 .updateDisplay();
 
     }
+
     @Override
     public void onPrefCheckedChange(boolean enable) {
-        Log.d(TAG,"onPrefCheckedChange");
+        Log.d(TAG, "onPrefCheckedChange");
         updateEnabledConfig(enable);
     }
+
     private void updateEnabledConfig(boolean enable) {
         use(WifiTetherSSIDPreferenceController.class)
                 .setEnabled(enable);
@@ -129,9 +143,10 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
                 .updateDisplay();
         use(WifiTetherAutoOffPreferenceController.class).setEnabled(enable);
     }
+
     @Override
     public void onTetherConfigUpdated() {
-        Log.d(TAG,"onTetherConfigUpdated");
+        Log.d(TAG, "onTetherConfigUpdated");
         final SoftApConfiguration config = buildNewConfig();
         mPasswordPreferenceController.updateVisibility(config.getSecurityType());
 
@@ -149,14 +164,16 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
         mWifiManager.setSoftApConfiguration(config);
 
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d(TAG,"onActivityCreated");
+        Log.d(TAG, "onActivityCreated");
     }
+
     @Override
     public void onStart() {
-        Log.d(TAG,"onStart");
+        Log.d(TAG, "onStart");
         super.onStart();
         final Context context = getContext();
         if (context != null) {
@@ -164,14 +181,16 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
         }
         mSwitchBarController.onStart();
     }
+
     @Override
     public void onResume() {
         super.onResume();
         updatePreferenceStates();
     }
+
     @Override
     public void onStop() {
-        Log.d(TAG,"onStop");
+        Log.d(TAG, "onStop");
         super.onStop();
         final Context context = getContext();
         if (context != null) {
@@ -182,9 +201,9 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        Log.d(TAG,"onCreatePreferences");
-        super.onCreatePreferences(savedInstanceState,rootKey);
-        mSwitchBarController = new WifiTetherEnablePreferenceController(mContext,KEY_WIFI_ENABLE_HOTSPOT,this);
+        Log.d(TAG, "onCreatePreferences");
+        super.onCreatePreferences(savedInstanceState, rootKey);
+        mSwitchBarController = new WifiTetherEnablePreferenceController(mContext, KEY_WIFI_ENABLE_HOTSPOT, this);
         mSwitchBarController.displayPreference(getPreferenceScreen());
     }
 
@@ -206,6 +225,7 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
         mRestartWifiApAfterConfigChange = false;
         mSwitchBarController.startTether();
     }
+
     class TetherChangeReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context content, Intent intent) {
@@ -219,7 +239,7 @@ public class HotSpotFragment extends HotSpotBaseFragment implements
                 }
             } else if (action.equals(WIFI_AP_STATE_CHANGED_ACTION)) {
                 int state = intent.getIntExtra(WifiManager.EXTRA_WIFI_AP_STATE, 0);
-                Log.d(TAG,"state:"+state+"mRestartWifiApAfterConfigChange:"+mRestartWifiApAfterConfigChange);
+                Log.d(TAG, "state:" + state + "mRestartWifiApAfterConfigChange:" + mRestartWifiApAfterConfigChange);
                 if (state == WifiManager.WIFI_AP_STATE_DISABLED
                         && mRestartWifiApAfterConfigChange) {
                     startTether();

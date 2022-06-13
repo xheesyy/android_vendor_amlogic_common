@@ -29,7 +29,7 @@ public class BalanceSeekBarActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(BalanceSeekBarFragment.class.getName(), null);
+                .newSettingsFragment(BalanceSeekBarFragment.class.getName(), null);
     }
 
 }

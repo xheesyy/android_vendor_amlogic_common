@@ -39,23 +39,24 @@ import java.io.ObjectOutputStream;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import com.droidlogic.app.tv.TvScanConfig;
+
 import android.util.Log;
 
 import com.droidlogic.app.SystemControlManager;
 
-public class DroidLogicTvUtils
-{
+public class DroidLogicTvUtils {
     public static final String TAG = "DroidLogicTvUtils";
     private static final boolean DEBUG = false;
     /**
      * final parameters for {@link TvInpuptService.Session.notifySessionEvent}
      */
     public static final String SIG_INFO_EVENT = "sig_info_event";
-    public static final String SIG_INFO_TYPE  = "sig_info_type";
-    public static final String SIG_INFO_LABEL  = "sig_info_label";
-    public static final String SIG_INFO_ARGS  = "sig_info_args";
-    public static final String AV_SIG_SCRAMBLED  = "av_sig_scambled";
+    public static final String SIG_INFO_TYPE = "sig_info_type";
+    public static final String SIG_INFO_LABEL = "sig_info_label";
+    public static final String SIG_INFO_ARGS = "sig_info_args";
+    public static final String AV_SIG_SCRAMBLED = "av_sig_scambled";
 
     public static final String SIG_INFO_C_DISPLAYNUM_EVENT = "sig_info_c_displaynum_event";
     public static final String SIG_INFO_C_DISPLAYNUM = "sig_info_c_displaynum";
@@ -112,22 +113,22 @@ public class DroidLogicTvUtils
     public static final String SIG_INFO_C_SID2S = "sid2s";
     public static final String SIG_INFO_C_SLANGS = "slangs";
 
-    public static final int SIG_INFO_TYPE_ATV    = 0;
-    public static final int SIG_INFO_TYPE_DTV    = 1;
-    public static final int SIG_INFO_TYPE_HDMI   = 2;
-    public static final int SIG_INFO_TYPE_AV     = 3;
-    public static final int SIG_INFO_TYPE_SPDIF  = 4;
-    public static final int SIG_INFO_TYPE_ADTV  = 5;
-    public static final int SIG_INFO_TYPE_AUX  = 6;
-    public static final int SIG_INFO_TYPE_ARC  = 7;
-    public static final int SIG_INFO_TYPE_OTHER  = 8;
+    public static final int SIG_INFO_TYPE_ATV = 0;
+    public static final int SIG_INFO_TYPE_DTV = 1;
+    public static final int SIG_INFO_TYPE_HDMI = 2;
+    public static final int SIG_INFO_TYPE_AV = 3;
+    public static final int SIG_INFO_TYPE_SPDIF = 4;
+    public static final int SIG_INFO_TYPE_ADTV = 5;
+    public static final int SIG_INFO_TYPE_AUX = 6;
+    public static final int SIG_INFO_TYPE_ARC = 7;
+    public static final int SIG_INFO_TYPE_OTHER = 8;
 
     //AV
     public static final String SIG_INFO_AV_VCHIP = "av_vchip";
     public static final String SIG_INFO_AV_VCHIP_KEY = "av_aratings";
 
     //hdmi info
-    public static final String SIG_INFO_HDMI_HDR= "hdmi_hdr";
+    public static final String SIG_INFO_HDMI_HDR = "hdmi_hdr";
     public static final String SIG_INFO_HDMI_AUDIO_FORMAT = "hdmi_audio_format";
 
     //CC
@@ -155,40 +156,40 @@ public class DroidLogicTvUtils
     /**
      * source input type need to switch
      */
-    private static final int SOURCE_TYPE_START  = 0;
-    private static final int SOURCE_TYPE_END    = 12;
+    private static final int SOURCE_TYPE_START = 0;
+    private static final int SOURCE_TYPE_END = 12;
 
-    public static final int SOURCE_TYPE_ATV     = SOURCE_TYPE_START;
-    public static final int SOURCE_TYPE_DTV     = SOURCE_TYPE_START + 1;
-    public static final int SOURCE_TYPE_AV1     = SOURCE_TYPE_START + 2;
-    public static final int SOURCE_TYPE_AV2     = SOURCE_TYPE_START + 3;
-    public static final int SOURCE_TYPE_HDMI1   = SOURCE_TYPE_START + 4;
-    public static final int SOURCE_TYPE_HDMI2   = SOURCE_TYPE_START + 5;
-    public static final int SOURCE_TYPE_HDMI3   = SOURCE_TYPE_START + 6;
-    public static final int SOURCE_TYPE_HDMI4   = SOURCE_TYPE_START + 7;
-    public static final int SOURCE_TYPE_SPDIF   = SOURCE_TYPE_START + 8;
-    public static final int SOURCE_TYPE_ADTV    = SOURCE_TYPE_START + 9;
-    public static final int SOURCE_TYPE_AUX    = SOURCE_TYPE_START + 10;
-    public static final int SOURCE_TYPE_ARC   = SOURCE_TYPE_START + 11;
-    public static final int SOURCE_TYPE_OTHER   = SOURCE_TYPE_END;
+    public static final int SOURCE_TYPE_ATV = SOURCE_TYPE_START;
+    public static final int SOURCE_TYPE_DTV = SOURCE_TYPE_START + 1;
+    public static final int SOURCE_TYPE_AV1 = SOURCE_TYPE_START + 2;
+    public static final int SOURCE_TYPE_AV2 = SOURCE_TYPE_START + 3;
+    public static final int SOURCE_TYPE_HDMI1 = SOURCE_TYPE_START + 4;
+    public static final int SOURCE_TYPE_HDMI2 = SOURCE_TYPE_START + 5;
+    public static final int SOURCE_TYPE_HDMI3 = SOURCE_TYPE_START + 6;
+    public static final int SOURCE_TYPE_HDMI4 = SOURCE_TYPE_START + 7;
+    public static final int SOURCE_TYPE_SPDIF = SOURCE_TYPE_START + 8;
+    public static final int SOURCE_TYPE_ADTV = SOURCE_TYPE_START + 9;
+    public static final int SOURCE_TYPE_AUX = SOURCE_TYPE_START + 10;
+    public static final int SOURCE_TYPE_ARC = SOURCE_TYPE_START + 11;
+    public static final int SOURCE_TYPE_OTHER = SOURCE_TYPE_END;
 
     /**
      * source input id sync with {@link CTvin.h}
      */
-    public static final int DEVICE_ID_ATV        = 0;
-    public static final int DEVICE_ID_AV1        = 1;
-    public static final int DEVICE_ID_AV2        = 2;
-    public static final int DEVICE_ID_HDMI1      = 5;
-    public static final int DEVICE_ID_HDMI2      = 6;
-    public static final int DEVICE_ID_HDMI3      = 7;
-    public static final int DEVICE_ID_HDMI4      = 8;
-    public static final int DEVICE_ID_DTV        = 11;
-    public static final int DEVICE_ID_AUX      = 17;
-    public static final int DEVICE_ID_SPDIF      = 15;
+    public static final int DEVICE_ID_ATV = 0;
+    public static final int DEVICE_ID_AV1 = 1;
+    public static final int DEVICE_ID_AV2 = 2;
+    public static final int DEVICE_ID_HDMI1 = 5;
+    public static final int DEVICE_ID_HDMI2 = 6;
+    public static final int DEVICE_ID_HDMI3 = 7;
+    public static final int DEVICE_ID_HDMI4 = 8;
+    public static final int DEVICE_ID_DTV = 11;
+    public static final int DEVICE_ID_AUX = 17;
+    public static final int DEVICE_ID_SPDIF = 15;
 
     /*virtual device*/
-    public static final int DEVICE_ID_ADTV       = 16;
-    public static final int DEVICE_ID_ARC      = 18;
+    public static final int DEVICE_ID_ADTV = 16;
+    public static final int DEVICE_ID_ARC = 18;
     public static final int DEVICE_ID_HDMIEXTEND = 19;
 
     public static final int DEVICE_ID_OFFSET = 0x1F;
@@ -286,14 +287,14 @@ public class DroidLogicTvUtils
     /*auto tracks call*/
     public static final String ACTION_DTV_AUTO_TRACKS = "dtv_auto_tracks";
 
-   /*when it's on ,block all program without rating*/
-   public static final String ACTION_BLOCK_NORATING = "block_norating";
-   public static final String PARAM_NORATING_ENABLE = "enable_norating";
-   public static final String ACTION_BLOCK_CHANNEL= "block_channel";
-   public static final String PARAM_CHANNEL_BLOCK_ENABLE= "enable_channel_block";
-   public static final int NORATING_OFF = 0;
-   public static final int NORATING_ON = 1;
-   public static final int NORATING_UNLOCK_CURRENT = 2;
+    /*when it's on ,block all program without rating*/
+    public static final String ACTION_BLOCK_NORATING = "block_norating";
+    public static final String PARAM_NORATING_ENABLE = "enable_norating";
+    public static final String ACTION_BLOCK_CHANNEL = "block_channel";
+    public static final String PARAM_CHANNEL_BLOCK_ENABLE = "enable_channel_block";
+    public static final int NORATING_OFF = 0;
+    public static final int NORATING_ON = 1;
+    public static final int NORATING_UNLOCK_CURRENT = 2;
 
     /*set type call*/
     public static final String ACTION_DTV_SET_TYPE = "dtv_set_type";
@@ -373,7 +374,7 @@ public class DroidLogicTvUtils
 
     public static final String TV_CURRENT_DEVICE_ID = "tv_current_device_id";
     public static final String TV_ATV_CHANNEL_INDEX = "tv_atv_channel_index";
-    public static final String TV_DTV_CHANNEL_INDEX  = "tv_dtv_channel_index";
+    public static final String TV_DTV_CHANNEL_INDEX = "tv_dtv_channel_index";
     public static final String TV_CURRENT_CHANNEL_IS_RADIO = "tv_current_channel_is_radio";
     public static final String BLOCK_NORATING = "block_norating";
     public static final String TV_CURRENT_BLOCK_STATUS = "tv_current_channel_blocked";
@@ -392,7 +393,7 @@ public class DroidLogicTvUtils
     public static final String TV_SEARCH_MODE_NIT = "nit";
     public static final String TV_SEARCH_TYPE = "tv_search_type";
     public static final String TV_SEARCH_ORDER = "tv_search_order";
-    public static final String TV_SEARCH_ATV_DTV_MODE= "search_atv_dtv_flag";
+    public static final String TV_SEARCH_ATV_DTV_MODE = "search_atv_dtv_flag";
     public static final String TV_SEARCH_TYPE_CHANGED = "tv_search_type_changed";
     public static final String TV_SEARCH_INPUTID = "tv_search_inputid";
     public static final String TV_CURRENT_INPUTID = "tv_current_inputid";
@@ -409,18 +410,18 @@ public class DroidLogicTvUtils
     public static final String ATSC_TV_SEARCH_SYS = "atsc_tv_search_sys";
     public static final String ATSC_TV_SEARCH_SOUND_SYS = "atsc_tv_search_sound_sys";
 
-    public static final String ACTION_ATV_SET_FINETUNE        = "action_atv_set_finetune";
-    public static final String ACTION_ATV_SET_VIDEO           = "action_atv_set_video";
-    public static final String ACTION_ATV_SET_AUDIO           = "action_atv_set_audio";
-    public static final String ACTION_ATV_SET_MTS_MODE        = "action_atv_set_mts_mode";
+    public static final String ACTION_ATV_SET_FINETUNE = "action_atv_set_finetune";
+    public static final String ACTION_ATV_SET_VIDEO = "action_atv_set_video";
+    public static final String ACTION_ATV_SET_AUDIO = "action_atv_set_audio";
+    public static final String ACTION_ATV_SET_MTS_MODE = "action_atv_set_mts_mode";
     public static final String ACTION_ATV_SET_MTS_OUTPUT_MODE = "action_atv_set_output_mode";
     public static final String ACTION_ATV_GET_MTS_OUTPUT_MODE = "action_atv_get_output_mode";
-    public static final String ACTION_ATV_GET_MTS_INPUT_STD   = "action_atv_get_mts_input_std";
-    public static final String ACTION_ATV_GET_MTS_INPUT_MODE  = "action_atv_get_mts_input_mode";
-    public static final String ACTION_ATV_SET_VOLUME_COMPENSATE  = "action_atv_set_volume_compensate";
-    public static final String KEY_ATV_SET_VALUE              = "value";
-    public static final String TV_STATIC_FRAME_SETTING        = "static_frame_setting";
-    public static final String TV_BLUE_SCREEN_SETTING         = "blue_screen_setting";
+    public static final String ACTION_ATV_GET_MTS_INPUT_STD = "action_atv_get_mts_input_std";
+    public static final String ACTION_ATV_GET_MTS_INPUT_MODE = "action_atv_get_mts_input_mode";
+    public static final String ACTION_ATV_SET_VOLUME_COMPENSATE = "action_atv_set_volume_compensate";
+    public static final String KEY_ATV_SET_VALUE = "value";
+    public static final String TV_STATIC_FRAME_SETTING = "static_frame_setting";
+    public static final String TV_BLUE_SCREEN_SETTING = "blue_screen_setting";
 
     public static final int TV_SEARCH_DVBC_QAM16 = 1;
     public static final int TV_SEARCH_DVBC_QAM32 = 2;
@@ -456,6 +457,7 @@ public class DroidLogicTvUtils
     public static final int MATCH_PROGRAM_ID = 6;
     public static final int MATCH_WATCHED_PROGRAM = 7;
     public static final int MATCH_WATCHED_PROGRAM_ID = 8;
+
     static {
         sUriMatcher = new UriMatcher(NO_MATCH);
         sUriMatcher.addURI(TvContract.AUTHORITY, "channel", MATCH_CHANNEL);
@@ -523,7 +525,7 @@ public class DroidLogicTvUtils
             ArrayList<String> searchTypeList = TvScanConfig.GetTvDtvSystemList(countryId);
             if (TvScanConfig.GetTvAtvSupport(countryId)) {
                 int i = TvScanConfig.TV_SEARCH_TYPE_ATSC_C_AUTO_INDEX;
-                for (; i<=TvScanConfig.TV_SEARCH_TYPE_ATSC_T_INDEX; i++) {
+                for (; i <= TvScanConfig.TV_SEARCH_TYPE_ATSC_T_INDEX; i++) {
                     if (searchTypeList.contains(TvScanConfig.TV_SEARCH_TYPE.get(i))) {
                         break;
                     }
@@ -582,7 +584,7 @@ public class DroidLogicTvUtils
     public static String getDtvType(Context mContext) {
         String type = TvControlDataManager.getInstance(mContext).getString(mContext.getContentResolver(), TV_KEY_DTV_TYPE);
         if (type == null) {
-            String searchType  = getSearchType(mContext);
+            String searchType = getSearchType(mContext);
             type = DTV_SEARCH_TYPE_LIST.get(searchType);
             Log.i(TAG, "getDtvType null, set default dtv type:" + type);
             TvControlDataManager.getInstance(mContext).putString(mContext.getContentResolver(), TV_KEY_DTV_TYPE, type);
@@ -636,11 +638,11 @@ public class DroidLogicTvUtils
         return soundSys;
     }
 
-    public static int getSearchStatus (Context mContext) {
+    public static int getSearchStatus(Context mContext) {
         return TvControlDataManager.getInstance(mContext).getInt(mContext.getContentResolver(), TV_SEARCHING_STATE, 0);
     }
 
-    public static void resetSearchStatus (Context mContext) {
+    public static void resetSearchStatus(Context mContext) {
         TvControlDataManager.getInstance(mContext).putInt(mContext.getContentResolver(), TV_SEARCHING_STATE, 0);
     }
 
@@ -811,14 +813,14 @@ public class DroidLogicTvUtils
             return false;
 
         String[] temp = info.getId().split("/");
-        return temp.length==3 ? true : false;
+        return temp.length == 3 ? true : false;
     }
 
     public static boolean isHardwareInput(String input_id) {
         if (TextUtils.isEmpty(input_id))
             return false;
         String[] temp = input_id.split("/");
-        return temp.length==3 ? true : false;
+        return temp.length == 3 ? true : false;
     }
 
     /**
@@ -838,14 +840,14 @@ public class DroidLogicTvUtils
             if (index != -1) {
                 address = inputId.substring(index + HW.length());
                 deviceId = Integer.parseInt(address);
-            } else if (inputId.indexOf(HDMI) != -1){
+            } else if (inputId.indexOf(HDMI) != -1) {
                 index = inputId.indexOf(HDMI);
                 address = inputId.substring(index + HDMI.length(), index + HDMI.length() + 1);
-                deviceId = Integer.parseInt(address) + DEVICE_ID_HDMI1 -1;
+                deviceId = Integer.parseInt(address) + DEVICE_ID_HDMI1 - 1;
             } else {
                 Log.e(TAG, "getDeviceIdFromInputId no identifed input " + inputId);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             Log.e(TAG, "getDeviceIdFromInputId " + inputId + e);
         }
 
@@ -958,7 +960,7 @@ public class DroidLogicTvUtils
     }
 
     public static String sourceTypeToString(int arg) {
-        String temp = "["+arg+"]";
+        String temp = "[" + arg + "]";
         switch (arg) {
             case SOURCE_TYPE_ATV:
                 return temp + "ATV";
@@ -994,6 +996,7 @@ public class DroidLogicTvUtils
             return SIG_INFO_TYPE_ATV;
         return SIG_INFO_TYPE_DTV;
     }
+
     public static final HashMap<String, String> DTV_SEARCH_TYPE_LIST = new HashMap<String, String>() {
         {
             put(TvScanConfig.TV_SEARCH_TYPE.get(TvScanConfig.TV_SEARCH_TYPE_ATSC_C_AUTO_INDEX), TvContract.Channels.TYPE_ATSC_C);
@@ -1011,6 +1014,7 @@ public class DroidLogicTvUtils
     };
 
     private static final Map<Integer, TvControlManager.SourceInput_Type> DeviceIdToTvSourceType = new HashMap<Integer, TvControlManager.SourceInput_Type>();
+
     static {
         DeviceIdToTvSourceType.put(DroidLogicTvUtils.DEVICE_ID_ATV, TvControlManager.SourceInput_Type.SOURCE_TYPE_TV);
         DeviceIdToTvSourceType.put(DroidLogicTvUtils.DEVICE_ID_AV1, TvControlManager.SourceInput_Type.SOURCE_TYPE_AV);
@@ -1025,11 +1029,12 @@ public class DroidLogicTvUtils
         DeviceIdToTvSourceType.put(DroidLogicTvUtils.DEVICE_ID_ARC, TvControlManager.SourceInput_Type.SOURCE_TYPE_ARC);
     }
 
-    public static TvControlManager.SourceInput_Type parseTvSourceTypeFromDeviceId (int deviceId) {
+    public static TvControlManager.SourceInput_Type parseTvSourceTypeFromDeviceId(int deviceId) {
         return DeviceIdToTvSourceType.get(deviceId);
     }
 
     private static final Map<Integer, TvControlManager.SourceInput> DeviceIdToTvSourceInput = new HashMap<Integer, TvControlManager.SourceInput>();
+
     static {
         DeviceIdToTvSourceInput.put(DroidLogicTvUtils.DEVICE_ID_ATV, TvControlManager.SourceInput.TV);
         DeviceIdToTvSourceInput.put(DroidLogicTvUtils.DEVICE_ID_AV1, TvControlManager.SourceInput.AV1);
@@ -1045,11 +1050,12 @@ public class DroidLogicTvUtils
         DeviceIdToTvSourceInput.put(DroidLogicTvUtils.DEVICE_ID_ARC, TvControlManager.SourceInput.ARC);
     }
 
-    public static TvControlManager.SourceInput parseTvSourceInputFromDeviceId (int deviceId) {
+    public static TvControlManager.SourceInput parseTvSourceInputFromDeviceId(int deviceId) {
         return DeviceIdToTvSourceInput.get(deviceId);
     }
 
     private static final Map<Integer, TvControlManager.SourceInput_Type> SigTypeToTvSourceType = new HashMap<Integer, TvControlManager.SourceInput_Type>();
+
     static {
         SigTypeToTvSourceType.put(DroidLogicTvUtils.SIG_INFO_TYPE_ATV, TvControlManager.SourceInput_Type.SOURCE_TYPE_TV);
         SigTypeToTvSourceType.put(DroidLogicTvUtils.SIG_INFO_TYPE_AV, TvControlManager.SourceInput_Type.SOURCE_TYPE_AV);
@@ -1060,17 +1066,18 @@ public class DroidLogicTvUtils
         SigTypeToTvSourceType.put(DroidLogicTvUtils.SIG_INFO_TYPE_ARC, TvControlManager.SourceInput_Type.SOURCE_TYPE_ARC);
     }
 
-    public static TvControlManager.SourceInput_Type parseTvSourceTypeFromSigType (int sigType) {
+    public static TvControlManager.SourceInput_Type parseTvSourceTypeFromSigType(int sigType) {
         return SigTypeToTvSourceType.get(sigType);
     }
 
     private static final Map<Integer, TvControlManager.SourceInput> SigTypeToTvSourceInput = new HashMap<Integer, TvControlManager.SourceInput>();
+
     static {
         SigTypeToTvSourceInput.put(DroidLogicTvUtils.SIG_INFO_TYPE_ATV, TvControlManager.SourceInput.TV);
         SigTypeToTvSourceInput.put(DroidLogicTvUtils.SIG_INFO_TYPE_DTV, TvControlManager.SourceInput.DTV);
     }
 
-    public static TvControlManager.SourceInput parseTvSourceInputFromSigType (int sigType) {
+    public static TvControlManager.SourceInput parseTvSourceInputFromSigType(int sigType) {
         return SigTypeToTvSourceInput.get(sigType);
     }
 
@@ -1104,7 +1111,7 @@ public class DroidLogicTvUtils
             if ((trackExtArray[trackIdx] & AUDIO_AD_ASVC) != AUDIO_AD_ASVC)
                 continue;
             int audioId = (trackExtArray[trackIdx] & AUDIO_AD_ID_MASK) >>> 16;
-            if ((audioId & (1<<mainAudioId)) == (1<<mainAudioId)) {
+            if ((audioId & (1 << mainAudioId)) == (1 << mainAudioId)) {
                 a.add(trackIdx);
             }
         }
@@ -1223,7 +1230,7 @@ public class DroidLogicTvUtils
             String[] nameValue = nameValuePair.split("=");
             try {
                 map.put(URLDecoder.decode(nameValue[0], "UTF-8"), nameValue.length > 1 ? URLDecoder.decode(
-                            nameValue[1], "UTF-8") : "");
+                        nameValue[1], "UTF-8") : "");
             } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException("This method requires UTF-8 encoding support", e);
             }
@@ -1247,18 +1254,20 @@ public class DroidLogicTvUtils
 
                 String value = map.get(key);
                 stringBuilder.append("\"")
-                    .append((key != null ? key : ""))
-                    .append("\":")
-                    .append(value != null ? value : "");
+                        .append((key != null ? key : ""))
+                        .append("\":")
+                        .append(value != null ? value : "");
                 has_member = true;
             }
             stringBuilder.append("}");
         }
         return stringBuilder.toString();
     }
+
     public static String mapToJson(Map<String, String> map) {
         return mapToJson(null, map);
     }
+
     public static Map<String, String> jsonToMap(String jsonString) {
         if (jsonString == null || jsonString.length() == 0)
             return null;
@@ -1268,17 +1277,17 @@ public class DroidLogicTvUtils
         try {
             jsonObject = new JSONObject(jsonString);
         } catch (JSONException e) {
-            Log.e(TAG, "Json parse fail: ["+jsonString+"]" + e.getMessage());
+            Log.e(TAG, "Json parse fail: [" + jsonString + "]" + e.getMessage());
             return null;
         }
         Iterator it = jsonObject.keys();
         while (it.hasNext()) {
-            String k = (String)it.next();
+            String k = (String) it.next();
             String v;
             try {
                 map.put(k, jsonObject.get(k).toString());
             } catch (JSONException e) {
-                Log.e(TAG, "Json get fail: ["+ k +"]" + e.getMessage());
+                Log.e(TAG, "Json get fail: [" + k + "]" + e.getMessage());
             }
         }
         return map;
@@ -1293,12 +1302,12 @@ public class DroidLogicTvUtils
         try {
             jsonObject = new JSONObject(jsonString);
         } catch (JSONException e) {
-            Log.e(TAG, "multiJsonToMap parse fail: ["+jsonString+"]" + e.getMessage());
+            Log.e(TAG, "multiJsonToMap parse fail: [" + jsonString + "]" + e.getMessage());
             return null;
         }
         Iterator it = jsonObject.keys();
         while (it.hasNext()) {
-            String k = (String)it.next();
+            String k = (String) it.next();
             String v;
             try {
                 String childStr = jsonObject.get(k).toString();
@@ -1306,7 +1315,7 @@ public class DroidLogicTvUtils
                 JSONObject childJsonObject = null;
                 Object childObject = jsonObject.get(k);
                 if (childObject instanceof JSONObject) {
-                    childJsonObject = (JSONObject)childObject;
+                    childJsonObject = (JSONObject) childObject;
                 }
                 if (childJsonObject != null) {
                     Map<String, String> childMap = multiJsonToMap(childJsonObject.toString());
@@ -1337,14 +1346,17 @@ public class DroidLogicTvUtils
             sb.append("]");
             return sb.toString();
         }
+
         public static String toString(String s) {
-            return "\""+((s == null)? "" : s.toString())+"\"";
+            return "\"" + ((s == null) ? "" : s.toString()) + "\"";
         }
+
         public static String fromString(String s) {
-            return (s == null)? null : s.replace("\"", "");
+            return (s == null) ? null : s.replace("\"", "");
         }
+
         public static String[] fromArrayString(String s) {
-            return (s == null)? null : s.replace("[", "").replace("]", "").replace("\"", "").split(",");
+            return (s == null) ? null : s.replace("[", "").replace("]", "").replace("\"", "").split(",");
         }
     }
 
@@ -1352,21 +1364,23 @@ public class DroidLogicTvUtils
         TvInputManager tim = (TvInputManager) context.getSystemService(Context.TV_INPUT_SERVICE);
         return tim.getTvInputInfo(inputId);
     }
-    public static String CA_ENContentRatingDimensions[] = { "CA_TV_EN_EXEMPT", "CA_TV_EN_C", "CA_TV_EN_C8",     "CA_TV_EN_G", "CA_TV_EN_PG", "CA_TV_EN_14", "CA_TV_EN_18"};
-    public static String CA_FRContentRatingDimensions[] = { "CA_TV_FR_E", "CA_TV_FR_G", "CA_TV_FR_8", "CA_TV_FR_13", "CA_TV_FR_16", "CA_TV_FR_18", };
-    public static String US_MvContentRatingDimensions[] = { "US_MV_G", "US_MV_PG", "US_MV_PG13", "US_MV_R", "US_MV_NC17", "US_MV_X", "US_MV_NR" };
+
+    public static String CA_ENContentRatingDimensions[] = {"CA_TV_EN_EXEMPT", "CA_TV_EN_C", "CA_TV_EN_C8", "CA_TV_EN_G", "CA_TV_EN_PG", "CA_TV_EN_14", "CA_TV_EN_18"};
+    public static String CA_FRContentRatingDimensions[] = {"CA_TV_FR_E", "CA_TV_FR_G", "CA_TV_FR_8", "CA_TV_FR_13", "CA_TV_FR_16", "CA_TV_FR_18",};
+    public static String US_MvContentRatingDimensions[] = {"US_MV_G", "US_MV_PG", "US_MV_PG13", "US_MV_R", "US_MV_NC17", "US_MV_X", "US_MV_NR"};
     public static String US_TvContentRatingDimensions[][] =
-    {
-        {"US_TV_Y",  "",            "",           "",           "",              ""},
-        {"US_TV_Y7", "US_TV_FV",    "",           "",           "",              ""},
-        {"US_TV_G",  "",            "",           "",           "",              ""},
-        {"US_TV_PG", "",            "US_TV_L",    "US_TV_S",    "US_TV_V",       "US_TV_D"},
-        {"US_TV_14", "",            "US_TV_L",    "US_TV_S",    "US_TV_V",       "US_TV_D"},
-        {"US_TV_MA", "",            "US_TV_L",    "US_TV_S",    "US_TV_V",       ""},
-    };
+            {
+                    {"US_TV_Y", "", "", "", "", ""},
+                    {"US_TV_Y7", "US_TV_FV", "", "", "", ""},
+                    {"US_TV_G", "", "", "", "", ""},
+                    {"US_TV_PG", "", "US_TV_L", "US_TV_S", "US_TV_V", "US_TV_D"},
+                    {"US_TV_14", "", "US_TV_L", "US_TV_S", "US_TV_V", "US_TV_D"},
+                    {"US_TV_MA", "", "US_TV_L", "US_TV_S", "US_TV_V", ""},
+            };
     public static String RatingDomain = "com.android.tv";
-    public static int  RowNum = 6;
-    public static int  ColumnNum = 6;
+    public static int RowNum = 6;
+    public static int ColumnNum = 6;
+
     public static TvContentRating[] unblockUSTVLowRating(String mrating, List<String> subRatings) {
         int mrow = 0;
         int mcolumn = 0;
@@ -1377,112 +1391,115 @@ public class DroidLogicTvUtils
         }
         ArrayList<TvContentRating> RatingList = new ArrayList<TvContentRating>();
 
-        for (mrow = 0; mrow < RowNum; mrow ++) {
+        for (mrow = 0; mrow < RowNum; mrow++) {
             if (mrating.equals(US_TvContentRatingDimensions[mrow][0])) {
-                    mRatingrowPos = mrow;
+                mRatingrowPos = mrow;
                 break;
             }
         }
-        if (DEBUG) Log.d("unblockLowRating", "mRatingrowPos: " + mRatingrowPos +"  has_subrating:" + has_subrating +"  mrating:" + mrating);
-        for (mrow = 0; mrow <= mRatingrowPos; mrow ++) {
-            for (mcolumn = 0; mcolumn < ColumnNum; mcolumn ++) {
-                    if (US_TvContentRatingDimensions[mrow][mcolumn].length() > 0 && (!has_subrating || mrow <= 2 || mcolumn == 0)) {
-                        if (DEBUG) Log.d("unblockLowRating", "high rating: " + mrating + " low rating[" + mrow + "][" + mcolumn + "]: " + US_TvContentRatingDimensions[mrow][mcolumn]);
-                        ArrayList<String> subRats = new ArrayList<String>();
-                        TvContentRating subrating;
-                        if (mcolumn != 0) {
-                            subRats.add(US_TvContentRatingDimensions[mrow][mcolumn]);
-                            subrating = TvContentRating.createRating(RatingDomain, "US_TV",
-                               US_TvContentRatingDimensions[mrow][0],  subRats.toArray(new String[subRats.size()]));
-                         } else {
-                            subrating = TvContentRating.createRating(RatingDomain, "US_TV",
-                               US_TvContentRatingDimensions[mrow][0]);
-                         }
-                         if (subrating != null)
-                          RatingList.add(subrating);
-                    } else if (US_TvContentRatingDimensions[mrow][mcolumn].length() > 0
-                             && subRatings.contains(US_TvContentRatingDimensions[mrow][mcolumn])) {
-                        if (DEBUG) Log.d("unblockLowRating", "--high rating: " + mrating + " low rating[" + mrow + "][" + mcolumn + "]: " + US_TvContentRatingDimensions[mrow][mcolumn]);
-                        ArrayList<String> subRats = new ArrayList<String>();
-                        TvContentRating subrating;
+        if (DEBUG)
+            Log.d("unblockLowRating", "mRatingrowPos: " + mRatingrowPos + "  has_subrating:" + has_subrating + "  mrating:" + mrating);
+        for (mrow = 0; mrow <= mRatingrowPos; mrow++) {
+            for (mcolumn = 0; mcolumn < ColumnNum; mcolumn++) {
+                if (US_TvContentRatingDimensions[mrow][mcolumn].length() > 0 && (!has_subrating || mrow <= 2 || mcolumn == 0)) {
+                    if (DEBUG)
+                        Log.d("unblockLowRating", "high rating: " + mrating + " low rating[" + mrow + "][" + mcolumn + "]: " + US_TvContentRatingDimensions[mrow][mcolumn]);
+                    ArrayList<String> subRats = new ArrayList<String>();
+                    TvContentRating subrating;
+                    if (mcolumn != 0) {
                         subRats.add(US_TvContentRatingDimensions[mrow][mcolumn]);
                         subrating = TvContentRating.createRating(RatingDomain, "US_TV",
-                               US_TvContentRatingDimensions[mrow][0],  subRats.toArray(new String[subRats.size()]));
-                        if (subrating != null)
-                        RatingList.add(subrating);
+                                US_TvContentRatingDimensions[mrow][0], subRats.toArray(new String[subRats.size()]));
+                    } else {
+                        subrating = TvContentRating.createRating(RatingDomain, "US_TV",
+                                US_TvContentRatingDimensions[mrow][0]);
                     }
+                    if (subrating != null)
+                        RatingList.add(subrating);
+                } else if (US_TvContentRatingDimensions[mrow][mcolumn].length() > 0
+                        && subRatings.contains(US_TvContentRatingDimensions[mrow][mcolumn])) {
+                    if (DEBUG)
+                        Log.d("unblockLowRating", "--high rating: " + mrating + " low rating[" + mrow + "][" + mcolumn + "]: " + US_TvContentRatingDimensions[mrow][mcolumn]);
+                    ArrayList<String> subRats = new ArrayList<String>();
+                    TvContentRating subrating;
+                    subRats.add(US_TvContentRatingDimensions[mrow][mcolumn]);
+                    subrating = TvContentRating.createRating(RatingDomain, "US_TV",
+                            US_TvContentRatingDimensions[mrow][0], subRats.toArray(new String[subRats.size()]));
+                    if (subrating != null)
+                        RatingList.add(subrating);
+                }
             }
         }
 
         return (RatingList.size() == 0 ? null : RatingList.toArray(new TvContentRating[RatingList.size()]));
     }
 
-     public static TvContentRating[] unblockUSMVLowRating(String mrating) {
-      int index = -1;
-      int pos = 0;
-      ArrayList<TvContentRating> RatingList = new ArrayList<TvContentRating>();
-      for (index = 0; index < US_MvContentRatingDimensions.length; index ++) {
-        if (mrating.equals(US_MvContentRatingDimensions[index])) {
-            break;
+    public static TvContentRating[] unblockUSMVLowRating(String mrating) {
+        int index = -1;
+        int pos = 0;
+        ArrayList<TvContentRating> RatingList = new ArrayList<TvContentRating>();
+        for (index = 0; index < US_MvContentRatingDimensions.length; index++) {
+            if (mrating.equals(US_MvContentRatingDimensions[index])) {
+                break;
+            }
         }
-      }
-      pos = index;
-      if (pos < US_MvContentRatingDimensions.length) {
-        for (index = 0; index < pos; index ++) {
-            TvContentRating subrating = TvContentRating.createRating(RatingDomain, "US_MV",
-               US_MvContentRatingDimensions[index]);
-            if (subrating != null)
-            RatingList.add(subrating);
+        pos = index;
+        if (pos < US_MvContentRatingDimensions.length) {
+            for (index = 0; index < pos; index++) {
+                TvContentRating subrating = TvContentRating.createRating(RatingDomain, "US_MV",
+                        US_MvContentRatingDimensions[index]);
+                if (subrating != null)
+                    RatingList.add(subrating);
+            }
         }
-      }
-      return (RatingList.size() == 0 ? null : RatingList.toArray(new TvContentRating[RatingList.size()]));
+        return (RatingList.size() == 0 ? null : RatingList.toArray(new TvContentRating[RatingList.size()]));
     }
 
     public static TvContentRating[] unblockCAENLowRating(String mrating) {
-      int index = -1;
-      int pos = 0;
-      ArrayList<TvContentRating> RatingList = new ArrayList<TvContentRating>();
-      for (index = 0; index < CA_ENContentRatingDimensions.length; index ++) {
-        if (mrating.equals(CA_ENContentRatingDimensions[index])) {
-            break;
+        int index = -1;
+        int pos = 0;
+        ArrayList<TvContentRating> RatingList = new ArrayList<TvContentRating>();
+        for (index = 0; index < CA_ENContentRatingDimensions.length; index++) {
+            if (mrating.equals(CA_ENContentRatingDimensions[index])) {
+                break;
+            }
         }
-      }
-      pos = index;
-      if (pos < CA_ENContentRatingDimensions.length) {
-        for (index = 0; index < pos; index ++) {
-            TvContentRating subrating = TvContentRating.createRating(RatingDomain, "CA_TV_EN",
-               CA_ENContentRatingDimensions[index]);
-            if (subrating != null)
-            RatingList.add(subrating);
+        pos = index;
+        if (pos < CA_ENContentRatingDimensions.length) {
+            for (index = 0; index < pos; index++) {
+                TvContentRating subrating = TvContentRating.createRating(RatingDomain, "CA_TV_EN",
+                        CA_ENContentRatingDimensions[index]);
+                if (subrating != null)
+                    RatingList.add(subrating);
+            }
         }
-      }
-      return (RatingList.size() == 0 ? null : RatingList.toArray(new TvContentRating[RatingList.size()]));
+        return (RatingList.size() == 0 ? null : RatingList.toArray(new TvContentRating[RatingList.size()]));
     }
 
     public static TvContentRating[] unblockCAFRLowRating(String mrating) {
-      int index = -1;
-      int pos = 0;
-      ArrayList<TvContentRating> RatingList = new ArrayList<TvContentRating>();
-      for (index = 0; index < CA_FRContentRatingDimensions.length; index ++) {
-        if (mrating.equals(CA_FRContentRatingDimensions[index])) {
-            break;
+        int index = -1;
+        int pos = 0;
+        ArrayList<TvContentRating> RatingList = new ArrayList<TvContentRating>();
+        for (index = 0; index < CA_FRContentRatingDimensions.length; index++) {
+            if (mrating.equals(CA_FRContentRatingDimensions[index])) {
+                break;
+            }
         }
-      }
-      if (DEBUG) Log.d(TAG, "unblockCAFRLowRating:-:" + index);
-      pos = index;
-      if (pos < CA_FRContentRatingDimensions.length) {
-        for (index = 0; index < pos; index ++) {
-            TvContentRating subrating = TvContentRating.createRating(RatingDomain, "CA_TV_FR",
-               CA_FRContentRatingDimensions[index]);
-            if (subrating != null)
-            RatingList.add(subrating);
+        if (DEBUG) Log.d(TAG, "unblockCAFRLowRating:-:" + index);
+        pos = index;
+        if (pos < CA_FRContentRatingDimensions.length) {
+            for (index = 0; index < pos; index++) {
+                TvContentRating subrating = TvContentRating.createRating(RatingDomain, "CA_TV_FR",
+                        CA_FRContentRatingDimensions[index]);
+                if (subrating != null)
+                    RatingList.add(subrating);
+            }
         }
-      }
-      return (RatingList.size() == 0 ? null : RatingList.toArray(new TvContentRating[RatingList.size()]));
+        return (RatingList.size() == 0 ? null : RatingList.toArray(new TvContentRating[RatingList.size()]));
     }
 
     public static TvContentRating[] unblockLowRating(TvContentRating rating) {
-       if (rating == null) {
+        if (rating == null) {
             return null;
         }
         if (DEBUG) Log.d(TAG, "unblockLowRating:" + rating.flattenToString());
@@ -1503,29 +1520,29 @@ public class DroidLogicTvUtils
     }
 
     public static String US_ContentRatingDimensions[][] =
-        {
-            {"", "None", "US_TV_G", "US_TV_PG", "US_TV_14", "US_TV_MA"},
-            {"", "US_TV_D"},
-            {"", "US_TV_L"},
-            {"", "US_TV_S"},
-            {"", "US_TV_V"},
-            {"", "US_TV_Y", "US_TV_Y7"},
-            {"", "US_TV_FV"},
-            {"", "NA", "US_MV_G", "US_MV_PG", "US_MV_PG13", "US_MV_R", "US_MV_NC17", "US_MV_X", "US_MV_NR"}
-        };
+            {
+                    {"", "None", "US_TV_G", "US_TV_PG", "US_TV_14", "US_TV_MA"},
+                    {"", "US_TV_D"},
+                    {"", "US_TV_L"},
+                    {"", "US_TV_S"},
+                    {"", "US_TV_V"},
+                    {"", "US_TV_Y", "US_TV_Y7"},
+                    {"", "US_TV_FV"},
+                    {"", "NA", "US_MV_G", "US_MV_PG", "US_MV_PG13", "US_MV_R", "US_MV_NC17", "US_MV_X", "US_MV_NR"}
+            };
     public static String CA_EN_ContentRatingDimensions[] =
-        {
-            "CA_TV_EN_EXEMPT", "CA_TV_EN_C", "CA_TV_EN_C8", "CA_TV_EN_G", "CA_TV_EN_PG", "CA_TV_EN_14", "CA_TV_EN_18"
-        };
+            {
+                    "CA_TV_EN_EXEMPT", "CA_TV_EN_C", "CA_TV_EN_C8", "CA_TV_EN_G", "CA_TV_EN_PG", "CA_TV_EN_14", "CA_TV_EN_18"
+            };
     public static String CA_FR_ContentRatingDimensions[] =
-        {
-            "CA_TV_FR_E", "CA_TV_FR_G", "CA_TV_FR_8", "CA_TV_FR_13", "CA_TV_FR_16", "CA_TV_FR_18"
-        };
+            {
+                    "CA_TV_FR_E", "CA_TV_FR_G", "CA_TV_FR_8", "CA_TV_FR_13", "CA_TV_FR_16", "CA_TV_FR_18"
+            };
 
 
     public static TvContentRating[] parseDRatings(String jsonString) {
         String RatingDomain = "com.android.tv";
-        if (DEBUG) Log.d(TAG, "parseDRatings:"+jsonString);
+        if (DEBUG) Log.d(TAG, "parseDRatings:" + jsonString);
         if (jsonString == null || jsonString.isEmpty())
             return null;
 
@@ -1546,7 +1563,7 @@ public class DroidLogicTvUtils
         try {
             obj = new JSONObject(jsonString);
         } catch (JSONException e) {
-            throw new RuntimeException("Json parse fail: ("+jsonString+")", e);
+            throw new RuntimeException("Json parse fail: (" + jsonString + ")", e);
         }
 
         try {
@@ -1555,7 +1572,7 @@ public class DroidLogicTvUtils
             return null;
         }
 
-        if (DEBUG) Log.d(TAG, "D rating:"+regionArray.toString());
+        if (DEBUG) Log.d(TAG, "D rating:" + regionArray.toString());
 
         int ArraySize = regionArray.length();
         for (int i = 0; i < regionArray.length(); i++) {
@@ -1584,15 +1601,15 @@ public class DroidLogicTvUtils
                         if (subDimension == -1 || subValue == -1)
                             continue;
                         if (subDimension > 7 ||
-                            subValue >= DroidLogicTvUtils.US_ContentRatingDimensions[subDimension].length ||
-                            TextUtils.isEmpty(DroidLogicTvUtils.US_ContentRatingDimensions[subDimension][subValue])) {
+                                subValue >= DroidLogicTvUtils.US_ContentRatingDimensions[subDimension].length ||
+                                TextUtils.isEmpty(DroidLogicTvUtils.US_ContentRatingDimensions[subDimension][subValue])) {
                             continue;
                         }
                         if (subDimension == 7) {
                             TvContentRating r = TvContentRating.createRating(RatingDomain, "US_MV",
                                     DroidLogicTvUtils.US_ContentRatingDimensions[subDimension][subValue]);
                             RatingList.add(r);
-                            Log.d(TAG, "mv add rating:"+r.flattenToString());
+                            Log.d(TAG, "mv add rating:" + r.flattenToString());
                         } else {
                         /*
                             if (subDimension == 255)
@@ -1604,15 +1621,15 @@ public class DroidLogicTvUtils
                          */
                             String name = "";
                             if ((subDimension == 1) || (subDimension == 2) || (subDimension == 3) || (subDimension == 4) || (subDimension == 6)) {
-                                        if (DroidLogicTvUtils.US_ContentRatingDimensions[subDimension].length > subValue)
-                                             name = DroidLogicTvUtils.US_ContentRatingDimensions[subDimension][subValue];
-                                        if (!TextUtils.isEmpty(name))
-                                             tvSubRatingList.add(name);
-                            } else if ((subDimension == 0) || (subDimension == 5)){
-                                        if (DroidLogicTvUtils.US_ContentRatingDimensions[subDimension].length > subValue)
-                                             name = DroidLogicTvUtils.US_ContentRatingDimensions[subDimension][subValue];
-                                        if (!TextUtils.isEmpty(name))
-                                             tvDimList.add(name);
+                                if (DroidLogicTvUtils.US_ContentRatingDimensions[subDimension].length > subValue)
+                                    name = DroidLogicTvUtils.US_ContentRatingDimensions[subDimension][subValue];
+                                if (!TextUtils.isEmpty(name))
+                                    tvSubRatingList.add(name);
+                            } else if ((subDimension == 0) || (subDimension == 5)) {
+                                if (DroidLogicTvUtils.US_ContentRatingDimensions[subDimension].length > subValue)
+                                    name = DroidLogicTvUtils.US_ContentRatingDimensions[subDimension][subValue];
+                                if (!TextUtils.isEmpty(name))
+                                    tvDimList.add(name);
                             }
                         }
                     }
@@ -1622,27 +1639,27 @@ public class DroidLogicTvUtils
                         int Dimension = RatingValues.optInt("d", -1);
                         int Value = RatingValues.optInt("r", -1);
                         if (Dimension == -1 || Value == -1)
-                             continue;
+                            continue;
                         if (Dimension == 0) {
-                        if (Value >= DroidLogicTvUtils.CA_EN_ContentRatingDimensions.length ||
-                             TextUtils.isEmpty(DroidLogicTvUtils.CA_EN_ContentRatingDimensions[Value])) {
-                             continue;
-                        }
+                            if (Value >= DroidLogicTvUtils.CA_EN_ContentRatingDimensions.length ||
+                                    TextUtils.isEmpty(DroidLogicTvUtils.CA_EN_ContentRatingDimensions[Value])) {
+                                continue;
+                            }
                             //canadian english language rating
                             TvContentRating r = TvContentRating.createRating(RatingDomain, "CA_TV_EN",
                                     DroidLogicTvUtils.CA_EN_ContentRatingDimensions[Value]);
                             RatingList.add(r);
-                            Log.d(TAG, "add rating:"+r.flattenToString());
+                            Log.d(TAG, "add rating:" + r.flattenToString());
                         } else if (Dimension == 1) {
                             if (Value >= DroidLogicTvUtils.CA_FR_ContentRatingDimensions.length ||
-                                 TextUtils.isEmpty(DroidLogicTvUtils.CA_FR_ContentRatingDimensions[Value])) {
-                                 continue;
+                                    TextUtils.isEmpty(DroidLogicTvUtils.CA_FR_ContentRatingDimensions[Value])) {
+                                continue;
                             }
                             //canadian frech language rating
                             TvContentRating r = TvContentRating.createRating(RatingDomain, "CA_TV_FR",
                                     DroidLogicTvUtils.CA_FR_ContentRatingDimensions[Value]);
                             RatingList.add(r);
-                            Log.d(TAG, "add rating:"+r.flattenToString());
+                            Log.d(TAG, "add rating:" + r.flattenToString());
                         }
                     }
                 }
@@ -1664,13 +1681,13 @@ public class DroidLogicTvUtils
     public static TvContentRating getARating(int auth, int id, int dlsv) {
         final String RatingDomain = "com.android.tv";
         final String ratings[][] = {
-            { "", "", "", "", "", "", "", "" },
-            { "NA", "US_MV_G", "US_MV_PG", "US_MV_PG13", "US_MV_R", "US_MV_NC17", "US_MV_X", "US_MV_NR" },
-            { "None", "US_TV_Y", "US_TV_Y7", "US_TV_G", "US_TV_PG", "US_TV_14", "US_TV_MA", "None" },
-            { "CA_TV_EN_EXEMPT", "CA_TV_EN_C", "CA_TV_EN_C8", "CA_TV_EN_G", "CA_TV_EN_PG", "CA_TV_EN_14", "CA_TV_EN_18", "" },
-            { "CA_TV_FR_E", "CA_TV_FR_G", "CA_TV_FR_8", "CA_TV_FR_13", "CA_TV_FR_16", "CA_TV_FR_18", "", "" }
+                {"", "", "", "", "", "", "", ""},
+                {"NA", "US_MV_G", "US_MV_PG", "US_MV_PG13", "US_MV_R", "US_MV_NC17", "US_MV_X", "US_MV_NR"},
+                {"None", "US_TV_Y", "US_TV_Y7", "US_TV_G", "US_TV_PG", "US_TV_14", "US_TV_MA", "None"},
+                {"CA_TV_EN_EXEMPT", "CA_TV_EN_C", "CA_TV_EN_C8", "CA_TV_EN_G", "CA_TV_EN_PG", "CA_TV_EN_14", "CA_TV_EN_18", ""},
+                {"CA_TV_FR_E", "CA_TV_FR_G", "CA_TV_FR_8", "CA_TV_FR_13", "CA_TV_FR_16", "CA_TV_FR_18", "", ""}
         };
-        final String region[] = { "", "US_MV", "US_TV", "CA_TV_EN", "CA_TV_FR" };
+        final String region[] = {"", "US_MV", "US_TV", "CA_TV_EN", "CA_TV_FR"};
 
         final int VBI_RATING_AUTH_NONE = 0;
         final int VBI_RATING_AUTH_MPAA = 1;
@@ -1697,12 +1714,12 @@ public class DroidLogicTvUtils
         if ((dlsv & VBI_RATING_S) == VBI_RATING_S)
             subRatings.add("US_TV_S");
         if ((dlsv & VBI_RATING_V) == VBI_RATING_V)
-            subRatings.add(TextUtils.equals(ratings[auth][id], "US_TV_Y7")? "US_TV_FV" : "US_TV_V");
+            subRatings.add(TextUtils.equals(ratings[auth][id], "US_TV_Y7") ? "US_TV_FV" : "US_TV_V");
 
         return TvContentRating.createRating(RatingDomain, region[auth],
-                   ratings[auth][id],
-                   (subRatings.size() == 0 ? null : subRatings.toArray(new String[subRatings.size()]))
-               );
+                ratings[auth][id],
+                (subRatings.size() == 0 ? null : subRatings.toArray(new String[subRatings.size()]))
+        );
     }
 
     public static TvContentRating[] parseARatings(String jsonString) {
@@ -1720,7 +1737,7 @@ public class DroidLogicTvUtils
         try {
             obj = new JSONObject(jsonString);
         } catch (JSONException e) {
-           return null;
+            return null;
         }
         JSONObject ratingObj = null;
         try {
@@ -1729,7 +1746,7 @@ public class DroidLogicTvUtils
             return null;
         }
 
-        Log.d(TAG, "A rating:"+ratingObj.toString());
+        Log.d(TAG, "A rating:" + ratingObj.toString());
 
         int region = ratingObj.optInt("g", -1);
         int id = ratingObj.optInt("i", -1);
@@ -1740,7 +1757,7 @@ public class DroidLogicTvUtils
         TvContentRating r = getARating(region, id, dlsv);
         if (r != null) {
             RatingList.add(r);
-            Log.d(TAG, "add rating:"+r.flattenToString());
+            Log.d(TAG, "add rating:" + r.flattenToString());
         }
         return (RatingList.size() == 0 ? null : RatingList.toArray(new TvContentRating[RatingList.size()]));
     }
@@ -1766,7 +1783,7 @@ public class DroidLogicTvUtils
         try {
             obj = new JSONObject(jsonString);
         } catch (JSONException e) {
-            throw new RuntimeException("Json parse fail: ("+jsonString+")", e);
+            throw new RuntimeException("Json parse fail: (" + jsonString + ")", e);
         }
 
         try {
@@ -1775,7 +1792,7 @@ public class DroidLogicTvUtils
             return null;
         }
 
-        Log.d(TAG, "captions:"+captionArray.toString());
+        Log.d(TAG, "captions:" + captionArray.toString());
 
         int ArraySize = captionArray.length();
         int count = 0;
@@ -1791,34 +1808,34 @@ public class DroidLogicTvUtils
                 int easyReader = c.optInt("bwasy", 0);
                 int wideAspectRatio = c.optInt("bwar", 0);
                 ChannelInfo.Subtitle s
-                    = new ChannelInfo.Subtitle(ChannelInfo.Subtitle.TYPE_DTV_CC,
-                                        ChannelInfo.Subtitle.CC_CAPTION_SERVICE1 + serviceNumber - 1,
-                                        ChannelInfo.Subtitle.TYPE_DTV_CC,
-                                        decoder_param,
-                                        (easyReader == 0 ? 0x80 : 0) | (wideAspectRatio == 0 ? 0x40 : 0),
-                                        c.optString("lng", ""),
-                                        count++);
+                        = new ChannelInfo.Subtitle(ChannelInfo.Subtitle.TYPE_DTV_CC,
+                        ChannelInfo.Subtitle.CC_CAPTION_SERVICE1 + serviceNumber - 1,
+                        ChannelInfo.Subtitle.TYPE_DTV_CC,
+                        decoder_param,
+                        (easyReader == 0 ? 0x80 : 0) | (wideAspectRatio == 0 ? 0x40 : 0),
+                        c.optString("lng", ""),
+                        count++);
                 SubtitleList.add(s);
             } else if (isDigitalCC == 0) {
                 int line21 = c.optInt("l21", 0);
                 ChannelInfo.Subtitle s
-                    = new ChannelInfo.Subtitle(ChannelInfo.Subtitle.TYPE_ATV_CC,
-                                        ChannelInfo.Subtitle.CC_CAPTION_CC1,
-                                        ChannelInfo.Subtitle.TYPE_ATV_CC,
-                                        0,
-                                        0,
-                                        "CC1",
-                                        count++);
+                        = new ChannelInfo.Subtitle(ChannelInfo.Subtitle.TYPE_ATV_CC,
+                        ChannelInfo.Subtitle.CC_CAPTION_CC1,
+                        ChannelInfo.Subtitle.TYPE_ATV_CC,
+                        0,
+                        0,
+                        "CC1",
+                        count++);
                 SubtitleList.add(s);
             }
-         }
+        }
 
         return (SubtitleList.size() == 0 ? null : SubtitleList);
     }
 
     public static String getObjectString(String jsonString, String objName) {
         if (jsonString == null || jsonString.isEmpty()
-            ||objName == null || objName.isEmpty())
+                || objName == null || objName.isEmpty())
             return null;
 
         /*
@@ -1828,7 +1845,7 @@ public class DroidLogicTvUtils
         try {
             obj = new JSONObject(jsonString);
         } catch (JSONException e) {
-            throw new RuntimeException("Json parse fail: ("+jsonString+")", e);
+            throw new RuntimeException("Json parse fail: (" + jsonString + ")", e);
         }
         JSONObject tObj = null;
         try {
@@ -1837,15 +1854,15 @@ public class DroidLogicTvUtils
             return null;
         }
 
-        Log.d(TAG, objName+":"+tObj.toString());
+        Log.d(TAG, objName + ":" + tObj.toString());
 
         return tObj.toString();
     }
 
     public static int getObjectValueInt(String jsonString, String objName, String valueName, int defaultValue) {
         if (jsonString == null || jsonString.isEmpty()
-            || objName == null || objName.isEmpty()
-            || valueName == null || valueName.isEmpty())
+                || objName == null || objName.isEmpty()
+                || valueName == null || valueName.isEmpty())
             return defaultValue;
 
         /*
@@ -1855,7 +1872,7 @@ public class DroidLogicTvUtils
         try {
             obj = new JSONObject(jsonString);
         } catch (JSONException e) {
-            throw new RuntimeException("Json parse fail: ("+jsonString+")", e);
+            throw new RuntimeException("Json parse fail: (" + jsonString + ")", e);
         }
         JSONObject nObj = null;
         try {
@@ -1864,7 +1881,7 @@ public class DroidLogicTvUtils
             return defaultValue;
         }
 
-        Log.d(TAG, objName+":"+nObj.toString());
+        Log.d(TAG, objName + ":" + nObj.toString());
 
         return nObj.optInt(valueName, defaultValue);
     }
@@ -1895,7 +1912,7 @@ public class DroidLogicTvUtils
         return result;
     }
 
-    public static boolean needPreviewFeture (SystemControlManager sm) {
+    public static boolean needPreviewFeture(SystemControlManager sm) {
         return sm.getPropertyBoolean(PROP_NEED_PREVIEW_WINDOW, false);
     }
 }

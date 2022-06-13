@@ -46,7 +46,8 @@ public class DataProviderManager {
     }
 
     public static boolean putStringValueToTable(Context context, String table, String name, String value) {
-        if (DEBUG) Log.d(TAG, "putStringValueToTable  table = " + table + ", name = " + name + ", value = " + value);
+        if (DEBUG)
+            Log.d(TAG, "putStringValueToTable  table = " + table + ", name = " + name + ", value = " + value);
         boolean result = false;
         if (context == null) {
             Log.d(TAG, "putStringValueToTable null context");
@@ -58,10 +59,10 @@ public class DataProviderManager {
         values.put(VALUE, value);
         Cursor cursor = null;
         try {
-            cursor = context.getContentResolver().query(uri, new String[] { PROPERTY, VALUE}, PROPERTY + " = ?",
-                    new String[]{ name }, null, null);
+            cursor = context.getContentResolver().query(uri, new String[]{PROPERTY, VALUE}, PROPERTY + " = ?",
+                    new String[]{name}, null, null);
             if (cursor != null && cursor.moveToFirst()) {
-                int row = context.getContentResolver().update(uri, values, PROPERTY + " = ?", new String[] { name });
+                int row = context.getContentResolver().update(uri, values, PROPERTY + " = ?", new String[]{name});
                 if (row != -1) {
                     result = true;
                 }
@@ -78,7 +79,7 @@ public class DataProviderManager {
                 }
             }
         } catch (Exception e) {
-            Log.e(TAG,"putStringValueToTable putString Exception  = " + e.getMessage());
+            Log.e(TAG, "putStringValueToTable putString Exception  = " + e.getMessage());
             e.printStackTrace();
         } finally {
             if (cursor != null) {
@@ -100,20 +101,21 @@ public class DataProviderManager {
         Uri uri = Uri.parse(CONTENT_URI + table);
         Cursor cursor = null;
         try {
-            cursor = context.getContentResolver().query(uri, new String[] { PROPERTY, VALUE}, PROPERTY + " = ?",
-                    new String[]{ name }, null, null);
+            cursor = context.getContentResolver().query(uri, new String[]{PROPERTY, VALUE}, PROPERTY + " = ?",
+                    new String[]{name}, null, null);
             if (cursor != null && cursor.moveToFirst()) {
                 result = cursor.getString(cursor.getColumnIndex(VALUE));
             }
         } catch (Exception e) {
-            Log.e(TAG,"getStringValueFromTable Exception  = " + e.getMessage());
+            Log.e(TAG, "getStringValueFromTable Exception  = " + e.getMessage());
             e.printStackTrace();
         } finally {
             if (cursor != null) {
                 cursor.close();
             }
         }
-        if (DEBUG) Log.d(TAG,"getStringValueFromTable table = " + table + ", name = " + name + ", value = " + result);
+        if (DEBUG)
+            Log.d(TAG, "getStringValueFromTable table = " + table + ", name = " + name + ", value = " + result);
         return result;
     }
 

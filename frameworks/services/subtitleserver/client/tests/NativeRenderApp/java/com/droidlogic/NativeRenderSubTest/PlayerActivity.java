@@ -63,12 +63,13 @@ public class PlayerActivity extends Activity implements
         }
 
         @Override
-        public void surfaceDestroyed (SurfaceHolder holder) {
+        public void surfaceDestroyed(SurfaceHolder holder) {
             nStopNativeRender();
         }
     };
 
     private native void nStartNativeRender(Surface surface);
+
     private native void nStopNativeRender();
 
     static {
@@ -100,15 +101,15 @@ public class PlayerActivity extends Activity implements
 
         mOnBtn = (Button) findViewById(R.id.subtitleOn);
         mOffBtn = (Button) findViewById(R.id.subtitleOff);
-        mOnBtn.setOnClickListener (new Button.OnClickListener() {
-            public void onClick (View v) {
-                Log.d (TAG, "mOnBtn onClick");
+        mOnBtn.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Log.d(TAG, "mOnBtn onClick");
                 nStartNativeRender(mCreatHolder.getSurface());
             }
         });
-        mOffBtn.setOnClickListener (new Button.OnClickListener() {
-            public void onClick (View v) {
-                Log.d (TAG, "mOffBtn onClick");
+        mOffBtn.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                Log.d(TAG, "mOffBtn onClick");
                 nStopNativeRender();
             }
         });
@@ -121,7 +122,7 @@ public class PlayerActivity extends Activity implements
     @Override
     protected void onStop() {
         super.onStop();
-         try {
+        try {
             mMediaPlayer.stop();
             mMediaPlayer.reset();
         } catch (Exception ex) {
@@ -138,7 +139,7 @@ public class PlayerActivity extends Activity implements
     private void playVideo() {
         try {
             // Create a new media player and set the listeners
-            mMediaPlayer.setDataSource (this, Uri.parse(mFilePath), null);
+            mMediaPlayer.setDataSource(this, Uri.parse(mFilePath), null);
             mMediaPlayer.setDisplay(mHolder);
 
             mMediaPlayer.setUseLocalExtractor(mMediaPlayer);
@@ -166,7 +167,7 @@ public class PlayerActivity extends Activity implements
         Log.d(TAG, "onCompletion called stopped");
 
         try {
-            mMediaPlayer.setDataSource (this, Uri.parse(mFilePath), null);
+            mMediaPlayer.setDataSource(this, Uri.parse(mFilePath), null);
             mMediaPlayer.setUseLocalExtractor(mMediaPlayer);
             mMediaPlayer.prepare();
         } catch (Exception ex) {
@@ -182,9 +183,9 @@ public class PlayerActivity extends Activity implements
             for (int j = 0; j < mTrackInfo.length; j++) {
                 if (mTrackInfo[j] != null) {
                     int trackType = mTrackInfo[j].getTrackType();
-                    Log.d(TAG, "get Track, track info="+mTrackInfo[j]);
+                    Log.d(TAG, "get Track, track info=" + mTrackInfo[j]);
                     if (trackType == MediaPlayer.TrackInfo.MEDIA_TRACK_TYPE_SUBTITLE || trackType == MediaPlayer.TrackInfo.MEDIA_TRACK_TYPE_TIMEDTEXT) {
-                        Log.d(TAG, "get  subtitle Track, track info="+mTrackInfo[j]);
+                        Log.d(TAG, "get  subtitle Track, track info=" + mTrackInfo[j]);
                     }
                 }
 
@@ -199,7 +200,7 @@ public class PlayerActivity extends Activity implements
 
     @Override
     public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-        Log.d(TAG, "onVideoSizeChanged called width="+width +", height="+height);
+        Log.d(TAG, "onVideoSizeChanged called width=" + width + ", height=" + height);
         mVideoWidth = width;
         mVideoHeight = height;
         if (width != 0 && width != 0) {

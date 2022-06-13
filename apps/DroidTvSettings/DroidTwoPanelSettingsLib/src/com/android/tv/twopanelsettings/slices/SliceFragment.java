@@ -127,7 +127,9 @@ public class SliceFragment extends SettingsPreferenceFragment implements Observe
         }
     };
 
-    /** Callback for one panel settings fragment **/
+    /**
+     * Callback for one panel settings fragment
+     **/
     public interface OnePanelSliceFragmentContainer {
         void navigateBack();
     }

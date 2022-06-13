@@ -182,7 +182,7 @@ public class StorageSummaryFragment extends SettingsPreferenceFragment {
             final String key = StorageSummaryFragment.VolPreference.makeKey(volumeInfo);
             touchedDeviceKeys.add(key);
             StorageSummaryFragment.VolPreference volPreference =
-                        (StorageSummaryFragment.VolPreference) deviceCategory.findPreference(key);
+                    (StorageSummaryFragment.VolPreference) deviceCategory.findPreference(key);
             if (volPreference == null) {
                 volPreference = new StorageSummaryFragment.VolPreference(themedContext, volumeInfo);
             }
@@ -197,12 +197,12 @@ public class StorageSummaryFragment extends SettingsPreferenceFragment {
                     (StorageSummaryFragment.MissingPreference) deviceCategory.findPreference(key);
             if (missingPreference == null) {
                 missingPreference = new StorageSummaryFragment.MissingPreference(
-                            themedContext, volumeRecord);
+                        themedContext, volumeRecord);
             }
             deviceCategory.addPreference(missingPreference);
         }
 
-        for (int i = 0; i < deviceCategory.getPreferenceCount();) {
+        for (int i = 0; i < deviceCategory.getPreferenceCount(); ) {
             final Preference pref = deviceCategory.getPreference(i);
             if (touchedDeviceKeys.contains(pref.getKey())) {
                 i++;
@@ -236,12 +236,12 @@ public class StorageSummaryFragment extends SettingsPreferenceFragment {
                     (StorageSummaryFragment.UnsupportedDiskPreference) findPreference(key);
             if (unsupportedDiskPreference == null) {
                 unsupportedDiskPreference = new StorageSummaryFragment.UnsupportedDiskPreference(
-                            themedContext, diskInfo);
+                        themedContext, diskInfo);
             }
             removableCategory.addPreference(unsupportedDiskPreference);
         }
 
-        for (int i = 0; i < removableCategory.getPreferenceCount();) {
+        for (int i = 0; i < removableCategory.getPreferenceCount(); ) {
             final Preference pref = removableCategory.getPreference(i);
             if (touchedRemovableKeys.contains(pref.getKey())) {
                 i++;
@@ -258,7 +258,7 @@ public class StorageSummaryFragment extends SettingsPreferenceFragment {
         }
 
         private void refresh(Context context, StorageManager storageManager,
-                VolumeInfo volumeInfo) {
+                             VolumeInfo volumeInfo) {
             final String description = storageManager
                     .getBestVolumeDescription(volumeInfo);
             setTitle(description);

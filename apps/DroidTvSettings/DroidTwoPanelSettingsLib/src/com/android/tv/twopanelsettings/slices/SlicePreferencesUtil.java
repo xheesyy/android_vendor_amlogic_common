@@ -69,7 +69,7 @@ import java.util.List;
 public final class SlicePreferencesUtil {
 
     static Preference getPreference(SliceItem item, ContextThemeWrapper contextThemeWrapper,
-            String className, boolean isTwoPanel) {
+                                    String className, boolean isTwoPanel) {
         Preference preference = null;
         if (item == null) {
             return null;
@@ -82,7 +82,7 @@ public final class SlicePreferencesUtil {
                 // TODO: Figure out all the possible cases and reorganize the logic
                 if (data.mInfoItems.size() > 0) {
                     preference = new InfoPreference(
-                                contextThemeWrapper, getInfoList(data.mInfoItems));
+                            contextThemeWrapper, getInfoList(data.mInfoItems));
                 } else if (data.mIntentItem != null) {
                     SliceActionImpl action = new SliceActionImpl(data.mIntentItem);
                     if (action != null) {
@@ -103,11 +103,11 @@ public final class SlicePreferencesUtil {
                     if (action != null) {
                         int buttonStyle = SlicePreferencesUtil.getButtonStyle(item);
                         switch (buttonStyle) {
-                            case CHECKMARK :
+                            case CHECKMARK:
                                 preference = new SliceCheckboxPreference(
                                         contextThemeWrapper, action);
                                 break;
-                            case SWITCH :
+                            case SWITCH:
                                 preference = new SliceSwitchPreference(contextThemeWrapper, action);
                                 break;
                             case RADIO:
@@ -137,7 +137,7 @@ public final class SlicePreferencesUtil {
                         // if contains info text
                         if (getInfoSummary(item) != null) {
                             preference = new CustomContentDescriptionPreference(
-                                        contextThemeWrapper);
+                                    contextThemeWrapper);
                         } else {
                             preference = new Preference(contextThemeWrapper);
                         }
@@ -294,16 +294,16 @@ public final class SlicePreferencesUtil {
             String subType = item.getSubType();
             if (subType != null) {
                 switch (subType) {
-                    case SlicesConstants.SUBTYPE_INFO_PREFERENCE :
+                    case SlicesConstants.SUBTYPE_INFO_PREFERENCE:
                         data.mInfoItems.add(item);
                         break;
-                    case SlicesConstants.SUBTYPE_INTENT :
+                    case SlicesConstants.SUBTYPE_INTENT:
                         data.mIntentItem = item;
                         break;
-                    case SlicesConstants.SUBTYPE_FOLLOWUP_INTENT :
+                    case SlicesConstants.SUBTYPE_FOLLOWUP_INTENT:
                         data.mFollowupIntentItem = item;
                         break;
-                    case SlicesConstants.TAG_TARGET_URI :
+                    case SlicesConstants.TAG_TARGET_URI:
                         data.mTargetSliceItem = item;
                         break;
                 }
@@ -357,11 +357,12 @@ public final class SlicePreferencesUtil {
 
     /**
      * Get the screen title item for the slice.
+     *
      * @param sliceItems list of SliceItem extracted from slice data.
      * @return screen title item.
      */
     static SliceItem getScreenTitleItem(List<SliceContent> sliceItems) {
-        for (SliceContent contentItem : sliceItems)  {
+        for (SliceContent contentItem : sliceItems) {
             SliceItem item = contentItem.getSliceItem();
             if (item.getSubType() != null
                     && item.getSubType().equals(SlicesConstants.TYPE_PREFERENCE_SCREEN_TITLE)) {
@@ -372,7 +373,7 @@ public final class SlicePreferencesUtil {
     }
 
     static SliceItem getRedirectSlice(List<SliceContent> sliceItems) {
-        for (SliceContent contentItem : sliceItems)  {
+        for (SliceContent contentItem : sliceItems) {
             SliceItem item = contentItem.getSliceItem();
             if (item.getSubType() != null
                     && item.getSubType().equals(SlicesConstants.TYPE_REDIRECTED_SLICE_URI)) {
@@ -383,7 +384,7 @@ public final class SlicePreferencesUtil {
     }
 
     static SliceItem getFocusedPreferenceItem(List<SliceContent> sliceItems) {
-        for (SliceContent contentItem : sliceItems)  {
+        for (SliceContent contentItem : sliceItems) {
             SliceItem item = contentItem.getSliceItem();
             if (item.getSubType() != null
                     && item.getSubType().equals(SlicesConstants.TYPE_FOCUSED_PREFERENCE)) {
@@ -394,7 +395,7 @@ public final class SlicePreferencesUtil {
     }
 
     static SliceItem getEmbeddedItem(List<SliceContent> sliceItems) {
-        for (SliceContent contentItem : sliceItems)  {
+        for (SliceContent contentItem : sliceItems) {
             SliceItem item = contentItem.getSliceItem();
             if (item.getSubType() != null
                     && item.getSubType().equals(SlicesConstants.TYPE_PREFERENCE_EMBEDDED)) {
@@ -406,7 +407,7 @@ public final class SlicePreferencesUtil {
 
     private static boolean isIconNeedsToBeProcessed(SliceItem sliceItem) {
         List<SliceItem> items = sliceItem.getSlice().getItems();
-        for (SliceItem item : items)  {
+        for (SliceItem item : items) {
             if (item.getSubType() != null && item.getSubType().equals(
                     SlicesConstants.SUBTYPE_ICON_NEED_TO_BE_PROCESSED)) {
                 return item.getInt() == 1;
@@ -417,7 +418,7 @@ public final class SlicePreferencesUtil {
 
     private static int getButtonStyle(SliceItem sliceItem) {
         List<SliceItem> items = sliceItem.getSlice().getItems();
-        for (SliceItem item : items)  {
+        for (SliceItem item : items) {
             if (item.getSubType() != null
                     && item.getSubType().equals(SlicesConstants.SUBTYPE_BUTTON_STYLE)) {
                 return item.getInt();
@@ -428,7 +429,7 @@ public final class SlicePreferencesUtil {
 
     private static boolean enabled(SliceItem sliceItem) {
         List<SliceItem> items = sliceItem.getSlice().getItems();
-        for (SliceItem item : items)  {
+        for (SliceItem item : items) {
             if (item.getSubType() != null
                     && item.getSubType().equals(SlicesConstants.SUBTYPE_IS_ENABLED)) {
                 return item.getInt() == 1;
@@ -439,7 +440,7 @@ public final class SlicePreferencesUtil {
 
     private static boolean selectable(SliceItem sliceItem) {
         List<SliceItem> items = sliceItem.getSlice().getItems();
-        for (SliceItem item : items)  {
+        for (SliceItem item : items) {
             if (item.getSubType() != null
                     && item.getSubType().equals(SlicesConstants.SUBTYPE_IS_SELECTABLE)) {
                 return item.getInt() == 1;
@@ -450,7 +451,7 @@ public final class SlicePreferencesUtil {
 
     private static boolean addInfoStatus(SliceItem sliceItem) {
         List<SliceItem> items = sliceItem.getSlice().getItems();
-        for (SliceItem item : items)  {
+        for (SliceItem item : items) {
             if (item.getSubType() != null
                     && item.getSubType().equals(EXTRA_ADD_INFO_STATUS)) {
                 return item.getInt() == 1;
@@ -469,7 +470,9 @@ public final class SlicePreferencesUtil {
         return item.getText();
     }
 
-    /** Get the icon from the SliceItem if available */
+    /**
+     * Get the icon from the SliceItem if available
+     */
     static Icon getIcon(SliceItem startItem) {
         if (startItem != null && startItem.getSlice() != null
                 && startItem.getSlice().getItems() != null
@@ -527,7 +530,7 @@ public final class SlicePreferencesUtil {
     private static String getInfoContentDescription(
             SliceItem sliceItem, String contentDescription) {
         List<SliceItem> items = sliceItem.getSlice().getItems();
-        for (SliceItem item : items)  {
+        for (SliceItem item : items) {
             if (item.getSubType() != null
                     && item.getSubType().equals(SUBTYPE_CONTENT_DESCRIPTION)) {
                 return item.getText().toString();

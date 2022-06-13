@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -107,13 +106,25 @@
     <color name="lb_dialog_selector_color">#0DFFFFFF</color>
     <item name="lb_dialog_list_item_unselected_text_alpha" format="float" type="string">1.00</item>
     <color name="lb_tv_white">#FFCCCCCC</color>
-    <item name="lb_dialog_list_item_unselected_description_text_alpha" format="float" type="string">0.50</item>
-    <item name="lb_dialog_list_item_selected_chevron_background_alpha" format="float" type="string">1.00</item>
-    <item name="lb_dialog_list_item_disabled_chevron_background_alpha" format="float" type="string">0.50</item>
-    <item name="lb_dialog_list_item_selected_title_text_alpha" format="float" type="string">1.00</item>
-    <item name="lb_dialog_list_item_disabled_title_text_alpha" format="float" type="string">0.50</item>
-    <item name="lb_dialog_list_item_selected_description_text_alpha" format="float" type="string">0.50</item>
-    <item name="lb_dialog_list_item_disabled_description_text_alpha" format="float" type="string">0.50</item>
+    <item name="lb_dialog_list_item_unselected_description_text_alpha" format="float" type="string">
+        0.50
+    </item>
+    <item name="lb_dialog_list_item_selected_chevron_background_alpha" format="float" type="string">
+        1.00
+    </item>
+    <item name="lb_dialog_list_item_disabled_chevron_background_alpha" format="float" type="string">
+        0.50
+    </item>
+    <item name="lb_dialog_list_item_selected_title_text_alpha" format="float" type="string">1.00
+    </item>
+    <item name="lb_dialog_list_item_disabled_title_text_alpha" format="float" type="string">0.50
+    </item>
+    <item name="lb_dialog_list_item_selected_description_text_alpha" format="float" type="string">
+        0.50
+    </item>
+    <item name="lb_dialog_list_item_disabled_description_text_alpha" format="float" type="string">
+        0.50
+    </item>
 
     <!-- Default avatar colors -->
     <color name="indigo_500">#FF3F51B5</color>

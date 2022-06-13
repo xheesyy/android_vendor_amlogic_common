@@ -108,7 +108,7 @@ public class WindowLocationUtil {
      * get clip and unclipped bounds of ImageView inside a window
      */
     public static void getImageLocationsInWindow(ImageView view,
-            RectF clippedBounds, RectF unclippedBitmapRect) {
+                                                 RectF clippedBounds, RectF unclippedBitmapRect) {
         // get bounds exclude padding, bitmap will be clipped by this bounds
         clippedBounds.set(view.getPaddingLeft(), view.getPaddingTop(),
                 view.getWidth() - view.getPaddingRight(),

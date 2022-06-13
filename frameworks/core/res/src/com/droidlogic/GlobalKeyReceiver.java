@@ -40,10 +40,11 @@ import android.database.Cursor;
 import android.net.Uri;
 
 
-
 import com.droidlogic.app.UsbCameraManager;
+
 import java.util.List;
 import java.lang.reflect.InvocationTargetException;
+
 import com.droidlogic.app.SystemControlManager;
 
 import com.droidlogic.app.DroidLogicUtils;
@@ -62,7 +63,7 @@ public class GlobalKeyReceiver extends BroadcastReceiver {
     private static final int NETFLIX_SOURCE_TYPE_POWER_ON_FROM_NETFLIX_BUTTON = 19;
     private static final String URI_NETFLIX = "nflx://www.netflix.com/";
     private static final String REMOTE_YT_BUTTON = "yt_remote_button";
-    private static final int  PENDING_KEY_NULL = -1;
+    private static final int PENDING_KEY_NULL = -1;
     private static final String EXTRA_BEGAN_FROM_NON_INTERACTIVE =
             "EXTRA_BEGAN_FROM_NON_INTERACTIVE";
     private boolean mIsBootCompleted = false;
@@ -70,11 +71,11 @@ public class GlobalKeyReceiver extends BroadcastReceiver {
     //table name
     private static final String TOGGLESTATE = "togglestate";
     public static final Uri HOTWORDMIC_URI = new Uri.Builder().scheme("content")
-                                                  .authority(HOTWORDMIC_AUTH)
-                                                  .appendPath(TOGGLESTATE)
-                                                  .build();
+            .authority(HOTWORDMIC_AUTH)
+            .appendPath(TOGGLESTATE)
+            .build();
     //colume name
-    public static final String COLUME_ID = "state" ;
+    public static final String COLUME_ID = "state";
 
     private static boolean isTvSetupComplete(Context context) {
         return Settings.Secure
@@ -102,7 +103,7 @@ public class GlobalKeyReceiver extends BroadcastReceiver {
             valueArgs[0] = SystemClock.uptimeMillis();
             valueArgs[1] = "android.policy:KEY";
 
-            powerManager.getClass().getMethod("wakeUp", long.class,String.class)
+            powerManager.getClass().getMethod("wakeUp", long.class, String.class)
                     .invoke(powerManager, valueArgs);
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,18 +117,18 @@ public class GlobalKeyReceiver extends BroadcastReceiver {
         }
 
         if ("android.intent.action.GLOBAL_BUTTON".equals(intent.getAction())) {
-            String component ;
+            String component;
             Intent intent1 = new Intent();
 
             KeyEvent event = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
             boolean fromNonInteractive =
-                intent.getBooleanExtra(EXTRA_BEGAN_FROM_NON_INTERACTIVE, false);
+                    intent.getBooleanExtra(EXTRA_BEGAN_FROM_NON_INTERACTIVE, false);
             int keyCode = event.getKeyCode();
             int keyAction = event.getAction();
-            Log.i(TAG, "onReceive:"+"keyAction<" + keyAction+"> keyCode: " + keyCode );
+            Log.i(TAG, "onReceive:" + "keyAction<" + keyAction + "> keyCode: " + keyCode);
             if (!mIsBootCompleted || !isTvSetupComplete(context)) {
-                  Log.i(TAG, "Set up incomplete. Ignoring KeyEvent: " + keyCode);
-                  return;
+                Log.i(TAG, "Set up incomplete. Ignoring KeyEvent: " + keyCode);
+                return;
             }
 
 /*             switch (keyCode) {
@@ -204,7 +205,7 @@ public class GlobalKeyReceiver extends BroadcastReceiver {
 
     private void oneTouchPlay(Context context) {
         Log.d(TAG, "oneTouchPlay");
-        HdmiControlManager manager = (HdmiControlManager)context.getSystemService(Context.HDMI_CONTROL_SERVICE);
+        HdmiControlManager manager = (HdmiControlManager) context.getSystemService(Context.HDMI_CONTROL_SERVICE);
         HdmiPlaybackClient playback = null;
         if (manager != null) {
             playback = manager.getPlaybackClient();
@@ -226,20 +227,21 @@ public class GlobalKeyReceiver extends BroadcastReceiver {
     private boolean isNetflixRunning(Context context) {
         boolean isNetflixRunning = false;
         try {
-            ActivityManager am = (ActivityManager) context.getSystemService (Context.ACTIVITY_SERVICE);
+            ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
             ComponentName componentInfo = tasks.get(0).topActivity;
             if (componentInfo.getPackageName().equals(PACKAGE_NAME_NETFLIX)) {
                 isNetflixRunning = true;
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         return isNetflixRunning;
     }
 
     private UserHandle getCurrentUser(Context context) {
-        final ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-        final UserManager userManager = (UserManager)context.getSystemService(Context.USER_SERVICE);
+        final ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        final UserManager userManager = (UserManager) context.getSystemService(Context.USER_SERVICE);
 
         List<UserInfo> userList = userManager.getUsers();
         for (UserInfo user : userList) {
@@ -259,7 +261,7 @@ public class GlobalKeyReceiver extends BroadcastReceiver {
 
     }
 
-    private void launchNetflix(Context context , boolean isInteractive) {
+    private void launchNetflix(Context context, boolean isInteractive) {
         PackageManager packageManager = context.getPackageManager();
         if (packageManager.getLaunchIntentForPackage(PACKAGE_NAME_NETFLIX) == null) {
             Log.e(TAG, "Cannot find intent for Netlix package: " + PACKAGE_NAME_NETFLIX);
@@ -275,21 +277,20 @@ public class GlobalKeyReceiver extends BroadcastReceiver {
         netflixIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         netflixIntent.putExtra("power_on", isInteractive); //false for netflixButton, true for powerOnFromNetflixButton
         context.startActivityAsUser(netflixIntent, getCurrentUser(context));
-       //netflix key always need wake up, if it is in interactive , wakeUp do noting
+        //netflix key always need wake up, if it is in interactive , wakeUp do noting
         wakeUp(context);
     }
 
     public boolean isIntentAvailable(Context context, Intent intent) {
-         final PackageManager packageManager = context.getPackageManager();
-         List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
-                    PackageManager.MATCH_DEFAULT_ONLY);
-         return list.size() > 0;
+        final PackageManager packageManager = context.getPackageManager();
+        List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
+                PackageManager.MATCH_DEFAULT_ONLY);
+        return list.size() > 0;
     }
 
 
-   private void updateMicToggleState (Context context)
-   {
-        ContentResolver resolver =  context.getContentResolver();
+    private void updateMicToggleState(Context context) {
+        ContentResolver resolver = context.getContentResolver();
         ContentValues value = new ContentValues();
 
         boolean mic_enable = DroidLogicUtils.getMicToggleState();

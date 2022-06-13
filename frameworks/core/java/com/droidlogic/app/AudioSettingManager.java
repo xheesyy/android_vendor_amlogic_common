@@ -34,7 +34,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class AudioSettingManager {
-    private static final String TAG                 = "AudioSettingManager";
+    private static final String TAG = "AudioSettingManager";
 
     private ContentResolver mResolver;
     private OutputModeManager mOutputModeManager;
@@ -44,7 +44,7 @@ public class AudioSettingManager {
 
     public static final String PROP_TUNER_AUDIO = "ro.vendor.platform.is.tv";
 
-    public AudioSettingManager(Context context){
+    public AudioSettingManager(Context context) {
         mResolver = context.getContentResolver();
         mSettingsObserver = new SettingsObserver(new Handler());
         mOutputModeManager = OutputModeManager.getInstance(context);
@@ -58,7 +58,7 @@ public class AudioSettingManager {
         switch (surround) {
             case OutputModeManager.ENCODED_SURROUND_OUTPUT_AUTO:
                 if (format == OutputModeManager.DIGITAL_AUDIO_FORMAT_AUTO ||
-                    format == OutputModeManager.DIGITAL_AUDIO_FORMAT_PASSTHROUGH) {
+                        format == OutputModeManager.DIGITAL_AUDIO_FORMAT_PASSTHROUGH) {
                     return false;
                 }
                 break;
@@ -92,7 +92,7 @@ public class AudioSettingManager {
     }
 
     public void registerSurroundObserver() {
-        String[] settings = new String[] {
+        String[] settings = new String[]{
                 OutputModeManager.ENCODED_SURROUND_OUTPUT,
                 OutputModeManager.ENCODED_SURROUND_OUTPUT_ENABLED_FORMATS,
         };
@@ -148,7 +148,7 @@ public class AudioSettingManager {
 
         setWiredDeviceConnectionState(SystemControlEvent.DEVICE_OUT_AUX_DIGITAL,
                 mOutputModeManager.isHDMIPlugged() ? 1 : 0, "", "");
-                /*setThisValue for dts scale*/
+        /*setThisValue for dts scale*/
         mOutputModeManager.setDtsDrcScaleSysfs();
 
         initDigitalAudioFormat();
@@ -160,17 +160,17 @@ public class AudioSettingManager {
         initVadStatus();
     }
 
-    private void initDigitalAudioFormat () {
+    private void initDigitalAudioFormat() {
         int audioFormat = mOutputModeManager.getDigitalAudioFormatOut();
         switch (audioFormat) {
             case OutputModeManager.DIGITAL_AUDIO_FORMAT_MANUAL:
                 mOutputModeManager.setDigitalAudioFormatOut(OutputModeManager.DIGITAL_AUDIO_FORMAT_MANUAL, getAudioManualFormats());
                 break;
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_PCM:
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_AUTO:
-        default:
-            mOutputModeManager.setDigitalAudioFormatOut(audioFormat);
-            break;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_PCM:
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_AUTO:
+            default:
+                mOutputModeManager.setDigitalAudioFormatOut(audioFormat);
+                break;
         }
     }
 
@@ -187,23 +187,23 @@ public class AudioSettingManager {
                 OutputModeManager.DRC_MODE, isTunerAudio() ? OutputModeManager.IS_DRC_RF : OutputModeManager.IS_DRC_LINE);
 
         switch (value) {
-        case OutputModeManager.IS_DRC_OFF:
-            mOutputModeManager.enableDobly_DRC(false);
-            mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
-            setDrcModePassthroughSetting(OutputModeManager.IS_DRC_OFF);
-            break;
-        case OutputModeManager.IS_DRC_LINE:
-            mOutputModeManager.enableDobly_DRC(true);
-            mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
-            setDrcModePassthroughSetting(OutputModeManager.IS_DRC_LINE);
-            break;
-        case OutputModeManager.IS_DRC_RF:
-            mOutputModeManager.enableDobly_DRC(false);
-            mOutputModeManager.setDoblyMode(OutputModeManager.RF_DRCMODE);
-            setDrcModePassthroughSetting(OutputModeManager.IS_DRC_RF);
-            break;
-        default:
-            return;
+            case OutputModeManager.IS_DRC_OFF:
+                mOutputModeManager.enableDobly_DRC(false);
+                mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
+                setDrcModePassthroughSetting(OutputModeManager.IS_DRC_OFF);
+                break;
+            case OutputModeManager.IS_DRC_LINE:
+                mOutputModeManager.enableDobly_DRC(true);
+                mOutputModeManager.setDoblyMode(OutputModeManager.LINE_DRCMODE);
+                setDrcModePassthroughSetting(OutputModeManager.IS_DRC_LINE);
+                break;
+            case OutputModeManager.IS_DRC_RF:
+                mOutputModeManager.enableDobly_DRC(false);
+                mOutputModeManager.setDoblyMode(OutputModeManager.RF_DRCMODE);
+                setDrcModePassthroughSetting(OutputModeManager.IS_DRC_RF);
+                break;
+            default:
+                return;
         }
     }
 
@@ -226,9 +226,9 @@ public class AudioSettingManager {
         try {
             Class<?> audioManager = Class.forName("android.media.AudioManager");
             Method setwireState = audioManager.getMethod("setWiredDeviceConnectionState",
-                                    int.class, int.class, String.class, String.class);
+                    int.class, int.class, String.class, String.class);
             setwireState.invoke(mAudioManager, type, state, address, name);
-        } catch(ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();

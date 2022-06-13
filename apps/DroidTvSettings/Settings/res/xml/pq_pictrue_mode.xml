@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +15,7 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/pq_pictrue">
+    android:title="@string/pq_pictrue">
 
     <ListPreference
         android:key="pq_pictrue_mode"
@@ -65,7 +64,7 @@
         android:entryValues="@array/pq_pictrue_mode_dolbyvision_entry_values"
         android:title="@string/pq_pictrue_mode_dolbyvision"
         android:summary="%s"
-        android:visibility="gone"/>
+        android:visibility="gone" />
     <ListPreference
         android:key="pq_pictrue_mode_cvua"
         android:persistent="false"
@@ -73,7 +72,7 @@
         android:entryValues="@array/pq_pictrue_mode_cvua_entry_values"
         android:title="@string/pq_pictrue_mode_cvua"
         android:summary="%s"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <!--<ListPreference
         android:key="pq_brightness"
@@ -135,7 +134,7 @@
         android:fragment="com.android.tv.settings.pqsettings.advanced.PQAdvancedFragment"
         android:key="pq_pictrue_advanced"
         android:persistent="false"
-        android:title="@string/pq_pictrue_advanced"/>
+        android:title="@string/pq_pictrue_advanced" />
     <Preference
         android:key="pq_allreset"
         android:title="@string/pq_allreset" />

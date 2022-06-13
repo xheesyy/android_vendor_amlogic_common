@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +15,14 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <Preference android:key="sync_now"
-                android:title="@string/sync_now"/>
-    <Preference android:key="remove_account"
-                android:title="@string/account_header_remove_account"/>
-    <PreferenceCategory android:key="sync_adapters"
-                        android:title="@string/account_sync"/>
+    <Preference
+        android:key="sync_now"
+        android:title="@string/sync_now" />
+    <Preference
+        android:key="remove_account"
+        android:title="@string/account_header_remove_account" />
+    <PreferenceCategory
+        android:key="sync_adapters"
+        android:title="@string/account_sync" />
 
 </PreferenceScreen>

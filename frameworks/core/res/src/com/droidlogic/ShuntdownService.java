@@ -25,7 +25,9 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.List;
+
 import android.bluetooth.BluetoothAdapter;
 import android.os.RemoteException;
 import android.os.SystemProperties;
@@ -34,13 +36,12 @@ import android.app.admin.DevicePolicyManager;
 import android.os.PowerManager;
 
 
-
 public class ShuntdownService extends Service {
 
     private static final String TAG = "ShuntdownService";
 
-    public static final String BT_NAME                  = "persist.vendor.bt_vendor";
-    public static final String BLUETOOTH_PKG_NAME           = "com.android.bluetooth";
+    public static final String BT_NAME = "persist.vendor.bt_vendor";
+    public static final String BLUETOOTH_PKG_NAME = "com.android.bluetooth";
     private static final int BT_SLEEP_TIME = 300;
     private boolean amlbt = false;
     private Context mContext;
@@ -55,15 +56,15 @@ public class ShuntdownService extends Service {
         mContext = this;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         mDevicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mActivityManager = (ActivityManager) mContext.getSystemService (Context.ACTIVITY_SERVICE);
+        mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         if (SystemProperties.get(BT_NAME, "null").indexOf("aml") != -1 ||
-            SystemProperties.get(BT_NAME, "null").indexOf("qca") != -1)
+                SystemProperties.get(BT_NAME, "null").indexOf("qca") != -1)
             amlbt = true;
 
         if (amlbt) {
             IntentFilter shundownfilter = new IntentFilter();
             shundownfilter.addAction(Intent.ACTION_SHUTDOWN);
-            registerReceiver (shundownReceiver, shundownfilter);
+            registerReceiver(shundownReceiver, shundownfilter);
         }
     }
 
@@ -95,7 +96,7 @@ public class ShuntdownService extends Service {
             //donot save shundown status setting global bluetooth_on
             try {
                 bluetoothAdapter.getClass().getMethod("disable", boolean.class)
-                    .invoke(bluetoothAdapter,false);
+                        .invoke(bluetoothAdapter, false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -115,10 +116,10 @@ public class ShuntdownService extends Service {
     private int getBtPid() {
         List<RunningAppProcessInfo> services = mActivityManager.getRunningAppProcesses();
         for (int i = 0; i < services.size(); i++) {
-            String servicename = services.get (i).processName;
-            if (servicename.contains (BLUETOOTH_PKG_NAME)) {
-                Log.d (TAG, "find process: " + servicename + " pid: " + services.get (i).pid);
-                return services.get (i).pid;
+            String servicename = services.get(i).processName;
+            if (servicename.contains(BLUETOOTH_PKG_NAME)) {
+                Log.d(TAG, "find process: " + servicename + " pid: " + services.get(i).pid);
+                return services.get(i).pid;
             }
         }
         return -1;

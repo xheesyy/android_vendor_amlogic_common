@@ -21,13 +21,17 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
 import androidx.preference.PreferenceScreen;
+
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -38,18 +42,19 @@ import com.droidlogic.app.OutputModeManager;
 import com.android.tv.settings.SettingsConstant;
 import com.android.tv.settings.R;
 
-public class NoSignalScreenStatusFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener{
+public class NoSignalScreenStatusFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     private static final String TAG = "NoSignalScreenStatusFragment";
 
     private static final String STATIC_FRAME = "tv_static_frame";
     private static final String BLACK_SCREEN = "tv_black_screen";
-    private static final String BLUE_SCREEN  = "tv_blue_screen";
+    private static final String BLUE_SCREEN = "tv_blue_screen";
 
     private TvOptionSettingManager mTvOptionSettingManager;
     private TwoStatePreference mStaticFramePreference;
     private TwoStatePreference mBlackScreenPreference;
     private TwoStatePreference mBlueScreenPreference;
+
     public static NoSignalScreenStatusFragment newInstance() {
         return new NoSignalScreenStatusFragment();
     }
@@ -100,16 +105,16 @@ public class NoSignalScreenStatusFragment extends SettingsPreferenceFragment imp
         switch (preference.getKey()) {
             case STATIC_FRAME:
                 isChecked = mStaticFramePreference.isChecked();
-                mTvOptionSettingManager.setStaticFrameStatus(isChecked?1:0, 1);
+                mTvOptionSettingManager.setStaticFrameStatus(isChecked ? 1 : 0, 1);
                 break;
             case BLACK_SCREEN:
                 isChecked = mBlackScreenPreference.isChecked();
-                mTvOptionSettingManager.setScreenColorForSignalChange(isChecked?0:1, 1);
+                mTvOptionSettingManager.setScreenColorForSignalChange(isChecked ? 0 : 1, 1);
                 updateScreenColorStatus(!isChecked);
                 break;
             case BLUE_SCREEN:
                 isChecked = mBlueScreenPreference.isChecked();
-                mTvOptionSettingManager.setScreenColorForSignalChange(isChecked?1:0, 1);
+                mTvOptionSettingManager.setScreenColorForSignalChange(isChecked ? 1 : 0, 1);
                 updateScreenColorStatus(isChecked);
                 break;
         }

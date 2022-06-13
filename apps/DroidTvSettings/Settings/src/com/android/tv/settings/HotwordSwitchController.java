@@ -48,13 +48,23 @@ public class HotwordSwitchController extends AbstractPreferenceController {
 
     static final String KEY_HOTWORD_SWITCH = "hotword_switch";
 
-    /** Listen to hotword state events. */
+    /**
+     * Listen to hotword state events.
+     */
     public interface HotwordStateListener {
-        /** hotword state has changed */
+        /**
+         * hotword state has changed
+         */
         void onHotwordStateChanged();
-        /** request to enable hotwording */
+
+        /**
+         * request to enable hotwording
+         */
         void onHotwordEnable();
-        /** request to disable hotwording */
+
+        /**
+         * request to disable hotwording
+         */
         void onHotwordDisable();
     }
 
@@ -152,7 +162,9 @@ public class HotwordSwitchController extends AbstractPreferenceController {
         super(context);
     }
 
-    /** Must be invoked to init controller and observe state changes. */
+    /**
+     * Must be invoked to init controller and observe state changes.
+     */
     public void init(HotwordStateListener listener) {
         mHotwordState.mHotwordSwitchTitle = mContext.getString(R.string.hotwording_title);
         mHotwordStateListener = listener;
@@ -165,7 +177,9 @@ public class HotwordSwitchController extends AbstractPreferenceController {
         }
     }
 
-    /** Must be invoked by caller to unregister receivers. */
+    /**
+     * Must be invoked by caller to unregister receivers.
+     */
     public void unregister() {
         mContext.getContentResolver().unregisterContentObserver(mHotwordSwitchObserver);
     }
@@ -211,8 +225,8 @@ public class HotwordSwitchController extends AbstractPreferenceController {
     /**
      * Extracts a string resource from a given package.
      *
-     * @param resource fully qualified resource identifier,
-     *        e.g. com.google.android.katniss:string/enable_ok_google
+     * @param resource     fully qualified resource identifier,
+     *                     e.g. com.google.android.katniss:string/enable_ok_google
      * @param defaultValue returned if resource cannot be extracted
      */
     private String getLocalizedStringResource(String resource, @Nullable String defaultValue) {
@@ -231,7 +245,7 @@ public class HotwordSwitchController extends AbstractPreferenceController {
                 return targetContext.getResources().getString(resId);
             }
         } catch (Resources.NotFoundException | PackageManager.NameNotFoundException
-                | SecurityException e) {
+                 | SecurityException e) {
             Log.w(TAG, "Unable to get string resource.", e);
         }
         return defaultValue;

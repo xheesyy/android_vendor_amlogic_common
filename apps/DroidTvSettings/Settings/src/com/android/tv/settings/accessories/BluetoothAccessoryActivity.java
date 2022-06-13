@@ -49,7 +49,9 @@ public class BluetoothAccessoryActivity extends TvSettingsActivity {
                         getArguments(deviceAddress, deviceName, deviceImgId));
     }
 
-    /** Arguments to be added when the fragment in constructed. */
+    /**
+     * Arguments to be added when the fragment in constructed.
+     */
     public static Bundle getArguments(String deviceAddress, String deviceName, int deviceImgId) {
         final Bundle b = new Bundle(3);
         b.putString(EXTRA_ACCESSORY_ADDRESS, deviceAddress);

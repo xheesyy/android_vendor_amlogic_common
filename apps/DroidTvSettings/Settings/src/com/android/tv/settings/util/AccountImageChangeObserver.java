@@ -162,14 +162,14 @@ public class AccountImageChangeObserver {
 
     private long getContactIdForAccount(Context context, Account account) {
         // Look up this account in the contacts database.
-        String[] projection = new String[] {
+        String[] projection = new String[]{
                 ContactsContract.Data._ID,
                 ContactsContract.Data.CONTACT_ID,
                 ContactsContract.Data.LOOKUP_KEY
         };
         String selection =
                 ContactsContract.CommonDataKinds.Email.ADDRESS + " LIKE ?";
-        String[] selectionArgs = new String[] { account.name };
+        String[] selectionArgs = new String[]{account.name};
         Cursor c = null;
         long contactId = -1;
         String lookupKey = null;

@@ -55,7 +55,8 @@ public class PictureInPicture extends SettingsPreferenceFragment
 
                     new ApplicationsState.AppFilter() {
                         @Override
-                        public void init() {}
+                        public void init() {
+                        }
 
                         @Override
                         public boolean filterApp(ApplicationsState.AppEntry info) {
@@ -110,7 +111,7 @@ public class PictureInPicture extends SettingsPreferenceFragment
     @NonNull
     @Override
     public Preference bindPreference(@NonNull Preference preference,
-            ApplicationsState.AppEntry entry) {
+                                     ApplicationsState.AppEntry entry) {
         final TwoStatePreference switchPref = (SwitchPreference) preference;
         switchPref.setTitle(entry.label);
         switchPref.setKey(entry.info.packageName);

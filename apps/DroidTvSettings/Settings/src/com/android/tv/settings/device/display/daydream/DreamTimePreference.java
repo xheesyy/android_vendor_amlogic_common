@@ -27,7 +27,7 @@ import androidx.preference.ListPreference;
 public class DreamTimePreference extends ListPreference {
 
     public DreamTimePreference(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                               int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

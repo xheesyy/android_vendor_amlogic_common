@@ -70,7 +70,7 @@ public class GoogleTVCustomizationSampleProvider extends ContentProvider {
                         out.write(buffer, 0, count);
                     }
                 } catch (IOException e) {
-                    Log.e(TAG,"Failed to send file " + uri, e);
+                    Log.e(TAG, "Failed to send file " + uri, e);
                 }
             }
         };

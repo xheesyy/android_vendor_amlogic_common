@@ -32,36 +32,36 @@ public class TvScanService extends Service {
 
     private Handler mHandler = new Handler() {
         @Override
-        public void handleMessage(Message msg){
+        public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            TvMessage message = new TvMessage(msg.arg1, msg.what, (String)(msg.obj));
-            try{
+            TvMessage message = new TvMessage(msg.arg1, msg.what, (String) (msg.obj));
+            try {
                 int count = mListenerList.beginBroadcast();
                 for (int i = 0; i < count; i++) {
                     mListenerList.getBroadcastItem(i).onRespond(message);
                 }
                 mListenerList.finishBroadcast();
-            } catch (RemoteException e){
+            } catch (RemoteException e) {
                 e.printStackTrace();
             }
         }
     };
 
-    private final ITvScanService.Stub mBinder = new ITvScanService.Stub(){
+    private final ITvScanService.Stub mBinder = new ITvScanService.Stub() {
 
-        public void init(Intent intent){
+        public void init(Intent intent) {
             initT(intent);
         }
 
-        public void setAtsccSearchSys(int value){
+        public void setAtsccSearchSys(int value) {
             setAtsccSearchSysT(value);
         }
 
-        public void startAutoScan(){
+        public void startAutoScan() {
             callAutosearch();
         }
 
-        public void startManualScan(){
+        public void startManualScan() {
             callManualSearch();
         }
 
@@ -77,7 +77,7 @@ public class TvScanService extends Service {
             setSearchTypeT(type, atsc_c);
         }
 
-        public void setFrequency (String value1, String value2) {
+        public void setFrequency(String value1, String value2) {
             setFrequencyT(value1, value2);
         }
 
@@ -105,7 +105,7 @@ public class TvScanService extends Service {
         Log.d(TAG, "=====init");
     }
 
-    public void initT(Intent intent){
+    public void initT(Intent intent) {
         Log.d(TAG, "=====init OptionUiManagerT");
         mOptionUiManagerT = new OptionUiManagerT(this, intent, true);
         mOptionUiManagerT.setHandler(mHandler);
@@ -147,7 +147,7 @@ public class TvScanService extends Service {
         }
     }
 
-    public void setSearchSysT (boolean dtv, boolean atv){
+    public void setSearchSysT(boolean dtv, boolean atv) {
         Log.d(TAG, "=====init setSearchSys");
         if (mOptionUiManagerT != null) {
             mOptionUiManagerT.setSearchSys(dtv, atv);
@@ -166,7 +166,7 @@ public class TvScanService extends Service {
         }
     }
 
-    public void setFrequencyT (String value1, String value2) {
+    public void setFrequencyT(String value1, String value2) {
         Log.d(TAG, "=====init setFrequency");
         if (mOptionUiManagerT != null) {
             mOptionUiManagerT.setFrequency(value1, value2);

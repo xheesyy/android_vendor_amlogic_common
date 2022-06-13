@@ -104,7 +104,8 @@ public class DataProvider extends ContentProvider {
         String table = getTableName(uri);
         SQLiteDatabase db = mDbOpenHelper.getReadableDatabase();
         if (db != null) {
-            if (DEBUG) Log.d(TAG, "query db = " + db.getPath() + ", SQL uri:" + (uri != null ? uri.toString() : "") + " projection:" + (projection != null ? Arrays.toString(projection) : "") + " selection:" + selection + " selectionArgs:"  + (selectionArgs != null ? Arrays.toString(selectionArgs) : "") + " sortOrder:" + sortOrder);
+            if (DEBUG)
+                Log.d(TAG, "query db = " + db.getPath() + ", SQL uri:" + (uri != null ? uri.toString() : "") + " projection:" + (projection != null ? Arrays.toString(projection) : "") + " selection:" + selection + " selectionArgs:" + (selectionArgs != null ? Arrays.toString(selectionArgs) : "") + " sortOrder:" + sortOrder);
         } else {
             Log.d(TAG, "query db null");
         }
@@ -116,7 +117,8 @@ public class DataProvider extends ContentProvider {
         String table = getTableName(uri);
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
         if (db != null) {
-            if (DEBUG) Log.d(TAG, "insert db = " + db.getPath() + ", SQL uri:" + (uri != null ? uri.toString() : "") + " values:" + (values != null ? values.toString() : ""));
+            if (DEBUG)
+                Log.d(TAG, "insert db = " + db.getPath() + ", SQL uri:" + (uri != null ? uri.toString() : "") + " values:" + (values != null ? values.toString() : ""));
         } else {
             Log.d(TAG, "insert db null");
         }
@@ -129,7 +131,8 @@ public class DataProvider extends ContentProvider {
         String table = getTableName(uri);
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
         if (db != null) {
-            if (DEBUG) Log.d(TAG, "update db = " + db.getPath() + ", SQL uri:" + (uri != null ? uri.toString() : "") + " values:" + (values != null ? values.toString() : "") + " selection:" + selection + " selectionArgs:"  + (selectionArgs != null ? Arrays.toString(selectionArgs) : ""));
+            if (DEBUG)
+                Log.d(TAG, "update db = " + db.getPath() + ", SQL uri:" + (uri != null ? uri.toString() : "") + " values:" + (values != null ? values.toString() : "") + " selection:" + selection + " selectionArgs:" + (selectionArgs != null ? Arrays.toString(selectionArgs) : ""));
         } else {
             Log.d(TAG, "update db null");
         }
@@ -141,7 +144,8 @@ public class DataProvider extends ContentProvider {
         String table = getTableName(uri);
         SQLiteDatabase db = mDbOpenHelper.getWritableDatabase();
         if (db != null) {
-            if (DEBUG) Log.d(TAG, "delete db = " + db.getPath() + ", SQL uri:" + (uri != null ? uri.toString() : "") + " selection:" + selection + " selectionArgs:"  + (selectionArgs != null ? Arrays.toString(selectionArgs) : ""));
+            if (DEBUG)
+                Log.d(TAG, "delete db = " + db.getPath() + ", SQL uri:" + (uri != null ? uri.toString() : "") + " selection:" + selection + " selectionArgs:" + (selectionArgs != null ? Arrays.toString(selectionArgs) : ""));
         } else {
             Log.d(TAG, "delete db null");
         }

@@ -17,6 +17,7 @@ public class TimeoutTracker implements Runnable {
     public TimeoutTracker(String name) {
         this(name, false);
     }
+
     public TimeoutTracker(String name, boolean runInCallingThread) {
         this(name, true, false);
     }
@@ -87,7 +88,8 @@ public class TimeoutTracker implements Runnable {
 
     private void notifyTimeout() {
         if (mListener != null) {
-            mListener.onTimeout();;
+            mListener.onTimeout();
+            ;
         }
     }
 

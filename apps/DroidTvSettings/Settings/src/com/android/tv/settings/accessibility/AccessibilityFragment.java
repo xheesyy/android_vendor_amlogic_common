@@ -57,6 +57,7 @@ public class AccessibilityFragment extends SettingsPreferenceFragment {
 
     /**
      * Create a new instance of the fragment
+     *
      * @return New fragment instance
      */
     public static AccessibilityFragment newInstance() {

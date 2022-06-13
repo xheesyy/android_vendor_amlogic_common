@@ -39,10 +39,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * SliceProvider. If the cache and the real data is not consistent, user would clearly see the
  * process of the cache data transforming to the real one. e.g, toggle state switching from false
  * to true.
- *
+ * <p>
  * This is because when a Lifecycle starts again, LiveData natively notify us about the change,
  * which will trigger onChanged() in SliceFragment.
- *
+ * <p>
  * To avoid this issue, we should ignore the lifecycle event, use SingleLiveEvent so we only get
  * notified when the data is actually changed.
  */
@@ -66,6 +66,7 @@ public final class PreferenceSliceLiveData {
         final SliceViewManager mSliceViewManager;
         Uri mUri;
         final AtomicBoolean mUpdatePending = new AtomicBoolean(false);
+
         SliceLiveDataImpl(Context context, Uri uri) {
             super();
             mSliceViewManager = SliceViewManager.getInstance(context);

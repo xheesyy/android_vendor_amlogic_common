@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,15 +14,14 @@
   limitations under the License
   -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:key="screen_position"
-        android:title="@string/device_position">
-       <PreferenceCategory
-        android:key="screen_position_scale">
-           <Preference
-                android:key="zoom_in"
-                android:title="@string/device_position_zoomin"/>
-           <Preference
-                android:key="zoom_out"
-                android:title="@string/device_position_zoomout"/>
-        </PreferenceCategory>
+    android:key="screen_position"
+    android:title="@string/device_position">
+    <PreferenceCategory android:key="screen_position_scale">
+        <Preference
+            android:key="zoom_in"
+            android:title="@string/device_position_zoomin" />
+        <Preference
+            android:key="zoom_out"
+            android:title="@string/device_position_zoomout" />
+    </PreferenceCategory>
 </PreferenceScreen>

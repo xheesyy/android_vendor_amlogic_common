@@ -43,7 +43,9 @@ public class DroidInfoFragment extends Fragment {
         return view;
     }
 
-    /** Update the infos in DroidInfoFragment **/
+    /**
+     * Update the infos in DroidInfoFragment
+     **/
     public void updateInfoFragment() {
         updateInfo(getView());
     }

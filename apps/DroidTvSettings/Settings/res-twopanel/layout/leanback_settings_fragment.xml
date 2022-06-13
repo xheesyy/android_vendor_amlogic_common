@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,10 +15,11 @@
   -->
 
 <androidx.leanback.preference.LeanbackSettingsRootView xmlns:android="http://schemas.android.com/apk/res/android"
-                                                       android:id="@+id/settings_dialog_container"
-                                                       android:background="@color/tp_fragment_container_background_color"
-                                                       android:layout_width="match_parent"
-                                                       android:layout_height="match_parent">
+    android:id="@+id/settings_dialog_container"
+    android:background="@color/tp_fragment_container_background_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <androidx.leanback.preference.internal.OutlineOnlyWithChildrenFrameLayout
         android:id="@+id/settings_preference_fragment_container"
         android:layout_width="@dimen/tp_settings_preference_pane_width"

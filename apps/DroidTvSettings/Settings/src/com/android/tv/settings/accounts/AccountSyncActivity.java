@@ -48,7 +48,7 @@ public class AccountSyncActivity extends TvSettingsActivity {
             }
         }
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(AccountSyncFragment.class.getName(), getArguments(account));
+                .newSettingsFragment(AccountSyncFragment.class.getName(), getArguments(account));
     }
 
     private Bundle getArguments(Account account) {

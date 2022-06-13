@@ -28,7 +28,7 @@ public class CollapsibleCategory extends PreferenceCategory {
     private boolean mCollapsed = true;
 
     public CollapsibleCategory(Context context, AttributeSet attrs, int defStyleAttr,
-            int defStyleRes) {
+                               int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

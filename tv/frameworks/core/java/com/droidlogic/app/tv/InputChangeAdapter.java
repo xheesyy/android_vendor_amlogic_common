@@ -35,7 +35,8 @@ public class InputChangeAdapter {
 
     private volatile static InputChangeAdapter sIntance;
 
-    private InputChangeAdapter() {}
+    private InputChangeAdapter() {
+    }
 
     private InputChangeAdapter(Context context) {
         if (SystemProperties.getBoolean(PROP_OTP_INPUT_CHANGE, true)) {
@@ -69,7 +70,7 @@ public class InputChangeAdapter {
 
                 List<TvInputInfo> tvInputList = manager.getTvInputList();
                 String inputId = "";
-                 String parentInputId = "";
+                String parentInputId = "";
                 for (TvInputInfo tvInputInfo : tvInputList) {
                     HdmiDeviceInfo hdmiInfo = tvInputInfo.getHdmiDeviceInfo();
                     if (hdmiInfo != null && hdmiInfo.getLogicalAddress() == info.getLogicalAddress()) {
@@ -88,7 +89,7 @@ public class InputChangeAdapter {
 
                 Log.d(TAG, "input id:" + inputId + " parent:" + parentInputId + " current:" + currentSelectInput);
                 if (currentSelectInput.equals(inputId)
-                    || currentSelectInput.equals(parentInputId)) {
+                        || currentSelectInput.equals(parentInputId)) {
                     Log.d(TAG, "same input id no need to broadcast");
                     return;
                 }
@@ -105,7 +106,7 @@ public class InputChangeAdapter {
 
     public static InputChangeAdapter getInstance(Context context) {
         if (null == sIntance) {
-            synchronized(InputChangeAdapter.class) {
+            synchronized (InputChangeAdapter.class) {
                 if (null == sIntance) {
                     sIntance = new InputChangeAdapter(context);
                 }

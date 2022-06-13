@@ -18,8 +18,10 @@ package com.android.tv.settings.wifi;
 
 import android.app.AlertDialog;
 import android.content.Context;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
+
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -47,7 +49,7 @@ public class ValidatedEditTextPreference extends CustomEditTextPreference {
     private boolean mIsSummaryPassword;
 
     public ValidatedEditTextPreference(Context context, AttributeSet attrs,
-            int defStyleAttr, int defStyleRes) {
+                                       int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

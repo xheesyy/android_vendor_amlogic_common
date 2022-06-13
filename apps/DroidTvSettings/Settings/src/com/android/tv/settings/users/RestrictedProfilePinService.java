@@ -26,7 +26,7 @@ import android.os.UserHandle;
 /**
  * Service for storing the exit pin for restricted profiles. This service is only to be used by the
  * {@link RestrictedProfilePinStorage}
- *
+ * <p>
  * The pin is stored in the Settings app's shared preferences of the system user. This is only
  * accessible to the Settings app in the system user, which makes it a safe place for storing
  * the pin.

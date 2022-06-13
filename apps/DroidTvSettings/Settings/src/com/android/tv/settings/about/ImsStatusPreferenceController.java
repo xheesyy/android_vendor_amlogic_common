@@ -26,7 +26,7 @@ import com.android.settingslib.deviceinfo.AbstractImsStatusPreferenceController;
  */
 public class ImsStatusPreferenceController extends AbstractImsStatusPreferenceController {
     public ImsStatusPreferenceController(Context context,
-            Lifecycle lifecycle) {
+                                         Lifecycle lifecycle) {
         super(context, lifecycle);
     }
 

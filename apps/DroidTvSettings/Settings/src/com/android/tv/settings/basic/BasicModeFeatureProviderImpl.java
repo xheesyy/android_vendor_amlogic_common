@@ -21,7 +21,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-/** Implementation of {@link BasicModeFeatureProvider} */
+/**
+ * Implementation of {@link BasicModeFeatureProvider}
+ */
 public class BasicModeFeatureProviderImpl implements BasicModeFeatureProvider {
 
     protected static final String TAG = "BasicModeFeature";

@@ -131,7 +131,7 @@ public class AccountsFragment extends SettingsPreferenceFragment {
             }
         }
 
-        for (int i = 0; i < prefScreen.getPreferenceCount();) {
+        for (int i = 0; i < prefScreen.getPreferenceCount(); ) {
             final Preference preference = prefScreen.getPreference(i);
             final String key = preference.getKey();
             if (touchedAccounts.contains(key) || TextUtils.equals(KEY_ADD_ACCOUNT, key)) {
@@ -159,7 +159,7 @@ public class AccountsFragment extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return  MetricsProto.MetricsEvent.ACCOUNTS_MANAGE_ACCOUNTS;
+        return MetricsProto.MetricsEvent.ACCOUNTS_MANAGE_ACCOUNTS;
     }
 
     /**
@@ -186,7 +186,7 @@ public class AccountsFragment extends SettingsPreferenceFragment {
         i.putExtra(AddAccountWithTypeActivity.EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY,
                 allowableAccountTypes.toArray(new String[allowableAccountTypes.size()]));
 
-                // If there are available account types, show the "add account" button.
+        // If there are available account types, show the "add account" button.
         preference.setVisible(!allowableAccountTypes.isEmpty());
         preference.setIntent(i);
         preference.setOnPreferenceClickListener(

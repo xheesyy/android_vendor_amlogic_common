@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
         android:key="DISPLAY_ROTATION_KEY"
@@ -9,8 +8,7 @@
         android:defaultValue="0"
         android:dialogTitle="@string/Display_screen_rotation"
         android:entries="@array/Screen_rotation_array"
-        android:entryValues="@array/Screen_rotation_array_value">
-    </ListPreference>
+        android:entryValues="@array/Screen_rotation_array_value"></ListPreference>
 
     <ListPreference
         android:key="DISPLAY_DENSITY_KEY"
@@ -19,12 +17,10 @@
         android:defaultValue="4"
         android:dialogTitle="@string/Display_screen_density"
         android:entries="@array/Screen_density_array"
-        android:entryValues="@array/Screen_density_array_value">
-    </ListPreference>
+        android:entryValues="@array/Screen_density_array_value"></ListPreference>
 
     <PreferenceScreen
         android:key="MORE_DISPLAY_SETTINGS"
-        android:title="@string/More_DisplaySound_Setting">
-    </PreferenceScreen>
+        android:title="@string/More_DisplaySound_Setting"></PreferenceScreen>
 
 </PreferenceScreen>

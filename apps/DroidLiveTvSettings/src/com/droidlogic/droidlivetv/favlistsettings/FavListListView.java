@@ -42,12 +42,12 @@ public class FavListListView extends CustomedListView {
         }
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_LEFT:
-            case KeyEvent.KEYCODE_DPAD_RIGHT:{
+            case KeyEvent.KEYCODE_DPAD_RIGHT: {
                 if (mKeyEventListener != null/* && TextUtils.equals(mListType, SORT_EDIT_ALL_FAV_LIST)*/) {
                     Bundle bundle = new Bundle();
                     bundle.putInt(KEY_ACTION_CODE, keyCode);
                     bundle.putString(KEY_LIST_TYPE, mListType);
-                    ItemAdapter adapter = (ItemAdapter)this.getAdapter();
+                    ItemAdapter adapter = (ItemAdapter) this.getAdapter();
                     Item item = null;
                     if (adapter != null && adapter.getCount() > 0) {
                         item = adapter.getItem(this.getSelectedItemPosition());
@@ -86,7 +86,7 @@ public class FavListListView extends CustomedListView {
         if (gainFocus) {
             super.onFocusChanged(false, direction, previouslyFocusedRect);
             View view = getChildAt(0);
-            if  (view != null && view instanceof View) {
+            if (view != null && view instanceof View) {
                 setSelection(0);
             }
         } else {
@@ -103,12 +103,12 @@ public class FavListListView extends CustomedListView {
     }
 
     public void updateItem(int position, Item item) {
-        ItemAdapter adapter = (ItemAdapter)this.getAdapter();
+        ItemAdapter adapter = (ItemAdapter) this.getAdapter();
         if (adapter == null) {
             Log.d(TAG, "updateItem null return");
             return;
         }
-        adapter.setDataByPosition(position,item);
+        adapter.setDataByPosition(position, item);
         int firstVisiblePosition = this.getFirstVisiblePosition();
         int lastVisiblePosition = this.getLastVisiblePosition();
         if (position >= firstVisiblePosition && position <= lastVisiblePosition) {
@@ -118,13 +118,13 @@ public class FavListListView extends CustomedListView {
     }
 
     public void updateAllItem(Context context, LinkedList<Item> data) {
-        ItemAdapter adapter = (ItemAdapter)getAdapter();
+        ItemAdapter adapter = (ItemAdapter) getAdapter();
         if (adapter == null) {
             adapter = new ItemAdapter(data, context, TAG);
             setAdapter(adapter);
             Log.d(TAG, "updateAllItem init adapter");
         }
-        ((ItemAdapter)getAdapter()).setAllData(data);
-        ((ItemAdapter)getAdapter()).notifyDataSetChanged();
+        ((ItemAdapter) getAdapter()).setAllData(data);
+        ((ItemAdapter) getAdapter()).notifyDataSetChanged();
     }
 }

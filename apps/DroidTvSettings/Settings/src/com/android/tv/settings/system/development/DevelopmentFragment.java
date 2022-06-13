@@ -599,7 +599,7 @@ public class DevelopmentFragment extends SettingsPreferenceFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         IntentFilter filter = new IntentFilter();
         filter.addAction(UsbManager.ACTION_USB_STATE);
         if (getActivity().registerReceiver(mUsbReceiver, filter) == null) {
@@ -720,7 +720,7 @@ public class DevelopmentFragment extends SettingsPreferenceFragment
     }
 
     private void updateListPreference(ListPreference preference, String currentValue,
-            String[] values, String[] summaries, int index) {
+                                      String[] values, String[] summaries, int index) {
         for (int i = 0; i < values.length; i++) {
             if (currentValue.equals(values[i])) {
                 index = i;
@@ -930,6 +930,7 @@ public class DevelopmentFragment extends SettingsPreferenceFragment
 
     /**
      * Take bug report and show notification.
+     *
      * @param activity
      */
     public static void captureBugReport(Activity activity) {
@@ -1247,7 +1248,9 @@ public class DevelopmentFragment extends SettingsPreferenceFragment
         }
     }
 
-    /** Called when audio recording is finished. Updates UI component states. */
+    /**
+     * Called when audio recording is finished. Updates UI component states.
+     */
     private void onAudioRecorded(boolean successful) {
         mPlayRecordedAudio.setVisible(successful);
         mSaveAudio.setVisible(successful);
@@ -1260,7 +1263,9 @@ public class DevelopmentFragment extends SettingsPreferenceFragment
         }
     }
 
-    /** Updates displayed audio recording metrics */
+    /**
+     * Updates displayed audio recording metrics
+     */
     private void updateAudioRecordingMetrics(AudioMetrics.Data data) {
         updateAudioRecordingMetric(mTimeToStartRead, data.timeToStartReadMs);
         updateAudioRecordingMetric(mTimeToValidAudio, data.timeToValidAudioMs);

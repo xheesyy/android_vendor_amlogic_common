@@ -28,6 +28,7 @@ import android.content.Intent;
 import com.droidlogic.app.tv.TvControlManager;
 //import com.droidlogic.app.tv.TvControlManager.FreqList;
 import com.droidlogic.app.tv.TvControlManager.TvMode;
+
 import vendor.amlogic.hardware.tvserver.V1_0.FreqList;
 
 public abstract class TvStoreManager {
@@ -71,7 +72,7 @@ public abstract class TvStoreManager {
     private int display_number_start;
 
     public TvStoreManager(Context context, String inputId, int initialDisplayNumber) {
-        Log.d(TAG, "inputId["+inputId+"] initialDisplayNumber["+initialDisplayNumber+"]");
+        Log.d(TAG, "inputId[" + inputId + "] initialDisplayNumber[" + initialDisplayNumber + "]");
 
         mContext = context;
         mInputId = inputId;
@@ -88,33 +89,39 @@ public abstract class TvStoreManager {
     }
 
     public void releaseHandlerThread() {
-       if (mhandlerThread != null) {
-           mhandlerThread.quit();
-           mhandlerThread = null;
-       }
-       if (mChildHandler != null)
-           mChildHandler = null;
+        if (mhandlerThread != null) {
+            mhandlerThread.quit();
+            mhandlerThread = null;
+        }
+        if (mChildHandler != null)
+            mChildHandler = null;
     }
 
 
     public void setInitialLcnNumber(int initialLcnNumber) {
-        Log.d(TAG, "initalLcnNumber["+initialLcnNumber+"]");
+        Log.d(TAG, "initalLcnNumber[" + initialLcnNumber + "]");
         mInitialLcnNumber = initialLcnNumber;
     }
 
-    public void onEvent(String eventType, Bundle eventArgs) {}
+    public void onEvent(String eventType, Bundle eventArgs) {
+    }
 
-    public void onUpdateCurrent(ChannelInfo channel, boolean store) {}
+    public void onUpdateCurrent(ChannelInfo channel, boolean store) {
+    }
 
-    public void onDtvNumberMode(String mode) {}
+    public void onDtvNumberMode(String mode) {
+    }
 
     public abstract void onScanEnd();
 
-    public void onScanExit(int freg) {}
+    public void onScanExit(int freg) {
+    }
 
-    public void onStoreEnd(int freg) {}
+    public void onStoreEnd(int freg) {
+    }
 
-    public void onScanEndBeforeStore(int freg) {}
+    public void onScanEndBeforeStore(int freg) {
+    }
 
     private Bundle getScanEventBundle(TvControlManager.ScannerEvent mEvent) {
         Bundle bundle = new Bundle();
@@ -175,8 +182,8 @@ public abstract class TvStoreManager {
     private void prepareStore(TvControlManager.ScannerEvent event) {
         mScanMode = new TvControlManager.ScanMode(event.scan_mode);
         mSortMode = new TvControlManager.SortMode(event.sort_mode);
-        Log.d(TAG, "scan mode:"+event.scan_mode);
-        Log.d(TAG, "sort mode:"+event.sort_mode);
+        Log.d(TAG, "scan mode:" + event.scan_mode);
+        Log.d(TAG, "sort mode:" + event.sort_mode);
 
         mDisplayNumber = mInitialDisplayNumber;
         mDisplayNumber2 = new Integer(mInitialDisplayNumber);
@@ -212,6 +219,7 @@ public abstract class TvStoreManager {
             mChannelsAll = new ArrayList<ChannelInfo>();
         }
     }
+
     private void reinitChannels() {
         if (mChannelsExist == null) {
             mChannelsExist = mTvDataBaseManager.getChannelList(mInputId, TvContract.Channels.SERVICE_TYPE_AUDIO_VIDEO);
@@ -260,65 +268,65 @@ public abstract class TvStoreManager {
         }
 
         TvControlManager.FEParas fep =
-            new TvControlManager.FEParas(DroidLogicTvUtils.getObjectString(event.paras, "fe"));
+                new TvControlManager.FEParas(DroidLogicTvUtils.getObjectString(event.paras, "fe"));
 
         return new ChannelInfo.Builder()
-               .setInputId(mInputId)
-               .setType(fep.getMode().toType())
-               .setServiceType(serviceType)
-               .setServiceId(event.serviceID)
-               .setDisplayNumber(Integer.toString(mDisplayNumber))
-               .setDisplayName(name)
-               .setLogoUrl(null)
-               .setOriginalNetworkId(event.orig_net_id)
-               .setTransportStreamId(event.ts_id)
-               .setVideoPid(event.vid)
-               .setVideoStd(0)
-               .setVfmt(event.vfmt)
-               .setVideoWidth(0)
-               .setVideoHeight(0)
-               .setAudioPids(event.aids)
-               .setAudioFormats(event.afmts)
-               .setAudioLangs(event.alangs)
-               .setAudioExts(event.aexts)
-               .setAudioStd(0)
-               .setIsAutoStd(event.isAutoStd)
-               //.setAudioTrackIndex(getidxByDefLan(event.alangs))
-               .setAudioCompensation(0)
-               .setPcrPid(event.pcr)
-               .setFrequency(event.freq)
-               .setBandwidth(event.bandwidth)
-               .setSymbolRate(event.sr)
-               .setModulation(event.mod)
-               .setFEParas(fep.toString())
-               .setFineTune(0)
-               .setBrowsable(true)
-               .setIsFavourite(false)
-               .setPassthrough(false)
-               .setLocked(false)
-               .setSubtitleTypes(event.stypes)
-               .setSubtitlePids(event.sids)
-               .setSubtitleStypes(event.sstypes)
-               .setSubtitleId1s(event.sid1s)
-               .setSubtitleId2s(event.sid2s)
-               .setSubtitleLangs(event.slangs)
-               //.setSubtitleTrackIndex(getidxByDefLan(event.slangs))
-               .setDisplayNameMulti(event.programName)
-               .setFreeCa(event.free_ca)
-               .setScrambled(event.scrambled)
-               .setSdtVersion(event.sdtVersion)
-               .setMajorChannelNumber(event.majorChannelNumber)
-               .setMinorChannelNumber(event.minorChannelNumber)
-               .setSourceId(event.sourceId)
-               .setAccessControled(event.accessControlled)
-               .setHidden(event.hidden)
-               .setHideGuide(event.hideGuide)
-               .setVct(event.vct)
-               .setProgramsInPat(event.programs_in_pat)
-               .setPatTsId(event.pat_ts_id)
-               .setSignalType(DroidLogicTvUtils.getCurrentSignalType(mContext) == DroidLogicTvUtils.SIGNAL_TYPE_ERROR
-                ? TvContract.Channels.TYPE_ATSC_T : DroidLogicTvUtils.getCurrentSignalType(mContext))
-               .build();
+                .setInputId(mInputId)
+                .setType(fep.getMode().toType())
+                .setServiceType(serviceType)
+                .setServiceId(event.serviceID)
+                .setDisplayNumber(Integer.toString(mDisplayNumber))
+                .setDisplayName(name)
+                .setLogoUrl(null)
+                .setOriginalNetworkId(event.orig_net_id)
+                .setTransportStreamId(event.ts_id)
+                .setVideoPid(event.vid)
+                .setVideoStd(0)
+                .setVfmt(event.vfmt)
+                .setVideoWidth(0)
+                .setVideoHeight(0)
+                .setAudioPids(event.aids)
+                .setAudioFormats(event.afmts)
+                .setAudioLangs(event.alangs)
+                .setAudioExts(event.aexts)
+                .setAudioStd(0)
+                .setIsAutoStd(event.isAutoStd)
+                //.setAudioTrackIndex(getidxByDefLan(event.alangs))
+                .setAudioCompensation(0)
+                .setPcrPid(event.pcr)
+                .setFrequency(event.freq)
+                .setBandwidth(event.bandwidth)
+                .setSymbolRate(event.sr)
+                .setModulation(event.mod)
+                .setFEParas(fep.toString())
+                .setFineTune(0)
+                .setBrowsable(true)
+                .setIsFavourite(false)
+                .setPassthrough(false)
+                .setLocked(false)
+                .setSubtitleTypes(event.stypes)
+                .setSubtitlePids(event.sids)
+                .setSubtitleStypes(event.sstypes)
+                .setSubtitleId1s(event.sid1s)
+                .setSubtitleId2s(event.sid2s)
+                .setSubtitleLangs(event.slangs)
+                //.setSubtitleTrackIndex(getidxByDefLan(event.slangs))
+                .setDisplayNameMulti(event.programName)
+                .setFreeCa(event.free_ca)
+                .setScrambled(event.scrambled)
+                .setSdtVersion(event.sdtVersion)
+                .setMajorChannelNumber(event.majorChannelNumber)
+                .setMinorChannelNumber(event.minorChannelNumber)
+                .setSourceId(event.sourceId)
+                .setAccessControled(event.accessControlled)
+                .setHidden(event.hidden)
+                .setHideGuide(event.hideGuide)
+                .setVct(event.vct)
+                .setProgramsInPat(event.programs_in_pat)
+                .setPatTsId(event.pat_ts_id)
+                .setSignalType(DroidLogicTvUtils.getCurrentSignalType(mContext) == DroidLogicTvUtils.SIGNAL_TYPE_ERROR
+                        ? TvContract.Channels.TYPE_ATSC_T : DroidLogicTvUtils.getCurrentSignalType(mContext))
+                .build();
     }
 
     private ChannelInfo createAtvChannelInfo(TvControlManager.ScannerEvent event) {
@@ -340,7 +348,7 @@ public abstract class TvStoreManager {
         }
 
         TvControlManager.FEParas fep =
-            new TvControlManager.FEParas(DroidLogicTvUtils.getObjectString(event.paras, "fe"));
+                new TvControlManager.FEParas(DroidLogicTvUtils.getObjectString(event.paras, "fe"));
 
         if (ATVName.length() == 0)
             ATVName = "xxxATV Program";
@@ -348,61 +356,61 @@ public abstract class TvStoreManager {
             ATVName = ATVName;
 
         return new ChannelInfo.Builder()
-               .setInputId(mInputId == null ? "NULL" : mInputId)
-               .setType(type)
-               .setServiceType(TvContract.Channels.SERVICE_TYPE_AUDIO_VIDEO)//default is SERVICE_TYPE_AUDIO_VIDEO
-               .setServiceId(0)
-               .setDisplayNumber(Integer.toString(mDisplayNumber))
-               .setDisplayName(TvMultilingualText.getText(ATVName))
-               .setLogoUrl(null)
-               .setOriginalNetworkId(0)
-               .setTransportStreamId(0)
-               .setVideoPid(0)
-               .setVideoStd(event.videoStd)
-               .setVfmt(event.vfmt)
-               .setVideoWidth(0)
-               .setVideoHeight(0)
-               .setAudioPids(null)
-               .setAudioFormats(null)
-               .setAudioLangs(null)
-               .setAudioExts(null)
-               .setAudioStd(event.audioStd)
-               .setIsAutoStd(event.isAutoStd)
-               .setAudioTrackIndex(0)
-               .setAudioCompensation(0)
-               .setPcrPid(0)
-               .setFrequency(event.freq)
-               .setBandwidth(0)
-               .setSymbolRate(0)
-               .setModulation(0)
-               .setFEParas(fep.toString())
-               .setFineTune(0)
-               .setBrowsable(true)
-               .setIsFavourite(false)
-               .setPassthrough(false)
-               .setLocked(false)
-               .setSubtitleTypes(event.stypes)
-               .setSubtitlePids(event.sids)
-               .setSubtitleStypes(event.sstypes)
-               .setSubtitleId1s(event.sid1s)
-               .setSubtitleId2s(event.sid2s)
-               .setSubtitleLangs(event.slangs)
-               .setDisplayNameMulti(ATVName)
-               .setMajorChannelNumber(event.majorChannelNumber)
-               .setMinorChannelNumber(event.minorChannelNumber)
-               .setSourceId(event.sourceId)
-               .setAccessControled(event.accessControlled)
-               .setHidden(event.hidden)
-               .setHideGuide(event.hideGuide)
-               .setContentRatings(null)
-               .setSignalType(DroidLogicTvUtils.getCurrentSignalType(mContext) == DroidLogicTvUtils.SIGNAL_TYPE_ERROR
-                ? TvContract.Channels.TYPE_ATSC_T : DroidLogicTvUtils.getCurrentSignalType(mContext))
-               .build();
+                .setInputId(mInputId == null ? "NULL" : mInputId)
+                .setType(type)
+                .setServiceType(TvContract.Channels.SERVICE_TYPE_AUDIO_VIDEO)//default is SERVICE_TYPE_AUDIO_VIDEO
+                .setServiceId(0)
+                .setDisplayNumber(Integer.toString(mDisplayNumber))
+                .setDisplayName(TvMultilingualText.getText(ATVName))
+                .setLogoUrl(null)
+                .setOriginalNetworkId(0)
+                .setTransportStreamId(0)
+                .setVideoPid(0)
+                .setVideoStd(event.videoStd)
+                .setVfmt(event.vfmt)
+                .setVideoWidth(0)
+                .setVideoHeight(0)
+                .setAudioPids(null)
+                .setAudioFormats(null)
+                .setAudioLangs(null)
+                .setAudioExts(null)
+                .setAudioStd(event.audioStd)
+                .setIsAutoStd(event.isAutoStd)
+                .setAudioTrackIndex(0)
+                .setAudioCompensation(0)
+                .setPcrPid(0)
+                .setFrequency(event.freq)
+                .setBandwidth(0)
+                .setSymbolRate(0)
+                .setModulation(0)
+                .setFEParas(fep.toString())
+                .setFineTune(0)
+                .setBrowsable(true)
+                .setIsFavourite(false)
+                .setPassthrough(false)
+                .setLocked(false)
+                .setSubtitleTypes(event.stypes)
+                .setSubtitlePids(event.sids)
+                .setSubtitleStypes(event.sstypes)
+                .setSubtitleId1s(event.sid1s)
+                .setSubtitleId2s(event.sid2s)
+                .setSubtitleLangs(event.slangs)
+                .setDisplayNameMulti(ATVName)
+                .setMajorChannelNumber(event.majorChannelNumber)
+                .setMinorChannelNumber(event.minorChannelNumber)
+                .setSourceId(event.sourceId)
+                .setAccessControled(event.accessControlled)
+                .setHidden(event.hidden)
+                .setHideGuide(event.hideGuide)
+                .setContentRatings(null)
+                .setSignalType(DroidLogicTvUtils.getCurrentSignalType(mContext) == DroidLogicTvUtils.SIGNAL_TYPE_ERROR
+                        ? TvContract.Channels.TYPE_ATSC_T : DroidLogicTvUtils.getCurrentSignalType(mContext))
+                .build();
     }
 
     private void filterChannels(TvControlManager.ScannerEvent event, ChannelInfo channel) {
         if (mChannelsOld != null) {
-            Log.d(TAG, "remove channels with freq!="+channel.getFrequency());
+            Log.d(TAG, "remove channels with freq!=" + channel.getFrequency());
             //remove channles with diff freq from old channles
             Iterator<ChannelInfo> iter = mChannelsOld.iterator();
             while (iter.hasNext()) {
@@ -485,7 +493,7 @@ public abstract class TvStoreManager {
             mChannelsNew.add(ch);
             Log.d(TAG, "dealRepeatCacheChannels not exist in new = " + ch.getDisplayNumber());
         }
-        return mChannelsNew.size() -1;
+        return mChannelsNew.size() - 1;
     }
 
     private boolean isChannelInListbyId(ChannelInfo channel, ArrayList<ChannelInfo> list) {
@@ -523,10 +531,10 @@ public abstract class TvStoreManager {
         }
         Log.d(TAG, "display number start from:" + display_number_start);
 
-        Log.d(TAG, "Service["+channel.getOriginalNetworkId()+":"+channel.getTransportStreamId()+":"+channel.getServiceId()+"]");
+        Log.d(TAG, "Service[" + channel.getOriginalNetworkId() + ":" + channel.getTransportStreamId() + ":" + channel.getServiceId() + "]");
 
         if (channel.getServiceType() == TvContract.Channels.SERVICE_TYPE_OTHER) {
-            Log.d(TAG, "Service["+channel.getServiceId()+"] is Type OTHER, ignore NUMBER update and set to unbrowsable");
+            Log.d(TAG, "Service[" + channel.getServiceId() + "] is Type OTHER, ignore NUMBER update and set to unbrowsable");
             channel.setBrowsable(false);
             return;
         }
@@ -534,10 +542,10 @@ public abstract class TvStoreManager {
         if (mChannelsOld != null) {//may only in manual search
             for (ChannelInfo c : mChannelsOld) {
                 if ((c.getOriginalNetworkId() == channel.getOriginalNetworkId())
-                    && (c.getTransportStreamId() == channel.getTransportStreamId())
-                    && (c.getServiceId() == channel.getServiceId())) {
+                        && (c.getTransportStreamId() == channel.getTransportStreamId())
+                        && (c.getServiceId() == channel.getServiceId())) {
                     //same freq, reuse number if old channel is identical
-                    Log.d(TAG, "found num:" + c.getDisplayNumber() + " by same old service["+c.getOriginalNetworkId()+":"+c.getTransportStreamId()+":"+c.getServiceId()+"]");
+                    Log.d(TAG, "found num:" + c.getDisplayNumber() + " by same old service[" + c.getOriginalNetworkId() + ":" + c.getTransportStreamId() + ":" + c.getServiceId() + "]");
                     number = c.getNumber();
                 }
             }
@@ -560,7 +568,7 @@ public abstract class TvStoreManager {
             }
             number = display_number_start++;
         }
-        Log.d(TAG, "update displayer number["+number+"]..");
+        Log.d(TAG, "update displayer number[" + number + "]..");
 
         channel.setDisplayNumber(String.valueOf(number));
 
@@ -596,12 +604,12 @@ public abstract class TvStoreManager {
                 }
             }
         }
-        Log.d(TAG, "lcn overflow start from:"+lcn_overflow_start);
+        Log.d(TAG, "lcn overflow start from:" + lcn_overflow_start);
 
-        Log.d(TAG, "Service["+channel.getOriginalNetworkId()+":"+channel.getTransportStreamId()+":"+channel.getServiceId()+"]");
+        Log.d(TAG, "Service[" + channel.getOriginalNetworkId() + ":" + channel.getTransportStreamId() + ":" + channel.getServiceId() + "]");
 
         if (channel.getServiceType() == TvContract.Channels.SERVICE_TYPE_OTHER) {
-            Log.d(TAG, "Service["+channel.getServiceId()+"] is Type OTHER, ignore LCN update and set to unbrowsable");
+            Log.d(TAG, "Service[" + channel.getServiceId() + "] is Type OTHER, ignore LCN update and set to unbrowsable");
             channel.setBrowsable(false);
             return;
         }
@@ -609,12 +617,12 @@ public abstract class TvStoreManager {
         if (mLcnInfo != null) {
             for (TvControlManager.ScannerLcnInfo l : mLcnInfo) {
                 if ((l.netId == channel.getOriginalNetworkId())
-                    && (l.tsId == channel.getTransportStreamId())
-                    && (l.serviceId == channel.getServiceId())) {
+                        && (l.tsId == channel.getTransportStreamId())
+                        && (l.serviceId == channel.getServiceId())) {
 
                     Log.d(TAG, "lcn found:");
-                    Log.d(TAG, "\tlcn[0:"+l.lcn[0]+":"+l.visible[0]+":"+l.valid[0]+"]");
-                    Log.d(TAG, "\tlcn[1:"+l.lcn[1]+":"+l.visible[1]+":"+l.valid[1]+"]");
+                    Log.d(TAG, "\tlcn[0:" + l.lcn[0] + ":" + l.visible[0] + ":" + l.valid[0] + "]");
+                    Log.d(TAG, "\tlcn[1:" + l.lcn[1] + ":" + l.visible[1] + ":" + l.valid[1] + "]");
 
                     // lcn found, use lcn[0] by default.
                     lcn_1 = l.valid[0] == 0 ? -1 : l.lcn[0];
@@ -633,17 +641,17 @@ public abstract class TvStoreManager {
                             }
                         } else {
                             chs = mTvDataBaseManager.getChannelList(mInputId, ChannelInfo.COMMON_PROJECTION,
-                                    ChannelInfo.COLUMN_LCN+"=?",
+                                    ChannelInfo.COLUMN_LCN + "=?",
                                     new String[]{String.valueOf(lcn_2)});
                             if (chs.size() > 0) {
                                 if (chs.size() > 1)
-                                    Log.d(TAG, "Warning: found " + chs.size() + "channels with lcn="+lcn_2);
+                                    Log.d(TAG, "Warning: found " + chs.size() + "channels with lcn=" + lcn_2);
                                 ch = chs.get(0);
                             }
                         }
                         if ((ch != null) && !isChannelInListbyId(ch, mChannelsOld)) {// do not check those will be deleted.
-                            Log.d(TAG, "swap exist lcn["+ch.getLCN()+"] -> ["+ch.getLCN2()+"]");
-                            Log.d(TAG, "\t for Service["+ch.getOriginalNetworkId()+":"+ch.getTransportStreamId()+":"+ch.getServiceId()+"]");
+                            Log.d(TAG, "swap exist lcn[" + ch.getLCN() + "] -> [" + ch.getLCN2() + "]");
+                            Log.d(TAG, "\t for Service[" + ch.getOriginalNetworkId() + ":" + ch.getTransportStreamId() + ":" + ch.getServiceId() + "]");
 
                             ch.setLCN(ch.getLCN2());
                             ch.setLCN1(ch.getLCN2());
@@ -662,7 +670,7 @@ public abstract class TvStoreManager {
             }
         }
 
-        Log.d(TAG, "Service visible = "+visible);
+        Log.d(TAG, "Service visible = " + visible);
         channel.setBrowsable(visible);
 
         if (!swapped) {
@@ -675,17 +683,17 @@ public abstract class TvStoreManager {
                     }
                 } else {
                     chs = mTvDataBaseManager.getChannelList(mInputId, ChannelInfo.COMMON_PROJECTION,
-                            ChannelInfo.COLUMN_LCN+"=?",
+                            ChannelInfo.COLUMN_LCN + "=?",
                             new String[]{String.valueOf(lcn)});
                     if (chs.size() > 0) {
                         if (chs.size() > 1)
-                            Log.d(TAG, "Warning: found " + chs.size() + "channels with lcn="+lcn);
+                            Log.d(TAG, "Warning: found " + chs.size() + "channels with lcn=" + lcn);
                         ch = chs.get(0);
                     }
                 }
                 if (ch != null) {
                     if (!isChannelInListbyId(ch, mChannelsOld)) {//do not check those will be deleted.
-                        Log.d(TAG, "found lcn conflct:" + lcn + " by service["+ch.getOriginalNetworkId()+":"+ch.getTransportStreamId()+":"+ch.getServiceId()+"]");
+                        Log.d(TAG, "found lcn conflct:" + lcn + " by service[" + ch.getOriginalNetworkId() + ":" + ch.getTransportStreamId() + ":" + ch.getServiceId() + "]");
                         lcn = lcn_overflow_start++;
                     }
                 }
@@ -694,10 +702,10 @@ public abstract class TvStoreManager {
                 if (mChannelsOld != null) {//may only in manual search
                     for (ChannelInfo c : mChannelsOld) {
                         if ((c.getOriginalNetworkId() == channel.getOriginalNetworkId())
-                            && (c.getTransportStreamId() == channel.getTransportStreamId())
-                            && (c.getServiceId() == channel.getServiceId())) {
+                                && (c.getTransportStreamId() == channel.getTransportStreamId())
+                                && (c.getServiceId() == channel.getServiceId())) {
                             //same freq, reuse lcn if old channel is identical
-                            Log.d(TAG, "found lcn:" + c.getLCN() + " by same old service["+c.getOriginalNetworkId()+":"+c.getTransportStreamId()+":"+c.getServiceId()+"]");
+                            Log.d(TAG, "found lcn:" + c.getLCN() + " by same old service[" + c.getOriginalNetworkId() + ":" + c.getTransportStreamId() + ":" + c.getServiceId() + "]");
                             lcn = c.getLCN();
                         }
                     }
@@ -722,7 +730,7 @@ public abstract class TvStoreManager {
             }
         }
 
-        Log.d(TAG, "update LCN[0:"+lcn+" 1:"+lcn_1+" 2:"+lcn_2+"]..");
+        Log.d(TAG, "update LCN[0:" + lcn + " 1:" + lcn_1 + " 2:" + lcn_2 + "]..");
 
         channel.setLCN(lcn);
         channel.setLCN1(lcn_1);
@@ -734,19 +742,19 @@ public abstract class TvStoreManager {
 
     private void storeTvChannel(boolean isRealtimeStore, boolean isFinalStore) {
         Bundle bundle = null;
-        ArrayList<ChannelInfo> dtvchannelsnew= new ArrayList<ChannelInfo>();
-        ArrayList<ChannelInfo> atvchannelsnew= new ArrayList<ChannelInfo>();
+        ArrayList<ChannelInfo> dtvchannelsnew = new ArrayList<ChannelInfo>();
+        ArrayList<ChannelInfo> atvchannelsnew = new ArrayList<ChannelInfo>();
         ArrayList<ChannelInfo> dtvchannelsinsert;
         ArrayList<ChannelInfo> dtvchannelsupdate;
         ArrayList<ChannelInfo> atvchannelsinsert;
         ArrayList<ChannelInfo> atvchannelsupdate;
 
-        Log.d(TAG, "isRealtimeStore:" + isRealtimeStore + " isFinalStore:"+ isFinalStore);
+        Log.d(TAG, "isRealtimeStore:" + isRealtimeStore + " isFinalStore:" + isFinalStore);
 
         if (mChannelsNew != null) {
 
             /*sort channels by serviceId*/
-            Collections.sort(mChannelsNew, new Comparator<ChannelInfo> () {
+            Collections.sort(mChannelsNew, new Comparator<ChannelInfo>() {
                 @Override
                 public int compare(ChannelInfo a, ChannelInfo b) {
                     /*sort: frequency 1st, serviceId 2nd*/
@@ -767,17 +775,17 @@ public abstract class TvStoreManager {
                     else
                         updateChannelLCN(c);
                     c.setDisplayNumber(String.valueOf(c.getLCN()));
-                    Log.d(TAG, "LCN DisplayNumber:"+ c.getDisplayNumber());
+                    Log.d(TAG, "LCN DisplayNumber:" + c.getDisplayNumber());
                     onDtvNumberMode("lcn");
                 } else if (mSortMode.isATSCStandard()) {
-                    Log.d(TAG, "ATSC DisplayNumber:"+c.getDisplayNumber());
+                    Log.d(TAG, "ATSC DisplayNumber:" + c.getDisplayNumber());
                     /*nothing to do*/
                 } else {
                     if (isRealtimeStore)
                         updateChannelNumber(c, mChannels);
                     else
                         updateChannelNumber(c);
-                    Log.d(TAG, "NUM DisplayNumber:"+ c.getDisplayNumber());
+                    Log.d(TAG, "NUM DisplayNumber:" + c.getDisplayNumber());
                 }
 
                 if (isRealtimeStore) {
@@ -806,12 +814,12 @@ public abstract class TvStoreManager {
         }
         if (atvchannelsnew != null && atvchannelsnew.size() > 0) {
             atvchannelsupdate = getNeedUpdateChannel(atvchannelsnew);
-            atvchannelsinsert= getNeedInsertChannel(atvchannelsnew);
+            atvchannelsinsert = getNeedInsertChannel(atvchannelsnew);
             mTvDataBaseManager.updateOrinsertChannelInList(atvchannelsupdate, atvchannelsinsert, false);
         }
         if (dtvchannelsnew != null && dtvchannelsnew.size() > 0) {
             dtvchannelsupdate = getNeedUpdateChannel(dtvchannelsnew);
-            dtvchannelsinsert= getNeedInsertChannel(dtvchannelsnew);
+            dtvchannelsinsert = getNeedInsertChannel(dtvchannelsnew);
             mTvDataBaseManager.updateOrinsertChannelInList(dtvchannelsupdate, dtvchannelsinsert, true);
         }
 
@@ -862,20 +870,20 @@ public abstract class TvStoreManager {
         return needinsert;
     }
 
-   private boolean getIsSameDisplayNumber(ChannelInfo currentChannel) {
-          int size = mChannelsExist.size();
-          for (int i = 0; i < size; i++) {
+    private boolean getIsSameDisplayNumber(ChannelInfo currentChannel) {
+        int size = mChannelsExist.size();
+        for (int i = 0; i < size; i++) {
             ChannelInfo channel = mChannelsExist.get(i);
             if (TextUtils.equals(currentChannel.getDisplayNumber(), channel.getDisplayNumber())
-                && (currentChannel.getFrequency() != channel.getFrequency())
-                && TextUtils.equals(currentChannel.getSignalType(), channel.getSignalType())) {
-               return true;
-           }
-         }
-       return false;
+                    && (currentChannel.getFrequency() != channel.getFrequency())
+                    && TextUtils.equals(currentChannel.getSignalType(), channel.getSignalType())) {
+                return true;
+            }
+        }
+        return false;
     }
 
-   private int getDvbPhysicalNumFromListByFre(ArrayList<FreqList> mlist, int freq, int diff) {
+    private int getDvbPhysicalNumFromListByFre(ArrayList<FreqList> mlist, int freq, int diff) {
         int size = mlist.size();
         for (int i = 0; i < size; i++) {
             if (freq == mlist.get(i).freq) {
@@ -889,7 +897,7 @@ public abstract class TvStoreManager {
                 return mlist.get(i).channelNum;
             }
         }
-       return -1;
+        return -1;
     }
 
     private int getDvbPhysicalNumByFre(TvMode tvMode, int freq) {
@@ -899,44 +907,45 @@ public abstract class TvStoreManager {
         int physicalNum = -1;
         Log.d(TAG, "type:" + type + " freq :" + freq);
         if (type.equals(TvContract.Channels.TYPE_ATSC_T)) {
-          tvMode.setList(0);
-          if (mATSC_T == null) {
-              mATSC_T = mTvControlManager.DTVGetScanFreqList(tvMode.getMode());
-          }
-          physicalNum = getDvbPhysicalNumFromListByFre(mATSC_T, freq, diff);
-          return physicalNum;
+            tvMode.setList(0);
+            if (mATSC_T == null) {
+                mATSC_T = mTvControlManager.DTVGetScanFreqList(tvMode.getMode());
+            }
+            physicalNum = getDvbPhysicalNumFromListByFre(mATSC_T, freq, diff);
+            return physicalNum;
         }
         if (type.equals(TvContract.Channels.TYPE_ATSC_C)) {
-          tvMode.setList(1);
-          if (mATSC_C_STD == null) {
-            mATSC_C_STD = mTvControlManager.DTVGetScanFreqList(tvMode.getMode());
-          }
-          physicalNum = getDvbPhysicalNumFromListByFre(mATSC_C_STD, freq, diff);
-          if (physicalNum != -1) {
-            //error
-            return physicalNum;
-          }
-          tvMode.setList(2);
-          if (mATSC_C_LRC == null) {
-            mATSC_C_LRC = mTvControlManager.DTVGetScanFreqList(tvMode.getMode());
-          }
-          physicalNum = getDvbPhysicalNumFromListByFre(mATSC_C_LRC, freq, diff);
-          if (physicalNum != -1) {
-            //error
-            return physicalNum;
-          }
-          tvMode.setList(3);
-          if (mATSC_HRC == null) {
-            mATSC_HRC = mTvControlManager.DTVGetScanFreqList(tvMode.getMode());
-          }
-          physicalNum = getDvbPhysicalNumFromListByFre(mATSC_HRC, freq, diff);
-          if (physicalNum != -1) {
-            //error
-            return physicalNum;
-          }
+            tvMode.setList(1);
+            if (mATSC_C_STD == null) {
+                mATSC_C_STD = mTvControlManager.DTVGetScanFreqList(tvMode.getMode());
+            }
+            physicalNum = getDvbPhysicalNumFromListByFre(mATSC_C_STD, freq, diff);
+            if (physicalNum != -1) {
+                //error
+                return physicalNum;
+            }
+            tvMode.setList(2);
+            if (mATSC_C_LRC == null) {
+                mATSC_C_LRC = mTvControlManager.DTVGetScanFreqList(tvMode.getMode());
+            }
+            physicalNum = getDvbPhysicalNumFromListByFre(mATSC_C_LRC, freq, diff);
+            if (physicalNum != -1) {
+                //error
+                return physicalNum;
+            }
+            tvMode.setList(3);
+            if (mATSC_HRC == null) {
+                mATSC_HRC = mTvControlManager.DTVGetScanFreqList(tvMode.getMode());
+            }
+            physicalNum = getDvbPhysicalNumFromListByFre(mATSC_HRC, freq, diff);
+            if (physicalNum != -1) {
+                //error
+                return physicalNum;
+            }
         }
         return physicalNum;
     }
+
     public void onStoreEvent(TvControlManager.ScannerEvent event) {
         sendStoreEvent(event);
     }
@@ -958,229 +967,229 @@ public abstract class TvStoreManager {
         Log.d(TAG, "onEvent:" + event.type + " :" + mDisplayNumber);
 
         switch (event.type) {
-        case TvControlManager.EVENT_SCAN_BEGIN:
-            Log.d(TAG, "Scan begin");
-            prepareStore(event);
-            break;
-
-        case TvControlManager.EVENT_LCN_INFO_DATA:
-
-            checkOrPatchBeginLost(event);
-
-            if (mLcnInfo == null)
-                mLcnInfo = new ArrayList<TvControlManager.ScannerLcnInfo>();
-            mLcnInfo.add(event.lcnInfo);
-            Log.d(TAG, "Lcn["+event.lcnInfo.netId+":"+event.lcnInfo.tsId+":"+event.lcnInfo.serviceId+"]");
-            Log.d(TAG, "\t[0:"+event.lcnInfo.lcn[0]+":"+event.lcnInfo.visible[0]+":"+event.lcnInfo.valid[0]+"]");
-            Log.d(TAG, "\t[1:"+event.lcnInfo.lcn[1]+":"+event.lcnInfo.visible[1]+":"+event.lcnInfo.valid[1]+"]");
-            break;
-
-        case TvControlManager.EVENT_DTV_PROG_DATA:
-            Log.d(TAG, "dtv prog data");
-
-            checkOrPatchBeginLost(event);
-
-            if (!isFinalStoreStage)
-                isRealtimeStore = true;
-
-            if (mScanMode == null) {
-                Log.d(TAG, "mScanMode is null, store return.");
-                return;
-            }
-
-            if (mScanMode.isDTVManulScan()) {
-                //delete exist same frequency channels to order new channels
-                if (mChannelsAll == null || mChannelsAll.size() == 0) {
-                    mTvDataBaseManager.deleteChannels(mInputId, event.freq);
-                    Log.d(TAG, "dtv prog data delete same frequency firstly " + event.freq);
-                }
-                initChannelsExist();
-            }
-             /*get exist channel info list*/
-             reinitChannels();
-            TvControlManager.FEParas fep =
-                new TvControlManager.FEParas(DroidLogicTvUtils.getObjectString(event.paras, "fe"));
-            channel = createDtvChannelInfo(event);
-
-            if (mDisplayNumber2 != null)
-                channel.setDisplayNumber(Integer.toString(mDisplayNumber2));
-            else
-                channel.setDisplayNumber(String.valueOf(mDisplayNumber));
-
-            if (event.minorChannelNumber != -1) {
-                channel.setDisplayNumber(""+event.majorChannelNumber+"-"+event.minorChannelNumber);
-                int vct = DroidLogicTvUtils.getObjectValueInt(event.paras, "srv", "vct", 0);
-                Log.d(TAG, "srv.vct:"+vct);
-                if (vct == 1 && ((event.majorChannelNumber >> 4) == 0x3f)) {
-                  //one-part channnel numbers for digital cable system.
-                  //see atsc a/65 page 35, if major_channel_number hi 6 bit is 11 1111
-                  //one_part_number = (major_channel_number & 0x00f) << 10 + mino_channel_number
-                  int one_part_number = ((event.majorChannelNumber & 0x00f) << 10) + event.minorChannelNumber;
-                  Log.d(TAG, "set one_part_number:"+ one_part_number + " maj:" + event.majorChannelNumber + " min:" +event.minorChannelNumber);
-                  if (one_part_number == 0) {
-                      mode = fep.getMode();
-                      freq = fep.getFrequency();
-                      physicalNum = getDvbPhysicalNumByFre(mode, freq);
-                      if (physicalNum > 0)
-                         channel.setDisplayNumber(""+physicalNum+"-"+channel.getServiceId());
-                       else
-                        channel.setDisplayNumber("0"+"-"+channel.getServiceId());
-                  } else {
-                      channel.setDisplayNumber(""+one_part_number);
-                  }
-                }
-            }
-
-            if (getIsSameDisplayNumber(channel) == true) {
-              //is same
-               mode = fep.getMode();
-               freq = fep.getFrequency();
-               physicalNum = getDvbPhysicalNumByFre(mode, freq);
-               if (physicalNum > 0)
-                 channel.setDisplayNumber(""+physicalNum+"-"+channel.getServiceId());
-              Log.d(TAG, "----Channels physicalNum set DisplayName:" + physicalNum + " getDisplayNumber:" + channel.getDisplayNumber());
-            }
-            channel.print();
-            /*add seach channel*/
-            mChannelsExist.add(channel);
-            cacheChannel(event, channel);
-
-            if (mDisplayNumber2 != null) {
-                Log.d(TAG, "mid store, num:"+mDisplayNumber2);
-                mDisplayNumber2++;//count for realtime stage
-            } else {
-                Log.d(TAG, "final store, num: " + mDisplayNumber);
-                bundle = getDisplayNumBunlde(mDisplayNumber);
-                onEvent(DroidLogicTvUtils.SIG_INFO_C_DISPLAYNUM_EVENT, bundle);
-                mDisplayNumber++;//count for store stage
-            }
-            break;
-
-        case TvControlManager.EVENT_ATV_PROG_DATA:
-            Log.d(TAG, "atv prog data");
-            checkOrPatchBeginLost(event);
-
-            if (isFinalStoreStage && !mScanMode.isATVManualScan())
+            case TvControlManager.EVENT_SCAN_BEGIN:
+                Log.d(TAG, "Scan begin");
+                prepareStore(event);
                 break;
 
-            initChannelsExist();
+            case TvControlManager.EVENT_LCN_INFO_DATA:
 
-            channel = createAtvChannelInfo(event);
-            if (event.majorChannelNumber != -1)
-                channel.setDisplayNumber(""+event.majorChannelNumber+"-"+event.minorChannelNumber);
+                checkOrPatchBeginLost(event);
 
-            Log.d(TAG, "reset number to " + channel.getDisplayNumber());
+                if (mLcnInfo == null)
+                    mLcnInfo = new ArrayList<TvControlManager.ScannerLcnInfo>();
+                mLcnInfo.add(event.lcnInfo);
+                Log.d(TAG, "Lcn[" + event.lcnInfo.netId + ":" + event.lcnInfo.tsId + ":" + event.lcnInfo.serviceId + "]");
+                Log.d(TAG, "\t[0:" + event.lcnInfo.lcn[0] + ":" + event.lcnInfo.visible[0] + ":" + event.lcnInfo.valid[0] + "]");
+                Log.d(TAG, "\t[1:" + event.lcnInfo.lcn[1] + ":" + event.lcnInfo.visible[1] + ":" + event.lcnInfo.valid[1] + "]");
+                break;
 
-            channel.print();
+            case TvControlManager.EVENT_DTV_PROG_DATA:
+                Log.d(TAG, "dtv prog data");
 
-            if (mSortMode.isATSCStandard()) {
-                cacheChannel(event, channel);
-            } else {
-                mDisplayNumber = mTvDataBaseManager.insertAtvChannelWithFreOrder(channel);
-                mDisplayNumber++;
-            }
+                checkOrPatchBeginLost(event);
 
-            Log.d(TAG, "onEvent,displayNum:" + mDisplayNumber);
+                if (!isFinalStoreStage)
+                    isRealtimeStore = true;
 
-            if (isFinalStoreStage) {
-                bundle = getDisplayNumBunlde(mDisplayNumber);
-                onEvent(DroidLogicTvUtils.SIG_INFO_C_DISPLAYNUM_EVENT, bundle);
-                mDisplayNumber++;//count for storestage
-            }
-            break;
-
-        case TvControlManager.EVENT_SCAN_PROGRESS:
-            Log.d(TAG, event.precent + "%\tfreq[" + event.freq + "] lock[" + event.lock + "] strength[" + event.strength + "] quality[" + event.quality + "] mode[" + event.mode + "]");
-
-            checkOrPatchBeginLost(event);
-
-            //take evt:progress as a store-loop end.
-            if (!isFinalStoreStage && !mScanMode.isDTVManulScan()) {
-                if (mCurrentStoreFrequency != event.freq) {
-                    // one frequency store channel once time
-                    mCurrentStoreFrequency = event.freq;
-                    storeTvChannel(isRealtimeStore, isFinalStoreStage);
+                if (mScanMode == null) {
+                    Log.d(TAG, "mScanMode is null, store return.");
+                    return;
                 }
-                mDisplayNumber2 = mInitialDisplayNumber;//dtv pop all channels scanned every store-loop
-            }
 
-            bundle = getScanEventBundle(event);
-            if (((event.mode & 0xff)  == TvChannelParams.MODE_ANALOG) && (event.lock == 0x11)) {
-                bundle.putInt(DroidLogicTvUtils.SIG_INFO_C_DISPLAYNUM, mDisplayNumber);
-                mDisplayNumber++;//count for progress stage
-            }
-            onEvent(DroidLogicTvUtils.SIG_INFO_C_PROCESS_EVENT, bundle);
-            break;
+                if (mScanMode.isDTVManulScan()) {
+                    //delete exist same frequency channels to order new channels
+                    if (mChannelsAll == null || mChannelsAll.size() == 0) {
+                        mTvDataBaseManager.deleteChannels(mInputId, event.freq);
+                        Log.d(TAG, "dtv prog data delete same frequency firstly " + event.freq);
+                    }
+                    initChannelsExist();
+                }
+                /*get exist channel info list*/
+                reinitChannels();
+                TvControlManager.FEParas fep =
+                        new TvControlManager.FEParas(DroidLogicTvUtils.getObjectString(event.paras, "fe"));
+                channel = createDtvChannelInfo(event);
 
-        case TvControlManager.EVENT_STORE_BEGIN:
-            Log.d(TAG, "Store begin");
+                if (mDisplayNumber2 != null)
+                    channel.setDisplayNumber(Integer.toString(mDisplayNumber2));
+                else
+                    channel.setDisplayNumber(String.valueOf(mDisplayNumber));
 
-            //reset for store stage
-            isFinalStoreStage = true;
-            mDisplayNumber = mInitialDisplayNumber;
-            mDisplayNumber2 = null;
-            if (mLcnInfo != null)
-                mLcnInfo.clear();
+                if (event.minorChannelNumber != -1) {
+                    channel.setDisplayNumber("" + event.majorChannelNumber + "-" + event.minorChannelNumber);
+                    int vct = DroidLogicTvUtils.getObjectValueInt(event.paras, "srv", "vct", 0);
+                    Log.d(TAG, "srv.vct:" + vct);
+                    if (vct == 1 && ((event.majorChannelNumber >> 4) == 0x3f)) {
+                        //one-part channnel numbers for digital cable system.
+                        //see atsc a/65 page 35, if major_channel_number hi 6 bit is 11 1111
+                        //one_part_number = (major_channel_number & 0x00f) << 10 + mino_channel_number
+                        int one_part_number = ((event.majorChannelNumber & 0x00f) << 10) + event.minorChannelNumber;
+                        Log.d(TAG, "set one_part_number:" + one_part_number + " maj:" + event.majorChannelNumber + " min:" + event.minorChannelNumber);
+                        if (one_part_number == 0) {
+                            mode = fep.getMode();
+                            freq = fep.getFrequency();
+                            physicalNum = getDvbPhysicalNumByFre(mode, freq);
+                            if (physicalNum > 0)
+                                channel.setDisplayNumber("" + physicalNum + "-" + channel.getServiceId());
+                            else
+                                channel.setDisplayNumber("0" + "-" + channel.getServiceId());
+                        } else {
+                            channel.setDisplayNumber("" + one_part_number);
+                        }
+                    }
+                }
 
-            bundle = getScanEventBundle(event);
-            onEvent(DroidLogicTvUtils.SIG_INFO_C_STORE_BEGIN_EVENT, bundle);
-            break;
+                if (getIsSameDisplayNumber(channel) == true) {
+                    //is same
+                    mode = fep.getMode();
+                    freq = fep.getFrequency();
+                    physicalNum = getDvbPhysicalNumByFre(mode, freq);
+                    if (physicalNum > 0)
+                        channel.setDisplayNumber("" + physicalNum + "-" + channel.getServiceId());
+                    Log.d(TAG, "----Channels physicalNum set DisplayName:" + physicalNum + " getDisplayNumber:" + channel.getDisplayNumber());
+                }
+                channel.print();
+                /*add seach channel*/
+                mChannelsExist.add(channel);
+                cacheChannel(event, channel);
 
-        case TvControlManager.EVENT_STORE_END:
-            Log.d(TAG, "Store end");
-            if (null != mChannelsNew && 0 != mChannelsNew.size()) {
-                Log.d(TAG, "Store end mChannelsNew.size=" + mChannelsNew.size());
-                onScanEndBeforeStore(event.freq);
-            }
-            mCurrentStoreFrequency = 0;
-            storeTvChannel(isRealtimeStore, isFinalStoreStage);
+                if (mDisplayNumber2 != null) {
+                    Log.d(TAG, "mid store, num:" + mDisplayNumber2);
+                    mDisplayNumber2++;//count for realtime stage
+                } else {
+                    Log.d(TAG, "final store, num: " + mDisplayNumber);
+                    bundle = getDisplayNumBunlde(mDisplayNumber);
+                    onEvent(DroidLogicTvUtils.SIG_INFO_C_DISPLAYNUM_EVENT, bundle);
+                    mDisplayNumber++;//count for store stage
+                }
+                break;
 
-            bundle = getScanEventBundle(event);
-            onEvent(DroidLogicTvUtils.SIG_INFO_C_STORE_END_EVENT, bundle);
+            case TvControlManager.EVENT_ATV_PROG_DATA:
+                Log.d(TAG, "atv prog data");
+                checkOrPatchBeginLost(event);
 
-            onStoreEnd(event.freq);
-            break;
+                if (isFinalStoreStage && !mScanMode.isATVManualScan())
+                    break;
 
-        case TvControlManager.EVENT_SCAN_END:
-            Log.d(TAG, "Scan end");
+                initChannelsExist();
 
-            onScanEnd();
+                channel = createAtvChannelInfo(event);
+                if (event.majorChannelNumber != -1)
+                    channel.setDisplayNumber("" + event.majorChannelNumber + "-" + event.minorChannelNumber);
 
-            bundle = getScanEventBundle(event);
-            onEvent(DroidLogicTvUtils.SIG_INFO_C_SCAN_END_EVENT, bundle);
-            break;
+                Log.d(TAG, "reset number to " + channel.getDisplayNumber());
 
-        case TvControlManager.EVENT_SCAN_EXIT:
-            Log.d(TAG, "Scan exit.");
+                channel.print();
 
-            isFinalStoreStage = false;
-            isRealtimeStore = false;
-            mDisplayNumber = mInitialDisplayNumber;
-            mDisplayNumber2 = null;
-            if (mLcnInfo != null) {
-                mLcnInfo.clear();
-                mLcnInfo = null;
-            }
+                if (mSortMode.isATSCStandard()) {
+                    cacheChannel(event, channel);
+                } else {
+                    mDisplayNumber = mTvDataBaseManager.insertAtvChannelWithFreOrder(channel);
+                    mDisplayNumber++;
+                }
 
-            mScanMode = null;
-            mChannelsAll = null;
+                Log.d(TAG, "onEvent,displayNum:" + mDisplayNumber);
 
-            //onScanExit(event.freq);
+                if (isFinalStoreStage) {
+                    bundle = getDisplayNumBunlde(mDisplayNumber);
+                    onEvent(DroidLogicTvUtils.SIG_INFO_C_DISPLAYNUM_EVENT, bundle);
+                    mDisplayNumber++;//count for storestage
+                }
+                break;
 
-            bundle = getScanEventBundle(event);
-            onEvent(DroidLogicTvUtils.SIG_INFO_C_SCAN_EXIT_EVENT, bundle);
-            sendStoreStatus(TvControlManager.EVENT_SCAN_EXIT);
-            break;
+            case TvControlManager.EVENT_SCAN_PROGRESS:
+                Log.d(TAG, event.precent + "%\tfreq[" + event.freq + "] lock[" + event.lock + "] strength[" + event.strength + "] quality[" + event.quality + "] mode[" + event.mode + "]");
 
-        default:
-            break;
+                checkOrPatchBeginLost(event);
+
+                //take evt:progress as a store-loop end.
+                if (!isFinalStoreStage && !mScanMode.isDTVManulScan()) {
+                    if (mCurrentStoreFrequency != event.freq) {
+                        // one frequency store channel once time
+                        mCurrentStoreFrequency = event.freq;
+                        storeTvChannel(isRealtimeStore, isFinalStoreStage);
+                    }
+                    mDisplayNumber2 = mInitialDisplayNumber;//dtv pop all channels scanned every store-loop
+                }
+
+                bundle = getScanEventBundle(event);
+                if (((event.mode & 0xff) == TvChannelParams.MODE_ANALOG) && (event.lock == 0x11)) {
+                    bundle.putInt(DroidLogicTvUtils.SIG_INFO_C_DISPLAYNUM, mDisplayNumber);
+                    mDisplayNumber++;//count for progress stage
+                }
+                onEvent(DroidLogicTvUtils.SIG_INFO_C_PROCESS_EVENT, bundle);
+                break;
+
+            case TvControlManager.EVENT_STORE_BEGIN:
+                Log.d(TAG, "Store begin");
+
+                //reset for store stage
+                isFinalStoreStage = true;
+                mDisplayNumber = mInitialDisplayNumber;
+                mDisplayNumber2 = null;
+                if (mLcnInfo != null)
+                    mLcnInfo.clear();
+
+                bundle = getScanEventBundle(event);
+                onEvent(DroidLogicTvUtils.SIG_INFO_C_STORE_BEGIN_EVENT, bundle);
+                break;
+
+            case TvControlManager.EVENT_STORE_END:
+                Log.d(TAG, "Store end");
+                if (null != mChannelsNew && 0 != mChannelsNew.size()) {
+                    Log.d(TAG, "Store end mChannelsNew.size=" + mChannelsNew.size());
+                    onScanEndBeforeStore(event.freq);
+                }
+                mCurrentStoreFrequency = 0;
+                storeTvChannel(isRealtimeStore, isFinalStoreStage);
+
+                bundle = getScanEventBundle(event);
+                onEvent(DroidLogicTvUtils.SIG_INFO_C_STORE_END_EVENT, bundle);
+
+                onStoreEnd(event.freq);
+                break;
+
+            case TvControlManager.EVENT_SCAN_END:
+                Log.d(TAG, "Scan end");
+
+                onScanEnd();
+
+                bundle = getScanEventBundle(event);
+                onEvent(DroidLogicTvUtils.SIG_INFO_C_SCAN_END_EVENT, bundle);
+                break;
+
+            case TvControlManager.EVENT_SCAN_EXIT:
+                Log.d(TAG, "Scan exit.");
+
+                isFinalStoreStage = false;
+                isRealtimeStore = false;
+                mDisplayNumber = mInitialDisplayNumber;
+                mDisplayNumber2 = null;
+                if (mLcnInfo != null) {
+                    mLcnInfo.clear();
+                    mLcnInfo = null;
+                }
+
+                mScanMode = null;
+                mChannelsAll = null;
+
+                //onScanExit(event.freq);
+
+                bundle = getScanEventBundle(event);
+                onEvent(DroidLogicTvUtils.SIG_INFO_C_SCAN_EXIT_EVENT, bundle);
+                sendStoreStatus(TvControlManager.EVENT_SCAN_EXIT);
+                break;
+
+            default:
+                break;
         }
     }
 
     private class ChildCallback implements Handler.Callback {
         @Override
         public boolean handleMessage(Message msg) {
-            dealStoreEvent((TvControlManager.ScannerEvent)msg.obj);
+            dealStoreEvent((TvControlManager.ScannerEvent) msg.obj);
             return false;
         }
     }

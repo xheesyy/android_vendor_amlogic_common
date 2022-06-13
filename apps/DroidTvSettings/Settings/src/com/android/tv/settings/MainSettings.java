@@ -32,7 +32,7 @@ public class MainSettings extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(MainFragment.class.getName(), null);
+                .newSettingsFragment(MainFragment.class.getName(), null);
     }
 
     @Override
@@ -41,15 +41,15 @@ public class MainSettings extends TvSettingsActivity {
     }
 
     // DroidLogic start
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_PROG_BLUE) {
-			Intent intent=new Intent();
-			intent.setClassName("com.android.tv.settings","com.android.tv.settings.more.MorePrefFragmentActivity");
-			startActivity(intent);
-		}
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_PROG_BLUE) {
+            Intent intent = new Intent();
+            intent.setClassName("com.android.tv.settings", "com.android.tv.settings.more.MorePrefFragmentActivity");
+            startActivity(intent);
+        }
 
-		return super.onKeyDown(keyCode, event);
-	}
-	// DroidLogic end
+        return super.onKeyDown(keyCode, event);
+    }
+    // DroidLogic end
 }

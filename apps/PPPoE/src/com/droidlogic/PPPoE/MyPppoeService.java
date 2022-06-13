@@ -1,19 +1,19 @@
 /******************************************************************
-*
-*Copyright (C) 2012  Amlogic, Inc.
-*
-*Licensed under the Apache License, Version 2.0 (the "License");
-*you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing, software
-*distributed under the License is distributed on an "AS IS" BASIS,
-*WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*See the License for the specific language governing permissions and
-*limitations under the License.
-******************************************************************/
+ *
+ *Copyright (C) 2012  Amlogic, Inc.
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ ******************************************************************/
 
 package com.droidlogic.PPPoE;
 
@@ -37,13 +37,13 @@ import android.os.ServiceManager;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.net.wifi.WifiManager;
+
 import com.amlogic.pppoe.PppoeOperation;
 import com.android.server.net.BaseNetworkObserver;
 import com.droidlogic.app.SystemControlManager;
 
 
-public class MyPppoeService extends Service
-{
+public class MyPppoeService extends Service {
     private static final String TAG = "MyPppoeService";
     private static final String eth_device_sysfs = "/sys/class/ethernet/linkspeed";
     private NotificationManager mNM;
@@ -60,13 +60,14 @@ public class MyPppoeService extends Service
     private static final int PPPOE_SCREEN_ON_DELAYD = 3000;
     private Context mContext;
     private SystemControlManager mSystemControlManager;
+
     @Override
     public void onCreate() {
         Log.d(TAG, "onCreate");
         IBinder b = ServiceManager.getService(Context.NETWORKMANAGEMENT_SERVICE);
         mNMService = INetworkManagementService.Stub.asInterface(b);
-        mScreenon=false;
-        mContext=this;
+        mScreenon = false;
+        mContext = this;
         mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         mSystemControlManager = SystemControlManager.getInstance();
@@ -97,8 +98,9 @@ public class MyPppoeService extends Service
     public IBinder onBind(Intent intent) {
         return null;
     }
+
     private void updateInterfaceState(String iface, boolean up) {
-        Log.d(TAG , "if send com.droidlogic.linkchange iface: " + iface + " up " + up);
+        Log.d(TAG, "if send com.droidlogic.linkchange iface: " + iface + " up " + up);
         Intent intent = new Intent("com.droidlogic.linkchange");
         if (iface.contains("eth0") && up) {
             intent.setPackage("com.droidlogic.PPPoE");
@@ -108,8 +110,7 @@ public class MyPppoeService extends Service
 
     private boolean getAutoDialFlag(Context context) {
         SharedPreferences sharedata = context.getSharedPreferences("inputdata", 0);
-        if (sharedata != null && sharedata.getAll().size() > 0)
-        {
+        if (sharedata != null && sharedata.getAll().size() > 0) {
             return sharedata.getBoolean(PppoeConfigDialog.INFO_AUTO_DIAL_FLAG, false);
         }
         return false;
@@ -118,10 +119,10 @@ public class MyPppoeService extends Service
     private boolean isEthDeviceAdded(Context context) {
         String str = mSystemControlManager.readSysFs(eth_device_sysfs);
         if (str == null)
-            return false ;
+            return false;
         if (str.contains("unlink")) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
@@ -129,22 +130,21 @@ public class MyPppoeService extends Service
     private class InterfaceObserver extends BaseNetworkObserver {
         @Override
         public void interfaceLinkStateChanged(String iface, boolean up) {
-            Log.d(TAG , "interfaceLinkStateChanged("+iface+") up "+up);
+            Log.d(TAG, "interfaceLinkStateChanged(" + iface + ") up " + up);
             if (iface.contains("eth0") && up) {
                 if (!mScreenon) {
                     if (getAutoDialFlag(mContext)) {
-                         mPppoeHandler.sendEmptyMessageDelayed(MSG_PPPOE_START, PPPOE_DELAYD);
+                        mPppoeHandler.sendEmptyMessageDelayed(MSG_PPPOE_START, PPPOE_DELAYD);
                     }
                 }
             } else if (iface.contains("ppp0")) {
                 mConnected = up;
-           }
-      }
+            }
+        }
 
     }
 
-    private class PppoeHandler extends Handler
-    {
+    private class PppoeHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -153,14 +153,14 @@ public class MyPppoeService extends Service
                     if (!mConnected) {
                         int wifiState = mWifiManager.getWifiState();
                         if ((wifiState == WifiManager.WIFI_STATE_ENABLING) ||
-                            (wifiState == WifiManager.WIFI_STATE_ENABLED)) {
+                                (wifiState == WifiManager.WIFI_STATE_ENABLED)) {
                             mWifiManager.setWifiEnabled(false);
                         } else {
                             if (isEthDeviceAdded(mContext))
                                 updateInterfaceState("eth0", true);
                         }
                         if (mTimes < 3) {
-                            mPppoeHandler.sendEmptyMessageDelayed(MSG_PPPOE_START, PPPOE_DELAYD+mTimes*1000);
+                            mPppoeHandler.sendEmptyMessageDelayed(MSG_PPPOE_START, PPPOE_DELAYD + mTimes * 1000);
                             mTimes++;
                         } else {
                             mScreenon = false;
@@ -178,26 +178,27 @@ public class MyPppoeService extends Service
             }
         }
     }
+
     private BroadcastReceiver mShutdownReceiver =
-        new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Log.d(TAG , "onReceive :" +intent.getAction());
-            mScreenon = false;
-            if (getAutoDialFlag(mContext)) {
-                if ((Intent.ACTION_SCREEN_OFF).equals(intent.getAction())) {
-                    mScreenon = true;
-                    operation.disconnect();
-                }
-                if ((Intent.ACTION_SCREEN_ON).equals(intent.getAction())) {
-                    mScreenon = true;
-                    if (!mConnected) {
-                        mTimes=0;
-                        mPppoeHandler.sendEmptyMessageDelayed(MSG_PPPOE_START, PPPOE_SCREEN_ON_DELAYD);
+            new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    Log.d(TAG, "onReceive :" + intent.getAction());
+                    mScreenon = false;
+                    if (getAutoDialFlag(mContext)) {
+                        if ((Intent.ACTION_SCREEN_OFF).equals(intent.getAction())) {
+                            mScreenon = true;
+                            operation.disconnect();
+                        }
+                        if ((Intent.ACTION_SCREEN_ON).equals(intent.getAction())) {
+                            mScreenon = true;
+                            if (!mConnected) {
+                                mTimes = 0;
+                                mPppoeHandler.sendEmptyMessageDelayed(MSG_PPPOE_START, PPPOE_SCREEN_ON_DELAYD);
+                            }
+                        }
                     }
                 }
-            }
-        }
-    };
+            };
 }
 

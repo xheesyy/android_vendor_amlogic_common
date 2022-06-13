@@ -120,7 +120,7 @@ public abstract class SettingsPreferenceFragment extends LeanbackPreferenceFragm
             // it is RTL.
             if (titleView != null
                     && getResources().getConfiguration().getLayoutDirection()
-                        == View.LAYOUT_DIRECTION_RTL) {
+                    == View.LAYOUT_DIRECTION_RTL) {
                 titleView.setGravity(Gravity.RIGHT);
             }
             if (FlavorUtils.isTwoPanel(getContext())) {
@@ -139,13 +139,13 @@ public abstract class SettingsPreferenceFragment extends LeanbackPreferenceFragm
     }
 
     private void iteratePreferenceAndSetObserver(SettingsViewModel viewModel,
-            PreferenceGroup preferenceGroup) {
+                                                 PreferenceGroup preferenceGroup) {
         for (int i = 0; i < preferenceGroup.getPreferenceCount(); i++) {
             Preference pref = preferenceGroup.getPreference(i);
             if (pref instanceof TsPreference
                     && ((TsPreference) pref).updatableFromGoogleSettings()) {
                 viewModel.getVisibilityLiveData(
-                        SettingsPreferenceUtil.getCompoundKey(this, pref))
+                                SettingsPreferenceUtil.getCompoundKey(this, pref))
                         .observe(getViewLifecycleOwner(), (Boolean b) -> pref.setVisible(b));
             }
             if (pref instanceof PreferenceGroup) {
@@ -172,7 +172,7 @@ public abstract class SettingsPreferenceFragment extends LeanbackPreferenceFragm
                 @Override
                 @NonNull
                 public PreferenceViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                        int viewType) {
+                                                               int viewType) {
                     PreferenceViewHolder vh = super.onCreateViewHolder(parent, viewType);
                     vh.itemView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(
                             getContext(), R.animator.preference));
@@ -273,7 +273,9 @@ public abstract class SettingsPreferenceFragment extends LeanbackPreferenceFragm
         return lifecycleHandled;
     }
 
-    /** Subclasses should override this to use their own PageId for statsd logging. */
+    /**
+     * Subclasses should override this to use their own PageId for statsd logging.
+     */
     protected int getPageId() {
         return TvSettingsEnums.PAGE_CLASSIC_DEFAULT;
     }

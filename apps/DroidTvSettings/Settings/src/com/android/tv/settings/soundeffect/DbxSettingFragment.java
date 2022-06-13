@@ -22,24 +22,28 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import com.droidlogic.app.tv.AudioEffectManager;
 
 import com.android.tv.settings.TvSettingsActivity;
 import com.android.tv.settings.R;
 
-public class DbxSettingFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener, SeekBar.OnSeekBarChangeListener{
+public class DbxSettingFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener, SeekBar.OnSeekBarChangeListener {
     private static final String TAG = "DbxSettingFragment";
 
-    private static final String KEY_TV_DBX_ENABLE               = "key_tv_dbx_enable";
-    private static final String KEY_TV_DBX_SOUND_MODE           = "key_tv_dbx_sound_mode";
+    private static final String KEY_TV_DBX_ENABLE = "key_tv_dbx_enable";
+    private static final String KEY_TV_DBX_SOUND_MODE = "key_tv_dbx_sound_mode";
 
     private AudioEffectManager mAudioEffectManager;
     private TwoStatePreference mDbxSwitchPref;
@@ -55,13 +59,15 @@ public class DbxSettingFragment extends SettingsPreferenceFragment implements Pr
     public static DbxSettingFragment newInstance() {
         return new DbxSettingFragment();
     }
+
     private boolean CanDebug() {
         return OptionParameterManager.CanDebug();
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (mAudioEffectManager == null) {
-            mAudioEffectManager = ((TvSettingsActivity)getActivity()).getAudioEffectManager();
+            mAudioEffectManager = ((TvSettingsActivity) getActivity()).getAudioEffectManager();
         }
         super.onCreate(savedInstanceState);
     }
@@ -91,8 +97,9 @@ public class DbxSettingFragment extends SettingsPreferenceFragment implements Pr
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
-        final int selection = Integer.parseInt((String)newValue);
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
+        final int selection = Integer.parseInt((String) newValue);
         if (TextUtils.equals(preference.getKey(), KEY_TV_DBX_SOUND_MODE)) {
             mAudioEffectManager.setDbxSoundMode(selection);
             if (selection == AudioEffectManager.DBX_SOUND_MODE_ADVANCED) {
@@ -130,19 +137,19 @@ public class DbxSettingFragment extends SettingsPreferenceFragment implements Pr
         if (!mIsSeekBarInited) {
             return;
         }
-        ((TvSettingsActivity)getActivity()).startShowActivityTimer();
+        ((TvSettingsActivity) getActivity()).startShowActivityTimer();
         switch (seekBar.getId()) {
-            case R.id.id_seek_bar_tv_dbx_param_sonics:{
+            case R.id.id_seek_bar_tv_dbx_param_sonics: {
                 setShow(AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_SONICS, progress);
                 mAudioEffectManager.setDbxAdvancedModeParam(AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_SONICS, progress);
                 break;
             }
-            case R.id.id_seek_bar_tv_dbx_param_volume:{
+            case R.id.id_seek_bar_tv_dbx_param_volume: {
                 setShow(AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_VOLUME, progress);
                 mAudioEffectManager.setDbxAdvancedModeParam(AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_VOLUME, progress);
                 break;
             }
-            case R.id.id_seek_bar_tv_dbx_param_surround:{
+            case R.id.id_seek_bar_tv_dbx_param_surround: {
                 setShow(AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_SURROUND, progress);
                 mAudioEffectManager.setDbxAdvancedModeParam(AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_SURROUND, progress);
                 break;
@@ -202,15 +209,15 @@ public class DbxSettingFragment extends SettingsPreferenceFragment implements Pr
 
     private void setShow(int id, int value) {
         switch (id) {
-            case AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_SONICS:{
+            case AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_SONICS: {
                 mTextSonics.setText(getShowString(R.string.title_tv_dbx_param_sonics, value));
                 break;
             }
-            case AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_VOLUME:{
+            case AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_VOLUME: {
                 mTextVolume.setText(getShowString(R.string.title_tv_dbx_param_volume, value));
                 break;
             }
-            case AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_SURROUND:{
+            case AudioEffectManager.DBX_ADVANCED_MODE_PRARM_TYPE_SURROUND: {
                 mTextSurround.setText(getShowString(R.string.title_tv_dbx_param_surround, value));
                 break;
             }

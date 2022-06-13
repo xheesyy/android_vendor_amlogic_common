@@ -23,8 +23,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
+
 import androidx.annotation.IntDef;
 import androidx.annotation.VisibleForTesting;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -265,7 +267,7 @@ public class PreferenceXmlParserUtils {
     }
 
     private static String getDataEntries(Context context, AttributeSet set, int[] attrs,
-            int resId) {
+                                         int resId) {
         final TypedArray sa = context.obtainStyledAttributes(set, attrs);
         final TypedValue tv = sa.peekValue(resId);
         sa.recycle();

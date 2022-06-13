@@ -1,9 +1,9 @@
 /*
-*Copyright (c) 2014 Amlogic, Inc. All rights reserved.
-*
-*This source code is subject to the terms and conditions defined in the
-*file 'LICENSE' which is part of this source code package.
-*/
+ *Copyright (c) 2014 Amlogic, Inc. All rights reserved.
+ *
+ *This source code is subject to the terms and conditions defined in the
+ *file 'LICENSE' which is part of this source code package.
+ */
 
 package com.droidlogic.pppoe;
 
@@ -51,6 +51,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.*;
 import android.util.Slog;
+
 import com.droidlogic.app.SystemControlManager;
 
 /**
@@ -67,14 +68,14 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
     public static final String PROP_PPP_DNS1 = "dhcp.ppp0.dns1";
     public static final String PROP_PPP_DNS2 = "dhcp.ppp0.dns2";
     public static final String PROP_PPP_GW = "dhcp.ppp0.gateway";
-    public static final String PROP_PPP_DEF_ROUTE ="net.ppp0.gw";
+    public static final String PROP_PPP_DEF_ROUTE = "net.ppp0.gw";
 
     private static final String PROP_VAL_PPP_NOERR = "0:0";
     private static final String PROP_NAME_PPP_ERRCODE = "net.ppp.errcode";
 
-    public static final int EVENT_CONNECTED         = 3;
-    public static final int EVENT_DISCONNECTED      = 4;
-    public static final int EVENT_CONNECT_FAILED    = 5;
+    public static final int EVENT_CONNECTED = 3;
+    public static final int EVENT_DISCONNECTED = 4;
+    public static final int EVENT_CONNECT_FAILED = 5;
     public static final int EVENT_DISCONNECT_FAILED = 6;
 
     public static final String PPPOE_SERVICE = "pppoe";
@@ -106,8 +107,8 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
     private static DetailedState mLastState = DetailedState.DISCONNECTED;
     private SystemControlManager mSystemControlManager;
 
-    public PppoeStateTracker(Looper looper,int netType, String networkName) {
-        Slog.i(TAG,"Starts ...");
+    public PppoeStateTracker(Looper looper, int netType, String networkName) {
+        Slog.i(TAG, "Starts ...");
         mNetworkName = networkName;
         mNetworkInfo = new NetworkInfo(netType, 0, networkName, "");
         mNetworkInfo.setIsAvailable(false);
@@ -116,13 +117,13 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
         mPppoeConnectStates = false;
         mLinkProperties = new LinkProperties();
         mNetworkCapabilities = new NetworkCapabilities();
-	mNetworkCapabilities.addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET);
+        mNetworkCapabilities.addTransportType(NetworkCapabilities.TRANSPORT_ETHERNET);
         mNetworkCapabilities.addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
-        if (PppoeNative.initPppoeNative() != 0 ) {
-            Slog.e(TAG,"Can not init pppoe device layers");
+        if (PppoeNative.initPppoeNative() != 0) {
+            Slog.e(TAG, "Can not init pppoe device layers");
             return;
         }
-        Slog.i(TAG,"Successed");
+        Slog.i(TAG, "Successed");
 
         mServiceStarted = true;
 
@@ -134,8 +135,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
     public boolean stopInterface(boolean suspend) {
         if (mEM != null) {
             PppoeDevInfo info = mEM.getSavedPppoeConfig();
-            if (info != null && mEM.pppoeConfigured())
-            {
+            if (info != null && mEM.pppoeConfigured()) {
                 mInterfaceStopped = true;
                 Slog.i(TAG, "stop interface");
                 String ifname = info.getIfName();
@@ -167,14 +167,13 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
                 Slog.i(TAG, "IP configuration failed: " + e);
                 return false;
             }
-        }
-        else {
+        } else {
             mLinkProperties = dhcpInfoInternal.makeLinkProperties();
         }
 
         mLinkProperties.addRoute(new RouteInfo(NetworkUtils.numericToInetAddress(Info.getRouteAddr())));
         mLinkProperties.setInterfaceName(ifname);
-        Slog.i(TAG,"Link configuration changed for netId:   new: " + mLinkProperties + "info.getRouteAddr():" +Info.getRouteAddr());
+        Slog.i(TAG, "Link configuration changed for netId:   new: " + mLinkProperties + "info.getRouteAddr():" + Info.getRouteAddr());
         return true;
     }
 
@@ -188,7 +187,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
 
         InetAddress ia = NetworkUtils.numericToInetAddress(info.getNetMask());
         mDhcpInfoInternal.prefixLength = NetworkUtils.netmaskIntToPrefixLength(
-                                            NetworkUtils.inetAddressToInt((Inet4Address)ia));
+                NetworkUtils.inetAddressToInt((Inet4Address) ia));
         mDhcpInfoInternal.dns1 = info.getDnsAddr();
 
         configureInterfaceStatic(info.getIfName(), mDhcpInfoInternal);
@@ -196,7 +195,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
     }
 
 
-    public boolean resetInterface()  throws UnknownHostException{
+    public boolean resetInterface() throws UnknownHostException {
         /*
          * This will guide us to enabled the enabled device
          */
@@ -212,14 +211,14 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
                 Slog.i(TAG, "DNS:" + info.getDnsAddr());
                 Slog.i(TAG, "Route:" + info.getRouteAddr());
 
-                synchronized(this) {
+                synchronized (this) {
                     if (mInterfaceName != null) {
                         Slog.i(TAG, "reset device " + mInterfaceName);
                         //NetworkUtils.resetConnections(mInterfaceName, NetworkUtils.RESET_ALL_ADDRESSES);
                     }
 
                     Slog.i(TAG, "Force the connection disconnected before configuration");
-                    setPppoeState( false, EVENT_DISCONNECTED, PppoeManager.PROP_VAL_PPP_NOERR);
+                    setPppoeState(false, EVENT_DISCONNECTED, PppoeManager.PROP_VAL_PPP_NOERR);
 
                     configureInterface(info);
                 }
@@ -242,6 +241,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
             Slog.i(TAG, "end monitoring");
         }
     }
+
     //@Override
     public boolean isAvailable() {
         // Only say available if we have interfaces and user did not disable us.
@@ -253,7 +253,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
         if (mServiceStarted) {
             Slog.i(TAG, ">>>reconnect");
             try {
-                if (mEM.getPppoeState() != PppoeManager.PPPOE_STATE_DISABLED ) {
+                if (mEM.getPppoeState() != PppoeManager.PPPOE_STATE_DISABLED) {
                     // maybe this is the first time we run, so set it to enabled
                     mEM.setPppoeEnabled(true);
                     if (!mEM.pppoeConfigured()) {
@@ -278,8 +278,8 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
 
     //@Override
     public void startMonitoring(Context context, Handler target) {
-        Slog.i(TAG,"start to monitor the pppoe devices");
-		mSystemControlManager = SystemControlManager.getInstance();
+        Slog.i(TAG, "start to monitor the pppoe devices");
+        mSystemControlManager = SystemControlManager.getInstance();
 
         if (mServiceStarted) {
             mContext = context;
@@ -289,7 +289,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
             mTarget = target;
             mTrackerTarget = new Handler(target.getLooper(), mTrackerHandlerCallback);
             if (mEM == null) {
-                Slog.i(TAG,"failed to start startMonitoring");
+                Slog.i(TAG, "failed to start startMonitoring");
                 return;
             }
             int state = mEM.getPppoeState();
@@ -325,6 +325,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
     public void captivePortalCheckComplete() {
         //TODO
     }
+
     private void postNotification(int event, String errcode) {
         final Intent intent = new Intent(PppoeManager.PPPOE_STATE_CHANGED_ACTION);
         intent.addFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY_BEFORE_BOOT);
@@ -348,7 +349,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
 
             } else {
                 mNetworkInfo.setDetailedState(DetailedState.DISCONNECTED, null, null);
-                if ( EVENT_DISCONNECTED == event ) {
+                if (EVENT_DISCONNECTED == event) {
                     Slog.d(TAG, "EVENT_DISCONNECTED: StopInterface");
                     stopInterface(true);
                 }
@@ -361,6 +362,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
             msg.sendToTarget();*/
         }
     }
+
     public DhcpInfo getDhcpInfo() {
         return mDhcpInfoInternal.makeDhcpInfo();
     }
@@ -374,101 +376,101 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
 
 
                 switch (msg.what) {
-                case EVENT_DISCONNECTED:
-                    Slog.i(TAG, "[EVENT: PPP DOWN]");
-                    Slog.i(TAG, "DO NOT clear IP Config and PPP Property");
+                    case EVENT_DISCONNECTED:
+                        Slog.i(TAG, "[EVENT: PPP DOWN]");
+                        Slog.i(TAG, "DO NOT clear IP Config and PPP Property");
 
-                    SystemProperties.set(PROP_PPP_ADDR, "0.0.0.0");
-                    SystemProperties.set(PROP_PPP_MASK, "0.0.0.0");
-                    SystemProperties.set(PROP_PPP_DNS1, "0.0.0.0");
-                    SystemProperties.set(PROP_PPP_DNS2, "0.0.0.0");
-                    SystemProperties.set(PROP_PPP_GW, "0.0.0.0");
+                        SystemProperties.set(PROP_PPP_ADDR, "0.0.0.0");
+                        SystemProperties.set(PROP_PPP_MASK, "0.0.0.0");
+                        SystemProperties.set(PROP_PPP_DNS1, "0.0.0.0");
+                        SystemProperties.set(PROP_PPP_DNS2, "0.0.0.0");
+                        SystemProperties.set(PROP_PPP_GW, "0.0.0.0");
 
-                    info.setIfName(mInterfaceName);
-                    info.setIpAddress("0.0.0.0");
-                    info.setNetMask("0.0.0.0");
-                    info.setDnsAddr("0.0.0.0");
-                    info.setRouteAddr("0.0.0.0");
-                    mEM.UpdatePppoeDevInfo(info);
+                        info.setIfName(mInterfaceName);
+                        info.setIpAddress("0.0.0.0");
+                        info.setNetMask("0.0.0.0");
+                        info.setDnsAddr("0.0.0.0");
+                        info.setRouteAddr("0.0.0.0");
+                        mEM.UpdatePppoeDevInfo(info);
 
-                    try {
-                        configureInterface(info);
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    }
-                    newNetworkstate = false;
-
-                    String ppp_err = mSystemControlManager.getPropertyString(PROP_NAME_PPP_ERRCODE, PppoeManager.PROP_VAL_PPP_NOERR);
-                    Slog.i(TAG, "ppp_err:" + ppp_err);
-                    if (ppp_err.equals(PROP_VAL_PPP_NOERR)) {
-                        setPppoeState(newNetworkstate, EVENT_DISCONNECTED, PppoeManager.PROP_VAL_PPP_NOERR);
-                    } else {
-                        setPppoeState(newNetworkstate, EVENT_CONNECT_FAILED, ppp_err);
-                    }
-                    if (mNetworkAgent != null && mNetworkInfo.getState() == NetworkInfo.State.DISCONNECTED) {
-                        mNetworkAgent.sendNetworkInfo(mNetworkInfo);
-                    }
-                    break;
-
-                case EVENT_CONNECTED:
-                    Slog.i(TAG, "[EVENT: PPP UP]");
-                    newNetworkstate = true;
-
-                    int i = 0;
-
-                    info.setIfName(mInterfaceName);
-                    String prop_val = null;
-                    do {
-                        prop_val = mSystemControlManager.getPropertyString(PROP_PPP_ADDR, "0.0.0.0");
-                        info.setIpAddress(prop_val);
-                        Slog.i(TAG, "ip:" + prop_val);
-						if (!prop_val.equals("0.0.0.0")) {
-							break;
-						}
                         try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException ex) {
-                            // Shut up!
+                            configureInterface(info);
+                        } catch (UnknownHostException e) {
+                            e.printStackTrace();
                         }
-                        i++;
-                    } while (i < 10);
+                        newNetworkstate = false;
 
-                    prop_val = mSystemControlManager.getPropertyString(PROP_PPP_MASK, "0.0.0.0");
-                    info.setNetMask(prop_val);
-                    Slog.i(TAG, "mask:" + prop_val);
+                        String ppp_err = mSystemControlManager.getPropertyString(PROP_NAME_PPP_ERRCODE, PppoeManager.PROP_VAL_PPP_NOERR);
+                        Slog.i(TAG, "ppp_err:" + ppp_err);
+                        if (ppp_err.equals(PROP_VAL_PPP_NOERR)) {
+                            setPppoeState(newNetworkstate, EVENT_DISCONNECTED, PppoeManager.PROP_VAL_PPP_NOERR);
+                        } else {
+                            setPppoeState(newNetworkstate, EVENT_CONNECT_FAILED, ppp_err);
+                        }
+                        if (mNetworkAgent != null && mNetworkInfo.getState() == NetworkInfo.State.DISCONNECTED) {
+                            mNetworkAgent.sendNetworkInfo(mNetworkInfo);
+                        }
+                        break;
 
-                    prop_val = mSystemControlManager.getPropertyString(PROP_PPP_DNS1, "0.0.0.0");
-                    info.setDnsAddr(prop_val);
-                    Slog.i(TAG, "dns:" + prop_val);
+                    case EVENT_CONNECTED:
+                        Slog.i(TAG, "[EVENT: PPP UP]");
+                        newNetworkstate = true;
 
-                    prop_val = mSystemControlManager.getPropertyString(PROP_PPP_GW, "0.0.0.0");
-                    info.setRouteAddr(prop_val);
-                    Slog.i(TAG, "gw:" + prop_val);
+                        int i = 0;
 
-                    mSystemControlManager.setProperty(PROP_PPP_DEF_ROUTE,prop_val);
-                    mEM.UpdatePppoeDevInfo(info);
-                    try {
-                        configureInterface(info);
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    }
+                        info.setIfName(mInterfaceName);
+                        String prop_val = null;
+                        do {
+                            prop_val = mSystemControlManager.getPropertyString(PROP_PPP_ADDR, "0.0.0.0");
+                            info.setIpAddress(prop_val);
+                            Slog.i(TAG, "ip:" + prop_val);
+                            if (!prop_val.equals("0.0.0.0")) {
+                                break;
+                            }
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException ex) {
+                                // Shut up!
+                            }
+                            i++;
+                        } while (i < 10);
 
-                    setPppoeState(newNetworkstate, EVENT_CONNECTED, PppoeManager.PROP_VAL_PPP_NOERR);
-                     mNetworkInfo.setDetailedState(DetailedState.CONNECTED, null, null);
+                        prop_val = mSystemControlManager.getPropertyString(PROP_PPP_MASK, "0.0.0.0");
+                        info.setNetMask(prop_val);
+                        Slog.i(TAG, "mask:" + prop_val);
 
-                    mNetworkAgent = new NetworkAgent(mLooper, mContext, mNetworkName,
-                    mNetworkInfo, mNetworkCapabilities,mLinkProperties,140) {
-                        @Override
-                        public void unwanted() {
+                        prop_val = mSystemControlManager.getPropertyString(PROP_PPP_DNS1, "0.0.0.0");
+                        info.setDnsAddr(prop_val);
+                        Slog.i(TAG, "dns:" + prop_val);
+
+                        prop_val = mSystemControlManager.getPropertyString(PROP_PPP_GW, "0.0.0.0");
+                        info.setRouteAddr(prop_val);
+                        Slog.i(TAG, "gw:" + prop_val);
+
+                        mSystemControlManager.setProperty(PROP_PPP_DEF_ROUTE, prop_val);
+                        mEM.UpdatePppoeDevInfo(info);
+                        try {
+                            configureInterface(info);
+                        } catch (UnknownHostException e) {
+                            e.printStackTrace();
+                        }
+
+                        setPppoeState(newNetworkstate, EVENT_CONNECTED, PppoeManager.PROP_VAL_PPP_NOERR);
+                        mNetworkInfo.setDetailedState(DetailedState.CONNECTED, null, null);
+
+                        mNetworkAgent = new NetworkAgent(mLooper, mContext, mNetworkName,
+                                mNetworkInfo, mNetworkCapabilities, mLinkProperties, 140) {
+                            @Override
+                            public void unwanted() {
                                 // We are user controlled, not driven by NetworkRequest.
-                        }
-                    };
+                            }
+                        };
 
-                    if (mNetworkAgent != null) {
-                        mNetworkAgent.sendNetworkInfo(mNetworkInfo);
-                    }
+                        if (mNetworkAgent != null) {
+                            mNetworkAgent.sendNetworkInfo(mNetworkInfo);
+                        }
 //                      if (mNetworkAgent != null) mNetworkAgent.sendLinkProperties(mLinkProperties);
-                    break;
+                        break;
                 }
             }
             mPppoeConnectStates = false;
@@ -479,19 +481,20 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
     public void notifyPppConnected(String ifname) {
         Slog.i(TAG, "report interface is up for " + ifname + ", last status: " + mLastState);
         mLastState = DetailedState.CONNECTED;
-        synchronized(this) {
+        synchronized (this) {
             mTrackerTarget.sendEmptyMessage(EVENT_CONNECTED);
         }
 
     }
-    public void notifyStateChange(String ifname,DetailedState state) {
+
+    public void notifyStateChange(String ifname, DetailedState state) {
         Slog.i(TAG, "report state change:" + mLastState.toString() + "->" + state.toString() + " on dev " + ifname);
         if ((ifname.equals(mInterfaceName) && mLastState != state)) {
             mLastState = state;
             mPppoeConnectStates = true;
-            synchronized(this) {
+            synchronized (this) {
                 mTrackerTarget.sendEmptyMessage(state.equals(DetailedState.CONNECTED)
-                    ? EVENT_CONNECTED : EVENT_DISCONNECTED);
+                        ? EVENT_CONNECTED : EVENT_DISCONNECTED);
             }
         } else if (ifname.equals(mInterfaceName1) && !mPppoeConnectStates) {
             mPppoeConnectStates = true;
@@ -629,6 +632,7 @@ public class PppoeStateTracker /*implements NetworkStateTracker*/ {
 
     /**
      * Get interesting information about this network link
+     *
      * @return a copy of link information, null if not available
      */
     public LinkQualityInfo getLinkQualityInfo() {

@@ -32,6 +32,7 @@ import android.view.Surface;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import android.net.Uri;
 
 
@@ -65,7 +66,7 @@ public class Hdmi4InputService extends DroidLogicTvInputService {
 
     @Override
     public void setCurrentSessionById(int sessionId) {
-        Utils.logd(TAG, "setCurrentSessionById:"+sessionId);
+        Utils.logd(TAG, "setCurrentSessionById:" + sessionId);
         Hdmi4InputSession session = sessionMap.get(sessionId);
         if (session != null) {
             mCurrentSession = session;
@@ -85,7 +86,7 @@ public class Hdmi4InputService extends DroidLogicTvInputService {
         @Override
         public boolean onSetSurface(Surface surface) {
             super.onSetSurface(surface);
-            return setSurfaceInService(surface,this);
+            return setSurfaceInService(surface, this);
         }
 
         @Override

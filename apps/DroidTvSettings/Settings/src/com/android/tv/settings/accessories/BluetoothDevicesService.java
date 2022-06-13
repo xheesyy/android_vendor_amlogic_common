@@ -42,7 +42,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/** The Service for handling Bluetooth-related logic. */
+/**
+ * The Service for handling Bluetooth-related logic.
+ */
 public class BluetoothDevicesService extends Service {
 
     private static final boolean DEBUG = false;
@@ -52,7 +54,9 @@ public class BluetoothDevicesService extends Service {
     private final Binder mBinder = new LocalBinder();
     protected final Handler mHandler = new Handler(Looper.getMainLooper());
 
-    /** Binder in BluetoothDeviceService. */
+    /**
+     * Binder in BluetoothDeviceService.
+     */
     public class LocalBinder extends Binder implements BluetoothDeviceProvider {
 
         public List<BluetoothDevice> getDevices() {
@@ -131,7 +135,7 @@ public class BluetoothDevicesService extends Service {
                     getContentResolver().notifyChange(GENERAL_SLICE_URI, null);
                 }
             } else {
-                switch(action) {
+                switch (action) {
                     case BluetoothA2dp.ACTION_CONNECTION_STATE_CHANGED:
                         int state = intent.getIntExtra(BluetoothProfile.EXTRA_STATE, -1);
                         mHandler.post(() -> onA2dpConnectionStateChanged(device.getName(), state));
@@ -186,7 +190,7 @@ public class BluetoothDevicesService extends Service {
 
     @Override
     protected void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
-        for (BluetoothDevice device: getDevices()) {
+        for (BluetoothDevice device : getDevices()) {
             if (!device.isConnected()) {
                 continue;
             }
@@ -254,11 +258,13 @@ public class BluetoothDevicesService extends Service {
         mListeners.forEach(listener -> listener.onDeviceUpdated(device));
     }
 
-    /** Returns the BluetoothDevice object with the input address. */
+    /**
+     * Returns the BluetoothDevice object with the input address.
+     */
     public static BluetoothDevice findDevice(String address) {
         List<BluetoothDevice> devices = getDevices();
         BluetoothDevice curDevice = null;
-        for (BluetoothDevice device: devices) {
+        for (BluetoothDevice device : devices) {
             if (address.equals(device.getAddress())) {
                 curDevice = device;
                 break;

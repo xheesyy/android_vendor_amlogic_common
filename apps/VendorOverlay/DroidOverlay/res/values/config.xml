@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /*
 **
 ** Copyright 2012, The Android Open Source Project
@@ -30,8 +29,8 @@
         <item>"ethernet,9,9,9,-1,true"</item>
     </string-array>
     <!-- Array of ConnectivityManager.TYPE_xxxx values allowable for tethering__-->
-        <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
-                 <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
+    <!-- Common options are [1, 4] for TYPE_WIFI and TYPE_MOBILE_DUN or
+             <!== [0,1,5,7] for TYPE_MOBILE, TYPE_WIFI, TYPE_MOBILE_HIPRI and TYPE_BLUETOOTH -->
     <!-- [18,9] for TYPE_PPPOE, TYPE_ETHERNET -->
     <integer-array translatable="false" name="config_tether_upstream_types">
         <item>1</item>
@@ -92,25 +91,26 @@
 
     <!-- disalbe wifi debugging -->
     <bool translatable="false" name="config_wifi_enable_wifi_firmware_debugging">false</bool>
-    <integer translatable="false" name="config_wifi_logger_ring_buffer_verbose_size_limit_kb">16</integer>
+    <integer translatable="false" name="config_wifi_logger_ring_buffer_verbose_size_limit_kb">16
+    </integer>
 
-   <!-- pin some little and always need files -->
-   <!-- /system/framework/framework-res.apk -->
-   <string-array translatable="false" name="config_defaultPinnerServiceFiles">
-      <item>"/system/lib/libandroid_servers.so"</item>
-      <item>"/system/bin/logd"</item>
-      <item>"/system/lib/libjavacrypto.so"</item>
-      <item>"/system/lib/libhidltransport.so"</item>
+    <!-- pin some little and always need files -->
+    <!-- /system/framework/framework-res.apk -->
+    <string-array translatable="false" name="config_defaultPinnerServiceFiles">
+        <item>"/system/lib/libandroid_servers.so"</item>
+        <item>"/system/bin/logd"</item>
+        <item>"/system/lib/libjavacrypto.so"</item>
+        <item>"/system/lib/libhidltransport.so"</item>
 
-      <item>"/system/framework/arm/boot-ext.art"</item>
-      <item>"/system/framework/arm/boot-ext.oat"</item>
-      <item>"/system/framework/boot-ext.vdex"</item>
-      <item>"/system/framework/framework.jar"</item>
-      <item>"/system/framework/services.jar"</item>
-      <item>"/system/framework/oat/arm/services.odex"</item>
-      <item>"/system/framework/arm/boot-framework.art"</item>
-      <item>"/system/framework/arm/boot-framework.oat"</item>
-      <item>"/system/framework/boot-framework.vdex"</item>
-   </string-array>
+        <item>"/system/framework/arm/boot-ext.art"</item>
+        <item>"/system/framework/arm/boot-ext.oat"</item>
+        <item>"/system/framework/boot-ext.vdex"</item>
+        <item>"/system/framework/framework.jar"</item>
+        <item>"/system/framework/services.jar"</item>
+        <item>"/system/framework/oat/arm/services.odex"</item>
+        <item>"/system/framework/arm/boot-framework.art"</item>
+        <item>"/system/framework/arm/boot-framework.oat"</item>
+        <item>"/system/framework/boot-framework.vdex"</item>
+    </string-array>
 
 </resources>

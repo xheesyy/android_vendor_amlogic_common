@@ -174,16 +174,16 @@ public class Tools {
                 asciiToString(decodeHEX(temp.split("\\s+")[9])) +
                 asciiToString(decodeHEX(temp.split("\\s+")[10]));*/
 
-        String srtUsid = temp.split("\\s+")[1].substring(1,2) +
-				temp.split("\\s+")[2].substring(1,2) +
-				temp.split("\\s+")[3].substring(1,2) +
-				temp.split("\\s+")[4].substring(1,2) +
-				temp.split("\\s+")[5].substring(1,2) +
-				temp.split("\\s+")[6].substring(1,2) +
-				temp.split("\\s+")[7].substring(1,2) +
-				temp.split("\\s+")[8].substring(1,2) +
-				temp.split("\\s+")[9].substring(1,2) +
-				temp.split("\\s+")[10].substring(1,2);
+        String srtUsid = temp.split("\\s+")[1].substring(1, 2) +
+                temp.split("\\s+")[2].substring(1, 2) +
+                temp.split("\\s+")[3].substring(1, 2) +
+                temp.split("\\s+")[4].substring(1, 2) +
+                temp.split("\\s+")[5].substring(1, 2) +
+                temp.split("\\s+")[6].substring(1, 2) +
+                temp.split("\\s+")[7].substring(1, 2) +
+                temp.split("\\s+")[8].substring(1, 2) +
+                temp.split("\\s+")[9].substring(1, 2) +
+                temp.split("\\s+")[10].substring(1, 2);
 
         Log.e(TAG, "srtUsid=" + srtUsid);
         return srtUsid;

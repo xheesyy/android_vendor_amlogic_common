@@ -1,9 +1,9 @@
 /*
-*Copyright (c) 2014 Amlogic, Inc. All rights reserved.
-*
-*This source code is subject to the terms and conditions defined in the
-*file 'LICENSE' which is part of this source code package.
-*/
+ *Copyright (c) 2014 Amlogic, Inc. All rights reserved.
+ *
+ *This source code is subject to the terms and conditions defined in the
+ *file 'LICENSE' which is part of this source code package.
+ */
 
 package com.amlogic.pppoe;
 
@@ -49,8 +49,7 @@ public class LooperThread extends Thread {
         synchronized (mQueue) {
             if (mQueue.size() > 0) {
                 return mQueue.getLast();
-            }
-            else {
+            } else {
                 return null;
             }
         }
@@ -58,7 +57,8 @@ public class LooperThread extends Thread {
 
     public void cancelRunnable(RunnableImpl runnableimpl) {
         synchronized (mQueue) {
-            while (mQueue.remove(runnableimpl)) { }
+            while (mQueue.remove(runnableimpl)) {
+            }
         }
     }
 
@@ -78,7 +78,7 @@ public class LooperThread extends Thread {
         }
     }
 
-    public void stopThread(){
+    public void stopThread() {
         if (null != mLooper) {
             mLooper.quit();
         }

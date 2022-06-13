@@ -21,7 +21,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
-/** Feature provider for basic mode. */
+/**
+ * Feature provider for basic mode.
+ */
 public interface BasicModeFeatureProvider {
 
     /**
@@ -32,6 +34,7 @@ public interface BasicModeFeatureProvider {
 
     /**
      * Attempt to start the Activity for exiting basic mode.
+     *
      * @param activity the Activity to start the basic mode exit Activity from
      */
     void startBasicModeExitActivity(@NonNull Activity activity);

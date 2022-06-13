@@ -57,9 +57,11 @@ public class BluetoothActionFragment extends GuidedStepFragment {
 
     public static final int DEFAULT_CHOICE_UNDEFINED = -1;
 
-    /** Encapsulates resources into a Bundle to be extracted. */
+    /**
+     * Encapsulates resources into a Bundle to be extracted.
+     */
     public static void prepareArgs(Bundle args, String key, int iconResId, int titleResId,
-            int summaryResId, int[] choices, String name, int defaultChoice) {
+                                   int summaryResId, int[] choices, String name, int defaultChoice) {
         args.putString(ARG_KEY, key);
         args.putInt(ARG_ICON, iconResId);
         args.putInt(ARG_TITLE, titleResId);

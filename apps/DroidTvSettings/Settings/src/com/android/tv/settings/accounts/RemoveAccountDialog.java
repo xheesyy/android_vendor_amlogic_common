@@ -52,7 +52,7 @@ public class RemoveAccountDialog extends FragmentActivity
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
             GuidedStepSupportFragment.addAsRoot(this, RemoveAccountFragment.newInstance(
-                    getIntent().getStringExtra(AccountSyncActivity.EXTRA_ACCOUNT)),
+                            getIntent().getStringExtra(AccountSyncActivity.EXTRA_ACCOUNT)),
                     android.R.id.content);
         }
     }
@@ -69,7 +69,7 @@ public class RemoveAccountDialog extends FragmentActivity
             if (!future.getResult().getBoolean(AccountManager.KEY_BOOLEAN_RESULT)) {
                 // Wasn't removed, toast this.
                 Toast.makeText(this, R.string.account_remove_failed,
-                        Toast.LENGTH_LONG)
+                                Toast.LENGTH_LONG)
                         .show();
             }
         } catch (OperationCanceledException | AuthenticatorException | IOException e) {
@@ -140,7 +140,7 @@ public class RemoveAccountDialog extends FragmentActivity
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             actions.add(new GuidedAction.Builder()
                     .id(ID_CANCEL)
                     .title(getString(android.R.string.cancel))

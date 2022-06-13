@@ -22,6 +22,7 @@ import android.util.Log;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
+
 import com.droidlogic.updater.R;
 import com.droidlogic.updater.UpdateApplication;
 import com.droidlogic.updater.UpdateConfig;
@@ -33,7 +34,9 @@ import com.droidlogic.updater.ui.FragmentAlertDialog;
 import com.droidlogic.updater.util.PermissionUtils;
 import com.droidlogic.updater.util.UpdateEngineErrorCodes;
 import com.droidlogic.updater.util.UpdateEngineStatuses;
+
 import java.util.Calendar;
+
 import org.json.JSONObject;
 
 public class AutoCheckService extends Service {
@@ -43,7 +46,7 @@ public class AutoCheckService extends Service {
     public static final int RUNNING = 3;
     public static final int HIDE = 4;
     public static final int FRUSH = 5;
-    private static final long HALFHOUR = 1000*60*30;
+    private static final long HALFHOUR = 1000 * 60 * 30;
     public static final String SHOWING_ACTION = "com.droidlogic.updater.autocheck";
     public static final String HIDE_UI = "com.droidlogic.updater.hideui";
     public static final String SHOW_UI = "com.droidlogic.updater.showui";
@@ -62,24 +65,25 @@ public class AutoCheckService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d(TAG,"oNnCreate");
+        Log.d(TAG, "oNnCreate");
         mRemoteView = RemoteView.getInstance();
         mRemoteView.createView(AutoCheckService.this);
         IntentFilter intentfilter = new IntentFilter(SHOWING_ACTION);
         intentfilter.addAction(HIDE_UI);
         intentfilter.addAction(SHOW_UI);
         registerReceiver(actionReceiver, intentfilter);
-        mUpdateManager = ((UpdateApplication)getApplication()).getUpdateManager();
+        mUpdateManager = ((UpdateApplication) getApplication()).getUpdateManager();
     }
-    private BroadcastReceiver actionReceiver =new BroadcastReceiver(){
+
+    private BroadcastReceiver actionReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(SHOWING_ACTION)) {
                 mUIHandler.sendEmptyMessage(CHECK);
-            }else if (intent.getAction().equals(HIDE_UI)) {
+            } else if (intent.getAction().equals(HIDE_UI)) {
                 hideUI();
-            }else{
+            } else {
                 mUpdateManager.setOnStateChangeCallback(AutoCheckService.this::onUpdaterStateChange);
                 mUpdateManager.setOnEngineCompleteCallback(AutoCheckService.this::onEnginePayloadApplicationComplete);
                 mUpdateManager.setOnProgressUpdateCallback(AutoCheckService.this::onProgressUpdate);
@@ -90,27 +94,29 @@ public class AutoCheckService extends Service {
 
     class UIHandler extends Handler {
         @Override
-        public void dispatchMessage( Message msg) {
-           switch (msg.what) {
-               case CHECK:
-               if (!MainActivity.mShowing) {
-                    update();
-               }
-               break;
-               case SHOWING:
-               if (!MainActivity.mShowing) {
-                    showDialog();
-               }
-               break;
-               case HIDE:
-               hideUI();
-               break;
-               case FRUSH:
-               updateInfo((String)msg.obj,true,msg.arg1);
-               break;
-           }
+        public void dispatchMessage(Message msg) {
+            switch (msg.what) {
+                case CHECK:
+                    if (!MainActivity.mShowing) {
+                        update();
+                    }
+                    break;
+                case SHOWING:
+                    if (!MainActivity.mShowing) {
+                        showDialog();
+                    }
+                    break;
+                case HIDE:
+                    hideUI();
+                    break;
+                case FRUSH:
+                    updateInfo((String) msg.obj, true, msg.arg1);
+                    break;
+            }
         }
-    };
+    }
+
+    ;
 
     /**
      * Invoked when SystemUpdaterSample app state changes.
@@ -118,7 +124,7 @@ public class AutoCheckService extends Service {
      * values from {@link UpdaterState}.
      */
     private void onUpdaterStateChange(int state) {
-        Log.d(TAG,"onUpdaterStateChange"+state);
+        Log.d(TAG, "onUpdaterStateChange" + state);
         if (state == UpdaterState.SLOT_SWITCH_REQUIRED) {
             mUpdateManager.setSwitchSlotOnReboot();
         }
@@ -130,10 +136,10 @@ public class AutoCheckService extends Service {
      * values from {@link UpdateEngine.ErrorCodeConstants}.
      */
     private void onEnginePayloadApplicationComplete(int errorCode) {
-        Log.d(TAG,"onEnginePayloadApplicationComplete"+errorCode);
-        mUIHandler.post(() ->{
+        Log.d(TAG, "onEnginePayloadApplicationComplete" + errorCode);
+        mUIHandler.post(() -> {
             boolean updateSuccess = UpdateEngineErrorCodes.isUpdateSucceeded(errorCode);
-            final String completionState = updateSuccess? getString(R.string.update_success):getString(R.string.update_fail);
+            final String completionState = updateSuccess ? getString(R.string.update_success) : getString(R.string.update_fail);
             Message msg = mUIHandler.obtainMessage();
             msg.what = FRUSH;
             msg.arg1 = 1;
@@ -141,36 +147,38 @@ public class AutoCheckService extends Service {
             mUIHandler.sendMessage(msg);
         });
     }
+
     /**
      * Invoked when update progress changes.
      */
     private void onProgressUpdate(double progress) {
-        int val = (int)(100*progress);
+        int val = (int) (100 * progress);
         if (val == 0) {
             return;
         }
         Message msg = mUIHandler.obtainMessage();
         msg.what = FRUSH;
         msg.arg1 = val;
-        msg.obj = getString(R.string.running)+(((int)(val*100))/100.0f)+"%";
+        msg.obj = getString(R.string.running) + (((int) (val * 100)) / 100.0f) + "%";
         mUIHandler.sendMessage(msg);
     }
 
-    private void update(){
-        ((UpdateApplication)getApplication()).mRunningUpgrade = true;
+    private void update() {
+        ((UpdateApplication) getApplication()).mRunningUpgrade = true;
         showUI();
-        Log.d(TAG,"update");
-        mWorkHandler.post(()->{
+        Log.d(TAG, "update");
+        mWorkHandler.post(() -> {
             try {
                 mUpdateManager.cancelRunningUpdate();
                 mUpdateManager.resetUpdate();
-            }catch (Exception ex) {}
+            } catch (Exception ex) {
+            }
             try {
                 mUpdateManager.setOnStateChangeCallback(this::onUpdaterStateChange);
                 mUpdateManager.setOnEngineCompleteCallback(this::onEnginePayloadApplicationComplete);
                 mUpdateManager.setOnProgressUpdateCallback(this::onProgressUpdate);
                 mUpdateManager.applyUpdate(this, mCurrentConfig);
-            }catch( Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
@@ -178,19 +186,20 @@ public class AutoCheckService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        aManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        mWorkHandler = ((UpdateApplication)this.getApplication()).getWorkHandler();
+        aManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        mWorkHandler = ((UpdateApplication) this.getApplication()).getWorkHandler();
         mWorkHandler.postDelayed(checkRunner, 30000);
         return START_NOT_STICKY;
     }
 
     private CheckRunnable checkRunner = new CheckRunnable();
-    class CheckRunnable implements Runnable{
+
+    class CheckRunnable implements Runnable {
         public void run() {
             if (checkLowerNetwork(AutoCheckService.this)) {
                 startCheck();
-                PrepareUpdateService.startCheckup(AutoCheckService.this,mWorkHandler,mCallback);
-            }else {
+                PrepareUpdateService.startCheckup(AutoCheckService.this, mWorkHandler, mCallback);
+            } else {
                 mWorkHandler.postDelayed(checkRunner, 30000);
             }
         }
@@ -198,12 +207,12 @@ public class AutoCheckService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.d(TAG,"onDestroy");
+        Log.d(TAG, "onDestroy");
         unregisterReceiver(actionReceiver);
         mUpdateManager.setOnStateChangeCallback(null);
         mUpdateManager.setOnEngineCompleteCallback(null);
         mUpdateManager.setOnProgressUpdateCallback(null);
-        ((UpdateApplication)getApplication()).mRunningUpgrade = false;
+        ((UpdateApplication) getApplication()).mRunningUpgrade = false;
         super.onDestroy();
     }
 
@@ -212,22 +221,23 @@ public class AutoCheckService extends Service {
         try {
             JSONObject o = new JSONObject(json);
             checkForce = o.getBoolean("is_force_upgrade");
-            Log.d(TAG,"checkForceUpdate"+checkForce);
-        }catch(Exception ex){
+            Log.d(TAG, "checkForceUpdate" + checkForce);
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }finally {
+        } finally {
             return checkForce;
         }
     }
 
     private PrepareUpdateService.CheckupResultCallback mCallback = (int status, UpdateConfig config) -> {
-        if (PermissionUtils.CanDebug()) Log.d(TAG,"checkcall back status:"+status+"@"+AutoCheckService.this);
+        if (PermissionUtils.CanDebug())
+            Log.d(TAG, "checkcall back status:" + status + "@" + AutoCheckService.this);
         if (status == UPDATE) {
             stopCheck();
             mCurrentConfig = config;
             Message msg = new Message();
             msg.obj = config.getName();
-            UpdateApplication.mRunningForce = checkForceUpdate(config.getRawJson())?true:false;
+            UpdateApplication.mRunningForce = checkForceUpdate(config.getRawJson()) ? true : false;
             if (UpdateApplication.mRunningForce) {
                 msg.what = CHECK;
                 mUIHandler.sendMessage(msg);
@@ -235,7 +245,7 @@ public class AutoCheckService extends Service {
                 msg.what = SHOWING;
                 mUIHandler.sendMessage(msg);
             }*/
-        }else {
+        } else {
             UpdateApplication.mRunningForce = false;
         }
 
@@ -245,7 +255,7 @@ public class AutoCheckService extends Service {
         if (MainActivity.mShowing) {
             return;
         }
-        Intent intent=new Intent(this,FragmentAlertDialog.class);
+        Intent intent = new Intent(this, FragmentAlertDialog.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -258,10 +268,10 @@ public class AutoCheckService extends Service {
         i.putExtra("key",33);
         i.putExtra(PrepareUpdateService.EXTRA_PARAM_RESULT_RECEIVER,wrapper);Log.d(TAG,"startCheck"+mWorkHandler+"/."+wrapper+"---"+i.getIntExtra("key",0));
         pIntent = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);*/
-        long triggerAtTime=SystemClock.elapsedRealtime()+HALFHOUR;
-        Intent i=new Intent(this, AutoCheckService.class);
+        long triggerAtTime = SystemClock.elapsedRealtime() + HALFHOUR;
+        Intent i = new Intent(this, AutoCheckService.class);
         pIntent = PendingIntent.getService(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
-        aManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,triggerAtTime,HALFHOUR,pIntent);
+        aManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, HALFHOUR, pIntent);
     }
 
     private void stopCheck() {
@@ -271,15 +281,16 @@ public class AutoCheckService extends Service {
     public void showUI() {
         mRemoteView.show();
     }
+
     private static boolean checkLowerNetwork(Context cxt) {
-        ConnectivityManager connMgr = (ConnectivityManager)cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) cxt.getSystemService(Context.CONNECTIVITY_SERVICE);
         Network net = connMgr.getActiveNetwork();
         NetworkCapabilities capabilities = connMgr.getNetworkCapabilities(net);
         return capabilities != null && capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET);
     }
 
     public void hideUI() {
-        Log.d(TAG,"hideUI");
+        Log.d(TAG, "hideUI");
         mRemoteView.hide();
     }
 
@@ -287,7 +298,7 @@ public class AutoCheckService extends Service {
     public void updateInfo(String str, boolean visible, int progress) {
         mRemoteView.updateUI(str, visible, progress);
         if (progress == 100) {
-            mUIHandler.sendEmptyMessageDelayed(HIDE,6000);
+            mUIHandler.sendEmptyMessageDelayed(HIDE, 6000);
         }
     }
 

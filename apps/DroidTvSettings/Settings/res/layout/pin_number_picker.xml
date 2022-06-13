@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -17,7 +16,8 @@
     android:layout_width="@dimen/pin_number_picker_width"
     android:layout_height="@dimen/pin_number_picker_height">
 
-    <View android:id="@+id/focused_background"
+    <View
+        android:id="@+id/focused_background"
         android:layout_width="@dimen/pin_number_picker_text_view_width"
         android:layout_height="@dimen/pin_number_picker_text_view_height"
         android:layout_gravity="center"
@@ -33,41 +33,50 @@
         android:focusable="true"
         android:orientation="vertical">
 
-        <TextView android:id="@+id/previous2_number"
+        <TextView
+            android:id="@+id/previous2_number"
             android:layout_width="@dimen/pin_number_picker_text_view_width"
             android:layout_height="@dimen/pin_number_picker_text_view_height"
             android:gravity="center"
             android:textSize="@dimen/pin_number_picker_text_size"
             android:textColor="@color/pin_dialog_text_color"
             android:fontFamily="@string/light_font" />
-        <TextView android:id="@+id/previous_number"
+
+        <TextView
+            android:id="@+id/previous_number"
             android:layout_width="@dimen/pin_number_picker_text_view_width"
             android:layout_height="@dimen/pin_number_picker_text_view_height"
             android:gravity="center"
             android:textSize="@dimen/pin_number_picker_text_size"
             android:textColor="@color/pin_dialog_text_color"
             android:fontFamily="@string/light_font" />
-        <TextView android:id="@+id/current_number"
-            android:layout_width="@dimen/pin_number_picker_text_view_width"
-            android:layout_height="@dimen/pin_number_picker_text_view_height"
-            android:gravity="center"
-            android:textSize="@dimen/pin_number_picker_text_size"
-            android:textColor="@color/pin_dialog_text_color"
-            android:fontFamily="@string/light_font"/>
-        <TextView android:id="@+id/next_number"
-            android:layout_width="@dimen/pin_number_picker_text_view_width"
-            android:layout_height="@dimen/pin_number_picker_text_view_height"
-            android:gravity="center"
-            android:textSize="@dimen/pin_number_picker_text_size"
-            android:textColor="@color/pin_dialog_text_color"
-            android:fontFamily="@string/light_font" />
-        <TextView android:id="@+id/next2_number"
+
+        <TextView
+            android:id="@+id/current_number"
             android:layout_width="@dimen/pin_number_picker_text_view_width"
             android:layout_height="@dimen/pin_number_picker_text_view_height"
             android:gravity="center"
             android:textSize="@dimen/pin_number_picker_text_size"
             android:textColor="@color/pin_dialog_text_color"
             android:fontFamily="@string/light_font" />
-        </LinearLayout>
+
+        <TextView
+            android:id="@+id/next_number"
+            android:layout_width="@dimen/pin_number_picker_text_view_width"
+            android:layout_height="@dimen/pin_number_picker_text_view_height"
+            android:gravity="center"
+            android:textSize="@dimen/pin_number_picker_text_size"
+            android:textColor="@color/pin_dialog_text_color"
+            android:fontFamily="@string/light_font" />
+
+        <TextView
+            android:id="@+id/next2_number"
+            android:layout_width="@dimen/pin_number_picker_text_view_width"
+            android:layout_height="@dimen/pin_number_picker_text_view_height"
+            android:gravity="center"
+            android:textSize="@dimen/pin_number_picker_text_size"
+            android:textColor="@color/pin_dialog_text_color"
+            android:fontFamily="@string/light_font" />
+    </LinearLayout>
 
 </FrameLayout>

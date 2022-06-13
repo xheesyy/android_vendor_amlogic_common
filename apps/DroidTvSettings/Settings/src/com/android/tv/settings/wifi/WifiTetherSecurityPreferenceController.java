@@ -1,7 +1,9 @@
 package com.android.tv.settings.wifi;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.wifi.SoftApConfiguration;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
@@ -15,7 +17,7 @@ public class WifiTetherSecurityPreferenceController extends WifiTetherBasePrefer
     private int mSecurityValue;
 
     public WifiTetherSecurityPreferenceController(Context context,
-            OnTetherConfigUpdateListener listener) {
+                                                  OnTetherConfigUpdateListener listener) {
         super(context, listener);
         mSecurityEntries = mContext.getResources().getStringArray(R.array.wifi_tether_security);
     }

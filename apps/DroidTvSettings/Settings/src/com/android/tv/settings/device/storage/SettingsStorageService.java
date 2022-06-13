@@ -169,7 +169,7 @@ public class SettingsStorageService {
 
         @Nullable
         private VolumeInfo findPrivateVolume(@NonNull StorageManager storageManager,
-                String diskId) {
+                                             String diskId) {
             final List<VolumeInfo> vols = storageManager.getVolumes();
             for (final VolumeInfo vol : vols) {
                 if (TextUtils.equals(diskId, vol.getDiskId())

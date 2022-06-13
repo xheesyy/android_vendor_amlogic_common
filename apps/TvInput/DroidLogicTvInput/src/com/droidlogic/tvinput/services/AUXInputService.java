@@ -34,6 +34,7 @@ import java.lang.reflect.Field;
 import java.util.Iterator;
 import java.util.HashMap;
 import java.util.Map;
+
 import android.net.Uri;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
@@ -41,25 +42,33 @@ import android.content.IntentFilter;
 import android.util.Log;
 import android.media.tv.TvInputManager;
 import android.media.tv.TvContentRating;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import com.droidlogic.app.tv.ChannelInfo;
 import com.droidlogic.app.tv.TvDataBaseManager;
 import com.droidlogic.tvinput.widget.DTVSubtitleView;
+
 import android.os.Handler;
 import android.os.HandlerThread;
+
 import com.droidlogic.app.tv.Program;
+
 import android.media.tv.TvContract;
 import android.os.Message;
 import android.view.accessibility.CaptioningManager;
 import android.view.accessibility.CaptioningManager.CaptionStyle;
 import android.view.accessibility.CaptioningManager.CaptioningChangeListener;
 import android.graphics.Color;
+
 import com.droidlogic.app.SystemControlManager;
+
 import android.media.tv.TvTrackInfo;
 
 public class AUXInputService extends DroidLogicTvInputService {
-    private static final String TAG = AUXInputService.class.getSimpleName();;
+    private static final String TAG = AUXInputService.class.getSimpleName();
+    ;
     private AUXInputSession mCurrentSession;
     private int id = 0;
     private Map<Integer, AUXInputSession> sessionMap = new HashMap<>();
@@ -107,13 +116,13 @@ public class AUXInputService extends DroidLogicTvInputService {
     @Override
     public void onCreate() {
         super.onCreate();
-         Utils.logd(TAG, "onCreate");
+        Utils.logd(TAG, "onCreate");
     }
 
     @Override
     public Session onCreateSession(String inputId) {
         super.onCreateSession(inputId);
-        Utils.logd(TAG, "onCreateSession:"+inputId);
+        Utils.logd(TAG, "onCreateSession:" + inputId);
         mCurrentSession = new AUXInputSession(this, inputId, getHardwareDeviceId(inputId));
         mCurrentSession.setSessionId(id);
         registerInputSession(mCurrentSession);
@@ -125,7 +134,7 @@ public class AUXInputService extends DroidLogicTvInputService {
 
     @Override
     public void setCurrentSessionById(int sessionId) {
-        Utils.logd(TAG, "setCurrentSessionById:"+sessionId);
+        Utils.logd(TAG, "setCurrentSessionById:" + sessionId);
         AUXInputSession session = sessionMap.get(sessionId);
         if (session != null) {
             mCurrentSession = session;
@@ -134,7 +143,7 @@ public class AUXInputService extends DroidLogicTvInputService {
 
     @Override
     public void doTuneFinish(int result, Uri uri, int sessionId) {
-        Log.d(TAG, "doTuneFinish,result:"+result+"sessionId:"+sessionId);
+        Log.d(TAG, "doTuneFinish,result:" + result + "sessionId:" + sessionId);
         if (result == ACTION_SUCCESS) {
             AUXInputSession session = sessionMap.get(sessionId);
             if (session != null) {
@@ -145,7 +154,7 @@ public class AUXInputService extends DroidLogicTvInputService {
         }
     }
 
-    public class AUXInputSession extends TvInputBaseSession{
+    public class AUXInputSession extends TvInputBaseSession {
         private TvInputManager mTvInputManager;
         private final Context mContext;
         //private TvControlManager mTvControlManager;
@@ -164,49 +173,50 @@ public class AUXInputService extends DroidLogicTvInputService {
         private boolean needRestartCC = false;
 
         private class CCStyleParams {
-             protected int fg_color;
-             protected int fg_opacity;
-             protected int bg_color;
-             protected int bg_opacity;
-             protected int font_style;
-             protected float font_size;
+            protected int fg_color;
+            protected int fg_opacity;
+            protected int bg_color;
+            protected int bg_opacity;
+            protected int font_style;
+            protected float font_size;
 
-             public CCStyleParams(int fg_color, int fg_opacity,
-                                int bg_color, int bg_opacity, int font_style, float font_size) {
-                 this.fg_color = fg_color;
-                 this.fg_opacity = fg_opacity;
-                 this.bg_color = bg_color;
-                 this.bg_opacity = bg_opacity;
-                 this.font_style = font_style;
-                 this.font_size = font_size;
-             }
-         }
+            public CCStyleParams(int fg_color, int fg_opacity,
+                                 int bg_color, int bg_opacity, int font_style, float font_size) {
+                this.fg_color = fg_color;
+                this.fg_opacity = fg_opacity;
+                this.bg_color = bg_color;
+                this.bg_opacity = bg_opacity;
+                this.font_style = font_style;
+                this.font_size = font_size;
+            }
+        }
 
         protected void setSubtitleParam(int type, int pid, int stype, int id1, int id2, String lang) {
             if (type == ChannelInfo.Subtitle.TYPE_ATV_CC) {
                 //CCStyleParams ccParam = getCaptionStyle();
                 CCStyleParams ccParam = getCaptionStyle();//new CCStyleParams(1,3,2,3,0,2);
                 DTVSubtitleView.AVCCParams params =
-                    new DTVSubtitleView.AVCCParams(pid, id1, lang,
-                        ccParam.fg_color,
-                        ccParam.fg_opacity,
-                        ccParam.bg_color,
-                        ccParam.bg_opacity,
-                        ccParam.font_style,
-                        ccParam.font_size);
+                        new DTVSubtitleView.AVCCParams(pid, id1, lang,
+                                ccParam.fg_color,
+                                ccParam.fg_opacity,
+                                ccParam.bg_color,
+                                ccParam.bg_opacity,
+                                ccParam.font_style,
+                                ccParam.font_size);
 
                 mSubtitleView.setSubParams(params);
                 mSubtitleView.setMargin(225, 128, 225, 128);
-                Log.d(TAG, "ATV CC pid="+pid+",fg_color="+ccParam.fg_color+", fg_op="+ccParam.fg_opacity+", bg_color="+ccParam.bg_color+", bg_op="+ccParam.bg_opacity);
-                Log.d(TAG,"font_style:"+ccParam.font_style+"font_size"+ccParam.font_size);
+                Log.d(TAG, "ATV CC pid=" + pid + ",fg_color=" + ccParam.fg_color + ", fg_op=" + ccParam.fg_opacity + ", bg_color=" + ccParam.bg_color + ", bg_op=" + ccParam.bg_opacity);
+                Log.d(TAG, "font_style:" + ccParam.font_style + "font_size" + ccParam.font_size);
             }
         }
+
         public AUXInputSession(Context context, String inputId, int deviceId) {
             super(context, inputId, deviceId);
             mContext = context;
             Utils.logd(TAG, "=====new AVInputSession=====");
             if (mTvInputManager == null)
-                mTvInputManager = (TvInputManager)getSystemService(Context.TV_INPUT_SERVICE);
+                mTvInputManager = (TvInputManager) getSystemService(Context.TV_INPUT_SERVICE);
             mCurrentChannel = null;
             mTvDataBaseManager = new TvDataBaseManager(mContext);
             //initOverlayView(R.layout.layout_overlay);
@@ -228,7 +238,7 @@ public class AUXInputService extends DroidLogicTvInputService {
                 isBlockNoRatingEnable = false;
                 isUnlockCurrent_NR = false;
             }*/
-            Log.d(TAG,"isBlockNoRatingEnable:"+isBlockNoRatingEnable+",isUnlockCurrent_NR:"+isUnlockCurrent_NR);
+            Log.d(TAG, "isBlockNoRatingEnable:" + isBlockNoRatingEnable + ",isUnlockCurrent_NR:" + isUnlockCurrent_NR);
             mCaptioningManager = (CaptioningManager) mContext.getSystemService(Context.CAPTIONING_SERVICE);
             mSystemControlManager = SystemControlManager.getInstance();
         }
@@ -259,8 +269,9 @@ public class AUXInputService extends DroidLogicTvInputService {
         @Override
         public boolean onSetSurface(Surface surface) {
             super.onSetSurface(surface);
-            return setSurfaceInService(surface,this);
+            return setSurfaceInService(surface, this);
         }
+
         @Override
         public boolean onTune(Uri channelUri) {
             isUnlockCurrent_NR = false;
@@ -290,7 +301,7 @@ public class AUXInputService extends DroidLogicTvInputService {
             mUnblockedRatingSet.clear();
             //stopSubtitle();
             releaseWorkThread();
-            synchronized(mLock) {
+            synchronized (mLock) {
                 mCurrentChannel = null;
             }
             if (mHandler != null) {
@@ -304,7 +315,7 @@ public class AUXInputService extends DroidLogicTvInputService {
                 mCurrentSession = null;
                 registerInputSession(null);
             }
-           // mSubtitleView = null;
+            // mSubtitleView = null;
 
             super.doRelease();
         }
@@ -319,6 +330,7 @@ public class AUXInputService extends DroidLogicTvInputService {
                 mHandler = null;
             }
         }
+
         @Override
         public void doUnblockContent(TvContentRating rating) {
             super.doUnblockContent(rating);
@@ -339,6 +351,7 @@ public class AUXInputService extends DroidLogicTvInputService {
             }
 
         }
+
         @Override
         public void doAppPrivateCmd(String action, Bundle bundle) {
             super.doAppPrivateCmd(action, bundle);
@@ -356,6 +369,7 @@ public class AUXInputService extends DroidLogicTvInputService {
                 checkCurrentContentBlockNeeded();
             }*/
         }
+
         public int mParentControlDelay = 3000;
        /* protected void doParentalControls(ChannelInfo channelInfo) {
             if (mHandler != null)
@@ -392,7 +406,7 @@ public class AUXInputService extends DroidLogicTvInputService {
         }*/
 
         protected TvContentRating[] getContentRatingsOfCurrentProgram(ChannelInfo channelInfo) {
-            Log.d(TAG, "getContentRatingsOfCurrentProgram:"+channelInfo);
+            Log.d(TAG, "getContentRatingsOfCurrentProgram:" + channelInfo);
             return mATVContentRatings;
         }
 
@@ -484,59 +498,59 @@ public class AUXInputService extends DroidLogicTvInputService {
             doParentalControls(channelInfo);
         }*/
 
-       /* private void updateChannelBlockStatus(boolean channelBlocked,
-                TvContentRating contentRating, ChannelInfo channelInfo) {
-            if (channelInfo == null) {
-                Log.d(TAG,"channelInfo is null ,exit updateChannelBlockStatus");
-               // return;
-            }
-            Log.d(TAG, "updateBlock:"+channelBlocked + " curBlock:"+mChannelBlocked + " channel:"+channelInfo);
+        /* private void updateChannelBlockStatus(boolean channelBlocked,
+                 TvContentRating contentRating, ChannelInfo channelInfo) {
+             if (channelInfo == null) {
+                 Log.d(TAG,"channelInfo is null ,exit updateChannelBlockStatus");
+                // return;
+             }
+             Log.d(TAG, "updateBlock:"+channelBlocked + " curBlock:"+mChannelBlocked + " channel:"+channelInfo);
 
-            //only for block norationg function
-            TvContentRating tcr = TvContentRating.createRating("com.android.tv", "block_norating", "block_norating", null);
+             //only for block norationg function
+             TvContentRating tcr = TvContentRating.createRating("com.android.tv", "block_norating", "block_norating", null);
 
-            boolean needChannelBlock = channelBlocked;
-            Log.d(TAG, "isBlockNoRatingEnable:"+isBlockNoRatingEnable+",isUnlockCurrent_NR:"+isUnlockCurrent_NR);
-            //add for no-rating block
-            boolean isParentControlEnabled = mTvInputManager.isParentalControlsEnabled();
-            TvContentRating currentBlockRatting = getCurrentRating();
-            if ((mATVContentRatings == null || (currentBlockRatting != null && currentBlockRatting.getMainRating().equals("None")))
-                    && isBlockNoRatingEnable && !isUnlockCurrent_NR) {
-                needChannelBlock = true;
-            }
+             boolean needChannelBlock = channelBlocked;
+             Log.d(TAG, "isBlockNoRatingEnable:"+isBlockNoRatingEnable+",isUnlockCurrent_NR:"+isUnlockCurrent_NR);
+             //add for no-rating block
+             boolean isParentControlEnabled = mTvInputManager.isParentalControlsEnabled();
+             TvContentRating currentBlockRatting = getCurrentRating();
+             if ((mATVContentRatings == null || (currentBlockRatting != null && currentBlockRatting.getMainRating().equals("None")))
+                     && isBlockNoRatingEnable && !isUnlockCurrent_NR) {
+                 needChannelBlock = true;
+             }
 
-            Log.d(TAG, "needChannelBlock:"+needChannelBlock);
-            needChannelBlock = isParentControlEnabled & needChannelBlock;
-            Log.d(TAG, "updated needChannelBlock:"+needChannelBlock);
+             Log.d(TAG, "needChannelBlock:"+needChannelBlock);
+             needChannelBlock = isParentControlEnabled & needChannelBlock;
+             Log.d(TAG, "updated needChannelBlock:"+needChannelBlock);
 
-            if ((mChannelBlocked != -1) && (mChannelBlocked == 1) == needChannelBlock
-                    && (!needChannelBlock || (needChannelBlock && contentRating != null && contentRating.equals(mLastBlockedRating))))
-                return;
+             if ((mChannelBlocked != -1) && (mChannelBlocked == 1) == needChannelBlock
+                     && (!needChannelBlock || (needChannelBlock && contentRating != null && contentRating.equals(mLastBlockedRating))))
+                 return;
 
-            mChannelBlocked = (needChannelBlock ? 1 : 0);
-            if (needChannelBlock) {
-                // stopSubtitleBlock();
-                //releasePlayerBlock();
-                if (contentRating != null) {
-                    Log.d(TAG, "notifyBlock:"+contentRating.flattenToString());
-                    notifyContentBlocked(contentRating);
-                } else if (isBlockNoRatingEnable) {
-                    Log.d(TAG, "notifyBlock because of block_norating:"+tcr.flattenToString());
-                    notifyContentBlocked(tcr);
-                }
-                mLastBlockedRating = contentRating;
-            } else {
-                synchronized(mLock) {
-                   // if (mCurrentChannel != null) {
-                        playProgram(mCurrentChannel);
-                        Log.d(TAG, "notifyAllowed");
-                        notifyContentAllowed();
-                   // }
-                }
-            }
-        }*/
+             mChannelBlocked = (needChannelBlock ? 1 : 0);
+             if (needChannelBlock) {
+                 // stopSubtitleBlock();
+                 //releasePlayerBlock();
+                 if (contentRating != null) {
+                     Log.d(TAG, "notifyBlock:"+contentRating.flattenToString());
+                     notifyContentBlocked(contentRating);
+                 } else if (isBlockNoRatingEnable) {
+                     Log.d(TAG, "notifyBlock because of block_norating:"+tcr.flattenToString());
+                     notifyContentBlocked(tcr);
+                 }
+                 mLastBlockedRating = contentRating;
+             } else {
+                 synchronized(mLock) {
+                    // if (mCurrentChannel != null) {
+                         playProgram(mCurrentChannel);
+                         Log.d(TAG, "notifyAllowed");
+                         notifyContentAllowed();
+                    // }
+                 }
+             }
+         }*/
         private boolean playProgram(ChannelInfo info) {
-            Log.d(TAG,"playProgram");
+            Log.d(TAG, "playProgram");
             startSubtitle();
 
             return true;
@@ -554,10 +568,10 @@ public class AUXInputService extends DroidLogicTvInputService {
                 Log.d(TAG, "subtitle view is null");
                 return;
             }*/
-            Log.d(TAG, "mCurrentCCStyle:"+mCurrentCCStyle);
+            Log.d(TAG, "mCurrentCCStyle:" + mCurrentCCStyle);
             int temp = mCurrentCCStyle;
             if (temp == -1) {
-                int ccPrefer =  mSystemControlManager.getPropertyInt(DTV_SUBTITLE_CC_PREFER, -1);
+                int ccPrefer = mSystemControlManager.getPropertyInt(DTV_SUBTITLE_CC_PREFER, -1);
                 temp = ccPrefer > 0 ? ccPrefer : ChannelInfo.Subtitle.CC_CAPTION_VCHIP_ONLY;//parse xds vchip only
             }
             //mSubtitleView.stop();
@@ -601,7 +615,7 @@ public class AUXInputService extends DroidLogicTvInputService {
             }
 
             for (TvContentRating rating : ratings) {
-               if (!mUnblockedRatingSet.contains(rating) && mTvInputManager
+                if (!mUnblockedRatingSet.contains(rating) && mTvInputManager
                         .isRatingBlocked(rating)) {
                     return rating;
                 }
@@ -651,10 +665,8 @@ public class AUXInputService extends DroidLogicTvInputService {
             }
         }*/
 
-        protected int getColor(int color)
-        {
-        switch (color)
-            {
+        protected int getColor(int color) {
+            switch (color) {
                 case 0xFFFFFF:
                     return DTV_COLOR_WHITE;
                 case 0x0:
@@ -674,11 +686,10 @@ public class AUXInputService extends DroidLogicTvInputService {
             }
             return DTV_COLOR_WHITE;
         }
-        protected int getOpacity(int opacity)
-        {
-            Log.d(TAG, ">> opacity:"+Integer.toHexString(opacity));
-            switch (opacity)
-            {
+
+        protected int getOpacity(int opacity) {
+            Log.d(TAG, ">> opacity:" + Integer.toHexString(opacity));
+            switch (opacity) {
                 case 0:
                     return DTV_OPACITY_TRANSPARENT;
                 case 0x80000000:
@@ -688,6 +699,7 @@ public class AUXInputService extends DroidLogicTvInputService {
             }
             return DTV_OPACITY_TRANSPARENT;
         }
+
         protected float getFontSize(float textSize) {
             if (0 <= textSize && textSize < .375) {
                 return 1.0f;//AM_CC_FONTSIZE_SMALL
@@ -699,7 +711,7 @@ public class AUXInputService extends DroidLogicTvInputService {
                 return 3.0f;//AM_CC_FONTSIZE_BIG
             } else if (textSize < 2.5) {
                 return 4.0f;//AM_CC_FONTSIZE_MAX
-            }else {
+            } else {
                 return 2.0f;//AM_CC_FONTSIZE_DEFAULT
             }
         }
@@ -748,62 +760,61 @@ public class AUXInputService extends DroidLogicTvInputService {
             int fg = userStyle.foregroundColor;
             int bg = userStyle.backgroundColor;
 
-            int convert_fg_color = USE_NEW_CCVIEW? fg_color : getColor(fg_color);
-            int convert_fg_opacity = USE_NEW_CCVIEW? fg_opacity : getOpacity(fg_opacity);
-            int convert_bg_color = USE_NEW_CCVIEW? bg_color : getColor(bg_color);
-            int convert_bg_opacity = USE_NEW_CCVIEW? bg_opacity : getOpacity(bg_opacity);
-            float convert_font_size = USE_NEW_CCVIEW? textSize: getFontSize(textSize);
-            Log.d(TAG, "Caption font size:"+convert_font_size+" ,fg_color:"+Integer.toHexString(fg)+
-                ", fg_opacity:"+Integer.toHexString(fg_opacity)+
-                " ,bg_color:"+Integer.toHexString(bg)+", @fg_color:"+convert_fg_color+", @bg_color:"+
-                convert_bg_color+", @fg_opacity:"+convert_fg_opacity+", @bg_opacity:"+convert_bg_opacity);
+            int convert_fg_color = USE_NEW_CCVIEW ? fg_color : getColor(fg_color);
+            int convert_fg_opacity = USE_NEW_CCVIEW ? fg_opacity : getOpacity(fg_opacity);
+            int convert_bg_color = USE_NEW_CCVIEW ? bg_color : getColor(bg_color);
+            int convert_bg_opacity = USE_NEW_CCVIEW ? bg_opacity : getOpacity(bg_opacity);
+            float convert_font_size = USE_NEW_CCVIEW ? textSize : getFontSize(textSize);
+            Log.d(TAG, "Caption font size:" + convert_font_size + " ,fg_color:" + Integer.toHexString(fg) +
+                    ", fg_opacity:" + Integer.toHexString(fg_opacity) +
+                    " ,bg_color:" + Integer.toHexString(bg) + ", @fg_color:" + convert_fg_color + ", @bg_color:" +
+                    convert_bg_color + ", @fg_opacity:" + convert_fg_opacity + ", @bg_opacity:" + convert_bg_opacity);
 
-            switch (style)
-            {
+            switch (style) {
                 case DTV_CC_STYLE_WHITE_ON_BLACK:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.WHITE : DTV_COLOR_WHITE;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.BLACK : DTV_COLOR_BLACK;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.WHITE : DTV_COLOR_WHITE;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.BLACK : DTV_COLOR_BLACK;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
                     break;
 
                 case DTV_CC_STYLE_BLACK_ON_WHITE:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.BLACK : DTV_COLOR_BLACK;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.WHITE : DTV_COLOR_WHITE;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.BLACK : DTV_COLOR_BLACK;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.WHITE : DTV_COLOR_WHITE;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
                     break;
 
                 case DTV_CC_STYLE_YELLOW_ON_BLACK:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.YELLOW : DTV_COLOR_YELLOW;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.BLACK : DTV_COLOR_BLACK;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.YELLOW : DTV_COLOR_YELLOW;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.BLACK : DTV_COLOR_BLACK;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
                     break;
 
                 case DTV_CC_STYLE_YELLOW_ON_BLUE:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.YELLOW : DTV_COLOR_YELLOW;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTV_OPACITY_SOLID;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.BLUE : DTV_COLOR_BLUE;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLUE : DTV_OPACITY_SOLID;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.YELLOW : DTV_COLOR_YELLOW;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTV_OPACITY_SOLID;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.BLUE : DTV_COLOR_BLUE;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLUE : DTV_OPACITY_SOLID;
                     break;
 
                 case DTV_CC_STYLE_USE_DEFAULT:
-                    convert_fg_color = USE_NEW_CCVIEW? Color.WHITE : DTVSubtitleView.CC_COLOR_DEFAULT;
-                    convert_fg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTVSubtitleView.CC_OPACITY_DEFAULT;
-                    convert_bg_color = USE_NEW_CCVIEW? Color.BLACK : DTVSubtitleView.CC_COLOR_DEFAULT;
-                    convert_bg_opacity = USE_NEW_CCVIEW? Color.BLACK : DTVSubtitleView.CC_OPACITY_DEFAULT;
+                    convert_fg_color = USE_NEW_CCVIEW ? Color.WHITE : DTVSubtitleView.CC_COLOR_DEFAULT;
+                    convert_fg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTVSubtitleView.CC_OPACITY_DEFAULT;
+                    convert_bg_color = USE_NEW_CCVIEW ? Color.BLACK : DTVSubtitleView.CC_COLOR_DEFAULT;
+                    convert_bg_opacity = USE_NEW_CCVIEW ? Color.BLACK : DTVSubtitleView.CC_OPACITY_DEFAULT;
                     break;
 
                 case DTV_CC_STYLE_USE_CUSTOM:
                     break;
             }
             params = new CCStyleParams(convert_fg_color,
-                convert_fg_opacity,
-                convert_bg_color,
-                convert_bg_opacity,
-                fontStyle,
-                convert_font_size);
+                    convert_fg_opacity,
+                    convert_bg_color,
+                    convert_bg_opacity,
+                    fontStyle,
+                    convert_font_size);
 
             return params;
         }

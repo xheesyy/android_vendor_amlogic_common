@@ -31,7 +31,9 @@ import com.android.tv.settings.overlay.FlavorUtils;
 
 import java.util.List;
 
-/** BroadcastReceiver to handle the request from setup */
+/**
+ * BroadcastReceiver to handle the request from setup
+ */
 public class DeviceSettingBroadcastReceiver extends BroadcastReceiver {
     private static final String TAG = "DeviceSettingsReceiver";
     private static final String ACTION_REBOOT_DEVICE = "com.android.tv.settings.REBOOT_DEVICE";

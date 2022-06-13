@@ -21,11 +21,13 @@ import android.text.TextUtils;
 
 import com.android.settingslib.wifi.AccessPoint;
 
-/** Helper class for Wifi configuration. */
+/**
+ * Helper class for Wifi configuration.
+ */
 public class WifiUtils {
     /**
      * Gets security value from ScanResult.
-     *
+     * <p>
      * Duplicated method from {@link AccessPoint#getSecurity(ScanResult)}.
      * TODO(b/120827021): Should be removed if the there is have a common one in shared place (e.g.
      * SettingsLib).
@@ -59,7 +61,7 @@ public class WifiUtils {
      * This method prefers to take {@link AccessPoint} input in priority. Therefore this method
      * will take {@link AccessPoint} input as preferred data extraction source when you input
      * both {@link AccessPoint} and {@link ScanResult}, and ignore {@link ScanResult} input.
-     *
+     * <p>
      * Duplicated and simplified method from {@link WifiConfigController#getConfig()}.
      * TODO(b/120827021): Should be removed if the there is have a common one in shared place (e.g.
      * SettingsLib).
@@ -69,7 +71,7 @@ public class WifiUtils {
      * @return WifiConfiguration obj based on input.
      */
     public static WifiConfiguration getWifiConfig(AccessPoint accessPoint, ScanResult scanResult,
-            String password) {
+                                                  String password) {
         if (accessPoint == null && scanResult == null) {
             throw new IllegalArgumentException(
                     "At least one of AccessPoint and ScanResult input is required.");

@@ -168,7 +168,7 @@ public class RecordedProgram {
         return values;
     }
 
-    public static class Builder{
+    public static class Builder {
         private long mId = ID_NOT_SET;
         private String mInputId;
         private long mChannelId;
@@ -404,7 +404,9 @@ public class RecordedProgram {
         }
     }
 
-    public static Builder builder() { return new Builder(); }
+    public static Builder builder() {
+        return new Builder();
+    }
 
     public static Builder buildFrom(RecordedProgram orig) {
         return builder()
@@ -482,14 +484,14 @@ public class RecordedProgram {
     private final int mVersionNumber;
 
     private RecordedProgram(long id, String inputId, long channelId, String title,
-            String seasonNumber, String seasonTitle, String episodeNumber, String episodeTitle,
-            long startTimeUtcMillis, long endTimeUtcMillis, String[] broadcastGenres,
-            String[] canonicalGenres, String shortDescription, String longDescription,
-            int videoWidth, int videoHeight, String audioLanguage, String contentRating,
-            Uri posterArt, Uri thumbnail, boolean searchable, Uri dataUri, long dataBytes,
-            long durationMillis, long expireTimeUtcMillis, byte[] internalProviderData,
-            int internalProviderFlag1, int internalProviderFlag2, int internalProviderFlag3,
-            int internalProviderFlag4, int versionNumber) {
+                            String seasonNumber, String seasonTitle, String episodeNumber, String episodeTitle,
+                            long startTimeUtcMillis, long endTimeUtcMillis, String[] broadcastGenres,
+                            String[] canonicalGenres, String shortDescription, String longDescription,
+                            int videoWidth, int videoHeight, String audioLanguage, String contentRating,
+                            Uri posterArt, Uri thumbnail, boolean searchable, Uri dataUri, long dataBytes,
+                            long durationMillis, long expireTimeUtcMillis, byte[] internalProviderData,
+                            int internalProviderFlag1, int internalProviderFlag2, int internalProviderFlag3,
+                            int internalProviderFlag4, int versionNumber) {
         mId = id;
         mInputId = inputId;
         mChannelId = channelId;
@@ -572,7 +574,7 @@ public class RecordedProgram {
         if (!TextUtils.isEmpty(mSeasonNumber) && !TextUtils.isEmpty(mEpisodeNumber)
                 && !TextUtils.isEmpty(mEpisodeTitle)) {
             return String.format("",/*context.getResources().getString(R.string.episode_format),*/
-                mSeasonNumber, mEpisodeNumber, mEpisodeTitle);
+                    mSeasonNumber, mEpisodeNumber, mEpisodeTitle);
         }
         return mEpisodeTitle;
     }
@@ -710,7 +712,7 @@ public class RecordedProgram {
     @Override
     public String toString() {
         return "RecordedProgram"
-                + "[" +  mId +
+                + "[" + mId +
                 "]{ mInputId=" + mInputId +
                 ", mChannelId='" + mChannelId + '\'' +
                 ", mTitle='" + mTitle + '\'' +
@@ -719,9 +721,9 @@ public class RecordedProgram {
                 ", mStartTimeUtcMillis=" + mStartTimeUtcMillis +
                 ", mEndTimeUtcMillis=" + mEndTimeUtcMillis +
                 ", mBroadcastGenres=" +
-                        (mBroadcastGenres != null ? Arrays.toString(mBroadcastGenres) : "null") +
+                (mBroadcastGenres != null ? Arrays.toString(mBroadcastGenres) : "null") +
                 ", mCanonicalGenres=" +
-                        (mCanonicalGenres != null ? Arrays.toString(mCanonicalGenres) : "null") +
+                (mCanonicalGenres != null ? Arrays.toString(mCanonicalGenres) : "null") +
                 ", mShortDescription='" + mShortDescription + '\'' +
                 ", mLongDescription='" + mLongDescription + '\'' +
                 ", mVideoHeight=" + mVideoHeight +
@@ -736,7 +738,7 @@ public class RecordedProgram {
                 ", mDurationMillis=" + mDurationMillis +
                 ", mExpireTimeUtcMillis=" + mExpireTimeUtcMillis +
                 ", mInternalProviderData.length=" +
-                        (mInternalProviderData == null ? "null" : mInternalProviderData.length) +
+                (mInternalProviderData == null ? "null" : mInternalProviderData.length) +
                 ", mInternalProviderFlag1=" + mInternalProviderFlag1 +
                 ", mInternalProviderFlag2=" + mInternalProviderFlag2 +
                 ", mInternalProviderFlag3=" + mInternalProviderFlag3 +
@@ -747,11 +749,11 @@ public class RecordedProgram {
                 '}';
     }
 
-    private static String safeToString( Object o) {
+    private static String safeToString(Object o) {
         return o == null ? null : o.toString();
     }
 
-    private static String safeEncode( String[] genres) {
+    private static String safeEncode(String[] genres) {
         return genres == null ? null : TvContract.Programs.Genres.encode(genres);
     }
 }

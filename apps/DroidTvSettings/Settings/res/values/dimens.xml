@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -153,10 +152,18 @@
 
     <item name="alpha_animiation_max_opacity" format="float" type="dimen">1.0</item>
     <item name="alpha_animiation_min_opacity" format="float" type="dimen">0.0</item>
-    <item name="alpha_activity_in_bkg_end" format="float" type="dimen">@dimen/alpha_animiation_max_opacity</item>
-    <item name="alpha_activity_in_bkg_start" format="float" type="dimen">@dimen/alpha_animiation_min_opacity</item>
-    <item name="alpha_activity_out_bkg_end" format="float" type="dimen">@dimen/alpha_animiation_min_opacity</item>
-    <item name="alpha_activity_out_bkg_start" format="float" type="dimen">@dimen/alpha_animiation_max_opacity</item>
+    <item name="alpha_activity_in_bkg_end" format="float" type="dimen">
+        @dimen/alpha_animiation_max_opacity
+    </item>
+    <item name="alpha_activity_in_bkg_start" format="float" type="dimen">
+        @dimen/alpha_animiation_min_opacity
+    </item>
+    <item name="alpha_activity_out_bkg_end" format="float" type="dimen">
+        @dimen/alpha_animiation_min_opacity
+    </item>
+    <item name="alpha_activity_out_bkg_start" format="float" type="dimen">
+        @dimen/alpha_animiation_max_opacity
+    </item>
 
     <integer name="base_animation_duration">500</integer>
     <integer name="alpha_activity_in_bkg_delay">0</integer>
@@ -225,13 +232,17 @@
     <dimen name="lb_preference_decor_title_margin_start">24dp</dimen>
     <dimen name="lb_preference_decor_title_margin_end">56dp</dimen>
 
-    <item name="description_with_inline_icon_line_spacing_multiplier" format="float" type="dimen">1.1</item>
+    <item name="description_with_inline_icon_line_spacing_multiplier" format="float" type="dimen">
+        1.1
+    </item>
 
     <!-- Common-->
     <dimen name="guidance_group_margin_start_two_panel">129.5dp</dimen>
     <dimen name="guidance_group_margin_end_two_panel">92dp</dimen>
     <dimen name="guidance_title_text_size_two_panel">32sp</dimen>
-    <item name="animation_description_vertical_guideline_percent_two_panel" format="float" type="dimen">0.5</item>
+    <item name="animation_description_vertical_guideline_percent_two_panel" format="float" type="dimen">
+        0.5
+    </item>
     <dimen name="rounded_button_background_radius_two_panel">36dp</dimen>
     <dimen name="rounded_button_text_size_two_panel">17sp</dimen>
     <item name="guidedstep_keyline_two_panel" format="float" type="string">32.45</item>
@@ -246,8 +257,10 @@
     <dimen name="guided_actions_list_button_vertical_spacing_two_panel">12dp</dimen>
     <dimen name="guided_actions_short_list_accept_button_extra_spacing">16dp</dimen>
     <item name="guided_action_width_weight_two_panel" format="float" type="string">0.645</item>
-    <item name="guided_action_button_scale_ratio_start_two_panel" format="float" type="dimen">1.0</item>
-    <item name="guided_action_button_scale_ratio_end_two_panel" format="float" type="dimen">1.10</item>
+    <item name="guided_action_button_scale_ratio_start_two_panel" format="float" type="dimen">1.0
+    </item>
+    <item name="guided_action_button_scale_ratio_end_two_panel" format="float" type="dimen">1.10
+    </item>
 
     <dimen name="guidance_icon_margin_bottom_two_panel">18dp</dimen>
 

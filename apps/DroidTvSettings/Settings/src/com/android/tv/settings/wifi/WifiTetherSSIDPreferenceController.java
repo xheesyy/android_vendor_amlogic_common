@@ -18,10 +18,13 @@ package com.android.tv.settings.wifi;
 
 import android.content.Context;
 import android.net.wifi.SoftApConfiguration;
+
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
+
 import android.util.Log;
+
 //import com.droidlogic.tv.settings.wifi.WifiTetherBasePreferenceController.OnTetherConfigUpdateListener;
 public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreferenceController
         implements ValidatedEditTextPreference.Validator {
@@ -36,7 +39,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     EditTextPreference preference = null;
 
     public WifiTetherSSIDPreferenceController(Context context,
-            OnTetherConfigUpdateListener listener) {
+                                              OnTetherConfigUpdateListener listener) {
         super(context, listener);
         mWifiDeviceNameTextValidator = new WifiDeviceNameTextValidator();
     }
@@ -49,7 +52,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
     @Override
     public void updateDisplay() {
         if (null != preference) {
-        String ssid = preference.getText();
+            String ssid = preference.getText();
             Log.d(TAG, "updateSsidDisplay: ssid:" + ssid);
             if (!ssid.equals(mSSID)) {
                 mSSID = ssid;
@@ -67,7 +70,7 @@ public class WifiTetherSSIDPreferenceController extends WifiTetherBasePreference
             }
         }
 
-        Log.d(TAG,"ValidatedEditTextPreference "+ mPreference.getKey()+"/"+(mPreference instanceof  ValidatedEditTextPreference));
+        Log.d(TAG, "ValidatedEditTextPreference " + mPreference.getKey() + "/" + (mPreference instanceof ValidatedEditTextPreference));
         ((ValidatedEditTextPreference) mPreference).setValidator(this);
         preference = (EditTextPreference) mPreference;
         updateSsidDisplay(preference);

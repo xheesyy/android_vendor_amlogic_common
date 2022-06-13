@@ -24,6 +24,7 @@ import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.droidlogic.app.DroidLogicUtils;
 import com.droidlogic.app.SystemControlManager;
 
@@ -37,11 +38,11 @@ public class AssistantMicMuteProvider extends ContentProvider {
     //table name
     private static final String TOGGLESTATE = "togglestate";
     public static final Uri HOTWORDMIC_URI = new Uri.Builder().scheme("content")
-                                                  .authority(HOTWORDMIC_AUTH)
-                                                  .appendPath(TOGGLESTATE)
-                                                  .build();
+            .authority(HOTWORDMIC_AUTH)
+            .appendPath(TOGGLESTATE)
+            .build();
     //colume name
-    public static final String COLUME_ID = "state" ;
+    public static final String COLUME_ID = "state";
 
 
     private static final String TAG = "AssistantMicMuteProvider";
@@ -49,7 +50,8 @@ public class AssistantMicMuteProvider extends ContentProvider {
     public static final int Toggle_Code = 1;
 
     private static final UriMatcher mMatcher;
-    static{
+
+    static {
         mMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mMatcher.addURI(HOTWORDMIC_AUTH, TOGGLESTATE, Toggle_Code);
     }
@@ -83,7 +85,7 @@ public class AssistantMicMuteProvider extends ContentProvider {
             mContext.getContentResolver().notifyChange(uri, null);
         }
         return uri;
-   }
+    }
 
 
     @Override
@@ -93,7 +95,7 @@ public class AssistantMicMuteProvider extends ContentProvider {
         String table = getTableName(uri);
 
         if (isAllowedPackage())
-            return db.query(table,projection,selection,selectionArgs,null,null,sortOrder,null);
+            return db.query(table, projection, selection, selectionArgs, null, null, sortOrder, null);
 
         return null;
     }
@@ -105,7 +107,7 @@ public class AssistantMicMuteProvider extends ContentProvider {
         int ret = 0;
         String table = getTableName(uri);
         if (isAllowedPackage()) {
-            ret = db.update(table, values, selection, selectionArgs );
+            ret = db.update(table, values, selection, selectionArgs);
             mContext.getContentResolver().notifyChange(uri, null);
         }
         return ret;
@@ -121,7 +123,7 @@ public class AssistantMicMuteProvider extends ContentProvider {
         return null;
     }
 
-    private String getTableName(Uri uri){
+    private String getTableName(Uri uri) {
         String tableName = null;
         switch (mMatcher.match(uri)) {
             case Toggle_Code:
@@ -129,20 +131,20 @@ public class AssistantMicMuteProvider extends ContentProvider {
                 break;
         }
         return tableName;
-   }
+    }
 
-   private boolean isAllowedPackage() {
-       String pkg = getCallingPackage();
-       ApplicationInfo info = null;
-       try {
+    private boolean isAllowedPackage() {
+        String pkg = getCallingPackage();
+        ApplicationInfo info = null;
+        try {
             info = getContext().getPackageManager().getApplicationInfo(pkg, 0);
-       } catch (PackageManager.NameNotFoundException e) {
-       }
-       boolean ret = !TextUtils.isEmpty(pkg) && info != null &&
-              ((info.flags & ApplicationInfo.FLAG_SYSTEM) != 0 ||
-              (info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0);
-       return ret;
-  }
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+        boolean ret = !TextUtils.isEmpty(pkg) && info != null &&
+                ((info.flags & ApplicationInfo.FLAG_SYSTEM) != 0 ||
+                        (info.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) != 0);
+        return ret;
+    }
 
 
     private class DBHelper extends SQLiteOpenHelper {
@@ -160,11 +162,11 @@ public class AssistantMicMuteProvider extends ContentProvider {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE IF NOT EXISTS " + TOGGLESTATE + "(" +COLUME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS " + TOGGLESTATE + "(" + COLUME_ID + " INTEGER PRIMARY KEY AUTOINCREMENT)");
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)   {
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             Log.d(TAG, "DBHelper.onUpgrade");
         }
 
@@ -178,7 +180,7 @@ public class AssistantMicMuteProvider extends ContentProvider {
 
     public static boolean getMicToggleState() {
         String ret = getSystemControlManager().readSysFs("/sys/class/gpio_keypad/table").replaceAll("\n", "");
-        Log.d(TAG, "getMicToggleState:"+ret);
+        Log.d(TAG, "getMicToggleState:" + ret);
 
         int a = ret.indexOf("name = mute");
         String item_mute = ret.substring(a);

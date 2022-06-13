@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/settings_background"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:layout_height="wrap_content"
@@ -13,15 +13,13 @@
         android:textSize="@dimen/pq_seekbar_title"
         android:layout_marginTop="@dimen/pq_seekbar_title_marginTop"
         android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
-        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        >
+        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom">
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -29,8 +27,7 @@
             android:layout_weight="2"
             android:focusable="false"
             android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+            android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
 
         <CheckBox
             android:id="@+id/checkbox_enable"
@@ -48,16 +45,14 @@
         android:textSize="@dimen/pq_seekbar_item"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
         android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
     <SeekBar
         android:id="@+id/seekbar_max_level"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="30"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
-        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        />
+        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom" />
     <TextView
         android:id="@+id/text_attack_time"
         android:layout_height="wrap_content"
@@ -66,16 +61,14 @@
         android:focusable="false"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
         android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
     <SeekBar
         android:id="@+id/seekbar_attack_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="19"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
-        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        />
+        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom" />
     <TextView
         android:id="@+id/text_release_time"
         android:layout_height="wrap_content"
@@ -84,14 +77,12 @@
         android:focusable="false"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
         android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft"
-        />
+        android:layout_marginLeft="@dimen/pq_seekbar_item_marginLeft" />
     <SeekBar
         android:id="@+id/seekbar_release_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:max="6"
         android:layout_marginTop="@dimen/pq_seekbar_item_marginTop"
-        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom"
-        />
+        android:layout_marginBottom="@dimen/pq_seekbar_item_marginBottom" />
 </LinearLayout>

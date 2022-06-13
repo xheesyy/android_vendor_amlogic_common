@@ -55,9 +55,9 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
     private static Set<String> sSystemAppPackages;
     private static final @ApplicationsState.SessionFlags int SESSION_FLAGS =
             ApplicationsState.FLAG_SESSION_REQUEST_HOME_APP
-            | ApplicationsState.FLAG_SESSION_REQUEST_ICONS
-            | ApplicationsState.FLAG_SESSION_REQUEST_SIZES
-            | ApplicationsState.FLAG_SESSION_REQUEST_LEANBACK_LAUNCHER;
+                    | ApplicationsState.FLAG_SESSION_REQUEST_ICONS
+                    | ApplicationsState.FLAG_SESSION_REQUEST_SIZES
+                    | ApplicationsState.FLAG_SESSION_REQUEST_LEANBACK_LAUNCHER;
 
     private ApplicationsState mApplicationsState;
     private ApplicationsState.Session mSessionInstalled;
@@ -88,13 +88,17 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
         }
     };
 
-    /** Prepares arguments for the fragment. */
+    /**
+     * Prepares arguments for the fragment.
+     */
     public static void prepareArgs(Bundle b, String volumeUuid, String volumeName) {
         b.putString(AppsActivity.EXTRA_VOLUME_UUID, volumeUuid);
         b.putString(AppsActivity.EXTRA_VOLUME_NAME, volumeName);
     }
 
-    /** Creates a new instance of the fragment. */
+    /**
+     * Creates a new instance of the fragment.
+     */
     public static AllAppsFragment newInstance(String volumeUuid, String volumeName) {
         final Bundle b = new Bundle(2);
         prepareArgs(b, volumeUuid, volumeName);
@@ -215,7 +219,7 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
     }
 
     private void updateAppList(PreferenceGroup group,
-            ArrayList<ApplicationsState.AppEntry> entries) {
+                               ArrayList<ApplicationsState.AppEntry> entries) {
         if (group == null) {
             Log.d(TAG, "Not updating list for null group");
             return;
@@ -240,7 +244,7 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
     }
 
     private void updateAppListInternal(PreferenceGroup group,
-            ArrayList<ApplicationsState.AppEntry> entries) {
+                                       ArrayList<ApplicationsState.AppEntry> entries) {
         if (entries != null) {
             final Set<String> touched = new ArraySet<>(entries.size());
             for (final ApplicationsState.AppEntry entry : entries) {
@@ -253,7 +257,7 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
                 group.addPreference(newPref);
                 touched.add(packageName);
             }
-            for (int i = 0; i < group.getPreferenceCount();) {
+            for (int i = 0; i < group.getPreferenceCount(); ) {
                 final Preference pref = group.getPreference(i);
                 if (touched.contains(pref.getKey())) {
                     i++;
@@ -267,12 +271,13 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
 
     /**
      * Creates or updates a preference according to an {@link ApplicationsState.AppEntry} object
+     *
      * @param preference If non-null, updates this preference object, otherwise creates a new one
-     * @param entry Info to populate preference
+     * @param entry      Info to populate preference
      * @return Updated preference entry
      */
     private Preference bindPreference(@NonNull Preference preference,
-            ApplicationsState.AppEntry entry) {
+                                      ApplicationsState.AppEntry entry) {
         preference.setKey(entry.info.packageName);
         entry.ensureLabel(getContext());
         preference.setTitle(entry.label);
@@ -285,7 +290,7 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
 
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if  (KEY_SHOW_OTHER_APPS.equals(preference.getKey())) {
+        if (KEY_SHOW_OTHER_APPS.equals(preference.getKey())) {
             logEntrySelected(TvSettingsEnums.APPS_ALL_APPS_SHOW_SYSTEM_APPS);
             showOtherApps();
             return true;
@@ -343,7 +348,8 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
             new ApplicationsState.AppFilter() {
 
                 @Override
-                public void init() {}
+                public void init() {
+                }
 
                 @Override
                 public boolean filterApp(ApplicationsState.AppEntry info) {
@@ -380,7 +386,8 @@ public class AllAppsFragment extends SettingsPreferenceFragment implements
             new ApplicationsState.AppFilter() {
 
                 @Override
-                public void init() {}
+                public void init() {
+                }
 
                 @Override
                 public boolean filterApp(ApplicationsState.AppEntry info) {

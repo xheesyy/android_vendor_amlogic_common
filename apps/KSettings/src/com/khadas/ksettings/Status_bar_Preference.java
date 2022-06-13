@@ -42,20 +42,20 @@ public class Status_bar_Preference extends PreferenceActivity implements Prefere
     }
 
     private void initPreference() {
-        status_upper_Preference = (SwitchPreference)findPreference(STATUS_BAR_UPPER);
+        status_upper_Preference = (SwitchPreference) findPreference(STATUS_BAR_UPPER);
         //int mistake_touch_mode_on  = Settings.System.getInt(AliDisplaySettings.this.getContentResolver(),"sys.mistaketouch.switch",0);
-        if(SystemProperties.getInt("persist.sys.show_upper_bar",1) == 1) {
+        if (SystemProperties.getInt("persist.sys.show_upper_bar", 1) == 1) {
             status_upper_Preference.setChecked(true);
-        }else{
+        } else {
             status_upper_Preference.setChecked(false);
         }
         status_upper_Preference.setOnPreferenceClickListener(this);
 
-        status_bottom_Preference = (SwitchPreference)findPreference(STATUS_BAR_BOTTOM);
+        status_bottom_Preference = (SwitchPreference) findPreference(STATUS_BAR_BOTTOM);
         //int mistake_touch_mode_on  = Settings.System.getInt(AliDisplaySettings.this.getContentResolver(),"sys.mistaketouch.switch",0);
-        if(SystemProperties.getInt("persist.sys.show_bottom_bar",1) == 1) {
+        if (SystemProperties.getInt("persist.sys.show_bottom_bar", 1) == 1) {
             status_bottom_Preference.setChecked(true);
-        }else{
+        } else {
             status_bottom_Preference.setChecked(false);
         }
         status_bottom_Preference.setOnPreferenceClickListener(this);
@@ -69,16 +69,16 @@ public class Status_bar_Preference extends PreferenceActivity implements Prefere
     @Override
     public boolean onPreferenceClick(Preference preference) {
         final String key = preference.getKey();
-        if (STATUS_BAR_UPPER.equals(key)){
+        if (STATUS_BAR_UPPER.equals(key)) {
             if (status_upper_Preference.isChecked()) {
                 sendBroadcast(new Intent("com.android.show_upper_bar"));
-            }else {
+            } else {
                 sendBroadcast(new Intent("com.android.hide_upper_bar"));
             }
-        }else if(STATUS_BAR_BOTTOM.equals(key)){
+        } else if (STATUS_BAR_BOTTOM.equals(key)) {
             if (status_bottom_Preference.isChecked()) {
                 sendBroadcast(new Intent("com.android.show_bottom_bar"));
-            }else {
+            } else {
                 sendBroadcast(new Intent("com.android.hide_bottom_bar"));
             }
         }

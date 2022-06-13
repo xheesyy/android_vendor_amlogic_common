@@ -46,26 +46,26 @@ public class DroidLiveTvActivity extends Activity {
     private static final int DEFAULT_MENU_TIME = DroidLogicTvUtils.DEFAULT_MENU_TIME;
 
     //use exist keycode to redefine tv related keyevent
-    public static final int KEYCODE_TV_SHORTCUTKEY_GLOBALSETUP    = KeyEvent.KEYCODE_BUTTON_1;
-    public static final int KEYCODE_TV_SHORTCUTKEY_SOURCE_LIST    = KeyEvent.KEYCODE_BUTTON_2;
-    public static final int KEYCODE_TV_SHORTCUTKEY_3DMODE         = KeyEvent.KEYCODE_BUTTON_3;
-    public static final int KEYCODE_TV_SHORTCUTKEY_DISPAYMODE     = KeyEvent.KEYCODE_BUTTON_4;
-    public static final int KEYCODE_TV_SHORTCUTKEY_VIEWMODE       = KeyEvent.KEYCODE_BUTTON_5;
-    public static final int KEYCODE_TV_SHORTCUTKEY_VOICEMODE      = KeyEvent.KEYCODE_BUTTON_6;
-    public static final int KEYCODE_TV_SHORTCUTKEY_TVINFO         = KeyEvent.KEYCODE_BUTTON_7;
-    public static final int KEYCODE_EARLY_POWER                   = KeyEvent.KEYCODE_BUTTON_8;
-    public static final int KEYCODE_TV_SLEEP                      = KeyEvent.KEYCODE_BUTTON_9;
-    public static final int KEYCODE_TV_SOUND_CHANNEL              = KeyEvent.KEYCODE_BUTTON_10;
-    public static final int KEYCODE_TV_REPEAT                     = KeyEvent.KEYCODE_BUTTON_11;
-    public static final int KEYCODE_TV_SUBTITLE                   = KeyEvent.KEYCODE_BUTTON_12;
-    public static final int KEYCODE_TV_SWITCH                     = KeyEvent.KEYCODE_BUTTON_13;
-    public static final int KEYCODE_TV_WASU                       = KeyEvent.KEYCODE_BUTTON_14;
-    public static final int KEYCODE_TV_VTION                      = KeyEvent.KEYCODE_BUTTON_15;
-    public static final int KEYCODE_TV_BROWSER                    = KeyEvent.KEYCODE_BUTTON_16;
-    public static final int KEYCODE_TV_ALTERNATE                  = KeyEvent.KEYCODE_BUTTON_X;
-    public static final int KEYCODE_FAV                           = KeyEvent.KEYCODE_BUTTON_Y;
-    public static final int KEYCODE_LIST                          = KeyEvent.KEYCODE_BUTTON_Z;
-    public static final int KEYCODE_MEDIA_AUDIO_CONTROL           = KeyEvent.KEYCODE_BUTTON_L1;
+    public static final int KEYCODE_TV_SHORTCUTKEY_GLOBALSETUP = KeyEvent.KEYCODE_BUTTON_1;
+    public static final int KEYCODE_TV_SHORTCUTKEY_SOURCE_LIST = KeyEvent.KEYCODE_BUTTON_2;
+    public static final int KEYCODE_TV_SHORTCUTKEY_3DMODE = KeyEvent.KEYCODE_BUTTON_3;
+    public static final int KEYCODE_TV_SHORTCUTKEY_DISPAYMODE = KeyEvent.KEYCODE_BUTTON_4;
+    public static final int KEYCODE_TV_SHORTCUTKEY_VIEWMODE = KeyEvent.KEYCODE_BUTTON_5;
+    public static final int KEYCODE_TV_SHORTCUTKEY_VOICEMODE = KeyEvent.KEYCODE_BUTTON_6;
+    public static final int KEYCODE_TV_SHORTCUTKEY_TVINFO = KeyEvent.KEYCODE_BUTTON_7;
+    public static final int KEYCODE_EARLY_POWER = KeyEvent.KEYCODE_BUTTON_8;
+    public static final int KEYCODE_TV_SLEEP = KeyEvent.KEYCODE_BUTTON_9;
+    public static final int KEYCODE_TV_SOUND_CHANNEL = KeyEvent.KEYCODE_BUTTON_10;
+    public static final int KEYCODE_TV_REPEAT = KeyEvent.KEYCODE_BUTTON_11;
+    public static final int KEYCODE_TV_SUBTITLE = KeyEvent.KEYCODE_BUTTON_12;
+    public static final int KEYCODE_TV_SWITCH = KeyEvent.KEYCODE_BUTTON_13;
+    public static final int KEYCODE_TV_WASU = KeyEvent.KEYCODE_BUTTON_14;
+    public static final int KEYCODE_TV_VTION = KeyEvent.KEYCODE_BUTTON_15;
+    public static final int KEYCODE_TV_BROWSER = KeyEvent.KEYCODE_BUTTON_16;
+    public static final int KEYCODE_TV_ALTERNATE = KeyEvent.KEYCODE_BUTTON_X;
+    public static final int KEYCODE_FAV = KeyEvent.KEYCODE_BUTTON_Y;
+    public static final int KEYCODE_LIST = KeyEvent.KEYCODE_BUTTON_Z;
+    public static final int KEYCODE_MEDIA_AUDIO_CONTROL = KeyEvent.KEYCODE_BUTTON_L1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class DroidLiveTvActivity extends Activity {
         registerSomeReceivers();
         mContext = this;
         Intent intent = getIntent();
-        Bundle bundle= intent.getExtras();
+        Bundle bundle = intent.getExtras();
         if (bundle != null) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             setContentView(R.layout.activity_droid_live_tv);
@@ -93,7 +93,7 @@ public class DroidLiveTvActivity extends Activity {
 
     @Override
     public void onResume() {
-        Log.d(TAG, "onResume" );
+        Log.d(TAG, "onResume");
         registerSomeReceivers();
         startShowActivityTimer();
         super.onResume();
@@ -158,6 +158,7 @@ public class DroidLiveTvActivity extends Activity {
             }
         }
     };
+
     public void registerSomeReceivers() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
@@ -165,7 +166,7 @@ public class DroidLiveTvActivity extends Activity {
         registerReceiver(mReceiver, intentFilter);
     }
 
-    private void startShowActivityTimer () {
+    private void startShowActivityTimer() {
         handler.removeMessages(0);
         int seconds = Settings.System.getInt(getContentResolver(), KEY_MENU_TIME, DEFAULT_MENU_TIME);
         if (seconds == 1) {

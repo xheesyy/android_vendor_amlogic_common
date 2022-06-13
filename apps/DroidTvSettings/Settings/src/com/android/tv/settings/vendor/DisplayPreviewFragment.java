@@ -23,7 +23,9 @@ import androidx.annotation.Keep;
 import com.android.tv.settings.R;
 import com.android.tv.settings.SettingsPreferenceFragment;
 
-/** A vendor sample of display preview settings. */
+/**
+ * A vendor sample of display preview settings.
+ */
 @Keep
 public class DisplayPreviewFragment extends SettingsPreferenceFragment {
     @Override

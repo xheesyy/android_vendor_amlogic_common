@@ -18,10 +18,13 @@ package com.android.tv.settings.tvoption;
 
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceCategory;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -45,7 +48,7 @@ public class SettingsModeFragment extends SettingsPreferenceFragment implements 
     private static final String DYNAMIC_BACKLIGHT = "tv_dynamic_backlight";
     private static final String AUDIO_AD_SWITCH = "tv_audio_ad_switch";
     private static final String MULTI_SETTINGS = "multi_settings";
-    private static final String RESTORE_FACTORY= "tv_restore_factory";
+    private static final String RESTORE_FACTORY = "tv_restore_factory";
     private static final String FBC_UPGRADE = "tv_fbc_upgrade";
 
     private static final int RESTORE = 0;
@@ -95,7 +98,8 @@ public class SettingsModeFragment extends SettingsPreferenceFragment implements 
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey());
         if (TextUtils.equals(preference.getKey(), RESTORE_FACTORY)) {
             createUiDialog(RESTORE);
         } else if (TextUtils.equals(preference.getKey(), FBC_UPGRADE)) {
@@ -106,8 +110,9 @@ public class SettingsModeFragment extends SettingsPreferenceFragment implements 
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
-        final int selection = Integer.parseInt((String)newValue);
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceChange] preference.getKey() = " + preference.getKey() + ", newValue = " + newValue);
+        final int selection = Integer.parseInt((String) newValue);
         if (TextUtils.equals(preference.getKey(), SRATUP_SETTING)) {
             mTvOptionSettingManager.setStartupSetting(selection);
         } else if (TextUtils.equals(preference.getKey(), DYNAMIC_BACKLIGHT)) {
@@ -138,7 +143,7 @@ public class SettingsModeFragment extends SettingsPreferenceFragment implements 
         return temp;
     }
 
-    private void createUiDialog (int type) {
+    private void createUiDialog(int type) {
         Context context = (Context) (getActivity());
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.xml.layout_dialog, null);
@@ -148,9 +153,9 @@ public class SettingsModeFragment extends SettingsPreferenceFragment implements 
         mAlertDialog.show();
         mAlertDialog.getWindow().setContentView(view);
         //mAlertDialog.getWindow().setLayout(150, 320);
-        TextView button_cancel = (TextView)view.findViewById(R.id.dialog_cancel);
-        TextView dialogtitle = (TextView)view.findViewById(R.id.dialog_title);
-        TextView dialogdetails = (TextView)view.findViewById(R.id.dialog_details);
+        TextView button_cancel = (TextView) view.findViewById(R.id.dialog_cancel);
+        TextView dialogtitle = (TextView) view.findViewById(R.id.dialog_title);
+        TextView dialogdetails = (TextView) view.findViewById(R.id.dialog_details);
         if (RESTORE == type) {
             dialogtitle.setText(getActivity().getResources().getString(R.string.tv_ensure_restore));
             dialogdetails.setText(getActivity().getResources().getString(R.string.tv_prompt_def_set));
@@ -166,7 +171,7 @@ public class SettingsModeFragment extends SettingsPreferenceFragment implements 
             }
         });
         button_cancel.requestFocus();
-        TextView button_ok = (TextView)view.findViewById(R.id.dialog_ok);
+        TextView button_ok = (TextView) view.findViewById(R.id.dialog_ok);
         button_ok.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

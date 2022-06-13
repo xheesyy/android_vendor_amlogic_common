@@ -29,7 +29,7 @@ public class PQAdvancedMEMCActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PQAdvancedMEMCFragment.class.getName(), null);
+                .newSettingsFragment(PQAdvancedMEMCFragment.class.getName(), null);
     }
 
 }

@@ -29,7 +29,7 @@ public class PQAdvancedActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(PQAdvancedFragment.class.getName(), null);
+                .newSettingsFragment(PQAdvancedFragment.class.getName(), null);
     }
 
 }

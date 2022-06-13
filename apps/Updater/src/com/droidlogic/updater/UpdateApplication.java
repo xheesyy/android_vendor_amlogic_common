@@ -16,16 +16,18 @@ public class UpdateApplication extends Application {
     private Handler mWorkHandler;
     public static boolean mRunningForce;
     public static boolean mRunningUpgrade;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        if (PermissionUtils.CanDebug()) Log.d(TAG,"APP:onCreate");
+        if (PermissionUtils.CanDebug()) Log.d(TAG, "APP:onCreate");
         mWorkingThread = new HandlerThread("update_engine");
         mWorkingThread.start();
         mWorkHandler = new Handler(mWorkingThread.getLooper());
         mUpdateManager = new UpdateManager(new UpdateEngine(), mWorkHandler);
         this.mUpdateManager.bind();
     }
+
     public UpdateManager getUpdateManager() {
         return mUpdateManager;
     }
@@ -37,7 +39,7 @@ public class UpdateApplication extends Application {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        if (PermissionUtils.CanDebug()) Log.d(TAG,"APP:onTerminate");
+        if (PermissionUtils.CanDebug()) Log.d(TAG, "APP:onTerminate");
         mWorkingThread.quitSafely();
         this.mUpdateManager.unbind();
     }

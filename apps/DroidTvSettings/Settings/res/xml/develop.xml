@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2015 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,14 +15,14 @@
   -->
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-        android:title="@string/amlogic_developer_options_title">
+    android:title="@string/amlogic_developer_options_title">
     <SwitchPreference
         android:key="kernel_loglevel_config"
         android:persistent="false"
-        android:title="@string/kernel_loglevel_config"/>
+        android:title="@string/kernel_loglevel_config" />
     <Preference
         android:key="dtvkit_features"
         android:title="@string/input_dtv_kit"
-        android:fragment="com.android.tv.settings.develop.dtvkit.DtvkitFragment"/>
+        android:fragment="com.android.tv.settings.develop.dtvkit.DtvkitFragment" />
 
 </PreferenceScreen>

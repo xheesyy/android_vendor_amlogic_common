@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
 import com.droidlogic.app.DaylightSavingTime;
 import com.droidlogic.app.tv.TvControlDataManager;
 
-public class TvTime{
+public class TvTime {
     private final static String TAG = "TvTime";
     private static final boolean DEBUG = true;
     private long diff = 0;
@@ -32,12 +32,12 @@ public class TvTime{
     private TvControlDataManager mTvControlDataManager = null;
     private final static String TV_STREAM_TIME = "vendor.sys.tv.stream.realtime";//to fit for dtvkit
 
-    public TvTime(Context context){
+    public TvTime(Context context) {
         mContext = context;
         mTvControlDataManager = TvControlDataManager.getInstance(mContext);
     }
 
-    public synchronized void setTime(long time){
+    public synchronized void setTime(long time) {
         Date sys = new Date();
 
         diff = time - sys.getTime();
@@ -56,7 +56,7 @@ public class TvTime{
     }
 
 
-    public synchronized long getTime(){
+    public synchronized long getTime() {
         Date sys = new Date();
         //diff = mTvControlDataManager.getLong(mContext.getContentResolver(), TV_KEY_TVTIME, 0);
         diff = getLong(TV_STREAM_TIME, 0);
@@ -65,12 +65,12 @@ public class TvTime{
     }
 
 
-    public synchronized long getDiffTime(){
+    public synchronized long getDiffTime() {
         //return mTvControlDataManager.getLong(mContext.getContentResolver(), TV_KEY_TVTIME, 0);
         return getLong(TV_STREAM_TIME, 0);
     }
 
-    public synchronized void setDiffTime(long diff){
+    public synchronized void setDiffTime(long diff) {
         this.diff = diff;
         //mTvControlDataManager.putLong(mContext.getContentResolver(), TV_KEY_TVTIME, this.diff);
         setProp(TV_STREAM_TIME, String.valueOf(this.diff));
@@ -85,9 +85,9 @@ public class TvTime{
             getIntMethod.setAccessible(true);
             result = (String) getIntMethod.invoke(SystemPropertiesClass, key, def);
         } catch (InvocationTargetException
-                | IllegalAccessException
-                | NoSuchMethodException
-                | ClassNotFoundException e) {
+                 | IllegalAccessException
+                 | NoSuchMethodException
+                 | ClassNotFoundException e) {
             Log.e(TAG, "Failed to invoke SystemProperties.get()", e);
         }
         if (DEBUG) {
@@ -106,9 +106,9 @@ public class TvTime{
             getIntMethod.invoke(SystemPropertiesClass, key, def);
             result = true;
         } catch (InvocationTargetException
-                | IllegalAccessException
-                | NoSuchMethodException
-                | ClassNotFoundException e) {
+                 | IllegalAccessException
+                 | NoSuchMethodException
+                 | ClassNotFoundException e) {
             Log.e(TAG, "Failed to invoke SystemProperties.set()", e);
         }
         if (DEBUG) {
@@ -126,9 +126,9 @@ public class TvTime{
             getIntMethod.setAccessible(true);
             result = (long) getIntMethod.invoke(SystemPropertiesClass, key, def);
         } catch (InvocationTargetException
-                | IllegalAccessException
-                | NoSuchMethodException
-                | ClassNotFoundException e) {
+                 | IllegalAccessException
+                 | NoSuchMethodException
+                 | ClassNotFoundException e) {
             Log.e(TAG, "Failed to invoke SystemProperties.getLong()", e);
         }
         if (DEBUG) {

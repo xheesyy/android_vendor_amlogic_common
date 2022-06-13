@@ -1,25 +1,26 @@
 /******************************************************************
-*
-*Copyright (C) 2012  Amlogic, Inc.
-*
-*Licensed under the Apache License, Version 2.0 (the "License");
-*you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing, software
-*distributed under the License is distributed on an "AS IS" BASIS,
-*WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*See the License for the specific language governing permissions and
-*limitations under the License.
-******************************************************************/
+ *
+ *Copyright (C) 2012  Amlogic, Inc.
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ ******************************************************************/
 package com.droidlogic.FileBrower;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+
 import android.provider.MediaStore.Images;
 
 import android.app.Service;
@@ -44,7 +45,7 @@ import com.droidlogic.app.FileListManager;
 public class ThumbnailScannerService extends Service implements Runnable {
     private static final String TAG = "ThumbnailScannerService";
     public static final String ACTION_THUMBNAIL_SCANNER_FINISHED
-        = "com.droidlogic.FileBrower.THUMBNAIL_SCANNER_FINISHED";
+            = "com.droidlogic.FileBrower.THUMBNAIL_SCANNER_FINISHED";
     private static FileBrowerDatabase db;
     private static boolean stop_scanner = false;
 
@@ -53,10 +54,9 @@ public class ThumbnailScannerService extends Service implements Runnable {
     private PowerManager.WakeLock mWakeLock;
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         db = new FileBrowerDatabase(this);
-        PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, TAG);
 
         // Start up the thread running the service.  Note that we create a
@@ -68,8 +68,7 @@ public class ThumbnailScannerService extends Service implements Runnable {
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId)
-    {
+    public int onStartCommand(Intent intent, int flags, int startId) {
         while (mServiceHandler == null) {
             synchronized (this) {
                 try {
@@ -81,7 +80,7 @@ public class ThumbnailScannerService extends Service implements Runnable {
 
         if (intent == null) {
             Log.e(TAG, "Intent is null in onStartCommand: ",
-                new NullPointerException());
+                    new NullPointerException());
             return Service.START_NOT_STICKY;
         }
 
@@ -95,8 +94,7 @@ public class ThumbnailScannerService extends Service implements Runnable {
     }
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         stop_scanner = true;
         if (db != null) db.close();
         // Make sure thread has started before telling it to quit.
@@ -111,8 +109,7 @@ public class ThumbnailScannerService extends Service implements Runnable {
         mServiceLooper.quit();
     }
 
-    public void run()
-    {
+    public void run() {
         // reduce priority below other background threads to avoid interfering
         // with other services at boot time.
         Process.setThreadPriority(Process.THREAD_PRIORITY_BACKGROUND +
@@ -125,11 +122,9 @@ public class ThumbnailScannerService extends Service implements Runnable {
         Looper.loop();
     }
 
-    private final class ServiceHandler extends Handler
-    {
+    private final class ServiceHandler extends Handler {
         @Override
-        public void handleMessage(Message msg)
-        {
+        public void handleMessage(Message msg) {
             Bundle arguments = (Bundle) msg.obj;
             String dir_path = arguments.getString("dir_path");
             String scan_type = arguments.getString("scan_type");
@@ -168,7 +163,7 @@ public class ThumbnailScannerService extends Service implements Runnable {
                             }
                         }
                         end_time = System.currentTimeMillis();
-                    }  else if (scan_type.equals("dev")) {
+                    } else if (scan_type.equals("dev")) {
                         if (dir_path != null) {
                             long start_time, end_time;
                             start_time = System.currentTimeMillis();
@@ -235,9 +230,9 @@ public class ThumbnailScannerService extends Service implements Runnable {
         int count = 0;
         if (file_path != null && db != null) {
             File file = new File(file_path);
-            if (FileListManager.isPhoto(file_path) &&  file != null && file.exists()) {
+            if (FileListManager.isPhoto(file_path) && file != null && file.exists()) {
                 //OutOfMemoryError, ignore file size >15MB
-                if (file.length() > 1024*1024*15 || file.length() <= 0) {
+                if (file.length() > 1024 * 1024 * 15 || file.length() <= 0) {
                     return 0;
                 }
 
@@ -254,7 +249,7 @@ public class ThumbnailScannerService extends Service implements Runnable {
                 Bitmap bitmap = null;
                 Bitmap thumb = null;
                 bitmap = createImageThumbnail(file_path,
-                Images.Thumbnails.MINI_KIND);
+                        Images.Thumbnails.MINI_KIND);
                 if (bitmap != null) {
                     thumb = ThumbnailUtils.extractThumbnail(bitmap, 96, 96);
                     if (!bitmap.isRecycled())
@@ -266,15 +261,15 @@ public class ThumbnailScannerService extends Service implements Runnable {
                         if (db != null) {
                             db.addThumbnail(file_path, os.toByteArray());
                             count++;
-                         }
-                         try {
-                             os.close();
-                         } catch (IOException e) {
-                             // TODO Auto-generated catch block
-                             e.printStackTrace();
-                         }
-                         if (!thumb.isRecycled())
-                             thumb.recycle();
+                        }
+                        try {
+                            os.close();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                        if (!thumb.isRecycled())
+                            thumb.recycle();
                     }
                 }
             }
@@ -282,10 +277,10 @@ public class ThumbnailScannerService extends Service implements Runnable {
         return count;
     }
 
-    public Bitmap createImageThumbnail(String file_path,int kind) {
+    public Bitmap createImageThumbnail(String file_path, int kind) {
         try {
             Class<?> sm = Class.forName("android.media.ThumbnailUtils");
-            Method createThumbnail = sm.getMethod("createImageThumbnail", String.class,int.class);
+            Method createThumbnail = sm.getMethod("createImageThumbnail", String.class, int.class);
             Bitmap bitmap = (Bitmap) createThumbnail.invoke(null, file_path, kind);
             return bitmap;
         } catch (Exception e) {
@@ -338,16 +333,16 @@ public class ThumbnailScannerService extends Service implements Runnable {
                     if (dir.listFiles().length > 0) {
                         for (File file : dir.listFiles()) {
                             if (file.exists())
-                            if (file.isDirectory()) {
-                                createAllThumbnailsInDir(file.getAbsolutePath());
-                            } else if (file.isFile() && FileListManager.isPhoto(file.getName())) {
-                                try {
-                                    createThumbnail(file.getAbsolutePath());
-                                } catch (IOException e) {
-                                    // TODO Auto-generated catch block
-                                    e.printStackTrace();
+                                if (file.isDirectory()) {
+                                    createAllThumbnailsInDir(file.getAbsolutePath());
+                                } else if (file.isFile() && FileListManager.isPhoto(file.getName())) {
+                                    try {
+                                        createThumbnail(file.getAbsolutePath());
+                                    } catch (IOException e) {
+                                        // TODO Auto-generated catch block
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
                         }
                     }
                 }

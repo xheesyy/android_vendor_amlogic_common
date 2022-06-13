@@ -150,7 +150,7 @@ public class SelectWifiState implements State {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             actions.addAll(getNetworks());
         }
 

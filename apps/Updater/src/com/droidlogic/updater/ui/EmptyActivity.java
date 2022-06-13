@@ -24,13 +24,18 @@ import android.os.Message;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.droidlogic.updater.UpdateApplication;
 import com.droidlogic.updater.UpdateManager;
 import com.droidlogic.updater.util.PrefUtils;
 import com.droidlogic.updater.R;
+
 import android.util.Log;
+
 import androidx.annotation.NonNull;
+
 import com.droidlogic.updater.service.PrepareUpdateService;
+
 public class EmptyActivity extends Activity {
 
     private static final int SHOW_TIME = 5000;
@@ -39,26 +44,29 @@ public class EmptyActivity extends Activity {
     private TextView mTextView;
     private PrefUtils mPref;
     private UpdateManager mUpdateEngine;
-    private static final int MSG_CHECK  = 0;
+    private static final int MSG_CHECK = 0;
+
     @Override
     protected void onResume() {
         super.onResume();
-        mTextView = (TextView)findViewById(R.id.text_result);
+        mTextView = (TextView) findViewById(R.id.text_result);
     }
+
     public void onAttachedToWindow() {
 
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE| WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         super.onAttachedToWindow();
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empty);
-        mUpdateEngine = ((UpdateApplication)getApplication()).getUpdateManager();
+        mUpdateEngine = ((UpdateApplication) getApplication()).getUpdateManager();
         mPref = new PrefUtils(this);
         mWorkerThread.start();
-        Log.d("ABUpdate","create");
-        mWorkerHandler = new Handler(mWorkerThread.getLooper()){
+        Log.d("ABUpdate", "create");
+        mWorkerHandler = new Handler(mWorkerThread.getLooper()) {
             @Override
             public void dispatchMessage(@NonNull Message msg) {
                 switch (msg.what) {
@@ -77,19 +85,24 @@ public class EmptyActivity extends Activity {
         mWorkerThread.quitSafely();
         super.onDestroy();
     }
+
     private void check() {
         mPref.disableUI(true, this);
         int mergeResult = mUpdateEngine.cleanupAppliedPayload();
-        Log.d("ABUpdate","mergeResult"+mergeResult);
+        Log.d("ABUpdate", "mergeResult" + mergeResult);
         if (mPref.getBooleanVal(PrefUtils.key, false)) {
             if (mergeResult == PrepareUpdateService.RESULT_CODE_SUCCESS) {
-                runOnUiThread(() -> {mTextView.setText(getString(R.string.update_success));});
+                runOnUiThread(() -> {
+                    mTextView.setText(getString(R.string.update_success));
+                });
                 Toast.makeText(EmptyActivity.this, getString(R.string.update_success), SHOW_TIME).show();
             } else {
-                runOnUiThread(() -> {mTextView.setText(getString(R.string.update_fail));});
+                runOnUiThread(() -> {
+                    mTextView.setText(getString(R.string.update_fail));
+                });
                 Toast.makeText(EmptyActivity.this, getString(R.string.update_fail), SHOW_TIME).show();
             }
-            mPref.setBoolean(PrefUtils.key,false);
+            mPref.setBoolean(PrefUtils.key, false);
         }
         mPref.disableUI(false, this);
         this.finish();

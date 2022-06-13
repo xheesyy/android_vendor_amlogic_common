@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import com.android.tv.settings.TvSettingsActivity;
 import com.android.tv.settings.overlay.FlavorUtils;
+
 /**
  * Activity to display displaymode and hdr.
  */
@@ -28,7 +29,7 @@ public class DisplayActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(DisplayFragment.class.getName(), null);
+                .newSettingsFragment(DisplayFragment.class.getName(), null);
     }
 
 }

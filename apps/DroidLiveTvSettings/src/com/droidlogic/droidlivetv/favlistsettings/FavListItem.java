@@ -32,7 +32,7 @@ public class FavListItem extends Item {
     private void initJSONObject(String json) {
         try {
             if (!TextUtils.isEmpty(json)) {
-                mJSONObject =  new JSONObject(json);
+                mJSONObject = new JSONObject(json);
             }
         } catch (JSONException e) {
             Log.e(TAG, "initJSONObject e = " + e.getMessage());

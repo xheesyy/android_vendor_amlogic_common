@@ -36,11 +36,17 @@ import java.lang.annotation.RetentionPolicy;
  */
 public class AdvancedWifiOptionsFlow {
 
-    /** Flag that set advanced flow start with default page */
+    /**
+     * Flag that set advanced flow start with default page
+     */
     public static final int START_DEFAULT_PAGE = 0;
-    /** Flag that set advanced flow start with IP settings page */
+    /**
+     * Flag that set advanced flow start with IP settings page
+     */
     public static final int START_IP_SETTINGS_PAGE = 1;
-    /** Flag that set advanced flow start with proxy settings page */
+    /**
+     * Flag that set advanced flow start with proxy settings page
+     */
     public static final int START_PROXY_SETTINGS_PAGE = 2;
     private static final String TAG = "AdvancedWifiOptionsFlow";
 
@@ -65,12 +71,12 @@ public class AdvancedWifiOptionsFlow {
      * @param startPage            The page where the advanced flow starts with.
      */
     public static void createFlow(FragmentActivity activity,
-            boolean askFirst,
-            boolean isSettingsFlow,
-            NetworkConfiguration initialConfiguration,
-            State entranceState,
-            State exitState,
-            @START_PAGE int startPage) {
+                                  boolean askFirst,
+                                  boolean isSettingsFlow,
+                                  NetworkConfiguration initialConfiguration,
+                                  State entranceState,
+                                  State exitState,
+                                  @START_PAGE int startPage) {
         StateMachine stateMachine = ViewModelProviders.of(activity).get(StateMachine.class);
         AdvancedOptionsFlowInfo advancedOptionsFlowInfo = ViewModelProviders.of(activity).get(
                 AdvancedOptionsFlowInfo.class);
@@ -98,17 +104,17 @@ public class AdvancedWifiOptionsFlow {
         // flow.
         State startState = null;
         switch (startPage) {
-            case START_DEFAULT_PAGE :
+            case START_DEFAULT_PAGE:
                 if (askFirst) {
                     startState = advancedOptionsState;
                 } else {
                     startState = proxySettingsState;
                 }
                 break;
-            case START_IP_SETTINGS_PAGE :
+            case START_IP_SETTINGS_PAGE:
                 startState = ipSettingsState;
                 break;
-            case START_PROXY_SETTINGS_PAGE :
+            case START_PROXY_SETTINGS_PAGE:
                 startState = proxySettingsState;
                 break;
             default:

@@ -44,21 +44,23 @@ public class AccessibilityServiceConfirmationFragment extends GuidedStepSupportF
     public interface OnAccessibilityServiceConfirmedListener {
         /**
          * Called when enabling/disabling was confirmed by the user, not called otherwise.
+         *
          * @param componentName Service in question
-         * @param enabling True for enabling
+         * @param enabling      True for enabling
          */
         void onAccessibilityServiceConfirmed(ComponentName componentName, boolean enabling);
     }
 
     /**
      * Create a new instance of the fragment
-     * @param cn Component of service
-     * @param label Human readable label
+     *
+     * @param cn       Component of service
+     * @param label    Human readable label
      * @param enabling True for enabling
      * @return new fragment instance
      */
     public static AccessibilityServiceConfirmationFragment newInstance(ComponentName cn,
-            CharSequence label, boolean enabling) {
+                                                                       CharSequence label, boolean enabling) {
         Bundle args = new Bundle(3);
         prepareArgs(args, cn, label, enabling);
         AccessibilityServiceConfirmationFragment fragment =
@@ -69,13 +71,14 @@ public class AccessibilityServiceConfirmationFragment extends GuidedStepSupportF
 
     /**
      * Put args in bundle
-     * @param args Bundle to prepare
-     * @param cn Component of service
-     * @param label Human readable label
+     *
+     * @param args     Bundle to prepare
+     * @param cn       Component of service
+     * @param label    Human readable label
      * @param enabling True for enabling
      */
     public static void prepareArgs(@NonNull Bundle args, ComponentName cn, CharSequence label,
-            boolean enabling) {
+                                   boolean enabling) {
         args.putParcelable(ARG_COMPONENT, cn);
         args.putCharSequence(ARG_LABEL, label);
         args.putBoolean(ARG_ENABLING, enabling);
@@ -108,7 +111,7 @@ public class AccessibilityServiceConfirmationFragment extends GuidedStepSupportF
 
     @Override
     public void onCreateActions(@NonNull List<GuidedAction> actions,
-            Bundle savedInstanceState) {
+                                Bundle savedInstanceState) {
         final Context context = getActivity();
         actions.add(new GuidedAction.Builder(context)
                 .clickAction(GuidedAction.ACTION_ID_OK).build());

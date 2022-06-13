@@ -39,7 +39,8 @@ public final class UriUtils {
     /**
      * Non instantiable.
      */
-    private UriUtils() {}
+    private UriUtils() {
+    }
 
     /**
      * get resource uri representation for a resource of a package
@@ -54,7 +55,7 @@ public final class UriUtils {
     public static String getAndroidResourceUri(Resources resources, int resourceId) {
         return ContentResolver.SCHEME_ANDROID_RESOURCE
                 + SCHEME_DELIMITER + resources.getResourceName(resourceId)
-                        .replace(URI_PACKAGE_DELIMITER, URI_PATH_DELIMITER);
+                .replace(URI_PACKAGE_DELIMITER, URI_PATH_DELIMITER);
     }
 
     /**
@@ -126,15 +127,15 @@ public final class UriUtils {
             iconResource.packageName = uri.getAuthority();
             // Trim off the scheme + 3 extra for "://", then replace the first "/" with a ":"
             iconResource.resourceName = uri.toString().substring(
-                    ContentResolver.SCHEME_ANDROID_RESOURCE.length() + SCHEME_DELIMITER.length())
+                            ContentResolver.SCHEME_ANDROID_RESOURCE.length() + SCHEME_DELIMITER.length())
                     .replaceFirst(URI_PATH_DELIMITER, URI_PACKAGE_DELIMITER);
             return iconResource;
-        } else if(isShortcutIconResourceUri(uri)) {
+        } else if (isShortcutIconResourceUri(uri)) {
             ShortcutIconResource iconResource = new ShortcutIconResource();
             iconResource.packageName = uri.getAuthority();
             iconResource.resourceName = uri.toString().substring(
-                    SCHEME_SHORTCUT_ICON_RESOURCE.length() + SCHEME_DELIMITER.length()
-                    + iconResource.packageName.length() + URI_PATH_DELIMITER.length())
+                            SCHEME_SHORTCUT_ICON_RESOURCE.length() + SCHEME_DELIMITER.length()
+                                    + iconResource.packageName.length() + URI_PATH_DELIMITER.length())
                     .replaceFirst(URI_PATH_DELIMITER, URI_PACKAGE_DELIMITER);
             return iconResource;
         } else {

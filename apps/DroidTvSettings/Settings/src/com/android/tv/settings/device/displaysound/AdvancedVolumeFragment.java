@@ -46,9 +46,12 @@ import java.util.Map;
 
 // DroidLogic start modify, add passthrough feature and remove manual feature.
 import java.util.Arrays;
+
 import androidx.preference.PreferenceScreen;
+
 import com.droidlogic.app.OutputModeManager;
 import com.android.tv.settings.tvoption.SoundParameterSettingManager;
+
 import android.util.Log;
 // DroidLogic end
 
@@ -62,8 +65,8 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
     static final String KEY_SURROUND_SOUND_FORMAT_PREFIX = "surround_sound_format_";
     // DroidLogic start
     public static final String TAG = "AdvancedVolumeFragment";
-    static final String KEY_SPDIF_OUTPUT_SWITCH             = "key_spdif_output_switch";
-    static final String KEY_AC4_OUTPUT_SWITCH               = "key_ac4_output_switch";
+    static final String KEY_SPDIF_OUTPUT_SWITCH = "key_spdif_output_switch";
+    static final String KEY_AC4_OUTPUT_SWITCH = "key_ac4_output_switch";
     // DroidLogic end
 
     static final String KEY_SUPPORTED_SURROUND_SOUND = "supported_formats";
@@ -131,7 +134,7 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.advanced_sound, null /* key */);
         // DroidLogic start
-        isfromMainsettings = getActivity().toString().contains(MainSettings) ;
+        isfromMainsettings = getActivity().toString().contains(MainSettings);
         PreferenceScreen advancedSoundScreenPref = getPreferenceScreen();
         // DroidLogic end
         final ListPreference surroundPref = findPreference(KEY_SURROUND_PASSTHROUGH);
@@ -174,7 +177,7 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
 
         // add this for the ac4 enhancer ui
         mAc4DialogEnhancerPref = findPreference(KEY_AC4_OUTPUT_SWITCH);
-        mAc4DialogEnhancerPref.setValueIndex(getAc4EnhancerValueSetting(getContext())/4);
+        mAc4DialogEnhancerPref.setValueIndex(getAc4EnhancerValueSetting(getContext()) / 4);
         mAc4DialogEnhancerPref.setOnPreferenceChangeListener(this);
 
         if (!mOutputModeManager.isAudioSupportMs12System()) {// when not the ms12 version hide the mAc4DialogEnhancerPref
@@ -187,7 +190,7 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
     @Override
     protected List<AbstractPreferenceController> onCreatePreferenceControllers(Context context) {
         // DroidLogic start, add passthrough feature and remove manual feature.
-        Log.d(TAG,"mOutputModeManager onCreatePreferenceControllers");
+        Log.d(TAG, "mOutputModeManager onCreatePreferenceControllers");
         mOutputModeManager = OutputModeManager.getInstance(context);
         // DroidLogic end, add passthrough feature and remove manual feature.
         mPreferenceControllers = new ArrayList<>(mFormats.size());
@@ -203,7 +206,9 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
         return getContext().getSystemService(AudioManager.class);
     }
 
-    /** Creates titles and switches for each surround sound format. */
+    /**
+     * Creates titles and switches for each surround sound format.
+     */
     private void createFormatPreferences() {
         mSupportedFormatsPreferenceCategory = createPreferenceCategory(
                 R.string.surround_sound_supported_title,
@@ -342,7 +347,7 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
                 DroidLogic end*/
                 // DroidLogic start
                 case VAL_SURROUND_SOUND_PASSTHROUGH:
-                    Log.d(TAG,"VAL_SURROUND_SOUND_PASSTHROUGH"); //// DroidLogic start, add passthrough feature and remove manual feature.
+                    Log.d(TAG, "VAL_SURROUND_SOUND_PASSTHROUGH"); //// DroidLogic start, add passthrough feature and remove manual feature.
                     mOutputModeManager.saveDigitalAudioFormatToHal(OutputModeManager.DIGITAL_AUDIO_FORMAT_PASSTHROUGH, "");
                     setSurroundPassthroughSetting(Settings.Global.ENCODED_SURROUND_OUTPUT_AUTO);
                     break;
@@ -376,7 +381,7 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
         // DroidLogic start
         if (TextUtils.equals(preference.getKey(), KEY_AC4_OUTPUT_SWITCH)) {
             final int selection1 = Integer.parseInt(newValue.toString());
-            Log.d(TAG,"KEY_AC4_OUTPUT_SWITCH:" + selection1);
+            Log.d(TAG, "KEY_AC4_OUTPUT_SWITCH:" + selection1);
             switch (selection1) {
                 case OutputModeManager.DIAGLOGUE_ENHANCEMENT_OFF:
                     if (mOutputModeManager.isAudioSupportMs12System()) {
@@ -404,8 +409,8 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
             }
             updateFormatPreferencesStates();
             return true;
-       }
-       // DroidLogic end
+        }
+        // DroidLogic end
         return true;
     }
 
@@ -438,7 +443,7 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
                 return VAL_SURROUND_SOUND_NEVER;
             // DroidLogic start, add passthrough feature and remove manual feature.
             case Settings.Global.ENCODED_SURROUND_OUTPUT_ALWAYS:
-                 return VAL_SURROUND_SOUND_PASSTHROUGH;
+                return VAL_SURROUND_SOUND_PASSTHROUGH;
             // DroidLogic end, add passthrough feature and remove manual feature.
             case Settings.Global.ENCODED_SURROUND_OUTPUT_AUTO:
             default:
@@ -465,20 +470,20 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
         Log.d(TAG, "getDigitalAudioFormat value = " + value);
         String format = "";
         switch (value) {
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_PCM:
-            format = VAL_SURROUND_SOUND_PCM;
-            break;
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_MANUAL:
-            format = VAL_SURROUND_SOUND_MANUAL;
-            break;
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_AUTO:
-            format = VAL_SURROUND_SOUND_AUTO;
-            break;
-        case OutputModeManager.DIGITAL_AUDIO_FORMAT_PASSTHROUGH:
-            format = VAL_SURROUND_SOUND_PASSTHROUGH;
-            break;
-        default:
-            format = VAL_SURROUND_SOUND_AUTO;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_PCM:
+                format = VAL_SURROUND_SOUND_PCM;
+                break;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_MANUAL:
+                format = VAL_SURROUND_SOUND_MANUAL;
+                break;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_AUTO:
+                format = VAL_SURROUND_SOUND_AUTO;
+                break;
+            case OutputModeManager.DIGITAL_AUDIO_FORMAT_PASSTHROUGH:
+                format = VAL_SURROUND_SOUND_PASSTHROUGH;
+                break;
+            default:
+                format = VAL_SURROUND_SOUND_AUTO;
         }
         return format;
     }
@@ -487,23 +492,23 @@ public class AdvancedVolumeFragment extends PreferenceControllerFragment impleme
         final int value = Settings.Global.getInt(context.getContentResolver(),
                 OutputModeManager.DIAGLOGUE_ENHANCEMENT_SWITCH,
                 OutputModeManager.DIAGLOGUE_ENHANCEMENT_OFF);
-        Log.d(TAG,"[getAc4EnhancerValueSetting]:" + value);
+        Log.d(TAG, "[getAc4EnhancerValueSetting]:" + value);
         switch (value) {
             case OutputModeManager.DIAGLOGUE_ENHANCEMENT_OFF:
             default:
-                 return 0;
+                return 0;
             case OutputModeManager.DIAGLOGUE_ENHANCEMENT_LOW:
-                 return 4;
+                return 4;
             case OutputModeManager.DIAGLOGUE_ENHANCEMENT_MEDIUM:
-                 return 8;
+                return 8;
             case OutputModeManager.DIAGLOGUE_ENHANCEMENT_HIGH:
-                 return 12;
+                return 12;
         }
     }
     // DroidLogic end
 
     private int getEntryId(int formatId) {
-        switch(formatId) {
+        switch (formatId) {
             case AudioFormat.ENCODING_AC4:
                 return TvSettingsEnums.DISPLAY_SOUND_ADVANCED_SOUNDS_DAC4;
             case AudioFormat.ENCODING_E_AC3_JOC:

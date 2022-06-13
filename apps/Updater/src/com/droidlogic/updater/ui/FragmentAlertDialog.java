@@ -33,11 +33,13 @@ import android.widget.TextView;
 
 import com.droidlogic.updater.R;
 import com.droidlogic.updater.service.AutoCheckService;
+
 /**
  * Demonstrates how to show an AlertDialog that is managed by a Fragment.
  */
 public class FragmentAlertDialog extends Activity {
     private Button mButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class FragmentAlertDialog extends Activity {
         windowLayoutParams.height = (int) (display.getHeight() * 0.3);
         getWindow().setAttributes(windowLayoutParams);
         setContentView(R.layout.fragment_dialog);
-        mButton = (Button)findViewById(R.id.show);
+        mButton = (Button) findViewById(R.id.show);
         mButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

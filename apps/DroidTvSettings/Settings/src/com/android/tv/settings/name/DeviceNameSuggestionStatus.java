@@ -54,6 +54,7 @@ public class DeviceNameSuggestionStatus {
 
     /**
      * Return the status of the suggestion.
+     *
      * @return True if finished.
      */
     public boolean isFinished() {

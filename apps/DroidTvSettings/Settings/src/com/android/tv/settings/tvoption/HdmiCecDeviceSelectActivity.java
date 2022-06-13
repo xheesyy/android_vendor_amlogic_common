@@ -21,7 +21,7 @@ public class HdmiCecDeviceSelectActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(HdmiCecDeviceSelectFragment.class.getName(), null);
+                .newSettingsFragment(HdmiCecDeviceSelectFragment.class.getName(), null);
     }
 
 }

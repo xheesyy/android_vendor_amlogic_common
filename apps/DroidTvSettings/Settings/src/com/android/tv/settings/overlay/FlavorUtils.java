@@ -24,7 +24,9 @@ import androidx.annotation.Nullable;
 
 import com.android.tv.settings.R;
 
-/** An Util class that manages logic related to build flavor and feature. */
+/**
+ * An Util class that manages logic related to build flavor and feature.
+ */
 public final class FlavorUtils {
 
     private static final String TAG = "OverlayUtils";
@@ -43,7 +45,9 @@ public final class FlavorUtils {
 
     private static FeatureFactory sFeatureFactory;
 
-    /** Returns the flavor of current TvSettings. */
+    /**
+     * Returns the flavor of current TvSettings.
+     */
     public static int getFlavor(@Nullable Context context) {
         if (context == null) {
             Log.w(TAG, "Trying to get flavor from null context. Returning undefined flavor.");
@@ -68,12 +72,16 @@ public final class FlavorUtils {
         }
     }
 
-    /** Returns whether the UI is two panel style. */
+    /**
+     * Returns whether the UI is two panel style.
+     */
     public static boolean isTwoPanel(@Nullable Context context) {
         return (getFlavor(context) & TWO_PANEL_FLAVORS_MASK) != 0;
     }
 
-    /** Returns the correct FeatureFactory. */
+    /**
+     * Returns the correct FeatureFactory.
+     */
     public static FeatureFactory getFeatureFactory(@Nullable Context context) {
         if (sFeatureFactory != null) {
             return sFeatureFactory;

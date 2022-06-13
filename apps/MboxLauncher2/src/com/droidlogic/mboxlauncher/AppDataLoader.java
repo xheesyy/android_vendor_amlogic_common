@@ -45,7 +45,7 @@ public class AppDataLoader {
     public final static String ICON = "icon";
     public final static String COMPONENT_NAME = "component name";
 
-    public String SHORTCUT_PATH ;//= "/data/data/com.droidlogic.mboxlauncher/shortcut.cfg";
+    public String SHORTCUT_PATH;//= "/data/data/com.droidlogic.mboxlauncher/shortcut.cfg";
     public final static int DEFAULT_SHORTCUR_PATH = R.raw.default_shortcut;
     public final static String HOME_SHORTCUT_HEAD = "Home_Shortcut:";
     public final static String VIDEO_SHORTCUT_HEAD = "Video_Shortcut:";
@@ -69,7 +69,7 @@ public class AppDataLoader {
     private String[] list_localShortcut;
 
     List<ArrayMap<String, Object>> homeShortCuts = new ArrayList<ArrayMap<String, Object>>();
-    List<ArrayMap<String, Object>> videoShortCuts= new ArrayList<ArrayMap<String, Object>>();
+    List<ArrayMap<String, Object>> videoShortCuts = new ArrayList<ArrayMap<String, Object>>();
     List<ArrayMap<String, Object>> recommendShorts = new ArrayList<ArrayMap<String, Object>>();
     List<ArrayMap<String, Object>> appShortCuts = new ArrayList<ArrayMap<String, Object>>();
     List<ArrayMap<String, Object>> musicShortCuts = new ArrayList<ArrayMap<String, Object>>();
@@ -78,12 +78,12 @@ public class AppDataLoader {
     private boolean isLoaded = false;
     private Object mLock;
 
-    public AppDataLoader (Context context) {
+    public AppDataLoader(Context context) {
         mContext = context;
-		SHORTCUT_PATH = mContext.getFilesDir() + "/shortcut.cfg";
-        mLauncherApps = (LauncherApps)mContext.getSystemService(Context.LAUNCHER_APPS_SERVICE);
-        mActivityManager = (ActivityManager)mContext.getSystemService(Context.ACTIVITY_SERVICE);
-        mLock = ((Launcher)mContext).getLock();
+        SHORTCUT_PATH = mContext.getFilesDir() + "/shortcut.cfg";
+        mLauncherApps = (LauncherApps) mContext.getSystemService(Context.LAUNCHER_APPS_SERVICE);
+        mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        mLock = ((Launcher) mContext).getLock();
     }
 
     public void update() {
@@ -99,13 +99,13 @@ public class AppDataLoader {
         }).start();
     }
 
-    private String[] loadCustomApps(){
+    private String[] loadCustomApps() {
         String[] list = null;
         File mFile = new File(SHORTCUT_PATH);
         if (!mFile.exists()) {
             getShortcutFromDefault(DEFAULT_SHORTCUR_PATH, SHORTCUT_PATH);
             mFile = new File(SHORTCUT_PATH);
-        } else{
+        } else {
             try {
                 BufferedReader b = new BufferedReader(new FileReader(mFile));
                 if (b.read() == -1) {
@@ -128,28 +128,27 @@ public class AppDataLoader {
             }
 
             String str = null;
-            while ((str=br.readLine()) != null ) {
+            while ((str = br.readLine()) != null) {
                 if (str.startsWith(HOME_SHORTCUT_HEAD)) {
                     str_homeShortcut = str.replaceAll(HOME_SHORTCUT_HEAD, "");
                     list_homeShortcut = str_homeShortcut.split(";");
                 } else if (str.startsWith(VIDEO_SHORTCUT_HEAD)) {
                     str_videoShortcut = str.replaceAll(VIDEO_SHORTCUT_HEAD, "");
                     list_videoShortcut = str_videoShortcut.split(";");
-                }  else if (str.startsWith(RECOMMEND_SHORTCUT_HEAD)) {
+                } else if (str.startsWith(RECOMMEND_SHORTCUT_HEAD)) {
                     str_recommendShortcut = str.replaceAll(RECOMMEND_SHORTCUT_HEAD, "");
                     list_recommendShortcut = str_recommendShortcut.split(";");
-                }  else if (str.startsWith(MUSIC_SHORTCUT_HEAD)) {
+                } else if (str.startsWith(MUSIC_SHORTCUT_HEAD)) {
                     str_musicShortcut = str.replaceAll(MUSIC_SHORTCUT_HEAD, "");
                     list_musicShortcut = str_musicShortcut.split(";");
-                }  else if (str.startsWith(LOCAL_SHORTCUT_HEAD)) {
+                } else if (str.startsWith(LOCAL_SHORTCUT_HEAD)) {
                     str_localShortcut = str.replaceAll(LOCAL_SHORTCUT_HEAD, "");
-                    list_localShortcut= str_localShortcut.split(";");
+                    list_localShortcut = str_localShortcut.split(";");
                 }
             }
 
-        }
-        catch (Exception e) {
-            Log.d(TAG,""+e);
+        } catch (Exception e) {
+            Log.d(TAG, "" + e);
         } finally {
             try {
                 if (br != null)
@@ -160,14 +159,13 @@ public class AppDataLoader {
         return list;
     }
 
-    public void saveShortcut(int mode, String str_apps){
+    public void saveShortcut(int mode, String str_apps) {
         synchronized (mLock) {
             File mFile = new File(SHORTCUT_PATH);
             if (!mFile.exists()) {
                 try {
                     mFile.createNewFile();
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     Log.e(TAG, e.getMessage().toString());
                 }
             }
@@ -179,7 +177,7 @@ public class AppDataLoader {
                 String str = null;
                 List list = new ArrayList();
 
-                while ( (str=br.readLine()) != null ) {
+                while ((str = br.readLine()) != null) {
                     list.add(str);
                 }
 
@@ -191,9 +189,9 @@ public class AppDataLoader {
                     list.add(LOCAL_SHORTCUT_HEAD);
                 }
                 bw = new BufferedWriter(new FileWriter(mFile));
-                for ( int i = 0;i < list.size(); i++ ) {
+                for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).toString().startsWith(parseShortcutHead(mode))) {
-                        str_apps =  parseShortcutHead(mode) + str_apps;
+                        str_apps = parseShortcutHead(mode) + str_apps;
                         bw.write(str_apps);
                     } else {
                         bw.write(list.get(i).toString());
@@ -202,8 +200,7 @@ public class AppDataLoader {
                 }
                 bw.flush();
                 bw.close();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Log.d(TAG, "   " + e);
             } finally {
                 try {
@@ -220,13 +217,12 @@ public class AppDataLoader {
         }
     }
 
-    public  void getShortcutFromDefault(int srcPath, String desPath){
+    public void getShortcutFromDefault(int srcPath, String desPath) {
         File desFile = new File(desPath);
         if (!desFile.exists()) {
             try {
                 desFile.createNewFile();
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Log.e(TAG, e.getMessage().toString());
             }
         }
@@ -238,18 +234,17 @@ public class AppDataLoader {
             String str = null;
             List list = new ArrayList();
 
-            while ((str=br.readLine()) != null ) {
+            while ((str = br.readLine()) != null) {
                 list.add(str);
             }
             bw = new BufferedWriter(new FileWriter(desFile));
-            for ( int i = 0;i < list.size(); i++ ) {
+            for (int i = 0; i < list.size(); i++) {
                 bw.write(list.get(i).toString());
                 bw.newLine();
             }
             bw.flush();
             bw.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             Log.d(TAG, "   " + e);
         } finally {
             try {
@@ -283,7 +278,7 @@ public class AppDataLoader {
         };
     }
 
-   private void loadShortcutList() {
+    private void loadShortcutList() {
         homeShortCuts.clear();
         videoShortCuts.clear();
         recommendShorts.clear();
@@ -303,7 +298,7 @@ public class AppDataLoader {
                 application.title = info.getLabel().toString();
                 application.setActivity(info.getComponentName(),
                         Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                                | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
                 application.icon = info.getBadgedIcon(iconDpi);
                 if (info.getComponentName().getPackageName().equals("com.android.gallery3d")
                         && application.intent.toString().contains("camera")) {
@@ -314,7 +309,7 @@ public class AppDataLoader {
                     for (int j = 0; j < list_homeShortcut.length; j++) {
                         if (info.getComponentName().getPackageName().equals(list_homeShortcut[j])) {
                             homeShortCuts.add(buildShortcutMap(application.title.toString(),
-                                    application.intent,application.icon, application.componentName));
+                                    application.intent, application.icon, application.componentName));
                             break;
                         }
                     }
@@ -361,7 +356,7 @@ public class AppDataLoader {
                 }
 
                 appShortCuts.add(buildShortcutMap(application.title.toString(),
-                        application.intent,application.icon, application.componentName));
+                        application.intent, application.icon, application.componentName));
                 application.icon.setCallback(null);
             }
         }
@@ -385,7 +380,7 @@ public class AppDataLoader {
         return map;
     }
 
-    private ArrayMap<String, Object> buildAddMap(){
+    private ArrayMap<String, Object> buildAddMap() {
         ArrayMap<String, Object> map = new ArrayMap<String, Object>();
         map.put(NAME, mContext.getResources().getString(R.string.str_add));
         map.put(INTENT, null);
@@ -431,11 +426,12 @@ public class AppDataLoader {
         }
         return null;
     }
+
     public boolean isDataLoaded() {
         return isLoaded;
     }
 
-    private String parseShortcutHead (int mode) {
+    private String parseShortcutHead(int mode) {
         switch (mode) {
             case Launcher.MODE_HOME:
                 return HOME_SHORTCUT_HEAD;
@@ -451,7 +447,7 @@ public class AppDataLoader {
         return null;
     }
 
-    private int parsePackageIcon(String packageName){
+    private int parsePackageIcon(String packageName) {
         if (packageName.equals("com.droidlogic.FileBrower")) {
             return R.drawable.icon_filebrowser;
         } else if (packageName.equals("com.android.browser")) {
@@ -460,7 +456,7 @@ public class AppDataLoader {
             return R.drawable.icon_appinstaller;
         } else if (packageName.equals("com.android.tv.settings")) {
             return R.drawable.icon_setting;
-        } else if (packageName.equals("com.droidlogic.mediacenter")){
+        } else if (packageName.equals("com.droidlogic.mediacenter")) {
             return R.drawable.icon_mediacenter;
         } else if (packageName.equals("com.droidlogic.otaupgrade")) {
             return R.drawable.icon_backupandupgrade;

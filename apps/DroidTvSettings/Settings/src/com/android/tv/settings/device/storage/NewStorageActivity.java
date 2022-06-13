@@ -50,7 +50,7 @@ public class NewStorageActivity extends FragmentActivity {
             "com.android.tv.settings.device.storage.NewStorageActivity.MISSING_STORAGE";
 
     public static Intent getNewStorageLaunchIntent(Context context, String volumeId,
-            String diskId) {
+                                                   String diskId) {
         final Intent i = new Intent(context, NewStorageActivity.class);
         i.setAction(ACTION_NEW_STORAGE);
         i.putExtra(VolumeInfo.EXTRA_VOLUME_ID, volumeId);
@@ -177,7 +177,7 @@ public class NewStorageActivity extends FragmentActivity {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             if (TextUtils.isEmpty(mVolumeId)) {
                 actions.add(new GuidedAction.Builder(getContext())
                         .title(R.string.storage_new_action_format_public)
@@ -320,7 +320,7 @@ public class NewStorageActivity extends FragmentActivity {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             actions.add(new GuidedAction.Builder(getContext())
                     .clickAction(GuidedAction.ACTION_ID_OK)
                     .build());

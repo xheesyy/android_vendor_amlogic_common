@@ -188,7 +188,7 @@ public class EnterPasswordState implements State {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View view = super.onCreateView(inflater, container, savedInstanceState);
 
             // Update guidance to contain subtitle with action done icon
@@ -221,7 +221,7 @@ public class EnterPasswordState implements State {
 
         @Override
         public void onCreateActions(@NonNull List<GuidedAction> actions,
-                Bundle savedInstanceState) {
+                                    Bundle savedInstanceState) {
             Context context = getActivity();
             CharSequence prevPassword = mUserChoiceInfo.getPageSummary(UserChoiceInfo.PASSWORD);
             boolean isPasswordHidden = mUserChoiceInfo.isPasswordHidden();

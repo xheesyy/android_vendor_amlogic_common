@@ -32,7 +32,9 @@ import com.android.tv.settings.R;
 
 import java.util.List;
 
-/** Implementation of {@link BasicModeFeatureProvider}. */
+/**
+ * Implementation of {@link BasicModeFeatureProvider}.
+ */
 public class BasicModeFeatureProviderImplX implements BasicModeFeatureProvider {
 
     private static final String TAG = "BasicModeFeatureX";

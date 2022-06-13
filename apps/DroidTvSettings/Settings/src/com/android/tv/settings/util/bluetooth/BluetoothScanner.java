@@ -95,12 +95,16 @@ public class BluetoothScanner {
     public static class Listener {
         public void onScanningStarted() {
         }
+
         public void onScanningStopped(ArrayList<Device> devices) {
         }
+
         public void onDeviceAdded(Device device) {
         }
+
         public void onDeviceChanged(Device device) {
         }
+
         public void onDeviceRemoved(Device device) {
         }
     }
@@ -114,7 +118,7 @@ public class BluetoothScanner {
      * cached before this call returns.
      */
     public static void startListening(Context context, Listener listener,
-            List<BluetoothDeviceCriteria> criteria) {
+                                      List<BluetoothDeviceCriteria> criteria) {
         if (sReceiver == null) {
             sReceiver = new Receiver(context.getApplicationContext());
         }
@@ -193,10 +197,10 @@ public class BluetoothScanner {
         /**
          * @param listener
          * @param matchers Pattern matchers to determine whether this listener
-         * will be notified about changes in status of a discovered device. Note
-         * that the matcher is only run against the device when the device is
-         * first discovered, not each time it appears in scan results. Device
-         * properties are assumed to be stable.
+         *                 will be notified about changes in status of a discovered device. Note
+         *                 that the matcher is only run against the device when the device is
+         *                 first discovered, not each time it appears in scan results. Device
+         *                 properties are assumed to be stable.
          */
         public void startListening(Listener listener, List<BluetoothDeviceCriteria> matchers) {
             int size = 0;
@@ -228,7 +232,7 @@ public class BluetoothScanner {
 
             // Call back with the ones we have already
             final int N = mPresentDevices.size();
-            for (int i=0; i<N; i++) {
+            for (int i = 0; i < N; i++) {
                 Device target = mPresentDevices.get(i);
                 for (BluetoothDeviceCriteria matcher : newClient.matchers) {
                     if (matcher.isMatchingDevice(target.btDevice)) {
@@ -387,7 +391,7 @@ public class BluetoothScanner {
                 // See if this is a device we already know about
                 Device device = null;
                 final int N = mPresentDevices.size();
-                for (int i=0; i<N; i++) {
+                for (int i = 0; i < N; i++) {
                     final Device d = mPresentDevices.get(i);
                     if (address.equals(d.address)) {
                         device = d;
@@ -431,7 +435,7 @@ public class BluetoothScanner {
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 // Clear any devices that have disappeared since the last scan completed
                 final int N = mPresentDevices.size();
-                for (int i=N-1; i>=0; i--) {
+                for (int i = N - 1; i >= 0; i--) {
                     Device device = mPresentDevices.get(i);
                     if (device.consecutiveMisses < 0) {
                         // -1 means found on this scan, raise to 0 for next time

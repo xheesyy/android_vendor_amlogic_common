@@ -26,6 +26,6 @@ public class LanguageActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(LanguageFragment.class.getName(), null);
+                .newSettingsFragment(LanguageFragment.class.getName(), null);
     }
 }

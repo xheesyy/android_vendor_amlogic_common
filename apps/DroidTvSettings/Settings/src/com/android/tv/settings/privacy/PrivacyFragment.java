@@ -81,12 +81,12 @@ public class PrivacyFragment extends SettingsPreferenceFragment {
         }
         if (assistantSlicePreference instanceof SlicePreference
                 && SliceUtils.isSliceProviderValid(
-                        getContext(), ((SlicePreference) assistantSlicePreference).getUri())) {
+                getContext(), ((SlicePreference) assistantSlicePreference).getUri())) {
             assistantSlicePreference.setVisible(true);
         }
         if (purchasesSlicePreference instanceof SlicePreference
                 && SliceUtils.isSliceProviderValid(
-                        getContext(), ((SlicePreference) purchasesSlicePreference).getUri())) {
+                getContext(), ((SlicePreference) purchasesSlicePreference).getUri())) {
             purchasesSlicePreference.setVisible(true);
         }
         accountPrefCategory.setVisible(

@@ -407,7 +407,7 @@ public class AddAccessoryActivity extends FragmentActivity
                     // More than one device found, cancel auto pair
                     cancelPairingCountdown();
                 }
-           }
+            }
         }
 
         TransitionManager.beginDelayedTransition(findViewById(R.id.content_frame));

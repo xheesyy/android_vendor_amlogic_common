@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -21,12 +20,12 @@
 
     <declare-styleable name="FrameLayoutWithShadows">
         <!-- default shadow drawable -->
-        <attr name="defaultShadow" format="reference"/>
+        <attr name="defaultShadow" format="reference" />
         <!-- drawable on bottom of content, note: it requires intrinsic height,
              so ColorDrawable does not work,  use ShapeDrawable with solid color
              instead -->
-        <attr name="drawableBottom" format="reference"/>
-        </declare-styleable>
+        <attr name="drawableBottom" format="reference" />
+    </declare-styleable>
 
     <declare-styleable name="ScrollAdapterView">
 
@@ -78,7 +77,7 @@
             <!-- keep scroll center as a fixed distance from start/top -->
             <enum name="fixed" value="1" />
             <!-- keep scroll center offset from the center of the view -->
-            <enum name="fixedPercent" value="2"/>
+            <enum name="fixedPercent" value="2" />
             <!-- keep scroll center as a fixed distance from end/bottom -->
             <enum name="fixedToEnd" value="3" />
         </attr>

@@ -30,6 +30,7 @@ public class DeviceManager {
 
     public static final String ACTION_DEVICE_NAME_UPDATE =
             "com.android.tv.settings.name.DeviceManager.DEVICE_NAME_UPDATE";
+
     /**
      * Retrieves the name from Settings.Global.DEVICE_NAME
      *
@@ -42,12 +43,12 @@ public class DeviceManager {
 
     /**
      * Sets the system device name.
-     *
+     * <p>
      * For now it will explicitly call the different discoverable services that haven't been ported
      * to use the Settings.Global.DEVICE_NAME entry.
      *
      * @param context A context that can access Settings.Global
-     * @param name The new device name.
+     * @param name    The new device name.
      */
     public static void setDeviceName(Context context, String name) {
         Settings.Global.putString(context.getContentResolver(), Settings.Global.DEVICE_NAME, name);

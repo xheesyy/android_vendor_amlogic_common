@@ -104,7 +104,7 @@ public class BitmapDownloader {
      */
     public static BitmapDownloader getInstance(Context context) {
         if (sBitmapDownloader == null) {
-            synchronized(sBitmapDownloaderLock) {
+            synchronized (sBitmapDownloaderLock) {
                 if (sBitmapDownloader == null) {
                     sBitmapDownloader = new BitmapDownloader(context);
                 }
@@ -146,13 +146,15 @@ public class BitmapDownloader {
             }
 
             @Override
-            public void onLowMemory() {}
+            public void onLowMemory() {
+            }
         });
     }
 
     /**
      * load bitmap in current thread, will *block* current thread.
      * FIXME: Should avoid using this function at all cost.
+     *
      * @deprecated
      */
     @Deprecated
@@ -250,12 +252,13 @@ public class BitmapDownloader {
 
     /**
      * Cancel download<p>
+     *
      * @param key {@link BitmapCallback} or {@link ImageView}
      */
     public boolean cancelDownload(Object key) {
         BitmapWorkerTask task = null;
         if (key instanceof ImageView) {
-            ImageView imageView = (ImageView)key;
+            ImageView imageView = (ImageView) key;
             SoftReference<BitmapWorkerTask> softReference =
                     (SoftReference<BitmapWorkerTask>) imageView.getTag(R.id.imageDownloadTask);
             if (softReference != null) {
@@ -263,7 +266,7 @@ public class BitmapDownloader {
                 softReference.clear();
             }
         } else if (key instanceof BitmapCallback) {
-            BitmapCallback callback = (BitmapCallback)key;
+            BitmapCallback callback = (BitmapCallback) key;
             if (callback.mTask != null) {
                 task = callback.mTask.get();
                 callback.mTask = null;
@@ -304,7 +307,7 @@ public class BitmapDownloader {
             }
         }
         if (DEBUG) {
-            Log.d(TAG, "add cache "+bucketKey+" isScaled = "+isScaled);
+            Log.d(TAG, "add cache " + bucketKey + " isScaled = " + isScaled);
         }
         bitmapItem = new BitmapItem(bitmap, isScaled);
         mMemoryCache.put(bucketKey, bitmapItem);
@@ -371,7 +374,7 @@ public class BitmapDownloader {
 
     public void invalidateCachedResources() {
         Map<String, BitmapItem> snapshot = mMemoryCache.snapshot();
-        for (String uri: snapshot.keySet()) {
+        for (String uri : snapshot.keySet()) {
             Log.d(TAG, "remove cached image: " + uri);
             if (uri.startsWith(ContentResolver.SCHEME_ANDROID_RESOURCE)) {
                 mMemoryCache.remove(uri);

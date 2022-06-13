@@ -21,7 +21,9 @@ import static com.android.tv.settings.overlay.FlavorUtils.X_EXPERIENCE_FLAVORS_M
 import com.android.tv.settings.R;
 import com.android.tv.settings.slice.SliceActivity;
 
-/** Activity to show ambient settings. */
+/**
+ * Activity to show ambient settings.
+ */
 public class AmbientSliceActivity extends SliceActivity {
     @Override
     public String getSliceUri() {

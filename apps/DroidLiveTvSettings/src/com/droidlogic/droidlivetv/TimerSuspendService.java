@@ -67,14 +67,14 @@ public class TimerSuspendService extends Service {
     }
 
     @Override
-    public IBinder onBind ( Intent intent ) {
+    public IBinder onBind(Intent intent) {
         return null;
     }
 
     @Override
-    public int onStartCommand ( Intent intent, int flags, int startId ) {
-        Log.d ( TAG, "onStartCommand");
-        if (intent != null)  {
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand");
+        if (intent != null) {
             Log.d(TAG, "intent=" + intent);
             mEnableSuspendTimeout = intent.getBooleanExtra(DroidLogicTvUtils.KEY_ENABLE_SUSPEND_TIMEOUT, false);
             mEnableNoSignalTimeout = intent.getBooleanExtra(DroidLogicTvUtils.KEY_ENABLE_NOSIGNAL_TIMEOUT, false);
@@ -91,13 +91,13 @@ public class TimerSuspendService extends Service {
             }
         }
 
-        return super.onStartCommand ( intent, flags, startId );
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d ( TAG, "onDestroy");
+        Log.d(TAG, "onDestroy");
         remove_shutdown_time();
     }
 
@@ -145,7 +145,7 @@ public class TimerSuspendService extends Service {
             Method constructor = cls.getMethod("getInstance");
             Method method = cls.getMethod("injectInputEvent", InputEvent.class, int.class);
             method.invoke(constructor.invoke(null), keyevent, mode);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -181,25 +181,25 @@ public class TimerSuspendService extends Service {
 
     private void reset_shutdown_time(int time) {
         Log.d(TAG, "reset_shutdown_time = " + time);
-        mSuspendCount =  time;
+        mSuspendCount = time;
         remove_shutdown_time();
         timeSuspend_handler.post(timeSuspend_runnable);
         hideDialog();
     }
 
     private void remove_shutdown_time() {
-        Log.d ( TAG, "remove_shutdown_time");
+        Log.d(TAG, "remove_shutdown_time");
         timeSuspend_handler.removeCallbacksAndMessages(null);
     }
 
     private void hideDialog() {
-        Log.d ( TAG, "hideDialog");
+        Log.d(TAG, "hideDialog");
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
     }
 
-    private void pressPowerKey () {
+    private void pressPowerKey() {
         if (!isSystemScreenOn()) {
             Log.d(TAG, "pressPowerKey screen is off already");
             return;

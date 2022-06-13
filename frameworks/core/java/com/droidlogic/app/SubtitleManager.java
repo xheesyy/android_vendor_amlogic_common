@@ -41,6 +41,7 @@ import android.content.Intent;
 import android.util.DisplayMetrics;
 
 import android.content.res.AssetManager;
+
 import java.io.InputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -61,7 +62,9 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.ActivityManager;
+
 import java.io.UnsupportedEncodingException;
 
 
@@ -93,8 +96,8 @@ public class SubtitleManager {
     static public final int TYPE_SUBTITLE_EXTERNAL = 15;
     static public final int TYPE_SUBTITLE_MAX = 13;
     //for the subtitle display type:text or image
-    static public final int SUBTITLE_TXT =1;
-    static public final int SUBTITLE_IMAGE =2;
+    static public final int SUBTITLE_TXT = 1;
+    static public final int SUBTITLE_IMAGE = 2;
     static public final int SUBTITLE_CC_JASON = 3;
     static public final int SUBTITLE_IMAGE_CENTER = 4;
     static public final int SUBTITLE_VCHIP_RATE = -1;
@@ -170,10 +173,10 @@ public class SubtitleManager {
 
     //TELETEXT load state
     static public final int TT2_DISPLAY_STATE = 0;
-    static public final int TT2_SEARCH_STATE  = 1;
+    static public final int TT2_SEARCH_STATE = 1;
 
     // inter_sub_total
-    private static int  mInterSubTotal = -1;
+    private static int mInterSubTotal = -1;
 
     private boolean mDebug = true;
     private MediaPlayerExt mMediaPlayer = null;
@@ -195,7 +198,7 @@ public class SubtitleManager {
     //public static final int IO_TYPE_DEV = 0;
     public static final int IO_TYPE_FMQ = 0;
     public static final int IO_TYPE_DEV = 1;
-    public static final int IO_TYPE_FILE =2;
+    public static final int IO_TYPE_FILE = 2;
     private int mIOType = IO_TYPE_FMQ;
     private ArrayList<Integer> mInnerTrackIdx = null;
 
@@ -211,8 +214,8 @@ public class SubtitleManager {
     //ext sub
     private SubtitleUtils mSubtitleUtils;
     private static final String[] mExternalExtension = {
-        ".txt",".srt", ".smi", ".sami",".rt", ".ssa", ".ass",".lrc", ".xml",
-        ".idx",".sub", ".pjs",".aqt", ".mpl", ".vtt",".js", ".jss"};
+            ".txt", ".srt", ".smi", ".sami", ".rt", ".ssa", ".ass", ".lrc", ".xml",
+            ".idx", ".sub", ".pjs", ".aqt", ".mpl", ".vtt", ".js", ".jss"};
 
     private int mDisplayType = -1;
     private int mCurrentTrack = 0;
@@ -228,13 +231,13 @@ public class SubtitleManager {
     private Rect mDisplayRect;
 
     private static final String[] sJNI_LIBRARY = {
-        "/vendor/lib/libsubtitlemanager_jni.so",
-        "/product/lib/libsubtitlemanager_jni.so",
-        "/system_ext/lib/libsubtitlemanager_jni.so",
-        "/system/lib/libsubtitlemanager_jni.so" };
+            "/vendor/lib/libsubtitlemanager_jni.so",
+            "/product/lib/libsubtitlemanager_jni.so",
+            "/system_ext/lib/libsubtitlemanager_jni.so",
+            "/system/lib/libsubtitlemanager_jni.so"};
 
     static {
-        for (String s:sJNI_LIBRARY) {
+        for (String s : sJNI_LIBRARY) {
             try {
                 System.load(s);
             } catch (UnsatisfiedLinkError e) {
@@ -247,38 +250,69 @@ public class SubtitleManager {
     }
 
     private native void nativeInit(boolean isFallback);
+
     private native void nativeUpdateVideoPos(int pos);
+
     private native boolean nativeOpen(String path, int ioType);
+
     private native void nativeClose();
-//    private native void nativeSetIoType(int type);
+
+    //    private native void nativeSetIoType(int type);
     private native void nativeDestroy();
+
     private native void nativeSelectCcChannel(int chn);
+
     private native void nativeOption();
+
     private native int nativeTotalSubtitles();
+
     private native int nativeInnerSubtitles();
+
     private native void nativeNext();
+
     private native void nativePrevious();
+
     private native void nativeDisplay();
+
     private native void nativeHide();
+
     private native void nativeClean();
+
     private native void nativeResetForSeek();
+
     private native int nativeGetSubWidth();
+
     private native int nativeGetSubHeight();
+
     private native void nativeSetSubType(int type);
+
     private native void nativeSetPlayerType(int type);
+
     private native void nativeSetSctePid(int pid);
+
     private native int nativeGetSubType();
+
     private native String nativeGetSubLanguage(int idx);
+
     private native String nativeGetCurName();
+
     private native int nativeGetSubTypeDetial();
+
     private native int nativeTtControl(int teletxtEvent, int magazine, int page, int regionId);
+
     private native int nativeTtGoHome();
+
     private native int nativeTtGotoPage(int pageNo, int subPageNo);
+
     private native int nativeTtNextPage(int dir);
+
     private native int nativeTtNextSubPage(int dir);
+
     private native void nativeLoad(String path);
+
     private native void nativeSetSurfaceViewParam(int x, int y, int w, int h);
-    private native void nativeUnCrypt(String src,String dest);
+
+    private native void nativeUnCrypt(String src, String dest);
 
 
     public SubtitleManager() {
@@ -327,8 +361,8 @@ public class SubtitleManager {
     }
 
     /**
-      * isFallback should not exported, only used for internal fallback display.
-      * default is false.
+     * isFallback should not exported, only used for internal fallback display.
+     * default is false.
      */
     private void init(Context context, boolean isFallback) {
         mContext = context;
@@ -345,32 +379,32 @@ public class SubtitleManager {
         });
     }
 
-    public Context getContext () {
+    public Context getContext() {
         Context context = null;
         LOGI("[getContext]");
         try {
             objActivityThread = Class.forName("android.app.ActivityThread");
             currentApplication = objActivityThread.getMethod("currentApplication");
             context = ((Application) (currentApplication.invoke(objActivityThread))).getApplicationContext();
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Log.e(TAG, "getContext failed:" + ex);
         }
         return context;
     }
+
     private void initFont() {
-        File uncryteDir = new File(mContext.getDataDir(),uncryptDirStr);
-        if (uncryteDir == null || uncryteDir.listFiles() == null || uncryteDir.listFiles().length == 0 ) {
+        File uncryteDir = new File(mContext.getDataDir(), uncryptDirStr);
+        if (uncryteDir == null || uncryteDir.listFiles() == null || uncryteDir.listFiles().length == 0) {
             unzipUncry(uncryteDir);
-         }
+        }
     }
 
     /**
-     *   Default resolution, init to fullscreen mode. the caller need call setDisplayRect to
-     *   set the actual display Rect [in screen] when required.
+     * Default resolution, init to fullscreen mode. the caller need call setDisplayRect to
+     * set the actual display Rect [in screen] when required.
      */
-    private void initDefaultResolution(){
-        WindowManager wm = (WindowManager)mContext.getSystemService (Context.WINDOW_SERVICE);
+    private void initDefaultResolution() {
+        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(dm);
         mDisplayRect = new Rect(0, 0, dm.widthPixels, dm.heightPixels);
@@ -382,7 +416,7 @@ public class SubtitleManager {
         int displayType = -1;
         switch (type) {
             case TYPE_SUBTITLE_DVB:
-                displayType =  SUBTITLE_IMAGE;
+                displayType = SUBTITLE_IMAGE;
                 break;
             case TYPE_SUBTITLE_EXTERNAL:
             case TYPE_SUBTITLE_SSA:
@@ -399,7 +433,10 @@ public class SubtitleManager {
         }
         final int fType = displayType;
         mDisplayType = fType;
-        runOnMainThread(() -> { mUI.setDisplayType(fType); mUI.setSubtitleType(type);});
+        runOnMainThread(() -> {
+            mUI.setDisplayType(fType);
+            mUI.setSubtitleType(type);
+        });
         return displayType;
     }
 
@@ -413,31 +450,31 @@ public class SubtitleManager {
                 nativeSelectCcChannel(channelId);
                 mCurrentCCchannel = channelId;
             }
-     } else if(event == 0 && mChalIdList.contains(channelId)) { //0:remvoe
+        } else if (event == 0 && mChalIdList.contains(channelId)) { //0:remvoe
             idx = mChalIdList.indexOf(channelId);
             mChalIdList.remove(idx);
-     } else if (event == -1) {
+        } else if (event == -1) {
             int auth = channelId >> 16;
-            int id = channelId >> 8 &0xff;
-            int dlsv = channelId&0x0f;
-            LOGI("updateChannedId  auth="+auth+";id="+id+";dlsv="+dlsv);
+            int id = channelId >> 8 & 0xff;
+            int dlsv = channelId & 0x0f;
+            LOGI("updateChannedId  auth=" + auth + ";id=" + id + ";dlsv=" + dlsv);
             if (mHidlCallback != null) {
                 Log.d(TAG, "onSubtitleEvent: mHidlCallback=" + mHidlCallback);
                 mHidlCallback.onSubtitleEvent(SUBTITLE_VCHIP_RATE, null, null, auth, id, dlsv, 0, 0, 0, false);
             } else if (mHidlFallbackDisplay != null) {
                 Log.d(TAG, "onSubtitleEvent: mHidlFallbackDisplay=" + mHidlFallbackDisplay);
-                mHidlFallbackDisplay.onSubtitleEvent(SUBTITLE_VCHIP_RATE,  null, null, auth, id, dlsv, 0, 0, 0, false);
+                mHidlFallbackDisplay.onSubtitleEvent(SUBTITLE_VCHIP_RATE, null, null, auth, id, dlsv, 0, 0, 0, false);
             } else {
                 Log.e(TAG, "Cannot handle events!");
             }
         } else if (event == -2) {
-            LOGI("updateChannedId  mask ="+channelId);
+            LOGI("updateChannedId  mask =" + channelId);
             if (mHidlCallback != null) {
                 Log.d(TAG, "onSubtitleEvent: mHidlCallback = " + mHidlCallback);
-                mHidlCallback.onSubtitleEvent(SUBTITLE_VCHIP_RATE,  null, null, -1, -1, -1, channelId, 0, 0, false);
+                mHidlCallback.onSubtitleEvent(SUBTITLE_VCHIP_RATE, null, null, -1, -1, -1, channelId, 0, 0, false);
             } else if (mHidlFallbackDisplay != null) {
                 Log.d(TAG, "onSubtitleEvent: mHidlFallbackDisplay = " + mHidlFallbackDisplay);
-                mHidlFallbackDisplay.onSubtitleEvent(SUBTITLE_VCHIP_RATE,  null, null, -1, -1, -1, channelId, 0, 0, false);
+                mHidlFallbackDisplay.onSubtitleEvent(SUBTITLE_VCHIP_RATE, null, null, -1, -1, -1, channelId, 0, 0, false);
             } else {
                 Log.e(TAG, "Cannot handle events!");
             }
@@ -448,14 +485,14 @@ public class SubtitleManager {
         LOGI("[notifyAvailable]avail:" + avail);
     }
 
-    public int getDisplayType () {
+    public int getDisplayType() {
         return mDisplayType;
     }
 
     private void runOnMainThread(Runnable r) {
         // Android MainThread is the first thread, same as pid.
         if (Process.myPid() != Process.myTid()) {
-            synchronized(this) {
+            synchronized (this) {
                 if (mHandler == null) {
                     mHandler = new Handler(Looper.getMainLooper());
                 }
@@ -468,7 +505,7 @@ public class SubtitleManager {
 
     private void runOnMainThreadImmidiate(Runnable r) {
         if (Process.myPid() != Process.myTid()) {
-            synchronized(this) {
+            synchronized (this) {
                 if (mHandler == null) {
                     mHandler = new Handler(Looper.getMainLooper());
                 }
@@ -480,29 +517,28 @@ public class SubtitleManager {
     }
 
     private void processSubtileEvent(int type, Object data, byte[] subdata, int x, int y,
-            int width ,int height, int videoWidth, int videoHeight, boolean show) {
-        Log.d(TAG, "in SubtitleManager.java onSubtitleEvent:" + type+"; height="+height
-                +"; width="+width+", show="+show+";videoWidth="+videoWidth+";videoHeight="+videoHeight);
+                                     int width, int height, int videoWidth, int videoHeight, boolean show) {
+        Log.d(TAG, "in SubtitleManager.java onSubtitleEvent:" + type + "; height=" + height
+                + "; width=" + width + ", show=" + show + ";videoWidth=" + videoWidth + ";videoHeight=" + videoHeight);
         runOnMainThread(() -> {
             if (!mShowFlag) {
-                Log.d(TAG, "processSubtileEvent:: the subtitle has stop!" );
+                Log.d(TAG, "processSubtileEvent:: the subtitle has stop!");
                 return;
             }
             mUI.setDisplayType(type);
             String text = null;
             switch (type) {
                 case SUBTITLE_TXT:
-                      //Log.d(TAG, "startSubtitle TEXT: " + isExtSubtitle() + ", getExtSubCharset:" + mSubtitleUtils.getExtSubCharset());
+                    //Log.d(TAG, "startSubtitle TEXT: " + isExtSubtitle() + ", getExtSubCharset:" + mSubtitleUtils.getExtSubCharset());
                     if (isExtSubtitle()) {
                         try {
-                            text = new String (subdata, mSubtitleUtils.getExtSubCharset());
-                        }
-                        catch (UnsupportedEncodingException e) {
+                            text = new String(subdata, mSubtitleUtils.getExtSubCharset());
+                        } catch (UnsupportedEncodingException e) {
                             LOGI("ext subtitle byte to string err!!!");
                             e.printStackTrace();
                         }
                     } else {
-                        text = new String (subdata);
+                        text = new String(subdata);
                     }
                     Log.d(TAG, "startSubtitle TEXT = " + text);
                     mUI.showSubtitleString(text, show);
@@ -515,21 +551,21 @@ public class SubtitleManager {
                         return;
                     }
                     try {
-                        int[] array = (int[])data;
+                        int[] array = (int[]) data;
                         mUI.setCordinate(x, y);
                         Bitmap bitmap = Bitmap.createBitmap(array, width, height, Config.ARGB_8888);
                         // scaling.
-                        float scaleW = ((mDisplayRect.right-mDisplayRect.left)*1.0f)/(float)videoWidth;
-                        float scaleH = ((mDisplayRect.bottom-mDisplayRect.top)*1.0f)/(float)videoHeight;
-                        Log.d(TAG, "DisplayRect=" + mDisplayRect +" show bitmap scaleW:" + scaleW+", scaleH:"+scaleH);
+                        float scaleW = ((mDisplayRect.right - mDisplayRect.left) * 1.0f) / (float) videoWidth;
+                        float scaleH = ((mDisplayRect.bottom - mDisplayRect.top) * 1.0f) / (float) videoHeight;
+                        Log.d(TAG, "DisplayRect=" + mDisplayRect + " show bitmap scaleW:" + scaleW + ", scaleH:" + scaleH);
                         mUI.showBitmap(bitmap, scaleW, scaleH, show);
-                    } catch(Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
 
                 case SUBTITLE_CC_JASON:
-                    text = new String (subdata);
+                    text = new String(subdata);
                     Log.d(TAG, "startSubtitle TEXT CC_text= " + text);
                     mUI.showCaptionClose(text);
                     break;
@@ -541,8 +577,8 @@ public class SubtitleManager {
     public boolean startSubtitle() {
         mHidlCallback = new SubtitleDataListener() {
             public void onSubtitleEvent(int type, Object data, byte[] subdata, int x, int y,
-                    int width ,int height, int videoWidth, int videoHeight, boolean show) {
-                Log.d(TAG, "in SubtitleManager.java onSubtitleEvent:" + type+"; height="+height+"; width="+width+", show="+show);
+                                        int width, int height, int videoWidth, int videoHeight, boolean show) {
+                Log.d(TAG, "in SubtitleManager.java onSubtitleEvent:" + type + "; height=" + height + "; width=" + width + ", show=" + show);
 
                 processSubtileEvent(type, data, subdata, x, y, width, height, videoWidth, videoHeight, show);
             }
@@ -561,7 +597,7 @@ public class SubtitleManager {
         Log.d(TAG, "startFallbackDisplay 3", new Throwable());
         mHidlFallbackDisplay = new FallbackDisplayListener() {
             public void onSubtitleEvent(int type, Object data, byte[] subdata, int x, int y,
-                    int width ,int height, int videoWidth, int videoHeight, boolean show) {
+                                        int width, int height, int videoWidth, int videoHeight, boolean show) {
                 Log.d(TAG, "here, FallbackDisplayListener: onSubtitleEvent");
 
                 // Check subtitle view created or not, if not, create it
@@ -574,6 +610,7 @@ public class SubtitleManager {
 
                 processSubtileEvent(type, data, subdata, x, y, width, height, videoWidth, videoHeight, show);
             }
+
             public void onUiCommandEvent(int cmd, int params[]) {
                 Log.d(TAG, "receive message:" + cmd);
                 switch (cmd) {
@@ -605,7 +642,7 @@ public class SubtitleManager {
                         setPosHeight(params[0]);
                         break;
                     case CMD_UI_SET_IMGRATIO:
-                        setImgSubRatio((float)params[0], (float)params[1], params[2], params[3]);
+                        setImgSubRatio((float) params[0], (float) params[1], params[2], params[3]);
                         break;
                     case CMD_UI_SET_SUBDEMISION:
                         Log.e(TAG, "Error! should not here!");
@@ -652,18 +689,18 @@ public class SubtitleManager {
 
     // TODO: how to design api?
     public boolean stopSubtitle() {
-         hide();
-         runOnMainThreadImmidiate(() -> {
+        hide();
+        runOnMainThreadImmidiate(() -> {
             mShowFlag = false;
             mUI.removeSubtitleView();
             mUI.stopTtxLoading();
             mUI.setDisplayFlag(false);
-         });
-         mHidlCallback = null;
-         mHidlFallbackDisplay = null;
-         mChalIdList.clear();
-         mThreadStop = true;
-         return true;
+        });
+        mHidlCallback = null;
+        mHidlFallbackDisplay = null;
+        mChalIdList.clear();
+        mThreadStop = true;
+        return true;
     }
 
     // customize how to show.
@@ -678,29 +715,29 @@ public class SubtitleManager {
     }
 
 
-    public void setMediaPlayer (MediaPlayerExt mp) {
+    public void setMediaPlayer(MediaPlayerExt mp) {
         mMediaPlayer = mp;
     }
 
     private boolean disable() {
         boolean ret = false;
         try {
-            ret = (boolean)Class.forName("android.os.SystemProperties")
-                .getMethod("getBoolean", new Class[] { String.class, Boolean.TYPE })
-                .invoke(null, new Object[] { "vendor.sys.subtitle.disable", false });
+            ret = (boolean) Class.forName("android.os.SystemProperties")
+                    .getMethod("getBoolean", new Class[]{String.class, Boolean.TYPE})
+                    .invoke(null, new Object[]{"vendor.sys.subtitle.disable", false});
         } catch (Exception e) {
-            Log.e(TAG,"[start]Exception e:" + e);
+            Log.e(TAG, "[start]Exception e:" + e);
         }
         return ret;
     }
 
-    private  boolean isExtSubtitle() {
-        Log.i(TAG,"[isExtSubtitle]mExtFilePath:" + mExtFilePath);
+    private boolean isExtSubtitle() {
+        Log.i(TAG, "[isExtSubtitle]mExtFilePath:" + mExtFilePath);
         if (mExtFilePath != null) {
             String name = mExtFilePath.toLowerCase();
-                for (String ext : mExternalExtension) {
+            for (String ext : mExternalExtension) {
                 if (name.endsWith(ext))
-                return true;
+                    return true;
             }
         }
         return false;
@@ -708,7 +745,7 @@ public class SubtitleManager {
 
     private void checkDebug() {
         try {
-            if (SystemProperties.getBoolean ("vendor.sys.subtitle.debug", true) ) {
+            if (SystemProperties.getBoolean("vendor.sys.subtitle.debug", true)) {
                 mDebug = true;
             }
         } catch (Exception e) {
@@ -726,7 +763,7 @@ public class SubtitleManager {
     private boolean optionEnable() {
         boolean ret = false;
         try {
-            if (SystemProperties.getBoolean ("vendor.sys.subtitleOption.enable", false) ) {
+            if (SystemProperties.getBoolean("vendor.sys.subtitleOption.enable", false)) {
                 ret = true;
             }
         } catch (Exception e) {
@@ -740,10 +777,11 @@ public class SubtitleManager {
     }
 
     private void LOGE(String msg) {
-        /*if (mDebug)*/ Log.e(TAG, msg);
+        /*if (mDebug)*/
+        Log.e(TAG, msg);
     }
 
-    public void setInvokeFromMp (boolean fromMediaPlayer) {
+    public void setInvokeFromMp(boolean fromMediaPlayer) {
         mInvokeFromMp = fromMediaPlayer;
     }
 
@@ -752,7 +790,7 @@ public class SubtitleManager {
     }
 
 
-    public void setSource (Context context, Uri uri) {
+    public void setSource(Context context, Uri uri) {
         if (context == null) {
             return;
         }
@@ -764,7 +802,7 @@ public class SubtitleManager {
         mPath = uri.getPath();
 
         String scheme = uri.getScheme();
-        if (scheme == null || scheme.equals ("file") ) {
+        if (scheme == null || scheme.equals("file")) {
             mPath = uri.getPath();
             return;
         }
@@ -773,26 +811,26 @@ public class SubtitleManager {
             ContentResolver resolver = context.getContentResolver();
             //add for subtitle service
             String mediaStorePath = uri.getPath();
-            String[] cols = new String[] {
-                MediaStore.Video.Media._ID,
-                MediaStore.Video.Media.DATA
+            String[] cols = new String[]{
+                    MediaStore.Video.Media._ID,
+                    MediaStore.Video.Media.DATA
             };
 
-            if (scheme.equals ("content") ) {
-                int idx_check = (uri.toString() ).indexOf ("media/external/video/media");
+            if (scheme.equals("content")) {
+                int idx_check = (uri.toString()).indexOf("media/external/video/media");
 
                 if (idx_check > -1) {
-                    int idx = mediaStorePath.lastIndexOf ("/");
-                    String idStr = mediaStorePath.substring (idx + 1);
-                    int id = Integer.parseInt (idStr);
+                    int idx = mediaStorePath.lastIndexOf("/");
+                    String idStr = mediaStorePath.substring(idx + 1);
+                    int id = Integer.parseInt(idStr);
                     LOGI("[setSource]id:" + id);
 
                     String where = MediaStore.Video.Media._ID + "=" + id;
-                    Cursor cursor = resolver.query (MediaStore.Video.Media.EXTERNAL_CONTENT_URI, cols, where , null, null);
+                    Cursor cursor = resolver.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, cols, where, null, null);
                     if (cursor != null && cursor.getCount() == 1) {
-                        int colidx = cursor.getColumnIndexOrThrow (MediaStore.Video.Media.DATA);
+                        int colidx = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
                         cursor.moveToFirst();
-                        mPath = cursor.getString (colidx);
+                        mPath = cursor.getString(colidx);
                         LOGI("[setSource]mediaStorePath:" + mediaStorePath + ",mPath:" + mPath);
                     }
                 }
@@ -802,18 +840,18 @@ public class SubtitleManager {
         }
     }
 
-    public void setSource (String path) {
+    public void setSource(String path) {
         if (path == null) {
             return;
         }
         try {
             final Uri uri = Uri.parse(path);
-            if ("file".equals (uri.getScheme())) {
+            if ("file".equals(uri.getScheme())) {
                 path = uri.getPath();
             }
             mPath = path;
         } catch (Exception e) {
-            Log.e(TAG, "Exception:" +e);
+            Log.e(TAG, "Exception:" + e);
         }
     }
 
@@ -823,7 +861,7 @@ public class SubtitleManager {
 
         r = nativeOpen(path, ioType);
 
-        LOGI("[open] innerTotal:" + innerTotal() +", mIOType:" + mIOType);
+        LOGI("[open] innerTotal:" + innerTotal() + ", mIOType:" + mIOType);
         if (mInnerTrackIdx != null && mInnerTrackIdx.size() > 0 && mIOType != IO_TYPE_FILE && mMediaPlayer != null) {
             mMediaPlayer.selectTrack(mInnerTrackIdx.get(mCurrentTrack));
         }
@@ -860,13 +898,15 @@ public class SubtitleManager {
             if (mSubtitleUtils.getSubID(idx - innerTotal()) != null) {
                 close();
                 mSubtitleUtils.resetCharset();
-                LOGI("[openIdx] ext sub switch idx:" + idx+" mPath:"+mPath);
+                LOGI("[openIdx] ext sub switch idx:" + idx + " mPath:" + mPath);
                 mSubtitleUtils = new SubtitleUtils(mPath);
                 mExtFilePath = mSubtitleUtils.getSubID(idx - mInterSubTotal).mFileName;
-                LOGI("[openIdx] ext sub switch idx:" + idx + " mExtFilePath:"+mExtFilePath+" mInterSubTotal:" + mInterSubTotal);
+                LOGI("[openIdx] ext sub switch idx:" + idx + " mExtFilePath:" + mExtFilePath + " mInterSubTotal:" + mInterSubTotal);
                 nativeOpen(mExtFilePath, IO_TYPE_FILE);
                 show();
-                runOnMainThread(() -> { mUI.clearContent(); });
+                runOnMainThread(() -> {
+                    mUI.clearContent();
+                });
             }
         }
 
@@ -878,19 +918,23 @@ public class SubtitleManager {
             nativeResetForSeek();
             mMediaPlayer.selectTrack(mInnerTrackIdx.get(idx));
             mCurrentTrack = idx;
-            runOnMainThread(() -> { mUI.clearContent(); });
+            runOnMainThread(() -> {
+                mUI.clearContent();
+            });
         }
     }
 
     public void startCCchanel(int channel) {
         LOGI("[startCCchanel] channel:" + channel);
-        if ((channel&0xff) < 0 || (channel&0xff) > 15) {
+        if ((channel & 0xff) < 0 || (channel & 0xff) > 15) {
             return;
         }
 
         mMonitorCCchannel = channel;
 
-        runOnMainThread(() -> { mUI.clearContent(); });
+        runOnMainThread(() -> {
+            mUI.clearContent();
+        });
         nativeSelectCcChannel(channel);
         mCurrentCCchannel = channel;
 
@@ -923,7 +967,7 @@ public class SubtitleManager {
             if (result) {
                 show();
 
-                if (optionEnable() ) {
+                if (optionEnable()) {
                     option();//show subtitle select option add for debug
                 }
             }
@@ -953,7 +997,7 @@ public class SubtitleManager {
         if (mExtFilePath != null) {
             if (mThread == null || mThreadStop == true) {
                 mThreadStop = false;
-                mThread = new Thread (runnable);
+                mThread = new Thread(runnable);
                 mThread.start();
             }
         }
@@ -963,9 +1007,9 @@ public class SubtitleManager {
         int isTvType = -1;
         isTvType = SystemProperties.getInt("vendor.sys.subtitleService.tvType", 3);
         if (isTvType == TV_SUB_H264 ||
-            isTvType == TV_SUB_MPEG2 ||
-            isTvType == TV_SUB_SCTE27 ||
-            isTvType == TV_SUB_DVB) {
+                isTvType == TV_SUB_MPEG2 ||
+                isTvType == TV_SUB_SCTE27 ||
+                isTvType == TV_SUB_DVB) {
             return true;
         }
         return false;
@@ -1014,7 +1058,10 @@ public class SubtitleManager {
     }
 
     public void enableDisplay() {
-        runOnMainThread(() -> { mUI.clearContent(); mUI.setDisplayFlag(false); });
+        runOnMainThread(() -> {
+            mUI.clearContent();
+            mUI.setDisplayFlag(false);
+        });
     }
 
     public void disableDisplay() {
@@ -1087,35 +1134,49 @@ public class SubtitleManager {
     public void setPlayerType(int type) {
         nativeSetPlayerType(type);
     }
+
     public void setSubPid(int pid) {
         nativeSetSctePid(pid);
     }
+
     public int getSubTypeDetial() {
         return nativeGetSubTypeDetial();
     }
 
     public void setTextColor(int color) {
-        runOnMainThread(() -> { mUI.setTextColor(color); });
+        runOnMainThread(() -> {
+            mUI.setTextColor(color);
+        });
     }
 
     public void setTextSize(int size) {
-        runOnMainThread(() -> { mUI.setTextSize(size); });
+        runOnMainThread(() -> {
+            mUI.setTextSize(size);
+        });
     }
 
     public void setGravity(int gravity) {
-        runOnMainThread(() -> { mUI.setGravity(gravity); });
+        runOnMainThread(() -> {
+            mUI.setGravity(gravity);
+        });
     }
 
     public void setTextStyle(int style) {
-        runOnMainThread(() -> { mUI.setTextStype(style); });
+        runOnMainThread(() -> {
+            mUI.setTextStype(style);
+        });
     }
 
     public void setPosHeight(int height) {
-        runOnMainThread(() -> { mUI.setPosHeight(height); });
+        runOnMainThread(() -> {
+            mUI.setPosHeight(height);
+        });
     }
 
     public void setImgSubRatio(float ratioW, float ratioH, int maxW, int maxH) {
-        runOnMainThread(() -> { mUI.setImgSubRatio(ratioW, ratioH, maxW, maxH); });
+        runOnMainThread(() -> {
+            mUI.setImgSubRatio(ratioW, ratioH, maxW, maxH);
+        });
     }
 
     //add region id param
@@ -1134,6 +1195,7 @@ public class SubtitleManager {
     public int ttGotoPage(int pageNo, int subPageNo) {
         return nativeTtGotoPage(pageNo, subPageNo);
     }
+
     public int ttNextPage(int dir) {
         return nativeTtNextPage(dir);
     }
@@ -1170,10 +1232,10 @@ public class SubtitleManager {
         LOGI("[storeTrackIdx] idx:" + idx);
         try {
             mInnerTrackIdx.add(idx);
-            } catch (Exception e) {
-                Log.e(TAG, "Exception:" + e);
-            }
+        } catch (Exception e) {
+            Log.e(TAG, "Exception:" + e);
         }
+    }
 
     public void setIOType(int type) {
         LOGI("[setIOType] type:" + type);
@@ -1189,52 +1251,53 @@ public class SubtitleManager {
         }*/
     }
 
-/*    private void setIOType() {
-        LOGI("[setIOType]mMediaPlayer:" + mMediaPlayer);
+    /*    private void setIOType() {
+            LOGI("[setIOType]mMediaPlayer:" + mMediaPlayer);
 
-        try {
-            mIOType = getIoType();       //default amnuplayer
-        if (mMediaPlayer != null) {
-            String typeStr = mMediaPlayer.getStringParameter(mMediaPlayer.KEY_PARAMETER_AML_PLAYER_TYPE_STR);
-            LOGI("[setIOType]typeStr:" + typeStr);
-            if (typeStr != null && typeStr.equals("AMNU_PLAYER")) {
-                mIOType = IO_TYPE_FMQ;
+            try {
+                mIOType = getIoType();       //default amnuplayer
+            if (mMediaPlayer != null) {
+                String typeStr = mMediaPlayer.getStringParameter(mMediaPlayer.KEY_PARAMETER_AML_PLAYER_TYPE_STR);
+                LOGI("[setIOType]typeStr:" + typeStr);
+                if (typeStr != null && typeStr.equals("AMNU_PLAYER")) {
+                    mIOType = IO_TYPE_FMQ;
+                }
+            }
+                setIOType(mIOType);
+            } catch (Exception e) {
+                Log.e(TAG, "Exception:" + e);
             }
         }
-            setIOType(mIOType);
-        } catch (Exception e) {
-            Log.e(TAG, "Exception:" + e);
-        }
-    }
-*/
+    */
     private int getIOType() {
         return mIOType;
     }
 
     private static final int AML_SUBTITLE_START = 800; // random value
+
     private class EventHandler extends Handler {
-        public EventHandler (Looper looper) {
-            super (looper);
+        public EventHandler(Looper looper) {
+            super(looper);
         }
 
         @Override
-        public void handleMessage (Message msg) {
+        public void handleMessage(Message msg) {
             try {
                 switch (msg.arg1) {
-                case AML_SUBTITLE_START:
-                    LOGI("[handleMessage]AML_SUBTITLE_START mPath:" + mPath);
-                    if (mPath != null) {
-                    boolean ret = open(mPath);
+                    case AML_SUBTITLE_START:
+                        LOGI("[handleMessage]AML_SUBTITLE_START mPath:" + mPath);
+                        if (mPath != null) {
+                            boolean ret = open(mPath);
 
-                        if (ret) {
-                            show();
+                            if (ret) {
+                                show();
 
-                            if (optionEnable() ) {
-                                option();//show subtitle select option add for debug
+                                if (optionEnable()) {
+                                    option();//show subtitle select option add for debug
+                                }
                             }
                         }
-                    }
-                    break;
+                        break;
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Exception:" + e);
@@ -1243,8 +1306,8 @@ public class SubtitleManager {
     }
 
     private String readSysfs(String path) {
-        if (!new File (path).exists() ) {
-            Log.e (TAG, "File not found: " + path);
+        if (!new File(path).exists()) {
+            Log.e(TAG, "File not found: " + path);
             return null;
         }
 
@@ -1252,13 +1315,13 @@ public class SubtitleManager {
         StringBuilder value = new StringBuilder();
 
         try {
-            FileReader fr = new FileReader (path);
-            BufferedReader br = new BufferedReader (fr);
+            FileReader fr = new FileReader(path);
+            BufferedReader br = new BufferedReader(fr);
 
             try {
-                while ( (str = br.readLine() ) != null) {
+                while ((str = br.readLine()) != null) {
                     if (str != null) {
-                        value.append (str);
+                        value.append(str);
                     }
                 }
                 fr.close();
@@ -1290,7 +1353,7 @@ public class SubtitleManager {
                 }
 
                 //show subtitle
-                if (mMediaPlayer != null && mMediaPlayer.isPlaying() ) {
+                if (mMediaPlayer != null && mMediaPlayer.isPlaying()) {
                     pos = mMediaPlayer.getCurrentPosition() * 90;//convert to pts
                     //LOGI("[runnable]showSub:" + pos);
                 }
@@ -1300,7 +1363,7 @@ public class SubtitleManager {
                 }
 
                 try {
-                    Thread.sleep (300 - (pos % 300) );
+                    Thread.sleep(300 - (pos % 300));
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -1309,11 +1372,11 @@ public class SubtitleManager {
     };
 
     public void setSubtitleDataListner(SubtitleDataListener cb) {
-        mHidlCallback= cb;
+        mHidlCallback = cb;
     }
 
     private void notifySubtitleEvent(int data[], byte[] subdata, int type, int x, int y,
-            int width , int height, int videoWidth, int videoHeight, boolean show) {
+                                     int width, int height, int videoWidth, int videoHeight, boolean show) {
         if (mHidlCallback != null) {
             Log.d(TAG, "onSubtitleEvent: mHidlCallback=" + mHidlCallback);
             mHidlCallback.onSubtitleEvent(type, data, subdata, x, y, width, height, videoWidth, videoHeight, show);
@@ -1347,19 +1410,19 @@ public class SubtitleManager {
     }
 
     void unzipUncry(File uncryteDir) {
-        File zipFile = new File(mContext.getDataDir(),"fonts.zip");
-        File unZipDir = new File(mContext.getDataDir(),unZipDirStr);
+        File zipFile = new File(mContext.getDataDir(), "fonts.zip");
+        File unZipDir = new File(mContext.getDataDir(), unZipDirStr);
         try {
-            copyToFileOrThrow(mContext.getAssets().open(fonts),zipFile);
-            upZipFile(zipFile,unZipDir.getCanonicalPath());
+            copyToFileOrThrow(mContext.getAssets().open(fonts), zipFile);
+            upZipFile(zipFile, unZipDir.getCanonicalPath());
             uncryteDir.mkdirs();
-            nativeUnCrypt(unZipDir.getCanonicalPath()+"/", uncryteDir.getCanonicalPath()+"/");
-        } catch(IOException ex) {
+            nativeUnCrypt(unZipDir.getCanonicalPath() + "/", uncryteDir.getCanonicalPath() + "/");
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
-    private  void copyToFileOrThrow(InputStream inputStream, File destFile)
+    private void copyToFileOrThrow(InputStream inputStream, File destFile)
             throws IOException {
         if (destFile.exists()) {
             destFile.delete();
@@ -1381,38 +1444,39 @@ public class SubtitleManager {
         }
     }
 
-    private  void upZipFile(File zipFile, String folderPath)
+    private void upZipFile(File zipFile, String folderPath)
             throws ZipException, IOException {
-            File desDir = new File(folderPath);
-            if (!desDir.exists()) {
-                desDir.mkdirs();
-            }
-            ZipFile zf = new ZipFile(zipFile);
-            for (Enumeration<?> entries = zf.entries(); entries.hasMoreElements();) {
-                ZipEntry entry = ((ZipEntry) entries.nextElement());
-                InputStream in = zf.getInputStream(entry);
-                String str = folderPath;
-                File desFile = new File(str, java.net.URLEncoder.encode(
-                        entry.getName(), "UTF-8"));
-                if (!desFile.exists()) {
-                    File fileParentDir = desFile.getParentFile();
-                    if (!fileParentDir.exists()) {
-                        fileParentDir.mkdirs();
-                    }
+        File desDir = new File(folderPath);
+        if (!desDir.exists()) {
+            desDir.mkdirs();
+        }
+        ZipFile zf = new ZipFile(zipFile);
+        for (Enumeration<?> entries = zf.entries(); entries.hasMoreElements(); ) {
+            ZipEntry entry = ((ZipEntry) entries.nextElement());
+            InputStream in = zf.getInputStream(entry);
+            String str = folderPath;
+            File desFile = new File(str, java.net.URLEncoder.encode(
+                    entry.getName(), "UTF-8"));
+            if (!desFile.exists()) {
+                File fileParentDir = desFile.getParentFile();
+                if (!fileParentDir.exists()) {
+                    fileParentDir.mkdirs();
                 }
-                OutputStream out = new FileOutputStream(desFile);
-                byte buffer[] = new byte[1024 * 1024];
-                int realLength = in.read(buffer);
-                while (realLength != -1) {
-                    out.write(buffer, 0, realLength);
-                    realLength = in.read(buffer);
-                }
-
-                out.close();
-                in.close();
-
             }
+            OutputStream out = new FileOutputStream(desFile);
+            byte buffer[] = new byte[1024 * 1024];
+            int realLength = in.read(buffer);
+            while (realLength != -1) {
+                out.write(buffer, 0, realLength);
+                realLength = in.read(buffer);
+            }
+
+            out.close();
+            in.close();
+
+        }
     }
+
     public interface SubtitleDataListener {
         /**
          * TO BE DEFINED LATER:
@@ -1422,14 +1486,16 @@ public class SubtitleManager {
          * Object: data
          */
         public void onSubtitleEvent(int type, Object data, byte[] subdata, int x, int y,
-                 int width ,int height, int videoW, int videoH, boolean showOrHide);
+                                    int width, int height, int videoW, int videoH, boolean showOrHide);
     }
 
-    /** This api not export to 3rd use **/
+    /**
+     * This api not export to 3rd use
+     **/
     public interface FallbackDisplayListener {
         // Received subtitle data
         public void onSubtitleEvent(int type, Object data, byte[] subdata, int x, int y,
-                int width ,int height, int videoW, int videoH, boolean showOrHide);
+                                    int width, int height, int videoW, int videoH, boolean showOrHide);
 
         public void onSubtitleInfo(int what, int extra);
 

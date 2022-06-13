@@ -17,7 +17,7 @@ import android.util.Log;
 
 
 public class TvSatelliteParams implements Parcelable {
-    private static final String TAG="TvSatelliteParams";
+    private static final String TAG = "TvSatelliteParams";
 
     public static final int SEC_22k_ON = 0;
     public static final int SEC_22k_OFF = 1;
@@ -44,7 +44,7 @@ public class TvSatelliteParams implements Parcelable {
     public static final int DISEQC_COMMITTED_BA = 2;
     public static final int DISEQC_COMMITTED_BB = 3;
 
-    public static final int DISEQC_NONE  = 4;
+    public static final int DISEQC_NONE = 4;
 
     public static final int DISEQC_UNCOMMITTED_0 = 0xF0;
     public static final int DISEQC_UNCOMMITTED_1 = 0xF1;
@@ -93,20 +93,23 @@ public class TvSatelliteParams implements Parcelable {
     public int motor_position_num;
     public double sat_longitude;
 
-    /** Dtv-Sx set Unicable settings, only use for dev_set_frontend*/
+    /**
+     * Dtv-Sx set Unicable settings, only use for dev_set_frontend
+     */
     private int user_band;
     private int ub_freq;//!< kHz
 
-    public static final Parcelable.Creator<TvSatelliteParams> CREATOR = new Parcelable.Creator<TvSatelliteParams>(){
+    public static final Parcelable.Creator<TvSatelliteParams> CREATOR = new Parcelable.Creator<TvSatelliteParams>() {
         public TvSatelliteParams createFromParcel(Parcel in) {
             return new TvSatelliteParams(in);
         }
+
         public TvSatelliteParams[] newArray(int size) {
             return new TvSatelliteParams[size];
         }
     };
 
-    public void readFromParcel(Parcel in){
+    public void readFromParcel(Parcel in) {
         local_longitude = in.readDouble();
         local_latitude = in.readDouble();
         lnb_num = in.readInt();
@@ -130,7 +133,7 @@ public class TvSatelliteParams implements Parcelable {
         ub_freq = in.readInt();
     }
 
-    public void writeToParcel(Parcel dest, int flags){
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeDouble(local_longitude);
         dest.writeDouble(local_latitude);
         dest.writeInt(lnb_num);
@@ -154,36 +157,36 @@ public class TvSatelliteParams implements Parcelable {
         dest.writeInt(ub_freq);
     }
 
-    public TvSatelliteParams(Parcel in){
+    public TvSatelliteParams(Parcel in) {
         readFromParcel(in);
     }
 
-    public TvSatelliteParams(){
+    public TvSatelliteParams() {
     }
 
-    public TvSatelliteParams(double sat_longitude){
+    public TvSatelliteParams(double sat_longitude) {
         /*default value*/
         this.sat_longitude = sat_longitude;
     }
 
 
-    public void setSatelliteRecLocal(double local_longitude, double local_latitude){
+    public void setSatelliteRecLocal(double local_longitude, double local_latitude) {
         this.local_longitude = local_longitude;
         this.local_latitude = local_latitude;
     }
 
 
-    public double getSatelliteRecLocalLongitude(){
+    public double getSatelliteRecLocalLongitude() {
         return this.local_longitude;
     }
 
 
-    public double getSatelliteRecLocalLatitude(){
+    public double getSatelliteRecLocalLatitude() {
         return this.local_latitude;
     }
 
 
-    public void setSatelliteLnb(int lnb_num, int lnb_lof_hi, int lnb_lof_lo, int lnb_lof_threadhold){
+    public void setSatelliteLnb(int lnb_num, int lnb_lof_hi, int lnb_lof_lo, int lnb_lof_threadhold) {
         this.lnb_num = lnb_num;
         this.lnb_lof_hi = lnb_lof_hi;
         this.lnb_lof_lo = lnb_lof_lo;
@@ -191,144 +194,144 @@ public class TvSatelliteParams implements Parcelable {
     }
 
 
-    public int getSatelliteLnbNum(){
+    public int getSatelliteLnbNum() {
         return this.lnb_num;
     }
 
 
-    public int getSatelliteLnbLofhi(){
+    public int getSatelliteLnbLofhi() {
         return this.lnb_lof_hi;
     }
 
 
-    public int getSatelliteLnbLofLo(){
+    public int getSatelliteLnbLofLo() {
         return this.lnb_lof_lo;
     }
 
-    public int getSatelliteLnbLofthreadhold(){
+    public int getSatelliteLnbLofthreadhold() {
         return this.lnb_lof_threadhold;
     }
 
-    public void setSec22k(int sec_22k_status){
+    public void setSec22k(int sec_22k_status) {
         this.sec_22k_status = sec_22k_status;
     }
 
 
-    public int getSec22k(){
+    public int getSec22k() {
         return this.sec_22k_status;
     }
 
 
-    public void setSecVoltage(int sec_voltage_status){
+    public void setSecVoltage(int sec_voltage_status) {
         this.sec_voltage_status = sec_voltage_status;
     }
 
 
-    public int getSecVoltage(){
+    public int getSecVoltage() {
         return this.sec_voltage_status;
     }
 
-    public void setSecToneBurst(int sec_tone_burst){
+    public void setSecToneBurst(int sec_tone_burst) {
         this.sec_tone_burst = sec_tone_burst;
     }
 
 
-    public int getSecToneBurst(){
+    public int getSecToneBurst() {
         return this.sec_tone_burst;
     }
 
-    public void setDiseqcMode(int diseqc_mode){
+    public void setDiseqcMode(int diseqc_mode) {
         this.diseqc_mode = diseqc_mode;
     }
 
 
-    public int getDiseqcMode(){
+    public int getDiseqcMode() {
         return this.diseqc_mode;
     }
 
-    public void setDiseqcCommitted(int diseqc_committed){
+    public void setDiseqcCommitted(int diseqc_committed) {
         this.diseqc_committed = diseqc_committed;
     }
 
 
-    public int getDiseqcCommitted(){
+    public int getDiseqcCommitted() {
         return this.diseqc_committed;
     }
 
-    public void setDiseqcUncommitted(int diseqc_uncommitted){
-        this.diseqc_uncommitted= diseqc_uncommitted;
+    public void setDiseqcUncommitted(int diseqc_uncommitted) {
+        this.diseqc_uncommitted = diseqc_uncommitted;
     }
 
 
-    public int getDiseqcUncommitted(){
+    public int getDiseqcUncommitted() {
         return this.diseqc_uncommitted;
     }
 
-    public void setDiseqcRepeatCount(int diseqc_repeat_count){
+    public void setDiseqcRepeatCount(int diseqc_repeat_count) {
         this.diseqc_repeat_count = diseqc_repeat_count;
     }
 
 
-    public int getDiseqcRepeatCount(){
+    public int getDiseqcRepeatCount() {
         return this.diseqc_repeat_count;
     }
 
 
-    public void setDiseqcSequenceRepeat(int diseqc_sequence_repeat){
+    public void setDiseqcSequenceRepeat(int diseqc_sequence_repeat) {
         this.diseqc_sequence_repeat = diseqc_sequence_repeat;
     }
 
 
-    public int getDiseqcSequenceRepeat(){
+    public int getDiseqcSequenceRepeat() {
         return this.diseqc_sequence_repeat;
     }
 
 
-    public void setDiseqcFast(int diseqc_fast){
+    public void setDiseqcFast(int diseqc_fast) {
         this.diseqc_fast = diseqc_fast;
     }
 
 
-    public int getDiseqcFast(){
+    public int getDiseqcFast() {
         return this.diseqc_fast;
     }
 
-    public void setDiseqcOrder(int diseqc_order){
+    public void setDiseqcOrder(int diseqc_order) {
         this.diseqc_order = diseqc_order;
     }
 
 
-    public int getDiseqcOrder(){
+    public int getDiseqcOrder() {
         return this.diseqc_order;
     }
 
 
-    public void setMotorNum(int motor_num){
+    public void setMotorNum(int motor_num) {
         this.motor_num = motor_num;
     }
 
 
-    public int getMotorNum(){
+    public int getMotorNum() {
         return this.motor_num;
     }
 
 
-    public void setMotorPositionNum(int motor_position_num){
+    public void setMotorPositionNum(int motor_position_num) {
         this.motor_position_num = motor_position_num;
     }
 
 
-    public int getMotorPositionNum(){
+    public int getMotorPositionNum() {
         return this.motor_position_num;
     }
 
 
-    public void setSatelliteLongitude(double sat_longitude){
+    public void setSatelliteLongitude(double sat_longitude) {
         this.sat_longitude = sat_longitude;
     }
 
 
-    public double getSatelliteLongitude(){
+    public double getSatelliteLongitude() {
         return this.sat_longitude;
     }
 
@@ -339,17 +342,17 @@ public class TvSatelliteParams implements Parcelable {
     }
 
 
-    public int getUnicableUserband(){
+    public int getUnicableUserband() {
         return this.user_band;
     }
 
 
-    public int getUnicableUbfreq(){
+    public int getUnicableUbfreq() {
         return this.ub_freq;
     }
 
 
-    public boolean equals(TvSatelliteParams params){
+    public boolean equals(TvSatelliteParams params) {
         if (this.local_longitude != params.local_longitude)
             return false;
 
@@ -416,7 +419,7 @@ public class TvSatelliteParams implements Parcelable {
         return true;
     }
 
-    public int describeContents(){
+    public int describeContents() {
         return 0;
     }
 

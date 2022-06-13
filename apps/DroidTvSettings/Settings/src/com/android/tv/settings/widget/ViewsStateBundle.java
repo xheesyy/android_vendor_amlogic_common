@@ -38,11 +38,17 @@ import android.view.View;
  */
 public abstract class ViewsStateBundle {
 
-    /** dont save states of any child views */
+    /**
+     * dont save states of any child views
+     */
     public static final int SAVE_NO_CHILD = 0;
-    /** only save visible child views, the states are lost when they are gone */
+    /**
+     * only save visible child views, the states are lost when they are gone
+     */
     public static final int SAVE_VISIBLE_CHILD = 1;
-    /** save visible views plus save removed child views states up to {@link #getLimitNumber()} */
+    /**
+     * save visible views plus save removed child views states up to {@link #getLimitNumber()}
+     */
     public static final int SAVE_LIMITED_CHILD = 2;
     /**
      * save visible views plus save removed child views without any limitation. This might cause out
@@ -76,7 +82,7 @@ public abstract class ViewsStateBundle {
 
     /**
      * @return the savePolicy, see {@link #SAVE_NO_CHILD} {@link #SAVE_VISIBLE_CHILD}
-     *         {@link #SAVE_LIMITED_CHILD} {@link #SAVE_ALL_CHILD}
+     * {@link #SAVE_LIMITED_CHILD} {@link #SAVE_ALL_CHILD}
      */
     public final int getSavePolicy() {
         return savePolicy;
@@ -84,7 +90,7 @@ public abstract class ViewsStateBundle {
 
     /**
      * @return the limitNumber, only works when {@link #getSavePolicy()} is
-     *         {@link #SAVE_LIMITED_CHILD}
+     * {@link #SAVE_LIMITED_CHILD}
      */
     public final int getLimitNumber() {
         return limitNumber;
@@ -108,7 +114,7 @@ public abstract class ViewsStateBundle {
      * Load view from states, it's none operation if the there is no state associated with the id.
      *
      * @param view view where loads into
-     * @param id unique id for the view within this ViewsStateBundle
+     * @param id   unique id for the view within this ViewsStateBundle
      */
     public final void loadView(View view, int id) {
         String key = getSaveStatesKey(id);
@@ -122,7 +128,7 @@ public abstract class ViewsStateBundle {
      * Save views regardless what's the current policy is.
      *
      * @param view view to save
-     * @param id unique id for the view within this ViewsStateBundle
+     * @param id   unique id for the view within this ViewsStateBundle
      */
     protected final void saveViewUnchecked(View view, int id) {
         String key = getSaveStatesKey(id);
@@ -162,7 +168,7 @@ public abstract class ViewsStateBundle {
      * Save views according to policy.
      *
      * @param view view to save
-     * @param id unique id for the view within this ViewsStateBundle
+     * @param id   unique id for the view within this ViewsStateBundle
      */
     public final void saveInvisibleView(View view, int id) {
         switch (savePolicy) {

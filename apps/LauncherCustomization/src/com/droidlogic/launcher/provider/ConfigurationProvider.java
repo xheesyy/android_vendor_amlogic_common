@@ -28,7 +28,9 @@ import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
 import com.droidlogic.launcher.provider.R;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -75,7 +77,7 @@ public class ConfigurationProvider extends ContentProvider {
         writer = new PipeDataWriter() {
             @Override
             public void writeDataToPipe(@NonNull ParcelFileDescriptor output, @NonNull Uri uri,
-                    @NonNull String mimeType, @Nullable Bundle opts, @Nullable Object args) {
+                                        @NonNull String mimeType, @Nullable Bundle opts, @Nullable Object args) {
                 try (FileOutputStream out = new FileOutputStream(output.getFileDescriptor())) {
                     byte[] buffer = new byte[8192];
                     int count;
@@ -103,8 +105,8 @@ public class ConfigurationProvider extends ContentProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String selection,
-            String[] selectionArgs, String sortOrder) {
-         Log.d(TAG,"query:"+uri+",projection:"+projection);
+                        String[] selectionArgs, String sortOrder) {
+        Log.d(TAG, "query:" + uri + ",projection:" + projection);
         switch (URI_MATCHER.match(uri)) {
             case MATCH_WIDGET:
                 String packageName = getContext().getApplicationContext().getPackageName();
@@ -142,7 +144,7 @@ public class ConfigurationProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, ContentValues values, String selection,
-            String[] selectionArgs) {
+                      String[] selectionArgs) {
         throw new UnsupportedOperationException();
     }
 

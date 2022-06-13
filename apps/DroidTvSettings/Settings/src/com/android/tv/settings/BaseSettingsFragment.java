@@ -44,7 +44,7 @@ public abstract class BaseSettingsFragment extends LeanbackSettingsFragmentCompa
         SliceFragment.OnePanelSliceFragmentContainer {
     @Override
     public final boolean onPreferenceStartFragment(PreferenceFragmentCompat caller,
-            Preference pref) {
+                                                   Preference pref) {
         if (pref.getFragment() != null) {
             if (pref instanceof SlicePreference) {
                 SlicePreference slicePref = (SlicePreference) pref;
@@ -83,11 +83,13 @@ public abstract class BaseSettingsFragment extends LeanbackSettingsFragmentCompa
 
     @Override
     public final boolean onPreferenceStartScreen(PreferenceFragmentCompat caller,
-            PreferenceScreen pref) {
+                                                 PreferenceScreen pref) {
         return false;
     }
 
-    /** Navigate back to the previous fragment **/
+    /**
+     * Navigate back to the previous fragment
+     **/
     public void navigateBack() {
         FragmentManager fragmentManager = getChildFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
@@ -97,7 +99,7 @@ public abstract class BaseSettingsFragment extends LeanbackSettingsFragmentCompa
 
     @Override
     public boolean onPreferenceDisplayDialog(@NonNull PreferenceFragmentCompat caller,
-            Preference pref) {
+                                             Preference pref) {
         final Fragment f;
         if (pref instanceof LeanbackPickerDialogPreference) {
             final LeanbackPickerDialogPreference dialogPreference = (LeanbackPickerDialogPreference)

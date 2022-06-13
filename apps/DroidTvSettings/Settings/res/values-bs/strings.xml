@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--  Copyright (C) 2014 The Android Open Source Project
+<?xml version="1.0" encoding="UTF-8"?><!--  Copyright (C) 2014 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,8 +13,7 @@
      limitations under the License.
  -->
 
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="settings_app_name" msgid="7931201304065140909">"Postavke"</string>
     <string name="launcher_settings_app_name" msgid="1459269619779675736">"Postavke"</string>
     <string name="launcher_network_app_name" msgid="8311763462169735002">"Mreža"</string>
@@ -46,9 +44,9 @@
     <string name="accounts_category_title" msgid="7286858931427579845">"Računi i prijava"</string>
     <string name="accounts_category_summary_no_account" msgid="3053606166993074648">"Nema računa"</string>
     <plurals name="accounts_category_summary" formatted="false" msgid="1711483230329281167">
-      <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> račun</item>
-      <item quantity="few"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računa</item>
-      <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računa</item>
+        <item quantity="one"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> račun</item>
+        <item quantity="few"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računa</item>
+        <item quantity="other"><xliff:g id="ACCOUNTS_NUMBER_1">%1$d</xliff:g> računa</item>
     </plurals>
     <string name="accounts_slice_summary" msgid="1571012157154521119">"Medijske usluge, Asistent, Plaćanja"</string>
     <string name="connectivity_network_category_title" msgid="8226264889892008114">"Mreža i internet"</string>
@@ -58,9 +56,9 @@
     <string name="remotes_and_accessories_category_title" msgid="4795119810430255047">"Daljinski upravljači i dodaci"</string>
     <string name="remotes_and_accessories_category_summary_no_bluetooth_device" msgid="3604712105359656700">"Nema povezanih Bluetooth uređaja"</string>
     <plurals name="remotes_and_accessories_category_summary" formatted="false" msgid="5219926550837712529">
-      <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> periferni uređaj</item>
-      <item quantity="few"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> periferna uređaja</item>
-      <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> perifernih uređaja</item>
+        <item quantity="one"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> periferni uređaj</item>
+        <item quantity="few"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> periferna uređaja</item>
+        <item quantity="other"><xliff:g id="ACCESSORIES_NUMBER_1">%1$d</xliff:g> perifernih uređaja</item>
     </plurals>
     <string name="display_and_sound_category_title" msgid="9203309625380755860">"Ekran i zvuk"</string>
     <string name="help_and_feedback_category_title" msgid="7036505833991003031">"Pomoć i povratne informacije"</string>
@@ -232,9 +230,9 @@
     <string name="about_serial" msgid="3432319328808745459">"Serijski broj"</string>
     <string name="about_build" msgid="8467840394761634575">"Verzija OS-a za Android TV"</string>
     <plurals name="show_dev_countdown" formatted="false" msgid="523455736684670250">
-      <item quantity="one">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vam treba da postanete programer</item>
-      <item quantity="few">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vam trebaju da postanete programer</item>
-      <item quantity="other">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vam treba da postanete programer</item>
+        <item quantity="one">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> korak vam treba da postanete programer</item>
+        <item quantity="few">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vam trebaju da postanete programer</item>
+        <item quantity="other">Još <xliff:g id="STEP_COUNT_1">%1$d</xliff:g> koraka vam treba da postanete programer</item>
     </plurals>
     <string name="about_ads" msgid="7662896442040086522">"Oglasi"</string>
     <string name="ads_description" msgid="8081069475265061074">"Upravljajte postavkama oglasa, npr. poništite ID za oglašavanje."</string>
@@ -268,20 +266,20 @@
     <string name="license_title" msgid="4032466200355435641">"Licenca"</string>
     <string name="terms_title" msgid="192888187310800678">"Odredbe i uslovi"</string>
     <string name="webview_license_title" msgid="5370270485188947540">"Sistemske WebView licence"</string>
-  <string-array name="wifi_signal_strength">
-    <item msgid="4475363344103354364">"Slab"</item>
-    <item msgid="2098818614362343532">"Osrednji"</item>
-    <item msgid="2713050260700175954">"Dobar"</item>
-    <item msgid="6005053494500517261">"Odličan"</item>
-  </string-array>
+    <string-array name="wifi_signal_strength">
+        <item msgid="4475363344103354364">"Slab"</item>
+        <item msgid="2098818614362343532">"Osrednji"</item>
+        <item msgid="2713050260700175954">"Dobar"</item>
+        <item msgid="6005053494500517261">"Odličan"</item>
+    </string-array>
     <string name="title_mac_address" msgid="7511588678922209883">"MAC adresa uređaja"</string>
     <string name="title_randomized_mac_address" msgid="3359532498635833471">"Nasumično odabrana MAC adresa"</string>
     <string name="title_signal_strength" msgid="5047116893338315998">"Jačina signala"</string>
     <string name="title_random_mac_settings" msgid="6685812569356353378">"Privatnost"</string>
-  <string-array name="random_mac_settings_entries">
-    <item msgid="3457228452595715533">"Koristi nasumično odabranu MAC adresu (zadano)"</item>
-    <item msgid="2490415280467390067">"Koristi MAC adresu uređaja"</item>
-  </string-array>
+    <string-array name="random_mac_settings_entries">
+        <item msgid="3457228452595715533">"Koristi nasumično odabranu MAC adresu (zadano)"</item>
+        <item msgid="2490415280467390067">"Koristi MAC adresu uređaja"</item>
+    </string-array>
     <string name="mac_address_not_available" msgid="2992935344891853369">"Nije dostupno"</string>
     <string name="mac_address_ephemeral_summary" msgid="3284374877361772531">"Nasumično odabrani MAC"</string>
     <string name="title_ip_address" msgid="705842159484772807">"IP adresa"</string>
@@ -455,15 +453,15 @@
     <string name="system_set_time_format" msgid="902518158066450918">"Korištenje 24-satnog formata"</string>
     <string name="desc_set_time_format" msgid="8688587526768572230">"<xliff:g id="STATE">%1$s</xliff:g> (<xliff:g id="SAMPLE">%2$s</xliff:g>)"</string>
     <string name="system_auto_date_time" msgid="8458199433555868708">"Automatski datum i vrijeme"</string>
-  <string-array name="auto_date_time_entries">
-    <item msgid="8119837829162871025">"Koristi vrijeme koje definira mreža"</item>
-    <item msgid="369146066143710034">"Isključeno"</item>
-  </string-array>
-  <string-array name="auto_date_time_ts_entries">
-    <item msgid="1010003447137304123">"Koristi vrijeme koje definira mreža"</item>
-    <item msgid="5645263357181875427">"Koristi vrijeme koje definira prijenos"</item>
-    <item msgid="5501503537181350884">"Isključeno"</item>
-  </string-array>
+    <string-array name="auto_date_time_entries">
+        <item msgid="8119837829162871025">"Koristi vrijeme koje definira mreža"</item>
+        <item msgid="369146066143710034">"Isključeno"</item>
+    </string-array>
+    <string-array name="auto_date_time_ts_entries">
+        <item msgid="1010003447137304123">"Koristi vrijeme koje definira mreža"</item>
+        <item msgid="5645263357181875427">"Koristi vrijeme koje definira prijenos"</item>
+        <item msgid="5501503537181350884">"Isključeno"</item>
+    </string-array>
     <string name="system_location" msgid="4057295363709016511">"Lokacija"</string>
     <string name="system_desc_location" msgid="1680134126100535031">"Dopustite korištenje informacija o vašoj lokaciji aplikacijama koje su tražile vaše odobrenje"</string>
     <string name="system_network_location_confirm" msgid="7128162421781085332">"Saglasnost za lokaciju"</string>
@@ -609,15 +607,15 @@
     <string name="system_hw_overdraw_counter" msgid="9132113146364838852">"Prikaži prekoračeni brojač"</string>
     <string name="no_application" msgid="1904437693440706534">"Ništa"</string>
     <string name="enable_opengl_traces_none" msgid="4718084947494592040">"Ništa"</string>
-  <string-array name="animation_scale_entries">
-    <item msgid="5408992662476056082">"Animacija je isključena"</item>
-    <item msgid="6818290063799857019">"Skaliranje animacije 0,5x"</item>
-    <item msgid="8257959452691080724">"Razmjera animacije 1x"</item>
-    <item msgid="4781052272686018414">"Razmjera animacije 1,5x"</item>
-    <item msgid="2272016945160227610">"Razmjera animacije 2x"</item>
-    <item msgid="5015441793276576312">"Razmjera animacije 5x"</item>
-    <item msgid="1290233583371556415">"Razmjera animacije 10x"</item>
-  </string-array>
+    <string-array name="animation_scale_entries">
+        <item msgid="5408992662476056082">"Animacija je isključena"</item>
+        <item msgid="6818290063799857019">"Skaliranje animacije 0,5x"</item>
+        <item msgid="8257959452691080724">"Razmjera animacije 1x"</item>
+        <item msgid="4781052272686018414">"Razmjera animacije 1,5x"</item>
+        <item msgid="2272016945160227610">"Razmjera animacije 2x"</item>
+        <item msgid="5015441793276576312">"Razmjera animacije 5x"</item>
+        <item msgid="1290233583371556415">"Razmjera animacije 10x"</item>
+    </string-array>
     <string name="track_frame_time_off" msgid="8845064783618702239">"Isključeno"</string>
     <string name="track_frame_time_bars" msgid="5841531515222229632">"Na ekranu u vidu crtica"</string>
     <string name="app_process_limit_standard" msgid="6069948528843313888">"Standardno ograničenje"</string>
@@ -670,19 +668,19 @@
     <string name="inputs_tv_auto_on" msgid="544848340484583318">"Automatsko uključivanje TV-a"</string>
     <string name="inputs_tv_auto_on_desc" msgid="3640723210479925817">"Uključi TV s HDMI uređajem"</string>
     <plurals name="inputs_header_connected_input" formatted="false" msgid="1179814566738084315">
-      <item quantity="one">povezani ulaz</item>
-      <item quantity="few">povezana ulaza</item>
-      <item quantity="other">povezanih ulaza</item>
+        <item quantity="one">povezani ulaz</item>
+        <item quantity="few">povezana ulaza</item>
+        <item quantity="other">povezanih ulaza</item>
     </plurals>
     <plurals name="inputs_header_standby_input" formatted="false" msgid="1205685426052294376">
-      <item quantity="one">ulaz u stanju mirovanja</item>
-      <item quantity="few">ulaza u stanju mirovanja</item>
-      <item quantity="other">ulaza u stanju mirovanja</item>
+        <item quantity="one">ulaz u stanju mirovanja</item>
+        <item quantity="few">ulaza u stanju mirovanja</item>
+        <item quantity="other">ulaza u stanju mirovanja</item>
     </plurals>
     <plurals name="inputs_header_disconnected_input" formatted="false" msgid="8405783081133938537">
-      <item quantity="one">ulaz koji nije povezan</item>
-      <item quantity="few">ulaza koja nisu povezana</item>
-      <item quantity="other">ulaza koji nisu povezani</item>
+        <item quantity="one">ulaz koji nije povezan</item>
+        <item quantity="few">ulaza koja nisu povezana</item>
+        <item quantity="other">ulaza koji nisu povezani</item>
     </plurals>
     <string name="user_add_profile_item_summary" msgid="3211866291940617804">"Ograničite pristup aplikacijama i drugom sadržaju na svom računu"</string>
     <string name="user_new_profile_name" msgid="6637593067318708353">"Ograničeni profil"</string>
@@ -698,9 +696,9 @@
     <string name="restricted_profile_configure_title" msgid="3327502517511010296">"Postavke"</string>
     <string name="restricted_profile_configure_apps_title" msgid="2244201859522056827">"Dozvoljene aplikacije"</string>
     <plurals name="restricted_profile_configure_apps_description" formatted="false" msgid="7923692208224457728">
-      <item quantity="one">%d aplikacija je odobrena</item>
-      <item quantity="few">%d aplikacije su odobrene</item>
-      <item quantity="other">%d aplikacija je odobreno</item>
+        <item quantity="one">%d aplikacija je odobrena</item>
+        <item quantity="few">%d aplikacije su odobrene</item>
+        <item quantity="other">%d aplikacija je odobreno</item>
     </plurals>
     <string name="restricted_profile_allowed" msgid="970921490464867884">"Dozvoljeno"</string>
     <string name="restricted_profile_not_allowed" msgid="8184983064118036268">"Nije dozvoljeno"</string>
@@ -778,12 +776,12 @@
     <string name="confirm_factory_reset_device" msgid="4308646529880718465">"Izbriši sve"</string>
     <string name="select_device_name_title" msgid="3045019448327493634">"Odaberite naziv za uređaj <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="select_device_name_description" msgid="8528185095614986580">"Dajte svom uređaju naziv radi lakše identifikacije prilikom emitiranja ili povezivanja s drugih uređaja."</string>
-  <string-array name="rooms">
-    <item msgid="6590829789532602097">"Android TV"</item>
-    <item msgid="1140506340411482365">"TV u dnevnom boravku"</item>
-    <item msgid="6448060889026244632">"TV u porodičnoj sobi"</item>
-    <item msgid="3336274213215419228">"TV u spavaćoj sobi"</item>
-  </string-array>
+    <string-array name="rooms">
+        <item msgid="6590829789532602097">"Android TV"</item>
+        <item msgid="1140506340411482365">"TV u dnevnom boravku"</item>
+        <item msgid="6448060889026244632">"TV u porodičnoj sobi"</item>
+        <item msgid="3336274213215419228">"TV u spavaćoj sobi"</item>
+    </string-array>
     <string name="custom_room" msgid="6798144004583173563">"Unesite prilagođeni naziv…"</string>
     <string name="device_rename_title" msgid="9070021379000499270">"Promijeni naziv uređaja <xliff:g id="DEVICEMODEL">%1$s</xliff:g>"</string>
     <string name="device_rename_description" msgid="1973894029492915135">"Trenutni naziv ovog uređaja <xliff:g id="DEVICEMODEL">%1$s</xliff:g> je \"<xliff:g id="DEVICENAME">%2$s</xliff:g>\""</string>

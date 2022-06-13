@@ -1,19 +1,19 @@
 /******************************************************************
-*
-*Copyright (C) 2012 Amlogic, Inc.
-*
-*Licensed under the Apache License, Version 2.0 (the "License");
-*you may not use this file except in compliance with the License.
-*You may obtain a copy of the License at
-*
-*    http://www.apache.org/licenses/LICENSE-2.0
-*
-*Unless required by applicable law or agreed to in writing, software
-*distributed under the License is distributed on an "AS IS" BASIS,
-*WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-*See the License for the specific language governing permissions and
-*limitations under the License.
-******************************************************************/
+ *
+ *Copyright (C) 2012 Amlogic, Inc.
+ *
+ *Licensed under the Apache License, Version 2.0 (the "License");
+ *you may not use this file except in compliance with the License.
+ *You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *Unless required by applicable law or agreed to in writing, software
+ *distributed under the License is distributed on an "AS IS" BASIS,
+ *WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *See the License for the specific language governing permissions and
+ *limitations under the License.
+ ******************************************************************/
 package com.droidlogic.otaupgrade;
 
 import android.app.Notification;
@@ -34,6 +34,7 @@ import com.amlogic.update.DownloadUpdateTask;
 import com.amlogic.update.Notifier;
 import com.amlogic.update.UpdateTasks;
 import com.amlogic.update.util.UpgradeInfo;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -74,13 +75,13 @@ public class UpdateService extends Service {
     private Context mContext = null;
     private PrefUtils mPrefUtils;
     private TimerTask autoCheckTask = new TimerTask() {
-            public void run() {
-                if ((mDownloadTask.getRunningStatus() != UpdateTasks.RUNNING_STATUS_RUNNING) &&
-                        (mCheckingTask.getRunningStatus() != UpdateTasks.RUNNING_STATUS_RUNNING)) {
-                    mCheckingTask.start();
-                }
+        public void run() {
+            if ((mDownloadTask.getRunningStatus() != UpdateTasks.RUNNING_STATUS_RUNNING) &&
+                    (mCheckingTask.getRunningStatus() != UpdateTasks.RUNNING_STATUS_RUNNING)) {
+                mCheckingTask.start();
             }
-        };
+        }
+    };
 
     @Override
     public IBinder onBind(Intent arg0) {
@@ -145,7 +146,7 @@ public class UpdateService extends Service {
         if (UpgradeInfo.firmware.equals("unknown")) {
             String url = UpdateService.this.getResources().getString(R.string.otaupdateurl);
             String version = UpdateService.this.getResources().getString(R.string.cur_version);
-            upgrade.setCustomValue(version,url);
+            upgrade.setCustomValue(version, url);
         }
         initInstance();
     }
@@ -156,63 +157,65 @@ public class UpdateService extends Service {
             boolean b = false;
 
             switch (taskId) {
-            case TASK_ID_CHECKING:
-                b = mCheckingTask.reset();
+                case TASK_ID_CHECKING:
+                    b = mCheckingTask.reset();
 
-                break;
+                    break;
 
-            case TASK_ID_DOWNLOAD:
-                b = mDownloadTask.reset();
+                case TASK_ID_DOWNLOAD:
+                    b = mDownloadTask.reset();
 
-                break;
+                    break;
             }
 
             return b;
         }
 
-        public void setTaskPause(int taskId,int resason) {
+        public void setTaskPause(int taskId, int resason) {
             switch (taskId) {
-            case TASK_ID_CHECKING:
-                mCheckingTask.pause();
+                case TASK_ID_CHECKING:
+                    mCheckingTask.pause();
 
-                break;
+                    break;
 
-            case TASK_ID_DOWNLOAD:
-                mDownloadTask.pause();
-                stopReason = resason;
-                break;
+                case TASK_ID_DOWNLOAD:
+                    mDownloadTask.pause();
+                    stopReason = resason;
+                    break;
             }
         }
 
         public void setTaskResume(int taskId) {
             switch (taskId) {
-            case TASK_ID_CHECKING:
-                mCheckingTask.resume();
+                case TASK_ID_CHECKING:
+                    mCheckingTask.resume();
 
-                break;
+                    break;
 
-            case TASK_ID_DOWNLOAD:
-                mDownloadTask.resume();
-                stopReason = -1;
-                break;
+                case TASK_ID_DOWNLOAD:
+                    mDownloadTask.resume();
+                    stopReason = -1;
+                    break;
             }
         }
-        public int getPauseReason () {
+
+        public int getPauseReason() {
             return stopReason;
         }
+
         public int getTaskRunnningStatus(int taskId) {
             int status = -1;
 
             switch (taskId) {
-            case TASK_ID_CHECKING:
-                status = mCheckingTask.getRunningStatus();
+                case TASK_ID_CHECKING:
+                    status = mCheckingTask.getRunningStatus();
 
-                break;
+                    break;
 
-            case TASK_ID_DOWNLOAD:
-                status = mDownloadTask.getRunningStatus();
+                case TASK_ID_DOWNLOAD:
+                    status = mDownloadTask.getRunningStatus();
 
-                break;
+                    break;
             }
 
             return status;
@@ -222,15 +225,15 @@ public class UpdateService extends Service {
             Object result = null;
 
             switch (taskId) {
-            case TASK_ID_CHECKING:
-                result = mCheckingTask.getResult();
+                case TASK_ID_CHECKING:
+                    result = mCheckingTask.getResult();
 
-                break;
+                    break;
 
-            case TASK_ID_DOWNLOAD:
-                result = mDownloadTask.getResult();
+                case TASK_ID_DOWNLOAD:
+                    result = mDownloadTask.getResult();
 
-                break;
+                    break;
             }
 
             return result;
@@ -240,15 +243,15 @@ public class UpdateService extends Service {
             int errorCode = -1;
 
             switch (taskId) {
-            case TASK_ID_CHECKING:
-                errorCode = mCheckingTask.getErrorCode();
+                case TASK_ID_CHECKING:
+                    errorCode = mCheckingTask.getErrorCode();
 
-                break;
+                    break;
 
-            case TASK_ID_DOWNLOAD:
-                errorCode = mDownloadTask.getErrorCode();
+                case TASK_ID_DOWNLOAD:
+                    errorCode = mDownloadTask.getErrorCode();
 
-                break;
+                    break;
             }
 
             return errorCode;
@@ -258,15 +261,15 @@ public class UpdateService extends Service {
             long progress = -1;
 
             switch (taskId) {
-            case TASK_ID_CHECKING:
-                progress = mCheckingTask.getProgress();
+                case TASK_ID_CHECKING:
+                    progress = mCheckingTask.getProgress();
 
-                break;
+                    break;
 
-            case TASK_ID_DOWNLOAD:
-                progress = mDownloadTask.getProgress();
+                case TASK_ID_DOWNLOAD:
+                    progress = mDownloadTask.getProgress();
 
-                break;
+                    break;
             }
 //Log.d(TAG,"getProgress"+progress);
             return progress;
@@ -274,28 +277,28 @@ public class UpdateService extends Service {
 
         public void startTask(int taskId) {
             switch (taskId) {
-            case TASK_ID_CHECKING:
-                Log.v(TAG, "startTask status=" + mDownloadTask.getRunningStatus());
+                case TASK_ID_CHECKING:
+                    Log.v(TAG, "startTask status=" + mDownloadTask.getRunningStatus());
 
-                if (mDownloadTask.getRunningStatus() != UpdateTasks.RUNNING_STATUS_UNSTART) {
-                    mDownloadTask.reset();
-                    stopReason = -1;
-                }
+                    if (mDownloadTask.getRunningStatus() != UpdateTasks.RUNNING_STATUS_UNSTART) {
+                        mDownloadTask.reset();
+                        stopReason = -1;
+                    }
 
-                if (mCheckingTask.getRunningStatus() == UpdateTasks.RUNNING_STATUS_UNSTART) {
-                    mCheckingTask.start();
-                }
+                    if (mCheckingTask.getRunningStatus() == UpdateTasks.RUNNING_STATUS_UNSTART) {
+                        mCheckingTask.start();
+                    }
 
-                break;
+                    break;
 
-            case TASK_ID_DOWNLOAD:
-                Log.d(TAG,"startTask TASK_ID_DOWNLOAD"+mDownloadTask.getRunningStatus());
-                if (mDownloadTask.getRunningStatus() != UpdateTasks.RUNNING_STATUS_RUNNING) {
-                    stopReason = -1;
-                    mDownloadTask.start();
-                }
+                case TASK_ID_DOWNLOAD:
+                    Log.d(TAG, "startTask TASK_ID_DOWNLOAD" + mDownloadTask.getRunningStatus());
+                    if (mDownloadTask.getRunningStatus() != UpdateTasks.RUNNING_STATUS_RUNNING) {
+                        stopReason = -1;
+                        mDownloadTask.start();
+                    }
 
-                break;
+                    break;
             }
         }
     }
@@ -319,12 +322,12 @@ public class UpdateService extends Service {
             PendingIntent contentItent = PendingIntent.getActivity(mContext, 0,
                     intent, 0);
             Notification.Builder notification = new Notification.Builder(mContext)
-            .setTicker(mContext.getString(R.string.noti_msg))
-            .setWhen(System.currentTimeMillis())
-            .setContentTitle(mContext.getString(R.string.app_name))
-            .setContentText(mContext.getString(R.string.noti_msg))
-            .setSmallIcon(R.drawable.ic_icon)
-            .setContentIntent(contentItent);
+                    .setTicker(mContext.getString(R.string.noti_msg))
+                    .setWhen(System.currentTimeMillis())
+                    .setContentTitle(mContext.getString(R.string.app_name))
+                    .setContentText(mContext.getString(R.string.noti_msg))
+                    .setSmallIcon(R.drawable.ic_icon)
+                    .setContentIntent(contentItent);
 
             notificationManager.notify(0, notification.getNotification());
         }

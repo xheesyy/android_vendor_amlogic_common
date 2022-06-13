@@ -48,7 +48,7 @@ public class SuggestionPreference extends Preference {
     private Callback mCallback;
 
     public SuggestionPreference(Suggestion suggestion, Context context,
-            SuggestionControllerMixinCompat suggestionControllerMixin, Callback callback) {
+                                SuggestionControllerMixinCompat suggestionControllerMixin, Callback callback) {
         super(context);
         setLayoutResource(R.layout.suggestion_item);
         this.mSuggestionControllerMixin = suggestionControllerMixin;
@@ -106,7 +106,9 @@ public class SuggestionPreference extends Preference {
     }
 
     public interface Callback {
-        /** Called when the dismiss button is clicked **/
+        /**
+         * Called when the dismiss button is clicked
+         **/
         void onSuggestionClosed(Preference preference);
     }
 }

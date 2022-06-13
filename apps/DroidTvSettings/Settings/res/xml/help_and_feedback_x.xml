@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2020 The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,15 +20,13 @@
         android:key="feedback"
         android:icon="@drawable/ic_send_feedback"
         android:title="@string/send_feedback">
-        <intent
-            android:action="com.google.android.apps.tv.launcherx.feedback.LAUNCH_FEEDBACK_UI" />
+        <intent android:action="com.google.android.apps.tv.launcherx.feedback.LAUNCH_FEEDBACK_UI" />
     </Preference>
     <Preference
         android:key="help_center"
         android:title="@string/launch_help"
         android:visible="false">
-        <intent
-            android:action="com.android.settings.action.LAUNCH_HELP" />
+        <intent android:action="com.android.settings.action.LAUNCH_HELP" />
     </Preference>
     <Preference
         android:key="help_center_info"

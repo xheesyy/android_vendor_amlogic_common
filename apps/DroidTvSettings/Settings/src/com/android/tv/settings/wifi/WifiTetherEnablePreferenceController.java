@@ -25,9 +25,11 @@ import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import android.util.Log;
 
 import static android.net.ConnectivityManager.TETHERING_WIFI;

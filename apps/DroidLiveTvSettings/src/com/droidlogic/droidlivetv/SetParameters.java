@@ -44,29 +44,29 @@ public class SetParameters {
     private int mDeviceId;
 
     public static final int PIC_STANDARD = 0;
-    public static final int PIC_VIVID    = 1;
-    public static final int PIC_SOFT     = 2;
-    public static final int PIC_USER     = 3;
-    public static final int PIC_MOVIE    = 4;
-    public static final int PIC_MONITOR  = 6;
-    public static final int PIC_SPORT    = 8;
+    public static final int PIC_VIVID = 1;
+    public static final int PIC_SOFT = 2;
+    public static final int PIC_USER = 3;
+    public static final int PIC_MOVIE = 4;
+    public static final int PIC_MONITOR = 6;
+    public static final int PIC_SPORT = 8;
 
     public static final int STATUS_STANDARD = 0;
-    public static final int STATUS_VIVID    = 1;
-    public static final int STATUS_SOFT     = 2;
-    public static final int STATUS_SPORT    = 3;
-    public static final int STATUS_MOVIE    = 4;
-    public static final int STATUS_MONITOR  = 5;
-    public static final int STATUS_USER     = 6;
+    public static final int STATUS_VIVID = 1;
+    public static final int STATUS_SOFT = 2;
+    public static final int STATUS_SPORT = 3;
+    public static final int STATUS_MOVIE = 4;
+    public static final int STATUS_MONITOR = 5;
+    public static final int STATUS_USER = 6;
 
     public static final int MODE_STANDARD = 0;
 
-    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE                   = "db_id_sound_effect_sound_mode";
-    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE              = "db_id_sound_effect_sound_mode_type";
-    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_DAP_VALUE         = "db_id_sound_effect_sound_mode_dap";
-    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_EQ_VALUE          = "db_id_sound_effect_sound_mode_eq";
-    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE_DAP          = "db_id_sound_effect_sound_mode_type_dap";
-    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE_EQ           = "db_id_sound_effect_sound_mode_type_eq";
+    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE = "db_id_sound_effect_sound_mode";
+    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE = "db_id_sound_effect_sound_mode_type";
+    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_DAP_VALUE = "db_id_sound_effect_sound_mode_dap";
+    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_EQ_VALUE = "db_id_sound_effect_sound_mode_eq";
+    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE_DAP = "db_id_sound_effect_sound_mode_type_dap";
+    private static final String DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE_EQ = "db_id_sound_effect_sound_mode_type_eq";
 
     public SetParameters(Context context, Bundle bundle) {
         this.mContext = context;
@@ -100,7 +100,7 @@ public class SetParameters {
         }
     }
 
-    public int getPictureModeStatus () {
+    public int getPictureModeStatus() {
         int pictureModeIndex = mSystemControlManager.GetPQMode();
         Log.d(TAG, "getPictureModeStatus:" + pictureModeIndex);
         switch (pictureModeIndex) {
@@ -123,7 +123,7 @@ public class SetParameters {
         }
     }
 
-    public void setPictureMode (int mode) {
+    public void setPictureMode(int mode) {
         Log.d(TAG, "setPictureMode:" + mode);
         if (mode == 0) {
             mSystemControlManager.SetPQMode(SystemControlManager.PQMode.PQ_MODE_STANDARD.toInt(), 1, 0);
@@ -137,13 +137,13 @@ public class SetParameters {
             mSystemControlManager.SetPQMode(SystemControlManager.PQMode.PQ_MODE_MOVIE.toInt(), 1, 0);
         } else if (mode == 5) {
             mSystemControlManager.SetPQMode(isHdmiSource()
-                ? SystemControlManager.PQMode.PQ_MODE_MONITOR.toInt() : SystemControlManager.PQMode.PQ_MODE_USER.toInt(), 1, 0);
+                    ? SystemControlManager.PQMode.PQ_MODE_MONITOR.toInt() : SystemControlManager.PQMode.PQ_MODE_USER.toInt(), 1, 0);
         } else if (mode == 6) {
             mSystemControlManager.SetPQMode(SystemControlManager.PQMode.PQ_MODE_USER.toInt(), 1, 0);
         }
     }
 
-    public  int getSoundModeStatus () {
+    public int getSoundModeStatus() {
         int itemPosition = -1;
         String soundmodetype = Settings.Global.getString(mContext.getContentResolver(), DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE);
         Log.d(TAG, "getSoundModeStatus soundmodetype = " + soundmodetype);
@@ -158,7 +158,7 @@ public class SetParameters {
         return itemPosition;
     }
 
-    public void setSoundMode (int mode) {
+    public void setSoundMode(int mode) {
         Log.d(TAG, "setSoundMode:" + mode);
         String soundmodetype = Settings.Global.getString(mContext.getContentResolver(), DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE);
         if (soundmodetype == null || DB_ID_SOUND_EFFECT_SOUND_MODE_TYPE_EQ.equals(soundmodetype)) {
@@ -170,7 +170,7 @@ public class SetParameters {
         }
     }
 
-    public int getAspectRatioStatus () {
+    public int getAspectRatioStatus() {
         int itemPosition = mSystemControlManager.GetDisplayMode(mTvSourceInput != null ? mTvSourceInput.toInt() : 10);//default 10 for mpeg
         Log.d(TAG, "getAspectRatioStatus:" + itemPosition);
         if (itemPosition == SystemControlManager.Display_Mode.DISPLAY_MODE_MODE43.toInt())
@@ -192,18 +192,18 @@ public class SetParameters {
         } else if (mode == 2) {
             mSystemControlManager.SetDisplayMode(mTvSourceInput != null ? mTvSourceInput.toInt() : 10, SystemControlManager.Display_Mode.DISPLAY_MODE_FULL, 1);
         } else if (mode == 3) {
-            mSystemControlManager.SetDisplayMode(mTvSourceInput != null ? mTvSourceInput.toInt() : 10, SystemControlManager.Display_Mode.DISPLAY_MODE_169,  1);
+            mSystemControlManager.SetDisplayMode(mTvSourceInput != null ? mTvSourceInput.toInt() : 10, SystemControlManager.Display_Mode.DISPLAY_MODE_169, 1);
         }
     }
 
-    public int getSleepTimerStatus () {
+    public int getSleepTimerStatus() {
         int time = DataProviderManager.getIntValue(mContext, DroidLogicTvUtils.PROP_DROID_TV_SLEEP_TIME, 0);
         Log.d(TAG, "getSleepTimerStatus:" + time);
         return time;
     }
 
-    public void setSleepTimer (int mode) {
-        AlarmManager alarm = (AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
+    public void setSleepTimer(int mode) {
+        AlarmManager alarm = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent("droidlogic.intent.action.TIMER_SUSPEND");
         intent.addFlags(0x01000000/*Intent.FLAG_RECEIVER_INCLUDE_BACKGROUND*/);
         intent.putExtra(DroidLogicTvUtils.KEY_ENABLE_SUSPEND_TIMEOUT, true);
@@ -216,9 +216,9 @@ public class SetParameters {
         if (mode == 0) {
             return;
         } else if (mode < 5) {
-            timeout = (mode * 15  - 1) * 60 * 1000;
+            timeout = (mode * 15 - 1) * 60 * 1000;
         } else {
-            timeout = ((mode - 4) * 30 + 4 * 15  - 1) * 60 * 1000;
+            timeout = ((mode - 4) * 30 + 4 * 15 - 1) * 60 * 1000;
         }
 
         alarm.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + timeout, pendingIntent);

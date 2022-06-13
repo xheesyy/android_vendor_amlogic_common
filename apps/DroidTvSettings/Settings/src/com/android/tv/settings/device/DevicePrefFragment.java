@@ -155,7 +155,7 @@ public class DevicePrefFragment extends SettingsPreferenceFragment implements
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         updateDeveloperOptions();
         updateSounds();
         updateGoogleSettings();
@@ -295,7 +295,7 @@ public class DevicePrefFragment extends SettingsPreferenceFragment implements
                                     ? info.resolvePackageName : info.activityInfo.packageName, 0);
                     castPref.setIcon(targetContext.getDrawable(info.getIconResource()));
                 } catch (Resources.NotFoundException | PackageManager.NameNotFoundException
-                        | SecurityException e) {
+                         | SecurityException e) {
                     Log.e(TAG, "Cast settings icon not found", e);
                 }
                 castPref.setTitle(info.activityInfo.loadLabel(getContext().getPackageManager()));

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   Copyright (C) 2016 The Android Open Source Project
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +24,6 @@
         android:key="unpair"
         android:title="@string/accessory_unpair"
         android:fragment="com.android.tv.settings.accessories.BluetoothAccessoryFragment$UnpairConfirmFragment" />
-    <Preference
-        android:key="battery" />
+    <Preference android:key="battery" />
 
 </PreferenceScreen>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
     Copyright (C) 2018 The Android Open Source Project
 
     Licensed under the Apache License, Version 2.0 (the "License")
@@ -16,11 +15,13 @@
 -->
 
 <resources>
+
     <style name="TextAppearance.TwoPanelPreference.Title" parent="android:TextAppearance">
         <item name="android:fontFamily">@string/preference_title_text_font</item>
         <item name="android:textSize">@dimen/tp_preference_decor_title_text_size</item>
         <item name="android:textColor">@color/tp_preference_decor_title_text_color</item>
     </style>
+
     <style name="TextAppearance.TwoPanelPreference.Subtitle" parent="android:TextAppearance">
         <item name="android:fontFamily">@string/preference_subtitle_text_font</item>
         <item name="android:textSize">@dimen/tp_preference_decor_subtitle_text_size</item>
@@ -28,6 +29,7 @@
         <item name="android:textColor">@color/tp_preference_decor_title_text_color</item>
         <item name="android:gravity">top</item>
     </style>
+
     <style name="TextAppearance.TwoPanelPreference.Category" parent="android:TextAppearance">
         <item name="android:fontFamily">@string/preference_category_text_font</item>
         <item name="android:textColor">@color/tp_preference_category_text_color</item>
@@ -43,11 +45,12 @@
 
     <style name="TextAppearance.TwoPanelPreference.ListItem.Secondary" parent="android:TextAppearance">
         <item name="android:fontFamily">@string/preference_list_item_secondary_text_font</item>
-        <item name="android:textColor">@color/tp_preference_item_secondary_text_color_selector</item>
+        <item name="android:textColor">@color/tp_preference_item_secondary_text_color_selector
+        </item>
         <item name="android:textSize">@dimen/tp_preference_item_secondary_text_size</item>
     </style>
 
-    <style name="TwoPanelPreferenceIconStyle" >
+    <style name="TwoPanelPreferenceIconStyle">
         <item name="android:duplicateParentState">true</item>
     </style>
 

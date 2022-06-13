@@ -10,6 +10,7 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 /**
  * Glue class: connects AlarmAlert IntentReceiver to AlarmAlert activity.
  * Passes through Alarm ID.
@@ -69,7 +70,7 @@ public class SchPwrOnReceiver extends BroadcastReceiver {
                 // Enable the next alert if there is one. The above call to
                 // enableAlarm will call setNextAlert so avoid calling it twice.
                 Log.d(TAG, "SchPwrOnReceiver.onReceive(): isRepeatSet()");
-                Alarms.setNextAlertPowerOn(context,false);
+                Alarms.setNextAlertPowerOn(context, false);
             } else {
                 Log.d(TAG, "SchPwrOnReceiver.onReceive(): not isRepeatSet()");
                 Alarms.enableAlarm(context, alarm.mId, false);

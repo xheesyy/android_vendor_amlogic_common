@@ -26,7 +26,7 @@ public class NoSignalScreenStatusActivity extends TvSettingsActivity {
     @Override
     protected Fragment createSettingsFragment() {
         return FlavorUtils.getFeatureFactory(this).getSettingsFragmentProvider()
-            .newSettingsFragment(NoSignalScreenStatusFragment.class.getName(), null);
+                .newSettingsFragment(NoSignalScreenStatusFragment.class.getName(), null);
     }
 
 }

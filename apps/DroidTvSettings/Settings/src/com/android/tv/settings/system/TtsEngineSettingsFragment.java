@@ -78,7 +78,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     private static final String KEY_INSTALL_DATA = "tts_install_data";
 
     private static final String STATE_KEY_LOCALE_ENTRIES = "locale_entries";
-    private static final String STATE_KEY_LOCALE_ENTRY_VALUES= "locale_entry_values";
+    private static final String STATE_KEY_LOCALE_ENTRY_VALUES = "locale_entry_values";
     private static final String STATE_KEY_LOCALE_VALUE = "locale_value";
 
     private static final int VOICE_DATA_INTEGRITY_CHECK = 1977;
@@ -120,7 +120,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     };
 
     public static void prepareArgs(@NonNull Bundle args, String engineName, String engineLabel,
-            Intent voiceCheckData) {
+                                   Intent voiceCheckData) {
         args.clear();
 
         args.putString(ARG_ENGINE_NAME, engineName);
@@ -128,7 +128,8 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         args.putParcelable(ARG_VOICES, voiceCheckData);
     }
 
-    public TtsEngineSettingsFragment() {}
+    public TtsEngineSettingsFragment() {
+    }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -238,7 +239,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     }
 
     private void updateVoiceDetails(Intent data) {
-        if (data == null){
+        if (data == null) {
             Log.e(TAG, "Engine failed voice data integrity check (null return)" +
                     mTts.getCurrentEngine());
             return;
@@ -258,7 +259,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
             mInstallVoicesPreference.setEnabled(false);
         }
 
-        if (available == null){
+        if (available == null) {
             Log.e(TAG, "TTS data check failed (available == null).");
             mLocalePreference.setEnabled(false);
         } else {
@@ -280,7 +281,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
                 new ArrayList<>(availableLangs.size());
         for (int i = 0; i < availableLangs.size(); i++) {
             Locale locale = mEnginesHelper.parseLocaleString(availableLangs.get(i));
-            if (locale != null){
+            if (locale != null) {
                 entryPairs.add(new Pair<>(locale.getDisplayName(), locale));
             }
         }
@@ -290,8 +291,8 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
 
         // Get two arrays out of one of pairs
         mSelectedLocaleIndex = 0; // Will point to the R.string.tts_lang_use_system value
-        CharSequence[] entries = new CharSequence[availableLangs.size()+1];
-        CharSequence[] entryValues = new CharSequence[availableLangs.size()+1];
+        CharSequence[] entries = new CharSequence[availableLangs.size() + 1];
+        CharSequence[] entryValues = new CharSequence[availableLangs.size() + 1];
 
         entries[0] = getString(R.string.tts_lang_use_system);
         entryValues[0] = "";
@@ -311,7 +312,9 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
         setLocalePreference(mSelectedLocaleIndex);
     }
 
-    /** Set entry from entry table in mLocalePreference */
+    /**
+     * Set entry from entry table in mLocalePreference
+     */
     private void setLocalePreference(int index) {
         if (index < 0) {
             mLocalePreference.setValue("");
@@ -367,7 +370,7 @@ public class TtsEngineSettingsFragment extends SettingsPreferenceFragment implem
     private void updateLanguageTo(Locale locale) {
         int selectedLocaleIndex = -1;
         String localeString = (locale != null) ? locale.toString() : "";
-        for (int i=0; i < mLocalePreference.getEntryValues().length; i++) {
+        for (int i = 0; i < mLocalePreference.getEntryValues().length; i++) {
             if (localeString.equalsIgnoreCase(mLocalePreference.getEntryValues()[i].toString())) {
                 selectedLocaleIndex = i;
                 break;

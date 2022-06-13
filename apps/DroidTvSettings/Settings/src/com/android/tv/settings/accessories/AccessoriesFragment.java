@@ -64,7 +64,7 @@ public class AccessoriesFragment extends SettingsPreferenceFragment {
 
     @Override
     public int getMetricsCategory() {
-        return  MetricsProto.MetricsEvent.BLUETOOTH;
+        return MetricsProto.MetricsEvent.BLUETOOTH;
     }
 
     private void updateAccessories() {
@@ -122,7 +122,7 @@ public class AccessoriesFragment extends SettingsPreferenceFragment {
             preferenceScreen.addPreference(preference);
         }
 
-        for (int i = 0; i < preferenceScreen.getPreferenceCount();) {
+        for (int i = 0; i < preferenceScreen.getPreferenceCount(); ) {
             final Preference preference = preferenceScreen.getPreference(i);
             if (touchedKeys.contains(preference.getKey())) {
                 i++;

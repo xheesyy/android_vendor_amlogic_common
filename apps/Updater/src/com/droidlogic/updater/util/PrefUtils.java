@@ -40,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
 import com.droidlogic.updater.ui.MainActivity;
 import com.droidlogic.updater.util.PermissionUtils;
 
@@ -69,6 +70,7 @@ public class PrefUtils {
     private Context mContext;
     private SharedPreferences mPrefs;
     private static final int FILE_COPY_BUFFER_SIZE = 1024;
+
     public PrefUtils(Context context) {
         mPrefs = context.getSharedPreferences("update", Context.MODE_PRIVATE);
         mContext = context;
@@ -221,7 +223,8 @@ public class PrefUtils {
             for (Object vol : mVolumes) {
                 if (vol != null && (boolean) isMount.invoke(vol) && (int) getType.invoke(vol) == 0) {
                     devList.add((File) getPath.invoke(vol));
-                    if (PermissionUtils.CanDebug()) Log.d(TAG, "path.getName():" + getPath.invoke(vol));
+                    if (PermissionUtils.CanDebug())
+                        Log.d(TAG, "path.getName():" + getPath.invoke(vol));
                 }
             }
         } catch (Exception ex) {
@@ -246,7 +249,8 @@ public class PrefUtils {
                 devices = (ArrayList<HashMap<String, Object>>) getdev.invoke(fileListObj);
 
                 for (HashMap<String, Object> dev : devices) {
-                    if (PermissionUtils.CanDebug()) Log.d(TAG, "getDevice:" + dev.get("key_name") + "getType:" + dev.get("key_type"));
+                    if (PermissionUtils.CanDebug())
+                        Log.d(TAG, "getDevice:" + dev.get("key_name") + "getType:" + dev.get("key_type"));
                     String name = (String) dev.get("key_name");
                     if (name.equals("Local Disk") && extern) {
                         continue;
@@ -285,7 +289,8 @@ public class PrefUtils {
             for (Object vol : mVolumes) {
                 if (vol != null && (boolean) isMount.invoke(vol) && ((int) getType.invoke(vol) == 0 || (int) getType.invoke(vol) == 2)) {
                     devList.add((File) getPath.invoke(vol, 0));
-                    if (PermissionUtils.CanDebug()) Log.d(TAG, "path.getName():" + getPath.invoke(vol, 0));
+                    if (PermissionUtils.CanDebug())
+                        Log.d(TAG, "path.getName():" + getPath.invoke(vol, 0));
                 }
             }
         } catch (Exception ex) {
@@ -317,9 +322,11 @@ public class PrefUtils {
             for (Object vol : mVolumes) {
                 if (vol != null && (boolean) isMount.invoke(vol) && ((int) getType.invoke(vol) == 0)) {
                     Object info = getDisk.invoke(vol);
-                    if (PermissionUtils.CanDebug()) Log.d(TAG, "getDiskInfo" + ((File) getPath.invoke(vol)).getAbsolutePath());
+                    if (PermissionUtils.CanDebug())
+                        Log.d(TAG, "getDiskInfo" + ((File) getPath.invoke(vol)).getAbsolutePath());
                     if (info != null && filePath.contains(((File) getPath.invoke(vol)).getAbsolutePath())) {
-                        if (PermissionUtils.CanDebug()) Log.d(TAG, "getDiskInfo path.getName():" + ((File) getPath.invoke(vol)).getAbsolutePath());
+                        if (PermissionUtils.CanDebug())
+                            Log.d(TAG, "getDiskInfo path.getName():" + ((File) getPath.invoke(vol)).getAbsolutePath());
                         return info;
                     }
                 }
@@ -501,7 +508,7 @@ public class PrefUtils {
 
 
     public static void copyFile(String fileFromPath, String fileToPath) throws Exception {
-        copyFile (fileFromPath, fileToPath, null);
+        copyFile(fileFromPath, fileToPath, null);
 
     }
 
@@ -547,15 +554,16 @@ public class PrefUtils {
         FileOutputStream fo = null;
         FileChannel in = null;
         FileChannel out = null;
-        if (PermissionUtils.CanDebug()) Log.d(TAG, "copyFile from " + fileFromPath + " to " + fileToPath);
+        if (PermissionUtils.CanDebug())
+            Log.d(TAG, "copyFile from " + fileFromPath + " to " + fileToPath);
         try {
             File outFile = new File(fileToPath);
             if (outFile.exists()) {
                 outFile.delete();
             }
             outFile.createNewFile();
-            outFile.setReadable(true,false);
-            outFile.setWritable(true,false);
+            outFile.setReadable(true, false);
+            outFile.setWritable(true, false);
             fi = new FileInputStream(new File(fileFromPath));
             in = fi.getChannel();
             fo = new FileOutputStream(new File(fileToPath));
@@ -563,16 +571,16 @@ public class PrefUtils {
             long size = in.size();
             long pos = 0;
             long count = 0;
-            while ( pos < size ) {
+            while (pos < size) {
                 if (callback == null || !callback.checkrunning()) {
                     count = size - pos > FILE_COPY_BUFFER_SIZE ? FILE_COPY_BUFFER_SIZE : size - pos;
                     pos += out.transferFrom(in, pos, count);
-                }else {
-                    Log.d("Update","copy file interrupt");
+                } else {
+                    Log.d("Update", "copy file interrupt");
                     break;
                 }
             }
-            Log.d("Update","already copy "+pos+" from "+size);
+            Log.d("Update", "already copy " + pos + " from " + size);
             //in.transferTo(0, in.size(), out);
         } finally {
             try {
@@ -584,17 +592,19 @@ public class PrefUtils {
             }
         }
     }
+
     public interface CallbackChecker {
         public boolean checkrunning();
     }
-    public void disableUI(boolean disable,Context cxt) {
-        PackageManager pmg=cxt.getPackageManager();
-        ComponentName component=new ComponentName(cxt,MainActivity.class);
+
+    public void disableUI(boolean disable, Context cxt) {
+        PackageManager pmg = cxt.getPackageManager();
+        ComponentName component = new ComponentName(cxt, MainActivity.class);
         int res = pmg.getComponentEnabledSetting(component);
-        if ( disable ) {
+        if (disable) {
             pmg.setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
                     PackageManager.DONT_KILL_APP);
-        }else{
+        } else {
             pmg.setComponentEnabledSetting(component, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT,
                     PackageManager.DONT_KILL_APP);
         }

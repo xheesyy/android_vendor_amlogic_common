@@ -9,7 +9,6 @@
  */
 
 
-
 package com.android.tv.settings.pqsettings.advanced;
 
 import android.content.Context;
@@ -17,14 +16,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.provider.Settings;
+
 import androidx.preference.SwitchPreference;
 import androidx.preference.SeekBarPreference;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 import androidx.preference.PreferenceCategory;
+
 import android.util.ArrayMap;
 import android.util.Log;
 import android.text.TextUtils;
@@ -43,8 +46,8 @@ import java.util.ArrayList;
 public class PQAdvancedGammaFragment extends SettingsPreferenceFragment implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "PQAdvancedGammaFragment";
 
-    private static final int PQ_PICTRUE_ADVANCED_GAMMA_STEP= 1;
-    private static final String PQ_PICTRUE_ADVANCED_GAMMA= "pq_pictrue_advanced_gamma";
+    private static final int PQ_PICTRUE_ADVANCED_GAMMA_STEP = 1;
+    private static final String PQ_PICTRUE_ADVANCED_GAMMA = "pq_pictrue_advanced_gamma";
 
     private SeekBarPreference PQPictureAdvancedGammaPref;
 
@@ -98,10 +101,10 @@ public class PQAdvancedGammaFragment extends SettingsPreferenceFragment implemen
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey()+" newValue:"+newValue);
+        Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey() + " newValue:" + newValue);
         switch (preference.getKey()) {
             case PQ_PICTRUE_ADVANCED_GAMMA:
-                mPQSettingsManager.setAdvancedGammaStatus((int)newValue);
+                mPQSettingsManager.setAdvancedGammaStatus((int) newValue);
                 break;
 
         }

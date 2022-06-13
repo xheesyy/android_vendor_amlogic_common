@@ -59,7 +59,7 @@ public class ContextSingleton {
     }
 
     /**
-     *  Grant full access to current package.
+     * Grant full access to current package.
      */
     public void grantFullAccess(Context ctx, Uri uri) {
         if (!mGivenFullSliceAccess) {

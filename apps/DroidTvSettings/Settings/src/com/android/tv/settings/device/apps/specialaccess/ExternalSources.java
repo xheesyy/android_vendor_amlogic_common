@@ -76,7 +76,7 @@ public class ExternalSources extends ManageAppOp {
     @NonNull
     @Override
     public Preference bindPreference(@NonNull Preference preference,
-            ApplicationsState.AppEntry entry) {
+                                     ApplicationsState.AppEntry entry) {
         final TwoStatePreference switchPref = (SwitchPreference) preference;
         switchPref.setTitle(entry.label);
         switchPref.setKey(entry.info.packageName);

@@ -1,5 +1,5 @@
 /*
-* opyright (C) 2015 The Android Open Source Project
+ * opyright (C) 2015 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,15 @@ import android.content.IntentFilter;
 import android.media.tv.TvInputInfo;
 import android.media.tv.TvInputManager;
 import android.os.Bundle;
+
 import androidx.annotation.Keep;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import android.text.TextUtils;
 
 import android.os.Bundle;
@@ -42,17 +46,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
 import android.hardware.hdmi.HdmiControlManager;
 import android.hardware.hdmi.HdmiDeviceInfo;
 import android.hardware.hdmi.HdmiTvClient;
 import android.hardware.hdmi.HdmiTvClient.SelectCallback;
 import android.os.SystemProperties;
+
 import com.android.tv.settings.SettingsConstant;
+
 import androidx.preference.Preference;
+
 import com.android.tv.settings.R;
 
 
@@ -64,21 +73,21 @@ public class HdmiCecDeviceSelectFragment extends SettingsPreferenceFragment impl
     private final String FROM_TV_SOURCE = "from_tv_source";
 
     private static final String[] DEFAULT_NAMES = {
-        "TV",
-        "Recorder_1",
-        "Recorder_2",
-        "Tuner_1",
-        "Playback_1",
-        "AudioSystem",
-        "Tuner_2",
-        "Tuner_3",
-        "Playback_2",
-        "Recorder_3",
-        "Tuner_4",
-        "Playback_3",
-        "Reserved_1",
-        "Reserved_2",
-        "Secondary_TV",
+            "TV",
+            "Recorder_1",
+            "Recorder_2",
+            "Tuner_1",
+            "Playback_1",
+            "AudioSystem",
+            "Tuner_2",
+            "Tuner_3",
+            "Playback_2",
+            "Recorder_3",
+            "Tuner_4",
+            "Playback_3",
+            "Reserved_1",
+            "Reserved_2",
+            "Secondary_TV",
     };
 
     HdmiControlManager mHdmiControlManager;
@@ -86,6 +95,7 @@ public class HdmiCecDeviceSelectFragment extends SettingsPreferenceFragment impl
     HdmiTvClient mTvClient;
 
     private ArrayList<HdmiDeviceInfo> mHdmiDeviceInfoList = new ArrayList();
+
     public static HdmiCecDeviceSelectFragment newInstance() {
         return new HdmiCecDeviceSelectFragment();
     }
@@ -93,12 +103,12 @@ public class HdmiCecDeviceSelectFragment extends SettingsPreferenceFragment impl
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         boolean tvFlag = SettingsConstant.needDroidlogicTvFeature(getContext())
-                    && (SystemProperties.getBoolean("vendor.tv.soc.as.mbox", false) == false);
+                && (SystemProperties.getBoolean("vendor.tv.soc.as.mbox", false) == false);
         if (tvFlag) {
             mTvInputManager = (TvInputManager) getActivity()
-                                            .getSystemService(Context.TV_INPUT_SERVICE);
+                    .getSystemService(Context.TV_INPUT_SERVICE);
             mHdmiControlManager = (HdmiControlManager) getActivity()
-                                        .getSystemService(Context.HDMI_CONTROL_SERVICE);
+                    .getSystemService(Context.HDMI_CONTROL_SERVICE);
             mTvClient = mHdmiControlManager.getTvClient();
             updatePreferenceFragment();
         }
@@ -162,8 +172,8 @@ public class HdmiCecDeviceSelectFragment extends SettingsPreferenceFragment impl
         List<TvInputInfo> inputList = mTvInputManager.getTvInputList();
         for (TvInputInfo input : inputList) {
             if (input != null &&
-                input.getHdmiDeviceInfo() != null &&
-                input.getHdmiDeviceInfo().getLogicalAddress() == logicalAddress) {
+                    input.getHdmiDeviceInfo() != null &&
+                    input.getHdmiDeviceInfo().getLogicalAddress() == logicalAddress) {
                 Log.d(TAG, "select tv input " + input);
                 startLiveTv(input);
                 return;

@@ -21,7 +21,7 @@ package com.droidlogic.inputmethod.remote;
  * makes a direction-gesture on candidate view.
  */
 public interface CandidateViewListener {
-    public void onClickChoice ( int choiceId );
+    public void onClickChoice(int choiceId);
 
     public void onToLeftGesture();
 

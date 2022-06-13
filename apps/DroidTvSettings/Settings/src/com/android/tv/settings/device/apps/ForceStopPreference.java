@@ -60,8 +60,8 @@ public class ForceStopPreference extends AppActionPreference {
         } else {
             Intent intent = new Intent(Intent.ACTION_QUERY_PACKAGE_RESTART,
                     Uri.fromParts("package", mEntry.info.packageName, null));
-            intent.putExtra(Intent.EXTRA_PACKAGES, new String[] {
-                    mEntry.info.packageName });
+            intent.putExtra(Intent.EXTRA_PACKAGES, new String[]{
+                    mEntry.info.packageName});
             intent.putExtra(Intent.EXTRA_UID, mEntry.info.uid);
             intent.putExtra(Intent.EXTRA_USER_HANDLE, UserHandle.getUserId(mEntry.info.uid));
             getContext().sendOrderedBroadcast(intent, null, new BroadcastReceiver() {

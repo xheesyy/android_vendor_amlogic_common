@@ -43,7 +43,7 @@ public class ScrollArrayAdapter<T> extends ArrayAdapter<T> implements ScrollAdap
     }
 
     public ScrollArrayAdapter(Context context, int resource, int textViewResourceId,
-            T[] objects) {
+                              T[] objects) {
         super(context, resource, textViewResourceId, objects);
         mLayoutResource = resource;
     }
@@ -53,7 +53,7 @@ public class ScrollArrayAdapter<T> extends ArrayAdapter<T> implements ScrollAdap
     }
 
     public ScrollArrayAdapter(Context context, int resource, int textViewResourceId,
-            List<T> objects) {
+                              List<T> objects) {
         super(context, resource, textViewResourceId, objects);
         mLayoutResource = resource;
     }

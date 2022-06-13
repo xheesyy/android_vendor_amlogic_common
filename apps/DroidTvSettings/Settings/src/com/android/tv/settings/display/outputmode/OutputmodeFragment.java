@@ -23,12 +23,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+
 import androidx.annotation.Keep;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import android.text.TextUtils;
+
 import com.android.tv.settings.R;
 
 
@@ -36,8 +41,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+
 import com.android.tv.settings.dialog.old.Action;
 import com.android.tv.settings.RadioPreference;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -64,6 +71,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
 @Keep
 public class OutputmodeFragment extends SettingsPreferenceFragment implements OnClickListener {
     private static final String LOG_TAG = "OutputmodeFragment";
@@ -89,13 +97,15 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            hpdFlag = intent.getBooleanExtra ("state", false);
+            hpdFlag = intent.getBooleanExtra("state", false);
             mHandler.sendEmptyMessageDelayed(MSG_PLUG_FRESH_UI, hpdFlag ^ isHdmiMode() ? 2000 : 1000);
         }
     };
+
     public static OutputmodeFragment newInstance() {
         return new OutputmodeFragment();
     }
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         mOutputUiManager = new OutputUiManager(getActivity());
@@ -103,6 +113,7 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
         mIntentFilter.addAction(Intent.ACTION_TIME_TICK);
         updatePreferenceFragment();
     }
+
     private ArrayList<Action> getMainActions() {
         ArrayList<Action> actions = new ArrayList<Action>();
         ArrayList<String> outputmodeValueList = mOutputUiManager.getOutputmodeValueList();
@@ -115,13 +126,13 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
         for (int i = 0; i < outputmodeTitleList.size(); i++) {
             if (i == currentModeIndex) {
                 actions.add(new Action.Builder().key(outputmodeValueList.get(i))
-                      .title("        " + outputmodeTitleList.get(i))
-                      .checked(true).build());
-             }else {
-                    actions.add(new Action.Builder().key(outputmodeValueList.get(i))
-                    .title("        " + outputmodeTitleList.get(i))
-                    .description("").build());
-             }
+                        .title("        " + outputmodeTitleList.get(i))
+                        .checked(true).build());
+            } else {
+                actions.add(new Action.Builder().key(outputmodeValueList.get(i))
+                        .title("        " + outputmodeTitleList.get(i))
+                        .description("").build());
+            }
         }
         return actions;
     }
@@ -175,22 +186,22 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
         return 0;
     }
 
-    private void showDialog () {
+    private void showDialog() {
         if (mAlertDialog == null) {
-            LayoutInflater inflater = (LayoutInflater)getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view_dialog = inflater.inflate(R.layout.dialog_outputmode, null);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             mAlertDialog = builder.create();
             mAlertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
 
-            tx_title = (TextView)view_dialog.findViewById(R.id.dialog_title);
-            tx_content = (TextView)view_dialog.findViewById(R.id.dialog_content);
+            tx_title = (TextView) view_dialog.findViewById(R.id.dialog_title);
+            tx_content = (TextView) view_dialog.findViewById(R.id.dialog_content);
 
-            TextView button_cancel = (TextView)view_dialog.findViewById(R.id.dialog_cancel);
+            TextView button_cancel = (TextView) view_dialog.findViewById(R.id.dialog_cancel);
             button_cancel.setOnClickListener(this);
 
-            TextView button_ok = (TextView)view_dialog.findViewById(R.id.dialog_ok);
+            TextView button_ok = (TextView) view_dialog.findViewById(R.id.dialog_ok);
             button_ok.setOnClickListener(this);
         }
         mAlertDialog.show();
@@ -201,7 +212,7 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
             tx_content.setText("Get outputmode empty!");
         } else if (mOutputUiManager.getCurrentModeIndex() < mOutputUiManager.getOutputmodeTitleList().size()) {
             tx_content.setText(getResources().getString(R.string.device_outputmode_change)
-                + " " +mOutputUiManager.getOutputmodeTitleList().get(mOutputUiManager.getCurrentModeIndex()));
+                    + " " + mOutputUiManager.getOutputmodeTitleList().get(mOutputUiManager.getCurrentModeIndex()));
         }
         countdown = 15;
         if (timer == null)
@@ -211,11 +222,12 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
         task = new DialogTimerTask();
         timer.schedule(task, 0, 1000);
     }
+
     private void recoverOutputMode() {
-       mOutputUiManager.change2NewMode(preMode);
-       // need revert Preference display.
-       curPreference = prePreference;
-       mHandler.sendEmptyMessage(MSG_FRESH_UI);
+        mOutputUiManager.change2NewMode(preMode);
+        // need revert Preference display.
+        curPreference = prePreference;
+        mHandler.sendEmptyMessage(MSG_FRESH_UI);
     }
 
     @Override
@@ -236,6 +248,7 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
         }
         task.cancel();
     }
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -269,16 +282,19 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
                 mHandler.sendEmptyMessage(MSG_COUNT_DOWN);
             }
         }
-    };
+    }
+
+    ;
+
     private boolean needfresh() {
         ArrayList<String> list = mOutputUiManager.getOutputmodeTitleList();
         //Log.d(LOG_TAG, "outputmodeTitleList: " + outputmodeTitleList.toString() + "\n list: " + list.toString());
         if (outputmodeTitleList.size() > 0 && outputmodeTitleList.size() == list.size()) {
-            for (String title:outputmodeTitleList) {
+            for (String title : outputmodeTitleList) {
                 if (!list.contains(title))
                     return true;
             }
-        }else {
+        } else {
             return true;
         }
         return false;
@@ -312,6 +328,7 @@ public class OutputmodeFragment extends SettingsPreferenceFragment implements On
             screen.addPreference(radioPreference);
         }
     }
+
     private boolean isHdmiMode() {
         return mOutputUiManager.isHdmiMode();
     }

@@ -70,10 +70,10 @@ public class GuideAdapter extends BaseAdapter {
             holder.title = (TextView) convertView.findViewById(R.id.text_title);
             convertView.setTag(holder);
         } else {
-            holder = (ViewHolder)convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
 
-        Object time_object =  mlistItem.get(position).get(GuideListView.ITEM_1);
+        Object time_object = mlistItem.get(position).get(GuideListView.ITEM_1);
         if (time_object != null) {
             holder.time.setText(time_object.toString());
         }

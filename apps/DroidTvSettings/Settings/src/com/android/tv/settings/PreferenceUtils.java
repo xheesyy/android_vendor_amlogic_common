@@ -35,7 +35,7 @@ public final class PreferenceUtils {
     public static final int FLAG_SET_TITLE = 1;
 
     public static void resolveSystemActivityOrRemove(Context context, PreferenceGroup parent,
-            Preference preference, int flags) {
+                                                     Preference preference, int flags) {
         if (preference == null) {
             return;
         }

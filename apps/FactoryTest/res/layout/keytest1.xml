@@ -3,7 +3,7 @@
     android:id="@id/layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ffffffff" >
+    android:background="#ffffffff">
 
     <Button
         android:id="@id/vs"

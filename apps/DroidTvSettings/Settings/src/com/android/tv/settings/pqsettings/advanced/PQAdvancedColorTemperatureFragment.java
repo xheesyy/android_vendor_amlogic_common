@@ -19,11 +19,14 @@ package com.android.tv.settings.pqsettings.advanced;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.Preference;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.ListPreference;
+
 import android.os.SystemProperties;
 import android.util.Log;
 import android.text.TextUtils;
@@ -147,7 +150,8 @@ public class PQAdvancedColorTemperatureFragment extends SettingsPreferenceFragme
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (CanDebug()) Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
+        if (CanDebug())
+            Log.d(TAG, "[onPreferenceTreeClick] preference.getKey() = " + preference.getKey());
         switch (preference.getKey()) {
             case PQ_PICTRUE_ADVANCED_COLOR_TEMPERATURE_WBRESET:
                 Intent PQAdvancedColorTemperatureResetAllIntent = new Intent();
@@ -164,34 +168,34 @@ public class PQAdvancedColorTemperatureFragment extends SettingsPreferenceFragme
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         switch (preference.getKey()) {
             case PQ_PICTRUE_ADVANCED_COLOR_TEMPERATURE_WBSETTING:
-                final int selection = Integer.parseInt((String)newValue);
+                final int selection = Integer.parseInt((String) newValue);
                 mPQSettingsManager.setColorTemperature(selection);
                 //final int progress = Integer.parseInt((String)newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_GEQ_ENABLE, progress);
                 //updateGeq(progress);
                 break;
             case PQ_PICTRUE_ADVANCED_COLOR_TEMPERATURE_RGAIN:
-                mPQSettingsManager.setAdvancedColorTemperatureRGainStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorTemperatureRGainStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_VL_AMOUNT, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_COLOR_TEMPERATURE_GGAIN:
-                mPQSettingsManager.setAdvancedColorTemperatureGGainStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorTemperatureGGainStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_DE_AMOUNT, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_COLOR_TEMPERATURE_BGAIN:
-                mPQSettingsManager.setAdvancedColorTemperatureBGainStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorTemperatureBGainStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_SURROUND_BOOST, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_COLOR_TEMPERATURE_ROFFSET:
-                mPQSettingsManager.setAdvancedColorTemperatureROffsetStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorTemperatureROffsetStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_SURROUND_BOOST, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_COLOR_TEMPERATURE_GOFFSET:
-                mPQSettingsManager.setAdvancedColorTemperatureGOffsetStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorTemperatureGOffsetStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_SURROUND_BOOST, (int)newValue);
                 break;
             case PQ_PICTRUE_ADVANCED_COLOR_TEMPERATURE_BOFFSET:
-                mPQSettingsManager.setAdvancedColorTemperatureBOffsetStatus((int)newValue);
+                mPQSettingsManager.setAdvancedColorTemperatureBOffsetStatus((int) newValue);
                 //mAudioEffectManager.setDapParam(AudioEffectManager.CMD_DAP_SURROUND_BOOST, (int)newValue);
                 break;
         }

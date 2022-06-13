@@ -50,7 +50,7 @@ public class AutofillHelper {
      */
     @NonNull
     public static List<DefaultAppInfo> getAutofillCandidates(@NonNull Context context,
-            @NonNull PackageManager pm, int myUserId) {
+                                                             @NonNull PackageManager pm, int myUserId) {
         final List<DefaultAppInfo> candidates = new ArrayList<>();
         final List<ResolveInfo> resolveInfos = pm.queryIntentServices(
                 AUTOFILL_PROBE, PackageManager.GET_META_DATA);
@@ -89,7 +89,7 @@ public class AutofillHelper {
      */
     @Nullable
     public static DefaultAppInfo getCurrentAutofill(@NonNull Context context,
-            @NonNull List<DefaultAppInfo> candidates) {
+                                                    @NonNull List<DefaultAppInfo> candidates) {
         final ComponentName name = getCurrentAutofillAsComponentName(context);
         for (int i = 0; i < candidates.size(); i++) {
             DefaultAppInfo appInfo = candidates.get(i);
@@ -106,7 +106,7 @@ public class AutofillHelper {
      */
     @Nullable
     public static Intent getAutofillSettingsIntent(@NonNull Context context,
-            @NonNull PackageManager pm, @Nullable DefaultAppInfo appInfo) {
+                                                   @NonNull PackageManager pm, @Nullable DefaultAppInfo appInfo) {
         if (appInfo == null || appInfo.componentName == null) {
             return null;
         }

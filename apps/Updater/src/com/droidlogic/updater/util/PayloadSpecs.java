@@ -31,10 +31,13 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-/** The helper class that creates {@link PayloadSpec}. */
+/**
+ * The helper class that creates {@link PayloadSpec}.
+ */
 public class PayloadSpecs {
 
-    public PayloadSpecs() {}
+    public PayloadSpecs() {
+    }
 
     /**
      * The payload PAYLOAD_ENTRY is stored in the zip package to comply with the Android OTA package
@@ -92,20 +95,20 @@ public class PayloadSpecs {
             throw new IOException("Failed to find payload entry in the given package.");
         }
         return PayloadSpec.newBuilder()
-                        .url("file://" + packageFile.getAbsolutePath())
-                        .offset(payloadOffset)
-                        .size(payloadSize)
-                        .properties(properties)
-                        .build();
+                .url("file://" + packageFile.getAbsolutePath())
+                .offset(payloadOffset)
+                .size(payloadSize)
+                .properties(properties)
+                .build();
     }
 
     /**
      * Creates a {@link PayloadSpec} for streaming update.
      */
     public PayloadSpec forStreaming(String updateUrl,
-                                           long offset,
-                                           long size,
-                                           File propertiesFile) throws IOException {
+                                    long offset,
+                                    long size,
+                                    File propertiesFile) throws IOException {
         return PayloadSpec.newBuilder()
                 .url(updateUrl)
                 .offset(offset)
@@ -122,7 +125,7 @@ public class PayloadSpecs {
                 + ", offset=" + payloadSpec.getOffset()
                 + ", size=" + payloadSpec.getSize()
                 + ", properties=" + Arrays.toString(
-                        payloadSpec.getProperties().toArray(new String[0]))
+                payloadSpec.getProperties().toArray(new String[0]))
                 + ">";
     }
 

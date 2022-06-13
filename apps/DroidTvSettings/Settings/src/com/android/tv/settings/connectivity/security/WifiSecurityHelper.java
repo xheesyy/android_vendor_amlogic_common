@@ -34,7 +34,9 @@ import com.android.tv.settings.connectivity.setup.UserChoiceInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Helper class to handle Wi-Fi security */
+/**
+ * Helper class to handle Wi-Fi security
+ */
 public class WifiSecurityHelper {
 
     private static final String TAG = "WifiSecurityConfigInfo";
@@ -74,7 +76,7 @@ public class WifiSecurityHelper {
     }
 
     public static List<GuidedAction> getActionsList(FragmentActivity context,
-            @UserChoiceInfo.PAGE int page) {
+                                                    @UserChoiceInfo.PAGE int page) {
         switch (page) {
             case UserChoiceInfo.SECURITY:
                 return getSecurityTypes(context);

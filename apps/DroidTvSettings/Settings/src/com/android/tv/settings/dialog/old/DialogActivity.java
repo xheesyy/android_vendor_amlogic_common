@@ -110,15 +110,15 @@ public abstract class DialogActivity extends InstrumentedActivity
     }
 
     public static Intent createIntent(Context context, String title,
-            String breadcrumb, String description, String imageUri,
-            ArrayList<Action> actions) {
+                                      String breadcrumb, String description, String imageUri,
+                                      ArrayList<Action> actions) {
         return createIntent(context, title, breadcrumb, description, imageUri,
                 Color.TRANSPARENT, actions);
     }
 
     public static Intent createIntent(Context context, String title,
-            String breadcrumb, String description, String imageUri,
-            int imageBackground, ArrayList<Action> actions) {
+                                      String breadcrumb, String description, String imageUri,
+                                      int imageBackground, ArrayList<Action> actions) {
         Intent intent = new Intent(context, DialogActivity.class);
         intent.putExtra(EXTRA_DIALOG_TITLE, title);
         intent.putExtra(EXTRA_DIALOG_BREADCRUMB, breadcrumb);
@@ -131,15 +131,15 @@ public abstract class DialogActivity extends InstrumentedActivity
     }
 
     public static Intent createIntent(Context context, String title,
-            String breadcrumb, String description, String imageUri,
-            ArrayList<Action> actions, Class<? extends DialogActivity> activityClass) {
+                                      String breadcrumb, String description, String imageUri,
+                                      ArrayList<Action> actions, Class<? extends DialogActivity> activityClass) {
         return createIntent(context, title, breadcrumb, description, imageUri, Color.TRANSPARENT,
                 actions, activityClass);
     }
 
     public static Intent createIntent(Context context, String title,
-            String breadcrumb, String description, String imageUri, int imageBackground,
-            ArrayList<Action> actions, Class<? extends DialogActivity> activityClass) {
+                                      String breadcrumb, String description, String imageUri, int imageBackground,
+                                      ArrayList<Action> actions, Class<? extends DialogActivity> activityClass) {
         Intent intent = new Intent(context, activityClass);
         intent.putExtra(EXTRA_DIALOG_TITLE, title);
         intent.putExtra(EXTRA_DIALOG_BREADCRUMB, breadcrumb);
@@ -152,9 +152,9 @@ public abstract class DialogActivity extends InstrumentedActivity
     }
 
     public static Intent createIntent(Context context, String title,
-            String breadcrumb, String description, String imageUri, int imageBackground,
-            ArrayList<Action> actions, Class<? extends DialogActivity> activityClass,
-            int startIndex) {
+                                      String breadcrumb, String description, String imageUri, int imageBackground,
+                                      ArrayList<Action> actions, Class<? extends DialogActivity> activityClass,
+                                      int startIndex) {
         Intent intent = new Intent(context, activityClass);
         intent.putExtra(EXTRA_DIALOG_TITLE, title);
         intent.putExtra(EXTRA_DIALOG_BREADCRUMB, breadcrumb);
@@ -179,7 +179,7 @@ public abstract class DialogActivity extends InstrumentedActivity
             getWindow().addFlags(0x02000000
                     /* WindowManager.LayoutParams.FLAG_LAYOUT_IN_OVERSCAN */);
         }
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             mLastBackStackCount = savedInstanceState.getInt(KEY_BACKSTACK_COUNT);
         }
 
@@ -264,9 +264,9 @@ public abstract class DialogActivity extends InstrumentedActivity
      * before calling {@link #onCreate(Bundle)} if they want to have a
      * custom view.
      *
-     * @param layoutResId resource if of the activity layout
+     * @param layoutResId   resource if of the activity layout
      * @param contentAreaId id of the content area
-     * @param actionAreaId id of the action area
+     * @param actionAreaId  id of the action area
      */
     protected void setLayoutProperties(int layoutResId, int contentAreaId, int actionAreaId) {
         mLayoutResId = layoutResId;
@@ -276,16 +276,16 @@ public abstract class DialogActivity extends InstrumentedActivity
     /**
      * Animates a view.
      *
-     * @param v              view to animate
-     * @param initAlpha      initial alpha
-     * @param initTransX     initial translation in the X
-     * @param delay          delay in ms
-     * @param duration       duration in ms
-     * @param interpolator   interpolator to be used, can be null
-     * @param isIcon         if {@code true}, this is the main icon being moved
+     * @param v            view to animate
+     * @param initAlpha    initial alpha
+     * @param initTransX   initial translation in the X
+     * @param delay        delay in ms
+     * @param duration     duration in ms
+     * @param interpolator interpolator to be used, can be null
+     * @param isIcon       if {@code true}, this is the main icon being moved
      */
     protected void prepareAndAnimateView(final View v, float initAlpha, float initTransX, int delay,
-            int duration, Interpolator interpolator, final boolean isIcon) {
+                                         int duration, Interpolator interpolator, final boolean isIcon) {
         getDialogFragment().prepareAndAnimateView(
                 v, initAlpha, initTransX, delay, duration, interpolator, isIcon);
     }
@@ -361,7 +361,7 @@ public abstract class DialogActivity extends InstrumentedActivity
      * this will be added to the back stack.
      */
     protected void setContentAndActionFragments(Fragment contentFragment, Fragment actionFragment,
-            boolean addToBackStack) {
+                                                boolean addToBackStack) {
         getDialogFragment().setContentAndActionFragments(
                 contentFragment, actionFragment, addToBackStack);
     }

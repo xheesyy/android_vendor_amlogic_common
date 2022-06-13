@@ -23,12 +23,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+
 import androidx.annotation.Keep;
+
 import com.android.tv.settings.SettingsPreferenceFragment;
+
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+
 import android.text.TextUtils;
+
 import com.android.tv.settings.dialog.old.Action;
 import com.android.tv.settings.RadioPreference;
 import com.android.tv.settings.R;
@@ -43,6 +48,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -67,18 +73,21 @@ public class ColorDepthFragment extends SettingsPreferenceFragment {
     private BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            hpdFlag = intent.getBooleanExtra ("state", false);
+            hpdFlag = intent.getBooleanExtra("state", false);
             mHandler.sendEmptyMessageDelayed(MSG_FRESH_UI, hpdFlag ^ isHdmiMode() ? 2000 : 1000);
         }
     };
+
     public static ColorDepthFragment newInstance() {
         return new ColorDepthFragment();
     }
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         mOutputUiManager = new OutputUiManager(getActivity());
         updatePreferenceFragment();
     }
+
     private boolean needfresh() {
         ArrayList<String> list = mOutputUiManager.getColorValueList();
         //Log.d(LOG_TAG, "curValueList: " + curValueList.toString() + "\n list: " + list.toString());
@@ -87,11 +96,12 @@ public class ColorDepthFragment extends SettingsPreferenceFragment {
                 if (!list.contains(title))
                     return true;
             }
-        }else {
+        } else {
             return true;
         }
         return false;
     }
+
     private void updatePreferenceFragment() {
         mOutputUiManager.updateUiMode();
         if (!needfresh()) return;
@@ -118,8 +128,9 @@ public class ColorDepthFragment extends SettingsPreferenceFragment {
             screen.addPreference(radioPreference);
         }
     }
-    private boolean isModeSupportColor(final String curMode, final String curValue){
-        boolean  ret = false;
+
+    private boolean isModeSupportColor(final String curMode, final String curValue) {
+        boolean ret = false;
         ret = mOutputUiManager.isModeSupportColor(curMode, curValue);
         return ret;
     }
@@ -128,14 +139,14 @@ public class ColorDepthFragment extends SettingsPreferenceFragment {
         ArrayList<Action> actions = new ArrayList<Action>();
         curValueList.clear();
         ArrayList<String> mList = mOutputUiManager.getColorValueList();
-        for (String color:mList) {
+        for (String color : mList) {
             curValueList.add(color);
         }
         ArrayList<String> colorValueList = mOutputUiManager.getColorValueList();
         String value = null;
         String filterValue = null;
-        String  curColorDepthValue = mOutputUiManager.getCurrentColorAttribute().toString().trim();
-        Log.i(LOG_TAG,"curColorDepthValue: "+curColorDepthValue);
+        String curColorDepthValue = mOutputUiManager.getCurrentColorAttribute().toString().trim();
+        Log.i(LOG_TAG, "curColorDepthValue: " + curColorDepthValue);
         if (curColorDepthValue.equals("default"))
             curColorDepthValue = DEFAULT_COLOR_DEPTH_VALUE;
         for (int i = 0; i < curValueList.size(); i++) {
@@ -150,28 +161,29 @@ public class ColorDepthFragment extends SettingsPreferenceFragment {
             if (filterValue.contains(mOutputUiManager.getCurrentColorSpaceAttr().trim() + "," + "12bit")) {
                 ENABLE_COLOR_DEPTH_VALUE = "12bit";
                 actions.add(new Action.Builder().key(ACTION_ON)
-                    .title("        " + getString(R.string.on))
-                    .checked(curColorDepthValue.contains(ENABLE_COLOR_DEPTH_VALUE) ? true : false)
-                    .description("")
-                    .build());
+                        .title("        " + getString(R.string.on))
+                        .checked(curColorDepthValue.contains(ENABLE_COLOR_DEPTH_VALUE) ? true : false)
+                        .description("")
+                        .build());
             } else if (filterValue.contains(mOutputUiManager.getCurrentColorSpaceAttr().trim() + "," + "10bit")) {
                 ENABLE_COLOR_DEPTH_VALUE = "10bit";
                 actions.add(new Action.Builder().key(ACTION_ON)
-                    .title("        " + getString(R.string.on))
-                    .checked(curColorDepthValue.contains(ENABLE_COLOR_DEPTH_VALUE) ? true : false)
-                    .description("")
-                    .build());
+                        .title("        " + getString(R.string.on))
+                        .checked(curColorDepthValue.contains(ENABLE_COLOR_DEPTH_VALUE) ? true : false)
+                        .description("")
+                        .build());
             }
         }
 
         actions.add(new Action.Builder().key(ACTION_OFF)
-            .title("        " + getString(R.string.off))
-            .checked(curColorDepthValue.contains(DEFAULT_COLOR_DEPTH_VALUE) ? true : false)
-            .description("")
-            .build());
+                .title("        " + getString(R.string.off))
+                .checked(curColorDepthValue.contains(DEFAULT_COLOR_DEPTH_VALUE) ? true : false)
+                .description("")
+                .build());
 
         return actions;
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -196,10 +208,10 @@ public class ColorDepthFragment extends SettingsPreferenceFragment {
                 }
             } else {
                 radioPreference.setChecked(true);
-                Log.i(LOG_TAG,"not checked");
+                Log.i(LOG_TAG, "not checked");
             }
         }
-      return super.onPreferenceTreeClick(preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -209,18 +221,18 @@ public class ColorDepthFragment extends SettingsPreferenceFragment {
 
     public boolean onClickHandle(String key) {
         curValue = key.contains(ACTION_ON) ? ENABLE_COLOR_DEPTH_VALUE : DEFAULT_COLOR_DEPTH_VALUE;
-        saveValue= mOutputUiManager.getCurrentColorDepthAttr().toString().trim();
+        saveValue = mOutputUiManager.getCurrentColorDepthAttr().toString().trim();
         if (saveValue.equals("default"))
             saveValue = DEFAULT_COLOR_DEPTH_VALUE;
         curMode = mOutputUiManager.getCurrentMode().trim();
-        Log.i(LOG_TAG,"Set Color Depth CurValue: "+curValue + "PreValue: "+saveValue);
+        Log.i(LOG_TAG, "Set Color Depth CurValue: " + curValue + "PreValue: " + saveValue);
 
         if (!curValue.equals(saveValue)) {
             curValue = mOutputUiManager.getCurrentColorSpaceAttr().trim() + "," + curValue;
-            if (isModeSupportColor(curMode,curValue)) {
-               mOutputUiManager.changeColorAttribte(curValue);
-               return true;
-           }
+            if (isModeSupportColor(curMode, curValue)) {
+                mOutputUiManager.changeColorAttribte(curValue);
+                return true;
+            }
         }
         return false;
     }
@@ -235,6 +247,7 @@ public class ColorDepthFragment extends SettingsPreferenceFragment {
             }
         }
     };
+
     private boolean isHdmiMode() {
         return mOutputUiManager.isHdmiMode();
     }
