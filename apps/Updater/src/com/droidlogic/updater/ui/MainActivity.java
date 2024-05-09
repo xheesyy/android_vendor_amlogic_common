@@ -54,6 +54,11 @@ import com.droidlogic.updater.util.PermissionUtils;
 import java.io.IOException;
 import java.io.File;
 
+import android.content.BroadcastReceiver;
+import android.content.IntentFilter;
+import android.content.ComponentName;
+import android.text.TextUtils;
+
 public class MainActivity extends Activity implements View.OnClickListener, PrefUtils.CallbackChecker{
     private static final String TAG = "ABUpdate";
     private static final int queryReturnOk = 0;
@@ -127,10 +132,32 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
         mBtnUpdate.setOnClickListener(this);
         mBtnReboot.setOnClickListener(this);
         mWorkerThread.start();
-        Log.d("Update","onCreate");
+        Log.d(TAG,"onCreate");
         mWorkerHandler = new Handler(mWorkerThread.getLooper());
         mPref = new PrefUtils(this);
         rebootRequest = false;
+
+        Intent intent = getIntent();
+        String mImageFilePath = intent.getStringExtra("path");
+        Log.e(TAG, "mImageFilePath " + mImageFilePath);
+        if(!TextUtils.isEmpty(mImageFilePath)) {
+            String file = mImageFilePath;
+            Log.e(TAG, "file " + file);
+            if (file != null) {
+                mFullPath.setText(file);
+                mLocalPath.setText(file.substring(file.lastIndexOf("/") + 1
+                ));
+                mBtnUpdate.setEnabled(true);
+            }
+
+            quickStopCopy = true;
+            mWorkerHandler.removeCallbacks(cfgRunning);
+            mWorkerHandler.post(cfgRunning);
+            mBtnLocal.setEnabled(false);
+            mBtnUpdate.setEnabled(false);
+            updateBtn.setEnabled(false);
+        }
+
     }
     private Runnable cfgRunning = new cfgRunnable();
     class cfgRunnable implements Runnable {
@@ -211,6 +238,18 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
         }
     }
 
+    private boolean checkOTAServiceInstalled(Context context, String pkgName) {
+        if (TextUtils.isEmpty(pkgName)) {
+            return false;
+        }
+        try {
+            context.getPackageManager().getPackageInfo(pkgName, 0);
+        } catch (Exception x) {
+            return false;
+        }
+        return true;
+    }
+
     private void initialView() {
         Log.d(TAG,"initialView");
         if (mvOnline != null)
@@ -240,6 +279,17 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
 
             @Override
             public void onClick(View v) {
+
+                boolean khadasUpdateService = checkOTAServiceInstalled(MainActivity.this, "com.khadas.otaservice");
+                Log.d(TAG, "khadasUpdateService " + khadasUpdateService);
+                if(khadasUpdateService) {
+                    ComponentName cn = new ComponentName("com.khadas.otaservice","com.khadas.otaservice.MainActivity") ;
+                    Intent intent = new Intent();
+                    intent.setComponent(cn);
+                    startActivity(intent);
+                    return;
+                }
+
                 if (updateBtn.getText().equals(getString(R.string.btn_check))) {
                     mHandler.sendEmptyMessage(CHECKING);
                     checkFromService();
@@ -307,6 +357,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
                     (resultCode == queryReturnOk)) {
                 Bundle bundle = data.getExtras();
                 String file = bundle.getString(FileSelector.FILE);
+                Log.e(TAG, "file " + file);
                 if (file != null) {
                     mFullPath.setText(file);
                     mLocalPath.setText(file.substring(file.lastIndexOf("/") + 1
@@ -378,6 +429,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
             });
 
         }
+        Log.d(TAG,"onDestroy");
     }
 
     /**

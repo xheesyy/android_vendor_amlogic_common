@@ -22,20 +22,40 @@ import android.os.UserHandle;
 import com.droidlogic.updater.util.PrefUtils;
 import com.droidlogic.updater.service.PrepareUpdateService;
 import com.droidlogic.updater.service.AutoCheckService;
+import android.util.Log;
+import android.text.TextUtils;
 
 public class LoaderReceiver extends BroadcastReceiver {
 
+    private static final String TAG = "LoaderReceiver";
+    private static final String BR_OTA_UPDATE = "com.khadas.ota.UPDATE";
+
     @Override
-    public void onReceive ( Context context, Intent ii ) {
+    public void onReceive ( Context context, Intent intent ) {
+        String action = intent.getAction();
+        Log.d(TAG, "action = " + action);
+        if(action.equals(BR_OTA_UPDATE)) {
+            String mImageFilePath = intent.getStringExtra("path");
+            if (!TextUtils.isEmpty(mImageFilePath)) {
+                Log.d(TAG, "BR_OTA_UPDATE mImageFilePath = " + mImageFilePath);
+                Intent intentMainActivity = new Intent(context, MainActivity.class);
+                intentMainActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intentMainActivity.putExtra("path", mImageFilePath);
+                context.startActivity(intentMainActivity);
+            }
+            return;
+        }
+
         PrefUtils mPref = new PrefUtils(context);
         if (mPref.getBooleanVal(PrefUtils.key, false)) {
-            Intent intent = new Intent(context, EmptyActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            Intent intentEmptyActivity = new Intent(context, EmptyActivity.class);
+            intentEmptyActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intentEmptyActivity);
         } else {
             Intent servintent = new Intent(context,AutoCheckService.class);
             context.startService(servintent);
         }
+
     }
 
 }

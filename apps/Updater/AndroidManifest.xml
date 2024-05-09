@@ -38,6 +38,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                  <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="com.khadas.ota.UPDATE" />
+            </intent-filter>
         </receiver>
        <activity android:name=".ui.UpdateActivity"/>
        <activity android:name=".ui.FragmentAlertDialog" android:theme="@style/activity_styles" />
