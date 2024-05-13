@@ -15,9 +15,20 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.util.Log;
 import android.widget.Toast;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class MainActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener {
 
@@ -32,7 +43,7 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
     private SwitchPreference HOTSPOT_Preference;
 
     private PreferenceScreen HDMI_IN_Preference;
-
+	private SwitchPreference CAM1_IR_CUT_Preference;
     private Context mContext;
 
     private static final String USB_PCIE_KEY = "USB_PCIE_KEY";
@@ -42,12 +53,14 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
     private static final String WOL_KEY = "WOL_KEY";
     private static final String HOTSPOT_KEY = "HOTSPOT_KEY";
     private static final String HDMI_IN_KEY = "HDMI_IN_KEY";
+	private static final String CAM1_IR_CUT_KEY = "CAM1_IR_CUT_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.main);
         mContext = this;
+		PreferenceScreen preferenceScreen = getPreferenceScreen();
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -57,7 +70,8 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
 
         FAN_Preference = (ListPreference) findPreference(FAN_KEY);
         bindPreferenceSummaryToValue(FAN_Preference);
-
+		CAM1_IR_CUT_Preference = (SwitchPreference)findPreference(CAM1_IR_CUT_KEY);
+		CAM1_IR_CUT_Preference.setOnPreferenceClickListener(this);
         POWERKEY_Preference = (ListPreference) findPreference(POWER_KEY);
         bindPreferenceSummaryToValue(POWERKEY_Preference);
 
@@ -86,6 +100,11 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
         HDMI_IN_Preference = (PreferenceScreen) findPreference(HDMI_IN_KEY);
         HDMI_IN_Preference.setOnPreferenceClickListener(this);
 
+        File file = new File("/sys/bus/i2c/drivers/ov08a10/2-0036");
+        if (!file.exists()){
+			//CAM1_IR_CUT_Preference.setEnabled(false);
+			preferenceScreen.removePreference(CAM1_IR_CUT_Preference);
+		}
 
     }
 
@@ -238,7 +257,63 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
             startActivity(intent);
             //Settings.System.putInt(mContext.getContentResolver(), DroidLogicTvUtils.TV_CURRENT_DEVICE_ID, TvControlManager.AM_AUDIO_HDMI2);
 
+        }else if (CAM1_IR_CUT_KEY.equals(key)){
+            if (CAM1_IR_CUT_Preference.isChecked()) {
+                su_exec("echo 481 > /sys/class/gpio/export;echo out > sys/class/gpio/gpio481/direction;echo 0 > sys/class/gpio/gpio481/value");
+				SystemProperties.set("persist.sys.cam1", "" + 1);
+            }else {
+                su_exec("echo 481 > /sys/class/gpio/export;echo out > sys/class/gpio/gpio481/direction;echo 1 > sys/class/gpio/gpio481/value");
+				SystemProperties.set("persist.sys.cam1", "" + 0);
+			}
         }
         return true;
     }
+
+	public static String su_exec(String command) {
+
+	    Process process = null;
+	    BufferedReader reader = null;
+	    InputStreamReader is = null;
+	    DataOutputStream os = null;
+
+	    try {
+	        process = Runtime.getRuntime().exec("su");
+	        is = new InputStreamReader(process.getInputStream());
+	        reader = new BufferedReader(is);
+	        os = new DataOutputStream(process.getOutputStream());
+	        os.writeBytes(command + "\n");
+	        os.writeBytes("exit\n");
+	        os.flush();
+	        int read;
+	        char[] buffer = new char[4096];
+	        StringBuilder output = new StringBuilder();
+	        while ((read = reader.read(buffer)) > 0) {
+	            output.append(buffer, 0, read);
+	        }
+	        process.waitFor();
+	        return output.toString();
+	    } catch (IOException | InterruptedException e) {
+	        throw new RuntimeException(e);
+	    } finally {
+	        try {
+	            if (os != null) {
+	                os.close();
+	            }
+
+	            if (reader != null) {
+	                reader.close();
+	            }
+
+	            if (is != null) {
+	                is.close();
+	            }
+
+	            if (process != null) {
+	                process.destroy();
+	            }
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	}
 }

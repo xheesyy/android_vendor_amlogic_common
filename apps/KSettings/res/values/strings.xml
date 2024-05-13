@@ -9,6 +9,9 @@
     <string name="LEDs">LEDs control</string>
     <string name="Cooling_fan">Cooling fan</string>
     <string name="WOL">WOL</string>
+	<string name="CAM1_IR_CUT">Camera1 ir-cut</string>
+    <string name="CAM_IR_CUT_ON_summary">Turn on os08a10 mipi camera ir-cut</string>
+    <string name="CAM_IR_CUT_OFF_summary">Turn off os08a10 mipi camera ir-cut</string>
     <string name="Status_bar_control">Status bar control</string>
     <string name="Logo_LED_control">Logo LED control</string>
     <string name="Timer">Timer</string>

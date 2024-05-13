@@ -65,6 +65,12 @@
         android:title="@string/WOL"
         android:summary="@string/WOL_summary"/>
 
+    <SwitchPreference
+        android:key="CAM1_IR_CUT_KEY"
+        android:iconSpaceReserved="false"
+        android:title="@string/CAM1_IR_CUT"
+		android:summaryOn="@string/CAM_IR_CUT_ON_summary"
+        android:summaryOff="@string/CAM_IR_CUT_OFF_summary"/>
     <PreferenceScreen
         android:title="@string/Status_bar_control"
         android:iconSpaceReserved="false">
