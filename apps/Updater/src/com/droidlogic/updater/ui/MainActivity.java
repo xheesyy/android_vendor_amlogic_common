@@ -645,6 +645,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
                     }
                     mPref.setBoolean(PrefUtils.key,true);
                     rebootRequest = true;
+                    //update success reboot immediately
+                    mPref.disableUI(true, MainActivity.this);
+                    ((PowerManager)MainActivity.this.getSystemService(Context.POWER_SERVICE)).reboot("");
                     break;
                 case MSG_INIT:
                     try {
