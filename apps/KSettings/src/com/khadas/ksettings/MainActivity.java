@@ -29,6 +29,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import android.text.TextUtils;
+import android.content.ComponentName;
 
 public class MainActivity extends PreferenceActivity implements Preference.OnPreferenceClickListener {
 
@@ -44,6 +46,7 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
 
     private PreferenceScreen HDMI_IN_Preference;
 	private SwitchPreference CAM1_IR_CUT_Preference;
+    private Preference UPDATER_Preference;
     private Context mContext;
 
     private static final String USB_PCIE_KEY = "USB_PCIE_KEY";
@@ -54,6 +57,8 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
     private static final String HOTSPOT_KEY = "HOTSPOT_KEY";
     private static final String HDMI_IN_KEY = "HDMI_IN_KEY";
 	private static final String CAM1_IR_CUT_KEY = "CAM1_IR_CUT_KEY";
+
+    private static final String UPDATER_KEY = "UPDATER_KEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +104,8 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
 
         HDMI_IN_Preference = (PreferenceScreen) findPreference(HDMI_IN_KEY);
         HDMI_IN_Preference.setOnPreferenceClickListener(this);
-
+        UPDATER_Preference = (Preference) findPreference(UPDATER_KEY);
+        UPDATER_Preference.setOnPreferenceClickListener(this);
         File file = new File("/sys/bus/i2c/drivers/ov08a10/2-0036");
         if (!file.exists()){
 			//CAM1_IR_CUT_Preference.setEnabled(false);
@@ -210,6 +216,18 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
 
     }
 
+    private boolean checkServiceInstalled(Context context, String pkgName) {
+        if (TextUtils.isEmpty(pkgName)) {
+            return false;
+        }
+        try {
+            context.getPackageManager().getPackageInfo(pkgName, 0);
+        } catch (Exception x) {
+            return false;
+        }
+        return true;
+    } 
+
     @Override
     public boolean onPreferenceClick(Preference preference) {
         final String key = preference.getKey();
@@ -265,6 +283,22 @@ public class MainActivity extends PreferenceActivity implements Preference.OnPre
                 su_exec("echo 481 > /sys/class/gpio/export;echo out > sys/class/gpio/gpio481/direction;echo 1 > sys/class/gpio/gpio481/value");
 				SystemProperties.set("persist.sys.cam1", "" + 0);
 			}
+        } else if (UPDATER_KEY.equals(key)){
+            boolean isInstall = checkServiceInstalled(mContext, "com.droidlogic.updater");
+            Log.e("KSettings", "isInstall  " + isInstall);
+            if (isInstall) {
+                try {
+                    Intent intent = mContext.getPackageManager().getLaunchIntentForPackage("com.droidlogic.updater");
+                    Log.d("KSettings", "intent  " + (intent == null));
+                    if (intent != null) {
+                        mContext.startActivity(intent);
+                    } else {
+                        Toast.makeText(this, getString(R.string.wait_updater_startup), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception exception) {
+                }
+                return true;
+            }
         }
         return true;
     }

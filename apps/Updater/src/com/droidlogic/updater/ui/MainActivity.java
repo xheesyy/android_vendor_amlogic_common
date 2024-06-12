@@ -264,6 +264,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
         this.mUpdateManager.setOnEngineCompleteCallback(this::onEnginePayloadApplicationComplete);
         this.mUpdateManager.setOnProgressUpdateCallback(this::onProgressUpdate);
         if (PermissionUtils.CanDebug()) Log.d(TAG,"Service getStatus"+PrepareUpdateService.getStatus());
+        Log.d(TAG,"Service getStatus"+PrepareUpdateService.getStatus());
         if (!checkLowerNetwork(MainActivity.this)) {
             updateBtn.setEnabled(false);
         }else if (PrepareUpdateService.getStatus() == IDLE && mStatus == IDLE) {
@@ -274,6 +275,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
             updateBtn.setText(R.string.btn_update);
         }
         mStatus = mUpdateManager.getUpdaterState();
+        Log.d(TAG,"mStatus " + mStatus);
         onUpdaterStateChange(mStatus);
         updateBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -523,6 +525,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
             }
             String rebootCmd = getResources().getString(R.string.reboot_cmd);
             if (!mRunningStatus.getText().equals(rebootCmd)) {
+                Log.d(TAG,"state " + state);
+                boolean isSwitchOk = true;
                 if (state == UpdaterState.PAUSED || state == UpdaterState.ERROR || state == IDLE) {
                     Log.d(TAG,"adjust ui---->state"+state);
                     resetUI();
@@ -532,8 +536,9 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
                         mRunningStatus.setText("");
                     }
                     return;
-                }else if (state == UpdaterState.SLOT_SWITCH_REQUIRED) {
-                    mUpdateManager.setSwitchSlotOnReboot();
+                } else if (state == UpdaterState.SLOT_SWITCH_REQUIRED) {
+                    isSwitchOk = mUpdateManager.setSwitchSlotOnReboot();
+                    Log.d(TAG,"setSwitchSlotOnReboot isSwitchOk " + isSwitchOk);
                 }
                 if (PermissionUtils.CanDebug()) Log.d(TAG,"adjust ui");
                 if (state == UpdaterState.SLOT_SWITCH_REQUIRED) {
@@ -541,6 +546,10 @@ public class MainActivity extends Activity implements View.OnClickListener, Pref
                     if (!mRunningStatus.getText().equals(rebootCmd)) {
                         mRunningStatus.setText(getResources().getString(R.string.reboot_cmd_prepare));
                         mHandler.removeMessages(MSG_SUCC);
+                    }
+                    if(!isSwitchOk) {
+                        resetUI();
+                        mRunningStatus.setText("");
                     }
                 } else if (state == UpdaterState.REBOOT_REQUIRED) {
                     if (mRunningStatus.getText().toString().isEmpty()) {

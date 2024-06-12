@@ -19,6 +19,8 @@
     <string name="USB_PCIE_Dialog_title">Effective after restart</string>
     <string name="USB_PCIE_default">USB-3.0 Mode</string>
 
+    <string name="wait_updater_startup">Please wait for the upgrade service to start</string>
+
     <string name="Gsensor">G-Sensor data</string>
     <string name="Updater" translatable="false">Updater</string>
 

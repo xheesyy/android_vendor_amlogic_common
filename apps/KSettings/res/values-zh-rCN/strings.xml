@@ -19,6 +19,8 @@
     <string name="USB_PCIE_Dialog_title">Effective after restart</string>
     <string name="USB_PCIE_default">USB-3.0 Mode</string>
 
+    <string name="wait_updater_startup">请稍等更新服务启动</string> 
+
     <string name="Gsensor">重力传感器数据</string>
 
     <string name="WOL_summary">网络唤醒</string>

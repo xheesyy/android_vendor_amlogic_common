@@ -102,7 +102,7 @@
 <!--            android:targetClass="com.khadas.ksettings.Gsensor_Preference"-->
 <!--            android:targetPackage="com.khadas.ksettings" />-->
 <!--    </PreferenceScreen>-->
-
+<!--
     <PreferenceScreen
         android:title="@string/Updater"
         android:iconSpaceReserved="false">
@@ -110,6 +110,13 @@
             android:targetClass="com.droidlogic.updater.ui.MainActivity"
             android:targetPackage="com.droidlogic.updater" />
     </PreferenceScreen>
+-->
+
+    <PreferenceScreen
+        android:key="UPDATER_KEY"
+        android:title="@string/Updater"
+        android:iconSpaceReserved="false">
+    </PreferenceScreen> 
 
     <ListPreference
         android:key="USB_PCIE_KEY"
